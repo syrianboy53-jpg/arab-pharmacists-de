@@ -1,0 +1,110 @@
+[
+  {
+    "id": "q01",
+    "category": "drug_class",
+    "question_de": "Zu welcher Wirkstoffklasse gehört Ramipril?",
+    "question_ar": "إلى أي صنف دوائي ينتمي راميبريل؟",
+    "options": ["ACE-Hemmer", "Betablocker", "Statin", "Diuretikum"],
+    "answer_index": 0,
+    "explanation_de": "Ramipril ist ein ACE-Hemmer und wird bei Hypertonie und Herzinsuffizienz eingesetzt."
+  },
+  {
+    "id": "q02",
+    "category": "interaction",
+    "question_de": "Welche Kombination ist besonders kritisch wegen Blutungsrisiko?",
+    "question_ar": "أي مزيج خطير بسبب زيادة خطر النزيف؟",
+    "options": ["Paracetamol + Vitamin C", "Ibuprofen + Phenprocoumon (Marcumar)", "Loratadin + Wasser", "Salbutamol + Budesonid"],
+    "answer_index": 1,
+    "explanation_de": "NSAIDs erhöhen das Blutungsrisiko unter Vitamin-K-Antagonisten deutlich."
+  },
+  {
+    "id": "q03",
+    "category": "pregnancy",
+    "question_de": "Welches Schmerzmittel ist in der Schwangerschaft Mittel der Wahl (alle Trimester)?",
+    "question_ar": "ما هو المسكن المفضل خلال جميع أشهر الحمل؟",
+    "options": ["Ibuprofen", "ASS 500", "Paracetamol", "Diclofenac"],
+    "answer_index": 2,
+    "explanation_de": "Paracetamol ist das Mittel der Wahl in allen Trimestern, Ibuprofen ist ab dem 6. Monat kontraindiziert."
+  },
+  {
+    "id": "q04",
+    "category": "rx_status",
+    "question_de": "Welches dieser Medikamente ist verschreibungspflichtig?",
+    "question_ar": "أي من هذه الأدوية يحتاج إلى وصفة طبية؟",
+    "options": ["Loratadin 10 mg", "Ibuprofen 400 mg (10 St.)", "Amoxicillin 1000 mg", "Paracetamol 500 mg (10 St.)"],
+    "answer_index": 2,
+    "explanation_de": "Antibiotika wie Amoxicillin sind in Deutschland verschreibungspflichtig."
+  },
+  {
+    "id": "q05",
+    "category": "counseling",
+    "question_de": "Worauf achten Sie nach Inhalation eines Kortikosteroids (z. B. Budesonid)?",
+    "question_ar": "ما الإرشاد المهم بعد استنشاق الكورتيكوستيرويد (مثل بوديزونيد)؟",
+    "options": ["Sofort essen", "Mund mit Wasser ausspülen", "Eine Stunde nicht trinken", "Kopf nach unten halten"],
+    "answer_index": 1,
+    "explanation_de": "Mund mit Wasser ausspülen reduziert das Risiko einer oralen Candidose."
+  },
+  {
+    "id": "q06",
+    "category": "dosage",
+    "question_de": "Maximale Tagesdosis Paracetamol bei Erwachsenen?",
+    "question_ar": "ما الجرعة اليومية القصوى للباراسيتامول لدى البالغين؟",
+    "options": ["1 g", "2 g", "4 g", "8 g"],
+    "answer_index": 2,
+    "explanation_de": "Die maximale Tagesdosis liegt bei 4 g (Erwachsene, Leberfunktion normal)."
+  },
+  {
+    "id": "q07",
+    "category": "rx_color",
+    "question_de": "Welche Farbe hat das Betäubungsmittel-Rezept (BtM) in Deutschland?",
+    "question_ar": "ما لون وصفة المواد المخدرة (BtM) في ألمانيا؟",
+    "options": ["Rosa", "Blau", "Gelb", "Grün"],
+    "answer_index": 2,
+    "explanation_de": "BtM-Rezepte sind gelb, dreiteilig, ab Ausstellung 7 Tage gültig."
+  },
+  {
+    "id": "q08",
+    "category": "antibiotic",
+    "question_de": "Was empfehlen Sie einem Patienten beim Start eines Antibiotikums?",
+    "question_ar": "بماذا تنصح المريض عند بدء مضاد حيوي؟",
+    "options": ["Nur bei Beschwerden nehmen", "Vorzeitig absetzen, wenn besser", "Packung bis zum Ende nehmen", "Mit Milch einnehmen"],
+    "answer_index": 2,
+    "explanation_de": "Auch bei Besserung sollte die Therapie zu Ende geführt werden, um Resistenzen zu vermeiden."
+  },
+  {
+    "id": "q09",
+    "category": "term",
+    "question_de": "„Hypertonie\" auf Arabisch?",
+    "question_ar": "ما معنى „Hypertonie\" بالعربية؟",
+    "options": ["انخفاض ضغط الدم", "ارتفاع ضغط الدم", "ارتفاع السكر", "فقر الدم"],
+    "answer_index": 1,
+    "explanation_de": "Hypertonie = ارتفاع ضغط الدم."
+  },
+  {
+    "id": "q10",
+    "category": "term",
+    "question_de": "„Schmerzmittel\" auf Englisch und Arabisch?",
+    "question_ar": "ترجمة „Schmerzmittel\" إلى الإنجليزية والعربية؟",
+    "options": ["Antibiotic / مضاد حيوي", "Painkiller / مسكن للألم", "Antihistamine / مضاد للهيستامين", "Antacid / مضاد للحموضة"],
+    "answer_index": 1,
+    "explanation_de": "Schmerzmittel = Painkiller / مسكن للألم."
+  },
+  {
+    "id": "q11",
+    "category": "otc",
+    "question_de": "Wann sollte ein Patient mit Durchfall an den Arzt verwiesen werden?",
+    "question_ar": "متى يُحال مريض الإسهال إلى الطبيب؟",
+    "options": ["Sofort bei jedem Durchfall", "Bei Fieber, Blut im Stuhl oder >48 h", "Nur bei Säuglingen", "Nie"],
+    "answer_index": 1,
+    "explanation_de": "Alarmzeichen: Fieber, Blut im Stuhl, anhaltende Beschwerden, Säuglinge/Schwangere."
+  },
+  {
+    "id": "q12",
+    "category": "device",
+    "question_de": "Wie wird ein Dosieraerosol vor dem ersten Gebrauch vorbereitet?",
+    "question_ar": "كيف يُجهَّز بخاخ الدواء قبل الاستخدام الأول؟",
+    "options": ["Direkt benutzen", "Schütteln und 2× in die Luft sprühen", "Einfrieren", "Mit Alkohol reinigen"],
+    "answer_index": 1,
+    "explanation_de": "Vor dem ersten Gebrauch schütteln und einige Sprühstöße in die Luft abgeben (Priming)."
+  }
+]

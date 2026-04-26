@@ -1,0 +1,12 @@
+[
+  { "id": "disease",       "en": "Disease",            "de": "Krankheit",            "ar": "مرض" },
+  { "id": "symptom",       "en": "Symptom",            "de": "Symptom",              "ar": "عَرَض" },
+  { "id": "drug_class",    "en": "Drug class",         "de": "Arzneimittelklasse",   "ar": "صنف دوائي" },
+  { "id": "active_ingredient", "en": "Active ingredient", "de": "Wirkstoff",         "ar": "مادة فعالة" },
+  { "id": "dosage_form",   "en": "Dosage form",        "de": "Darreichungsform",     "ar": "شكل صيدلاني" },
+  { "id": "anatomy",       "en": "Anatomy",            "de": "Anatomie",             "ar": "تشريح" },
+  { "id": "pharmacy_tool", "en": "Pharmacy tool",      "de": "Apothekenausstattung", "ar": "أدوات الصيدلية" },
+  { "id": "phrase",        "en": "Pharmacy phrase",    "de": "Apothekenphrase",      "ar": "عبارة صيدلية" },
+  { "id": "lab",           "en": "Lab / measurement",  "de": "Labor / Messung",      "ar": "مختبر / قياس" },
+  { "id": "admin_route",   "en": "Route of administration", "de": "Applikationsweg", "ar": "طريق الإعطاء" }
+]
