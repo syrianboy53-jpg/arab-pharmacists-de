@@ -2,7 +2,6 @@
 // and verify shape & invariants. Avoids a full app pump-and-settle
 // which is flaky in this CI environment.
 
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:arab_pharmacists_de/models.dart';
