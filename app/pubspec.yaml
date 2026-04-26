@@ -1,0 +1,28 @@
+name: arab_pharmacists_de
+description: "App for Arabic-speaking pharmacists in Germany — multilingual EN/DE/AR pharmacy & medical terminology, dialogues, drugs, flashcards, quizzes."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/data/categories.json
+    - assets/data/terms.json
+    - assets/data/drugs.json
+    - assets/data/dialogues.json
+    - assets/data/quizzes.json

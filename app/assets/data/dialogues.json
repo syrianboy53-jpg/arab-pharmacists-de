@@ -1,0 +1,384 @@
+[
+  {
+    "id": "d01",
+    "scenario_en": "Headache — OTC consultation",
+    "scenario_de": "Kopfschmerzen — Selbstmedikation",
+    "scenario_ar": "صداع — استشارة دواء بدون وصفة",
+    "tags": ["otc", "pain"],
+    "turns": [
+      { "speaker": "patient",    "de": "Guten Tag, ich habe seit heute Morgen starke Kopfschmerzen. Können Sie mir etwas empfehlen?",                          "en": "Hello, I've had a bad headache since this morning. Can you recommend something?",                              "ar": "مرحباً، عندي صداع شديد منذ الصباح. هل يمكنك التوصية بشيء؟" },
+      { "speaker": "pharmacist", "de": "Gerne. Haben Sie auch Fieber, Übelkeit oder eine Erkältung?",                                                          "en": "Of course. Do you also have fever, nausea, or a cold?",                                                       "ar": "بكل سرور. هل لديك أيضاً حمى أو غثيان أو نزلة برد؟" },
+      { "speaker": "patient",    "de": "Nein, nur Kopfschmerzen. Ich habe nicht gut geschlafen.",                                                            "en": "No, only the headache. I didn't sleep well.",                                                                  "ar": "لا، فقط صداع. لم أنم جيداً." },
+      { "speaker": "pharmacist", "de": "Sind Sie schwanger? Nehmen Sie regelmäßig andere Medikamente?",                                                     "en": "Are you pregnant? Do you regularly take other medication?",                                                    "ar": "هل أنتِ حامل؟ هل تتناولين أدوية أخرى بانتظام؟" },
+      { "speaker": "patient",    "de": "Nein zu beidem.",                                                                                                    "en": "No to both.",                                                                                                  "ar": "لا لكليهما." },
+      { "speaker": "pharmacist", "de": "Dann empfehle ich Ibuprofen 400 mg. Eine Tablette, am besten nach dem Essen, mit ausreichend Wasser.",              "en": "Then I recommend ibuprofen 400 mg. One tablet, preferably after a meal, with plenty of water.",                "ar": "إذن أنصح بإيبوبروفين 400 ملغ. قرص واحد، يفضل بعد الطعام، مع كمية كافية من الماء." },
+      { "speaker": "pharmacist", "de": "Wenn die Kopfschmerzen länger als drei Tage anhalten, sollten Sie zum Arzt.",                                       "en": "If the headache lasts more than three days, you should see a doctor.",                                          "ar": "إذا استمر الصداع أكثر من ثلاثة أيام، فعليك مراجعة الطبيب." }
+    ]
+  },
+  {
+    "id": "d02",
+    "scenario_en": "Dry cough at night",
+    "scenario_de": "Reizhusten in der Nacht",
+    "scenario_ar": "سعال جاف ليلاً",
+    "tags": ["otc", "respiratory"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich habe einen trockenen Husten, vor allem nachts. Was kann ich nehmen?",                                            "en": "I have a dry cough, especially at night. What can I take?",                                                    "ar": "لديّ سعال جاف، خاصة ليلاً. ماذا يمكنني أن آخذ؟" },
+      { "speaker": "pharmacist", "de": "Bei trockenem Reizhusten ohne Auswurf hilft ein Hustenstiller, zum Beispiel Dextromethorphan.",                     "en": "For a dry cough without phlegm, a cough suppressant such as dextromethorphan can help.",                       "ar": "للسعال الجاف بدون بلغم يفيد مثبط السعال مثل ديكستروميثورفان." },
+      { "speaker": "pharmacist", "de": "Wichtig: Hustenstiller nicht zusammen mit Hustenlösern einnehmen.",                                                "en": "Important: do not combine cough suppressants with expectorants.",                                              "ar": "مهم: لا تجمع بين مثبط السعال والأدوية المُذيبة للبلغم." },
+      { "speaker": "patient",    "de": "Kann ich das auch tagsüber nehmen?",                                                                                "en": "Can I also take it during the day?",                                                                            "ar": "هل يمكنني تناوله أثناء النهار أيضاً؟" },
+      { "speaker": "pharmacist", "de": "Ja, aber es kann müde machen, fahren Sie dann besser nicht.",                                                       "en": "Yes, but it may cause drowsiness, so it's better not to drive.",                                                "ar": "نعم، لكنه قد يسبب النعاس، لذا من الأفضل عدم القيادة." }
+    ]
+  },
+  {
+    "id": "d03",
+    "scenario_en": "Common cold — first symptoms",
+    "scenario_de": "Erkältung — erste Beschwerden",
+    "scenario_ar": "نزلة برد — أول الأعراض",
+    "tags": ["otc", "respiratory"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich glaube, ich bekomme eine Erkältung. Halsweh und Schnupfen.",                                                     "en": "I think I'm coming down with a cold. Sore throat and runny nose.",                                              "ar": "أعتقد أنني أُصاب بنزلة برد. ألم في الحلق وسيلان في الأنف." },
+      { "speaker": "pharmacist", "de": "Haben Sie auch Fieber oder Gliederschmerzen?",                                                                       "en": "Do you also have fever or body aches?",                                                                         "ar": "هل لديك أيضاً حمى أو آلام في الجسم؟" },
+      { "speaker": "patient",    "de": "Nein, nur leichte Halsschmerzen.",                                                                                    "en": "No, just mild sore throat.",                                                                                    "ar": "لا، فقط ألم خفيف في الحلق." },
+      { "speaker": "pharmacist", "de": "Dann empfehle ich Halstabletten und ein abschwellendes Nasenspray für maximal 5–7 Tage.",                            "en": "Then I recommend throat lozenges and a decongestant nasal spray for no more than 5–7 days.",                    "ar": "أنصح بأقراص للحلق وبخاخ مزيل للاحتقان للأنف لمدة لا تتجاوز 5–7 أيام." },
+      { "speaker": "pharmacist", "de": "Trinken Sie viel und ruhen Sie sich aus.",                                                                            "en": "Drink plenty of fluids and rest.",                                                                             "ar": "اشرب الكثير من السوائل وخذ قسطاً من الراحة." }
+    ]
+  },
+  {
+    "id": "d04",
+    "scenario_en": "Hay fever / allergic rhinitis",
+    "scenario_de": "Heuschnupfen",
+    "scenario_ar": "حمى القش",
+    "tags": ["otc", "allergy"],
+    "turns": [
+      { "speaker": "patient",    "de": "Im Frühling bekomme ich immer Niesattacken und juckende Augen.",                                                     "en": "Every spring I get sneezing fits and itchy eyes.",                                                              "ar": "كل ربيع تنتابني نوبات عطس وحكة في العينين." },
+      { "speaker": "pharmacist", "de": "Das klingt nach Heuschnupfen. Cetirizin oder Loratadin einmal täglich kann helfen.",                                "en": "That sounds like hay fever. Cetirizine or loratadine once daily can help.",                                     "ar": "تبدو حمى القش. سيتيريزين أو لوراتادين مرة يومياً قد يساعد." },
+      { "speaker": "pharmacist", "de": "Bei sehr juckenden Augen gibt es zusätzlich Augentropfen mit Antihistaminikum.",                                    "en": "For very itchy eyes there are additional antihistamine eye drops.",                                             "ar": "للعيون شديدة الحكة، يوجد قطرات عين مضادة للهيستامين إضافية." },
+      { "speaker": "patient",    "de": "Macht Cetirizin müde?",                                                                                              "en": "Does cetirizine make you sleepy?",                                                                              "ar": "هل يسبب السيتيريزين النعاس؟" },
+      { "speaker": "pharmacist", "de": "Selten, aber möglich. Beim ersten Mal abends einnehmen.",                                                            "en": "Rarely, but possible. Take it in the evening the first time.",                                                  "ar": "نادراً، لكنه ممكن. خذه في المساء أول مرة." }
+    ]
+  },
+  {
+    "id": "d05",
+    "scenario_en": "Heartburn — sodbrennen",
+    "scenario_de": "Sodbrennen",
+    "scenario_ar": "حرقة المعدة",
+    "tags": ["otc", "gi"],
+    "turns": [
+      { "speaker": "patient",    "de": "Nach dem Essen habe ich oft Sodbrennen.",                                                                              "en": "I often have heartburn after eating.",                                                                          "ar": "كثيراً ما تنتابني حرقة في المعدة بعد الأكل." },
+      { "speaker": "pharmacist", "de": "Wie oft pro Woche tritt es auf?",                                                                                    "en": "How many times per week does it occur?",                                                                       "ar": "كم مرة في الأسبوع تحدث؟" },
+      { "speaker": "patient",    "de": "Drei- bis viermal.",                                                                                                  "en": "Three to four times.",                                                                                          "ar": "ثلاث إلى أربع مرات." },
+      { "speaker": "pharmacist", "de": "Dann hilft Pantoprazol 20 mg, einmal morgens nüchtern, für maximal 14 Tage in der Selbstmedikation.",                "en": "Then pantoprazole 20 mg once each morning before food can help, for at most 14 days in self-medication.",       "ar": "يفيد بانتوبرازول 20 ملغ مرة صباحاً على الريق، لمدة 14 يوماً كحد أقصى للعلاج الذاتي." },
+      { "speaker": "pharmacist", "de": "Wenn die Beschwerden bleiben, gehen Sie bitte zum Arzt.",                                                            "en": "If symptoms persist, please see a doctor.",                                                                     "ar": "إذا استمرت الأعراض، يرجى مراجعة الطبيب." }
+    ]
+  },
+  {
+    "id": "d06",
+    "scenario_en": "Diarrhea — traveler's",
+    "scenario_de": "Reisedurchfall",
+    "scenario_ar": "إسهال السفر",
+    "tags": ["otc", "gi"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich habe seit gestern Durchfall, ich war im Urlaub in Ägypten.",                                                      "en": "I've had diarrhea since yesterday; I was on holiday in Egypt.",                                                "ar": "لديّ إسهال منذ الأمس، كنت في عطلة في مصر." },
+      { "speaker": "pharmacist", "de": "Haben Sie Fieber oder Blut im Stuhl?",                                                                               "en": "Do you have fever or blood in the stool?",                                                                     "ar": "هل لديك حمى أو دم في البراز؟" },
+      { "speaker": "patient",    "de": "Nein.",                                                                                                                "en": "No.",                                                                                                          "ar": "لا." },
+      { "speaker": "pharmacist", "de": "Wichtig ist Flüssigkeitszufuhr. Ich empfehle eine Elektrolytlösung. Bei Bedarf kurzfristig Loperamid.",              "en": "Hydration is essential. I recommend an oral rehydration solution. Loperamide can be used short term if needed.","ar": "تعويض السوائل ضروري. أنصح بمحلول الإماهة الفموية. يمكن استخدام لوبيراميد لفترة قصيرة عند الحاجة." },
+      { "speaker": "pharmacist", "de": "Bei Fieber, Blut im Stuhl oder Beschwerden über 48 Stunden — bitte zum Arzt.",                                       "en": "If you have fever, blood in stool, or symptoms longer than 48 hours — please see a doctor.",                   "ar": "إذا كان هناك حمى أو دم في البراز أو استمرت الأعراض أكثر من 48 ساعة — يرجى مراجعة الطبيب." }
+    ]
+  },
+  {
+    "id": "d07",
+    "scenario_en": "Constipation",
+    "scenario_de": "Verstopfung",
+    "scenario_ar": "إمساك",
+    "tags": ["otc", "gi"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich habe seit fünf Tagen keinen Stuhlgang.",                                                                          "en": "I haven't had a bowel movement for five days.",                                                                "ar": "لم يحدث لدي إخراج منذ خمسة أيام." },
+      { "speaker": "pharmacist", "de": "Trinken Sie genug? Bewegen Sie sich regelmäßig?",                                                                    "en": "Are you drinking enough? Are you moving regularly?",                                                            "ar": "هل تشرب كمية كافية من الماء؟ هل تمارس الحركة بانتظام؟" },
+      { "speaker": "patient",    "de": "Ich sitze viel im Büro.",                                                                                              "en": "I sit a lot at the office.",                                                                                    "ar": "أجلس كثيراً في المكتب." },
+      { "speaker": "pharmacist", "de": "Macrogol-Pulver, einmal täglich in Wasser aufgelöst, ist sanft und gut verträglich. Wirkt nach 1–2 Tagen.",          "en": "Macrogol powder, once daily dissolved in water, is gentle and well tolerated. Works within 1–2 days.",          "ar": "مسحوق الماكروغول مرة يومياً يُذاب في الماء، لطيف وجيد التحمل. يبدأ مفعوله خلال 1–2 يوم." }
+    ]
+  },
+  {
+    "id": "d08",
+    "scenario_en": "Cystitis (mild, female adult)",
+    "scenario_de": "Blasenentzündung",
+    "scenario_ar": "التهاب المثانة",
+    "tags": ["urology", "referral"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich habe Brennen beim Wasserlassen und muss oft auf die Toilette.",                                                  "en": "I have burning on urination and frequent urge to go.",                                                          "ar": "أشعر بحرقة عند التبول وكثرة الإلحاح على الذهاب للحمام." },
+      { "speaker": "pharmacist", "de": "Haben Sie Fieber, Flankenschmerzen oder Blut im Urin?",                                                              "en": "Do you have fever, flank pain, or blood in the urine?",                                                         "ar": "هل لديكِ حمى أو ألم في الخاصرة أو دم في البول؟" },
+      { "speaker": "patient",    "de": "Nein.",                                                                                                                "en": "No.",                                                                                                          "ar": "لا." },
+      { "speaker": "pharmacist", "de": "Trinken Sie viel und nehmen Sie pflanzliche Präparate, z. B. Bärentraubenblätter. Bei stärkeren Symptomen zum Arzt.","en": "Drink a lot and consider herbal preparations such as bearberry leaves. For stronger symptoms, see a doctor.",   "ar": "اشربي الكثير من الماء واعتبري المستحضرات العشبية مثل أوراق عنب الدب. للأعراض الأشد راجعي الطبيب." },
+      { "speaker": "pharmacist", "de": "Bei Schwangerschaft oder bei Männern immer ärztliche Abklärung empfehlen.",                                          "en": "Always recommend medical evaluation in pregnancy or in men.",                                                  "ar": "احرص دائماً على التحويل للطبيب في حالة الحمل أو لدى الرجال." }
+    ]
+  },
+  {
+    "id": "d09",
+    "scenario_en": "Picking up a prescription",
+    "scenario_de": "Rezept einlösen",
+    "scenario_ar": "صرف وصفة طبية",
+    "tags": ["prescription", "workflow"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich möchte dieses Rezept einlösen.",                                                                                 "en": "I'd like to fill this prescription.",                                                                          "ar": "أرغب في صرف هذه الوصفة." },
+      { "speaker": "pharmacist", "de": "Gerne. Haben Sie Ihre Versichertenkarte dabei?",                                                                     "en": "Of course. Do you have your insurance card with you?",                                                          "ar": "بكل سرور. هل معك بطاقة التأمين؟" },
+      { "speaker": "patient",    "de": "Ja, hier.",                                                                                                            "en": "Yes, here.",                                                                                                   "ar": "نعم، تفضل." },
+      { "speaker": "pharmacist", "de": "Einen Moment, ich prüfe die Rabattverträge … Wir haben das Präparat im Haus. Die Zuzahlung beträgt 5 Euro.",          "en": "One moment, I'll check the rebate contracts… We have the product in stock. The co-payment is 5 euros.",         "ar": "لحظة من فضلك، سأتحقق من اتفاقيات الخصم… الدواء متوفر لدينا. المساهمة الشخصية 5 يورو." },
+      { "speaker": "pharmacist", "de": "Haben Sie das Medikament schon einmal genommen?",                                                                    "en": "Have you taken this medication before?",                                                                       "ar": "هل تناولت هذا الدواء من قبل؟" }
+    ]
+  },
+  {
+    "id": "d10",
+    "scenario_en": "Generic substitution (aut idem)",
+    "scenario_de": "Generikumaustausch (aut idem)",
+    "scenario_ar": "استبدال بالدواء الجنيس",
+    "tags": ["prescription", "workflow"],
+    "turns": [
+      { "speaker": "patient",    "de": "Warum sieht das Medikament anders aus als beim letzten Mal?",                                                       "en": "Why does the medication look different than last time?",                                                       "ar": "لماذا يبدو الدواء مختلفاً عن المرة السابقة؟" },
+      { "speaker": "pharmacist", "de": "Aufgrund eines Rabattvertrags muss ich Ihnen das Präparat von Hersteller X geben. Der Wirkstoff ist identisch.",     "en": "Due to a rebate contract I have to give you the product from manufacturer X. The active ingredient is the same.","ar": "بسبب اتفاقية خصم يجب أن أصرف لك مستحضر الشركة X. المادة الفعالة هي نفسها." },
+      { "speaker": "patient",    "de": "Wirkt das genauso?",                                                                                                  "en": "Does it work the same?",                                                                                       "ar": "هل يعمل بنفس الفعالية؟" },
+      { "speaker": "pharmacist", "de": "Ja, gleicher Wirkstoff, gleiche Dosierung. Nur die Tablettenform und der Hersteller sind anders.",                   "en": "Yes — same active ingredient, same dose. Only the tablet shape and manufacturer differ.",                       "ar": "نعم، نفس المادة الفعالة ونفس الجرعة. فقط شكل القرص والشركة المصنعة يختلفان." }
+    ]
+  },
+  {
+    "id": "d11",
+    "scenario_en": "Forgot a dose — what to do",
+    "scenario_de": "Dosis vergessen",
+    "scenario_ar": "نسيان جرعة",
+    "tags": ["counseling"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich habe heute meine Blutdrucktablette vergessen. Soll ich jetzt zwei nehmen?",                                       "en": "I forgot my blood pressure tablet today. Should I take two now?",                                              "ar": "نسيت قرص ضغط الدم اليوم. هل آخذ قرصين الآن؟" },
+      { "speaker": "pharmacist", "de": "Nein, nehmen Sie keine doppelte Dosis. Nehmen Sie die vergessene Tablette so bald wie möglich, sonst lassen Sie sie aus.","en": "No, don't take a double dose. Take the missed tablet as soon as possible, otherwise skip it.",                "ar": "لا، لا تتناول جرعة مضاعفة. تناول الجرعة المنسية في أقرب وقت، وإلا فاتركها." },
+      { "speaker": "pharmacist", "de": "Morgen wieder zur gewohnten Zeit weiter.",                                                                            "en": "Continue tomorrow at your usual time.",                                                                        "ar": "استمر في الجرعة المعتادة غداً في الوقت نفسه." }
+    ]
+  },
+  {
+    "id": "d12",
+    "scenario_en": "Pregnancy and OTC pain relief",
+    "scenario_de": "Schwangerschaft und Schmerzmittel",
+    "scenario_ar": "الحمل ومسكنات الألم",
+    "tags": ["pregnancy", "safety"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich bin in der 20. Woche schwanger und habe Kopfschmerzen. Was darf ich nehmen?",                                     "en": "I'm 20 weeks pregnant and have a headache. What can I take?",                                                  "ar": "أنا حامل في الأسبوع 20 ولدي صداع. ماذا يمكنني تناوله؟" },
+      { "speaker": "pharmacist", "de": "Paracetamol bis 1 g pro Einzeldosis und maximal 3 g pro Tag ist in der Schwangerschaft das Mittel der Wahl.",        "en": "Paracetamol up to 1 g per dose, max 3 g per day, is the first choice in pregnancy.",                            "ar": "الباراسيتامول حتى 1غ للجرعة و3غ كحد أقصى يومياً هو الخيار الأول في الحمل." },
+      { "speaker": "pharmacist", "de": "Ibuprofen darf ab dem 6. Schwangerschaftsmonat nicht mehr eingenommen werden.",                                      "en": "Ibuprofen must not be used from the 6th month of pregnancy onwards.",                                          "ar": "لا يُسمح بتناول الإيبوبروفين بدءاً من الشهر السادس من الحمل." },
+      { "speaker": "patient",    "de": "Verstanden, danke!",                                                                                                  "en": "Understood, thank you!",                                                                                       "ar": "فهمت، شكراً!" }
+    ]
+  },
+  {
+    "id": "d13",
+    "scenario_en": "Antibiotic counselling",
+    "scenario_de": "Beratung zu Antibiotika",
+    "scenario_ar": "استشارة عن المضاد الحيوي",
+    "tags": ["prescription", "antibiotic"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich habe ein Rezept für Amoxicillin 1000 mg.",                                                                       "en": "I have a prescription for amoxicillin 1000 mg.",                                                                "ar": "لدي وصفة لأموكسيسيلين 1000 ملغ." },
+      { "speaker": "pharmacist", "de": "Sind Sie auf Penicillin allergisch?",                                                                                "en": "Are you allergic to penicillin?",                                                                              "ar": "هل لديك حساسية من البنسلين؟" },
+      { "speaker": "patient",    "de": "Nein.",                                                                                                                "en": "No.",                                                                                                          "ar": "لا." },
+      { "speaker": "pharmacist", "de": "Nehmen Sie eine Tablette dreimal täglich, alle 8 Stunden, mit Wasser. Bitte die ganze Packung zu Ende nehmen.",      "en": "Take one tablet three times daily, every 8 hours, with water. Please complete the whole pack.",                "ar": "خذ قرصاً ثلاث مرات يومياً، كل 8 ساعات، مع الماء. يرجى إكمال العلبة كاملة." },
+      { "speaker": "pharmacist", "de": "Antibiotika können Durchfall verursachen. Bei starken Beschwerden zum Arzt.",                                       "en": "Antibiotics may cause diarrhea. See a doctor if symptoms are severe.",                                          "ar": "قد تسبب المضادات الحيوية إسهالاً. راجع الطبيب عند حدوث أعراض شديدة." }
+    ]
+  },
+  {
+    "id": "d14",
+    "scenario_en": "Asthma inhaler technique",
+    "scenario_de": "Asthma-Inhalator — Anwendung",
+    "scenario_ar": "طريقة استخدام بخاخ الربو",
+    "tags": ["counseling", "respiratory"],
+    "turns": [
+      { "speaker": "patient",    "de": "Mein neuer Inhalator — wie benutze ich ihn richtig?",                                                                "en": "My new inhaler — how do I use it correctly?",                                                                  "ar": "بخاخي الجديد — كيف أستخدمه بشكل صحيح؟" },
+      { "speaker": "pharmacist", "de": "Schütteln, ausatmen, Mundstück fest umschließen, beim Einatmen sprühen, Atem 10 Sekunden anhalten.",                "en": "Shake, exhale, seal lips around the mouthpiece, press during inhalation, hold breath for 10 seconds.",          "ar": "رجّ البخاخ، ازفر، أحكم إغلاق الفم حول الفوهة، اضغط أثناء الشهيق، احبس النفس 10 ثوانٍ." },
+      { "speaker": "pharmacist", "de": "Nach der Anwendung mit Wasser den Mund spülen — vor allem bei Kortison-Inhalatoren.",                               "en": "After use, rinse your mouth with water — especially for steroid inhalers.",                                     "ar": "اشطف فمك بالماء بعد الاستخدام، خاصة مع بخاخات الكورتيزون." }
+    ]
+  },
+  {
+    "id": "d15",
+    "scenario_en": "Diabetes — blood glucose meter",
+    "scenario_de": "Diabetes — Blutzuckermessgerät",
+    "scenario_ar": "السكري — جهاز قياس السكر",
+    "tags": ["counseling", "diabetes"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich habe ein neues Blutzuckermessgerät bekommen. Wie messe ich richtig?",                                            "en": "I got a new blood glucose meter. How do I measure correctly?",                                                 "ar": "حصلت على جهاز جديد لقياس السكر. كيف أقيس بشكل صحيح؟" },
+      { "speaker": "pharmacist", "de": "Hände waschen, mit der Lanzette seitlich in die Fingerkuppe stechen, ersten Tropfen abwischen, zweiten Tropfen messen.","en": "Wash your hands, prick the side of the fingertip, wipe away the first drop, measure the second drop.",          "ar": "اغسل يديك، استخدم الإبرة على جانب الإصبع، امسح القطرة الأولى، قس القطرة الثانية." },
+      { "speaker": "pharmacist", "de": "Teststreifen sind temperaturempfindlich — kühl, trocken und verschlossen lagern.",                                  "en": "Test strips are temperature sensitive — store cool, dry, and sealed.",                                          "ar": "أشرطة الاختبار حساسة لدرجة الحرارة — تُحفظ باردة جافة ومغلقة." }
+    ]
+  },
+  {
+    "id": "d16",
+    "scenario_en": "Anticoagulant + new medicine — interaction check",
+    "scenario_de": "Antikoagulans + neues Medikament — Wechselwirkung",
+    "scenario_ar": "مضاد التخثر + دواء جديد — تفاعل دوائي",
+    "tags": ["interaction", "safety"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich nehme Marcumar (Phenprocoumon). Darf ich Ibuprofen gegen meine Rückenschmerzen nehmen?",                         "en": "I take Marcumar (phenprocoumon). Can I take ibuprofen for my back pain?",                                       "ar": "أتناول مارfumار (فينبروكومون). هل يمكنني أخذ إيبوبروفين لألم ظهري؟" },
+      { "speaker": "pharmacist", "de": "Ibuprofen erhöht das Blutungsrisiko. Bitte nicht ohne ärztliche Rücksprache.",                                       "en": "Ibuprofen increases bleeding risk. Please not without consulting your doctor.",                                "ar": "يزيد الإيبوبروفين خطر النزيف. يُرجى عدم تناوله دون استشارة الطبيب." },
+      { "speaker": "pharmacist", "de": "Paracetamol ist für Sie eine sicherere Option.",                                                                     "en": "Paracetamol is a safer option for you.",                                                                       "ar": "الباراسيتامول هو خيار أكثر أماناً لك." }
+    ]
+  },
+  {
+    "id": "d17",
+    "scenario_en": "Child fever — paracetamol dosing",
+    "scenario_de": "Fieber beim Kind — Paracetamol-Dosierung",
+    "scenario_ar": "حمى الطفل — جرعة الباراسيتامول",
+    "tags": ["pediatrics"],
+    "turns": [
+      { "speaker": "patient",    "de": "Mein Sohn ist 4 Jahre alt, wiegt 16 kg, hat 39 Grad Fieber.",                                                         "en": "My son is 4 years old, weighs 16 kg, has 39°C fever.",                                                          "ar": "ابني عمره 4 سنوات، وزنه 16 كغ، حرارته 39°." },
+      { "speaker": "pharmacist", "de": "Paracetamol-Saft 200 mg pro Einzeldosis, maximal viermal täglich, abstand mindestens 6 Stunden.",                    "en": "Paracetamol syrup 200 mg per single dose, up to four times daily, at least 6 hours apart.",                     "ar": "شراب الباراسيتامول 200 ملغ للجرعة، حتى 4 مرات يومياً، بفاصل 6 ساعات على الأقل." },
+      { "speaker": "pharmacist", "de": "Bei Fieber über 3 Tage oder wenn das Kind sehr schlapp ist — bitte zum Kinderarzt.",                                "en": "If fever lasts more than 3 days or the child is very lethargic — please see a pediatrician.",                  "ar": "إذا استمرت الحمى أكثر من 3 أيام أو كان الطفل ضعيفاً جداً — راجع طبيب الأطفال." }
+    ]
+  },
+  {
+    "id": "d18",
+    "scenario_en": "Emergency contraception (Pille danach)",
+    "scenario_de": "Pille danach",
+    "scenario_ar": "حبوب منع الحمل الطارئة",
+    "tags": ["counseling", "women-health"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich brauche die Pille danach.",                                                                                       "en": "I need the morning-after pill.",                                                                                "ar": "أحتاج إلى حبة منع الحمل الطارئة." },
+      { "speaker": "pharmacist", "de": "Wann war der ungeschützte Verkehr?",                                                                                  "en": "When was the unprotected intercourse?",                                                                         "ar": "متى كانت العلاقة دون وقاية؟" },
+      { "speaker": "patient",    "de": "Vor etwa 12 Stunden.",                                                                                                "en": "About 12 hours ago.",                                                                                          "ar": "قبل حوالي 12 ساعة." },
+      { "speaker": "pharmacist", "de": "Levonorgestrel wirkt bis 72 Stunden, Ulipristalacetat bis 120 Stunden — je früher, desto besser.",                   "en": "Levonorgestrel works up to 72 hours, ulipristal acetate up to 120 hours — the sooner, the better.",             "ar": "الليفونورجستريل يعمل حتى 72 ساعة، يوليبريستال أسيتات حتى 120 ساعة — كلما كان أبكر كان أفضل." },
+      { "speaker": "pharmacist", "de": "Bei Erbrechen innerhalb von 3 Stunden bitte nochmal eine Tablette einnehmen.",                                       "en": "If vomiting occurs within 3 hours, please take another tablet.",                                               "ar": "في حال التقيؤ خلال 3 ساعات يُنصح بتناول قرص آخر." }
+    ]
+  },
+  {
+    "id": "d19",
+    "scenario_en": "Insurance — private vs. statutory",
+    "scenario_de": "Versicherung — privat oder gesetzlich",
+    "scenario_ar": "التأمين — خاص أم قانوني",
+    "tags": ["insurance", "workflow"],
+    "turns": [
+      { "speaker": "pharmacist", "de": "Sind Sie privat oder gesetzlich versichert?",                                                                         "en": "Are you privately or statutorily insured?",                                                                     "ar": "هل تأمينك خاص أم قانوني؟" },
+      { "speaker": "patient",    "de": "Privat.",                                                                                                              "en": "Privately.",                                                                                                   "ar": "تأمين خاص." },
+      { "speaker": "pharmacist", "de": "Dann zahlen Sie das Medikament zunächst selbst, ich gebe Ihnen die Quittung. Sie reichen sie bei Ihrer Versicherung ein.","en": "Then you pay for the medication yourself first; I'll give you the receipt. You submit it to your insurance.",  "ar": "إذن ستدفع ثمن الدواء أولاً، سأعطيك الإيصال لتقديمه إلى شركة التأمين." }
+    ]
+  },
+  {
+    "id": "d20",
+    "scenario_en": "Narcotic prescription (BtM)",
+    "scenario_de": "Betäubungsmittelrezept (BtM)",
+    "scenario_ar": "وصفة مادة مخدرة (BtM)",
+    "tags": ["controlled", "workflow"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich habe ein gelbes Rezept, dreiteilig.",                                                                              "en": "I have a yellow three-part prescription.",                                                                     "ar": "لدي وصفة صفراء ثلاثية." },
+      { "speaker": "pharmacist", "de": "Ein BtM-Rezept. Ich prüfe Datum, Dosis und Unterschrift. Es ist ab Ausstellung 7 Tage gültig.",                       "en": "A narcotic prescription. I check the date, dosage, and signature. It is valid for 7 days from issue.",          "ar": "وصفة مادة مخدرة. سأتحقق من التاريخ والجرعة والتوقيع. صالحة لمدة 7 أيام من الإصدار." },
+      { "speaker": "pharmacist", "de": "Ich brauche kurz Ihren Ausweis und unterschreibe die BtM-Dokumentation.",                                             "en": "I'll briefly need your ID and will sign the narcotic documentation.",                                          "ar": "أحتاج إلى بطاقتك الشخصية للحظة وسأوقع توثيق المواد المخدرة." }
+    ]
+  },
+  {
+    "id": "d21",
+    "scenario_en": "Smoking cessation",
+    "scenario_de": "Raucherentwöhnung",
+    "scenario_ar": "الإقلاع عن التدخين",
+    "tags": ["counseling"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich möchte mit dem Rauchen aufhören. Was empfehlen Sie?",                                                            "en": "I want to quit smoking. What do you recommend?",                                                                "ar": "أرغب في الإقلاع عن التدخين. بماذا تنصح؟" },
+      { "speaker": "pharmacist", "de": "Nikotinersatz hilft. Pflaster für die Grundversorgung, Kaugummi oder Lutschtablette für akutes Verlangen.",          "en": "Nicotine replacement helps. Patches for baseline supply, gum or lozenges for acute craving.",                  "ar": "البديل النيكوتيني يساعد. لصاقات للأساس، علكة أو أقراص استحلاب للرغبة الحادة." },
+      { "speaker": "pharmacist", "de": "Wir berechnen die Pflasterstärke nach Ihrer aktuellen Zigarettenanzahl.",                                            "en": "We calculate the patch strength based on your current daily cigarette count.",                                  "ar": "نختار قوة اللصاقة حسب عدد سجائرك اليومي." }
+    ]
+  },
+  {
+    "id": "d22",
+    "scenario_en": "Eye drops — open jar problem",
+    "scenario_de": "Augentropfen — Anwendung",
+    "scenario_ar": "قطرة العين — الاستعمال",
+    "tags": ["counseling"],
+    "turns": [
+      { "speaker": "patient",    "de": "Wie wende ich Augentropfen richtig an?",                                                                              "en": "How do I correctly use eye drops?",                                                                            "ar": "كيف أستعمل قطرة العين بشكل صحيح؟" },
+      { "speaker": "pharmacist", "de": "Hände waschen, Kopf zurücklehnen, unteres Lid sanft herunterziehen, einen Tropfen in die Bindehauttasche.",          "en": "Wash hands, tilt head back, gently pull the lower lid down, place one drop into the conjunctival sac.",         "ar": "اغسل يديك، أمل رأسك للخلف، اسحب الجفن السفلي بلطف، ضع قطرة واحدة في الجيب الملتحمي." },
+      { "speaker": "pharmacist", "de": "Augenlid für 1 Minute geschlossen halten und Tränenkanal seitlich der Nase drücken.",                                "en": "Keep eyelid closed for 1 minute and press tear duct beside the nose.",                                          "ar": "أبقِ الجفن مغلقاً لدقيقة واضغط القناة الدمعية بجانب الأنف." },
+      { "speaker": "pharmacist", "de": "Nach Anbruch 4 Wochen verwenden, dann verwerfen.",                                                                    "en": "Use within 4 weeks of opening, then discard.",                                                                  "ar": "تُستعمل خلال 4 أسابيع من فتحها ثم يتم التخلص منها." }
+    ]
+  },
+  {
+    "id": "d23",
+    "scenario_en": "Vaccination question",
+    "scenario_de": "Impfberatung",
+    "scenario_ar": "استشارة لقاح",
+    "tags": ["vaccine", "counseling"],
+    "turns": [
+      { "speaker": "patient",    "de": "Welche Grippeimpfung empfehlen Sie für eine 70-jährige Patientin?",                                                  "en": "Which flu vaccine do you recommend for a 70-year-old patient?",                                                "ar": "أي لقاح إنفلونزا تنصح به لمريضة عمرها 70 سنة؟" },
+      { "speaker": "pharmacist", "de": "Für Personen ab 60 wird ein Hochdosis- oder adjuvantierter Influenza-Impfstoff empfohlen (STIKO-Empfehlung).",       "en": "For people over 60, a high-dose or adjuvanted influenza vaccine is recommended (STIKO guideline).",             "ar": "للأشخاص فوق 60 يُنصح بلقاح إنفلونزا عالي الجرعة أو معزز (توصية STIKO)." }
+    ]
+  },
+  {
+    "id": "d24",
+    "scenario_en": "Blood pressure measurement in pharmacy",
+    "scenario_de": "Blutdruckmessung in der Apotheke",
+    "scenario_ar": "قياس ضغط الدم في الصيدلية",
+    "tags": ["service"],
+    "turns": [
+      { "speaker": "patient",    "de": "Können Sie meinen Blutdruck messen?",                                                                                "en": "Can you measure my blood pressure?",                                                                            "ar": "هل يمكنك قياس ضغط دمي؟" },
+      { "speaker": "pharmacist", "de": "Ja gerne, bitte 5 Minuten ruhig sitzen, Arm auf Herzhöhe.",                                                          "en": "Yes, please sit quietly for 5 minutes, arm at heart level.",                                                    "ar": "بكل سرور. اجلس بهدوء لمدة 5 دقائق، الذراع بمستوى القلب." },
+      { "speaker": "pharmacist", "de": "Ihr Wert ist 145/92 — leicht erhöht. Bitte über mehrere Tage messen und mit Ihrem Hausarzt sprechen.",                "en": "Your reading is 145/92 — slightly elevated. Please measure over several days and talk to your GP.",             "ar": "القراءة 145/92 — مرتفع قليلاً. الرجاء القياس على مدار عدة أيام والتحدث مع طبيبك." }
+    ]
+  },
+  {
+    "id": "d25",
+    "scenario_en": "Skin rash — referral case",
+    "scenario_de": "Hautausschlag — Fall für den Arzt",
+    "scenario_ar": "طفح جلدي — حالة للطبيب",
+    "tags": ["referral", "dermatology"],
+    "turns": [
+      { "speaker": "patient",    "de": "Mein Kind hat plötzlich einen Ausschlag im Gesicht, dazu Fieber.",                                                    "en": "My child suddenly has a rash on the face, plus fever.",                                                         "ar": "لدى طفلي طفح مفاجئ في الوجه مع حمى." },
+      { "speaker": "pharmacist", "de": "Bitte gehen Sie heute noch zum Kinderarzt — Ausschlag mit Fieber sollte abgeklärt werden.",                          "en": "Please see the pediatrician today — rash with fever needs evaluation.",                                         "ar": "يرجى مراجعة طبيب الأطفال اليوم — طفح مع حمى يحتاج إلى فحص." }
+    ]
+  },
+  {
+    "id": "d26",
+    "scenario_en": "Vitamin D supplementation",
+    "scenario_de": "Vitamin-D-Supplementierung",
+    "scenario_ar": "مكملات فيتامين د",
+    "tags": ["counseling", "vitamin"],
+    "turns": [
+      { "speaker": "patient",    "de": "Mein Hausarzt sagt, mein Vitamin-D-Spiegel ist niedrig.",                                                            "en": "My GP says my vitamin D level is low.",                                                                         "ar": "طبيبي يقول إن مستوى فيتامين د لدي منخفض." },
+      { "speaker": "pharmacist", "de": "Üblich ist 1000–2000 IE pro Tag. Mit einer fetthaltigen Mahlzeit besser aufgenommen.",                              "en": "1000–2000 IU per day is common. Better absorbed with a fatty meal.",                                            "ar": "1000–2000 وحدة يومياً هو المعتاد. يُمتص أفضل مع وجبة دهنية." }
+    ]
+  },
+  {
+    "id": "d27",
+    "scenario_en": "Iron supplementation",
+    "scenario_de": "Eisensubstitution",
+    "scenario_ar": "تعويض الحديد",
+    "tags": ["counseling"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich habe Eisenmangel, der Arzt hat mir Eisentabletten verschrieben.",                                                "en": "I have iron deficiency, the doctor prescribed iron tablets.",                                                  "ar": "لديّ نقص حديد، وصف لي الطبيب أقراص حديد." },
+      { "speaker": "pharmacist", "de": "Nehmen Sie sie auf nüchternen Magen, am besten mit einem Glas Orangensaft. Nicht zusammen mit Milch oder Kaffee.",   "en": "Take on an empty stomach, ideally with orange juice. Not together with milk or coffee.",                       "ar": "تُؤخذ على معدة فارغة، يفضل مع كوب من عصير البرتقال. ليس مع الحليب أو القهوة." },
+      { "speaker": "pharmacist", "de": "Stuhl kann sich dunkel verfärben — das ist normal.",                                                                 "en": "Stools may turn dark — that's normal.",                                                                        "ar": "قد يتلوّن البراز بلون داكن — هذا طبيعي." }
+    ]
+  },
+  {
+    "id": "d28",
+    "scenario_en": "Antifungal — vaginal candidiasis",
+    "scenario_de": "Antimykotikum — Scheidenpilz",
+    "scenario_ar": "مضاد فطريات — الفطريات المهبلية",
+    "tags": ["women-health"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich habe starken Juckreiz und weißlichen Ausfluss.",                                                                  "en": "I have severe itching and a whitish discharge.",                                                                "ar": "لديّ حكة شديدة وإفرازات بيضاء." },
+      { "speaker": "pharmacist", "de": "Klingt nach einer Pilzinfektion. Clotrimazol als Vaginaltablette plus Creme für 3 Tage hilft meist gut.",            "en": "Sounds like a yeast infection. Clotrimazole vaginal tablet plus cream for 3 days usually helps well.",          "ar": "يبدو ذلك التهاباً فطرياً. عادة ما يفيد كلوتريمازول كقرص مهبلي مع كريم لمدة 3 أيام." },
+      { "speaker": "pharmacist", "de": "Bei häufigen Episoden, in der Schwangerschaft oder bei Blutung — bitte zum Arzt.",                                  "en": "For frequent episodes, during pregnancy or with bleeding — please see a doctor.",                              "ar": "في حالة تكرار النوبات أو الحمل أو وجود نزيف — يُرجى مراجعة الطبيب." }
+    ]
+  },
+  {
+    "id": "d29",
+    "scenario_en": "Refill request without prescription",
+    "scenario_de": "Notfallabgabe ohne Rezept",
+    "scenario_ar": "صرف استثنائي بدون وصفة",
+    "tags": ["workflow"],
+    "turns": [
+      { "speaker": "patient",    "de": "Mein Blutdruckmittel ist alle, ich habe das Rezept zu Hause vergessen.",                                              "en": "I'm out of my blood pressure medication and forgot the prescription at home.",                                  "ar": "نفد دواء ضغط الدم لدي ونسيت الوصفة في المنزل." },
+      { "speaker": "pharmacist", "de": "In Notfällen können wir eine kleine Menge im Voraus abgeben. Bringen Sie das Rezept bitte zeitnah nach.",            "en": "In emergencies we can dispense a small amount in advance. Please bring the prescription afterwards.",          "ar": "في الحالات الطارئة يمكننا صرف كمية صغيرة مقدماً. يرجى إحضار الوصفة لاحقاً." }
+    ]
+  },
+  {
+    "id": "d30",
+    "scenario_en": "Wound care — small cut",
+    "scenario_de": "Wundversorgung — kleine Wunde",
+    "scenario_ar": "العناية بجرح صغير",
+    "tags": ["otc", "first-aid"],
+    "turns": [
+      { "speaker": "patient",    "de": "Ich habe mich beim Kochen geschnitten.",                                                                              "en": "I cut myself while cooking.",                                                                                  "ar": "جرحت نفسي أثناء الطبخ." },
+      { "speaker": "pharmacist", "de": "Wunde mit fließendem Wasser reinigen, mit Octenisept oder ähnlich desinfizieren, dann ein Pflaster aufkleben.",      "en": "Rinse the wound with running water, disinfect with Octenisept or similar, then apply a plaster.",                "ar": "اشطف الجرح بماء جارٍ، عقمه بمحلول أوكتنيسبت أو ما شابه، ثم ضع لاصقاً." },
+      { "speaker": "pharmacist", "de": "Bei tiefen Wunden, starkem Bluten oder fehlender Tetanusimpfung bitte zum Arzt.",                                    "en": "For deep wounds, heavy bleeding, or missing tetanus vaccination — see a doctor.",                              "ar": "للجروح العميقة أو النزيف الغزير أو عدم وجود لقاح كزاز — راجع الطبيب." }
+    ]
+  }
+]
