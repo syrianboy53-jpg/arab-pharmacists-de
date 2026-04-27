@@ -12,6 +12,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:
@@ -26,3 +27,7 @@ flutter:
     - assets/data/drugs.json
     - assets/data/dialogues.json
     - assets/data/quizzes.json
+    - assets/data/payment_accounts.json
+    - assets/data/contact_info.json
+    - assets/data/material_prices.json
+    - assets/data/subscription_plans.json

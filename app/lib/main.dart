@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'ammaar_repository.dart';
 import 'repository.dart';
 import 'screens/home_screen.dart';
 
@@ -10,7 +11,10 @@ Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
-  await Repository.instance.load();
+  await Future.wait([
+    Repository.instance.load(),
+    AmmaarRepository.instance.load(),
+  ]);
   runApp(const ArabPharmacistsApp());
 }
 

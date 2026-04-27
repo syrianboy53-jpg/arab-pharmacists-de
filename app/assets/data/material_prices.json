@@ -1,0 +1,122 @@
+[
+  {
+    "id": "mp_1",
+    "name_ar": "إسمنت",
+    "unit": "طن",
+    "price": 1200000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  },
+  {
+    "id": "mp_2",
+    "name_ar": "حديد (قطر 12 مم)",
+    "unit": "طن",
+    "price": 8500000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  },
+  {
+    "id": "mp_3",
+    "name_ar": "حديد (قطر 16 مم)",
+    "unit": "طن",
+    "price": 8800000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  },
+  {
+    "id": "mp_4",
+    "name_ar": "رمل",
+    "unit": "متر مكعب",
+    "price": 150000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  },
+  {
+    "id": "mp_5",
+    "name_ar": "بحص (حصى)",
+    "unit": "متر مكعب",
+    "price": 200000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  },
+  {
+    "id": "mp_6",
+    "name_ar": "بلوك (طوب)",
+    "unit": "حبة",
+    "price": 5000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  },
+  {
+    "id": "mp_7",
+    "name_ar": "دهان (بلاستيك داخلي)",
+    "unit": "تنكة (18 ليتر)",
+    "price": 350000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  },
+  {
+    "id": "mp_8",
+    "name_ar": "دهان (زيتي)",
+    "unit": "تنكة (4 ليتر)",
+    "price": 250000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  },
+  {
+    "id": "mp_9",
+    "name_ar": "سيراميك أرضيات",
+    "unit": "متر مربع",
+    "price": 45000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  },
+  {
+    "id": "mp_10",
+    "name_ar": "جبصين (جبس)",
+    "unit": "كيس (25 كغ)",
+    "price": 75000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  },
+  {
+    "id": "mp_11",
+    "name_ar": "ألواح خشب (MDF)",
+    "unit": "لوح (122×244 سم)",
+    "price": 180000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  },
+  {
+    "id": "mp_12",
+    "name_ar": "مواسير PVC (قطر 110 مم)",
+    "unit": "متر",
+    "price": 15000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  },
+  {
+    "id": "mp_13",
+    "name_ar": "سلك كهرباء (2.5 مم)",
+    "unit": "متر",
+    "price": 5000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  },
+  {
+    "id": "mp_14",
+    "name_ar": "عازل مائي (رول)",
+    "unit": "رول",
+    "price": 450000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  },
+  {
+    "id": "mp_15",
+    "name_ar": "لاصق بلاط",
+    "unit": "كيس (25 كغ)",
+    "price": 80000,
+    "last_updated": "2026-04-27",
+    "source": "manual"
+  }
+]
