@@ -1,0 +1,23 @@
+[
+  {
+    "id": "plan_monthly",
+    "name_ar": "باقة شهرية",
+    "description_ar": "اشتراك شهري في خدمات عمّار المميزة",
+    "price_syp": 200000,
+    "duration": "monthly"
+  },
+  {
+    "id": "plan_yearly",
+    "name_ar": "باقة سنوية",
+    "description_ar": "اشتراك سنوي بسعر مخفّض — وفّر 40%",
+    "price_syp": 1500000,
+    "duration": "yearly"
+  },
+  {
+    "id": "plan_lifetime",
+    "name_ar": "شريك الإعمار (مدى الحياة)",
+    "description_ar": "اشتراك مدى الحياة — ادفع مرة واحدة واستمتع للأبد",
+    "price_syp": 3000000,
+    "duration": "lifetime"
+  }
+]

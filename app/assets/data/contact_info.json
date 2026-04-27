@@ -1,0 +1,37 @@
+[
+  {
+    "id": "ci_1",
+    "type": "phone",
+    "label": "هاتف",
+    "value": "09XXXXXXXX",
+    "enabled": true
+  },
+  {
+    "id": "ci_2",
+    "type": "whatsapp",
+    "label": "واتساب",
+    "value": "09XXXXXXXX",
+    "enabled": true
+  },
+  {
+    "id": "ci_3",
+    "type": "telegram",
+    "label": "تلغرام",
+    "value": "@ammaar_sy",
+    "enabled": true
+  },
+  {
+    "id": "ci_4",
+    "type": "facebook",
+    "label": "فيسبوك",
+    "value": "https://facebook.com/ammaar",
+    "enabled": true
+  },
+  {
+    "id": "ci_5",
+    "type": "email",
+    "label": "بريد إلكتروني",
+    "value": "info@ammaar.sy",
+    "enabled": false
+  }
+]

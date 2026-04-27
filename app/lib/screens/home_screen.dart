@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'admin_dashboard_screen.dart';
 import 'dialogues_screen.dart';
 import 'drugs_screen.dart';
+import 'material_prices_screen.dart';
 import 'quiz_screen.dart';
 import 'search_screen.dart';
+import 'subscription_screen.dart';
 import 'terms_screen.dart';
+import 'user_profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -57,6 +61,106 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Search',
           ),
         ],
+      ),
+      drawer: Drawer(
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(Icons.construction,
+                        size: 40,
+                        color: Theme.of(context).colorScheme.onPrimary),
+                    const SizedBox(height: 8),
+                    Text(
+                      'عمّار',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'سوريا بتتعمّر بإيديك',
+                      style: TextStyle(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .onPrimary
+                            .withOpacity(0.8),
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.person),
+                title: const Text('ملفي الشخصي'),
+                subtitle: const Text('إنشاء أو تعديل حسابك'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (_) => const UserProfileScreen(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.price_change),
+                title: const Text('دليل أسعار المواد'),
+                subtitle: const Text('أسعار مواد البناء'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (_) => const MaterialPricesScreen(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.star),
+                title: const Text('اشتراك VIP'),
+                subtitle: const Text('الباقات والميزات المميزة'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (_) => const SubscriptionScreen(),
+                    ),
+                  );
+                },
+              ),
+              const Divider(),
+              ListTile(
+                leading: const Icon(Icons.admin_panel_settings),
+                title: const Text('لوحة التحكم'),
+                subtitle: const Text('إدارة التطبيق'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (_) => const AdminDashboardScreen(),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

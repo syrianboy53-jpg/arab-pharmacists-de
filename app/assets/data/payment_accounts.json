@@ -1,0 +1,26 @@
+[
+  {
+    "id": "pa_1",
+    "method": "syriatel_cash",
+    "label": "سيريتل كاش",
+    "account_number": "09XXXXXXXX",
+    "holder_name": "عمّار",
+    "enabled": true
+  },
+  {
+    "id": "pa_2",
+    "method": "sham_cash",
+    "label": "شام كاش",
+    "account_number": "09XXXXXXXX",
+    "holder_name": "عمّار",
+    "enabled": true
+  },
+  {
+    "id": "pa_3",
+    "method": "al_haram",
+    "label": "الهرم للحوالات",
+    "account_number": "XXXXXXXX",
+    "holder_name": "عمّار",
+    "enabled": true
+  }
+]
