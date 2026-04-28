@@ -13,6 +13,7 @@ class AmanRepository {
   static const _kAnonQuestions = 'aman_anon_questions';
   static const _kSubscription = 'aman_subscription';
   static const _kTicketCounter = 'aman_ticket_counter';
+  static const _kPrivateSessions = 'aman_private_sessions';
 
   List<Expert>? _experts;
   List<LegalArticle>? _legalArticles;
@@ -25,7 +26,9 @@ class AmanRepository {
   List<HelpCenter>? _helpCenters;
   List<JugendamtRiskQuestion>? _jugendamtRiskQuestions;
   List<AmanPlan>? _plans;
+  List<AvailableTimeSlot>? _privateSlots;
   List<AnonQuestion> _anonQuestions = [];
+  List<PrivateSession> _privateSessions = [];
   AmanSubscription _subscription = const AmanSubscription();
   int _ticketCounter = 1000;
 
@@ -43,6 +46,7 @@ class AmanRepository {
       rootBundle.loadString('assets/data/aman_help_centers.json'),
       rootBundle.loadString('assets/data/aman_jugendamt_risk.json'),
       rootBundle.loadString('assets/data/aman_plans.json'),
+      rootBundle.loadString('assets/data/aman_private_slots.json'),
     ]);
     _experts = (jsonDecode(results[0]) as List)
         .cast<Map<String, dynamic>>()
@@ -88,6 +92,10 @@ class AmanRepository {
         .cast<Map<String, dynamic>>()
         .map(AmanPlan.fromJson)
         .toList();
+    _privateSlots = (jsonDecode(results[11]) as List)
+        .cast<Map<String, dynamic>>()
+        .map(AvailableTimeSlot.fromJson)
+        .toList();
 
     // Load locally saved anonymous questions.
     final prefs = await SharedPreferences.getInstance();
@@ -108,6 +116,15 @@ class AmanRepository {
 
     // Load ticket counter.
     _ticketCounter = prefs.getInt(_kTicketCounter) ?? 1000;
+
+    // Load private sessions.
+    final savedSessions = prefs.getString(_kPrivateSessions);
+    if (savedSessions != null) {
+      _privateSessions = (jsonDecode(savedSessions) as List)
+          .cast<Map<String, dynamic>>()
+          .map(PrivateSession.fromJson)
+          .toList();
+    }
   }
 
   List<Expert> get experts => _experts ?? const [];
@@ -125,7 +142,9 @@ class AmanRepository {
   List<JugendamtRiskQuestion> get jugendamtRiskQuestions =>
       _jugendamtRiskQuestions ?? const [];
   List<AmanPlan> get plans => _plans ?? const [];
+  List<AvailableTimeSlot> get privateSlots => _privateSlots ?? const [];
   List<AnonQuestion> get anonQuestions => _anonQuestions;
+  List<PrivateSession> get privateSessions => _privateSessions;
   AmanSubscription get subscription => _subscription;
 
   // --------------- Anonymous Questions ---------------
@@ -181,6 +200,34 @@ class AmanRepository {
     await prefs.setString(
       _kAnonQuestions,
       jsonEncode(_anonQuestions.map((e) => e.toJson()).toList()),
+    );
+  }
+
+  // --------------- Private Sessions ---------------
+
+  Future<void> bookPrivateSession(PrivateSession session) async {
+    _privateSessions.add(session);
+    await _savePrivateSessions();
+  }
+
+  Future<void> updatePrivateSession(PrivateSession updated) async {
+    final idx = _privateSessions.indexWhere((s) => s.id == updated.id);
+    if (idx >= 0) {
+      _privateSessions[idx] = updated;
+      await _savePrivateSessions();
+    }
+  }
+
+  Future<void> destroySession(String sessionId) async {
+    _privateSessions.removeWhere((s) => s.id == sessionId);
+    await _savePrivateSessions();
+  }
+
+  Future<void> _savePrivateSessions() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+      _kPrivateSessions,
+      jsonEncode(_privateSessions.map((s) => s.toJson()).toList()),
     );
   }
 
