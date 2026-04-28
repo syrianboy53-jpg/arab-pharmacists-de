@@ -28,6 +28,9 @@ class _RelationshipQuizScreenState extends State<RelationshipQuizScreen> {
     return total;
   }
 
+  int get _maxScore => _questions.fold(
+      0, (sum, q) => sum + q.scores.reduce((a, b) => a > b ? a : b));
+
   String get _resultTitle {
     final score = _totalScore;
     if (score <= 8) return 'علاقتكما بخير';
@@ -205,7 +208,7 @@ class _RelationshipQuizScreenState extends State<RelationshipQuizScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'الدرجة: $_totalScore من ${_questions.length * 5}',
+            'الدرجة: $_totalScore من $_maxScore',
             style: TextStyle(
               fontSize: 16,
               color: Theme.of(context).colorScheme.onSurfaceVariant,
