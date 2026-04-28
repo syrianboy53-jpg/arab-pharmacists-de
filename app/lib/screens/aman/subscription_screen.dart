@@ -19,7 +19,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     _plans = AmanRepository.instance.plans;
   }
 
-  AmanSubscription get _sub => AmanRepository.instance.subscription;
+  AmanSubscription get _sub => AmanRepository.instance.activeSubscription;
 
   Future<void> _selectPlan(AmanPlan plan) async {
     if (plan.id == 'plan-free') {
@@ -35,6 +35,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       await AmanRepository.instance.updateSubscription(
         AmanSubscription(
           tier: AmanTier.premium,
+          activePlanId: plan.id,
           expiresAt: DateTime.now()
               .add(plan.duration == 'yearly'
                   ? const Duration(days: 365)
@@ -124,7 +125,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 plan: plan,
                 isActive:
                     (plan.id == 'plan-free' && !_sub.isPremium) ||
-                    (plan.id != 'plan-free' && _sub.isPremium),
+                    (plan.id == _sub.activePlanId),
                 onSelect: () => _selectPlan(plan),
               ),
               const SizedBox(height: 12),

@@ -149,6 +149,33 @@ class AmanRepository {
     await prefs.setString(_kSubscription, jsonEncode(sub.toJson()));
   }
 
+  /// Returns the current subscription with monthly question counter reset if
+  /// the stored month differs from the current month.
+  AmanSubscription get activeSubscription {
+    final now = DateTime.now();
+    final currentMonth =
+        '${now.year}-${now.month.toString().padLeft(2, '0')}';
+    if (_subscription.questionsResetMonth != currentMonth &&
+        !_subscription.isPremium) {
+      _subscription = _subscription.copyWith(
+        questionsUsedThisMonth: 0,
+        questionsResetMonth: currentMonth,
+      );
+      updateSubscription(_subscription);
+    }
+    return _subscription;
+  }
+
+  Future<void> incrementQuestionCount() async {
+    final now = DateTime.now();
+    final currentMonth =
+        '${now.year}-${now.month.toString().padLeft(2, '0')}';
+    await updateSubscription(_subscription.copyWith(
+      questionsUsedThisMonth: _subscription.questionsUsedThisMonth + 1,
+      questionsResetMonth: currentMonth,
+    ));
+  }
+
   Future<void> _saveAnonQuestions() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(

@@ -109,35 +109,63 @@ enum AmanTier { free, premium }
 /// User subscription state.
 class AmanSubscription {
   final AmanTier tier;
+  final String? activePlanId; // e.g. 'plan-monthly', 'plan-yearly'
   final String? expiresAt; // ISO date, null for free
   final int questionsUsedThisMonth;
   final int maxQuestionsPerMonth; // 0 = unlimited for premium concept
+  final String? questionsResetMonth; // e.g. '2026-04' for monthly reset
 
   const AmanSubscription({
     this.tier = AmanTier.free,
+    this.activePlanId,
     this.expiresAt,
     this.questionsUsedThisMonth = 0,
     this.maxQuestionsPerMonth = 2,
+    this.questionsResetMonth,
   });
 
   bool get isPremium => tier == AmanTier.premium;
   bool get canAskQuestion =>
       isPremium || questionsUsedThisMonth < maxQuestionsPerMonth;
 
+  AmanSubscription copyWith({
+    AmanTier? tier,
+    String? activePlanId,
+    String? expiresAt,
+    int? questionsUsedThisMonth,
+    int? maxQuestionsPerMonth,
+    String? questionsResetMonth,
+  }) =>
+      AmanSubscription(
+        tier: tier ?? this.tier,
+        activePlanId: activePlanId ?? this.activePlanId,
+        expiresAt: expiresAt ?? this.expiresAt,
+        questionsUsedThisMonth:
+            questionsUsedThisMonth ?? this.questionsUsedThisMonth,
+        maxQuestionsPerMonth:
+            maxQuestionsPerMonth ?? this.maxQuestionsPerMonth,
+        questionsResetMonth:
+            questionsResetMonth ?? this.questionsResetMonth,
+      );
+
   factory AmanSubscription.fromJson(Map<String, dynamic> j) =>
       AmanSubscription(
         tier: j['tier'] == 'premium' ? AmanTier.premium : AmanTier.free,
+        activePlanId: j['active_plan_id'] as String?,
         expiresAt: j['expires_at'] as String?,
         questionsUsedThisMonth:
             (j['questions_used_this_month'] as int?) ?? 0,
         maxQuestionsPerMonth: (j['max_questions_per_month'] as int?) ?? 2,
+        questionsResetMonth: j['questions_reset_month'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
         'tier': tier.name,
+        'active_plan_id': activePlanId,
         'expires_at': expiresAt,
         'questions_used_this_month': questionsUsedThisMonth,
         'max_questions_per_month': maxQuestionsPerMonth,
+        'questions_reset_month': questionsResetMonth,
       };
 }
 

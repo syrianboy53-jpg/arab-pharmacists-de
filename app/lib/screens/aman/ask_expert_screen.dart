@@ -92,6 +92,19 @@ class _AnonymousQuestionsTabState extends State<_AnonymousQuestionsTab> {
     if (text.isEmpty) return;
 
     final repo = AmanRepository.instance;
+    final sub = repo.activeSubscription;
+
+    if (!sub.canAskQuestion) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text(
+                'لقد استنفدت أسئلتك المجانية هذا الشهر. '
+                'اشترك في الخطة المميزة لأسئلة غير محدودة.')),
+      );
+      return;
+    }
+
     final ticketNum = repo.nextTicketNumber();
     final q = AnonQuestion(
       id: 'q-${DateTime.now().millisecondsSinceEpoch}',
@@ -100,9 +113,10 @@ class _AnonymousQuestionsTabState extends State<_AnonymousQuestionsTab> {
       category: _selectedCategory,
       date: DateTime.now().toIso8601String().split('T').first,
       attachmentNames: List.of(_attachmentNames),
-      isPremium: repo.subscription.isPremium,
+      isPremium: sub.isPremium,
     );
     await repo.addAnonQuestion(q);
+    await repo.incrementQuestionCount();
     _questionController.clear();
     _attachmentNames.clear();
     if (!mounted) return;

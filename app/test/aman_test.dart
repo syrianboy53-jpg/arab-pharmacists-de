@@ -168,16 +168,20 @@ void main() {
   test('AmanSubscription serialization round-trip', () {
     const sub = AmanSubscription(
       tier: AmanTier.premium,
+      activePlanId: 'plan-monthly',
       expiresAt: '2027-04-28',
       questionsUsedThisMonth: 3,
       maxQuestionsPerMonth: 10,
+      questionsResetMonth: '2027-04',
     );
     final json = sub.toJson();
     final restored = AmanSubscription.fromJson(json);
     expect(restored.tier, AmanTier.premium);
+    expect(restored.activePlanId, 'plan-monthly');
     expect(restored.expiresAt, '2027-04-28');
     expect(restored.questionsUsedThisMonth, 3);
     expect(restored.maxQuestionsPerMonth, 10);
+    expect(restored.questionsResetMonth, '2027-04');
   });
 
   test('TicketStatus round-trip via AnonQuestion JSON', () {
