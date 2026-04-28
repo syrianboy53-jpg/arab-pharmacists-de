@@ -92,7 +92,7 @@ void main() {
   });
 
   test('AnonQuestion serialization round-trip', () {
-    final q = AnonQuestion(
+    const q = AnonQuestion(
       id: 'q-test',
       questionAr: 'سؤال تجريبي',
       category: 'legal',
