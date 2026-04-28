@@ -4,7 +4,8 @@ import '../../aman_models.dart';
 import '../../aman_repository.dart';
 
 class EmergencySupportScreen extends StatelessWidget {
-  const EmergencySupportScreen({super.key});
+  const EmergencySupportScreen({super.key, this.embedded = false});
+  final bool embedded;
 
   @override
   Widget build(BuildContext context) {
@@ -14,79 +15,88 @@ class EmergencySupportScreen extends StatelessWidget {
     final emergency = resources.where((r) => r.isEmergency).toList();
     final other = resources.where((r) => !r.isEmergency).toList();
 
+    final content = ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        // Emergency banner
+        Card(
+          color: cs.errorContainer,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Icon(Icons.emergency, color: cs.onErrorContainer, size: 40),
+                const SizedBox(height: 8),
+                Text(
+                  'إذا كنتِ في خطر الآن',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: cs.onErrorContainer,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'اتصلي فوراً بأحد الأرقام أدناه',
+                  style: TextStyle(color: cs.onErrorContainer),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 16),
+
+        // Emergency resources
+        Text(
+          'أرقام الطوارئ',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: cs.error,
+              ),
+        ),
+        const SizedBox(height: 8),
+        ...emergency.map((r) => _EmergencyCard(resource: r)),
+
+        const SizedBox(height: 24),
+
+        // Other resources
+        Text(
+          'مراكز المساعدة والدعم',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 8),
+        ...other.map((r) => _ResourceCard(resource: r)),
+
+        const SizedBox(height: 24),
+
+        // Legal explanations
+        Text(
+          'شرح القوانين المتعلقة',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 8),
+        ...explanations.map((e) => _LegalExplanationTile(explanation: e)),
+      ],
+    );
+
+    if (embedded) {
+      return Directionality(
+        textDirection: TextDirection.rtl,
+        child: content,
+      );
+    }
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('المرأة والبيت الآمن'),
         ),
-        body: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            // Emergency banner
-            Card(
-              color: cs.errorContainer,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  children: [
-                    Icon(Icons.emergency, color: cs.onErrorContainer, size: 40),
-                    const SizedBox(height: 8),
-                    Text(
-                      'إذا كنتِ في خطر الآن',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: cs.onErrorContainer,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'اتصلي فوراً بأحد الأرقام أدناه',
-                      style: TextStyle(color: cs.onErrorContainer),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            // Emergency resources
-            Text(
-              'أرقام الطوارئ',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: cs.error,
-                  ),
-            ),
-            const SizedBox(height: 8),
-            ...emergency.map((r) => _EmergencyCard(resource: r)),
-
-            const SizedBox(height: 24),
-
-            // Other resources
-            Text(
-              'مراكز المساعدة والدعم',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
-            const SizedBox(height: 8),
-            ...other.map((r) => _ResourceCard(resource: r)),
-
-            const SizedBox(height: 24),
-
-            // Legal explanations
-            Text(
-              'شرح القوانين المتعلقة',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
-            const SizedBox(height: 8),
-            ...explanations.map((e) => _LegalExplanationTile(explanation: e)),
-          ],
-        ),
+        body: content,
       ),
     );
   }

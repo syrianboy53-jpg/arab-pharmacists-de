@@ -3,25 +3,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'aman_repository.dart';
-import 'ammaar_repository.dart';
-import 'repository.dart';
-import 'screens/home_screen.dart';
+import 'screens/aman/aman_app_shell.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
   ));
-  await Future.wait([
-    Repository.instance.load(),
-    AmmaarRepository.instance.load(),
-    AmanRepository.instance.load(),
-  ]);
-  runApp(const ArabPharmacistsApp());
+  await AmanRepository.instance.load();
+  runApp(const AmanApp());
 }
 
-class ArabPharmacistsApp extends StatelessWidget {
-  const ArabPharmacistsApp({super.key});
+class AmanApp extends StatelessWidget {
+  const AmanApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +24,7 @@ class ArabPharmacistsApp extends StatelessWidget {
       brightness: Brightness.light,
     );
     return MaterialApp(
-      title: 'Arab Pharmacists DE',
+      title: 'أمان',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: scheme,
@@ -59,11 +53,12 @@ class ArabPharmacistsApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: const [
+        Locale('ar'),
         Locale('de'),
         Locale('en'),
-        Locale('ar'),
       ],
-      home: const HomeScreen(),
+      locale: const Locale('ar'),
+      home: const AmanAppShell(),
     );
   }
 }

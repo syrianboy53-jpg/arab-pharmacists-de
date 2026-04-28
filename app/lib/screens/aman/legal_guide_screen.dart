@@ -4,7 +4,8 @@ import '../../aman_models.dart';
 import '../../aman_repository.dart';
 
 class LegalGuideScreen extends StatelessWidget {
-  const LegalGuideScreen({super.key});
+  const LegalGuideScreen({super.key, this.embedded = false});
+  final bool embedded;
 
   static const _categoryLabels = {
     'jugendamt': 'اليوجند امت',
@@ -26,27 +27,36 @@ class LegalGuideScreen extends StatelessWidget {
     final categories =
         articles.map((a) => a.category).toSet().toList();
 
+    final content = ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        _buildInfoBanner(context),
+        const SizedBox(height: 16),
+        for (final cat in categories) ...[
+          _buildCategoryHeader(context, cat),
+          const SizedBox(height: 8),
+          ...articles
+              .where((a) => a.category == cat)
+              .map((a) => _ArticleTile(article: a)),
+          const SizedBox(height: 16),
+        ],
+      ],
+    );
+
+    if (embedded) {
+      return Directionality(
+        textDirection: TextDirection.rtl,
+        child: content,
+      );
+    }
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('دليل القانون والتعامل'),
         ),
-        body: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            _buildInfoBanner(context),
-            const SizedBox(height: 16),
-            for (final cat in categories) ...[
-              _buildCategoryHeader(context, cat),
-              const SizedBox(height: 8),
-              ...articles
-                  .where((a) => a.category == cat)
-                  .map((a) => _ArticleTile(article: a)),
-              const SizedBox(height: 16),
-            ],
-          ],
-        ),
+        body: content,
       ),
     );
   }
