@@ -119,8 +119,8 @@ class AmanRepository {
     final q = query.trim().toLowerCase();
     if (q.isEmpty) return experts;
     return experts.where((e) {
-      return e.nameAr.contains(query.trim()) ||
-          e.specialtyAr.contains(query.trim()) ||
+      return e.nameAr.toLowerCase().contains(q) ||
+          e.specialtyAr.toLowerCase().contains(q) ||
           e.specialty.toLowerCase().contains(q) ||
           e.city?.toLowerCase().contains(q) == true ||
           e.tags.any((t) => t.toLowerCase().contains(q));
@@ -131,7 +131,7 @@ class AmanRepository {
     final q = query.trim().toLowerCase();
     if (q.isEmpty) return helpCenters;
     return helpCenters.where((h) {
-      return h.nameAr.contains(query.trim()) ||
+      return h.nameAr.toLowerCase().contains(q) ||
           h.city.toLowerCase().contains(q) ||
           h.type.toLowerCase().contains(q);
     }).toList();
