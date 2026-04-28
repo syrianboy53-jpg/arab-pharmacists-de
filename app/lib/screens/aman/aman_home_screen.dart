@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'ask_expert_screen.dart';
+import 'consultant_dashboard_screen.dart';
 import 'emergency_support_screen.dart';
 import 'help_map_screen.dart';
+import 'jugendamt_risk_screen.dart';
+import 'legal_compliance_screen.dart';
 import 'legal_guide_screen.dart';
 import 'podcast_screen.dart';
 import 'relationship_quiz_screen.dart';
 import 'stories_screen.dart';
+import 'subscription_screen.dart';
 
 class AmanHomeScreen extends StatelessWidget {
   const AmanHomeScreen({super.key});
@@ -133,6 +137,15 @@ class AmanHomeScreen extends StatelessWidget {
               onTap: () => _navigate(context, const StoriesScreen()),
             ),
 
+            _SectionCard(
+              icon: Icons.shield_outlined,
+              title: 'كاشف خطر اليوجند أمت',
+              subtitle: 'هل تصرفاتي تستدعي تدخل اليوجند أمت؟',
+              color: Colors.deepOrange,
+              onTap: () =>
+                  _navigate(context, const JugendamtRiskScreen()),
+            ),
+
             const SizedBox(height: 20),
 
             // Creative features
@@ -175,6 +188,53 @@ class AmanHomeScreen extends StatelessWidget {
               subtitle: 'أقرب مراكز استشارية عربية في مدينتك',
               color: Colors.green,
               onTap: () => _navigate(context, const HelpMapScreen()),
+            ),
+
+            const SizedBox(height: 20),
+
+            // Management & Legal
+            Text(
+              'الإدارة والشروط',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            const SizedBox(height: 12),
+
+            Row(
+              children: [
+                Expanded(
+                  child: _SmallCard(
+                    icon: Icons.star,
+                    title: 'خطط الاشتراك',
+                    subtitle: 'مجاني / مميز',
+                    color: Colors.amber,
+                    onTap: () =>
+                        _navigate(context, const SubscriptionScreen()),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: _SmallCard(
+                    icon: Icons.dashboard,
+                    title: 'لوحة المستشار',
+                    subtitle: 'إدارة الاستشارات',
+                    color: Colors.blueGrey,
+                    onTap: () =>
+                        _navigate(context, const ConsultantDashboardScreen()),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+
+            _SectionCard(
+              icon: Icons.gavel,
+              title: 'الشروط القانونية',
+              subtitle: 'Impressum, DSGVO, AGB',
+              color: Colors.grey,
+              onTap: () =>
+                  _navigate(context, const LegalComplianceScreen()),
             ),
 
             const SizedBox(height: 24),

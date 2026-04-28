@@ -43,41 +43,153 @@ class Expert {
       );
 }
 
-/// An anonymous question submitted to the "Ask an Expert" section.
+/// Ticket status for the consulting system.
+enum TicketStatus { open, pending, answered, closed }
+
+/// An anonymous consultation ticket (upgraded from simple question).
 class AnonQuestion {
   final String id;
+  final int ticketNumber;
   final String questionAr;
   final String category; // 'legal', 'psychological', 'social'
   final String? answerAr;
   final String? answeredBy;
   final String date;
+  final TicketStatus status;
+  final List<String> attachmentNames;
+  final bool isPremium;
 
   const AnonQuestion({
     required this.id,
+    required this.ticketNumber,
     required this.questionAr,
     required this.category,
     this.answerAr,
     this.answeredBy,
     required this.date,
+    this.status = TicketStatus.open,
+    this.attachmentNames = const [],
+    this.isPremium = false,
   });
 
   factory AnonQuestion.fromJson(Map<String, dynamic> j) => AnonQuestion(
         id: j['id'] as String,
+        ticketNumber: (j['ticket_number'] as int?) ?? 0,
         questionAr: j['question_ar'] as String,
         category: j['category'] as String,
         answerAr: j['answer_ar'] as String?,
         answeredBy: j['answered_by'] as String?,
         date: j['date'] as String,
+        status: TicketStatus.values.firstWhere(
+          (s) => s.name == (j['status'] as String? ?? 'open'),
+          orElse: () => TicketStatus.open,
+        ),
+        attachmentNames:
+            (j['attachment_names'] as List?)?.cast<String>() ?? const [],
+        isPremium: (j['is_premium'] as bool?) ?? false,
       );
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'ticket_number': ticketNumber,
         'question_ar': questionAr,
         'category': category,
         'answer_ar': answerAr,
         'answered_by': answeredBy,
         'date': date,
+        'status': status.name,
+        'attachment_names': attachmentNames,
+        'is_premium': isPremium,
       };
+}
+
+/// Subscription tier for Aman.
+enum AmanTier { free, premium }
+
+/// User subscription state.
+class AmanSubscription {
+  final AmanTier tier;
+  final String? expiresAt; // ISO date, null for free
+  final int questionsUsedThisMonth;
+  final int maxQuestionsPerMonth; // 0 = unlimited for premium concept
+
+  const AmanSubscription({
+    this.tier = AmanTier.free,
+    this.expiresAt,
+    this.questionsUsedThisMonth = 0,
+    this.maxQuestionsPerMonth = 2,
+  });
+
+  bool get isPremium => tier == AmanTier.premium;
+  bool get canAskQuestion =>
+      isPremium || questionsUsedThisMonth < maxQuestionsPerMonth;
+
+  factory AmanSubscription.fromJson(Map<String, dynamic> j) =>
+      AmanSubscription(
+        tier: j['tier'] == 'premium' ? AmanTier.premium : AmanTier.free,
+        expiresAt: j['expires_at'] as String?,
+        questionsUsedThisMonth:
+            (j['questions_used_this_month'] as int?) ?? 0,
+        maxQuestionsPerMonth: (j['max_questions_per_month'] as int?) ?? 2,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'tier': tier.name,
+        'expires_at': expiresAt,
+        'questions_used_this_month': questionsUsedThisMonth,
+        'max_questions_per_month': maxQuestionsPerMonth,
+      };
+}
+
+/// A subscription plan offered to users.
+class AmanPlan {
+  final String id;
+  final String nameAr;
+  final String descriptionAr;
+  final double priceEur;
+  final String duration; // 'monthly' or 'yearly'
+  final List<String> features;
+
+  const AmanPlan({
+    required this.id,
+    required this.nameAr,
+    required this.descriptionAr,
+    required this.priceEur,
+    required this.duration,
+    this.features = const [],
+  });
+
+  factory AmanPlan.fromJson(Map<String, dynamic> j) => AmanPlan(
+        id: j['id'] as String,
+        nameAr: j['name_ar'] as String,
+        descriptionAr: j['description_ar'] as String,
+        priceEur: (j['price_eur'] as num).toDouble(),
+        duration: j['duration'] as String,
+        features: (j['features'] as List?)?.cast<String>() ?? const [],
+      );
+}
+
+/// A Jugendamt risk detector question.
+class JugendamtRiskQuestion {
+  final String id;
+  final String questionAr;
+  final List<String> options;
+  final List<int> riskScores; // per option (higher = more risk)
+
+  const JugendamtRiskQuestion({
+    required this.id,
+    required this.questionAr,
+    required this.options,
+    required this.riskScores,
+  });
+
+  factory JugendamtRiskQuestion.fromJson(Map<String, dynamic> j) =>
+      JugendamtRiskQuestion(
+        id: j['id'] as String,
+        questionAr: j['question_ar'] as String,
+        options: (j['options'] as List).cast<String>(),
+        riskScores: (j['risk_scores'] as List).cast<int>(),
+      );
 }
 
 /// A legal guide article (Jugendamt, rights, duties, prevention).

@@ -76,21 +76,39 @@ class _AnonymousQuestionsTabState extends State<_AnonymousQuestionsTab> {
     super.dispose();
   }
 
+  final List<String> _attachmentNames = [];
+
+  void _addAttachment() {
+    // Simulated file picker — in production, use file_picker package.
+    final name = 'مرفق_${_attachmentNames.length + 1}.pdf';
+    setState(() => _attachmentNames.add(name));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('تم إرفاق: $name')),
+    );
+  }
+
   Future<void> _submitQuestion() async {
     final text = _questionController.text.trim();
     if (text.isEmpty) return;
 
+    final repo = AmanRepository.instance;
+    final ticketNum = repo.nextTicketNumber();
     final q = AnonQuestion(
       id: 'q-${DateTime.now().millisecondsSinceEpoch}',
+      ticketNumber: ticketNum,
       questionAr: text,
       category: _selectedCategory,
       date: DateTime.now().toIso8601String().split('T').first,
+      attachmentNames: List.of(_attachmentNames),
+      isPremium: repo.subscription.isPremium,
     );
-    await AmanRepository.instance.addAnonQuestion(q);
+    await repo.addAnonQuestion(q);
     _questionController.clear();
+    _attachmentNames.clear();
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('تم إرسال سؤالك بنجاح. سيتم الرد عليه قريباً.')),
+      SnackBar(
+          content: Text('تم إرسال استشارتك برقم تذكرة #$ticketNum')),
     );
     setState(() {});
   }
@@ -152,14 +170,39 @@ class _AnonymousQuestionsTabState extends State<_AnonymousQuestionsTab> {
                     border: OutlineInputBorder(),
                   ),
                 ),
-                const SizedBox(height: 12),
-                SizedBox(
-                  width: double.infinity,
-                  child: FilledButton.icon(
-                    onPressed: _submitQuestion,
-                    icon: const Icon(Icons.send),
-                    label: const Text('إرسال السؤال'),
+                if (_attachmentNames.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Wrap(
+                      spacing: 6,
+                      children: _attachmentNames
+                          .map((n) => Chip(
+                                avatar: const Icon(Icons.attach_file, size: 16),
+                                label: Text(n,
+                                    style: const TextStyle(fontSize: 12)),
+                                onDeleted: () => setState(
+                                    () => _attachmentNames.remove(n)),
+                              ))
+                          .toList(),
+                    ),
                   ),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: FilledButton.icon(
+                        onPressed: _submitQuestion,
+                        icon: const Icon(Icons.send),
+                        label: const Text('إرسال الاستشارة'),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    IconButton.outlined(
+                      onPressed: _addAttachment,
+                      icon: const Icon(Icons.attach_file),
+                      tooltip: 'إرفاق ملف',
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -183,6 +226,22 @@ class _AnonymousQuestionsTabState extends State<_AnonymousQuestionsTab> {
                     children: [
                       Row(
                         children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: cs.primaryContainer,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              '#${q.ticketNumber}',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: cs.onPrimaryContainer),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
                           Chip(
                             label: Text(
                               _categories[q.category] ?? q.category,
@@ -191,13 +250,32 @@ class _AnonymousQuestionsTabState extends State<_AnonymousQuestionsTab> {
                             visualDensity: VisualDensity.compact,
                           ),
                           const Spacer(),
-                          Text(q.date,
-                              style: TextStyle(
-                                  fontSize: 12, color: cs.onSurfaceVariant)),
+                          _StatusBadge(status: q.status),
                         ],
                       ),
+                      const SizedBox(height: 4),
+                      Text(q.date,
+                          style: TextStyle(
+                              fontSize: 11, color: cs.onSurfaceVariant)),
                       const SizedBox(height: 8),
                       Text(q.questionAr),
+                      if (q.attachmentNames.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 6),
+                          child: Wrap(
+                            spacing: 4,
+                            children: q.attachmentNames
+                                .map((n) => Chip(
+                                      avatar: const Icon(Icons.attach_file,
+                                          size: 14),
+                                      label: Text(n,
+                                          style:
+                                              const TextStyle(fontSize: 11)),
+                                      visualDensity: VisualDensity.compact,
+                                    ))
+                                .toList(),
+                          ),
+                        ),
                       if (q.answerAr != null) ...[
                         const Divider(),
                         Row(
@@ -229,6 +307,30 @@ class _AnonymousQuestionsTabState extends State<_AnonymousQuestionsTab> {
               )),
         ],
       ],
+    );
+  }
+}
+
+class _StatusBadge extends StatelessWidget {
+  final TicketStatus status;
+  const _StatusBadge({required this.status});
+
+  @override
+  Widget build(BuildContext context) {
+    final (label, color) = switch (status) {
+      TicketStatus.open => ('جديدة', Colors.blue),
+      TicketStatus.pending => ('قيد الرد', Colors.orange),
+      TicketStatus.answered => ('تم الرد', Colors.green),
+      TicketStatus.closed => ('مغلقة', Colors.grey),
+    };
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.15),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Text(label,
+          style: TextStyle(fontSize: 11, color: color, fontWeight: FontWeight.w600)),
     );
   }
 }

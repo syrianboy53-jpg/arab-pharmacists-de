@@ -11,6 +11,8 @@ class AmanRepository {
   static final AmanRepository instance = AmanRepository._();
 
   static const _kAnonQuestions = 'aman_anon_questions';
+  static const _kSubscription = 'aman_subscription';
+  static const _kTicketCounter = 'aman_ticket_counter';
 
   List<Expert>? _experts;
   List<LegalArticle>? _legalArticles;
@@ -21,7 +23,11 @@ class AmanRepository {
   List<RelationshipQuizQuestion>? _quizQuestions;
   List<PodcastEpisode>? _podcasts;
   List<HelpCenter>? _helpCenters;
+  List<JugendamtRiskQuestion>? _jugendamtRiskQuestions;
+  List<AmanPlan>? _plans;
   List<AnonQuestion> _anonQuestions = [];
+  AmanSubscription _subscription = const AmanSubscription();
+  int _ticketCounter = 1000;
 
   Future<void> load() async {
     if (_experts != null) return;
@@ -35,6 +41,8 @@ class AmanRepository {
       rootBundle.loadString('assets/data/aman_relationship_quiz.json'),
       rootBundle.loadString('assets/data/aman_podcasts.json'),
       rootBundle.loadString('assets/data/aman_help_centers.json'),
+      rootBundle.loadString('assets/data/aman_jugendamt_risk.json'),
+      rootBundle.loadString('assets/data/aman_plans.json'),
     ]);
     _experts = (jsonDecode(results[0]) as List)
         .cast<Map<String, dynamic>>()
@@ -72,6 +80,14 @@ class AmanRepository {
         .cast<Map<String, dynamic>>()
         .map(HelpCenter.fromJson)
         .toList();
+    _jugendamtRiskQuestions = (jsonDecode(results[9]) as List)
+        .cast<Map<String, dynamic>>()
+        .map(JugendamtRiskQuestion.fromJson)
+        .toList();
+    _plans = (jsonDecode(results[10]) as List)
+        .cast<Map<String, dynamic>>()
+        .map(AmanPlan.fromJson)
+        .toList();
 
     // Load locally saved anonymous questions.
     final prefs = await SharedPreferences.getInstance();
@@ -82,6 +98,16 @@ class AmanRepository {
           .map(AnonQuestion.fromJson)
           .toList();
     }
+
+    // Load subscription state.
+    final savedSub = prefs.getString(_kSubscription);
+    if (savedSub != null) {
+      _subscription = AmanSubscription.fromJson(
+          jsonDecode(savedSub) as Map<String, dynamic>);
+    }
+
+    // Load ticket counter.
+    _ticketCounter = prefs.getInt(_kTicketCounter) ?? 1000;
   }
 
   List<Expert> get experts => _experts ?? const [];
@@ -96,13 +122,31 @@ class AmanRepository {
       _quizQuestions ?? const [];
   List<PodcastEpisode> get podcasts => _podcasts ?? const [];
   List<HelpCenter> get helpCenters => _helpCenters ?? const [];
+  List<JugendamtRiskQuestion> get jugendamtRiskQuestions =>
+      _jugendamtRiskQuestions ?? const [];
+  List<AmanPlan> get plans => _plans ?? const [];
   List<AnonQuestion> get anonQuestions => _anonQuestions;
+  AmanSubscription get subscription => _subscription;
 
   // --------------- Anonymous Questions ---------------
+
+  int nextTicketNumber() {
+    _ticketCounter++;
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setInt(_kTicketCounter, _ticketCounter);
+    });
+    return _ticketCounter;
+  }
 
   Future<void> addAnonQuestion(AnonQuestion q) async {
     _anonQuestions.add(q);
     await _saveAnonQuestions();
+  }
+
+  Future<void> updateSubscription(AmanSubscription sub) async {
+    _subscription = sub;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_kSubscription, jsonEncode(sub.toJson()));
   }
 
   Future<void> _saveAnonQuestions() async {

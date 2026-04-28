@@ -40,3 +40,5 @@ flutter:
     - assets/data/aman_relationship_quiz.json
     - assets/data/aman_podcasts.json
     - assets/data/aman_help_centers.json
+    - assets/data/aman_jugendamt_risk.json
+    - assets/data/aman_plans.json
