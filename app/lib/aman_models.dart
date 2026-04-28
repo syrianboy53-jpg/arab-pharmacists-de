@@ -434,3 +434,126 @@ class HelpCenter {
         speaksArabic: (j['speaks_arabic'] as bool?) ?? true,
       );
 }
+
+// --------------- Private Session (الجلسة السرية) ---------------
+
+/// Status of a private consulting session.
+enum PrivateSessionStatus { booked, active, ended, destroyed }
+
+/// A private (secret) consulting session.
+class PrivateSession {
+  final String id;
+  final String alias; // user-chosen pseudonym
+  final String date; // ISO date e.g. '2026-05-01'
+  final String timeSlot; // e.g. '14:00'
+  final int durationMinutes;
+  final double priceEur;
+  final PrivateSessionStatus status;
+  final String? consultantAlias;
+  final List<ChatMessage> messages;
+  final String createdAt; // ISO datetime
+
+  const PrivateSession({
+    required this.id,
+    required this.alias,
+    required this.date,
+    required this.timeSlot,
+    this.durationMinutes = 25,
+    this.priceEur = 1.0,
+    this.status = PrivateSessionStatus.booked,
+    this.consultantAlias,
+    this.messages = const [],
+    required this.createdAt,
+  });
+
+  factory PrivateSession.fromJson(Map<String, dynamic> j) => PrivateSession(
+        id: j['id'] as String,
+        alias: j['alias'] as String,
+        date: j['date'] as String,
+        timeSlot: j['time_slot'] as String,
+        durationMinutes: (j['duration_minutes'] as int?) ?? 25,
+        priceEur: (j['price_eur'] as num?)?.toDouble() ?? 1.0,
+        status: PrivateSessionStatus.values.firstWhere(
+          (s) => s.name == j['status'],
+          orElse: () => PrivateSessionStatus.booked,
+        ),
+        consultantAlias: j['consultant_alias'] as String?,
+        messages: ((j['messages'] as List?) ?? [])
+            .cast<Map<String, dynamic>>()
+            .map(ChatMessage.fromJson)
+            .toList(),
+        createdAt: j['created_at'] as String,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'alias': alias,
+        'date': date,
+        'time_slot': timeSlot,
+        'duration_minutes': durationMinutes,
+        'price_eur': priceEur,
+        'status': status.name,
+        'consultant_alias': consultantAlias,
+        'messages': messages.map((m) => m.toJson()).toList(),
+        'created_at': createdAt,
+      };
+}
+
+/// A single chat message in a private session.
+class ChatMessage {
+  final String id;
+  final String senderAlias;
+  final String text;
+  final String timestamp; // ISO datetime
+  final bool isConsultant;
+
+  const ChatMessage({
+    required this.id,
+    required this.senderAlias,
+    required this.text,
+    required this.timestamp,
+    this.isConsultant = false,
+  });
+
+  factory ChatMessage.fromJson(Map<String, dynamic> j) => ChatMessage(
+        id: j['id'] as String,
+        senderAlias: j['sender_alias'] as String,
+        text: j['text'] as String,
+        timestamp: j['timestamp'] as String,
+        isConsultant: (j['is_consultant'] as bool?) ?? false,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'sender_alias': senderAlias,
+        'text': text,
+        'timestamp': timestamp,
+        'is_consultant': isConsultant,
+      };
+}
+
+/// An available time slot for booking private sessions.
+class AvailableTimeSlot {
+  final String id;
+  final String dayOfWeek; // e.g. 'monday'
+  final String dayAr; // e.g. 'الاثنين'
+  final String time; // e.g. '14:00'
+  final String consultantAlias;
+
+  const AvailableTimeSlot({
+    required this.id,
+    required this.dayOfWeek,
+    required this.dayAr,
+    required this.time,
+    required this.consultantAlias,
+  });
+
+  factory AvailableTimeSlot.fromJson(Map<String, dynamic> j) =>
+      AvailableTimeSlot(
+        id: j['id'] as String,
+        dayOfWeek: j['day_of_week'] as String,
+        dayAr: j['day_ar'] as String,
+        time: j['time'] as String,
+        consultantAlias: j['consultant_alias'] as String,
+      );
+}

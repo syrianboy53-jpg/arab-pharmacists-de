@@ -24,6 +24,7 @@ void main() {
     expect(AmanRepository.instance.helpCenters, isNotEmpty);
     expect(AmanRepository.instance.jugendamtRiskQuestions, isNotEmpty);
     expect(AmanRepository.instance.plans, isNotEmpty);
+    expect(AmanRepository.instance.privateSlots, isNotEmpty);
   });
 
   test('Every expert has required fields', () async {
@@ -196,5 +197,63 @@ void main() {
     final json = q.toJson();
     final restored = AnonQuestion.fromJson(json);
     expect(restored.status, TicketStatus.answered);
+  });
+
+  test('Private session slots have required fields', () async {
+    await AmanRepository.instance.load();
+    for (final slot in AmanRepository.instance.privateSlots) {
+      expect(slot.id, isNotEmpty, reason: 'Slot missing id');
+      expect(slot.dayOfWeek, isNotEmpty, reason: 'Slot ${slot.id} missing day');
+      expect(slot.dayAr, isNotEmpty, reason: 'Slot ${slot.id} missing dayAr');
+      expect(slot.time, isNotEmpty, reason: 'Slot ${slot.id} missing time');
+      expect(slot.consultantAlias, isNotEmpty,
+          reason: 'Slot ${slot.id} missing consultant');
+    }
+  });
+
+  test('PrivateSession serialization round-trip', () {
+    const session = PrivateSession(
+      id: 'ps-test',
+      alias: 'أمل',
+      date: '2026-05-01',
+      timeSlot: '14:00',
+      consultantAlias: 'مستشار أمان',
+      createdAt: '2026-05-01T12:00:00',
+      status: PrivateSessionStatus.active,
+      messages: [
+        ChatMessage(
+          id: 'msg-1',
+          senderAlias: 'أمل',
+          text: 'مرحباً',
+          timestamp: '2026-05-01T14:00:00',
+        ),
+      ],
+    );
+    final json = session.toJson();
+    final restored = PrivateSession.fromJson(json);
+    expect(restored.id, 'ps-test');
+    expect(restored.alias, 'أمل');
+    expect(restored.status, PrivateSessionStatus.active);
+    expect(restored.durationMinutes, 25);
+    expect(restored.priceEur, 1.0);
+    expect(restored.messages.length, 1);
+    expect(restored.messages.first.text, 'مرحباً');
+    expect(restored.messages.first.isConsultant, isFalse);
+  });
+
+  test('ChatMessage serialization round-trip', () {
+    const msg = ChatMessage(
+      id: 'msg-c1',
+      senderAlias: 'مستشار',
+      text: 'أهلاً بك',
+      timestamp: '2026-05-01T14:01:00',
+      isConsultant: true,
+    );
+    final json = msg.toJson();
+    final restored = ChatMessage.fromJson(json);
+    expect(restored.id, 'msg-c1');
+    expect(restored.senderAlias, 'مستشار');
+    expect(restored.text, 'أهلاً بك');
+    expect(restored.isConsultant, isTrue);
   });
 }

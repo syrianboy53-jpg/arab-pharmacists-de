@@ -1,0 +1,72 @@
+[
+  {
+    "id": "slot-01",
+    "day_of_week": "monday",
+    "day_ar": "الاثنين",
+    "time": "10:00",
+    "consultant_alias": "مستشار أمان"
+  },
+  {
+    "id": "slot-02",
+    "day_of_week": "monday",
+    "day_ar": "الاثنين",
+    "time": "14:00",
+    "consultant_alias": "مستشار أمان"
+  },
+  {
+    "id": "slot-03",
+    "day_of_week": "tuesday",
+    "day_ar": "الثلاثاء",
+    "time": "11:00",
+    "consultant_alias": "مستشار حقوقي"
+  },
+  {
+    "id": "slot-04",
+    "day_of_week": "tuesday",
+    "day_ar": "الثلاثاء",
+    "time": "16:00",
+    "consultant_alias": "مستشار حقوقي"
+  },
+  {
+    "id": "slot-05",
+    "day_of_week": "wednesday",
+    "day_ar": "الأربعاء",
+    "time": "09:00",
+    "consultant_alias": "مستشار أمان"
+  },
+  {
+    "id": "slot-06",
+    "day_of_week": "wednesday",
+    "day_ar": "الأربعاء",
+    "time": "13:00",
+    "consultant_alias": "مستشار نفسي"
+  },
+  {
+    "id": "slot-07",
+    "day_of_week": "thursday",
+    "day_ar": "الخميس",
+    "time": "10:00",
+    "consultant_alias": "مستشار نفسي"
+  },
+  {
+    "id": "slot-08",
+    "day_of_week": "thursday",
+    "day_ar": "الخميس",
+    "time": "15:00",
+    "consultant_alias": "مستشار أمان"
+  },
+  {
+    "id": "slot-09",
+    "day_of_week": "friday",
+    "day_ar": "الجمعة",
+    "time": "10:00",
+    "consultant_alias": "مستشار حقوقي"
+  },
+  {
+    "id": "slot-10",
+    "day_of_week": "friday",
+    "day_ar": "الجمعة",
+    "time": "14:00",
+    "consultant_alias": "مستشار أمان"
+  }
+]
