@@ -170,7 +170,7 @@ class AmanRepository {
 
   /// Returns the current subscription with monthly question counter reset if
   /// the stored month differs from the current month.
-  AmanSubscription get activeSubscription {
+  Future<AmanSubscription> getActiveSubscription() async {
     final now = DateTime.now();
     final currentMonth =
         '${now.year}-${now.month.toString().padLeft(2, '0')}';
@@ -180,7 +180,7 @@ class AmanRepository {
         questionsUsedThisMonth: 0,
         questionsResetMonth: currentMonth,
       );
-      updateSubscription(_subscription);
+      await updateSubscription(_subscription);
     }
     return _subscription;
   }

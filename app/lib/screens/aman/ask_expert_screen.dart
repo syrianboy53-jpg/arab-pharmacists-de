@@ -92,7 +92,7 @@ class _AnonymousQuestionsTabState extends State<_AnonymousQuestionsTab> {
     if (text.isEmpty) return;
 
     final repo = AmanRepository.instance;
-    final sub = repo.activeSubscription;
+    final sub = await repo.getActiveSubscription();
 
     if (!sub.canAskQuestion) {
       if (!mounted) return;
