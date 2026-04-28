@@ -12,14 +12,19 @@ class SubscriptionScreen extends StatefulWidget {
 
 class _SubscriptionScreenState extends State<SubscriptionScreen> {
   late final List<AmanPlan> _plans;
+  AmanSubscription _sub = AmanRepository.instance.subscription;
 
   @override
   void initState() {
     super.initState();
     _plans = AmanRepository.instance.plans;
+    _loadSubscription();
   }
 
-  AmanSubscription get _sub => AmanRepository.instance.activeSubscription;
+  Future<void> _loadSubscription() async {
+    final sub = await AmanRepository.instance.getActiveSubscription();
+    if (mounted) setState(() => _sub = sub);
+  }
 
   Future<void> _selectPlan(AmanPlan plan) async {
     if (plan.id == 'plan-free') {
@@ -50,7 +55,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         SnackBar(content: Text('تم تفعيل ${plan.nameAr} بنجاح!')),
       );
     }
-    setState(() {});
+    await _loadSubscription();
   }
 
   @override
