@@ -32,7 +32,7 @@
     "id": "plan-yearly",
     "name_ar": "الاشتراك السنوي",
     "description_ar": "وفّر أكثر من 15% — جميع الميزات المميزة لمدة سنة كاملة",
-    "price_eur": 50.0,
+    "price_eur": 40.0,
     "duration": "yearly",
     "features": [
       "جميع ميزات الاشتراك الشهري",
