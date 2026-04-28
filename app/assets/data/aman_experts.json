@@ -1,0 +1,74 @@
+[
+  {
+    "id": "exp-01",
+    "name_ar": "المحامي أحمد الخطيب",
+    "specialty": "lawyer",
+    "specialty_ar": "محامي - قانون الأسرة",
+    "description_ar": "محامي متخصص في قانون الأسرة الألماني، يتحدث العربية والألمانية. خبرة ١٥ سنة في قضايا الطلاق وحضانة الأطفال.",
+    "city": "Berlin",
+    "phone": "+49-30-1234567",
+    "email": "khatib@example.de",
+    "speaks_arabic": true,
+    "speaks_german": true,
+    "tags": ["family_law", "divorce", "custody"]
+  },
+  {
+    "id": "exp-02",
+    "name_ar": "د. ليلى حسن",
+    "specialty": "psychologist",
+    "specialty_ar": "أخصائية نفسية",
+    "description_ar": "أخصائية نفسية مرخصة في ألمانيا، متخصصة في العلاج الأسري والصدمات النفسية. تفهم الخلفية الثقافية العربية.",
+    "city": "München",
+    "phone": "+49-89-2345678",
+    "speaks_arabic": true,
+    "speaks_german": true,
+    "tags": ["family_therapy", "trauma", "couples"]
+  },
+  {
+    "id": "exp-03",
+    "name_ar": "الأستاذ كريم سعيد",
+    "specialty": "coach",
+    "specialty_ar": "مدرب علاقات (Beziehungscoach)",
+    "description_ar": "مدرب علاقات معتمد، يساعد الأزواج على تحسين التواصل وحل الخلافات بطرق صحية. جلسات باللغة العربية.",
+    "city": "Frankfurt",
+    "phone": "+49-69-3456789",
+    "speaks_arabic": true,
+    "speaks_german": true,
+    "tags": ["relationship", "communication", "conflict_resolution"]
+  },
+  {
+    "id": "exp-04",
+    "name_ar": "المحامية سارة عبد الله",
+    "specialty": "lawyer",
+    "specialty_ar": "محامية - قانون الأجانب والإقامة",
+    "description_ar": "متخصصة في قانون الأجانب والإقامة في ألمانيا. تساعد في قضايا لم الشمل وتأثير الطلاق على الإقامة.",
+    "city": "Hamburg",
+    "phone": "+49-40-4567890",
+    "speaks_arabic": true,
+    "speaks_german": true,
+    "tags": ["immigration", "residence", "family_reunion"]
+  },
+  {
+    "id": "exp-05",
+    "name_ar": "د. عمر الراشد",
+    "specialty": "social_worker",
+    "specialty_ar": "أخصائي اجتماعي",
+    "description_ar": "أخصائي اجتماعي يعمل مع الأسر العربية في ألمانيا. خبرة في التعامل مع Jugendamt والمدارس الألمانية.",
+    "city": "Köln",
+    "phone": "+49-221-5678901",
+    "speaks_arabic": true,
+    "speaks_german": true,
+    "tags": ["jugendamt", "schools", "family_support"]
+  },
+  {
+    "id": "exp-06",
+    "name_ar": "د. هدى المصري",
+    "specialty": "psychologist",
+    "specialty_ar": "معالجة نفسية للأطفال",
+    "description_ar": "متخصصة في علاج الأطفال والمراهقين، خاصة من تأثروا بالطلاق أو الصراعات الأسرية.",
+    "city": "Stuttgart",
+    "speaks_arabic": true,
+    "speaks_german": true,
+    "tags": ["children", "adolescents", "divorce_impact"]
+  }
+]

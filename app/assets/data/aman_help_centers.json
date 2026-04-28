@@ -1,0 +1,77 @@
+[
+  {
+    "id": "hc-01",
+    "name_ar": "مركز الاستشارات العربية - برلين",
+    "city": "Berlin",
+    "address": "Sonnenallee 78, 12045 Berlin",
+    "phone": "+49-30-6818110",
+    "website": "https://www.al-dar.de",
+    "type": "counseling",
+    "speaks_arabic": true
+  },
+  {
+    "id": "hc-02",
+    "name_ar": "كاريتاس - ميونخ",
+    "city": "München",
+    "address": "Landwehrstr. 26, 80336 München",
+    "phone": "+49-89-231149",
+    "website": "https://www.caritas-muenchen.de",
+    "type": "social",
+    "speaks_arabic": true
+  },
+  {
+    "id": "hc-03",
+    "name_ar": "مركز الإرشاد الأسري - فرانكفورت",
+    "city": "Frankfurt",
+    "address": "Gutleutstr. 160, 60327 Frankfurt",
+    "phone": "+49-69-27227870",
+    "type": "counseling",
+    "speaks_arabic": true
+  },
+  {
+    "id": "hc-04",
+    "name_ar": "دياكوني - هامبورغ",
+    "city": "Hamburg",
+    "address": "Königstr. 54, 22767 Hamburg",
+    "phone": "+49-40-30620",
+    "website": "https://www.diakonie-hamburg.de",
+    "type": "social",
+    "speaks_arabic": true
+  },
+  {
+    "id": "hc-05",
+    "name_ar": "مركز المرأة العربية - كولن",
+    "city": "Köln",
+    "address": "Venloer Str. 51, 50672 Köln",
+    "phone": "+49-221-12074",
+    "type": "counseling",
+    "speaks_arabic": true
+  },
+  {
+    "id": "hc-06",
+    "name_ar": "استشارات قانونية مجانية - شتوتغارت",
+    "city": "Stuttgart",
+    "address": "Hauptstätter Str. 119, 70178 Stuttgart",
+    "phone": "+49-711-2159460",
+    "type": "legal",
+    "speaks_arabic": true
+  },
+  {
+    "id": "hc-07",
+    "name_ar": "مركز الدعم النفسي - دوسلدورف",
+    "city": "Düsseldorf",
+    "address": "Graf-Adolf-Str. 61, 40210 Düsseldorf",
+    "phone": "+49-211-1717690",
+    "type": "psychological",
+    "speaks_arabic": true
+  },
+  {
+    "id": "hc-08",
+    "name_ar": "مركز الاندماج - إيسن",
+    "city": "Essen",
+    "address": "Schederhofstr. 45, 45145 Essen",
+    "phone": "+49-201-8327050",
+    "type": "social",
+    "speaks_arabic": true
+  }
+]

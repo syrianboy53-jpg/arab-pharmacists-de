@@ -31,3 +31,14 @@ flutter:
     - assets/data/contact_info.json
     - assets/data/material_prices.json
     - assets/data/subscription_plans.json
+    - assets/data/aman_experts.json
+    - assets/data/aman_legal_guide.json
+    - assets/data/aman_emergency.json
+    - assets/data/aman_legal_explanations.json
+    - assets/data/aman_stories.json
+    - assets/data/aman_whatif.json
+    - assets/data/aman_relationship_quiz.json
+    - assets/data/aman_podcasts.json
+    - assets/data/aman_help_centers.json
+    - assets/data/aman_jugendamt_risk.json
+    - assets/data/aman_plans.json

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'aman_repository.dart';
 import 'ammaar_repository.dart';
 import 'repository.dart';
 import 'screens/home_screen.dart';
@@ -14,6 +15,7 @@ Future<void> main() async {
   await Future.wait([
     Repository.instance.load(),
     AmmaarRepository.instance.load(),
+    AmanRepository.instance.load(),
   ]);
   runApp(const ArabPharmacistsApp());
 }

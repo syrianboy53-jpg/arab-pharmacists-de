@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'admin_dashboard_screen.dart';
+import 'aman/aman_home_screen.dart';
 import 'dialogues_screen.dart';
 import 'drugs_screen.dart';
 import 'material_prices_screen.dart';
@@ -111,6 +112,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     context,
                     MaterialPageRoute<void>(
                       builder: (_) => const UserProfileScreen(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.shield),
+                title: const Text('أمان - الدعم المجتمعي'),
+                subtitle: const Text('استشارات قانونية ونفسية واجتماعية'),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (_) => const AmanHomeScreen(),
                     ),
                   );
                 },
