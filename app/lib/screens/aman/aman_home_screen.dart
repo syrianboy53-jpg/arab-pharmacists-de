@@ -10,6 +10,7 @@ import 'legal_guide_screen.dart';
 import 'podcast_screen.dart';
 import 'relationship_quiz_screen.dart';
 import 'stories_screen.dart';
+import 'private_session_booking_screen.dart';
 import 'subscription_screen.dart';
 
 class AmanHomeScreen extends StatelessWidget {
@@ -144,6 +145,81 @@ class AmanHomeScreen extends StatelessWidget {
               color: Colors.deepOrange,
               onTap: () =>
                   _navigate(context, const JugendamtRiskScreen()),
+            ),
+
+            const SizedBox(height: 20),
+
+            // Private session
+            Text(
+              'الجلسة السرية',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            const SizedBox(height: 12),
+
+            Card(
+              clipBehavior: Clip.antiAlias,
+              child: InkWell(
+                onTap: () => _navigate(
+                    context, const PrivateSessionBookingScreen()),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.teal.shade700,
+                        Colors.teal.shade900,
+                      ],
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(Icons.shield,
+                            color: Colors.white, size: 32),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'الجلسة السرية',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'مساحة آمنة للحديث مع مستشار — 25 دقيقة بـ 1€ فقط',
+                              style: TextStyle(
+                                  color: Colors.white.withOpacity(0.85)),
+                            ),
+                            const SizedBox(height: 8),
+                            const Wrap(
+                              spacing: 8,
+                              children: [
+                                _MiniTag('تدمير ذاتي'),
+                                _MiniTag('منع التصوير'),
+                                _MiniTag('اسم مستعار'),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Icon(Icons.chevron_left, color: Colors.white),
+                    ],
+                  ),
+                ),
+              ),
             ),
 
             const SizedBox(height: 20),
@@ -354,6 +430,24 @@ class _SmallCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _MiniTag extends StatelessWidget {
+  final String label;
+  const _MiniTag(this.label);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(label,
+          style: const TextStyle(color: Colors.white, fontSize: 11)),
     );
   }
 }

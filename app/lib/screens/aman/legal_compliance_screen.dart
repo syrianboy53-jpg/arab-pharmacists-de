@@ -114,7 +114,12 @@ Aman erhebt und überträgt keine personenbezogenen Daten an externe Server. All
 5. ملفات تعريف الارتباط (Cookies):
 لا يستخدم التطبيق أي ملفات تعريف ارتباط أو أدوات تتبع.
 
-6. الاتصال بنا:
+6. الجلسة السرية (Vertrauliche Sitzung):
+بيانات الجلسة السرية (الاسم المستعار، الرسائل) تُحفظ محلياً فقط أثناء الجلسة وتُحذف نهائياً عند التدمير الذاتي. لا يتم نقل أي بيانات إلى خوادم خارجية.
+
+Die Daten der vertraulichen Sitzung werden nur lokal gespeichert und nach der Selbstzerstörung vollständig gelöscht.
+
+7. الاتصال بنا:
 للاستفسارات المتعلقة بالخصوصية: datenschutz@aman-app.de
 ''';
 
@@ -126,7 +131,8 @@ const _agbContent = '''
 
 2. خطط الاشتراك (Abonnement):
 • الخطة المجانية: وصول محدود للمحتوى الأساسي
-• الخطة المميزة: 4 يورو شهرياً أو 50 يورو سنوياً
+• الخطة المميزة: 4 يورو شهرياً أو 40 يورو سنوياً
+• الجلسة السرية: 1 يورو لكل جلسة (25 دقيقة)
 • يمكن إلغاء الاشتراك في أي وقت
 
 3. حق الانسحاب (Widerrufsrecht):
@@ -147,6 +153,14 @@ const _agbContent = '''
 7. القانون الساري (Anwendbares Recht):
 تخضع هذه الشروط للقانون الألماني. مكان الاختصاص القضائي هو [المدينة].
 
-8. الاتصال (Kontakt):
+8. الجلسة السرية (Vertrauliche Sitzung):
+• مدة الجلسة 25 دقيقة بتكلفة 1 يورو لكل جلسة
+• جميع المحادثات مشفرة ولا يتم تسجيلها
+• يتم حذف المحادثة نهائياً بعد انتهاء الجلسة أو بطلب المستخدم
+• لا يتم الكشف عن الهوية الحقيقية للمستخدم للمستشار
+• Alle Gespräche sind verschlüsselt und werden nicht aufgezeichnet
+• Der Chat wird nach Beendigung der Sitzung automatisch gelöscht
+
+9. الاتصال (Kontakt):
 agb@aman-app.de
 ''';
