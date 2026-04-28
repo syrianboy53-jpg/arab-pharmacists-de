@@ -4,7 +4,8 @@ import '../../aman_models.dart';
 import '../../aman_repository.dart';
 
 class AskExpertScreen extends StatefulWidget {
-  const AskExpertScreen({super.key});
+  const AskExpertScreen({super.key, this.embedded = false});
+  final bool embedded;
 
   @override
   State<AskExpertScreen> createState() => _AskExpertScreenState();
@@ -28,26 +29,45 @@ class _AskExpertScreenState extends State<AskExpertScreen>
 
   @override
   Widget build(BuildContext context) {
+    final tabBar = TabBar(
+      controller: _tabController,
+      tabs: const [
+        Tab(icon: Icon(Icons.question_answer), text: 'استشارة مجهولة'),
+        Tab(icon: Icon(Icons.people), text: 'دليل المختصين'),
+      ],
+    );
+
+    final body = TabBarView(
+      controller: _tabController,
+      children: const [
+        _AnonymousQuestionsTab(),
+        _ExpertDirectoryTab(),
+      ],
+    );
+
+    if (widget.embedded) {
+      return Directionality(
+        textDirection: TextDirection.rtl,
+        child: Column(
+          children: [
+            Material(
+              color: Theme.of(context).colorScheme.primary,
+              child: tabBar,
+            ),
+            Expanded(child: body),
+          ],
+        ),
+      );
+    }
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('اسأل خبيراً'),
-          bottom: TabBar(
-            controller: _tabController,
-            tabs: const [
-              Tab(icon: Icon(Icons.question_answer), text: 'استشارة مجهولة'),
-              Tab(icon: Icon(Icons.people), text: 'دليل المختصين'),
-            ],
-          ),
+          bottom: tabBar,
         ),
-        body: TabBarView(
-          controller: _tabController,
-          children: const [
-            _AnonymousQuestionsTab(),
-            _ExpertDirectoryTab(),
-          ],
-        ),
+        body: body,
       ),
     );
   }
