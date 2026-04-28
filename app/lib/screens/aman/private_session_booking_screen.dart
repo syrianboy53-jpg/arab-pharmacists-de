@@ -31,6 +31,12 @@ class _PrivateSessionBookingScreenState
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _aliasController.addListener(() => setState(() {}));
+  }
+
+  @override
   void dispose() {
     _aliasController.dispose();
     super.dispose();
