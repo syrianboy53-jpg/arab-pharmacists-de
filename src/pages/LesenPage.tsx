@@ -1,5 +1,8 @@
 import { useState } from 'react'
-import { lesenModels } from '../data/lesen'
+import { lesenModels as baseModels } from '../data/lesen'
+import { lesenModelsExtra } from '../data/lesen-extra'
+
+const lesenModels = [...baseModels, ...lesenModelsExtra]
 
 export default function LesenPage() {
   const [selectedModel, setSelectedModel] = useState<number | null>(null)

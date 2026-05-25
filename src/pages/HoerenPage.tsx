@@ -1,68 +1,5 @@
 import { useState } from 'react'
-
-interface HoerenQuestion {
-  id: number
-  audioDescription: string
-  question: string
-  options: string[]
-  correct: number
-  explanation: string
-}
-
-const hoerenModels: { id: number; title: string; questions: HoerenQuestion[] }[] = [
-  {
-    id: 1,
-    title: 'Modell 1 – Ansagen verstehen',
-    questions: [
-      {
-        id: 1,
-        audioDescription: '📢 Ansage am Bahnhof: "Achtung an Gleis 3. Der ICE 597 nach Hamburg hat heute ca. 15 Minuten Verspätung. Wir bitten um Entschuldigung."',
-        question: 'Was wird am Bahnhof durchgesagt?',
-        options: ['Der Zug fährt heute nicht', 'Der Zug kommt 15 Minuten später', 'Der Zug fährt von einem anderen Gleis', 'Der Zug fährt nach München'],
-        correct: 1,
-        explanation: 'القطار ICE 597 إلى هامبورغ متأخّر 15 دقيقة.'
-      },
-      {
-        id: 2,
-        audioDescription: '📢 Ansage im Supermarkt: "Liebe Kunden, heute haben wir ein Sonderangebot: Alle Bio-Produkte 20% reduziert. Das Angebot gilt nur heute bis Ladenschluss."',
-        question: 'Was ist das Sonderangebot?',
-        options: ['Alle Produkte sind billiger', 'Bio-Produkte kosten 20% weniger', 'Der Laden schließt früher', 'Es gibt kostenlose Produkte'],
-        correct: 1,
-        explanation: 'العرض الخاص: منتجات Bio أرخص بـ20% لهذا اليوم فقط.'
-      },
-      {
-        id: 3,
-        audioDescription: '📢 Ansage in der Arztpraxis: "Frau Yilmaz, bitte kommen Sie ins Zimmer 2. Dr. Schmidt ist jetzt für Sie bereit."',
-        question: 'Was soll Frau Yilmaz tun?',
-        options: ['Sie soll nach Hause gehen', 'Sie soll ins Behandlungszimmer 2 kommen', 'Sie soll einen neuen Termin machen', 'Sie soll im Wartezimmer bleiben'],
-        correct: 1,
-        explanation: 'يُطلب من السيّدة يلماز الذهاب للغرفة 2 لأنّ الطبيب جاهز.'
-      },
-    ]
-  },
-  {
-    id: 2,
-    title: 'Modell 2 – Gespräche verstehen',
-    questions: [
-      {
-        id: 1,
-        audioDescription: '🎙️ Dialog:\nA: "Entschuldigung, wissen Sie, wo der nächste Geldautomat ist?"\nB: "Ja, gehen Sie hier geradeaus, dann die zweite Straße links. Da ist eine Sparkasse."\nA: "Danke schön!"\nB: "Gerne, ist nicht weit, nur 5 Minuten zu Fuß."',
-        question: 'Wo ist der Geldautomat?',
-        options: ['Direkt hier um die Ecke', 'Geradeaus und dann die zweite links', 'Am Bahnhof', '10 Minuten mit dem Bus'],
-        correct: 1,
-        explanation: 'الصرّاف الآلي: مشي للأمام ثمّ الشارع الثاني يسار، عند بنك Sparkasse.'
-      },
-      {
-        id: 2,
-        audioDescription: '🎙️ Dialog:\nA: "Ich möchte mich für den B1-Kurs anmelden."\nB: "Der nächste Kurs beginnt am 3. März, montags und mittwochs von 9 bis 12 Uhr."\nA: "Was kostet der Kurs?"\nB: "390 Euro für 4 Monate. Bringen Sie bitte Ihren Ausweis und ein Passfoto mit."',
-        question: 'Wann findet der Kurs statt?',
-        options: ['Jeden Tag von 9-12', 'Montags und mittwochs, 9-12 Uhr', 'Am Wochenende', 'Freitags 14-17 Uhr'],
-        correct: 1,
-        explanation: 'الكورس أيام الاثنين والأربعاء من 9 إلى 12 ظهراً.'
-      },
-    ]
-  },
-]
+import { hoerenModels } from '../data/hoeren'
 
 export default function HoerenPage() {
   const [selectedModel, setSelectedModel] = useState<number | null>(null)
@@ -78,7 +15,7 @@ export default function HoerenPage() {
           <span className="text-3xl">🎧</span>
           <div>
             <h1 className="text-2xl font-bold">الاستماع — Hören</h1>
-            <p className="text-muted text-sm">تدرّب على فهم الإعلانات والمحادثات الألمانية.</p>
+            <p className="text-muted text-sm">تدرّب على فهم الإعلانات والمحادثات الألمانية. ({hoerenModels.length} نماذج)</p>
           </div>
         </div>
         <div className="grid gap-3">
