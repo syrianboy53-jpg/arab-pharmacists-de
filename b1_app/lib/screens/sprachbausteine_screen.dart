@@ -1,142 +1,150 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
+import '../data/sprachbausteine_data.dart';
 
 class SprachbausteineScreen extends StatefulWidget {
   const SprachbausteineScreen({super.key});
-
   @override
   State<SprachbausteineScreen> createState() => _SprachbausteineScreenState();
 }
 
 class _SprachbausteineScreenState extends State<SprachbausteineScreen> {
-  int _index = 0;
-  int? _selected;
-  int _correct = 0;
-  bool _done = false;
-
-  static const _items = [
-    _SBItem(text: 'Ich möchte mich ___ den Deutschkurs anmelden.', textAr: 'أريد التسجيل في دورة الألمانية.', options: ['für', 'auf', 'an', 'über'], correct: 0),
-    _SBItem(text: 'Er hat sich ___ die neue Stelle beworben.', textAr: 'تقدّم للوظيفة الجديدة.', options: ['für', 'um', 'auf', 'an'], correct: 1),
-    _SBItem(text: 'Wir freuen uns ___ Ihren Besuch.', textAr: 'نتطلّع لزيارتكم.', options: ['über', 'für', 'auf', 'an'], correct: 2),
-    _SBItem(text: 'Ich bin ___ Montag nicht da.', textAr: 'لن أكون موجوداً يوم الاثنين.', options: ['am', 'im', 'um', 'an'], correct: 0),
-    _SBItem(text: 'Könnten Sie mir bitte ___ ?', textAr: 'هل يمكنك مساعدتي من فضلك؟', options: ['helfen', 'geholfen', 'hilft', 'half'], correct: 0),
-    _SBItem(text: 'Die Prüfung findet ___ 15. März statt.', textAr: 'الامتحان يُعقد في 15 مارس.', options: ['am', 'im', 'um', 'an dem'], correct: 0),
-    _SBItem(text: 'Ich warte ___ den Bus.', textAr: 'أنتظر الحافلة.', options: ['auf', 'für', 'an', 'über'], correct: 0),
-    _SBItem(text: 'Er interessiert sich ___ Musik.', textAr: 'يهتم بالموسيقى.', options: ['für', 'an', 'über', 'auf'], correct: 0),
-    _SBItem(text: 'Ich habe Angst ___ der Prüfung.', textAr: 'أخاف من الامتحان.', options: ['vor', 'von', 'für', 'über'], correct: 0),
-    _SBItem(text: 'Sie denkt oft ___ ihre Familie.', textAr: 'تفكّر كثيراً بعائلتها.', options: ['an', 'über', 'von', 'für'], correct: 0),
-    _SBItem(text: 'Wir sind ___ dem Ergebnis zufrieden.', textAr: 'نحن راضون عن النتيجة.', options: ['mit', 'von', 'über', 'für'], correct: 0),
-    _SBItem(text: 'Er hat ___ zwei Jahren Deutsch gelernt.', textAr: 'تعلّم الألمانية قبل سنتين.', options: ['vor', 'seit', 'ab', 'nach'], correct: 0),
-    _SBItem(text: 'Ich lerne Deutsch, ___ ich in Deutschland arbeiten möchte.', textAr: 'أتعلم الألمانية لأنني أريد العمل في ألمانيا.', options: ['weil', 'dass', 'ob', 'wenn'], correct: 0),
-    _SBItem(text: 'Er weiß nicht, ___ er morgen kommen kann.', textAr: 'لا يعرف إن كان يستطيع القدوم غداً.', options: ['ob', 'weil', 'dass', 'wenn'], correct: 0),
-    _SBItem(text: '___ ich nach Hause komme, koche ich Abendessen.', textAr: 'عندما أصل للبيت، أطبخ العشاء.', options: ['Wenn', 'Weil', 'Ob', 'Dass'], correct: 0),
-    _SBItem(text: 'Ich bin müde, ___ ich trotzdem arbeiten muss.', textAr: 'أنا متعب، لكن يجب أن أعمل رغم ذلك.', options: ['obwohl', 'weil', 'wenn', 'dass'], correct: 0),
-    _SBItem(text: 'Der Film, ___ gestern im Kino lief, war toll.', textAr: 'الفيلم الذي عُرض أمس في السينما كان رائعاً.', options: ['der', 'den', 'dem', 'das'], correct: 0),
-    _SBItem(text: 'Das ist die Frau, ___ ich gestern getroffen habe.', textAr: 'هذه المرأة التي التقيت بها أمس.', options: ['die', 'der', 'dem', 'den'], correct: 0),
-    _SBItem(text: 'Ich ___ gern einen Kaffee bestellen.', textAr: 'أريد طلب قهوة.', options: ['möchte', 'mag', 'muss', 'kann'], correct: 0),
-    _SBItem(text: 'Du ___ hier nicht rauchen.', textAr: 'لا يجوز لك التدخين هنا.', options: ['darfst', 'kannst', 'musst', 'sollst'], correct: 0),
-  ];
+  int _currentQ = 0;
+  int? _selectedAnswer;
+  int _score = 0;
+  bool _showResult = false;
+  bool _answered = false;
 
   @override
   Widget build(BuildContext context) {
+    if (_showResult) return _buildResult();
+    if (_currentQ >= pruefungsFragen.length) {
+      return const Center(child: Text('لا توجد أسئلة'));
+    }
+    final q = pruefungsFragen[_currentQ];
+    final options = List<Map<String, dynamic>>.from(q['options'] as List? ?? []);
+    final correct = q['correct'] as int? ?? 0;
+    
     return Scaffold(
-      appBar: AppBar(title: const Text('Sprachbausteine - تراكيب لغوية')),
-      body: _done ? _buildResult() : _buildQuiz(),
-    );
-  }
-
-  Widget _buildQuiz() {
-    final item = _items[_index];
-    final colorScheme = Theme.of(context).colorScheme;
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          LinearProgressIndicator(value: (_index + 1) / _items.length),
-          const SizedBox(height: 8),
-          Text('${_index + 1} / ${_items.length}', textAlign: TextAlign.center, style: TextStyle(color: colorScheme.onSurfaceVariant)),
-          const SizedBox(height: 20),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  Text(item.text, textDirection: TextDirection.ltr, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600), textAlign: TextAlign.center),
-                  const SizedBox(height: 12),
-                  Text(item.textAr, style: TextStyle(color: colorScheme.onSurfaceVariant, fontSize: 15), textAlign: TextAlign.center),
-                ],
-              ),
-            ),
+      appBar: AppBar(
+        title: const Text('تمارين القواعد'),
+        centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Center(child: Text('${_currentQ + 1}/${pruefungsFragen.length}', style: const TextStyle(fontWeight: FontWeight.bold))),
           ),
-          const SizedBox(height: 20),
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            alignment: WrapAlignment.center,
-            children: List.generate(item.options.length, (i) {
-              final isSelected = _selected == i;
-              final isCorrect = i == item.correct;
-              final show = _selected != null;
-              Color? bg;
-              Color? fg;
-              if (show && isCorrect) { bg = Colors.green; fg = Colors.white; }
-              else if (show && isSelected && !isCorrect) { bg = Colors.red; fg = Colors.white; }
-
-              return ChoiceChip(
-                label: Text(item.options[i], style: TextStyle(fontSize: 16, color: fg)),
-                selected: isSelected,
-                selectedColor: bg,
-                onSelected: _selected == null ? (_) {
-                  setState(() {
-                    _selected = i;
-                    if (i == item.correct) { _correct++; context.read<AppProvider>().addXP(5); }
-                  });
-                } : null,
+        ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            LinearProgressIndicator(value: (_currentQ + 1) / pruefungsFragen.length),
+            const SizedBox(height: 16),
+            if (q['context'] != null) ...[
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(q['context'] as String, textDirection: TextDirection.ltr, style: const TextStyle(height: 1.5)),
+              ),
+              const SizedBox(height: 16),
+            ],
+            Text('المستوى: ${q["level"] ?? "-"}', style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+            const SizedBox(height: 12),
+            ...List.generate(options.length, (i) {
+              final opt = options[i];
+              final isCorrect = i == correct;
+              final isSelected = _selectedAnswer == i;
+              Color? tileColor;
+              if (_answered) {
+                if (isCorrect) {
+                  tileColor = Colors.green[50];
+                } else if (isSelected) {
+                  tileColor = Colors.red[50];
+                }
+              }
+              return Card(
+                color: tileColor,
+                margin: const EdgeInsets.only(bottom: 8),
+                child: RadioListTile<int>(
+                  value: i,
+                  groupValue: _selectedAnswer,
+                  title: Text(opt['text'] as String? ?? opt.toString(), textDirection: TextDirection.ltr),
+                  onChanged: _answered ? null : (v) => setState(() => _selectedAnswer = v),
+                ),
               );
             }),
-          ),
-          if (_selected != null) ...[
-            const SizedBox(height: 24),
-            FilledButton(
-              onPressed: () {
-                if (_index < _items.length - 1) {
-                  setState(() { _index++; _selected = null; });
-                } else {
-                  context.read<AppProvider>().incrementQuizzes();
-                  setState(() => _done = true);
-                }
-              },
-              child: Text(_index < _items.length - 1 ? 'التالي' : 'النتيجة'),
-            ),
+            const SizedBox(height: 16),
+            if (!_answered && _selectedAnswer != null)
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _answered = true;
+                      if (_selectedAnswer == correct) _score++;
+                    });
+                  },
+                  child: const Text('تحقّق'),
+                ),
+              ),
+            if (_answered) ...[
+              if (q['explanation'] != null) ...[
+                const SizedBox(height: 8),
+                Text('💡 ${q["explanation"]}', style: const TextStyle(fontSize: 14)),
+              ],
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      if (_currentQ < pruefungsFragen.length - 1) {
+                        _currentQ++;
+                        _selectedAnswer = null;
+                        _answered = false;
+                      } else {
+                        _showResult = true;
+                        context.read<AppProvider>().addXP(_score * 5);
+                      }
+                    });
+                  },
+                  child: Text(_currentQ < pruefungsFragen.length - 1 ? 'التالي' : 'النتيجة'),
+                ),
+              ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }
 
   Widget _buildResult() {
-    final percent = _correct / _items.length;
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(percent >= 0.6 ? Icons.emoji_events : Icons.refresh, size: 64, color: percent >= 0.6 ? Colors.amber : Colors.red),
-          const SizedBox(height: 16),
-          Text('$_correct / ${_items.length}', style: Theme.of(context).textTheme.headlineMedium),
-          Text('${(percent * 100).toInt()}%'),
-          const SizedBox(height: 24),
-          FilledButton(onPressed: () => Navigator.pop(context), child: const Text('رجوع')),
-        ],
+    final pct = (pruefungsFragen.isNotEmpty) ? (_score / pruefungsFragen.length * 100).round() : 0;
+    return Scaffold(
+      appBar: AppBar(title: const Text('النتيجة')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(pct >= 60 ? Icons.celebration : Icons.refresh, size: 64, color: pct >= 60 ? Colors.green : Colors.orange),
+            const SizedBox(height: 16),
+            Text('$pct%', style: Theme.of(context).textTheme.displayMedium),
+            Text('$_score / ${pruefungsFragen.length}'),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: () => setState(() { _currentQ = 0; _score = 0; _showResult = false; _selectedAnswer = null; _answered = false; }),
+              child: const Text('إعادة'),
+            ),
+          ],
+        ),
       ),
     );
   }
-}
-
-class _SBItem {
-  final String text, textAr;
-  final List<String> options;
-  final int correct;
-  const _SBItem({required this.text, required this.textAr, required this.options, required this.correct});
 }
