@@ -53,10 +53,9 @@
   --gold-accent: #fbbf24;
   --gold-glow: rgba(245, 158, 11, 0.12);
 
-  --txt: #cbd5e0;
-  --txt-m: #a0aec0;
-  --txt-d: #718096;
-
+  --txt: #ffffff; /* Pure white text for maximum readability */
+  --txt-m: #f1f5f9; /* Crisp slate-white text */
+  --txt-d: #94a3b8; /* Clear muted text */
   --border: rgba(255, 255, 255, 0.08);
   --border-gold: rgba(245, 158, 11, 0.25);
 
@@ -665,14 +664,18 @@ footer {
 
 .footer-col-title {
   font-family: 'Cairo', 'Outfit', sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: normal; /* Disables character separation for cursive Arabic fonts */
   color: var(--green);
   margin-bottom: 20px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
+}
+
+.dark .footer-col-title {
+  color: var(--green-accent); /* Lighter green for better dark contrast */
 }
 
 .footer-col ul {
@@ -687,7 +690,7 @@ footer {
   font-size: 0.875rem;
   color: var(--txt-m);
   transition: all 0.25s ease;
-  line-height: 1;
+  line-height: 1.5; /* Gives tall Arabic ascenders and descenders proper breathing room */
   display: inline-flex;
   align-items: center;
   gap: 6px;

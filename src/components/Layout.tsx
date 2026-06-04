@@ -210,11 +210,11 @@ export default function Layout({ children }: { children: ReactNode }) {
                 <div className="footer-col">
                   <h4 className="footer-col-title">أقسام الامتحان</h4>
                   <ul>
-                    <li><Link to="/lesen">📖 اختبار القراءة (Lesen)</Link></li>
-                    <li><Link to="/hoeren">🎧 اختبار الاستماع (Hören)</Link></li>
-                    <li><Link to="/schreiben">✍️ اختبار الكتابة (Schreiben)</Link></li>
-                    <li><Link to="/sprechen">🗣️ اختبار المحادثة (Sprechen)</Link></li>
-                    <li><Link to="/sprachbausteine">🧩 إكمال الفراغات</Link></li>
+                    <li><Link to="/lesen">اختبار القراءة (Lesen)</Link></li>
+                    <li><Link to="/hoeren">اختبار الاستماع (Hören)</Link></li>
+                    <li><Link to="/schreiben">اختبار الكتابة (Schreiben)</Link></li>
+                    <li><Link to="/sprechen">اختبار المحادثة (Sprechen)</Link></li>
+                    <li><Link to="/sprachbausteine">إكمال الفراغات (Sprachbausteine)</Link></li>
                   </ul>
                 </div>
 
@@ -222,10 +222,10 @@ export default function Layout({ children }: { children: ReactNode }) {
                 <div className="footer-col">
                   <h4 className="footer-col-title">أقسام أخرى</h4>
                   <ul>
-                    <li><Link to="/grammar">📐 قواعد اللغة B1</Link></li>
-                    <li><Link to="/vocabulary">📚 قاموس المفردات</Link></li>
-                    <li><Link to="/leben">🇩🇪 الحياة في ألمانيا</Link></li>
-                    <li><Link to="/b2">🎓 المستوى المتقدّم B2</Link></li>
+                    <li><Link to="/grammar">قواعد اللغة B1</Link></li>
+                    <li><Link to="/vocabulary">قاموس المفردات</Link></li>
+                    <li><Link to="/leben">الحياة في ألمانيا (Leben in DE)</Link></li>
+                    <li><Link to="/b2">المستوى المتقدّم B2</Link></li>
                   </ul>
                 </div>
 
