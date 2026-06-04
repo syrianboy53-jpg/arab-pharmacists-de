@@ -1,67 +1,70 @@
 @import "tailwindcss";
 
 :root {
-  /* Light Theme variables - elegant slate/green */
-  --base: #f4f6f4;
-  --base-2: #ffffff;
-  --surface: #ffffff;
-  --surface-2: #f3f4f6;
-  --surface-3: #e5e7eb;
+  /* Color Palette - MOFAEX Light Theme */
+  --base:         #f7f7f7; /* Light Gray Background */
+  --base-2:       #ffffff; /* White background for alternate sections */
+  --base-3:       #f9fafb; /* Soft gray */
+  --surface:      #ffffff; /* White for cards */
+  --surface-2:    #f3f4f6; /* Very light gray */
+  --surface-3:    #e5e7eb; /* Standard border light gray */
 
-  --green: #0F7B3E; /* Syrian brand green */
-  --green-dark: #094F28;
-  --green-deep: #062719;
-  --green-accent: #10b981;
-  --green-glow: rgba(15, 123, 62, 0.08);
-  --green-glow-d: rgba(15, 123, 62, 0.04);
+  --green:        #00584b; /* MOFAEX Deep Teal */
+  --green-dark:   #00463c; /* Slightly Darker Teal */
+  --green-deep:   #003830; /* Much Darker Teal */
+  --green-l:      #0a7a6c; /* Medium Teal */
+  --green-accent: #00c98d; /* Vibrant Emerald Green Accent */
+  --green-glow:   rgba(0, 88, 75, 0.12);
+  --green-glow-d: rgba(0, 88, 75, 0.05);
 
-  --gold: #C9A96E; /* Syrian brand gold */
-  --gold-accent: #f59e0b;
-  --gold-glow: rgba(201, 169, 110, 0.08);
+  --gold:         #bfa15f; /* MOFAEX Gold Accent */
+  --gold-accent:  #f0b429; /* Vibrant Gold Accent */
+  --gold-glow:    rgba(191, 161, 95, 0.12);
 
-  --txt: #0B0B0B;
-  --txt-m: #2d3748;
-  --txt-d: #4a5568;
+  --txt:          #2d3748; /* Dark slate text */
+  --txt-m:        #4a5568; /* Slate gray text */
+  --txt-d:        #718096; /* Slate muted text */
 
-  --border: #e2e8f0;
-  --border-gold: rgba(201, 169, 110, 0.2);
+  --border:       #e2e8f0; /* Faint gray border */
+  --border-gold:  rgba(191, 161, 95, 0.25);
 
-  --glass-bg: #ffffff;
+  --glass-bg:     #ffffff;
   --glass-border: #e2e8f0;
-  --glass-hover: #f8fafc;
-  --sh-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --glass-hover:  #f8fafc;
+  --sh-card:      0 2px 8px rgba(0,0,0,0.03), 0 0 0 1px rgba(0, 88, 75, 0.06);
 }
 
 .dark {
-  /* Dark Theme variables - premium deep space dark + emerald green + gold accents */
-  --base: #050a0d; /* Deep Space Dark */
-  --base-2: #0b1418;
-  --surface: #0c1a20;
-  --surface-2: #11262f;
-  --surface-3: #183440;
+  /* Color Palette - MOFAEX Dark Theme */
+  --base:         #050a0d; /* Deep Space Dark background */
+  --base-2:       #0b1418; /* Darker grey-teal for alternate sections */
+  --base-3:       #070f12; /* Darker soft gray-teal */
+  --surface:      #0c1a20; /* Dark teal-grey for cards */
+  --surface-2:    #11262f; /* Medium dark teal-grey */
+  --surface-3:    #183440; /* Dark border teal-grey */
 
-  --green: #10b981; /* emerald-500 */
-  --green-dark: #059669; /* emerald-600 */
-  --green-deep: #064e3b; /* emerald-900 */
-  --green-accent: #34d399; /* emerald-400 */
-  --green-glow: rgba(16, 185, 129, 0.12);
-  --green-glow-d: rgba(16, 185, 129, 0.04);
+  --green:        #00c98d; /* Vibrant Emerald Green Accent */
+  --green-dark:   #00a875; /* Lighter emerald */
+  --green-deep:   #003828;
+  --green-accent: #33d4a4;
+  --green-glow:   rgba(0, 201, 141, 0.15);
+  --green-glow-d: rgba(0, 201, 141, 0.04);
 
-  --gold: #f59e0b; /* amber-500 */
-  --gold-accent: #fbbf24;
-  --gold-glow: rgba(245, 158, 11, 0.12);
+  --gold:         #f0b429; /* Vibrant Gold Accent */
+  --gold-accent:  #f8c347;
+  --gold-glow:    rgba(240, 180, 41, 0.15);
 
-  --txt: #cbd5e0;
-  --txt-m: #a0aec0;
-  --txt-d: #718096;
+  --txt:          #cbd5e0; /* Light slate text */
+  --txt-m:        #a0aec0; /* Medium light text */
+  --txt-d:        #718096; /* Muted text */
 
-  --border: rgba(255, 255, 255, 0.08);
-  --border-gold: rgba(245, 158, 11, 0.25);
+  --border:       rgba(255, 255, 255, 0.08); /* Faint white borders */
+  --border-gold:  rgba(240, 180, 41, 0.25);
 
-  --glass-bg: rgba(12, 26, 32, 0.7);
+  --glass-bg:     rgba(12, 26, 32, 0.7);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-hover: rgba(17, 38, 47, 0.85);
-  --sh-card: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --glass-hover:  rgba(17, 38, 47, 0.85);
+  --sh-card:      0 4px 20px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.05);
 }
 
 @theme {
@@ -539,7 +542,7 @@ body {
 .mobile-menu a:hover {
   color: var(--green);
   background: var(--green-glow);
-  padding-left: 26px;
+  padding-inline-start: 26px;
 }
 
 .mobile-menu.open { display: flex; }
@@ -547,7 +550,7 @@ body {
 /* FOOTER styles from fadihalawani.com */
 footer {
   position: relative;
-  background: var(--surface);
+  background: var(--base-2);
   border-top: 1px solid var(--border);
   color: var(--txt);
 }
@@ -693,7 +696,7 @@ footer {
 
 .footer-col ul li a:hover {
   color: var(--green);
-  padding-left: 8px;
+  padding-inline-start: 8px;
 }
 
 .footer-contact-list {
@@ -715,7 +718,7 @@ footer {
 }
 
 .footer-bottom {
-  background: var(--surface-2);
+  background: var(--base-3);
   border-top: 1px solid var(--border);
   padding: 20px 0;
 }
