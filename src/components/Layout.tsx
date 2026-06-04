@@ -161,7 +161,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         </nav>
 
         {/* Main Content Area */}
-        <main className="container py-8 relative z-10">
+        <main className="max-w-6xl mx-auto px-4 py-8 relative z-10">
           {children}
         </main>
 
