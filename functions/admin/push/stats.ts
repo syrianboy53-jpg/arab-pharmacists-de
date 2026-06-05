@@ -23,9 +23,13 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     return new Response(JSON.stringify({
       active_devices,
       total_devices,
-      fcm_configured
+      fcm_configured,
+      history: [] // Return empty history array to prevent frontend rendering crash
     }), {
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store, no-cache, must-revalidate'
+      }
     })
   } catch (e: any) {
     return new Response(JSON.stringify({ error: e.message }), { status: 500 })
