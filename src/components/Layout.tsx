@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { type ReactNode, useState } from 'react'
+import { type ReactNode, useState, useEffect } from 'react'
 
 const navItems = [
   { path: '/', label: 'الرئيسية', icon: '🏠' },
@@ -20,9 +20,41 @@ const navItems = [
 export default function Layout({ children }: { children: ReactNode }) {
   const location = useLocation()
   const [darkMode, setDarkMode] = useState(false)
+  const [updateUrl, setUpdateUrl] = useState<string | null>(null)
+
+  useEffect(() => {
+    const ua = navigator.userAgent
+    const match = ua.match(/B1DeutschAPK\/(\d+)/)
+    if (match) {
+      const localVersion = parseInt(match[1], 10)
+      
+      fetch('/config')
+        .then(res => res.json())
+        .then((config: any) => {
+          const remoteVersion = parseInt(config.apk_version || '0', 10)
+          if (localVersion < remoteVersion && config.apk_url) {
+            setUpdateUrl(config.apk_url)
+          }
+        })
+        .catch(err => console.error('Error checking for updates:', err))
+    }
+  }, [])
 
   return (
     <div className={darkMode ? 'dark' : ''}>
+      {updateUrl && (
+        <div className="bg-yellow-500 text-gray-900 px-4 py-2 text-center text-sm font-bold shadow-md flex items-center justify-center gap-2 z-50 border-b border-yellow-600 animate-pulse">
+          <span>📢 تحديث جديد هام لتطبيق الأندرويد متوفر الآن!</span>
+          <a
+            href={updateUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-gray-900 text-white px-3 py-1 rounded-full text-xs hover:bg-gray-800 transition-colors inline-block"
+          >
+            تحميل التحديث المباشر ⬇️
+          </a>
+        </div>
+      )}
       <div className="min-h-screen bg-bg-light dark:bg-gray-900">
         {/* Header */}
         <header className="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-sm border-b border-gray-100 dark:border-gray-700">

@@ -53,7 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                url.contains('stripe.com') || 
                                url.contains('buymeacoffee.com') ||
                                url.contains('jotform.com') ||
-                               url.contains('jotfor.ms');
+                               url.contains('jotfor.ms') ||
+                               url.contains('.apk');
                                
             if (isExternal) {
               // Open in external browser/application (Telegram, email, stripe, etc.)
