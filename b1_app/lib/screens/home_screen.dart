@@ -18,6 +18,9 @@ import 'einbuergerung_screen.dart';
 import 'b2_screen.dart';
 import 'settings_screen.dart';
 import 'library_screen.dart';
+import 'slang_screen.dart';
+import 'chat_simulator_screen.dart';
+import 'premium_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -57,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (config != null) {
       final remoteVersion = int.tryParse(config['apk_version'] ?? '0') ?? 0;
-      const localVersion = 54; // Native app version 54
+      const localVersion = 55; // Native app version 55
       if (localVersion < remoteVersion) {
         final apkUrl = config['apk_url'] ?? 'https://www.b1-syrer.de/b1-deutsch.apk';
         _showUpdateDialog(apkUrl);
@@ -66,11 +69,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _showUpdateDialog(String downloadUrl) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1E293B), // Slate Dark
+        backgroundColor: isDark ? const Color(0xFF1E293B) : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Row(
           children: [
@@ -78,18 +82,18 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(width: 8),
             Text(
               'تحديث جديد متوفر! 🚀',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
           ],
         ),
-        content: const Text(
+        content: Text(
           'يتوفر إصدار جديد يحتوي على دروس إضافية وملخصات وتحسينات هامة للأداء. يرجى تنزيل التحديث للاستمرار بأفضل تجربة تعليمية.',
-          style: TextStyle(color: Colors.white70, fontSize: 14, height: 1.5),
+          style: TextStyle(color: isDark ? Colors.white70 : Colors.black87, fontSize: 14, height: 1.5),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('لاحقاً', style: TextStyle(color: Colors.white38)),
+            child: Text('لاحقاً', style: TextStyle(color: isDark ? Colors.white38 : Colors.grey)),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -117,11 +121,19 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final provider = context.watch<AppProvider>();
     final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    // Light-mode Soft Design Colors
+    final scaffoldBg = isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC);
+    final barBg = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final textMain = isDark ? Colors.white : const Color(0xFF1E293B);
+    final borderCol = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0F172A), // Slate Dark background matching premium look
+      backgroundColor: scaffoldBg,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: barBg,
+        foregroundColor: textMain,
         elevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -138,30 +150,39 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(width: 8),
-            const Text(
-              'Deutsch للسوريين والعرب',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+            Text(
+              'B1-B2 Deutsch للعرب',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: textMain),
             ),
           ],
         ),
         leading: IconButton(
           icon: Icon(
             provider.isDarkMode ? Icons.wb_sunny : Icons.nightlight_round,
-            color: Colors.white,
+            color: textMain,
           ),
           onPressed: () => provider.toggleDarkMode(),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings, color: Colors.white),
+            icon: const Icon(Icons.star, color: Color(0xFFF59E0B)),
+            tooltip: 'Premium',
+            onPressed: () => _navigate(const PremiumScreen()),
+          ),
+          IconButton(
+            icon: Icon(Icons.settings, color: textMain),
             onPressed: () => _navigate(const SettingsScreen()),
           ),
         ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(color: borderCol, height: 1),
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: _checkUpdates,
         color: const Color(0xFF10B981),
-        backgroundColor: const Color(0xFF1E293B),
+        backgroundColor: barBg,
         child: CustomScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
@@ -169,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: _buildStatsCard(context, provider, colorScheme),
+                child: _buildStatsCard(context, provider, colorScheme, isDark, textMain, borderCol),
               ),
             ),
 
@@ -185,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       'نماذج امتحان Telc B1',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: textMain,
                           ),
                     ),
                   ],
@@ -207,6 +228,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     subtitle: '11 نموذج كامل',
                     icon: Icons.menu_book,
                     color: const Color(0xFF2563EB), // Blue
+                    isDark: isDark,
+                    borderCol: borderCol,
                     onTap: () => _navigate(const LesenScreen()),
                   ),
                   _buildMenuCard(
@@ -214,6 +237,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     subtitle: '8 نماذج صوتية',
                     icon: Icons.headphones,
                     color: const Color(0xFF7C3AED), // Purple
+                    isDark: isDark,
+                    borderCol: borderCol,
                     onTap: () => _navigate(const HoerenScreen()),
                   ),
                   _buildMenuCard(
@@ -221,6 +246,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     subtitle: '11 نموذج رسائل',
                     icon: Icons.edit_note,
                     color: const Color(0xFF0D9488), // Teal
+                    isDark: isDark,
+                    borderCol: borderCol,
                     onTap: () => _navigate(const SchreibenScreen()),
                   ),
                   _buildMenuCard(
@@ -228,6 +255,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     subtitle: '3 أجزاء تفاعلية',
                     icon: Icons.record_voice_over,
                     color: const Color(0xFFEA580C), // Orange
+                    isDark: isDark,
+                    borderCol: borderCol,
                     onTap: () => _navigate(const SprechenScreen()),
                   ),
                   _buildMenuCard(
@@ -235,6 +264,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     subtitle: '5 اختبارات لغة',
                     icon: Icons.extension,
                     color: const Color(0xFF4F46E5), // Indigo
+                    isDark: isDark,
+                    borderCol: borderCol,
                     onTap: () => _navigate(const SprachbausteineScreen()),
                   ),
                 ]),
@@ -243,7 +274,60 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
-            // Section 2: Grammar & Vocab
+            // Section 2: Colloquial & Daily Speech (New Web Additions!)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Row(
+                  children: [
+                    const Icon(Icons.forum, color: Color(0xFF10B981), size: 20),
+                    const SizedBox(width: 8),
+                    Text(
+                      'المحادثة اليومية والعامية (جديد) 🔥',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: textMain,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              sliver: SliverGrid(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  childAspectRatio: 1.35,
+                ),
+                delegate: SliverChildListDelegate([
+                  _buildMenuCard(
+                    title: 'محاكي المحادثة',
+                    subtitle: 'محاكاة حوار B1-B2',
+                    icon: Icons.chat_bubble_outline,
+                    color: const Color(0xFFD97706), // Amber
+                    isDark: isDark,
+                    borderCol: borderCol,
+                    onTap: () => _navigate(const ChatSimulatorScreen()),
+                  ),
+                  _buildMenuCard(
+                    title: 'قاموس العامية',
+                    subtitle: 'لغة الشارع والشباب',
+                    icon: Icons.local_fire_department,
+                    color: const Color(0xFFDC2626), // Red
+                    isDark: isDark,
+                    borderCol: borderCol,
+                    onTap: () => _navigate(const SlangScreen()),
+                  ),
+                ]),
+              ),
+            ),
+
+            const SliverToBoxAdapter(child: SizedBox(height: 16)),
+
+            // Section 3: Grammar & Vocab
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -255,7 +339,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       'القواعد والمفردات الأساسية',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: textMain,
                           ),
                     ),
                   ],
@@ -277,13 +361,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     subtitle: '12 درس مع أمثلة',
                     icon: Icons.gavel,
                     color: const Color(0xFF059669), // Emerald
+                    isDark: isDark,
+                    borderCol: borderCol,
                     onTap: () => _navigate(const GrammatikScreen()),
                   ),
                   _buildMenuCard(
                     title: 'قاموس المفردات (Wortschatz)',
                     subtitle: '500+ كلمة مترجمة',
                     icon: Icons.translate,
-                    color: const Color(0xFFDC2626), // Red
+                    color: const Color(0xFF0891B2), // Cyan
+                    isDark: isDark,
+                    borderCol: borderCol,
                     onTap: () => _navigate(const WortschatzScreen()),
                   ),
                 ]),
@@ -292,7 +380,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
-            // Section 3: B2 Upgrade & Golden Resources
+            // Section 4: B2 Upgrade & Golden Resources
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -304,7 +392,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       'مستوى B2 والمكتبة الذهبية 🎓',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: textMain,
                           ),
                     ),
                   ],
@@ -326,13 +414,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     subtitle: '5 نماذج امتحانات B2',
                     icon: Icons.auto_stories,
                     color: const Color(0xFFB45309), // Amber
+                    isDark: isDark,
+                    borderCol: borderCol,
                     onTap: () => _navigate(const B2Screen()),
                   ),
                   _buildMenuCard(
                     title: 'المكتبة والملخصات',
                     subtitle: 'رسائل وقوالب B1-B2',
                     icon: Icons.library_books,
-                    color: const Color(0xFF0891B2), // Cyan
+                    color: const Color(0xFFDB2777), // Pink
+                    isDark: isDark,
+                    borderCol: borderCol,
                     onTap: () => _navigate(const LibraryScreen()),
                   ),
                   _buildMenuCard(
@@ -340,6 +432,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     subtitle: '460+ سؤال وجواب',
                     icon: Icons.flag,
                     color: const Color(0xFF1E3A8A), // Dark Blue
+                    isDark: isDark,
+                    borderCol: borderCol,
                     onTap: () => _navigate(const LebenScreen()),
                   ),
                   _buildMenuCard(
@@ -347,9 +441,65 @@ class _HomeScreenState extends State<HomeScreen> {
                     subtitle: 'Einbürgerungstest',
                     icon: Icons.account_balance,
                     color: const Color(0xFF475569), // Slate
+                    isDark: isDark,
+                    borderCol: borderCol,
                     onTap: () => _navigate(const EinbuergerungScreen()),
                   ),
                 ]),
+              ),
+            ),
+            
+            // Section 5: Premium Upgrade (Golden Card)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFFF59E0B), Color(0xFFD97706)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: InkWell(
+                    onTap: () => _navigate(const PremiumScreen()),
+                    borderRadius: BorderRadius.circular(16),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.star, color: Colors.white, size: 36),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'الترقية إلى B1-Syrer Premium ⭐',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'تصفح بدون إعلانات، واحصل على قوالب وميزات B2 الحصرية ومحاكيات متقدمة!',
+                                  style: TextStyle(
+                                    color: Colors.white70,
+                                    fontSize: 11,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 32)),
@@ -359,19 +509,19 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildStatsCard(BuildContext context, AppProvider provider, ColorScheme colorScheme) {
+  Widget _buildStatsCard(BuildContext context, AppProvider provider, ColorScheme colorScheme, bool isDark, Color textMain, Color borderCol) {
+    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final textMuted = isDark ? Colors.white60 : const Color(0xFF64748B);
+    final textSub = isDark ? Colors.white38 : const Color(0xFF94A3B8);
+
     return Container(
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF1E293B), Color(0xFF0F172A)],
-        ),
+        color: cardBg,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF334155), width: 1.5),
+        border: Border.all(color: borderCol, width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.3),
+            color: Colors.black.withValues(alpha: isDark ? 0.3 : 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -395,7 +545,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               progressColor: const Color(0xFF10B981),
-              backgroundColor: const Color(0xFF334155),
+              backgroundColor: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0),
               circularStrokeCap: CircularStrokeCap.round,
               animation: true,
             ),
@@ -406,17 +556,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Text(
                     'المستوى الحالي: ${provider.levelTitle}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: textMain,
                       fontSize: 16,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     'مجموع نقاط الخبرة: ${provider.xp} XP',
-                    style: const TextStyle(
-                      color: Colors.white60,
+                    style: TextStyle(
+                      color: textMuted,
                       fontSize: 13,
                     ),
                   ),
@@ -424,8 +574,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Progress mini-text
                   Text(
                     'النقاط للمستوى التالي: ${100 - (provider.xp % 100)} XP',
-                    style: const TextStyle(
-                      color: Colors.white38,
+                    style: TextStyle(
+                      color: textSub,
                       fontSize: 11,
                     ),
                   ),
@@ -441,17 +591,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(width: 4),
                     Text(
                       '${provider.streak}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: textMain,
                       ),
                     ),
                   ],
                 ),
-                const Text(
+                Text(
                   'يوم متتالي',
-                  style: TextStyle(color: Colors.white38, fontSize: 10),
+                  style: TextStyle(color: textSub, fontSize: 10),
                 ),
                 const SizedBox(height: 8),
                 Row(
@@ -460,16 +610,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(width: 4),
                     Text(
                       '${provider.completedQuizzes}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 14,
-                        color: Colors.white,
+                        color: textMain,
                       ),
                     ),
                   ],
                 ),
-                const Text(
+                Text(
                   'اختبار مكتمل',
-                  style: TextStyle(color: Colors.white38, fontSize: 10),
+                  style: TextStyle(color: textSub, fontSize: 10),
                 ),
               ],
             ),
@@ -484,16 +634,23 @@ class _HomeScreenState extends State<HomeScreen> {
     required String subtitle,
     required IconData icon,
     required Color color,
+    required bool isDark,
+    required Color borderCol,
     required VoidCallback onTap,
   }) {
+    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final textMain = isDark ? Colors.white : const Color(0xFF1E293B);
+    final textMuted = isDark ? Colors.white38 : const Color(0xFF94A3B8);
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFF334155), width: 1),
+        border: Border.all(color: borderCol, width: 1),
       ),
       child: Card(
         margin: EdgeInsets.zero,
-        color: const Color(0xFF1E293B), // Dark Slate
+        color: cardBg,
+        surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
@@ -512,12 +669,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: color.withValues(alpha: 0.15),
+                        color: color.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Icon(icon, color: color, size: 22),
                     ),
-                    const Icon(Icons.arrow_forward_ios, size: 12, color: Colors.white24),
+                    Icon(Icons.arrow_forward_ios, size: 12, color: textMuted.withValues(alpha: 0.5)),
                   ],
                 ),
                 const SizedBox(height: 8),
@@ -526,8 +683,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Text(
                       title,
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: textMain,
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
                       ),
@@ -537,8 +694,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 2),
                     Text(
                       subtitle,
-                      style: const TextStyle(
-                        color: Colors.white38,
+                      style: TextStyle(
+                        color: textMuted,
                         fontSize: 10,
                       ),
                       maxLines: 1,

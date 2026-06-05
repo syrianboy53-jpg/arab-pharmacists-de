@@ -6,23 +6,33 @@ class LibraryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    final scaffoldBg = isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC);
+    final appBarBg = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final textMain = isDark ? Colors.white : const Color(0xFF1E293B);
+    final borderCol = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
+
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        backgroundColor: const Color(0xFF0F172A), // Slate Dark
+        backgroundColor: scaffoldBg,
         appBar: AppBar(
-          backgroundColor: const Color(0xFF1E293B),
-          foregroundColor: Colors.white,
-          title: const Text(
+          backgroundColor: appBarBg,
+          foregroundColor: textMain,
+          elevation: 0,
+          title: Text(
             'المكتبة والملخصات الذهبية (B1 - B2)',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: textMain),
           ),
           centerTitle: true,
+          shape: Border(bottom: BorderSide(color: borderCol, width: 1)),
           bottom: const TabBar(
             isScrollable: true,
             indicatorColor: Color(0xFF10B981), // Emerald green
             labelColor: Color(0xFF10B981),
-            unselectedLabelColor: Colors.white70,
+            unselectedLabelColor: Colors.grey,
             tabs: [
               Tab(text: 'قوالب الرسائل (Schreiben)', icon: Icon(Icons.email)),
               Tab(text: 'عبارات المحادثة (Sprechen)', icon: Icon(Icons.record_voice_over)),
@@ -50,6 +60,13 @@ class WritingTemplatesTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final textMain = isDark ? Colors.white : const Color(0xFF1E293B);
+    final textMuted = isDark ? Colors.white70 : const Color(0xFF475569);
+    final borderCol = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
+    final innerBg = isDark ? const Color(0xFF0F172A) : const Color(0xFFF1F5F9);
+
     final templates = [
       {
         'title': 'خطاب شكوى / اعتراض (Beschwerdebrief)',
@@ -96,22 +113,23 @@ class WritingTemplatesTab extends StatelessWidget {
       itemBuilder: (context, index) {
         final t = templates[index];
         return Card(
-          color: const Color(0xFF1E293B),
+          color: cardBg,
+          surfaceTintColor: Colors.transparent,
           margin: const EdgeInsets.only(bottom: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
-            side: const BorderSide(color: Color(0xFF334155)),
+            side: BorderSide(color: borderCol),
           ),
           child: ExpansionTile(
             title: Text(
               t['title'] as String,
-              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+              style: TextStyle(color: textMain, fontWeight: FontWeight.bold, fontSize: 16),
             ),
             subtitle: Text(
               'المستوى: ${t['level']} | ${t['situation']}',
-              style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 13),
+              style: TextStyle(color: textMuted, fontSize: 13),
             ),
-            collapsedIconColor: Colors.white,
+            collapsedIconColor: textMain,
             iconColor: const Color(0xFF10B981),
             childrenPadding: const EdgeInsets.all(16),
             expandedCrossAxisAlignment: CrossAxisAlignment.start,
@@ -121,8 +139,8 @@ class WritingTemplatesTab extends StatelessWidget {
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(color: const Color(0xFF0F172A), borderRadius: BorderRadius.circular(8)),
-                child: Text(t['intro'] as String, style: const TextStyle(color: Colors.white70, height: 1.5, fontSize: 14)),
+                decoration: BoxDecoration(color: innerBg, borderRadius: BorderRadius.circular(8)),
+                child: Text(t['intro'] as String, style: TextStyle(color: textMain.withValues(alpha: 0.8), height: 1.5, fontSize: 14)),
               ),
               const SizedBox(height: 12),
               const Text('🔸 عبارات المتن (Hauptteil):', style: TextStyle(color: Color(0xFFF59E0B), fontWeight: FontWeight.bold)),
@@ -133,7 +151,7 @@ class WritingTemplatesTab extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('• ', style: TextStyle(color: Color(0xFF10B981), fontWeight: FontWeight.bold)),
-                    Expanded(child: Text(p, style: const TextStyle(color: Colors.white70, fontSize: 14))),
+                    Expanded(child: Text(p, style: TextStyle(color: textMain.withValues(alpha: 0.8), fontSize: 14))),
                   ],
                 ),
               ))),
@@ -143,8 +161,8 @@ class WritingTemplatesTab extends StatelessWidget {
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(color: const Color(0xFF0F172A), borderRadius: BorderRadius.circular(8)),
-                child: Text(t['conclusion'] as String, style: const TextStyle(color: Colors.white70, height: 1.5, fontSize: 14)),
+                decoration: BoxDecoration(color: innerBg, borderRadius: BorderRadius.circular(8)),
+                child: Text(t['conclusion'] as String, style: TextStyle(color: textMain.withValues(alpha: 0.8), height: 1.5, fontSize: 14)),
               ),
             ],
           ),
@@ -160,6 +178,12 @@ class SpeakingTemplatesTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final textMain = isDark ? Colors.white : const Color(0xFF1E293B);
+    final textMuted = isDark ? Colors.white60 : const Color(0xFF64748B);
+    final borderCol = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
+
     final sections = [
       {
         'title': 'إبداء الرأي الشخصي (Meinungsäußerung)',
@@ -206,11 +230,12 @@ class SpeakingTemplatesTab extends StatelessWidget {
         final sec = sections[index];
         final items = sec['items'] as List<Map<String, String>>;
         return Card(
-          color: const Color(0xFF1E293B),
+          color: cardBg,
+          surfaceTintColor: Colors.transparent,
           margin: const EdgeInsets.only(bottom: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
-            side: const BorderSide(color: Color(0xFF334155)),
+            side: BorderSide(color: borderCol),
           ),
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -221,7 +246,7 @@ class SpeakingTemplatesTab extends StatelessWidget {
                   sec['title'] as String,
                   style: const TextStyle(color: Color(0xFF10B981), fontWeight: FontWeight.bold, fontSize: 16),
                 ),
-                const Divider(color: Color(0xFF334155), height: 20),
+                Divider(color: borderCol, height: 20),
                 ...items.map((item) => Padding(
                   padding: const EdgeInsets.only(bottom: 12),
                   child: Column(
@@ -229,13 +254,13 @@ class SpeakingTemplatesTab extends StatelessWidget {
                     children: [
                       Text(
                         item['de']!,
-                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 15),
+                        style: TextStyle(color: textMain, fontWeight: FontWeight.w600, fontSize: 15),
                         textDirection: TextDirection.ltr,
                       ),
                       const SizedBox(height: 2),
                       Text(
                         item['ar']!,
-                        style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 13),
+                        style: TextStyle(color: textMuted, fontSize: 13),
                       ),
                     ],
                   ),
@@ -255,6 +280,12 @@ class GrammarB2Tab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final textMuted = isDark ? Colors.white70 : const Color(0xFF64748B);
+    final borderCol = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
+    final innerBg = isDark ? const Color(0xFF0F172A) : const Color(0xFFF1F5F9);
+
     final rules = [
       {
         'title': 'الروابط الثنائية (Zweiteilige Konnektoren)',
@@ -307,11 +338,12 @@ class GrammarB2Tab extends StatelessWidget {
         final r = rules[index];
         final details = r['details'] as List<Map<String, String>>;
         return Card(
-          color: const Color(0xFF1E293B),
+          color: cardBg,
+          surfaceTintColor: Colors.transparent,
           margin: const EdgeInsets.only(bottom: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
-            side: const BorderSide(color: Color(0xFF334155)),
+            side: BorderSide(color: borderCol),
           ),
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -325,9 +357,9 @@ class GrammarB2Tab extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   r['explanation'] as String,
-                  style: const TextStyle(color: Colors.white70, fontSize: 13),
+                  style: TextStyle(color: textMuted, fontSize: 13),
                 ),
-                const Divider(color: Color(0xFF334155), height: 24),
+                Divider(color: borderCol, height: 24),
                 ...details.map((d) => Padding(
                   padding: const EdgeInsets.only(bottom: 16),
                   child: Column(
@@ -341,16 +373,16 @@ class GrammarB2Tab extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         d['desc']!,
-                        style: const TextStyle(color: Colors.white70, fontSize: 13),
+                        style: TextStyle(color: textMuted, fontSize: 13),
                       ),
                       const SizedBox(height: 6),
                       Container(
                         width: double.infinity,
                         padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(color: const Color(0xFF0F172A), borderRadius: BorderRadius.circular(6)),
+                        decoration: BoxDecoration(color: innerBg, borderRadius: BorderRadius.circular(6)),
                         child: Text(
                           d['ex']!,
-                          style: const TextStyle(color: Color(0xFF38BDF8), fontSize: 13, height: 1.4),
+                          style: const TextStyle(color: Color(0xFF0284C7), fontSize: 13, height: 1.4),
                           textDirection: TextDirection.ltr,
                         ),
                       ),
@@ -389,6 +421,12 @@ class PdfDownloadsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final textMain = isDark ? Colors.white : const Color(0xFF1E293B);
+    final textMuted = isDark ? Colors.white60 : const Color(0xFF64748B);
+    final borderCol = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
+
     final pdfs = [
       {
         'title': 'كتاب وقاموس مفردات B1 كامل مع الترجمة',
@@ -418,11 +456,12 @@ class PdfDownloadsTab extends StatelessWidget {
       itemBuilder: (context, index) {
         final pdf = pdfs[index];
         return Card(
-          color: const Color(0xFF1E293B),
+          color: cardBg,
+          surfaceTintColor: Colors.transparent,
           margin: const EdgeInsets.only(bottom: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
-            side: const BorderSide(color: Color(0xFF334155)),
+            side: BorderSide(color: borderCol),
           ),
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -443,12 +482,12 @@ class PdfDownloadsTab extends StatelessWidget {
                     children: [
                       Text(
                         pdf['title']!,
-                        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+                        style: TextStyle(color: textMain, fontWeight: FontWeight.bold, fontSize: 14),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         pdf['desc']!,
-                        style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 12),
+                        style: TextStyle(color: textMuted, fontSize: 12),
                       ),
                     ],
                   ),

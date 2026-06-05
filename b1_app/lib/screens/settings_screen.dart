@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
+import 'premium_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -20,6 +21,21 @@ class SettingsScreen extends StatelessWidget {
               subtitle: const Text('Dark Mode'),
               value: provider.isDarkMode,
               onChanged: (_) => provider.toggleDarkMode(),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Card(
+            child: ListTile(
+              leading: const Icon(Icons.star, color: Color(0xFFF59E0B)),
+              title: const Text('B1-Syrer Premium'),
+              subtitle: const Text('تصفح بدون إعلانات وميزات حصرية ⭐'),
+              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const PremiumScreen()),
+                );
+              },
             ),
           ),
           const SizedBox(height: 12),
