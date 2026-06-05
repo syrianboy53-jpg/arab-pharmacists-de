@@ -31,14 +31,27 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
   const user = result.rows[0]
 
-  // Compare passwords using bcryptjs
+  // Compare passwords using bcryptjs or fallback to legacy btoa
+  let isMatched = false
   try {
-    const isMatched = bcrypt.compareSync(password, user.password_hash)
-    if (!isMatched) {
-      return new Response(JSON.stringify({ error: 'Invalid credentials' }), { status: 401 })
-    }
+    isMatched = bcrypt.compareSync(password, user.password_hash)
   } catch (err: any) {
-    return new Response(JSON.stringify({ error: 'Password verification failed' }), { status: 401 })
+    // If it's a legacy btoa hash, compareSync might throw an error
+  }
+
+  if (!isMatched && user.password_hash === btoa(password)) {
+    isMatched = true
+    // Auto-upgrade password hash to bcryptjs
+    try {
+      const newBcryptHash = bcrypt.hashSync(password, 10)
+      await query(env, 'UPDATE "user" SET password_hash = $1 WHERE id = $2', [newBcryptHash, user.id])
+    } catch (dbErr) {
+      console.error('Failed to auto-upgrade password hash:', dbErr)
+    }
+  }
+
+  if (!isMatched) {
+    return new Response(JSON.stringify({ error: 'Invalid credentials' }), { status: 401 })
   }
 
   const token = await createJWT(
