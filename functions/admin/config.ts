@@ -10,7 +10,23 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
 
   try {
     const res = await query(env, "SELECT key, value FROM config")
-    const config: Record<string, string> = {}
+    
+    // Default static config fallback (to ensure React controlled inputs never receive undefined values)
+    const config: Record<string, string> = {
+      announcement: '',
+      announcement_color: '#CE1126',
+      web_version: '20',
+      web_changelog: '',
+      apk_version: '52',
+      apk_changelog: '',
+      apk_url: 'https://b1-syrer.de/b1-deutsch.apk',
+      min_apk_version: '1',
+      support_bmc_url: 'https://buymeacoffee.com/halawanyfav',
+      support_paypal_url: '',
+      support_message: '',
+      support_hide: '0',
+    }
+
     if (res.rows) {
       for (const row of res.rows) {
         config[row.key] = row.value

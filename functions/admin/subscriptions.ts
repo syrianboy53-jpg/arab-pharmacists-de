@@ -27,16 +27,16 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       expiry_date: row.expiry_date ? new Date(row.expiry_date).toISOString() : null
     }))
 
-    // 2. Fetch statistics
+    // 2. Fetch statistics (using COALESCE to ensure no null values are returned when table is empty)
     const statsRes = await query(env, `
       SELECT 
         COUNT(*)::integer as total,
-        SUM(CASE WHEN is_active = true THEN 1 ELSE 0 END)::integer as active,
-        SUM(CASE WHEN platform = 'stripe' THEN 1 ELSE 0 END)::integer as stripe_count,
-        SUM(CASE WHEN platform = 'paypal' THEN 1 ELSE 0 END)::integer as paypal_count,
-        SUM(CASE WHEN platform IN ('google_play', 'play_store', 'google', 'android') THEN 1 ELSE 0 END)::integer as google_play_count,
-        SUM(CASE WHEN product_id LIKE '%monthly%' OR product_id LIKE '%month%' THEN 1 ELSE 0 END)::integer as monthly_count,
-        SUM(CASE WHEN product_id LIKE '%yearly%' OR product_id LIKE '%year%' THEN 1 ELSE 0 END)::integer as yearly_count
+        COALESCE(SUM(CASE WHEN is_active = true THEN 1 ELSE 0 END), 0)::integer as active,
+        COALESCE(SUM(CASE WHEN platform = 'stripe' THEN 1 ELSE 0 END), 0)::integer as stripe_count,
+        COALESCE(SUM(CASE WHEN platform = 'paypal' THEN 1 ELSE 0 END), 0)::integer as paypal_count,
+        COALESCE(SUM(CASE WHEN platform IN ('google_play', 'play_store', 'google', 'android') THEN 1 ELSE 0 END), 0)::integer as google_play_count,
+        COALESCE(SUM(CASE WHEN product_id LIKE '%monthly%' OR product_id LIKE '%month%' THEN 1 ELSE 0 END), 0)::integer as monthly_count,
+        COALESCE(SUM(CASE WHEN product_id LIKE '%yearly%' OR product_id LIKE '%year%' THEN 1 ELSE 0 END), 0)::integer as yearly_count
       FROM subscription
     `)
 
