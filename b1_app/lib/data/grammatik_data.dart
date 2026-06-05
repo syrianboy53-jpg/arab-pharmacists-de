@@ -6,3 +6,58 @@ final List<Map<String, dynamic>> trennbareVerben = [{'id': 'trennbar-haeufig', '
 
 // Satzbau patterns
 final List<Map<String, dynamic>> satzbau = [{'id': 'l1-1', 'level': 1, 'tokens': ['Ich', 'lerne', 'jeden', 'Tag', 'Deutsch', '.'], 'ar': 'أتعلّم الألمانية كل يوم.', 'tipAr': 'في الجملة البسيطة: الفاعل (Ich) ثم الفعل المصرّف (lerne) ثم بقيّة المعلومات.'}, {'id': 'l1-2', 'level': 1, 'tokens': ['Mein', 'Bruder', 'wohnt', 'in', 'Berlin', '.'], 'ar': 'أخي يسكن في برلين.'}, {'id': 'l1-3', 'level': 1, 'tokens': ['Wir', 'gehen', 'morgen', 'ins', 'Kino', '.'], 'ar': 'نحن نذهب غداً إلى السينما.', 'tipAr': 'الزمن (morgen) يأتي عادة بعد الفعل وقبل المكان.'}, {'id': 'l1-4', 'level': 1, 'tokens': ['Sie', 'kauft', 'ein', 'neues', 'Auto', '.'], 'ar': 'هي تشتري سيّارة جديدة.'}, {'id': 'l1-5', 'level': 1, 'tokens': ['Heute', 'ist', 'das', 'Wetter', 'sehr', 'schön', '.'], 'ar': 'اليوم الطقس جميل جداً.', 'tipAr': 'لو بدأت بظرف زمان (Heute)، الفعل يبقى في الموقع الثاني.'}, {'id': 'l1-6', 'level': 1, 'tokens': ['Mein', 'Sohn', 'spielt', 'gern', 'Fußball', '.'], 'ar': 'ابني يحبّ لعب كرة القدم.'}, {'id': 'l1-7', 'level': 1, 'tokens': ['Am', 'Wochenende', 'besuche', 'ich', 'meine', 'Freunde', '.'], 'ar': 'في عطلة الأسبوع أزور أصدقائي.', 'tipAr': 'بعد ظرف الزمان (Am Wochenende) يأتي الفعل ثم الفاعل (انعكاس).'}, {'id': 'l2-1', 'level': 2, 'tokens': ['Ich', 'muss', 'heute', 'früh', 'aufstehen', '.'], 'ar': 'يجب أن أستيقظ مبكراً اليوم.', 'tipAr': 'مع الأفعال الناقصة (muss, will, kann …)، المصدر يذهب لآخر الجملة.'}, {'id': 'l2-2', 'level': 2, 'tokens': ['Er', 'kann', 'sehr', 'gut', 'Deutsch', 'sprechen', '.'], 'ar': 'هو يستطيع التحدّث بالألمانية جيّداً.'}, {'id': 'l2-3', 'level': 2, 'tokens': ['Wir', 'wollen', 'am', 'Sonntag', 'einen', 'Ausflug', 'machen', '.'], 'ar': 'نريد القيام برحلة يوم الأحد.'}, {'id': 'l2-4', 'level': 2, 'tokens': ['Ich', 'rufe', 'dich', 'morgen', 'an', '.'], 'ar': 'سأتّصل بك غداً.', 'tipAr': 'الفعل المنفصل (anrufen): تصرّفه (rufe) في الموقع الثاني، والبادئة (an) لآخر الجملة.'}, {'id': 'l2-5', 'level': 2, 'tokens': ['Der', 'Zug', 'fährt', 'um', '8', 'Uhr', 'ab', '.'], 'ar': 'القطار ينطلق الساعة الثامنة.', 'tipAr': 'abfahren فعل منفصل: ab تذهب لآخر الجملة.'}, {'id': 'l2-6', 'level': 2, 'tokens': ['Du', 'sollst', 'mehr', 'Wasser', 'trinken', '.'], 'ar': 'يجب أن تشرب ماءً أكثر.'}, {'id': 'l2-7', 'level': 2, 'tokens': ['Sie', 'darf', 'hier', 'nicht', 'rauchen', '.'], 'ar': 'لا يحقّ لها أن تدخّن هنا.'}, {'id': 'l2-8', 'level': 2, 'tokens': ['Wir', 'haben', 'gestern', 'einen', 'Film', 'gesehen', '.'], 'ar': 'شاهدنا فيلماً البارحة.', 'tipAr': 'في Perfekt: المساعد (haben/sein) في الموقع الثاني، Partizip II (gesehen) لآخر الجملة.'}, {'id': 'l2-9', 'level': 2, 'tokens': ['Ich', 'bin', 'um', '7', 'Uhr', 'aufgestanden', '.'], 'ar': 'استيقظت الساعة السابعة.', 'tipAr': 'aufstehen → بـ sein في Perfekt (يدلّ على حركة/تغيّر حالة).'}, {'id': 'l3-1', 'level': 3, 'tokens': ['Ich', 'lerne', 'Deutsch', ',', 'weil', 'ich', 'in', 'Deutschland', 'leben', 'will', '.'], 'ar': 'أتعلّم الألمانية لأنّي أريد العيش في ألمانيا.', 'tipAr': 'بعد weil: الفعل المصرّف يذهب لآخر الجملة الفرعيّة.'}, {'id': 'l3-2', 'level': 3, 'tokens': ['Sie', 'sagt', ',', 'dass', 'sie', 'müde', 'ist', '.'], 'ar': 'هي تقول إنّها متعبة.', 'tipAr': 'بعد dass: الفعل المصرّف (ist) في آخر الجملة.'}, {'id': 'l3-3', 'level': 3, 'tokens': ['Obwohl', 'es', 'regnet', ',', 'gehen', 'wir', 'spazieren', '.'], 'ar': 'رغم أنّها تمطر، نذهب للنزهة.', 'tipAr': 'لمّا تبدأ الجملة بـ obwohl، الفعل في الجملة الرئيسيّة (gehen) يأتي مباشرة بعد الفاصلة.'}, {'id': 'l3-4', 'level': 3, 'tokens': ['Ich', 'weiß', ',', 'dass', 'du', 'fleißig', 'arbeitest', '.'], 'ar': 'أعرف أنّك تعمل بجدّ.'}, {'id': 'l3-5', 'level': 3, 'tokens': ['Wenn', 'ich', 'Zeit', 'habe', ',', 'besuche', 'ich', 'meine', 'Eltern', '.'], 'ar': 'عندما يكون لديّ وقت، أزور والديّ.', 'tipAr': 'بعد wenn الفعل لآخر الجملة، وفي الرئيسيّة الفعل يأتي مباشرة بعد الفاصلة.'}, {'id': 'l3-6', 'level': 3, 'tokens': ['Er', 'hofft', ',', 'dass', 'er', 'die', 'Prüfung', 'besteht', '.'], 'ar': 'يأمل أن ينجح في الامتحان.'}, {'id': 'l3-7', 'level': 3, 'tokens': ['Ich', 'gehe', 'nicht', 'mit', ',', 'weil', 'ich', 'krank', 'bin', '.'], 'ar': 'لن أذهب معكم لأنّي مريض.'}, {'id': 'l3-8', 'level': 3, 'tokens': ['Bevor', 'ich', 'schlafe', ',', 'lese', 'ich', 'ein', 'Buch', '.'], 'ar': 'قبل أن أنام، أقرأ كتاباً.'}, {'id': 'l4-1', 'level': 4, 'tokens': ['Das', 'ist', 'der', 'Mann', ',', 'der', 'gestern', 'angerufen', 'hat', '.'], 'ar': 'هذا هو الرجل الذي اتّصل البارحة.', 'tipAr': 'في Relativsatz: الضمير (der) يطابق جنس وعدد الكلمة المرجعيّة، والفعل لآخر الجملة الفرعيّة.'}, {'id': 'l4-2', 'level': 4, 'tokens': ['Die', 'Frau', ',', 'die', 'ich', 'gesehen', 'habe', ',', 'ist', 'meine', 'Lehrerin', '.'], 'ar': 'المرأة التي رأيتها هي معلّمتي.', 'tipAr': 'die في الـ Akkusativ هنا (ich → habe gesehen → die Frau).'}, {'id': 'l4-3', 'level': 4, 'tokens': ['Das', 'Auto', ',', 'das', 'ich', 'gekauft', 'habe', ',', 'ist', 'sehr', 'schnell', '.'], 'ar': 'السيّارة التي اشتريتها سريعة جداً.'}, {'id': 'l4-4', 'level': 4, 'tokens': ['Wenn', 'ich', 'Geld', 'hätte', ',', 'würde', 'ich', 'eine', 'Reise', 'machen', '.'], 'ar': 'لو كان لديّ مال، لسافرت رحلة.', 'tipAr': 'Konjunktiv II: hätte + würde … machen — للتعبير عن المستحيل/الافتراضي.'}, {'id': 'l4-5', 'level': 4, 'tokens': ['Ich', 'freue', 'mich', ',', 'dass', 'du', 'gekommen', 'bist', '.'], 'ar': 'أنا سعيد لأنّك جئت.', 'tipAr': 'sich freuen + dass-Satz: الفعل المركّب (gekommen bist) لآخر الجملة الفرعيّة.'}, {'id': 'l4-6', 'level': 4, 'tokens': ['Er', 'arbeitet', 'in', 'der', 'Firma', ',', 'in', 'der', 'auch', 'sein', 'Vater', 'arbeitet', '.'], 'ar': 'يعمل في الشركة التي يعمل فيها أبوه أيضاً.', 'tipAr': 'مع حرف جرّ + Relativpronomen (in der …)، الفعل لآخر الجملة الفرعيّة.'}];
+
+final List<Map<String, dynamic>> grammarLessons = [
+  {
+    'id': 1,
+    'title': 'Akkusativ vs. Dativ',
+    'titleAr': 'المفعول به مقابل المجرور',
+    'explanation': 'الـAkkusativ يُجيب عن: wen? was? (مَن؟ ماذا؟) — المفعول به المباشر.\nالـDativ يُجيب عن: wem? (لمَن؟) — المفعول به غير المباشر.\n\nأدوات التعريف:\n• Akkusativ: den (m), die (f), das (n), die (pl)\n• Dativ: dem (m), der (f), dem (n), den+n (pl)\n\nأفعال مع Akkusativ: haben, brauchen, sehen, finden, kaufen\nأفعال مع Dativ: helfen, danken, gehören, gefallen, folgen',
+    'examples': [
+      {'de': 'Ich sehe den Mann. (Akkusativ)', 'ar': 'أرى الرجل — مفعول به مباشر'},
+      {'de': 'Ich helfe dem Mann. (Dativ)', 'ar': 'أساعد الرجل — مفعول به غير مباشر'},
+      {'de': 'Sie kauft einen Laptop.', 'ar': 'هي تشتري لابتوب (Akk)'},
+      {'de': 'Das Buch gehört dem Kind.', 'ar': 'الكتاب يخصّ الطفل (Dat)'}
+    ],
+    'exercises': [
+      {'question': 'Ich brauche ___ neuen Computer.', 'options': ['einen (Akk)', 'einem (Dat)'], 'correct': 0},
+      {'question': 'Kannst du ___ Frau helfen?', 'options': ['die (Akk)', 'der (Dat)'], 'correct': 1},
+      {'question': 'Ich schenke ___ Kind ein Buch.', 'options': ['das (Akk)', 'dem (Dat)'], 'correct': 1},
+      {'question': 'Hast du ___ Schlüssel gefunden?', 'options': ['den (Akk)', 'dem (Dat)'], 'correct': 0}
+    ]
+  },
+  {
+    'id': 2,
+    'title': 'Nebensätze mit weil, dass, obwohl',
+    'titleAr': 'الجمل الثانوية',
+    'explanation': 'في الجمل الثانوية (Nebensatz) الفعل يذهب للنهاية!\n\n• weil = لأنّ (سبب)\n• dass = أنّ (محتوى)\n• obwohl = بالرغم من (تناقض)\n• wenn = لو/عندما (شرط/زمن)\n• als = عندما (ماضي مرّة واحدة)\n\nالهيكل: Hauptsatz + Konnektor + ... + VERB',
+    'examples': [
+      {'de': 'Ich bleibe zu Hause, weil ich krank bin.', 'ar': 'أبقى في البيت لأنّي مريض.'},
+      {'de': 'Ich glaube, dass er recht hat.', 'ar': 'أعتقد أنّه محقّ.'},
+      {'de': 'Obwohl es regnet, gehe ich spazieren.', 'ar': 'بالرغم من المطر، أمشي.'},
+      {'de': 'Wenn ich Zeit habe, lese ich ein Buch.', 'ar': 'لو عندي وقت، أقرأ كتاب.'}
+    ],
+    'exercises': [
+      {'question': 'Ich lerne Deutsch, weil ich in Deutschland ___.', 'options': ['lebe', 'leben'], 'correct': 0},
+      {'question': 'Er sagt, dass er morgen ___.', 'options': ['kommt', 'kommt er'], 'correct': 0},
+      {'question': 'Obwohl sie müde ___, geht sie arbeiten.', 'options': ['ist', 'ist sie'], 'correct': 0}
+    ]
+  },
+  {
+    'id': 3,
+    'title': 'Perfekt (Partizip II)',
+    'titleAr': 'الماضي التام',
+    'explanation': 'الـPerfekt هو الزمن الأكثر استخداماً للماضي في المحادثة.\n\nالهيكل: haben/sein + Partizip II\n\n• ge...t (أفعال منتظمة): machen → gemacht, kaufen → gekauft\n• ge...en (أفعال شاذّة): fahren → gefahren, schreiben → geschrieben\n• بدون ge-: أفعال بـbe-, er-, ver-, ent-: besuchen → besucht\n\nsein مع أفعال الحركة والتغيير:\ngehen → ist gegangen, fahren → ist gefahren, kommen → ist gekommen',
+    'examples': [
+      {'de': 'Ich habe gestern viel gearbeitet.', 'ar': 'عملت كثيراً البارحة.'},
+      {'de': 'Wir sind nach Berlin gefahren.', 'ar': 'سافرنا إلى برلين.'},
+      {'de': 'Er hat ein Buch gelesen.', 'ar': 'قرأ كتاباً.'},
+      {'de': 'Sie ist um 7 Uhr aufgestanden.', 'ar': 'استيقظت الساعة 7.'}
+    ],
+    'exercises': [
+      {'question': 'Ich ___ gestern ins Kino gegangen.', 'options': ['habe', 'bin'], 'correct': 1},
+      {'question': 'Er ___ einen Brief geschrieben.', 'options': ['hat', 'ist'], 'correct': 0},
+      {'question': 'Wir ___ Pizza bestellt. (bestellen → bestellt)', 'options': ['haben', 'sind'], 'correct': 0}
+    ]
+  }
+];

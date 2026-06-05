@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,10 +10,21 @@ class AppProvider extends ChangeNotifier {
   int _completedQuizzes = 0;
   String _lastStudyDate = '';
 
+  String? _token;
+  String? _userId;
+  String? _userEmail;
+  String? _userName;
+
   bool get isDarkMode => _isDarkMode;
   int get xp => _xp;
   int get streak => _streak;
   int get completedQuizzes => _completedQuizzes;
+
+  String? get token => _token;
+  String? get userId => _userId;
+  String? get userEmail => _userEmail;
+  String? get userName => _userName;
+  bool get isLoggedIn => _token != null;
 
   Future<void> init() async {
     final prefs = await SharedPreferences.getInstance();
@@ -20,6 +33,12 @@ class AppProvider extends ChangeNotifier {
     _streak = prefs.getInt('streak') ?? 0;
     _completedQuizzes = prefs.getInt('completedQuizzes') ?? 0;
     _lastStudyDate = prefs.getString('lastStudyDate') ?? '';
+    
+    _token = prefs.getString('token');
+    _userId = prefs.getString('userId');
+    _userEmail = prefs.getString('userEmail');
+    _userName = prefs.getString('userName');
+    
     _checkStreak();
     notifyListeners();
   }
@@ -100,5 +119,94 @@ class AppProvider extends ChangeNotifier {
       default:
         return 'محترف';
     }
+  }
+
+  Future<String?> login(String email, String password) async {
+    try {
+      final client = HttpClient();
+      client.connectionTimeout = const Duration(seconds: 8);
+      final request = await client.postUrl(Uri.parse('https://b1-syrer.de/auth/login'));
+      request.headers.set(HttpHeaders.contentTypeHeader, 'application/json');
+      
+      final body = json.encode({'email': email, 'password': password});
+      request.write(body);
+      
+      final response = await request.close();
+      final responseBody = await response.transform(utf8.decoder).join();
+      final data = json.decode(responseBody) as Map<String, dynamic>;
+      
+      if (response.statusCode == 200) {
+        _token = data['access_token'];
+        final user = data['user'] as Map<String, dynamic>;
+        _userId = user['id']?.toString();
+        _userEmail = user['email'];
+        _userName = user['display_name'];
+        
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', _token!);
+        await prefs.setString('userId', _userId!);
+        await prefs.setString('userEmail', _userEmail!);
+        await prefs.setString('userName', _userName!);
+        
+        notifyListeners();
+        return null; // Success
+      } else {
+        return data['error'] ?? 'بيانات الدخول غير صحيحة';
+      }
+    } catch (e) {
+      return 'فشل الاتصال بالخادم: $e';
+    }
+  }
+
+  Future<String?> signup(String name, String email, String password) async {
+    try {
+      final client = HttpClient();
+      client.connectionTimeout = const Duration(seconds: 8);
+      final request = await client.postUrl(Uri.parse('https://b1-syrer.de/auth/signup'));
+      request.headers.set(HttpHeaders.contentTypeHeader, 'application/json');
+      
+      final body = json.encode({'name': name, 'email': email, 'password': password});
+      request.write(body);
+      
+      final response = await request.close();
+      final responseBody = await response.transform(utf8.decoder).join();
+      final data = json.decode(responseBody) as Map<String, dynamic>;
+      
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        _token = data['access_token'];
+        final user = data['user'] as Map<String, dynamic>;
+        _userId = user['id']?.toString();
+        _userEmail = user['email'];
+        _userName = user['display_name'];
+        
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', _token!);
+        await prefs.setString('userId', _userId!);
+        await prefs.setString('userEmail', _userEmail!);
+        await prefs.setString('userName', _userName!);
+        
+        notifyListeners();
+        return null; // Success
+      } else {
+        return data['error'] ?? 'حدث خطأ أثناء إنشاء الحساب';
+      }
+    } catch (e) {
+      return 'فشل الاتصال بالخادم: $e';
+    }
+  }
+
+  void logout() async {
+    _token = null;
+    _userId = null;
+    _userEmail = null;
+    _userName = null;
+    
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('token');
+    await prefs.remove('userId');
+    await prefs.remove('userEmail');
+    await prefs.remove('userName');
+    
+    notifyListeners();
   }
 }

@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (config != null) {
       final remoteVersion = int.tryParse(config['apk_version'] ?? '0') ?? 0;
-      const localVersion = 57; // Native app version 57
+      const localVersion = 58; // Native app version 58
       if (localVersion < remoteVersion) {
         final apkUrl = config['apk_url'] ?? 'https://www.b1-syrer.de/b1-deutsch.apk';
         _showUpdateDialog(apkUrl);
@@ -129,6 +129,117 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   // ==================== INTERACTIVE GAMES & POPUPS ====================
+
+  // 0. Streak details dialog (الالتزام اليومي - Duolingo like)
+  void _showStreakDetailDialog() {
+    final provider = context.read<AppProvider>();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: isDark ? const Color(0xFF1E293B) : Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.local_fire_department, color: Colors.orange, size: 28),
+              SizedBox(width: 8),
+              Text(
+                'سلسلة الالتزام اليومي! 🔥',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'أنت الآن في اليوم المتتالي رقم',
+                style: TextStyle(color: isDark ? Colors.white70 : Colors.black87, fontSize: 14),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 12),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                decoration: BoxDecoration(
+                  color: Colors.orange.withValues(alpha: 0.1),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.orange, width: 2),
+                ),
+                child: Text(
+                  '${provider.streak}',
+                  style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.orange),
+                ),
+              ),
+              const SizedBox(height: 16),
+              // Mascot container
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: isDark ? const Color(0xFF0F172A) : Colors.grey[100],
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: isDark ? Colors.white10 : Colors.grey[300]!),
+                ),
+                child: Row(
+                  children: [
+                    const Text('🦉', style: TextStyle(fontSize: 36)),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        'مدرّب B1-Syrer يقول:\n"استمر يا بطل! حافظ على لهيب حماسك متقداً يومياً لتتقن الألمانية بدون معلّم."',
+                        style: TextStyle(
+                          fontSize: 12,
+                          height: 1.4,
+                          fontWeight: FontWeight.bold,
+                          color: isDark ? Colors.white70 : Colors.black87,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              // Daily status
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: List.generate(7, (index) {
+                  final weekdays = ['إثن', 'ثلا', 'أرب', 'خمي', 'جمع', 'سبت', 'أحد'];
+                  // Highlight Mon-Sun mock grid
+                  final isCompleted = index < provider.streak;
+                  return Column(
+                    children: [
+                      Icon(
+                        isCompleted ? Icons.local_fire_department : Icons.circle,
+                        color: isCompleted ? Colors.orange : Colors.grey[300],
+                        size: isCompleted ? 20 : 12,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        weekdays[index],
+                        style: TextStyle(fontSize: 10, color: isCompleted ? Colors.orange : Colors.grey),
+                      )
+                    ],
+                  );
+                }),
+              )
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+              onPressed: () => Navigator.pop(context),
+              child: const Text('متابعة الدراسة 📚', style: TextStyle(fontWeight: FontWeight.bold)),
+            )
+          ],
+        );
+      },
+    );
+  }
 
   // 1. Der/Die/Das game (ترتيب البطاقات)
   void _showCardSortingGame() {
@@ -932,6 +1043,20 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () => provider.toggleDarkMode(),
         ),
         actions: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                '${provider.streak}',
+                style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.orange, fontSize: 15),
+              ),
+              IconButton(
+                icon: const Icon(Icons.local_fire_department, color: Colors.orange),
+                tooltip: 'الالتزام اليومي',
+                onPressed: _showStreakDetailDialog,
+              ),
+            ],
+          ),
           IconButton(
             icon: const Icon(Icons.star, color: Color(0xFFF59E0B)),
             tooltip: 'Premium',
