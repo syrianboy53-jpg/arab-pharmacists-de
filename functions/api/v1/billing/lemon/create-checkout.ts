@@ -14,33 +14,12 @@ export async function onRequestPost(context: { request: Request; env: EnvExt }) 
   }
 
   try {
-    const { plan } = await request.json() as any
-
     const isMock = !env.LEMON_SQUEEZY_API_KEY || env.LEMON_SQUEEZY_API_KEY === ''
 
     if (isMock) {
-      const expiry = new Date()
-      expiry.setFullYear(expiry.getFullYear() + (plan === 'yearly' ? 1 : 0))
-      if (plan !== 'yearly') {
-        expiry.setMonth(expiry.getMonth() + 1)
-      }
-
-      await query(env, 'UPDATE subscription SET is_active = false WHERE user_id = $1', [userId])
-
-      await query(env, `
-        INSERT INTO subscription (
-          user_id, platform, product_id, status, start_date, expiry_date, is_active, created_at, updated_at
-        ) VALUES ($1, 'lemon', $2, 'active', NOW(), $3, true, NOW(), NOW())
-      `, [
-        userId,
-        plan === 'yearly' ? 'premium_yearly' : 'premium_monthly',
-        expiry.toISOString()
-      ])
-
-      const redirectUrl = new URL(request.url).origin + '/app/#/premium?status=success'
-      return new Response(JSON.stringify({ checkout_url: redirectUrl }), {
-        headers: { 'Content-Type': 'application/json' }
-      })
+      return new Response(JSON.stringify({ 
+        error: 'بوابة الدفع Lemon Squeezy غير مهيأة بعد على هذا الخادم.' 
+      }), { status: 400, headers: { 'Content-Type': 'application/json' } })
     }
 
     const redirectUrl = new URL(request.url).origin + '/app/#/premium?status=success'
@@ -49,6 +28,9 @@ export async function onRequestPost(context: { request: Request; env: EnvExt }) 
     })
 
   } catch (e: any) {
-    return new Response(JSON.stringify({ error: e.message }), { status: 500 })
+    return new Response(JSON.stringify({ error: e.message }), { 
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    })
   }
 }
