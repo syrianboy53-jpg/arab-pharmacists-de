@@ -30,12 +30,22 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       created_at: row.created_at ? new Date(row.created_at).toISOString() : null
     }))
 
-    return new Response(JSON.stringify(entries), {
-      headers: { 'Content-Type': 'application/json' }
+    const unreadRes = await query(env, "SELECT COUNT(*)::integer FROM feedback WHERE status = 'unread'")
+    const unread_count = unreadRes.rows[0]?.count || 0
+
+    return new Response(JSON.stringify({
+      entries,
+      unread_count
+    }), {
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store, no-cache, must-revalidate'
+      }
     })
   } catch (e: any) {
     return new Response(JSON.stringify({ error: e.message }), { status: 500 })
   }
+
 
 }
 

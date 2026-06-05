@@ -9,22 +9,34 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
   }
 
   try {
-    const [usersRes, subsRes, feedbackRes] = await Promise.all([
+    const [totalRes, todayRes, weekRes, activeRes, progressRes] = await Promise.all([
       query(env, 'SELECT COUNT(*)::integer FROM "user"'),
-      query(env, 'SELECT COUNT(*)::integer FROM subscription WHERE is_active = true AND expiry_date > NOW()'),
-      query(env, 'SELECT COUNT(*)::integer FROM feedback')
+      query(env, 'SELECT COUNT(*)::integer FROM "user" WHERE created_at >= CURRENT_DATE'),
+      query(env, 'SELECT COUNT(*)::integer FROM "user" WHERE created_at >= NOW() - INTERVAL \'7 days\''),
+      query(env, 'SELECT COUNT(DISTINCT user_id)::integer FROM progressentry'),
+      query(env, 'SELECT COUNT(*)::integer FROM progressentry')
     ])
 
-    const total_users = usersRes.rows[0]?.[0] || usersRes.rows[0]?.count || 0
-    const active_subscriptions = subsRes.rows[0]?.[0] || subsRes.rows[0]?.count || 0
-    const total_feedback = feedbackRes.rows[0]?.[0] || feedbackRes.rows[0]?.count || 0
+    const total_users = totalRes.rows[0]?.count || 0
+    const today_users = todayRes.rows[0]?.count || 0
+    const week_users = weekRes.rows[0]?.count || 0
+    const active_users = activeRes.rows[0]?.count || 0
+    const total_progress_entries = progressRes.rows[0]?.count || 0
 
     return new Response(JSON.stringify({
       total_users,
-      active_subscriptions,
-      total_feedback
-    }), { headers: { 'Content-Type': 'application/json' } })
+      today_users,
+      week_users,
+      active_users,
+      total_progress_entries
+    }), {
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store, no-cache, must-revalidate'
+      }
+    })
   } catch (e: any) {
     return new Response(JSON.stringify({ error: e.message }), { status: 500 })
   }
 }
+
