@@ -21,7 +21,10 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
         u.created_at,
         COALESCE(p.count, 0)::integer as progress_entries,
         COALESCE(s.current, 0)::integer as streak_current,
-        COALESCE(s.longest, 0)::integer as streak_longest
+        COALESCE(s.longest, 0)::integer as streak_longest,
+        COALESCE(sub.is_active, false) as is_premium,
+        sub.id as subscription_id,
+        sub.status as subscription_status
       FROM "user" u
       LEFT JOIN (
         SELECT user_id, COUNT(*)::integer as count 
@@ -32,6 +35,11 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
         SELECT user_id, "current", "longest" 
         FROM streakrecord
       ) s ON u.id = s.user_id
+      LEFT JOIN (
+        SELECT DISTINCT ON (user_id) id, user_id, is_active, status
+        FROM subscription
+        ORDER BY user_id, created_at DESC
+      ) sub ON u.id = sub.user_id
     `
     let params: any[] = []
 
