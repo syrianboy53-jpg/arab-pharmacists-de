@@ -2,15 +2,51 @@ import { Env, query } from '../utils'
 
 export async function onRequestGet(context: { request: Request; env: Env }) {
   const { request, env } = context
-  const adminToken = request.headers.get('X-Admin-Token')
+  const url = new URL(request.url)
+  const adminToken = request.headers.get('X-Admin-Token') || url.searchParams.get('token') || url.searchParams.get('admin_token')
   
   if (adminToken !== env.ADMIN_TOKEN) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
   }
 
+  // Support quick GET actions directly from the browser URL bar
+  const action = url.searchParams.get('action')
+  const id = url.searchParams.get('id')
+
+  if (action && id) {
+    try {
+      if (action === 'cancel') {
+        await query(env, `
+          UPDATE subscription 
+          SET is_active = false, status = 'cancelled', updated_at = NOW()
+          WHERE id = $1
+        `, [id])
+        return new Response(JSON.stringify({ ok: true, message: `Subscription ${id} cancelled successfully` }), {
+          headers: { 'Content-Type': 'application/json' }
+        })
+      } else if (action === 'delete') {
+        await query(env, 'DELETE FROM subscription WHERE id = $1', [id])
+        return new Response(JSON.stringify({ ok: true, message: `Subscription ${id} deleted successfully` }), {
+          headers: { 'Content-Type': 'application/json' }
+        })
+      } else if (action === 'activate') {
+        await query(env, `
+          UPDATE subscription 
+          SET is_active = true, status = 'active', updated_at = NOW()
+          WHERE id = $1
+        `, [id])
+        return new Response(JSON.stringify({ ok: true, message: `Subscription ${id} activated successfully` }), {
+          headers: { 'Content-Type': 'application/json' }
+        })
+      }
+    } catch (e: any) {
+      return new Response(JSON.stringify({ error: e.message }), { status: 500 })
+    }
+  }
+
   try {
-    const url = new URL(request.url)
     const limit = parseInt(url.searchParams.get('limit') || '200')
+
 
     // 1. Fetch subscriptions list
     const res = await query(env, 
@@ -63,7 +99,8 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
   const { request, env } = context
-  const adminToken = request.headers.get('X-Admin-Token')
+  const url = new URL(request.url)
+  const adminToken = request.headers.get('X-Admin-Token') || url.searchParams.get('token') || url.searchParams.get('admin_token')
   
   if (adminToken !== env.ADMIN_TOKEN) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
@@ -98,14 +135,14 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
 export async function onRequestDelete(context: { request: Request; env: Env }) {
   const { request, env } = context
-  const adminToken = request.headers.get('X-Admin-Token')
+  const url = new URL(request.url)
+  const adminToken = request.headers.get('X-Admin-Token') || url.searchParams.get('token') || url.searchParams.get('admin_token')
   
   if (adminToken !== env.ADMIN_TOKEN) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
   }
 
   try {
-    const url = new URL(request.url)
     const id = url.searchParams.get('id')
 
     if (!id) {
