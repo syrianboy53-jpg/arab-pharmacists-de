@@ -10,11 +10,11 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
 
   try {
     // 1. Count total tokens
-    const totalRes = await query(env, 'SELECT COUNT(*)::integer as count FROM fcm_tokens')
+    const totalRes = await query(env, 'SELECT COUNT(*)::integer as count FROM pushdevice')
     const total_devices = totalRes.rows[0]?.count || 0
 
     // 2. Count active tokens in last 30 days
-    const activeRes = await query(env, "SELECT COUNT(*)::integer as count FROM fcm_tokens WHERE created_at > NOW() - INTERVAL '30 days'")
+    const activeRes = await query(env, "SELECT COUNT(*)::integer as count FROM pushdevice WHERE active = true OR last_seen > NOW() - INTERVAL '30 days'")
     const active_devices = activeRes.rows[0]?.count || total_devices // Fallback to total if active is smaller or zero
 
     // 3. Check if FCM environment variable is set

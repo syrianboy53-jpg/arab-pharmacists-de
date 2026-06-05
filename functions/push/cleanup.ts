@@ -99,24 +99,21 @@ async function getFcmAccessToken(serviceAccountJsonStr: string): Promise<string>
   return data.access_token
 }
 
-export async function onRequestPost(context: { request: Request; env: Env; waitUntil: (promise: Promise<any>) => void }) {
-  const { request, env, waitUntil } = context
-  const adminToken = request.headers.get('X-Admin-Token')
+export async function onRequestGet(context: { request: Request; env: Env }) {
+  const { request, env } = context
+  const url = new URL(request.url)
+  const adminToken = request.headers.get('X-Admin-Token') || url.searchParams.get('token')
   
   if (adminToken !== env.ADMIN_TOKEN) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
   }
 
+  const offset = parseInt(url.searchParams.get('offset') || '0', 10)
+  const limit = 30
+
   try {
-    const bodyJson = await request.json() as any
-    const { title, body, url, offset = 0 } = bodyJson
-
-    if (!title || !body) {
-      return new Response(JSON.stringify({ error: 'title and body required' }), { status: 400 })
-    }
-
     if (!env.FCM_SERVICE_ACCOUNT_JSON) {
-      return new Response(JSON.stringify({ error: 'Firebase is not configured (FCM_SERVICE_ACCOUNT_JSON is missing)' }), { status: 500 })
+      return new Response(JSON.stringify({ error: 'Firebase is not configured' }), { status: 500 })
     }
 
     // 1. Get Access Token
@@ -124,21 +121,22 @@ export async function onRequestPost(context: { request: Request; env: Env; waitU
     const sa = JSON.parse(env.FCM_SERVICE_ACCOUNT_JSON)
     const projectId = sa.project_id
 
-    // 2. Get FCM tokens from database using query helper with limit and offset
-    const limit = 40
+    // 2. Fetch 30 active tokens from database
     const dbRes = await query(env, 'SELECT token FROM pushdevice WHERE active = true ORDER BY id ASC LIMIT $1 OFFSET $2', [limit, offset])
     const tokens = dbRes.rows?.map((r: any) => r.token) || []
 
     if (tokens.length === 0) {
       return new Response(JSON.stringify({ 
         ok: true, 
-        sent: 0,
-        failed: 0,
-        message: 'No registered devices found for this batch.'
+        processed: 0,
+        deactivated: 0,
+        message: 'No active devices found for this offset.'
       }), { headers: { 'Content-Type': 'application/json' } })
     }
 
-    // 3. Send notifications in parallel
+    let deactivatedCount = 0
+
+    // 3. Validate tokens in parallel
     const results = await Promise.all(tokens.map(async (token: string) => {
       try {
         const fcmRes = await fetch(`https://fcm.googleapis.com/v1/projects/${projectId}/messages:send`, {
@@ -148,16 +146,12 @@ export async function onRequestPost(context: { request: Request; env: Env; waitU
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            message: {
-              token,
-              notification: { title, body },
-              data: url ? { url } : undefined
-            }
+            validate_only: true,
+            message: { token }
           })
         })
         
         if (!fcmRes.ok) {
-          // Clean up invalid or unregistered tokens
           const errData = await fcmRes.json() as any
           const fcmErrorStatus = errData.error?.status
           const fcmErrorCode = errData.error?.details?.[0]?.errorCode
@@ -171,53 +165,32 @@ export async function onRequestPost(context: { request: Request; env: Env; waitU
             fcmErrorCode === 'INVALID_ARGUMENT'
           ) {
             await query(env, 'UPDATE pushdevice SET active = false WHERE token = $1', [token]).catch(() => {})
+            deactivatedCount++
+            return { token, valid: false, error: fcmErrorStatus }
           }
-          return false
+          return { token, valid: false, error: 'other_error' }
         }
-        return true
-      } catch {
-        return false
+        return { token, valid: true }
+      } catch (err: any) {
+        return { token, valid: false, error: err.message }
       }
     }))
 
-    const sent = results.filter(r => r === true).length
-    const failed = results.filter(r => r === false).length
-
-    // 4. Trigger next batch in the background if there are more active devices
-    const nextOffset = offset + limit
-    const nextDbRes = await query(env, 'SELECT COUNT(*)::integer as count FROM pushdevice WHERE active = true')
-    const totalActive = nextDbRes.rows[0]?.count || 0
-    const hasMore = totalActive > nextOffset
-
-    if (hasMore) {
-      const selfUrl = new URL(request.url)
-      selfUrl.pathname = '/push/broadcast'
-      
-      const nextBatchPromise = fetch(selfUrl.toString(), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Admin-Token': adminToken || ''
-        },
-        body: JSON.stringify({ title, body, url, offset: nextOffset })
-      }).catch(err => console.error('Error triggering next broadcast batch:', err))
-      
-      if (typeof waitUntil === 'function') {
-        waitUntil(nextBatchPromise)
-      }
-    }
+    // Get overall remaining active count
+    const countRes = await query(env, 'SELECT COUNT(*)::integer as count FROM pushdevice WHERE active = true')
+    const active_remaining = countRes.rows[0]?.count || 0
 
     return new Response(JSON.stringify({ 
       ok: true, 
-      sent,
-      failed,
-      title,
-      body,
-      has_more: hasMore
+      processed: tokens.length,
+      deactivated: deactivatedCount,
+      active_remaining,
+      offset,
+      results
     }), { headers: { 'Content-Type': 'application/json' } })
 
   } catch (e: any) {
-    return new Response(JSON.stringify({ error: e.message, detail: e.message }), { 
+    return new Response(JSON.stringify({ error: e.message }), { 
       status: 500,
       headers: { 'Content-Type': 'application/json' }
     })
