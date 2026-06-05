@@ -43,6 +43,8 @@ if (fs.existsSync(srcDir)) {
 }
 
 // Copy the restored React app index.html to dist/app/index.html
+// Commented out to allow using the newly built Vite index.html with our code modifications!
+/*
 const restoredAppIndexSrc = path.resolve('public/index.html');
 const restoredAppIndexDest = path.resolve('dist/app/index.html');
 console.log(`Copying restored app entry from ${restoredAppIndexSrc} to ${restoredAppIndexDest}...`);
@@ -53,6 +55,7 @@ if (fs.existsSync(restoredAppIndexSrc)) {
   console.error(`Error: Restored app index file ${restoredAppIndexSrc} does not exist!`);
   process.exit(1);
 }
+*/
 
 // Copy _redirects to dist/_redirects so Cloudflare Pages reads it
 const redirectsSrc = path.resolve('public/_redirects');
