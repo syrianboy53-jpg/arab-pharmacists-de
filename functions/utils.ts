@@ -35,6 +35,23 @@ export async function sha256(message: string): Promise<string> {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
 }
 
+export function base64urlEncode(str: string): string {
+  // Convert standard base64 to base64url
+  return btoa(str)
+    .replace(/=/g, '')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+}
+
+export function base64urlDecode(str: string): string {
+  // Add padding back if missing and convert base64url to standard base64
+  let base64 = str.replace(/-/g, '+').replace(/_/g, '/')
+  while (base64.length % 4) {
+    base64 += '='
+  }
+  return atob(base64)
+}
+
 // Decode and verify JWT token
 export async function verifyJWT(authHeader: string | null, secret: string): Promise<number | null> {
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -60,8 +77,8 @@ export async function verifyJWT(authHeader: string | null, secret: string): Prom
       ['verify']
     )
     
-    // Decode base64url signature
-    const sigStr = atob(signatureB64.replace(/-/g, '+').replace(/_/g, '/'))
+    // Decode base64url signature safely
+    const sigStr = base64urlDecode(signatureB64)
     const sigBytes = new Uint8Array(sigStr.length)
     for (let i = 0; i < sigStr.length; i++) {
       sigBytes[i] = sigStr.charCodeAt(i)
@@ -78,8 +95,8 @@ export async function verifyJWT(authHeader: string | null, secret: string): Prom
       return null
     }
     
-    // Decode payload
-    const payloadStr = atob(payloadB64)
+    // Decode payload safely
+    const payloadStr = base64urlDecode(payloadB64)
     const payload = JSON.parse(payloadStr)
     
     // Check expiration
@@ -92,3 +109,4 @@ export async function verifyJWT(authHeader: string | null, secret: string): Prom
     return null
   }
 }
+

@@ -1,12 +1,12 @@
-import { Env, query } from '../utils'
+import { Env, query, base64urlEncode } from '../utils'
 
 async function createJWT(payload: object, secret: string): Promise<string> {
-  const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }))
-  const body = btoa(JSON.stringify(payload))
+  const header = base64urlEncode(JSON.stringify({ alg: 'HS256', typ: 'JWT' }))
+  const body = base64urlEncode(JSON.stringify(payload))
   const data = `${header}.${body}`
   const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign'])
   const sig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(data))
-  const signature = btoa(String.fromCharCode(...new Uint8Array(sig))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '')
+  const signature = base64urlEncode(String.fromCharCode(...new Uint8Array(sig)))
   return `${header}.${body}.${signature}`
 }
 
