@@ -30,7 +30,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         final config = json.decode(responseBody) as Map<String, dynamic>;
         
         final remoteVersion = int.tryParse(config['apk_version'] ?? '0') ?? 0;
-        const localVersion = 60; // Current app version code is 59
+        const localVersion = 61; // Current app version code is 59
         
         if (mounted) {
           if (localVersion < remoteVersion) {
@@ -39,7 +39,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('أنت تستخدم أحدث إصدار بالفعل! (النسخة 60) 🎉'),
+                content: Text('أنت تستخدم أحدث إصدار بالفعل! (النسخة 61) 🎉'),
                 backgroundColor: Colors.green,
               ),
             );
