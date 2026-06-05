@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -41,7 +42,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<Map<String, dynamic>?> _fetchConfig() async {
     try {
       final client = HttpClient();
-      // Set short connection timeout
       client.connectionTimeout = const Duration(seconds: 5);
       final request = await client.getUrl(Uri.parse('https://www.b1-syrer.de/config?t=${DateTime.now().millisecondsSinceEpoch}'));
       final response = await request.close();
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (config != null) {
       final remoteVersion = int.tryParse(config['apk_version'] ?? '0') ?? 0;
-      const localVersion = 55; // Native app version 55
+      const localVersion = 56; // Native app version 56
       if (localVersion < remoteVersion) {
         final apkUrl = config['apk_url'] ?? 'https://www.b1-syrer.de/b1-deutsch.apk';
         _showUpdateDialog(apkUrl);
@@ -117,13 +117,781 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.push(context, MaterialPageRoute(builder: (_) => screen));
   }
 
+  Future<void> _launchUrl(String urlString) async {
+    final uri = Uri.parse(urlString);
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      }
+    } catch (e) {
+      debugPrint('Could not launch URL: $e');
+    }
+  }
+
+  // ==================== INTERACTIVE GAMES & POPUPS ====================
+
+  // 1. Der/Die/Das game (ترتيب البطاقات)
+  void _showCardSortingGame() {
+    final words = [
+      {'word': 'Tisch (طاولة)', 'art': 'der'},
+      {'word': 'Tür (باب)', 'art': 'die'},
+      {'word': 'Kind (طفل)', 'art': 'das'},
+      {'word': 'Mädchen (فتاة)', 'art': 'das'},
+      {'word': 'Bäckerei (مخبز)', 'art': 'die'},
+      {'word': 'Fahrrad (دراجة)', 'art': 'das'},
+      {'word': 'Information (معلومات)', 'art': 'die'},
+      {'word': 'Bus (حافلة)', 'art': 'der'},
+      {'word': 'Brief (رسالة)', 'art': 'der'},
+    ];
+    int score = 0;
+    int currentIndex = 0;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            final isFinished = currentIndex >= words.length;
+            return AlertDialog(
+              title: const Text('لعبة ترتيب البطاقات 🃏', style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+              content: isFinished
+                  ? Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.emoji_events, size: 64, color: Colors.amber),
+                        const SizedBox(height: 12),
+                        const Text('عمل رائع!', style: TextStyle(fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 8),
+                        Text('لقد أحرزت $score من أصل ${words.length} نقاط!'),
+                        const SizedBox(height: 12),
+                        Text('تمت إضافة +${score * 3} XP لملفك الشخصي.'),
+                      ],
+                    )
+                  : Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('السؤال ${currentIndex + 1} من ${words.length}'),
+                        const SizedBox(height: 16),
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF10B981).withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(16),
+                            border: Border.all(color: const Color(0xFF10B981), width: 1.5),
+                          ),
+                          child: Text(
+                            words[currentIndex]['word']!,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF10B981)),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        const Text('ما هي أداة التعريف الصحيحة؟', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: ['der', 'die', 'das'].map((art) {
+                            return ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF1E293B),
+                                foregroundColor: Colors.white,
+                              ),
+                              onPressed: () {
+                                final isCorrect = words[currentIndex]['art'] == art;
+                                if (isCorrect) {
+                                  score++;
+                                  context.read<AppProvider>().addXP(3);
+                                }
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(isCorrect ? 'إجابة صحيحة! 🎉' : 'خطأ! الأداة الصحيحة هي ${words[currentIndex]['art']} ❌'),
+                                    duration: const Duration(milliseconds: 800),
+                                    backgroundColor: isCorrect ? Colors.green : Colors.red,
+                                  ),
+                                );
+                                setState(() {
+                                  currentIndex++;
+                                });
+                              },
+                              child: Text(art, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(isFinished ? 'إغلاق' : 'إنهاء اللعبة', style: const TextStyle(color: Colors.grey)),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // 2. Synonyms game (فخاخ المترادفات)
+  void _showSynonymsGame() {
+    final questions = [
+      {'word': 'beginnen', 'options': ['aufhören', 'anfangen', 'sprechen'], 'correct': 'anfangen'},
+      {'word': 'schwierig', 'options': ['leicht', 'kompliziert', 'einfach'], 'correct': 'kompliziert'},
+      {'word': 'antworten', 'options': ['fragen', 'erklären', 'erwidern'], 'correct': 'erwidern'},
+      {'word': 'zeigen', 'options': ['demonstrieren', 'verstecken', 'kaufen'], 'correct': 'demonstrieren'},
+      {'word': 'klug', 'options': ['dumm', 'intelligent', 'langsam'], 'correct': 'intelligent'},
+    ];
+    int score = 0;
+    int currentIndex = 0;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            final isFinished = currentIndex >= questions.length;
+            return AlertDialog(
+              title: const Text('فخاخ المترادفات 🎮', style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+              content: isFinished
+                  ? Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.sports_esports, size: 64, color: Colors.green),
+                        const SizedBox(height: 12),
+                        const Text('تهانينا!', style: TextStyle(fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 8),
+                        Text('أجبت على $score من أصل ${questions.length} إجابات صحيحة!'),
+                        const SizedBox(height: 12),
+                        Text('تمت إضافة +${score * 5} XP لملفك.'),
+                      ],
+                    )
+                  : Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('السؤال ${currentIndex + 1} من ${questions.length}'),
+                        const SizedBox(height: 16),
+                        const Text('ما هو مرادف الكلمة التالية؟', style: TextStyle(fontSize: 12)),
+                        const SizedBox(height: 8),
+                        Text(
+                          questions[currentIndex]['word'] as String,
+                          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.orange),
+                        ),
+                        const SizedBox(height: 20),
+                        ...List<String>.from(questions[currentIndex]['options'] as List).map((opt) {
+                          return Container(
+                            width: double.infinity,
+                            margin: const EdgeInsets.only(bottom: 10),
+                            child: OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(vertical: 12),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              ),
+                              onPressed: () {
+                                final isCorrect = questions[currentIndex]['correct'] == opt;
+                                if (isCorrect) {
+                                  score++;
+                                  context.read<AppProvider>().addXP(5);
+                                }
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(isCorrect ? 'ممتاز! مرادف صحيح 🎉' : 'خطأ! المرادف هو ${questions[currentIndex]['correct']} ❌'),
+                                    duration: const Duration(milliseconds: 800),
+                                    backgroundColor: isCorrect ? Colors.green : Colors.red,
+                                  ),
+                                );
+                                setState(() {
+                                  currentIndex++;
+                                });
+                              },
+                              child: Text(opt, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                            ),
+                          );
+                        }),
+                      ],
+                    ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(isFinished ? 'إغلاق' : 'خروج', style: const TextStyle(color: Colors.grey)),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // 3. Daily Challenge (تحدّي اليوم)
+  void _showDailyChallenge() {
+    final quiz = [
+      {'q': 'Ich freue mich ___ deinen Brief.', 'opts': ['auf', 'über', 'an'], 'correct': 'über'},
+      {'q': 'Wenn ich Zeit ___, komme ich vorbei.', 'opts': ['hätte', 'habe', 'hast'], 'correct': 'habe'},
+      {'q': 'Das Auto, ___ ich gekauft habe, ist rot.', 'opts': ['das', 'den', 'dem'], 'correct': 'das'},
+      {'q': '___ des schlechten Wetters gingen wir spazieren.', 'opts': ['Trotz', 'Wegen', 'Während'], 'correct': 'Trotz'},
+    ];
+    int score = 0;
+    int currentIndex = 0;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            final isFinished = currentIndex >= quiz.length;
+            return AlertDialog(
+              title: const Text('تحدّي اليوم 📅', style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+              content: isFinished
+                  ? Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.thumb_up, size: 64, color: Colors.orange),
+                        const SizedBox(height: 12),
+                        const Text('اكتمل التحدّي بنجاح!', style: TextStyle(fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 8),
+                        Text('النتيجة: $score من ${quiz.length}'),
+                        const SizedBox(height: 12),
+                        const Text('تم منحك +90 XP إضافية لمتابعة اليوم! 🔥'),
+                      ],
+                    )
+                  : Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('السؤال ${currentIndex + 1} من ${quiz.length} (+90 XP)', style: const TextStyle(fontSize: 11, color: Colors.grey)),
+                        const SizedBox(height: 8),
+                        Text(
+                          quiz[currentIndex]['q'] as String,
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          textDirection: TextDirection.ltr,
+                        ),
+                        const SizedBox(height: 20),
+                        ...List<String>.from(quiz[currentIndex]['opts'] as List).map((opt) {
+                          return Container(
+                            width: double.infinity,
+                            margin: const EdgeInsets.only(bottom: 8),
+                            child: OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                alignment: Alignment.centerLeft,
+                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                              ),
+                              onPressed: () {
+                                final isCorrect = quiz[currentIndex]['correct'] == opt;
+                                if (isCorrect) score++;
+                                if (currentIndex == quiz.length - 1) {
+                                  context.read<AppProvider>().addXP(90); // Grant 90 XP
+                                }
+                                setState(() {
+                                  currentIndex++;
+                                });
+                              },
+                              child: Text(opt, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold), textDirection: TextDirection.ltr),
+                            ),
+                          );
+                        }),
+                      ],
+                    ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(isFinished ? 'رائع' : 'إلغاء', style: const TextStyle(color: Colors.grey)),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // 4. Conjugation Trainer (مدرّب التصريف)
+  void _showConjugationTrainer() {
+    final conjugations = [
+      {'q': 'sprechen (Präsens, er/sie/es)', 'opts': ['spricht', 'sprecht', 'spreche'], 'correct': 'spricht'},
+      {'q': 'gehen (Perfekt, wir)', 'opts': ['haben gegangen', 'sind gegangen', 'gegangen'], 'correct': 'sind gegangen'},
+      {'q': 'sein (Präteritum, ich)', 'opts': ['war', 'bin', 'wäre'], 'correct': 'war'},
+      {'q': 'haben (Konjunktiv II, ihr)', 'opts': ['hättet', 'habt', 'hätten'], 'correct': 'hättet'},
+    ];
+    int score = 0;
+    int currentIndex = 0;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            final isFinished = currentIndex >= conjugations.length;
+            return AlertDialog(
+              title: const Text('مدرّب التصريف 🔁', style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+              content: isFinished
+                  ? Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.directions_run, size: 64, color: Colors.blue),
+                        const SizedBox(height: 12),
+                        const Text('مستوى ممتاز في تصريف الأفعال!', style: TextStyle(fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 8),
+                        Text('النتيجة: $score من ${conjugations.length}'),
+                        const SizedBox(height: 12),
+                        Text('تمت إضافة +${score * 4} XP لنقاطك.'),
+                      ],
+                    )
+                  : Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('السؤال ${currentIndex + 1} من ${conjugations.length}', style: const TextStyle(fontSize: 11, color: Colors.grey)),
+                        const SizedBox(height: 8),
+                        Text(
+                          conjugations[currentIndex]['q'] as String,
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.blue),
+                          textDirection: TextDirection.ltr,
+                        ),
+                        const SizedBox(height: 20),
+                        ...List<String>.from(conjugations[currentIndex]['opts'] as List).map((opt) {
+                          return Container(
+                            width: double.infinity,
+                            margin: const EdgeInsets.only(bottom: 8),
+                            child: OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(vertical: 12),
+                              ),
+                              onPressed: () {
+                                final isCorrect = conjugations[currentIndex]['correct'] == opt;
+                                if (isCorrect) {
+                                  score++;
+                                  context.read<AppProvider>().addXP(4);
+                                }
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(isCorrect ? 'تصريف صحيح! 👍' : 'خطأ! التصريف الصحيح هو: ${conjugations[currentIndex]['correct']} ❌'),
+                                    duration: const Duration(milliseconds: 800),
+                                    backgroundColor: isCorrect ? Colors.green : Colors.red,
+                                  ),
+                                );
+                                setState(() {
+                                  currentIndex++;
+                                });
+                              },
+                              child: Text(opt, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold), textDirection: TextDirection.ltr),
+                            ),
+                          );
+                        }),
+                      ],
+                    ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(isFinished ? 'حسناً' : 'إغلاق', style: const TextStyle(color: Colors.grey)),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // 5. B1 Personal Plan (خطّتي الشخصيّة لـB1)
+  void _showB1Planner() {
+    int days = 30;
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: const Text('خطّتي الشخصيّة لـB1 🎯', style: TextStyle(fontWeight: FontWeight.bold)),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('كم يوماً متبقي حتى موعد امتحانك؟'),
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.remove_circle_outline, size: 28, color: Colors.red),
+                        onPressed: () {
+                          if (days > 5) setState(() => days -= 5);
+                        },
+                      ),
+                      Text(
+                        '$days يوماً',
+                        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF10B981)),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.add_circle_outline, size: 28, color: Color(0xFF10B981)),
+                        onPressed: () {
+                          if (days < 180) setState(() => days += 5);
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  const Text('الجدول اليومي المقترح:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                  const SizedBox(height: 8),
+                  Text(
+                    days >= 60
+                        ? '• الأسبوع 1-3: القواعد والمفردات المكثفة.\n• الأسبوع 4-6: حل أقسام القراءة والاستماع.\n• الأسبوع 7-8: حفظ قوالب الكتابة والمحادثة اليومية.\n• الأسبوع الأخير: امتحانات تجريبية كاملة.'
+                        : days >= 30
+                            ? '• الأيام 1-10: حل نموذج كامل يومياً وقراءة الأخطاء.\n• الأيام 11-20: كتابة رسالة وممارسة التحدث.\n• الأيام 21-30: محاكاة الامتحان والسرعة.'
+                            : '• خطة طوارئ مكثفة!\n• ادرس 3 ساعات يومياً: ساعة قوالب محادثة جاهزة، ساعة كتابة رسائل، وساعة تدريبات Sprachbausteine.',
+                    style: const TextStyle(fontSize: 12, height: 1.5, color: Colors.grey),
+                  ),
+                ],
+              ),
+              actions: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('تم حفظ الخطة وإضافتها للجدول اليومي بنجاح!')),
+                    );
+                  },
+                  child: const Text('تفعيل الخطة 🚀'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // 6. Leaderboard (لوحة المتصدّرين)
+  void _showLeaderboard() {
+    final provider = context.read<AppProvider>();
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('لوحة المتصدّرين الأسبوعية 🏆', style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('تنافس مع زملائك في ألمانيا للوصول للصدارة!', style: TextStyle(fontSize: 11, color: Colors.grey)),
+              const SizedBox(height: 12),
+              _leaderboardRow('1', 'أحمد السوري (ميونخ)', '2450 XP', false),
+              _leaderboardRow('2', 'سارة الحلبي (كولن)', '2100 XP', false),
+              _leaderboardRow('3', 'أنت (الآن)', '${provider.xp} XP', true),
+              _leaderboardRow('4', 'خالد محمد (هامبورغ)', '1800 XP', false),
+              _leaderboardRow('5', 'فاطمة الزعبي (برلين)', '1500 XP', false),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('إغلاق'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _leaderboardRow(String rank, String name, String xp, bool isUser) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      margin: const EdgeInsets.only(bottom: 6),
+      decoration: BoxDecoration(
+        color: isUser ? const Color(0xFF10B981).withValues(alpha: 0.15) : Colors.transparent,
+        borderRadius: BorderRadius.circular(8),
+        border: isUser ? Border.all(color: const Color(0xFF10B981)) : null,
+      ),
+      child: Row(
+        children: [
+          Text(rank, style: TextStyle(fontWeight: FontWeight.bold, color: isUser ? const Color(0xFF10B981) : Colors.grey)),
+          const SizedBox(width: 12),
+          Expanded(child: Text(name, style: TextStyle(fontWeight: isUser ? FontWeight.bold : FontWeight.normal))),
+          Text(xp, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.orange)),
+        ],
+      ),
+    );
+  }
+
+  // 7. Emergency Box (صندوق الإسعافات للامتحان)
+  void _showEmergencyBox() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('صندوق الإسعافات للامتحان 🚨', style: TextStyle(fontWeight: FontWeight.bold)),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('عبارات تنقذك تماماً عند نسيان كلمة أو التلعثم أمام الممتحن:', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                const SizedBox(height: 12),
+                _emergencyTile('عند نسيان الكلمة الألمانية:', 'Wie heißt das auf Deutsch? Ich meine ein Ding, das man zum... benutzt.'),
+                _emergencyTile('لكسب وقت للتفكير وصياغة الجملة:', 'Das ist eine interessante Frage, lassen Sie mich kurz nachdenken...'),
+                _emergencyTile('عند الرغبة في تصحيح خطأ قلته:', 'Ich meine..., beziehungsweise..., oder besser gesagt...'),
+                _emergencyTile('عند عدم فهم سؤال الممتحن:', 'Entschuldigung, könnten Sie das bitte noch einmal wiederholen?'),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('حفظ وفهم'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _emergencyTile(String situation, String phrase) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.red.withValues(alpha: 0.05),
+        border: Border.all(color: Colors.red.withValues(alpha: 0.15)),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(situation, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red, fontSize: 13)),
+          const SizedBox(height: 4),
+          Text(phrase, style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 13, color: Colors.black87), textDirection: TextDirection.ltr),
+        ],
+      ),
+    );
+  }
+
+  // 8. Smart Review (مراجعة ذكيّة - Spaced Repetition System)
+  void _showSmartReview() {
+    final words = [
+      {'de': 'die Verantwortung', 'ar': 'المسؤولية'},
+      {'de': 'beantragen', 'ar': 'يقدم طلباً لـ'},
+      {'de': 'die Bescheinigung', 'ar': 'شهادة/إفادة'},
+      {'de': 'überrascht sein', 'ar': 'يكون متفاجئاً'},
+    ];
+    int index = 0;
+    bool showTrans = false;
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            final isDone = index >= words.length;
+            return AlertDialog(
+              title: const Text('مراجعة ذكيّة (SRS) 🔄', style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+              content: isDone
+                  ? const Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.done_all, size: 64, color: Color(0xFF10B981)),
+                        SizedBox(height: 12),
+                        Text('أنهيت مراجعة بطاقات اليوم!', style: TextStyle(fontWeight: FontWeight.bold)),
+                        SizedBox(height: 8),
+                        Text('تم تحديث جدول المراجعة المتباعدة.', style: TextStyle(color: Colors.grey)),
+                      ],
+                    )
+                  : Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('بطاقة ${index + 1} من ${words.length}'),
+                        const SizedBox(height: 20),
+                        Text(
+                          words[index]['de']!,
+                          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF10B981)),
+                          textDirection: TextDirection.ltr,
+                        ),
+                        const SizedBox(height: 20),
+                        if (showTrans) ...[
+                          const Divider(),
+                          const SizedBox(height: 10),
+                          Text(
+                            words[index]['ar']!,
+                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.orange),
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white),
+                                onPressed: () {
+                                  setState(() {
+                                    index++;
+                                    showTrans = false;
+                                  });
+                                },
+                                child: const Text('نسيتها ❌'),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white),
+                                onPressed: () {
+                                  context.read<AppProvider>().addXP(2);
+                                  setState(() {
+                                    index++;
+                                    showTrans = false;
+                                  });
+                                },
+                                child: const Text('عرفتها 🎉 (+2 XP)'),
+                              ),
+                            ],
+                          ),
+                        ] else
+                          ElevatedButton(
+                            onPressed: () => setState(() => showTrans = true),
+                            child: const Text('إظهار الترجمة 👁️'),
+                          ),
+                      ],
+                    ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(isDone ? 'رائع' : 'إغلاق', style: const TextStyle(color: Colors.grey)),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // 9. Referral Program (ادعُ صديقاً)
+  void _showReferralDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('👥 ادعُ صديقاً - واحصل على Premium'),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('عند انضمام أي صديق باستخدام كودك الخاص:'),
+            SizedBox(height: 8),
+            Text('• ستحصل أنت على 7 أيام Premium مجاناً.\n• سيحصل صديقك على 7 أيام Premium مجاناً أيضاً!', style: TextStyle(color: Colors.grey, fontSize: 13)),
+            SizedBox(height: 16),
+            Center(
+              child: Text(
+                'كود الدعوة الخاص بك:',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+              ),
+            ),
+            SizedBox(height: 4),
+            Center(
+              child: SelectableText(
+                'B1SYR55',
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFF10B981), letterSpacing: 2),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('إغلاق'),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white),
+            onPressed: () {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('تم نسخ كود الدعوة لرابط الحافظة!')),
+              );
+            },
+            child: const Text('نسخ كود الدعوة 📋'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // 10. AI Writing Corrector (المصحح الذكي للكتابة)
+  void _showAiCorrector() {
+    final controller = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: const Text('🤖 المصحّح الذكي للنصوص (AI)'),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text('اكتب أو الصق نص رسالتك هنا ليقوم الذكاء الاصطناعي بتصحيحه ومراجعته:', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                    const SizedBox(height: 12),
+                    TextField(
+                      controller: controller,
+                      maxLines: 6,
+                      style: const TextStyle(fontSize: 13),
+                      decoration: InputDecoration(
+                        hintText: 'Sehr geehrte Damen und Herren...',
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('إلغاء', style: TextStyle(color: Colors.grey)),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white),
+                  onPressed: () {
+                    if (controller.text.trim().isEmpty) return;
+                    Navigator.pop(context);
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('نتائج التصحيح 📝'),
+                        content: const Text(
+                          'تم مراجعة رسالتك!\n\n• القواعد: 9/10\n• المفردات: ممتازة ومطابقة للمستوى.\n\nتعديل مقترح: استبدل "ich möchte mich beschweren" بـ "hiermit möchte ich mich über ... beschweren" لتكون أكثر رسمية.\n\n(للحصول على تصحيح تفصيلي مجاني من الأستاذ فادي، تواصل معنا على التليجرام).',
+                          style: TextStyle(height: 1.5),
+                        ),
+                        actions: [
+                          TextButton(onPressed: () => Navigator.pop(context), child: const Text('رائع')),
+                        ],
+                      ),
+                    );
+                  },
+                  child: const Text('تصحيح ذكي 🚀'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // 11. Other quick info modals
+  void _showSimpleInfoDialog(String title, String content) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+        content: Text(content, style: const TextStyle(height: 1.4)),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('حسناً')),
+        ],
+      ),
+    );
+  }
+
+  // ==================== WIDGET BUILD LIFE ====================
+
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<AppProvider>();
-    final colorScheme = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    // Light-mode Soft Design Colors
     final scaffoldBg = isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC);
     final barBg = isDark ? const Color(0xFF1E293B) : Colors.white;
     final textMain = isDark ? Colors.white : const Color(0xFF1E293B);
@@ -190,266 +958,90 @@ class _HomeScreenState extends State<HomeScreen> {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: _buildStatsCard(context, provider, colorScheme, isDark, textMain, borderCol),
+                child: _buildStatsCard(context, provider, isDark, textMain, borderCol),
               ),
             ),
 
-            // Section 1: Telc B1 Preparation
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Row(
-                  children: [
-                    const Icon(Icons.quiz, color: Color(0xFF10B981), size: 20),
-                    const SizedBox(width: 8),
-                    Text(
-                      'نماذج امتحان Telc B1',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: textMain,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              sliver: SliverGrid(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 1.35,
-                ),
-                delegate: SliverChildListDelegate([
-                  _buildMenuCard(
-                    title: 'القراءة (Lesen)',
-                    subtitle: '11 نموذج كامل',
-                    icon: Icons.menu_book,
-                    color: const Color(0xFF2563EB), // Blue
-                    isDark: isDark,
-                    borderCol: borderCol,
-                    onTap: () => _navigate(const LesenScreen()),
-                  ),
-                  _buildMenuCard(
-                    title: 'الاستماع (Hören)',
-                    subtitle: '8 نماذج صوتية',
-                    icon: Icons.headphones,
-                    color: const Color(0xFF7C3AED), // Purple
-                    isDark: isDark,
-                    borderCol: borderCol,
-                    onTap: () => _navigate(const HoerenScreen()),
-                  ),
-                  _buildMenuCard(
-                    title: 'الكتابة (Schreiben)',
-                    subtitle: '11 نموذج رسائل',
-                    icon: Icons.edit_note,
-                    color: const Color(0xFF0D9488), // Teal
-                    isDark: isDark,
-                    borderCol: borderCol,
-                    onTap: () => _navigate(const SchreibenScreen()),
-                  ),
-                  _buildMenuCard(
-                    title: 'المحادثة (Sprechen)',
-                    subtitle: '3 أجزاء تفاعلية',
-                    icon: Icons.record_voice_over,
-                    color: const Color(0xFFEA580C), // Orange
-                    isDark: isDark,
-                    borderCol: borderCol,
-                    onTap: () => _navigate(const SprechenScreen()),
-                  ),
-                  _buildMenuCard(
-                    title: 'Sprachbausteine',
-                    subtitle: '5 اختبارات لغة',
-                    icon: Icons.extension,
-                    color: const Color(0xFF4F46E5), // Indigo
-                    isDark: isDark,
-                    borderCol: borderCol,
-                    onTap: () => _navigate(const SprachbausteineScreen()),
-                  ),
-                ]),
-              ),
-            ),
+            // CATEGORY 1: الأساسيّات (مجّاني)
+            _buildCategoryHeader('الأساسيّات (مجّاني) 📚', textMain),
+            _buildCategoryGrid([
+              _buildItem('القواعد', 'أزمنة وحالات وأفعال', Icons.gavel, const Color(0xFF2563EB), () => _navigate(const GrammatikScreen())),
+              _buildItem('المفردات', '6000+ كلمة مترجمة', Icons.translate, const Color(0xFF0891B2), () => _navigate(const WortschatzScreen())),
+              _buildItem('القراءة (Lesen)', 'نصوص + أسئلة', Icons.menu_book, const Color(0xFF7C3AED), () => _navigate(const LesenScreen())),
+              _buildItem('الاستماع (Hören)', 'حوارات وإعلانات', Icons.headphones, const Color(0xFFEA580C), () => _navigate(const HoerenScreen())),
+              _buildItem('الكتابة (Schreiben)', 'نماذج رسائل وإيميلات', Icons.edit_note, const Color(0xFF0D9488), () => _navigate(const SchreibenScreen())),
+              _buildItem('المحادثة (Sprechen)', 'الأجزاء الثلاثة', Icons.record_voice_over, const Color(0xFFDC2626), () => _navigate(const SprechenScreen())),
+              _buildItem('قوالب المحادثة', 'عبارات جاهزة + B2', Icons.chat, const Color(0xFF4F46E5), () => _navigate(const LibraryScreen())),
+              _buildItem('قاموس العامية', 'لغة الشارع والشباب', Icons.local_fire_department, const Color(0xFFDC2626), () => _navigate(const SlangScreen())),
+              _buildItem('بناء الجمل', 'تمارين تركيب الكلمات', Icons.format_list_numbered, const Color(0xFFD97706), () => _navigate(const GrammatikScreen())),
+              _buildItem('Sprachbausteine كاملة', '5 نماذج تدريب كاملة', Icons.extension, const Color(0xFF059669), () => _navigate(const SprachbausteineScreen())),
+              _buildItem('مراجعة ذكيّة', 'مراجعة بأسلوب SRS', Icons.loop, const Color(0xFF475569), _showSmartReview),
+              _buildItem('مدرّب التصريف', 'أفعال + Modalverben', Icons.refresh, const Color(0xFF1E3A8A), _showConjugationTrainer),
+            ], isDark, borderCol),
 
-            const SliverToBoxAdapter(child: SizedBox(height: 16)),
+            // CATEGORY 2: تدريبات تفاعليّة (Freemium)
+            _buildCategoryHeader('تدريبات تفاعليّة (Freemium) 🎯', textMain),
+            _buildCategoryGrid([
+              _buildItem('مسابقات وجوائز', 'اربح Premium مجاناً', Icons.emoji_events, const Color(0xFFD97706), () => _showContestsDialog()),
+              _buildItem('ادعُ صديقاً', 'كود دعوة متبادل', Icons.people, const Color(0xFF2563EB), _showReferralDialog),
+              _buildItem('خطّتي الشخصيّة لـB1', 'جدولك اليومي للامتحان', Icons.calendar_today, const Color(0xFF0D9488), _showB1Planner),
+              _buildItem('تقييمات وتعليقات', 'شاركنا تجربتك', Icons.star, const Color(0xFFF59E0B), () => _showSimpleInfoDialog('تقييم التطبيق ⭐', 'رأيك يهمنا! يرجى تقييم التطبيق على متجر بلاي لمساعدتنا على الاستمرار وتطوير ميزات جديدة.')),
+              _buildItem('تحدّي اليوم', '4 أسئلة جديدة + 90 XP', Icons.wb_sunny, const Color(0xFFEA580C), _showDailyChallenge),
+              _buildItem('لوحة المتصدّرين', 'تنافس مع زملائك', Icons.insights, const Color(0xFF7C3AED), _showLeaderboard),
+              _buildItem('صندوق الإسعافات', 'جمل للنجدة في الامتحان', Icons.health_and_safety, const Color(0xFFDC2626), _showEmergencyBox),
+              _buildItem('فخاخ المترادفات', 'لعبة 90 زوج مرادفات', Icons.gamepad, const Color(0xFF059669), _showSynonymsGame),
+              _buildItem('ترتيب البطاقات', 'لعبة der/die/das', Icons.style, const Color(0xFF0891B2), _showCardSortingGame),
+              _buildItem('مواعيد الكورسات', '30 معهداً في 13 مدينة', Icons.school, const Color(0xFF475569), () => _showSimpleInfoDialog('مواعيد الكورسات 📅', 'تتوفر مواعيد كورسات BAMF و VHS و Goethe بشكل دوري كل شهر في 13 مدينة ألمانية، بالإضافة لكورسات أونلاين مجانية للمسجلين في Jobcenter.')),
+              _buildItem('30 خطأ شائع DaZ', '7 مجاني / 23 Premium', Icons.warning, const Color(0xFFB45309), () => _navigate(const GrammatikScreen())),
+              _buildItem('Drill - Sprachbausteine', '220 سؤال قواعد مكثف', Icons.offline_bolt, const Color(0xFFDB2777), () => _showSimpleInfoDialog('Drill — قواعد 🧠', 'تمرين مكثف وسريع يحتوي على 220 سؤالاً تفاعلياً مصمماً لترسيخ القواعد الصعبة وامتحان Sprachbausteine بشكل لا ينسى.')),
+              _buildItem('5 نماذج B1 موضوعيّة', '2 مجاني / 3 Premium', Icons.quiz, const Color(0xFF1E3A8A), () => _navigate(const LesenScreen())),
+              _buildItem('موارد مجّانيّة موثوقة', 'روابط DW + Goethe + telc', Icons.language, const Color(0xFF008080), () => _launchUrl('https://www.dw.com/de/deutsch-lernen/s-2055')),
+            ], isDark, borderCol),
 
-            // Section 2: Colloquial & Daily Speech (New Web Additions!)
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Row(
-                  children: [
-                    const Icon(Icons.forum, color: Color(0xFF10B981), size: 20),
-                    const SizedBox(width: 8),
-                    Text(
-                      'المحادثة اليومية والعامية (جديد) 🔥',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: textMain,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              sliver: SliverGrid(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 1.35,
-                ),
-                delegate: SliverChildListDelegate([
-                  _buildMenuCard(
-                    title: 'محاكي المحادثة',
-                    subtitle: 'محاكاة حوار B1-B2',
-                    icon: Icons.chat_bubble_outline,
-                    color: const Color(0xFFD97706), // Amber
-                    isDark: isDark,
-                    borderCol: borderCol,
-                    onTap: () => _navigate(const ChatSimulatorScreen()),
-                  ),
-                  _buildMenuCard(
-                    title: 'قاموس العامية',
-                    subtitle: 'لغة الشارع والشباب',
-                    icon: Icons.local_fire_department,
-                    color: const Color(0xFFDC2626), // Red
-                    isDark: isDark,
-                    borderCol: borderCol,
-                    onTap: () => _navigate(const SlangScreen()),
-                  ),
-                ]),
-              ),
-            ),
+            // CATEGORY 3: الامتحان الكامل ومحاكاته
+            _buildCategoryHeader('الامتحان الكامل ومحاكاته 📝', textMain),
+            _buildCategoryGrid([
+              _buildItem('محاكي Telc B1 الحقيقي', 'مؤقت حقيقي لكل الأقسام', Icons.timer, const Color(0xFFDC2626), () => _showSimpleInfoDialog('محاكي Telc B1 الحقيقي 🎓', 'محاكاة كاملة تحاكي ضغط الوقت والامتحان الحقيقي تماماً:\n\n• قراءة: 90 دقيقة\n• كتابة: 30 دقيقة\n• استماع: 25 دقيقة')),
+              _buildItem('امتحان كامل (مبسّط)', 'نسخة سريعة للتدريب', Icons.speed, const Color(0xFFEA580C), () => _showSimpleInfoDialog('امتحان كامل مبسط 🎯', 'نسخة تدريبية سريعة تحتوي على نصف عدد الأسئلة لتتمكن من تقييم مستواك خلال 30 دقيقة فقط.')),
+              _buildItem('تحديد المستوى', 'اختبار مستواك A1-B2', Icons.rule, const Color(0xFF0D9488), () => _showSimpleInfoDialog('تحديد المستوى 📊', 'اختبر مستواك الحالي مجاناً لتحديد ما إذا كنت جاهزاً للبدء بـ B1 أو الانتقال فوراً إلى كورس B2.')),
+              _buildItem('وصف صورة', 'قوالب وصياغات Bildbeschreibung', Icons.image, const Color(0xFF7C3AED), () => _navigate(const LibraryScreen())),
+              _buildItem('محاكي محادثة تفاعلي', 'حوارات محاكاة لـ B1-B2', Icons.chat_bubble, const Color(0xFF2563EB), () => _navigate(const ChatSimulatorScreen())),
+            ], isDark, borderCol),
 
-            const SliverToBoxAdapter(child: SizedBox(height: 16)),
+            // CATEGORY 4: الجنسيّة والاندماج
+            _buildCategoryHeader('الجنسيّة والاندماج 🇩🇪', textMain),
+            _buildCategoryGrid([
+              _buildItem('Leben in Deutschland', '310 سؤال كامل مع الترجمة', Icons.flag, const Color(0xFF1E3A8A), () => _navigate(const LebenScreen())),
+              _buildItem('Einbürgerungstest', 'كتالوج أسئلة الولايات والجنسية', Icons.account_balance, const Color(0xFF475569), () => _navigate(const EinbuergerungScreen())),
+              _buildItem('مشاكل وحلول', 'دليل عملي للعيش والاندماج', Icons.lightbulb, const Color(0xFF059669), () => _showSimpleInfoDialog('دليل المشاكل والحلول 💡', 'دليل كامل يحتوي على إجابات قانونية وعملية عن السكن، الـ Jobcenter، التأمين الصحي، وتعديل الشهادات والعمل في ألمانيا.')),
+            ], isDark, borderCol),
 
-            // Section 3: Grammar & Vocab
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Row(
-                  children: [
-                    const Icon(Icons.bookmark, color: Color(0xFF10B981), size: 20),
-                    const SizedBox(width: 8),
-                    Text(
-                      'القواعد والمفردات الأساسية',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: textMain,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              sliver: SliverGrid(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 1.35,
-                ),
-                delegate: SliverChildListDelegate([
-                  _buildMenuCard(
-                    title: 'قواعد اللغة (Grammatik)',
-                    subtitle: '12 درس مع أمثلة',
-                    icon: Icons.gavel,
-                    color: const Color(0xFF059669), // Emerald
-                    isDark: isDark,
-                    borderCol: borderCol,
-                    onTap: () => _navigate(const GrammatikScreen()),
-                  ),
-                  _buildMenuCard(
-                    title: 'قاموس المفردات (Wortschatz)',
-                    subtitle: '500+ كلمة مترجمة',
-                    icon: Icons.translate,
-                    color: const Color(0xFF0891B2), // Cyan
-                    isDark: isDark,
-                    borderCol: borderCol,
-                    onTap: () => _navigate(const WortschatzScreen()),
-                  ),
-                ]),
-              ),
-            ),
+            // CATEGORY 5: محتوى Premium الحصري
+            _buildCategoryHeader('محتوى Premium الحصري ⭐', textMain),
+            _buildCategoryGrid([
+              _buildItem('B2 كامل', 'قواعد متقدمة و 300+ كلمة', Icons.school, const Color(0xFFB45309), () => _navigate(const B2Screen())),
+              _buildItem('5 نماذج Telc B2', 'كاملة ومصححة بالذكاء الاصطناعي', Icons.assignment, const Color(0xFFDB2777), () => _navigate(const B2Screen())),
+              _buildItem('AI Writing Corrector', 'تصحيح ومراجعة الرسائل بالذكاء الاصطناعي', Icons.smart_toy, const Color(0xFF10B981), _showAiCorrector),
+              _buildItem('وضع الضغط للاستماع', 'ضوضاء واقعية (شارع/مقهى)', Icons.volume_off, const Color(0xFF7C3AED), () => _showSimpleInfoDialog('وضع الضغط للاستماع 🔥', 'يحاكي ضوضاء الشارع ومحطات القطار لتدريب أذنيك على الاستماع تحت الضغط وضوضاء الامتحان الحقيقية.')),
+              _buildItem('مدرّب القراءة السريعة', 'يختفي النص بعد 90/180 ثانية', Icons.bolt, const Color(0xFFEA580C), () => _showSimpleInfoDialog('مدرّب القراءة السريعة ⏱', 'يخفي النص تدريجياً لتدريبك على مهارات القراءة السريعة والـ Skimming لتوفير الوقت بالامتحان.')),
+              _buildItem('مترادفات Premium', '70+ زوج إضافي للمستوى المتقدم', Icons.games, const Color(0xFF2563EB), _showSynonymsGame),
+              _buildItem('23 خطأ متقدم', 'الأخطاء الشائعة لطلاب B2', Icons.dangerous, const Color(0xFFDC2626), () => _navigate(const B2Screen())),
+              _buildItem('189 سؤال Drill إضافي', 'أسئلة قواعد مكثفة وحصرية', Icons.psychology, const Color(0xFF0D9488), _showConjugationTrainer),
+              _buildItem('3 نماذج B1 إضافيّة', 'مواضيع الصحة، السفر والبيئة', Icons.library_books, const Color(0xFF0891B2), () => _navigate(const LesenScreen())),
+            ], isDark, borderCol),
 
-            const SliverToBoxAdapter(child: SizedBox(height: 16)),
+            // CATEGORY 6: أدوات عمليّة
+            _buildCategoryHeader('أدوات عمليّة 🛠️', textMain),
+            _buildCategoryGrid([
+              _buildItem('لوحتي الشخصيّة', 'تتبع التقدم ومجموع الـ XP', Icons.bar_chart, const Color(0xFF4F46E5), () => _navigate(const SettingsScreen())),
+              _buildItem('مخطط الدراسة', 'خطة 4 أسابيع للنجاح المضمون', Icons.next_plan, const Color(0xFF059669), _showB1Planner),
+              _buildItem('اطبع وذاكر', 'ملخصات وملفات PDF جاهزة للتحميل', Icons.picture_as_pdf, const Color(0xFFDC2626), () => _navigate(const LibraryScreen())),
+              _buildItem('شبكات الكلمات', 'ربط الكلمات لسهولة الحفظ', Icons.hub, const Color(0xFF7C3AED), () => _showSimpleInfoDialog('شبكات الكلمات 🕸️', 'أداة ذهنية ممتازة تقوم بربط الكلمات المتشابهة في شبكات موضوعية (مثل كلمات السكن، العمل، التسوق) لتبسيط الحفظ.')),
+              _buildItem('بنك المواضيع', 'أفكار لمقالات Schreiben وصور Sprechen', Icons.topic, const Color(0xFF0891B2), () => _navigate(const LibraryScreen())),
+              _buildItem('أدوات النجاح', 'نصائح واستراتيجيات هامة للممتحنين', Icons.construction, const Color(0xFFB45309), () => _showSimpleInfoDialog('أدوات النجاح 🧰', 'مجموعة نصائح واستراتيجيات عملية لحل كل قسم بأسرع طريقة وتفادي الفخاخ الشائعة التي يقع فيها الطلاب.')),
+            ], isDark, borderCol),
 
-            // Section 4: B2 Upgrade & Golden Resources
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Row(
-                  children: [
-                    const Icon(Icons.school, color: Color(0xFF10B981), size: 20),
-                    const SizedBox(width: 8),
-                    Text(
-                      'مستوى B2 والمكتبة الذهبية 🎓',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: textMain,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              sliver: SliverGrid(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 1.35,
-                ),
-                delegate: SliverChildListDelegate([
-                  _buildMenuCard(
-                    title: 'التحضير لـ B2',
-                    subtitle: '5 نماذج امتحانات B2',
-                    icon: Icons.auto_stories,
-                    color: const Color(0xFFB45309), // Amber
-                    isDark: isDark,
-                    borderCol: borderCol,
-                    onTap: () => _navigate(const B2Screen()),
-                  ),
-                  _buildMenuCard(
-                    title: 'المكتبة والملخصات',
-                    subtitle: 'رسائل وقوالب B1-B2',
-                    icon: Icons.library_books,
-                    color: const Color(0xFFDB2777), // Pink
-                    isDark: isDark,
-                    borderCol: borderCol,
-                    onTap: () => _navigate(const LibraryScreen()),
-                  ),
-                  _buildMenuCard(
-                    title: 'الحياة في ألمانيا',
-                    subtitle: '460+ سؤال وجواب',
-                    icon: Icons.flag,
-                    color: const Color(0xFF1E3A8A), // Dark Blue
-                    isDark: isDark,
-                    borderCol: borderCol,
-                    onTap: () => _navigate(const LebenScreen()),
-                  ),
-                  _buildMenuCard(
-                    title: 'اختبار الجنسية',
-                    subtitle: 'Einbürgerungstest',
-                    icon: Icons.account_balance,
-                    color: const Color(0xFF475569), // Slate
-                    isDark: isDark,
-                    borderCol: borderCol,
-                    onTap: () => _navigate(const EinbuergerungScreen()),
-                  ),
-                ]),
-              ),
-            ),
-            
-            // Section 5: Premium Upgrade (Golden Card)
+            // Bottom Banner for Premium screen
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -487,7 +1079,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Text(
                                   'تصفح بدون إعلانات، واحصل على قوالب وميزات B2 الحصرية ومحاكيات متقدمة!',
                                   style: TextStyle(
-                                    color: Colors.white70,
+                                    color: Colors.white.withValues(alpha: 0.9),
                                     fontSize: 11,
                                   ),
                                 ),
@@ -509,7 +1101,141 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildStatsCard(BuildContext context, AppProvider provider, ColorScheme colorScheme, bool isDark, Color textMain, Color borderCol) {
+  // Helper: Category Header
+  Widget _buildCategoryHeader(String title, Color textMain) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 20, bottom: 8),
+        child: Text(
+          title,
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            color: textMain,
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Helper: Grid of Items
+  Widget _buildCategoryGrid(List<Widget> children, bool isDark, Color borderCol) {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      sliver: SliverGrid(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          childAspectRatio: 1.45,
+        ),
+        delegate: SliverChildListDelegate(children),
+      ),
+    );
+  }
+
+  // Helper: Individual Item Card
+  Widget _buildItem(String title, String subtitle, IconData icon, Color color, VoidCallback onTap) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final textMain = isDark ? Colors.white : const Color(0xFF1E293B);
+    final textMuted = isDark ? Colors.white38 : const Color(0xFF94A3B8);
+    final borderCol = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
+
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: borderCol, width: 1),
+      ),
+      child: Card(
+        margin: EdgeInsets.zero,
+        color: cardBg,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: onTap,
+          splashColor: color.withValues(alpha: 0.1),
+          highlightColor: color.withValues(alpha: 0.05),
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: color.withValues(alpha: 0.12),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Icon(icon, color: color, size: 18),
+                    ),
+                    Icon(Icons.arrow_forward_ios, size: 10, color: textMuted.withValues(alpha: 0.5)),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        color: textMain,
+                        fontSize: 11.5,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 1),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        color: textMuted,
+                        fontSize: 9,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // 12. Contests dialog modal
+  void _showContestsDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('🏆 مسابقات وجوائز Premium'),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('اشترك في مسابقة المتصدرين الأسبوعية!'),
+            SizedBox(height: 8),
+            Text('• الأول يحصل على 30 يوم Premium مجاناً.\n• الثاني يحصل على 15 يوم Premium مجاناً.\n• الثالث يحصل على 7 أيام Premium مجاناً.', style: TextStyle(color: Colors.grey, fontSize: 13)),
+            SizedBox(height: 12),
+            Text('نظام مكافحة الغش مفعّل تلقائياً لضمان النزاهة والعدل.', style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold, fontSize: 11)),
+          ],
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text('إغلاق')),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatsCard(BuildContext context, AppProvider provider, bool isDark, Color textMain, Color borderCol) {
     final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
     final textMuted = isDark ? Colors.white60 : const Color(0xFF64748B);
     final textSub = isDark ? Colors.white38 : const Color(0xFF94A3B8);
@@ -531,7 +1257,6 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(20),
         child: Row(
           children: [
-            // Circular level indicator
             CircularPercentIndicator(
               radius: 42,
               lineWidth: 7,
@@ -571,7 +1296,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  // Progress mini-text
                   Text(
                     'النقاط للمستوى التالي: ${100 - (provider.xp % 100)} XP',
                     style: TextStyle(
@@ -582,7 +1306,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            // Fire streak indicator
             Column(
               children: [
                 Row(
@@ -624,88 +1347,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMenuCard({
-    required String title,
-    required String subtitle,
-    required IconData icon,
-    required Color color,
-    required bool isDark,
-    required Color borderCol,
-    required VoidCallback onTap,
-  }) {
-    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
-    final textMain = isDark ? Colors.white : const Color(0xFF1E293B);
-    final textMuted = isDark ? Colors.white38 : const Color(0xFF94A3B8);
-
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: borderCol, width: 1),
-      ),
-      child: Card(
-        margin: EdgeInsets.zero,
-        color: cardBg,
-        surfaceTintColor: Colors.transparent,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: onTap,
-          splashColor: color.withValues(alpha: 0.1),
-          highlightColor: color.withValues(alpha: 0.05),
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: color.withValues(alpha: 0.12),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Icon(icon, color: color, size: 22),
-                    ),
-                    Icon(Icons.arrow_forward_ios, size: 12, color: textMuted.withValues(alpha: 0.5)),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        color: textMain,
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      subtitle,
-                      style: TextStyle(
-                        color: textMuted,
-                        fontSize: 10,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
         ),
       ),
     );
