@@ -50,3 +50,15 @@ if (fs.existsSync(restoredAppIndexSrc)) {
   process.exit(1);
 }
 
+// Copy _redirects to dist/_redirects so Cloudflare Pages reads it
+const redirectsSrc = path.resolve('public/_redirects');
+const redirectsDest = path.resolve('dist/_redirects');
+console.log(`Copying redirects from ${redirectsSrc} to ${redirectsDest}...`);
+if (fs.existsSync(redirectsSrc)) {
+  fs.copyFileSync(redirectsSrc, redirectsDest);
+  console.log('Redirects file copied successfully.');
+} else {
+  console.log('No redirects file to copy.');
+}
+
+
