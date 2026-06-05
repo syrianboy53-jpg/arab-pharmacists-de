@@ -19,7 +19,7 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       web_changelog: '',
       apk_version: '57',
       apk_changelog: '',
-      apk_url: 'https://b1-syrer.de/b1-deutsch.apk',
+      apk_url: 'https://b1-syrer.de',
       min_apk_version: '1',
       support_bmc_url: 'https://buymeacoffee.com/halawanyfav',
       support_paypal_url: '',
