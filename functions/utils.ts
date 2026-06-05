@@ -44,8 +44,8 @@ export function base64urlEncode(str: string): string {
 }
 
 export function base64urlDecode(str: string): string {
-  // Add padding back if missing and convert base64url to standard base64
-  let base64 = str.replace(/-/g, '+').replace(/_/g, '/')
+  // Strip any existing '=' padding first, then convert base64url to standard base64
+  let base64 = str.replace(/=/g, '').replace(/-/g, '+').replace(/_/g, '/')
   while (base64.length % 4) {
     base64 += '='
   }
