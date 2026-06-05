@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "postbuild": "node scripts/copy-landing.js",
+    "postbuild": "node scripts/generate-static-pages.cjs && node scripts/copy-landing.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

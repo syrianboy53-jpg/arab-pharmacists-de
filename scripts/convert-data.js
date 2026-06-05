@@ -8,7 +8,7 @@ const tsDataDir = path.join(workspaceDir, 'src/data');
 const filesToConvert = [
   { dart: 'vocab_data.dart', ts: 'vocabulary.ts', variableName: 'vocabCategories' },
   { dart: 'schreiben_data.dart', ts: 'schreiben.ts', variableName: 'schreibenModels' },
-  { dart: 'grammatik_data.dart', ts: 'grammar.ts', variableNames: ['commonMistakes', 'trennbareVerben', 'untrennbareVerben'] },
+  { dart: 'grammatik_data.dart', ts: 'grammar.ts', variableNames: ['commonMistakes', 'trennbareVerben', 'grammarLessons', 'satzbau'] },
   { dart: 'b2_data.dart', ts: 'b2.ts', variableName: 'telcB2Models' },
   { dart: 'lesen_data.dart', ts: 'lesen.ts', variableName: 'lesenModels' },
   { dart: 'hoeren_data.dart', ts: 'hoeren.ts', variableName: 'hoerenModels' },
@@ -18,8 +18,9 @@ const filesToConvert = [
 function cleanAndParse(filePath, varNameOrNames) {
   let content = fs.readFileSync(filePath, 'utf-8');
 
-  // Replace final Dart definitions
+  // Replace final Dart definitions and imports
   let cleaned = content
+    .replace(/import\s+['"][^'"]+['"];/g, '') // Remove Dart imports
     .replace(/final\s+List<Map<String, dynamic>>/g, 'var')
     .replace(/final\s+List<Map<String, String>>/g, 'var')
     .replace(/final\s+List<String>/g, 'var')
