@@ -20,8 +20,8 @@ function copyRecursiveSync(src, dest) {
       );
     });
   } else {
-    if (path.basename(src) === 'b1-deutsch.apk') {
-      console.log('Skipping b1-deutsch.apk (handled by page function)...');
+    if (src === path.resolve('landing/b1-deutsch.apk')) {
+      console.log('Skipping legacy root b1-deutsch.apk...');
       return;
     }
     // Ensure parent dir exists
