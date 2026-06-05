@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (config != null) {
       final remoteVersion = int.tryParse(config['apk_version'] ?? '0') ?? 0;
-      const localVersion = 59; // Native app version 59
+      const localVersion = 60; // Native app version 59
       if (localVersion < remoteVersion) {
         final apkUrl = config['apk_url'] ?? 'https://www.b1-syrer.de/b1-deutsch.apk';
         _showUpdateDialog(apkUrl);

@@ -359,50 +359,219 @@ class _SatzbauList extends StatelessWidget {
   }
 }
 
-class _TrennbarList extends StatelessWidget {
+class _TrennbarList extends StatefulWidget {
+  @override
+  State<_TrennbarList> createState() => _TrennbarListState();
+}
+
+class _TrennbarListState extends State<_TrennbarList> {
+  int _selectedCategoryIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.all(16),
-      itemCount: trennbareVerben.length,
-      itemBuilder: (ctx, i) {
-        final item = trennbareVerben[i];
-        final verbs = List<Map<String, dynamic>>.from(item['verbs'] as List? ?? []);
-        return Card(
-          margin: const EdgeInsets.only(bottom: 16),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(item['titleAr'] as String? ?? '', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                Text(item['titleDe'] as String? ?? '', style: TextStyle(color: Colors.grey[600]), textDirection: TextDirection.ltr),
-                if (item['intro'] != null) ...[const SizedBox(height: 8), Text(item['intro'] as String)],
-                const Divider(height: 16),
-                ...verbs.map((v) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('• ', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(v['de'] as String? ?? '', style: const TextStyle(fontWeight: FontWeight.bold), textDirection: TextDirection.ltr),
-                            if (v['ar'] != null) Text(v['ar'] as String, style: const TextStyle(fontSize: 13)),
-                            if (v['example'] != null) Text(v['example'] as String, style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: Colors.grey[600]), textDirection: TextDirection.ltr),
-                          ],
+    if (trennbareVerben.isEmpty) {
+      return const Center(child: Text('لا توجد أفعال حالياً'));
+    }
+    final category = trennbareVerben[_selectedCategoryIndex < trennbareVerben.length ? _selectedCategoryIndex : 0];
+    final verbs = List<Map<String, dynamic>>.from(category['verbs'] as List? ?? []);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: isDark ? Colors.grey[900] : Colors.grey[200],
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              children: List.generate(trennbareVerben.length, (index) {
+                final cat = trennbareVerben[index];
+                final isSelected = _selectedCategoryIndex == index;
+                return Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _selectedCategoryIndex = index;
+                      });
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(
+                        color: isSelected
+                            ? const Color(0xFF10B981)
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Text(
+                          cat['titleAr'] as String? ?? '',
+                          style: TextStyle(
+                            color: isSelected
+                                ? Colors.white
+                                : (isDark ? Colors.white70 : Colors.black87),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            ),
+          ),
+        ),
+        if (category['intro'] != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: const Color(0xFF10B981).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: const Color(0xFF10B981).withOpacity(0.2)),
+              ),
+              child: Text(
+                category['intro'] as String,
+                style: const TextStyle(fontSize: 12, height: 1.5),
+                textAlign: TextAlign.right,
+              ),
+            ),
+          ),
+        const SizedBox(height: 8),
+        Expanded(
+          child: ListView.builder(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            itemCount: verbs.length,
+            itemBuilder: (ctx, verbIdx) {
+              final v = verbs[verbIdx];
+              final examples = List<Map<String, dynamic>>.from(v['examples'] as List? ?? []);
+              
+              return Card(
+                margin: const EdgeInsets.only(bottom: 12),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                child: ExpansionTile(
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          v['ar'] as String? ?? '',
+                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        v['infinitiv'] as String? ?? '',
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF10B981)),
+                        textDirection: TextDirection.ltr,
                       ),
                     ],
                   ),
-                )),
-              ],
-            ),
+                  subtitle: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Wrap(
+                      spacing: 8,
+                      runSpacing: 4,
+                      children: [
+                        _buildBadge(context, 'Prät: ${v['praeteritum'] ?? ''}'),
+                        _buildBadge(context, 'P2: ${v['partizip2'] ?? ''}'),
+                        _buildBadge(context, v['hilfsverb'] ?? '', color: const Color(0xFF10B981)),
+                      ],
+                    ),
+                  ),
+                  children: [
+                    if (examples.isEmpty)
+                      const Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: Text('لا توجد أمثلة حالياً', style: TextStyle(fontSize: 12, fontStyle: FontStyle.italic)),
+                      )
+                    else
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            const Text(
+                              '💡 أمثلة توضيحية (Beispiele):',
+                              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.right,
+                            ),
+                            const Divider(height: 16),
+                            ...examples.map((ex) {
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 10.0),
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: isDark ? Colors.black26 : Colors.grey[100],
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      if (ex['context'] != null)
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                          margin: const EdgeInsets.only(bottom: 4),
+                                          decoration: BoxDecoration(
+                                            color: Colors.blue.withOpacity(0.1),
+                                            borderRadius: BorderRadius.circular(4),
+                                          ),
+                                          child: Text(
+                                            ex['context'] as String,
+                                            style: const TextStyle(fontSize: 10, color: Colors.blue, fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      Text(
+                                        ex['de'] as String? ?? '',
+                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                        textDirection: TextDirection.ltr,
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        ex['ar'] as String? ?? '',
+                                        style: TextStyle(fontSize: 12, color: isDark ? Colors.white60 : Colors.grey[700]),
+                                        textAlign: TextAlign.right,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
+                          ],
+                        ),
+                      ),
+                  ],
+                ),
+              );
+            },
           ),
-        );
-      },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBadge(BuildContext context, String text, {Color? color}) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final badgeColor = color ?? (isDark ? Colors.white30 : Colors.black12);
+    final textColor = color != null ? Colors.white : (isDark ? Colors.white70 : Colors.black87);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(
+        color: color != null ? badgeColor : badgeColor.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: badgeColor.withOpacity(0.3)),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: textColor),
+      ),
     );
   }
 }
+

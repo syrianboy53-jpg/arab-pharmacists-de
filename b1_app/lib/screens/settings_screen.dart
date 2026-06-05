@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../providers/app_provider.dart';
 import 'premium_screen.dart';
 import 'login_screen.dart';
+import 'contact_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -29,7 +30,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         final config = json.decode(responseBody) as Map<String, dynamic>;
         
         final remoteVersion = int.tryParse(config['apk_version'] ?? '0') ?? 0;
-        const localVersion = 59; // Current app version code is 59
+        const localVersion = 60; // Current app version code is 59
         
         if (mounted) {
           if (localVersion < remoteVersion) {
@@ -38,7 +39,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('أنت تستخدم أحدث إصدار بالفعل! (النسخة 59) 🎉'),
+                content: Text('أنت تستخدم أحدث إصدار بالفعل! (النسخة 60) 🎉'),
                 backgroundColor: Colors.green,
               ),
             );
@@ -235,10 +236,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   subtitle: Text('فادي الحلواني - الحسكة، سوريا'),
                   trailing: Icon(Icons.favorite, color: Colors.red),
                 ),
-                const ListTile(
-                  leading: Icon(Icons.email),
-                  title: Text('تواصل'),
-                  subtitle: Text('shami.fadi@gmx.de'),
+                ListTile(
+                  leading: const Icon(Icons.support_agent),
+                  title: const Text('تواصل مع الإدارة 💬'),
+                  subtitle: const Text('أرسل اقتراحاتك واستفساراتك مباشرة'),
+                  trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const ContactScreen()),
+                    );
+                  },
                 ),
               ],
             ),

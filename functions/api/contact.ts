@@ -1,4 +1,4 @@
-import { Env } from '../utils'
+import { Env, query } from '../utils'
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
   const { request, env } = context
@@ -97,6 +97,35 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
       } catch (err) {
         console.error('Failed to send contact notification email via Resend:', err)
       }
+    }
+
+    // 4. Save to database feedback table (so it shows up in Fadi's Admin Dashboard)
+    try {
+      const topics: Record<string, string> = {
+        general: 'استفسار عام',
+        feedback: 'اقتراح أو ملاحظة',
+        premium: 'مشاكل الاشتراك / الدفع',
+        lessons: 'الدروس الخاصة والطلب الشفوي',
+        collab: 'شراكة / تعاون',
+        other: 'أخرى'
+      }
+      const topicName = topics[topic] || topic || 'غير محدد'
+      const finalSubject = subject ? subject.trim() : topicName;
+
+      await query(env, 
+        'INSERT INTO feedback (name, email, subject, message, status, created_at) VALUES ($1, $2, $3, $4, $5, $6)',
+        [
+          name.trim(),
+          email.trim(),
+          finalSubject,
+          message.trim(),
+          'unread',
+          new Date().toISOString()
+        ]
+      )
+      console.log('Saved feedback to database successfully')
+    } catch (dbErr) {
+      console.error('Failed to save feedback to database:', dbErr)
     }
 
     return new Response(JSON.stringify({
