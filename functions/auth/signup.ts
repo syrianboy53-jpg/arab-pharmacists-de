@@ -1,4 +1,5 @@
 import { Env, query, base64urlEncode } from '../utils'
+import bcrypt from 'bcryptjs'
 
 async function createJWT(payload: object, secret: string): Promise<string> {
   const header = base64urlEncode(JSON.stringify({ alg: 'HS256', typ: 'JWT' }))
@@ -19,7 +20,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
   }
 
   // Hash password
-  const pwHash = btoa(password) // simplified - production should use bcrypt
+  const pwHash = bcrypt.hashSync(password, 10)
 
   // Insert user
   const result = await query(env,

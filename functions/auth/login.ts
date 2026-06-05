@@ -1,4 +1,5 @@
 import { Env, query, base64urlEncode } from '../utils'
+import bcrypt from 'bcryptjs'
 
 async function createJWT(payload: object, secret: string): Promise<string> {
   const header = base64urlEncode(JSON.stringify({ alg: 'HS256', typ: 'JWT' }))
@@ -18,10 +19,10 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     return new Response(JSON.stringify({ error: 'Email and password required' }), { status: 400 })
   }
 
-  const pwHash = btoa(password)
+  // Look up user by email
   const result = await query(env,
-    `SELECT id, email, display_name, created_at FROM "user" WHERE email = $1 AND password_hash = $2`,
-    [email, pwHash]
+    `SELECT id, email, display_name, password_hash, created_at FROM "user" WHERE email = $1`,
+    [email]
   )
 
   if (!result.rows || result.rows.length === 0) {
@@ -29,6 +30,17 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
   }
 
   const user = result.rows[0]
+
+  // Compare passwords using bcryptjs
+  try {
+    const isMatched = bcrypt.compareSync(password, user.password_hash)
+    if (!isMatched) {
+      return new Response(JSON.stringify({ error: 'Invalid credentials' }), { status: 401 })
+    }
+  } catch (err: any) {
+    return new Response(JSON.stringify({ error: 'Password verification failed' }), { status: 401 })
+  }
+
   const token = await createJWT(
     { sub: String(user.id), email: user.email, iat: Math.floor(Date.now() / 1000), exp: Math.floor(Date.now() / 1000) + 30 * 24 * 3600 },
     env.JWT_SECRET
