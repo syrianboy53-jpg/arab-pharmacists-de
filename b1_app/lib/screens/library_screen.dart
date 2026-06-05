@@ -405,11 +405,7 @@ class PdfDownloadsTab extends StatelessWidget {
   Future<void> _openUrl(BuildContext context, String urlString) async {
     try {
       final uri = Uri.parse(urlString);
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-      } else {
-        throw 'Could not launch $urlString';
-      }
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
     } catch (e) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

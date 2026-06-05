@@ -73,6 +73,7 @@ class _HoerenScreenState extends State<HoerenScreen> {
     final model = hoerenModels[_selectedModel!];
     final parts = List<Map<String, dynamic>>.from(model['parts'] as List);
     final part = parts[_currentPart];
+    final questions = part['questions'] != null ? List<Map<String, dynamic>>.from(part['questions'] as List) : [];
     
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
@@ -127,9 +128,9 @@ class _HoerenScreenState extends State<HoerenScreen> {
               if (_currentPart > 0)
                 TextButton.icon(onPressed: () => setState(() { _currentPart--; _currentQuestion = 0; _selectedAnswer = null; }), icon: const Icon(Icons.arrow_back), label: const Text('السابق')),
               ElevatedButton.icon(
-                onPressed: _selectedAnswer != null ? () => _nextQuestion(parts) : null,
+                onPressed: (questions.isEmpty || _selectedAnswer != null) ? () => _nextQuestion(parts) : null,
                 icon: const Icon(Icons.arrow_forward),
-                label: Text(_currentPart == parts.length - 1 ? 'النتيجة' : 'التالي'),
+                label: Text(_isLastQuestion(parts) ? 'النتيجة' : 'التالي'),
               ),
             ],
           ),
@@ -166,6 +167,13 @@ class _HoerenScreenState extends State<HoerenScreen> {
         ],
       ],
     );
+  }
+
+  bool _isLastQuestion(List<Map<String, dynamic>> parts) {
+    final questions = parts[_currentPart]['questions'] != null ? List<Map<String, dynamic>>.from(parts[_currentPart]['questions'] as List) : [];
+    if (_currentPart < parts.length - 1) return false;
+    if (questions.isEmpty) return true;
+    return _currentQuestion == questions.length - 1;
   }
 
   void _nextQuestion(List<Map<String, dynamic>> parts) {

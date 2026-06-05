@@ -17,7 +17,7 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       announcement_color: '#CE1126',
       web_version: '20',
       web_changelog: '',
-      apk_version: '56',
+      apk_version: '57',
       apk_changelog: '',
       apk_url: 'https://b1-syrer.de/b1-deutsch.apk',
       min_apk_version: '1',

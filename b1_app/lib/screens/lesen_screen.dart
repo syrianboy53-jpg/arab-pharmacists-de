@@ -116,7 +116,7 @@ class _LesenScreenState extends State<LesenScreen> {
                   label: const Text('السابق'),
                 ),
               ElevatedButton.icon(
-                onPressed: _selectedAnswer != null ? _goNext : null,
+                onPressed: (questions.isEmpty || _selectedAnswer != null) ? _goNext : null,
                 icon: const Icon(Icons.arrow_forward),
                 label: Text(_isLastQuestion() ? 'النتيجة' : 'التالي'),
               ),
@@ -160,7 +160,9 @@ class _LesenScreenState extends State<LesenScreen> {
   bool _isLastQuestion() {
     final parts = _parts;
     final questions = parts[_currentPart]['questions'] as List? ?? [];
-    return _currentPart == parts.length - 1 && _currentQuestion == questions.length - 1;
+    if (_currentPart < parts.length - 1) return false;
+    if (questions.isEmpty) return true;
+    return _currentQuestion == questions.length - 1;
   }
 
   void _goBack() {

@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (config != null) {
       final remoteVersion = int.tryParse(config['apk_version'] ?? '0') ?? 0;
-      const localVersion = 56; // Native app version 56
+      const localVersion = 57; // Native app version 57
       if (localVersion < remoteVersion) {
         final apkUrl = config['apk_url'] ?? 'https://www.b1-syrer.de/b1-deutsch.apk';
         _showUpdateDialog(apkUrl);
@@ -102,8 +102,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             onPressed: () async {
               final uri = Uri.parse(downloadUrl);
-              if (await canLaunchUrl(uri)) {
+              try {
                 await launchUrl(uri, mode: LaunchMode.externalApplication);
+              } catch (e) {
+                debugPrint('Could not launch update URL: $e');
               }
             },
             child: const Text('تحديث الآن 📥', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -120,9 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _launchUrl(String urlString) async {
     final uri = Uri.parse(urlString);
     try {
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-      }
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
     } catch (e) {
       debugPrint('Could not launch URL: $e');
     }
