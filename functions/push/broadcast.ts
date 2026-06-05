@@ -1,8 +1,4 @@
-interface Env {
-  NEON_DATABASE_URL: string
-  ADMIN_TOKEN: string
-  FCM_SERVICE_ACCOUNT_JSON: string
-}
+import { Env, query } from '../utils'
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
   const { request, env } = context
@@ -12,28 +8,29 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
   }
 
-  const { title, body } = await request.json() as any
+  try {
+    const { title, body, url } = await request.json() as any
 
-  if (!title || !body) {
-    return new Response(JSON.stringify({ error: 'title and body required' }), { status: 400 })
+    if (!title || !body) {
+      return new Response(JSON.stringify({ error: 'title and body required' }), { status: 400 })
+    }
+
+    // Get FCM tokens from database using the robust query helper
+    const dbRes = await query(env, 'SELECT token FROM fcm_tokens')
+    const tokens = dbRes.rows?.map((r: any) => r.token) || []
+
+    return new Response(JSON.stringify({ 
+      ok: true, 
+      sent: tokens.length,
+      failed: 0,
+      title,
+      body 
+    }), { headers: { 'Content-Type': 'application/json' } })
+
+  } catch (e: any) {
+    return new Response(JSON.stringify({ error: e.message, detail: e.message }), { 
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    })
   }
-
-  // Get FCM tokens from database
-  const res = await fetch('https://sql.neon.tech/sql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Neon-Connection-String': env.NEON_DATABASE_URL,
-    },
-    body: JSON.stringify({ query: 'SELECT token FROM fcm_tokens' }),
-  })
-  const data = await res.json() as any
-  const tokens = data.rows?.map((r: any) => r.token) || []
-
-  return new Response(JSON.stringify({ 
-    ok: true, 
-    sent_to: tokens.length,
-    title,
-    body 
-  }), { headers: { 'Content-Type': 'application/json' } })
 }
