@@ -4,7 +4,7 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
   const { request, env } = context
   
   // 1. Get apk_url from DB config table
-  let apkUrl = 'https://github.com/syrianboy53-jpg/arab-pharmacists-de/releases/download/v2.0.0/b1-deutsch.1.apk'
+  let apkUrl = 'https://raw.githubusercontent.com/syrianboy53-jpg/arab-pharmacists-de/main/landing/apk/b1-deutsch.apk'
   try {
     const res = await query(env, "SELECT value FROM config WHERE key = 'apk_url'")
     if (res.rows && res.rows.length > 0 && res.rows[0].value) {
