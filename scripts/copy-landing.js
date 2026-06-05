@@ -65,4 +65,32 @@ if (fs.existsSync(redirectsSrc)) {
   console.log('No redirects file to copy.');
 }
 
+// Copy legal compliance and guides pages from public/ to root dist/
+const legalFolders = ['impressum', 'datenschutz', 'privacy', 'agb', 'ueber-uns', 'leitfaden'];
+for (const folder of legalFolders) {
+  const src = path.resolve('public', folder);
+  const dest = path.resolve('dist', folder);
+  if (fs.existsSync(src)) {
+    console.log(`Copying ${folder} to ${dest}...`);
+    copyRecursiveSync(src, dest);
+  }
+}
+
+// Copy the legal sub-app bundle assets from public/assets to root dist/assets
+const legalAssets = ['index-jxGr3yiO.js', 'index-BfhUiy1k.css'];
+for (const asset of legalAssets) {
+  const src = path.resolve('public/assets', asset);
+  const dest = path.resolve('dist/assets', asset);
+  if (fs.existsSync(src)) {
+    console.log(`Copying asset ${asset} to ${dest}...`);
+    // Ensure parent dir exists
+    const parent = path.dirname(dest);
+    if (!fs.existsSync(parent)) {
+      fs.mkdirSync(parent, { recursive: true });
+    }
+    fs.copyFileSync(src, dest);
+  }
+}
+
+
 
