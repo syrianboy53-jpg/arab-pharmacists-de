@@ -12,21 +12,40 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
   // Support quick GET actions directly from the browser URL bar
   const action = url.searchParams.get('action')
   const id = url.searchParams.get('id')
+  const email = url.searchParams.get('email')
 
-  if (action && id) {
+  if (action && (id || email)) {
     try {
+      let targetId = id
+      if (email) {
+        // Resolve email to active or most recent subscription ID
+        const userSubRes = await query(env, `
+          SELECT s.id 
+          FROM subscription s
+          JOIN "user" u ON s.user_id = u.id
+          WHERE u.email = $1
+          ORDER BY s.created_at DESC LIMIT 1
+        `, [email])
+        
+        if (userSubRes.rows && userSubRes.rows.length > 0) {
+          targetId = userSubRes.rows[0].id
+        } else {
+          return new Response(JSON.stringify({ error: `No subscription found for email: ${email}` }), { status: 404 })
+        }
+      }
+
       if (action === 'cancel') {
         await query(env, `
           UPDATE subscription 
           SET is_active = false, status = 'cancelled', updated_at = NOW()
           WHERE id = $1
-        `, [id])
-        return new Response(JSON.stringify({ ok: true, message: `Subscription ${id} cancelled successfully` }), {
+        `, [targetId])
+        return new Response(JSON.stringify({ ok: true, message: `Subscription for ${email || 'ID ' + targetId} cancelled successfully` }), {
           headers: { 'Content-Type': 'application/json' }
         })
       } else if (action === 'delete') {
-        await query(env, 'DELETE FROM subscription WHERE id = $1', [id])
-        return new Response(JSON.stringify({ ok: true, message: `Subscription ${id} deleted successfully` }), {
+        await query(env, 'DELETE FROM subscription WHERE id = $1', [targetId])
+        return new Response(JSON.stringify({ ok: true, message: `Subscription for ${email || 'ID ' + targetId} deleted successfully` }), {
           headers: { 'Content-Type': 'application/json' }
         })
       } else if (action === 'activate') {
@@ -34,8 +53,8 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
           UPDATE subscription 
           SET is_active = true, status = 'active', updated_at = NOW()
           WHERE id = $1
-        `, [id])
-        return new Response(JSON.stringify({ ok: true, message: `Subscription ${id} activated successfully` }), {
+        `, [targetId])
+        return new Response(JSON.stringify({ ok: true, message: `Subscription for ${email || 'ID ' + targetId} activated successfully` }), {
           headers: { 'Content-Type': 'application/json' }
         })
       }
@@ -43,6 +62,7 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       return new Response(JSON.stringify({ error: e.message }), { status: 500 })
     }
   }
+
 
   try {
     const limit = parseInt(url.searchParams.get('limit') || '200')
