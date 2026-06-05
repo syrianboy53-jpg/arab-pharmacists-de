@@ -60,3 +60,65 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     return new Response(JSON.stringify({ error: e.message }), { status: 500 })
   }
 }
+
+export async function onRequestPost(context: { request: Request; env: Env }) {
+  const { request, env } = context
+  const adminToken = request.headers.get('X-Admin-Token')
+  
+  if (adminToken !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
+  }
+
+  try {
+    const { id, is_active, status, expiry_date } = await request.json() as any
+
+    if (!id) {
+      return new Response(JSON.stringify({ error: 'Subscription id required' }), { status: 400 })
+    }
+
+    // Update subscription status or active flag
+    await query(env, `
+      UPDATE subscription 
+      SET is_active = $2, status = $3, expiry_date = COALESCE($4, expiry_date), updated_at = NOW()
+      WHERE id = $1
+    `, [
+      id, 
+      is_active !== undefined ? is_active : false, 
+      status || 'cancelled',
+      expiry_date || null
+    ])
+
+    return new Response(JSON.stringify({ ok: true, message: 'Subscription updated successfully' }), {
+      headers: { 'Content-Type': 'application/json' }
+    })
+  } catch (e: any) {
+    return new Response(JSON.stringify({ error: e.message }), { status: 500 })
+  }
+}
+
+export async function onRequestDelete(context: { request: Request; env: Env }) {
+  const { request, env } = context
+  const adminToken = request.headers.get('X-Admin-Token')
+  
+  if (adminToken !== env.ADMIN_TOKEN) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401 })
+  }
+
+  try {
+    const url = new URL(request.url)
+    const id = url.searchParams.get('id')
+
+    if (!id) {
+      return new Response(JSON.stringify({ error: 'id required' }), { status: 400 })
+    }
+
+    await query(env, 'DELETE FROM subscription WHERE id = $1', [id])
+
+    return new Response(JSON.stringify({ ok: true, message: 'Subscription deleted successfully' }), {
+      headers: { 'Content-Type': 'application/json' }
+    })
+  } catch (e: any) {
+    return new Response(JSON.stringify({ error: e.message }), { status: 500 })
+  }
+}
+
