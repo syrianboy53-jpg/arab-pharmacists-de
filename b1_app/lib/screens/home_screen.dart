@@ -22,6 +22,18 @@ import 'library_screen.dart';
 import 'slang_screen.dart';
 import 'chat_simulator_screen.dart';
 import 'premium_screen.dart';
+import 'einstufung_screen.dart';
+import 'satzbau_screen.dart';
+import 'drill_screen.dart';
+import 'synonyms_screen.dart';
+import 'fehler_screen.dart';
+import 'conjugation_trainer_screen.dart';
+import 'emergency_screen.dart';
+import 'smart_review_screen.dart';
+import 'problems_screen.dart';
+import 'exam_simulation_screen.dart';
+import 'bild_description_screen.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -60,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (config != null) {
       final remoteVersion = int.tryParse(config['apk_version'] ?? '0') ?? 0;
-      const localVersion = 58; // Native app version 58
+      const localVersion = 59; // Native app version 59
       if (localVersion < remoteVersion) {
         final apkUrl = config['apk_url'] ?? 'https://www.b1-syrer.de/b1-deutsch.apk';
         _showUpdateDialog(apkUrl);
@@ -1090,7 +1102,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // CATEGORY 1: الأساسيّات (مجّاني)
             _buildCategoryHeader('الأساسيّات (مجّاني) 📚', textMain),
             _buildCategoryGrid([
-              _buildItem('القواعد', 'أزمنة وحالات وأفعال', Icons.gavel, const Color(0xFF2563EB), () => _navigate(const GrammatikScreen())),
+              _buildItem('القواعد', 'أزمنة وح حالات وأفعال', Icons.gavel, const Color(0xFF2563EB), () => _navigate(const GrammatikScreen())),
               _buildItem('المفردات', '6000+ كلمة مترجمة', Icons.translate, const Color(0xFF0891B2), () => _navigate(const WortschatzScreen())),
               _buildItem('القراءة (Lesen)', 'نصوص + أسئلة', Icons.menu_book, const Color(0xFF7C3AED), () => _navigate(const LesenScreen())),
               _buildItem('الاستماع (Hören)', 'حوارات وإعلانات', Icons.headphones, const Color(0xFFEA580C), () => _navigate(const HoerenScreen())),
@@ -1098,10 +1110,10 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildItem('المحادثة (Sprechen)', 'الأجزاء الثلاثة', Icons.record_voice_over, const Color(0xFFDC2626), () => _navigate(const SprechenScreen())),
               _buildItem('قوالب المحادثة', 'عبارات جاهزة + B2', Icons.chat, const Color(0xFF4F46E5), () => _navigate(const LibraryScreen())),
               _buildItem('قاموس العامية', 'لغة الشارع والشباب', Icons.local_fire_department, const Color(0xFFDC2626), () => _navigate(const SlangScreen())),
-              _buildItem('بناء الجمل', 'تمارين تركيب الكلمات', Icons.format_list_numbered, const Color(0xFFD97706), () => _navigate(const GrammatikScreen())),
+              _buildItem('بناء الجمل', 'تمارين تركيب الكلمات', Icons.format_list_numbered, const Color(0xFFD97706), () => _navigate(const SatzbauScreen())),
               _buildItem('Sprachbausteine كاملة', '5 نماذج تدريب كاملة', Icons.extension, const Color(0xFF059669), () => _navigate(const SprachbausteineScreen())),
-              _buildItem('مراجعة ذكيّة', 'مراجعة بأسلوب SRS', Icons.loop, const Color(0xFF475569), _showSmartReview),
-              _buildItem('مدرّب التصريف', 'أفعال + Modalverben', Icons.refresh, const Color(0xFF1E3A8A), _showConjugationTrainer),
+              _buildItem('مراجعة ذكيّة', 'مراجعة بأسلوب SRS', Icons.loop, const Color(0xFF475569), () => _navigate(const SmartReviewScreen())),
+              _buildItem('مدرّب التصريف', 'أفعال + Modalverben', Icons.refresh, const Color(0xFF1E3A8A), () => _navigate(const ConjugationTrainerScreen())),
             ], isDark, borderCol),
 
             // CATEGORY 2: تدريبات تفاعليّة (Freemium)
@@ -1113,12 +1125,12 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildItem('تقييمات وتعليقات', 'شاركنا تجربتك', Icons.star, const Color(0xFFF59E0B), () => _showSimpleInfoDialog('تقييم التطبيق ⭐', 'رأيك يهمنا! يرجى تقييم التطبيق على متجر بلاي لمساعدتنا على الاستمرار وتطوير ميزات جديدة.')),
               _buildItem('تحدّي اليوم', '4 أسئلة جديدة + 90 XP', Icons.wb_sunny, const Color(0xFFEA580C), _showDailyChallenge),
               _buildItem('لوحة المتصدّرين', 'تنافس مع زملائك', Icons.insights, const Color(0xFF7C3AED), _showLeaderboard),
-              _buildItem('صندوق الإسعافات', 'جمل للنجدة في الامتحان', Icons.health_and_safety, const Color(0xFFDC2626), _showEmergencyBox),
-              _buildItem('فخاخ المترادفات', 'لعبة 90 زوج مرادفات', Icons.gamepad, const Color(0xFF059669), _showSynonymsGame),
+              _buildItem('صندوق الإسعافات', 'جمل للنجدة في الامتحان', Icons.health_and_safety, const Color(0xFFDC2626), () => _navigate(const EmergencyScreen())),
+              _buildItem('فخاخ المترادفات', 'لعبة 90 زوج مرادفات', Icons.gamepad, const Color(0xFF059669), () => _navigate(const SynonymsScreen())),
               _buildItem('ترتيب البطاقات', 'لعبة der/die/das', Icons.style, const Color(0xFF0891B2), _showCardSortingGame),
               _buildItem('مواعيد الكورسات', '30 معهداً في 13 مدينة', Icons.school, const Color(0xFF475569), () => _showSimpleInfoDialog('مواعيد الكورسات 📅', 'تتوفر مواعيد كورسات BAMF و VHS و Goethe بشكل دوري كل شهر في 13 مدينة ألمانية، بالإضافة لكورسات أونلاين مجانية للمسجلين في Jobcenter.')),
-              _buildItem('30 خطأ شائع DaZ', '7 مجاني / 23 Premium', Icons.warning, const Color(0xFFB45309), () => _navigate(const GrammatikScreen())),
-              _buildItem('Drill - Sprachbausteine', '220 سؤال قواعد مكثف', Icons.offline_bolt, const Color(0xFFDB2777), () => _showSimpleInfoDialog('Drill — قواعد 🧠', 'تمرين مكثف وسريع يحتوي على 220 سؤالاً تفاعلياً مصمماً لترسيخ القواعد الصعبة وامتحان Sprachbausteine بشكل لا ينسى.')),
+              _buildItem('30 خطأ شائع DaZ', '7 مجاني / 23 Premium', Icons.warning, const Color(0xFFB45309), () => _navigate(const FehlerScreen())),
+              _buildItem('Drill - Sprachbausteine', '220 سؤال قواعد مكثف', Icons.offline_bolt, const Color(0xFFDB2777), () => _navigate(const DrillScreen())),
               _buildItem('5 نماذج B1 موضوعيّة', '2 مجاني / 3 Premium', Icons.quiz, const Color(0xFF1E3A8A), () => _navigate(const LesenScreen())),
               _buildItem('موارد مجّانيّة موثوقة', 'روابط DW + Goethe + telc', Icons.language, const Color(0xFF008080), () => _launchUrl('https://www.dw.com/de/deutsch-lernen/s-2055')),
             ], isDark, borderCol),
@@ -1126,10 +1138,10 @@ class _HomeScreenState extends State<HomeScreen> {
             // CATEGORY 3: الامتحان الكامل ومحاكاته
             _buildCategoryHeader('الامتحان الكامل ومحاكاته 📝', textMain),
             _buildCategoryGrid([
-              _buildItem('محاكي Telc B1 الحقيقي', 'مؤقت حقيقي لكل الأقسام', Icons.timer, const Color(0xFFDC2626), () => _showSimpleInfoDialog('محاكي Telc B1 الحقيقي 🎓', 'محاكاة كاملة تحاكي ضغط الوقت والامتحان الحقيقي تماماً:\n\n• قراءة: 90 دقيقة\n• كتابة: 30 دقيقة\n• استماع: 25 دقيقة')),
+              _buildItem('محاكي Telc B1 الحقيقي', 'مؤقت حقيقي لكل الأقسام', Icons.timer, const Color(0xFFDC2626), () => _navigate(const ExamSimulationScreen())),
               _buildItem('امتحان كامل (مبسّط)', 'نسخة سريعة للتدريب', Icons.speed, const Color(0xFFEA580C), () => _showSimpleInfoDialog('امتحان كامل مبسط 🎯', 'نسخة تدريبية سريعة تحتوي على نصف عدد الأسئلة لتتمكن من تقييم مستواك خلال 30 دقيقة فقط.')),
-              _buildItem('تحديد المستوى', 'اختبار مستواك A1-B2', Icons.rule, const Color(0xFF0D9488), () => _showSimpleInfoDialog('تحديد المستوى 📊', 'اختبر مستواك الحالي مجاناً لتحديد ما إذا كنت جاهزاً للبدء بـ B1 أو الانتقال فوراً إلى كورس B2.')),
-              _buildItem('وصف صورة', 'قوالب وصياغات Bildbeschreibung', Icons.image, const Color(0xFF7C3AED), () => _navigate(const LibraryScreen())),
+              _buildItem('تحديد المستوى', 'اختبار مستواك A1-B2', Icons.rule, const Color(0xFF0D9488), () => _navigate(const EinstufungScreen())),
+              _buildItem('وصف صورة', 'قوالب وصياغات Bildbeschreibung', Icons.image, const Color(0xFF7C3AED), () => _navigate(const BildDescriptionScreen())),
               _buildItem('محاكي محادثة تفاعلي', 'حوارات محاكاة لـ B1-B2', Icons.chat_bubble, const Color(0xFF2563EB), () => _navigate(const ChatSimulatorScreen())),
             ], isDark, borderCol),
 
@@ -1138,7 +1150,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _buildCategoryGrid([
               _buildItem('Leben in Deutschland', '310 سؤال كامل مع الترجمة', Icons.flag, const Color(0xFF1E3A8A), () => _navigate(const LebenScreen())),
               _buildItem('Einbürgerungstest', 'كتالوج أسئلة الولايات والجنسية', Icons.account_balance, const Color(0xFF475569), () => _navigate(const EinbuergerungScreen())),
-              _buildItem('مشاكل وحلول', 'دليل عملي للعيش والاندماج', Icons.lightbulb, const Color(0xFF059669), () => _showSimpleInfoDialog('دليل المشاكل والحلول 💡', 'دليل كامل يحتوي على إجابات قانونية وعملية عن السكن، الـ Jobcenter، التأمين الصحي، وتعديل الشهادات والعمل في ألمانيا.')),
+              _buildItem('مشاكل وحلول', 'دليل عملي للعيش والاندماج', Icons.lightbulb, const Color(0xFF059669), () => _navigate(const ProblemsScreen())),
             ], isDark, borderCol),
 
             // CATEGORY 5: محتوى Premium الحصري
@@ -1149,9 +1161,9 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildItem('AI Writing Corrector', 'تصحيح ومراجعة الرسائل بالذكاء الاصطناعي', Icons.smart_toy, const Color(0xFF10B981), _showAiCorrector),
               _buildItem('وضع الضغط للاستماع', 'ضوضاء واقعية (شارع/مقهى)', Icons.volume_off, const Color(0xFF7C3AED), () => _showSimpleInfoDialog('وضع الضغط للاستماع 🔥', 'يحاكي ضوضاء الشارع ومحطات القطار لتدريب أذنيك على الاستماع تحت الضغط وضوضاء الامتحان الحقيقية.')),
               _buildItem('مدرّب القراءة السريعة', 'يختفي النص بعد 90/180 ثانية', Icons.bolt, const Color(0xFFEA580C), () => _showSimpleInfoDialog('مدرّب القراءة السريعة ⏱', 'يخفي النص تدريجياً لتدريبك على مهارات القراءة السريعة والـ Skimming لتوفير الوقت بالامتحان.')),
-              _buildItem('مترادفات Premium', '70+ زوج إضافي للمستوى المتقدم', Icons.games, const Color(0xFF2563EB), _showSynonymsGame),
+              _buildItem('مترادفات Premium', '70+ زوج إضافي للمستوى المتقدم', Icons.games, const Color(0xFF2563EB), () => _navigate(const SynonymsScreen())),
               _buildItem('23 خطأ متقدم', 'الأخطاء الشائعة لطلاب B2', Icons.dangerous, const Color(0xFFDC2626), () => _navigate(const B2Screen())),
-              _buildItem('189 سؤال Drill إضافي', 'أسئلة قواعد مكثفة وحصرية', Icons.psychology, const Color(0xFF0D9488), _showConjugationTrainer),
+              _buildItem('189 سؤال Drill إضافي', 'أسئلة قواعد مكثفة وحصرية', Icons.psychology, const Color(0xFF0D9488), () => _navigate(const ConjugationTrainerScreen())),
               _buildItem('3 نماذج B1 إضافيّة', 'مواضيع الصحة، السفر والبيئة', Icons.library_books, const Color(0xFF0891B2), () => _navigate(const LesenScreen())),
             ], isDark, borderCol),
 
