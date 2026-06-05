@@ -28,7 +28,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     if (match) {
       const localVersion = parseInt(match[1], 10)
       
-      fetch('/config')
+      fetch('/config?t=' + Date.now())
         .then(res => res.json())
         .then((config: any) => {
           const remoteVersion = parseInt(config.apk_version || '0', 10)

@@ -33,7 +33,10 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     }
 
     return new Response(JSON.stringify(config), {
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate'
+      }
     })
   } catch (e: any) {
     // Fallback if DB fails so site loads
@@ -54,6 +57,7 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     return new Response(JSON.stringify(config), {
       headers: {
         'Content-Type': 'application/json',
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
         'X-Config-Fallback': 'true',
         'X-Config-Error': e.message
       }
