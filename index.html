@@ -2,171 +2,18 @@
 <html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="favicon.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="ios/icon-180.png" />
-    <link rel="apple-touch-icon" sizes="167x167" href="ios/icon-167.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="ios/icon-152.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="ios/icon-120.png" />
-    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#0F7B3E" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes" />
-    <meta name="description" content="تطبيق مجاني لتحضير امتحان B1 الألماني (Goethe, telc, DTZ, ÖSD) — مفردات، قواعد، قراءة، استماع، محادثة، وكتابة بالعربية والألمانية. للسوريين والعرب في ألمانيا والنمسا وسويسرا." />
-    <meta name="keywords" content="B1 Deutsch, امتحان الألماني B1, Goethe B1, telc B1, DTZ, ÖSD, تعلم الألمانية, اختبار الألماني, شرح ألماني بالعربي, B1 Prüfung, Integrationstest, Einbürgerungstest, DaZ, Deutschlernen, Syrer in Deutschland" />
-    <meta name="author" content="B1-Syrer.de" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow" />
-    <meta name="language" content="ar,de" />
-    <meta name="geo.region" content="DE" />
-    <meta name="geo.placename" content="Germany" />
-    <meta http-equiv="content-language" content="ar,de" />
-
-    <!-- Canonical + hreflang -->
-    <link rel="canonical" href="../index.html" />
-    <link rel="alternate" hreflang="ar" href="../index.html" />
-    <link rel="alternate" hreflang="de" href="../index.html" />
-    <link rel="alternate" hreflang="x-default" href="../index.html" />
-
-    <!-- Open Graph (Facebook, WhatsApp, Telegram preview) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="B1-Syrer.de" />
-    <meta property="og:url" content="https://www.b1-syrer.de/" />
-    <meta property="og:title" content="B1 Deutsch — تحضير امتحان الألماني B1 مجاناً" />
-    <meta property="og:description" content="أفضل تطبيق مجاني للسوريين والعرب لتحضير امتحان B1 الألماني (Goethe, telc, DTZ, ÖSD) — مع شرح بالعربية." />
-    <meta property="og:image" content="https://www.b1-syrer.de/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="ar_SY" />
-    <meta property="og:locale:alternate" content="de_DE" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="B1 Deutsch — تحضير امتحان الألماني B1" />
-    <meta name="twitter:description" content="تطبيق مجاني لتحضير امتحان B1 الألماني بالعربية." />
-    <meta name="twitter:image" content="https://www.b1-syrer.de/og-image.png" />
-
-    <!-- JSON-LD: Organization + WebSite + EducationalApplication -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": "https://www.b1-syrer.de/#org",
-          "name": "B1-Syrer.de",
-          "url": "https://www.b1-syrer.de/",
-          "logo": "https://www.b1-syrer.de/favicon.png",
-          "sameAs": []
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://www.b1-syrer.de/#website",
-          "url": "https://www.b1-syrer.de/",
-          "name": "B1 Deutsch — تحضير امتحان الألماني",
-          "inLanguage": ["ar", "de"],
-          "publisher": { "@id": "https://www.b1-syrer.de/#org" },
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://www.b1-syrer.de/app/#/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
-        },
-        {
-          "@type": "EducationalApplication",
-          "name": "B1 Deutsch",
-          "applicationCategory": "EducationalApplication",
-          "operatingSystem": "Web, iOS, Android",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "EUR"
-          },
-          "inLanguage": ["ar", "de"],
-          "audience": {
-            "@type": "EducationalAudience",
-            "educationalRole": "student"
-          },
-          "educationalLevel": "B1 (CEFR)",
-          "teaches": "Deutsch als Zweitsprache, Goethe-Zertifikat B1, telc B1, DTZ, ÖSD B1"
-        }
-      ]
-    }
-    </script>
-
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="B1 Deutsch" />
-    <meta name="format-detection" content="telephone=no" />
-    <!-- iPhone splash screens -->
-    <link rel="apple-touch-startup-image" href="ios/splash-iphone-14promax-1290x2796.png" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3)" />
-    <link rel="apple-touch-startup-image" href="ios/splash-iphone-15-1179x2556.png" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3)" />
-    <link rel="apple-touch-startup-image" href="ios/splash-iphone-13promax-1284x2778.png" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3)" />
-    <link rel="apple-touch-startup-image" href="ios/splash-iphone-13-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" />
-    <link rel="apple-touch-startup-image" href="ios/splash-iphone-xsmax-1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" />
-    <link rel="apple-touch-startup-image" href="ios/splash-iphone-xr-828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" />
-    <link rel="apple-touch-startup-image" href="ios/splash-iphone-x-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" />
-    <link rel="apple-touch-startup-image" href="ios/splash-iphone-8plus-1242x2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3)" />
-    <link rel="apple-touch-startup-image" href="ios/splash-iphone-8-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" />
-    <link rel="apple-touch-startup-image" href="ios/splash-iphone-se-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
-    <title>B1 Deutsch – تحضير امتحان الألماني</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;700&family=Patrick+Hand&display=swap" rel="stylesheet">
-    <!-- Google AdSense — site verification + auto ads -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1874998894873805" crossorigin="anonymous"></script>
-
-    <!-- Google Analytics 4 (GA4) -->
-    <script>
-      window.GA4_ID = window.GA4_ID || null
-      if (window.GA4_ID) {
-        var s = document.createElement('script')
-        s.async = true
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GA4_ID
-        document.head.appendChild(s)
-        window.dataLayer = window.dataLayer || []
-        window.gtag = function () { window.dataLayer.push(arguments) }
-        window.gtag('js', new Date())
-        window.gtag('config', window.GA4_ID, { anonymize_ip: true, cookie_flags: 'SameSite=None;Secure' })
-      }
-    </script>
-    <link rel="stylesheet" href="modern-theme.css">
+    <title>B1 Deutsch للسوريين — تطبيق تحضير امتحان B1 الألماني</title>
+    <meta name="description" content="تطبيق سوري مجاني لتحضير امتحان B1 الألماني — قراءة، استماع، كتابة، محادثة، Leben in Deutschland، وأكثر." />
+    <link rel="icon" type="image/png" href="/app/brand/icon.png" />
+    <link rel="apple-touch-icon" href="/app/brand/icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js').then((reg) => {
-            const notifyWaiting = () => {
-              if (reg.waiting) {
-                window.dispatchEvent(new CustomEvent('app:update-available', {
-                  detail: { reg }
-                }));
-              }
-            };
-            notifyWaiting();
-            reg.addEventListener('updatefound', () => {
-              const newSW = reg.installing;
-              if (!newSW) return;
-              newSW.addEventListener('statechange', () => {
-                if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
-                  notifyWaiting();
-                }
-              });
-            });
-            setInterval(() => reg.update().catch(() => {}), 5 * 60 * 1000);
-          }).catch(() => {});
-          let refreshing = false;
-          navigator.serviceWorker.addEventListener('controllerchange', () => {
-            if (refreshing) return;
-            refreshing = true;
-            window.location.reload();
-          });
-        });
-      }
-    </script>
-    <!-- Jotform AI Agent -->
-    <script src='https://cdn.jotfor.ms/agent/embedjs/019e228faa8370939eb96e1db4ecd6992d9e/embed.js?autoOpenChatIn=1'></script>
   </body>
 </html>
