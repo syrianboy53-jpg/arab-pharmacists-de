@@ -25,12 +25,18 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     params.push(limit)
 
     const res = await query(env, sql, params)
-    return new Response(JSON.stringify(res.rows || []), {
+    const entries = (res.rows || []).map((row: any) => ({
+      ...row,
+      created_at: row.created_at ? new Date(row.created_at).toISOString() : null
+    }))
+
+    return new Response(JSON.stringify(entries), {
       headers: { 'Content-Type': 'application/json' }
     })
   } catch (e: any) {
     return new Response(JSON.stringify({ error: e.message }), { status: 500 })
   }
+
 }
 
 export async function onRequestDelete(context: { request: Request; env: Env }) {

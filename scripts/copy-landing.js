@@ -20,6 +20,10 @@ function copyRecursiveSync(src, dest) {
       );
     });
   } else {
+    if (path.basename(src) === 'b1-deutsch.apk') {
+      console.log('Skipping b1-deutsch.apk (handled by page function)...');
+      return;
+    }
     // Ensure parent dir exists
     const parent = path.dirname(dest);
     if (!fs.existsSync(parent)) {
