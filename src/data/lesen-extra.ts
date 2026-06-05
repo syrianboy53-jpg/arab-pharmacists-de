@@ -1,4 +1,17 @@
-import type { LesenModel } from './lesen'
+export interface LesenModel {
+  id: number
+  title: string
+  teil: number
+  description: string
+  questions: {
+    id: number
+    text: string
+    question: string
+    options: string[]
+    correct: number
+    explanation: string
+  }[]
+}
 
 export const lesenModelsExtra: LesenModel[] = [
   {

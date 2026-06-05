@@ -1,29 +1,68 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { lesenModels as baseModels } from '../data/lesen'
 import { lesenModelsExtra } from '../data/lesen-extra'
 
 const lesenModels = [...baseModels, ...lesenModelsExtra]
 
 export default function LesenPage() {
-  const [selectedModel, setSelectedModel] = useState<number | null>(null)
-  const [answers, setAnswers] = useState<Record<number, number>>({})
+  const [selectedModelIndex, setSelectedModelIndex] = useState<number | null>(null)
+  const [answers, setAnswers] = useState<Record<string, any>>({}) // maps questionId to choice
   const [showResults, setShowResults] = useState(false)
+  const [showExplanations, setShowExplanations] = useState<Record<string, boolean>>({})
 
-  const model = selectedModel !== null ? lesenModels[selectedModel] : null
+  const model = selectedModelIndex !== null ? lesenModels[selectedModelIndex] : null
 
-  function handleAnswer(questionId: number, optionIndex: number) {
+  // Flatten questions to calculate stats
+  const allQuestions = useMemo(() => {
+    if (!model) return []
+    if ((model as any).parts) {
+      // Hierarchical model
+      const list: any[] = []
+      ;(model as any).parts.forEach((part: any) => {
+        if (part.statements) {
+          list.push(...part.statements.map((s: any) => ({ ...s, type: 'match-blog', correct: s.correctAd })))
+        } else if (part.questions) {
+          if (part.type === 'tf-opinions') {
+            list.push(...part.questions.map((q: any) => ({ ...q, type: 'tf-opinions', correct: q.correct })))
+          } else {
+            list.push(...part.questions.map((q: any) => ({ ...q, type: 'mc', correct: q.correct })))
+          }
+        } else if (part.situations) {
+          list.push(...part.situations.map((s: any) => ({ ...s, type: 'match-ads', correct: s.correctAd })))
+        }
+      })
+      return list
+    } else {
+      // Flat model
+      return ((model as any).questions || []).map((q: any) => ({ ...q, type: 'flat', correct: q.correct }))
+    }
+  }, [model])
+
+  // Calculate score
+  const score = useMemo(() => {
+    let count = 0
+    allQuestions.forEach((q: any) => {
+      const ans = answers[q.id]
+      if (ans !== undefined && String(ans) === String(q.correct)) {
+        count++
+      }
+    })
+    return count
+  }, [allQuestions, answers])
+
+  const handleSelectAnswer = (qId: string, value: any) => {
     if (showResults) return
-    setAnswers(prev => ({ ...prev, [questionId]: optionIndex }))
+    setAnswers(prev => ({
+      ...prev,
+      [qId]: value
+    }))
   }
 
-  function checkAnswers() {
-    setShowResults(true)
-  }
-
-  function reset() {
+  const reset = () => {
     setAnswers({})
     setShowResults(false)
-    setSelectedModel(null)
+    setSelectedModelIndex(null)
+    setShowExplanations({})
   }
 
   if (!model) {
@@ -32,20 +71,28 @@ export default function LesenPage() {
         <div className="flex items-center gap-3 mb-6">
           <span className="text-3xl">📖</span>
           <div>
-            <h1 className="text-2xl font-bold">القراءة — Lesen</h1>
-            <p className="text-muted text-sm">اختر نموذجاً للتدريب. كل نموذج يحاكي الامتحان الحقيقي.</p>
+            <h1 className="text-2xl font-bold grad-text">القراءة — Lesen B1</h1>
+            <p className="text-muted text-sm">اختر نموذجاً للتدريب. تحاكي هذه النماذج الأقسام المختلفة لامتحان القراءة B1.</p>
           </div>
         </div>
-        <div className="grid gap-3">
+
+        <div className="grid md:grid-cols-2 gap-4">
           {lesenModels.map((m, i) => (
             <button
               key={m.id}
-              onClick={() => setSelectedModel(i)}
-              className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow border border-gray-100 dark:border-gray-700 text-right"
+              onClick={() => setSelectedModelIndex(i)}
+              className="glass p-5 rounded-2xl border border-white/5 text-right hover:border-green/20 transition-all flex flex-col justify-between shadow-md cursor-pointer group"
             >
-              <h3 className="font-bold text-green">{m.title}</h3>
-              <p className="text-sm text-muted mt-1">{m.description}</p>
-              <p className="text-xs text-gray-400 mt-2">{m.questions.length} أسئلة</p>
+              <div>
+                <h3 className="font-bold text-white group-hover:text-green transition-colors">{m.title}</h3>
+                <p className="text-xs text-muted mt-2 leading-relaxed">{m.description}</p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center w-full">
+                <span className="text-[10px] bg-green/10 text-green px-2 py-0.5 rounded-full">B1 Niveau</span>
+                <span className="text-[10px] text-muted font-mono">
+                  {(m as any).parts ? `${(m as any).parts.length} أجزاء` : `${(m as any).questions.length} أسئلة`}
+                </span>
+              </div>
             </button>
           ))}
         </div>
@@ -53,83 +100,425 @@ export default function LesenPage() {
     )
   }
 
-  const score = model.questions.filter(q => answers[q.id] === q.correct).length
+  const isAllAnswered = allQuestions.length > 0 && Object.keys(answers).length >= allQuestions.length
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between mb-4">
-        <button onClick={reset} className="text-green font-bold text-sm hover:underline">
+      {/* Header Navigation */}
+      <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
+        <button onClick={reset} className="text-green font-bold text-sm hover:underline cursor-pointer">
           → العودة للنماذج
         </button>
-        <h1 className="text-lg font-bold">{model.title}</h1>
+        <h1 className="text-lg font-bold text-white">{model.title}</h1>
       </div>
 
+      {/* Results Header */}
       {showResults && (
-        <div className={`rounded-xl p-4 text-center font-bold text-lg ${
-          score >= model.questions.length * 0.7
-            ? 'bg-green/10 text-green'
-            : 'bg-red/10 text-red'
+        <div className={`rounded-xl p-5 text-center font-bold text-base border animate-slideDown ${
+          score >= allQuestions.length * 0.6
+            ? 'bg-green/10 text-green border-green/20'
+            : 'bg-red/10 text-red border-red/20'
         }`}>
-          النتيجة: {score} / {model.questions.length}
-          {score >= model.questions.length * 0.7 ? ' — ممتاز! 🎉' : ' — حاول مرّة أخرى 💪'}
+          النتيجة النهائية: {score} / {allQuestions.length} ({Math.round((score / allQuestions.length) * 100)}%)
+          {score >= allQuestions.length * 0.6 ? ' — ممتاز! تجاوزت اختبار القراءة بنجاح 🎉' : ' — حاول مرّة أخرى لتعزيز مهاراتك في الفهم 💪'}
         </div>
       )}
 
-      {model.questions.map((q) => (
-        <div key={q.id} className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-700">
-          <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-4 text-sm leading-relaxed" dir="ltr">
-            {q.text}
-          </div>
-          <p className="font-bold mb-3">{q.question}</p>
-          <div className="space-y-2">
-            {q.options.map((opt, oi) => {
-              let className = 'border rounded-lg p-3 cursor-pointer transition-colors text-sm '
-              if (showResults) {
-                if (oi === q.correct) className += 'border-green bg-green/10 text-green font-bold'
-                else if (answers[q.id] === oi) className += 'border-red bg-red/10 text-red'
-                else className += 'border-gray-200 text-gray-400'
-              } else {
-                if (answers[q.id] === oi) className += 'border-green bg-green/5 font-bold'
-                else className += 'border-gray-200 hover:border-green hover:bg-green/5'
-              }
-              return (
-                <button
-                  key={oi}
-                  onClick={() => handleAnswer(q.id, oi)}
-                  className={className + ' block w-full text-right'}
+      {/* RENDER HIERARCHICAL B1 EXAMS */}
+      {(model as any).parts ? (
+        <div className="space-y-8">
+          {(model as any).parts.map((part: any, pIdx: number) => {
+            return (
+              <div key={pIdx} className="glass p-6 rounded-2xl border border-white/5 space-y-5 shadow-xl">
+                {/* Part Header */}
+                <div className="border-b border-white/5 pb-3">
+                  <span className="text-xs text-green font-bold uppercase tracking-wider">Teil {pIdx + 1}</span>
+                  <h3 className="text-base font-bold text-white mt-0.5">{part.title}</h3>
+                  <p className="text-xs text-muted mt-1 leading-relaxed">{part.instructionsAr}</p>
+                </div>
+
+                {/* Blog Matching Block */}
+                {part.type === 'match-blog' && part.texts && (
+                  <div className="space-y-6">
+                    {/* Authors and texts */}
+                    <div className="grid md:grid-cols-2 gap-3 bg-slate-950/20 p-4 rounded-xl border border-white/5">
+                      {part.texts.map((item: any) => (
+                        <div key={item.id} className="p-3 rounded-lg border border-white/5 bg-slate-900/40 text-left font-sans" dir="ltr">
+                          <span className="text-xs text-gold font-bold">{item.id}) {item.titleDe} ({item.titleAr}):</span>
+                          <p className="text-xs text-ink-soft mt-1 leading-relaxed">{item.textDe}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Statements to check */}
+                    <div className="space-y-4 pt-2">
+                      <p className="text-xs font-bold text-gold">طابق العبارات بالكاتب المناسب (A-E):</p>
+                      {part.statements.map((s: any, sIdx: number) => {
+                        const selectedVal = answers[s.id]
+                        
+                        
+                        return (
+                          <div key={s.id} className="border-t border-white/5 pt-4 space-y-2">
+                            <div className="flex gap-2.5 items-start">
+                              <span className="bg-white/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                                {sIdx + 1}
+                              </span>
+                              <div className="text-left font-sans text-sm text-ink-soft leading-normal" dir="ltr">
+                                <p className="font-medium text-white">{s.textDe}</p>
+                                {s.textAr && <p className="text-xs text-muted mt-1 text-right font-sans" dir="rtl">💡 {s.textAr}</p>}
+                              </div>
+                            </div>
+
+                            {/* Author letters selectors */}
+                            <div className="flex flex-wrap gap-1.5 mr-8 pt-1">
+                              {part.texts.map((item: any) => {
+                                const isSelected = selectedVal === item.id
+                                const isOptCorrect = s.correctAd === item.id
+
+                                let btnStyle = 'bg-white/5 border-white/10 text-ink-soft hover:bg-white/10'
+                                if (showResults) {
+                                  if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
+                                  else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
+                                  else btnStyle = 'bg-white/5 border-white/5 text-muted opacity-40'
+                                } else {
+                                  if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
+                                }
+
+                                return (
+                                  <button
+                                    key={item.id}
+                                    disabled={showResults}
+                                    onClick={() => handleSelectAnswer(s.id, item.id)}
+                                    className={`w-9 h-9 rounded-full border text-xs font-bold transition-all flex items-center justify-center cursor-pointer ${btnStyle}`}
+                                  >
+                                    {item.id}
+                                  </button>
+                                )
+                              })}
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Newspaper Article Text / Rules text / Opinions text */}
+                {part.textDe && (
+                  <div 
+                    className="bg-slate-950/40 border border-white/5 p-5 rounded-xl text-sm leading-relaxed text-ink-soft whitespace-pre-wrap select-text text-left font-sans"
+                    dir="ltr"
+                  >
+                    {part.textDe}
+                  </div>
+                )}
+
+                {/* MC questions (mc-article / mc-rules) */}
+                {part.questions && part.type !== 'tf-opinions' && (
+                  <div className="space-y-6 pt-2">
+                    {part.questions.map((q: any, qIdx: number) => {
+                      const selectedVal = answers[q.id]
+                      const showEx = showExplanations[q.id]
+                      return (
+                        <div key={q.id} className="border-t border-white/5 pt-4 space-y-3">
+                          <div className="flex gap-2.5 items-start">
+                            <span className="bg-white/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                              {qIdx + 1}
+                            </span>
+                            <div className="text-left font-sans text-sm text-white" dir="ltr">
+                              <p className="font-semibold">{q.promptDe}</p>
+                              {q.promptAr && <p className="text-xs text-muted mt-1 text-right" dir="rtl">💡 {q.promptAr}</p>}
+                            </div>
+                          </div>
+
+                          <div className="grid sm:grid-cols-3 gap-2 mr-8">
+                            {q.options.map((opt: any) => {
+                              const optionId = opt.id
+                              const optionText = opt.de
+                              const isSelected = selectedVal === optionId
+                              const isOptCorrect = q.correct === optionId
+
+                              let btnStyle = 'bg-white/5 border-white/10 text-ink-soft hover:bg-white/10'
+                              if (showResults) {
+                                if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
+                                else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
+                                else btnStyle = 'bg-white/5 border-white/5 text-muted opacity-40'
+                              } else {
+                                if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
+                              }
+
+                              return (
+                                <button
+                                  key={optionId}
+                                  disabled={showResults}
+                                  onClick={() => handleSelectAnswer(q.id, optionId)}
+                                  className={`w-full text-left font-sans px-4 py-2.5 rounded-xl border text-xs transition-all flex items-center justify-between gap-1.5 cursor-pointer ${btnStyle}`}
+                                  dir="ltr"
+                                >
+                                  <span><span className="font-bold uppercase mr-1">{optionId})</span> {optionText}</span>
+                                  {showResults && isOptCorrect && <span className="text-green text-sm">✓</span>}
+                                  {showResults && isSelected && !isOptCorrect && <span className="text-red text-sm">✗</span>}
+                                </button>
+                              )
+                            })}
+                          </div>
+
+                          {showResults && q.explanation && (
+                            <div className="mr-8 space-y-2">
+                              <button
+                                onClick={() => setShowExplanations(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
+                                className="text-[10px] text-muted hover:text-white transition-colors cursor-pointer"
+                              >
+                                {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
+                              </button>
+                              {showEx && (
+                                <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-ink-soft leading-relaxed">
+                                  {q.explanation}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
+
+                {/* Ads matching (match-ads) */}
+                {part.type === 'match-ads' && part.ads && (
+                  <div className="space-y-6">
+                    {/* Ads catalog */}
+                    <div className="grid sm:grid-cols-2 gap-3 bg-slate-950/20 p-4 rounded-xl border border-white/5 max-h-96 overflow-y-auto nav-scroll">
+                      {part.ads.map((ad: any) => (
+                        <div key={ad.id} className="p-3 rounded-lg border border-white/5 bg-slate-900/40 text-left font-sans" dir="ltr">
+                          <span className="text-xs text-gold font-bold">إعلان ({ad.id}): {ad.titleDe}</span>
+                          <p className="text-[11px] text-ink-soft mt-1 leading-relaxed">{ad.textDe}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Situations to solve */}
+                    <div className="space-y-4 pt-2">
+                      <p className="text-xs font-bold text-gold">اختر الإعلان المناسب (a-h) لكل حالة من الحالات التالية:</p>
+                      {part.situations.map((sit: any, sIdx: number) => {
+                        const selectedVal = answers[sit.id]
+                         
+
+                        return (
+                          <div key={sit.id} className="border-t border-white/5 pt-4 space-y-2">
+                            <div className="flex gap-2.5 items-start">
+                              <span className="bg-white/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                                {sIdx + 1}
+                              </span>
+                              <div className="text-left font-sans text-sm text-white" dir="ltr">
+                                <p className="font-medium text-white">{sit.textDe}</p>
+                                {sit.textAr && <p className="text-xs text-muted mt-1 text-right font-sans" dir="rtl">💡 {sit.textAr}</p>}
+                              </div>
+                            </div>
+
+                            {/* Options buttons a-h */}
+                            <div className="flex flex-wrap gap-1.5 mr-8 pt-1">
+                              {part.ads.map((ad: any) => {
+                                const isSelected = selectedVal === ad.id
+                                const isOptCorrect = sit.correctAd === ad.id
+
+                                let btnStyle = 'bg-white/5 border-white/10 text-ink-soft hover:bg-white/10'
+                                if (showResults) {
+                                  if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
+                                  else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
+                                  else btnStyle = 'bg-white/5 border-white/5 text-muted opacity-40'
+                                } else {
+                                  if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
+                                }
+
+                                return (
+                                  <button
+                                    key={ad.id}
+                                    disabled={showResults}
+                                    onClick={() => handleSelectAnswer(sit.id, ad.id)}
+                                    className={`w-9 h-9 rounded-xl border text-xs font-bold uppercase transition-all flex items-center justify-center cursor-pointer ${btnStyle}`}
+                                  >
+                                    {ad.id}
+                                  </button>
+                                )
+                              })}
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* True/False opinions matching (tf-opinions) */}
+                {part.type === 'tf-opinions' && part.questions && (
+                  <div className="space-y-6 pt-2">
+                    {part.questions.map((q: any, qIdx: number) => {
+                      const selectedVal = answers[q.id]
+                      const showEx = showExplanations[q.id]
+                      return (
+                        <div key={q.id} className="border-t border-white/5 pt-4 space-y-3">
+                          <div className="flex gap-2.5 items-start">
+                            <span className="bg-white/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                              {qIdx + 1}
+                            </span>
+                            <div className="text-left font-sans text-sm text-white" dir="ltr">
+                              <p className="font-semibold">{q.statementDe}</p>
+                              {q.statementAr && <p className="text-xs text-muted mt-1 text-right" dir="rtl">💡 {q.statementAr}</p>}
+                            </div>
+                          </div>
+
+                          <div className="flex gap-3 mr-8">
+                            {([true, false] as const).map(val => {
+                              const isSelected = selectedVal === val
+                              const isOptCorrect = q.correct === val
+
+                              let btnStyle = 'bg-white/5 border-white/10 text-ink-soft hover:bg-white/10'
+                              if (showResults) {
+                                if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
+                                else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
+                                else btnStyle = 'bg-white/5 border-white/5 text-muted opacity-40'
+                              } else {
+                                if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
+                              }
+
+                              return (
+                                <button
+                                  key={String(val)}
+                                  disabled={showResults}
+                                  onClick={() => handleSelectAnswer(q.id, val)}
+                                  className={`px-5 py-2 rounded-xl border text-xs font-bold transition-all cursor-pointer ${btnStyle}`}
+                                >
+                                  {val ? 'Richtig (صح)' : 'Falsch (خطأ)'}
+                                </button>
+                              )
+                            })}
+                          </div>
+
+                          {showResults && q.explanation && (
+                            <div className="mr-8 space-y-2">
+                              <button
+                                onClick={() => setShowExplanations(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
+                                className="text-[10px] text-muted hover:text-white transition-colors cursor-pointer"
+                              >
+                                {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
+                              </button>
+                              {showEx && (
+                                <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-ink-soft leading-relaxed">
+                                  {q.explanation}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                )}
+
+              </div>
+            )
+          })}
+        </div>
+      ) : (
+        /* RENDER FLAT MODELS (lesenModelsExtra) */
+        <div className="space-y-6">
+          {(model as any).questions && (model as any).questions.map((q: any, qIdx: number) => {
+            const selectedVal = answers[q.id]
+            const showEx = showExplanations[q.id]
+
+            return (
+              <div key={q.id} className="glass p-5 rounded-2xl border border-white/5 space-y-4 shadow-xl">
+                {/* Passage Text */}
+                <div 
+                  className="bg-slate-950/40 border border-white/5 p-4 rounded-xl text-xs text-ink-soft leading-relaxed select-text text-left font-sans"
                   dir="ltr"
                 >
-                  <span className="inline-block w-6 text-center font-bold">{String.fromCharCode(65 + oi)}.</span>
-                  {opt}
-                </button>
-              )
-            })}
-          </div>
-          {showResults && q.explanation && (
-            <div className="mt-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 text-sm text-blue-800 dark:text-blue-200">
-              💡 {q.explanation}
-            </div>
-          )}
+                  {q.text}
+                </div>
+
+                {/* Question Prompt */}
+                <div className="flex gap-2.5 items-start">
+                  <span className="bg-white/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                    {qIdx + 1}
+                  </span>
+                  <p className="text-sm font-semibold text-white text-left font-sans" dir="ltr">{q.question}</p>
+                </div>
+
+                {/* Multiple choices buttons */}
+                <div className="grid sm:grid-cols-2 gap-2 mr-8">
+                  {q.options && q.options.map((opt: string, oi: number) => {
+                    const isSelected = selectedVal === oi
+                    const isOptCorrect = q.correct === oi
+
+                    let btnStyle = 'bg-white/5 border-white/10 text-ink-soft hover:bg-white/10'
+                    if (showResults) {
+                      if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
+                      else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
+                      else btnStyle = 'bg-white/5 border-white/5 text-muted opacity-40'
+                    } else {
+                      if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
+                    }
+
+                    return (
+                      <button
+                        key={oi}
+                        disabled={showResults}
+                        onClick={() => handleSelectAnswer(q.id, oi)}
+                        className={`w-full text-left font-sans px-4 py-2.5 rounded-xl border text-xs transition-all flex items-center justify-between gap-1.5 cursor-pointer ${btnStyle}`}
+                        dir="ltr"
+                      >
+                        <span><span className="font-bold uppercase mr-1.5">{String.fromCharCode(65 + oi)})</span> {opt}</span>
+                        {showResults && isOptCorrect && <span className="text-green text-sm">✓</span>}
+                        {showResults && isSelected && !isOptCorrect && <span className="text-red text-sm">✗</span>}
+                      </button>
+                    )
+                  })}
+                </div>
+
+                {/* Explanation */}
+                {showResults && q.explanation && (
+                  <div className="mr-8 space-y-2">
+                    <button
+                      onClick={() => setShowExplanations(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
+                      className="text-[10px] text-muted hover:text-white transition-colors cursor-pointer"
+                    >
+                      {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
+                    </button>
+                    {showEx && (
+                      <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-ink-soft leading-relaxed">
+                        {q.explanation}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+              </div>
+            )
+          })}
         </div>
-      ))}
+      )}
 
-      {!showResults && Object.keys(answers).length > 0 && (
-        <button
-          onClick={checkAnswers}
-          className="w-full bg-green text-white py-3 rounded-xl font-bold hover:bg-green-dark transition-colors"
+      {/* Verify Button */}
+      {!showResults && isAllAnswered && (
+        <button 
+          onClick={() => setShowResults(true)} 
+          className="w-full bg-green text-white py-3.5 rounded-2xl font-bold hover:bg-green-dark transition-all cursor-pointer shadow-lg"
         >
-          ✅ تحقّق من إجاباتي ({Object.keys(answers).length}/{model.questions.length})
+          ✅ تحقّق من الإجابات ورؤية النتيجة
         </button>
       )}
 
+      {/* Reset Button */}
       {showResults && (
-        <button
-          onClick={reset}
-          className="w-full bg-gray-100 dark:bg-gray-700 py-3 rounded-xl font-bold hover:bg-gray-200 transition-colors"
+        <button 
+          onClick={reset} 
+          className="w-full bg-white/5 border border-white/10 text-white py-3.5 rounded-2xl font-bold hover:bg-white/10 transition-all cursor-pointer shadow-lg"
         >
-          🔄 العودة للنماذج
+          🔄 العودة واختيار نموذج آخر
         </button>
       )}
+
     </div>
   )
 }

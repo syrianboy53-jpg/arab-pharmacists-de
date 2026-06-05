@@ -15,6 +15,8 @@ const PremiumPage = lazy(() => import('./pages/PremiumPage'))
 const AdminDashboardPage = lazy(() => import('./pages/AdminDashboardPage'))
 const SprachbausteinePage = lazy(() => import('./pages/SprachbausteinePage'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
+const ChatSimulatorPage = lazy(() => import('./pages/ChatSimulatorPage'))
+const SlangPage = lazy(() => import('./pages/SlangPage'))
 
 function Loading() {
   return (
@@ -42,6 +44,8 @@ export default function App() {
           <Route path="/admin" element={<AdminDashboardPage />} />
           <Route path="/sprachbausteine" element={<SprachbausteinePage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/chat-simulator" element={<ChatSimulatorPage />} />
+          <Route path="/slang" element={<SlangPage />} />
         </Routes>
       </Suspense>
     </Layout>

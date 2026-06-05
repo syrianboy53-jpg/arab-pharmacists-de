@@ -3,3 +3,11 @@ dist/
 .env
 .wrangler/
 *.local
+
+# Restored old app assets
+public/assets/
+public/ios/
+public/favicon.png
+public/index.html
+public/manifest.webmanifest
+public/sw.js

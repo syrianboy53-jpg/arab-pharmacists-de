@@ -1,0 +1,92 @@
+{
+  "name": "B1 Deutsch للعرب والسوريين",
+  "short_name": "B1 Deutsch",
+  "description": "تحضير امتحان B1 الألماني للعرب والسوريين في ألمانيا — Lesen, Hören, Schreiben, Sprechen, DTZ, telc, Goethe.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "id": "/app/",
+  "display": "standalone",
+  "display_override": ["standalone", "window-controls-overlay", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#0F7B3E",
+  "theme_color": "#0F7B3E",
+  "categories": ["education", "books", "productivity"],
+  "icons": [
+    {
+      "src": "ios/icon-120.png",
+      "sizes": "120x120",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "ios/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "ios/icon-167.png",
+      "sizes": "167x167",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "ios/icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "ios/icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "الصفحة الرئيسيّة",
+      "short_name": "الرئيسيّة",
+      "description": "عُد للصفحة الرئيسيّة",
+      "url": "./#/",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "امتحان تجريبي DTZ",
+      "short_name": "DTZ",
+      "description": "ابدأ محاكاة امتحان DTZ",
+      "url": "./#/dtz",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "مكتبة الأدلّة",
+      "short_name": "أدلّة",
+      "description": "اقرأ الأدلّة الشاملة",
+      "url": "./#/guides",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Premium",
+      "short_name": "Premium",
+      "description": "اشترك في Premium",
+      "url": "./#/premium",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false,
+  "edge_side_panel": { "preferred_width": 480 }
+}
