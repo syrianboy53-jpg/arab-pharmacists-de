@@ -65,6 +65,24 @@ if (fs.existsSync(redirectsSrc)) {
   console.log('No redirects file to copy.');
 }
 
+// Copy ads.txt to dist/ads.txt so AdSense can find it at the root domain
+const adsSrc = path.resolve('public/ads.txt');
+const adsDest = path.resolve('dist/ads.txt');
+console.log(`Copying ads.txt from ${adsSrc} to ${adsDest}...`);
+if (fs.existsSync(adsSrc)) {
+  fs.copyFileSync(adsSrc, adsDest);
+  console.log('ads.txt file copied successfully.');
+} else {
+  // If public/ads.txt doesn't exist, try landing/ads.txt
+  const landingAdsSrc = path.resolve('landing/ads.txt');
+  if (fs.existsSync(landingAdsSrc)) {
+    fs.copyFileSync(landingAdsSrc, adsDest);
+    console.log('ads.txt file copied successfully from landing.');
+  } else {
+    console.log('No ads.txt file to copy.');
+  }
+}
+
 // Copy legal compliance and guides pages from public/ to root dist/
 const legalFolders = ['impressum', 'datenschutz', 'privacy', 'agb', 'ueber-uns', 'leitfaden'];
 for (const folder of legalFolders) {
