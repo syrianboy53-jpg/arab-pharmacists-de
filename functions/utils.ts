@@ -3,6 +3,7 @@ export interface Env {
   ADMIN_TOKEN: string
   JWT_SECRET: string
   RESEND_API_KEY: string
+  FCM_SERVICE_ACCOUNT_JSON?: string
 }
 
 // Helper to query the Neon DB over HTTP
