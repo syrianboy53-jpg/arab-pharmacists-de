@@ -1,20 +1,4 @@
-interface Env {
-  NEON_DATABASE_URL: string
-  JWT_SECRET: string
-}
-
-async function query(env: Env, sql: string, params: any[] = []) {
-  const dbUrl = env.NEON_DATABASE_URL
-  const res = await fetch('https://sql.neon.tech/sql', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Neon-Connection-String': dbUrl,
-    },
-    body: JSON.stringify({ query: sql, params }),
-  })
-  return res.json() as any
-}
+import { Env, query } from '../utils'
 
 async function createJWT(payload: object, secret: string): Promise<string> {
   const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }))
