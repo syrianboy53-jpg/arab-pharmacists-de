@@ -2,6 +2,7 @@ export interface Env {
   NEON_DATABASE_URL: string
   ADMIN_TOKEN: string
   JWT_SECRET: string
+  RESEND_API_KEY: string
 }
 
 // Helper to query the Neon DB over HTTP
