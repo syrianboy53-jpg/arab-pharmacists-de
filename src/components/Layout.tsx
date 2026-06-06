@@ -40,6 +40,13 @@ export default function Layout({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  useEffect(() => {
+    const appPath = '/app/#' + location.pathname
+    fetch('/api/visit?path=' + encodeURIComponent(appPath))
+      .catch(err => console.error('Error tracking page visit:', err))
+  }, [location.pathname])
+
+
   return (
     <div className={darkMode ? 'dark' : ''}>
       {updateUrl && (

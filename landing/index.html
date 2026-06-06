@@ -903,7 +903,7 @@ section { padding: 80px 0; }
     return String.fromCodePoint.apply(String, codePoints);
   }
 
-  fetch('/api/visit')
+  fetch('/api/visit?path=' + encodeURIComponent(window.location.pathname || '/'))
     .then(function(res) { return res.json(); })
     .then(function(data) {
       if (data) {

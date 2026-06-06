@@ -43,6 +43,7 @@ interface DBStats {
     ip_address: string
     country: string
     user_agent: string
+    path?: string
   }>
   top_countries?: Array<{
     country: string
@@ -67,6 +68,49 @@ function getFlagEmoji(countryCode: string) {
     .split('')
     .map(char => 127397 + char.charCodeAt(0));
   return String.fromCodePoint(...codePoints);
+}
+
+function getPathLabel(path?: string) {
+  if (!path) return '🏠 الرئيسية (الهبوط)';
+  
+  let cleanPath = path.trim();
+  if (cleanPath.includes('?')) {
+    cleanPath = cleanPath.split('?')[0];
+  }
+  
+  const items: Record<string, string> = {
+    '/': '🏠 الرئيسية (الهبوط)',
+    '/index.html': '🏠 الرئيسية (الهبوط)',
+    '/app/': '🏠 الرئيسية (التطبيق)',
+    '/app/#/': '🏠 الرئيسية (التطبيق)',
+    '/app/#/lesen': '📖 القراءة',
+    '/app/#/hoeren': '🎧 الاستماع',
+    '/app/#/schreiben': '✍️ الكتابة',
+    '/app/#/sprechen': '🗣️ المحادثة',
+    '/app/#/chat-simulator': '💬 محاكي المحادثة',
+    '/app/#/slang': '🔥 قاموس العامية',
+    '/app/#/grammar': '📐 القواعد',
+    '/app/#/vocabulary': '📚 المفردات',
+    '/app/#/sprachbausteine': '🧩 Sprachbausteine',
+    '/app/#/leben': '🇩🇪 الحياة في ألمانيا',
+    '/app/#/b2': '🎓 B2',
+    '/app/#/premium': '⭐ Premium',
+    '/app/#/admin': '🔑 لوحة التحكم',
+    '/app/#/about': 'ℹ️ عن التطبيق',
+    '/app/#/einstufung': '📊 تحديد المستوى',
+    '/app/#/satzbau': '🧩 بناء الجمل',
+    '/app/#/drill': '🏋️ تدريب مكثف',
+    '/app/#/synonyms': '🔗 المترادفات',
+    '/app/#/fehler': '❌ تصحيح الأخطاء'
+  };
+
+  if (items[cleanPath]) return items[cleanPath];
+
+  const internalRoute = cleanPath.replace('/app/#', '');
+  if (items[`/app/#${internalRoute}`]) return items[`/app/#${internalRoute}`];
+  if (items[internalRoute]) return items[internalRoute];
+
+  return cleanPath;
 }
 
 export default function AdminDashboardPage() {
@@ -783,7 +827,7 @@ export default function AdminDashboardPage() {
 
             {/* Latest Visitors Table */}
             <div className="md:col-span-2 space-y-3">
-              <h3 className="font-bold text-sm text-gray-800 border-b pb-1">📋 سجل أحدث الزيارات (آخر 50 زيارة فريدة)</h3>
+              <h3 className="font-bold text-sm text-gray-800 border-b pb-1">📋 سجل أحدث زيارات الصفحات (آخر 100 زيارة)</h3>
               {usersStats.latest_visitors && usersStats.latest_visitors.length > 0 ? (
                 <div className="overflow-x-auto border rounded-xl max-h-[300px] overflow-y-auto">
                   <table className="w-full border-collapse text-xs text-right">
@@ -792,6 +836,7 @@ export default function AdminDashboardPage() {
                         <th className="p-2.5">الوقت</th>
                         <th className="p-2.5">IP Address</th>
                         <th className="p-2.5">البلد</th>
+                        <th className="p-2.5">الصفحة المستهدفة</th>
                         <th className="p-2.5">المتصفح / النظام</th>
                       </tr>
                     </thead>
@@ -804,7 +849,10 @@ export default function AdminDashboardPage() {
                             <span>{getFlagEmoji(v.country)}</span>
                             <span>{v.country}</span>
                           </td>
-                          <td className="p-2.5 text-gray-600 truncate max-w-[200px]" title={v.user_agent}>{v.user_agent}</td>
+                          <td className="p-2.5 font-semibold text-emerald-700 whitespace-nowrap">
+                            {getPathLabel(v.path)}
+                          </td>
+                          <td className="p-2.5 text-gray-600 truncate max-w-[150px]" title={v.user_agent}>{v.user_agent}</td>
                         </tr>
                       ))}
                     </tbody>

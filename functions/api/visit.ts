@@ -3,21 +3,24 @@ import { Env, query } from '../utils'
 export async function onRequestGet(context: { request: Request; env: Env }) {
   const { request, env } = context
   try {
+    const url = new URL(request.url)
+    const path = url.searchParams.get('path') || '/'
+
     const ip = request.headers.get('CF-Connecting-IP') || 'unknown'
     const country = request.headers.get('CF-IPCountry') || 'unknown'
     const ua = request.headers.get('User-Agent') || ''
 
     if (ip !== 'unknown') {
-      // Check if this IP has visited in the last 15 minutes to prevent spamming logs
+      // Check if this IP has visited this specific path in the last 15 minutes to prevent spamming logs
       const recentCheck = await query(env, 
-        "SELECT id FROM visitor_logs WHERE ip_address = $1 AND created_at >= NOW() - INTERVAL '15 minutes' LIMIT 1", 
-        [ip]
+        "SELECT id FROM visitor_logs WHERE ip_address = $1 AND path = $2 AND created_at >= NOW() - INTERVAL '15 minutes' LIMIT 1", 
+        [ip, path]
       )
       
       if (recentCheck.rows.length === 0) {
         await query(env, 
-          "INSERT INTO visitor_logs (ip_address, country, user_agent) VALUES ($1, $2, $3)", 
-          [ip, country, ua]
+          "INSERT INTO visitor_logs (ip_address, country, user_agent, path) VALUES ($1, $2, $3, $4)", 
+          [ip, country, ua, path]
         )
       }
     }

@@ -22,7 +22,7 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       query(env, 'SELECT COUNT(DISTINCT ip_address)::integer FROM visitor_logs'),
       query(env, 'SELECT COUNT(DISTINCT ip_address)::integer FROM visitor_logs WHERE created_at >= CURRENT_DATE'),
       query(env, "SELECT COUNT(DISTINCT ip_address)::integer FROM visitor_logs WHERE created_at >= NOW() - INTERVAL '7 days'"),
-      query(env, 'SELECT id, created_at, ip_address, country, user_agent FROM visitor_logs ORDER BY created_at DESC LIMIT 50'),
+      query(env, 'SELECT id, created_at, ip_address, country, user_agent, path FROM visitor_logs ORDER BY created_at DESC LIMIT 100'),
       query(env, 'SELECT country, COUNT(DISTINCT ip_address)::integer AS count FROM visitor_logs GROUP BY country ORDER BY count DESC LIMIT 10')
     ])
 
