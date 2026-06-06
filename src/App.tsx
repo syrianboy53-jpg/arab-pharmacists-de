@@ -18,6 +18,13 @@ const AboutPage = lazy(() => import('./pages/AboutPage'))
 const ChatSimulatorPage = lazy(() => import('./pages/ChatSimulatorPage'))
 const SlangPage = lazy(() => import('./pages/SlangPage'))
 
+// New Interactive pages
+const EinstufungPage = lazy(() => import('./pages/EinstufungPage'))
+const SatzbauPage = lazy(() => import('./pages/SatzbauPage'))
+const DrillPage = lazy(() => import('./pages/DrillPage'))
+const SynonymsPage = lazy(() => import('./pages/SynonymsPage'))
+const FehlerPage = lazy(() => import('./pages/FehlerPage'))
+
 function Loading() {
   return (
     <div className="flex items-center justify-center min-h-[50vh]">
@@ -46,6 +53,13 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/chat-simulator" element={<ChatSimulatorPage />} />
           <Route path="/slang" element={<SlangPage />} />
+          
+          {/* New Interactive routes */}
+          <Route path="/einstufung" element={<EinstufungPage />} />
+          <Route path="/satzbau" element={<SatzbauPage />} />
+          <Route path="/drill" element={<DrillPage />} />
+          <Route path="/synonyms" element={<SynonymsPage />} />
+          <Route path="/fehler" element={<FehlerPage />} />
         </Routes>
       </Suspense>
     </Layout>

@@ -12,29 +12,77 @@ const filesToConvert = [
   { dart: 'b2_data.dart', ts: 'b2.ts', variableName: 'telcB2Models' },
   { dart: 'lesen_data.dart', ts: 'lesen.ts', variableName: 'lesenModels' },
   { dart: 'hoeren_data.dart', ts: 'hoeren.ts', variableName: 'hoerenModels' },
-  { dart: 'sprachbausteine_data.dart', ts: 'sprachbausteine.ts', variableName: 'pruefungsFragen' }
+  { dart: 'sprachbausteine_data.dart', ts: 'sprachbausteine.ts', variableName: 'pruefungsFragen' },
+  { dart: 'synonyms_data.dart', ts: 'synonyms.ts', variableName: 'synonyms' }
 ];
 
 function cleanAndParse(filePath, varNameOrNames) {
   let content = fs.readFileSync(filePath, 'utf-8');
 
-  // Replace final Dart definitions and imports
-  let cleaned = content
-    .replace(/import\s+['"][^'"]+['"];/g, '') // Remove Dart imports
-    .replace(/final\s+List<Map<String, dynamic>>/g, 'var')
-    .replace(/final\s+List<Map<String, String>>/g, 'var')
-    .replace(/final\s+List<String>/g, 'var')
-    .replace(/final\s+Map<String, dynamic>/g, 'var')
+  // Strip Dart imports
+  let cleaned = content.replace(/import\s+['"][^'"]+['"];/g, '');
+
+  // Strip 'r' prefix before triple quotes
+  cleaned = cleaned.replace(/\br(?=['"]{3})/g, '');
+
+  // Strip nested generic type brackets like List<Map<String, dynamic>>
+  let previous;
+  do {
+    previous = cleaned;
+    cleaned = cleaned.replace(/(List|Map|from|decode)<[^<>]+>/g, '$1');
+  } while (cleaned !== previous);
+
+  // Replace final definitions
+  cleaned = cleaned
+    .replace(/(final\s+)?(List|Map)\s+(\w+)\s*=/g, 'var $3 =')
     .replace(/final\s+/g, 'var ');
+
+  // Truncate at the first variable declaration that is not requested
+  const names = Array.isArray(varNameOrNames) ? varNameOrNames : [varNameOrNames];
+  const declRegex = /(?:var|final|const)\s+(\w+)\s*=/g;
+  let match;
+  let truncateIndex = -1;
+  while ((match = declRegex.exec(cleaned)) !== null) {
+    const varName = match[1];
+    if (!names.includes(varName)) {
+      truncateIndex = match.index;
+      break;
+    }
+  }
+
+  if (truncateIndex !== -1) {
+    cleaned = cleaned.substring(0, truncateIndex);
+  }
 
   // Handle triple quotes
   cleaned = cleaned.replace(/'''([\s\S]*?)'''/g, (_, p1) => {
-    // Escape backticks if any
-    return '`' + p1.replace(/`/g, '\\`') + '`';
+    return '`' + p1.replace(/\\/g, '\\\\').replace(/`/g, '\\`') + '`';
   });
   cleaned = cleaned.replace(/"""([\s\S]*?)"""/g, (_, p1) => {
-    return '`' + p1.replace(/`/g, '\\`') + '`';
+    return '`' + p1.replace(/\\/g, '\\\\').replace(/`/g, '\\`') + '`';
   });
+
+  // Inject mocks at the top of the evaluated script
+  const header = `
+const List = {
+  from: (x) => x
+};
+const Map = {
+  from: (x) => x
+};
+const json = {
+  decode: (x) => {
+    if (typeof x === 'string') {
+      try {
+        return JSON.parse(x);
+      } catch (e) {
+        return JSON.parse(x.replace(/\\n/g, '\\\\n').replace(/\\r/g, '\\\\r'));
+      }
+    }
+    return x;
+  }
+};
+`;
 
   // Evaluate the Javascript code to extract variables
   try {
@@ -46,7 +94,7 @@ function cleanAndParse(filePath, varNameOrNames) {
       assignments += `if (typeof ${name} !== 'undefined') sandbox.${name} = ${name};\n`;
     });
     
-    const contextEvaluator = new Function(cleaned + assignments + 'return sandbox;');
+    const contextEvaluator = new Function(header + cleaned + assignments + 'return sandbox;');
     const result = contextEvaluator();
     return result;
   } catch (err) {

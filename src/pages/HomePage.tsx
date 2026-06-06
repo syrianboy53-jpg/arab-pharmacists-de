@@ -22,6 +22,16 @@ const sections = [
     ],
   },
   {
+    title: 'ألعاب وأدوات تفاعلية',
+    items: [
+      { label: 'تحديد المستوى (Einstufung)', path: '/einstufung', icon: '📊', count: '15 سؤالاً تدريجياً' },
+      { label: 'تركيب الجمل (Satzbau)', path: '/satzbau', icon: '🧱', count: 'ألعاب ترتيب بطاقات' },
+      { label: 'تمارين القواعد (Drill)', path: '/drill', icon: '⚙️', count: 'تحدي القواعد التفاعلي' },
+      { label: 'المترادفات (Synonyms)', path: '/synonyms', icon: '🃏', count: 'ألعاب مطابقة المترادفات' },
+      { label: 'أخطاء شائعة (Fehler)', path: '/fehler', icon: '⚠️', count: 'بطاقات التعلّم الذكية' },
+    ],
+  },
+  {
     title: 'القواعد والمفردات',
     items: [
       { label: 'القواعد (Grammatik)', path: '/grammar', icon: '📐', count: '12 درس' },
@@ -54,6 +64,20 @@ export default function HomePage() {
     setTodayWord(dailyWords[dayIndex])
   }, [])
 
+  const handleShareApp = () => {
+    const shareText = 'أوصيك بتطبيق B1-Syrer الرائع للتحضير لامتحان اللغة الألمانية B1! يحتوي على أقسام تفاعلية كاملة مع شرح بالعربية وألعاب لغوية تفاعلية 🚀'
+    if (navigator.share) {
+      navigator.share({
+        title: 'B1-Syrer - تحضير امتحان B1',
+        text: shareText,
+        url: window.location.origin
+      }).catch(err => console.log('Error sharing:', err))
+    } else {
+      navigator.clipboard.writeText(shareText + ' ' + window.location.origin)
+      alert('تم نسخ رابط وتفاصيل المشاركة إلى الحافظة! شاركها الآن مع أصدقائك على واتساب أو فيسبوك 🎉')
+    }
+  }
+
   return (
     <div className="space-y-8">
       {/* Hero Section */}
@@ -83,6 +107,9 @@ export default function HomePage() {
             <Link to="/premium" className="bg-white/20 hover:bg-white/30 px-6 py-2.5 rounded-full font-bold text-sm transition-colors">
               🔑 مفتاح النجاح
             </Link>
+            <button onClick={handleShareApp} className="bg-gold hover:bg-gold/90 px-6 py-2.5 rounded-full font-bold text-sm transition-colors flex items-center gap-1.5 cursor-pointer">
+              📢 شارك التطبيق
+            </button>
           </div>
         </div>
       </section>
