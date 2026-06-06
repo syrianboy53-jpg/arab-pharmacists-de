@@ -393,19 +393,19 @@ class _LessonDetailScreenState extends State<_LessonDetailScreen> {
                               final isSelected = _selectedAnswers[idx] == optIdx;
                               final isCorrect = ex['correct'] == optIdx;
 
-                              Color borderCol = isSelected ? accentCol : (isDark ? Colors.white10 : Colors.black12);
+                              Color borderCol = isSelected ? accentCol : (isDark ? const Color(0xFF1E293B) : Colors.black12);
                               Color bgCol = isSelected ? accentCol.withOpacity(0.05) : Colors.transparent;
                               Widget? icon;
 
                               if (_showResults) {
                                 if (isCorrect) {
-                                  borderCol = Colors.green;
-                                  bgCol = Colors.green.withOpacity(0.1);
-                                  icon = const Icon(Icons.check_circle_rounded, color: Colors.green, size: 20);
+                                  borderCol = const Color(0xFF2DD4BF);
+                                  bgCol = const Color(0xFF2DD4BF).withOpacity(0.1);
+                                  icon = const Icon(Icons.check_circle_rounded, color: Color(0xFF2DD4BF), size: 20);
                                 } else if (isSelected) {
-                                  borderCol = Colors.red;
-                                  bgCol = Colors.red.withOpacity(0.1);
-                                  icon = const Icon(Icons.cancel_rounded, color: Colors.red, size: 20);
+                                  borderCol = const Color(0xFFF43F5E);
+                                  bgCol = const Color(0xFFF43F5E).withOpacity(0.1);
+                                  icon = const Icon(Icons.cancel_rounded, color: Color(0xFFF43F5E), size: 20);
                                 }
                               }
 
@@ -1460,19 +1460,19 @@ class _RandomGrammarPracticeScreenState extends State<_RandomGrammarPracticeScre
               final isCorrectOption = currentQuestion['correct'] == optIdx;
               final isSelectedOption = _selectedOptionIndex == optIdx;
 
-              Color borderCol = isDark ? Colors.white10 : Colors.black12;
+              Color borderCol = isDark ? const Color(0xFF1E293B) : Colors.black12;
               Color bgCol = Colors.transparent;
               Widget? trailingIcon;
 
               if (_isAnswered) {
                 if (isCorrectOption) {
-                  borderCol = Colors.green;
-                  bgCol = Colors.green.withOpacity(0.12);
-                  trailingIcon = const Icon(Icons.check_circle_rounded, color: Colors.green, size: 24);
+                  borderCol = const Color(0xFF2DD4BF);
+                  bgCol = const Color(0xFF2DD4BF).withOpacity(0.12);
+                  trailingIcon = const Icon(Icons.check_circle_rounded, color: Color(0xFF2DD4BF), size: 24);
                 } else if (isSelectedOption) {
-                  borderCol = Colors.red;
-                  bgCol = Colors.red.withOpacity(0.12);
-                  trailingIcon = const Icon(Icons.cancel_rounded, color: Colors.red, size: 24);
+                  borderCol = const Color(0xFFF43F5E);
+                  bgCol = const Color(0xFFF43F5E).withOpacity(0.12);
+                  trailingIcon = const Icon(Icons.cancel_rounded, color: Color(0xFFF43F5E), size: 24);
                 }
               } else if (isSelectedOption) {
                 borderCol = Theme.of(context).colorScheme.primary;

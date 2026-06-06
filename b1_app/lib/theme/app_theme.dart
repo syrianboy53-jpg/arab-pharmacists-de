@@ -80,25 +80,25 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme.copyWith(
-        surface: const Color(0xFF0F172A),
+        surface: const Color(0xFF131C33),
       ),
-      scaffoldBackgroundColor: const Color(0xFF0F172A),
+      scaffoldBackgroundColor: const Color(0xFF0A0F1D),
       textTheme: GoogleFonts.cairoTextTheme(ThemeData.dark().textTheme),
       appBarTheme: const AppBarTheme(
         centerTitle: true,
-        backgroundColor: Color(0xFF1E293B),
+        backgroundColor: Color(0xFF0F172A),
         foregroundColor: Colors.white,
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.white),
         actionsIconTheme: IconThemeData(color: Colors.white),
       ),
       cardTheme: CardThemeData(
-        color: const Color(0xFF1E293B),
+        color: const Color(0xFF131C33),
         elevation: 0.5,
         shadowColor: Colors.black26,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
-          side: const BorderSide(color: Color(0xFF334155), width: 1.0),
+          side: const BorderSide(color: Color(0xFF1E293B), width: 1.0),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(

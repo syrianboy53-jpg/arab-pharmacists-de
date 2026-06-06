@@ -1276,28 +1276,38 @@ class _HomeScreenState extends State<HomeScreen> {
   // Helper: Individual Item Card
   Widget _buildItem(String title, String subtitle, IconData icon, Color color, VoidCallback onTap) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final cardBg = isDark ? const Color(0x991E293B) : Colors.white;
     final textMain = isDark ? Colors.white : const Color(0xFF1E293B);
     final textMuted = isDark ? Colors.white38 : const Color(0xFF94A3B8);
-    final borderCol = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
+    final borderCol = isDark ? const Color(0x1FADF7D5) : const Color(0xFFE2E8F0);
 
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: borderCol, width: 1),
-      ),
-      child: Card(
-        margin: EdgeInsets.zero,
         color: cardBg,
-        surfaceTintColor: Colors.transparent,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        clipBehavior: Clip.antiAlias,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: isDark ? const Color(0xFF1E293B).withOpacity(0.5) : borderCol,
+          width: 1.2,
+        ),
+        boxShadow: isDark
+            ? [
+                BoxShadow(
+                  color: color.withOpacity(0.04),
+                  blurRadius: 8,
+                  offset: const Offset(0, 3),
+                ),
+              ]
+            : null,
+      ),
+      child: Material(
+        color: Colors.transparent,
         child: InkWell(
+          borderRadius: BorderRadius.circular(12),
           onTap: onTap,
-          splashColor: color.withValues(alpha: 0.1),
-          highlightColor: color.withValues(alpha: 0.05),
+          splashColor: color.withOpacity(0.12),
+          highlightColor: color.withOpacity(0.06),
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1306,14 +1316,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(6),
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: color.withValues(alpha: 0.12),
+                        color: isDark ? color.withOpacity(0.18) : color.withOpacity(0.12),
                         borderRadius: BorderRadius.circular(6),
                       ),
-                      child: Icon(icon, color: color, size: 18),
+                      child: Icon(icon, color: isDark ? color.withOpacity(0.9) : color, size: 16),
                     ),
-                    Icon(Icons.arrow_forward_ios, size: 10, color: textMuted.withValues(alpha: 0.5)),
+                    Icon(Icons.arrow_forward_ios, size: 8, color: textMuted.withOpacity(0.5)),
                   ],
                 ),
                 const SizedBox(height: 4),
@@ -1375,20 +1385,35 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildStatsCard(BuildContext context, AppProvider provider, bool isDark, Color textMain, Color borderCol) {
-    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
-    final textMuted = isDark ? Colors.white60 : const Color(0xFF64748B);
+    final textMuted = isDark ? Colors.white70 : const Color(0xFF64748B);
     final textSub = isDark ? Colors.white38 : const Color(0xFF94A3B8);
 
     return Container(
       decoration: BoxDecoration(
-        color: cardBg,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: borderCol, width: 1.5),
+        color: isDark ? const Color(0xFF131C33) : Colors.white,
+        gradient: isDark
+            ? const LinearGradient(
+                colors: [
+                  Color(0xFF0F172A),
+                  Color(0xFF1E1E38),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              )
+            : null,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: isDark ? const Color(0xFF1E293B) : borderCol,
+          width: 1.5,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.3 : 0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            color: isDark
+                ? const Color(0xFF0D9488).withOpacity(0.08)
+                : Colors.black.withOpacity(0.05),
+            blurRadius: 15,
+            spreadRadius: 2,
+            offset: const Offset(0, 6),
           ),
         ],
       ),
@@ -1402,13 +1427,13 @@ class _HomeScreenState extends State<HomeScreen> {
               percent: (provider.xp % 100) / 100,
               center: Text(
                 '${provider.level}',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF10B981),
+                  color: isDark ? const Color(0xFF2DD4BF) : const Color(0xFF10B981),
                 ),
               ),
-              progressColor: const Color(0xFF10B981),
+              progressColor: isDark ? const Color(0xFF2DD4BF) : const Color(0xFF10B981),
               backgroundColor: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0),
               circularStrokeCap: CircularStrokeCap.round,
               animation: true,
@@ -1468,7 +1493,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    const Icon(Icons.check_circle_outline, color: Color(0xFF10B981), size: 18),
+                    Icon(Icons.check_circle_outline, color: isDark ? const Color(0xFF2DD4BF) : const Color(0xFF10B981), size: 18),
                     const SizedBox(width: 4),
                     Text(
                       '${provider.completedQuizzes}',
