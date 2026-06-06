@@ -73,6 +73,23 @@ async function run() {
   await fs.writeFile(configPath, configContent, 'utf8');
   console.log(`[✔] Updated functions/config.ts fallbacks to apk_version: '${newVersion}'`);
 
+  // 4.5. Update landing/index.html version text
+  const landingIndexPath = path.join(rootDir, 'landing', 'index.html');
+  try {
+    let landingContent = await fs.readFile(landingIndexPath, 'utf8');
+    // Find (إصدار \d+) in landing/index.html
+    const landingVersionRegex = /\(إصدار\s+\d+\)/g;
+    if (landingVersionRegex.test(landingContent)) {
+      landingContent = landingContent.replace(landingVersionRegex, `(إصدار ${newVersion})`);
+      await fs.writeFile(landingIndexPath, landingContent, 'utf8');
+      console.log(`[✔] Updated landing/index.html download link version text to (إصدار ${newVersion})`);
+    } else {
+      console.warn("[⚠️] Warning: Could not find version text (إصدار X) in landing/index.html to replace.");
+    }
+  } catch (err) {
+    console.warn(`[⚠️] Warning: Could not update landing/index.html version text: ${err.message}`);
+  }
+
   // 5. Connect to Neon database and update configuration tables
   console.log("Connecting to database and updating remote configurations...");
   const host = dbUrl.split('@')[1].split('/')[0];
