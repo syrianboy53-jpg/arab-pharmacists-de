@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  static const _primaryColor = Color(0xFF10B981); // Emerald green
-  static const _secondaryColor = Color(0xFFF59E0B); // Amber
-  static const _surfaceColor = Color(0xFFF8FAFC); // Light blue-grey background
+  static const _primaryColor = Color(0xFF4F46E5); // Premium Indigo
+  static const _secondaryColor = Color(0xFF0D9488); // Teal
+  static const _surfaceColor = Color(0xFFF8FAFC); // Light Slate background
 
   static ThemeData get lightTheme {
     final colorScheme = ColorScheme.fromSeed(
@@ -29,24 +29,42 @@ class AppTheme {
       ),
       cardTheme: CardThemeData(
         color: Colors.white,
-        elevation: 2,
+        elevation: 0.5,
         shadowColor: Colors.black12,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.0),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+          backgroundColor: _primaryColor,
+          foregroundColor: Colors.white,
+          elevation: 1,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
           ),
+          textStyle: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: _primaryColor,
+          side: const BorderSide(color: Color(0xFFCBD5E1), width: 1.5),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          textStyle: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
       navigationBarTheme: NavigationBarThemeData(
         indicatorColor: colorScheme.primaryContainer,
+        backgroundColor: Colors.white,
+        elevation: 8,
         labelTextStyle: WidgetStatePropertyAll(
-          GoogleFonts.cairo(fontSize: 12, fontWeight: FontWeight.w600),
+          GoogleFonts.cairo(fontSize: 12, fontWeight: FontWeight.w700),
         ),
       ),
     );
@@ -76,24 +94,40 @@ class AppTheme {
       ),
       cardTheme: CardThemeData(
         color: const Color(0xFF1E293B),
-        elevation: 2,
+        elevation: 0.5,
         shadowColor: Colors.black26,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
+          side: const BorderSide(color: Color(0xFF334155), width: 1.0),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+          backgroundColor: _primaryColor,
+          foregroundColor: Colors.white,
+          elevation: 1,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
           ),
+          textStyle: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: Colors.white,
+          side: const BorderSide(color: Color(0xFF475569), width: 1.5),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          textStyle: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
       navigationBarTheme: NavigationBarThemeData(
         indicatorColor: colorScheme.primaryContainer,
         labelTextStyle: WidgetStatePropertyAll(
-          GoogleFonts.cairo(fontSize: 12, fontWeight: FontWeight.w600),
+          GoogleFonts.cairo(fontSize: 12, fontWeight: FontWeight.w700),
         ),
       ),
     );

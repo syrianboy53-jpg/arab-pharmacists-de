@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../data/grammatik_data.dart';
 import '../providers/app_provider.dart';
 
@@ -12,15 +13,20 @@ class GrammatikScreen extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('القواعد - Grammatik'),
+          title: const Text('القواعد - Grammatik', style: TextStyle(fontWeight: FontWeight.bold)),
           centerTitle: true,
-          bottom: const TabBar(
+          bottom: TabBar(
             isScrollable: true,
-            tabs: [
-              Tab(text: 'دروس القواعد', icon: Icon(Icons.book)),
-              Tab(text: 'أخطاء شائعة', icon: Icon(Icons.warning_amber)),
-              Tab(text: 'بناء الجمل', icon: Icon(Icons.format_list_numbered)),
-              Tab(text: 'أفعال منفصلة', icon: Icon(Icons.call_split)),
+            tabAlignment: TabAlignment.start,
+            indicatorColor: Theme.of(context).colorScheme.primary,
+            labelColor: Theme.of(context).colorScheme.primary,
+            unselectedLabelColor: Theme.of(context).colorScheme.onSurfaceVariant,
+            labelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+            tabs: const [
+              Tab(text: 'دروس القواعد', icon: Icon(Icons.menu_book_rounded)),
+              Tab(text: 'أخطاء شائعة', icon: Icon(Icons.do_not_disturb_on_rounded)),
+              Tab(text: 'بناء الجمل (تفاعلي)', icon: Icon(Icons.extension_rounded)),
+              Tab(text: 'أفعال مركّبة', icon: Icon(Icons.transform_rounded)),
             ],
           ),
         ),
@@ -40,27 +46,70 @@ class GrammatikScreen extends StatelessWidget {
 class _LessonsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return ListView.builder(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       itemCount: grammarLessons.length,
       itemBuilder: (ctx, i) {
         final l = grammarLessons[i];
         return Card(
           margin: const EdgeInsets.only(bottom: 12),
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-              child: Text('${i + 1}', style: TextStyle(color: Theme.of(context).colorScheme.onPrimaryContainer, fontWeight: FontWeight.bold)),
+          clipBehavior: Clip.antiAlias,
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border(
+                right: BorderSide(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 4,
+                ),
+              ),
             ),
-            title: Text(l['title'] as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-            subtitle: Text(l['titleAr'] as String, style: const TextStyle(fontSize: 12)),
-            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => _LessonDetailScreen(lesson: l)),
-              );
-            },
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              leading: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: Text(
+                    '${i + 1}',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ),
+              title: Text(
+                l['title'] as String,
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, fontFamily: 'Cairo'),
+              ),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: Text(
+                  l['titleAr'] as String,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isDark ? Colors.white70 : Colors.black54,
+                  ),
+                ),
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 16,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => _LessonDetailScreen(lesson: l)),
+                );
+              },
+            ),
           ),
         );
       },
@@ -87,17 +136,18 @@ class _LessonDetailScreenState extends State<_LessonDetailScreen> {
     final exercises = List<Map<String, dynamic>>.from(l['exercises'] as List);
     final examples = List<Map<String, dynamic>>.from(l['examples'] as List);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final accentCol = Theme.of(context).colorScheme.primary;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l['title'] as String),
+        title: Text(l['title'] as String, style: const TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Explanation
+            // Title & Explanation
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -106,12 +156,12 @@ class _LessonDetailScreenState extends State<_LessonDetailScreen> {
                   children: [
                     Text(
                       l['titleAr'] as String,
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF10B981)),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: accentCol),
                     ),
-                    const SizedBox(height: 12),
+                    const Divider(height: 24),
                     Text(
                       l['explanation'] as String,
-                      style: const TextStyle(fontSize: 14, height: 1.5),
+                      style: const TextStyle(fontSize: 14, height: 1.6),
                     ),
                   ],
                 ),
@@ -126,19 +176,45 @@ class _LessonDetailScreenState extends State<_LessonDetailScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      '💡 أمثلة توضيحية (Beispiele):',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    Row(
+                      children: [
+                        Icon(Icons.lightbulb_outline_rounded, color: Theme.of(context).colorScheme.secondary),
+                        const SizedBox(width: 8),
+                        const Text(
+                          '💡 أمثلة توضيحية (Beispiele):',
+                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
-                    const Divider(height: 20),
-                    ...examples.map((ex) => Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
+                    const Divider(height: 24),
+                    ...examples.map((ex) => Container(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: isDark ? Colors.black26 : Colors.grey[50],
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: isDark ? Colors.white10 : Colors.black12),
+                          ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(ex['de'] as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13), textDirection: TextDirection.ltr),
-                              const SizedBox(height: 4),
-                              Text(ex['ar'] as String, style: TextStyle(color: isDark ? Colors.white60 : Colors.grey[600], fontSize: 12)),
+                              Text(
+                                ex['de'] as String,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                                textDirection: TextDirection.ltr,
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                ex['ar'] as String,
+                                style: TextStyle(
+                                  color: isDark ? Colors.white60 : Colors.grey[700],
+                                  fontSize: 12,
+                                ),
+                              ),
                             ],
                           ),
                         )),
@@ -148,70 +224,109 @@ class _LessonDetailScreenState extends State<_LessonDetailScreen> {
             ),
             const SizedBox(height: 12),
 
-            // Quizzes
+            // Exercises
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      '✏️ تمارين اختبار الفهم:',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    Row(
+                      children: [
+                        Icon(Icons.edit_note_rounded, color: Theme.of(context).colorScheme.primary),
+                        const SizedBox(width: 8),
+                        const Text(
+                          '✏️ تمارين اختبار الفهم:',
+                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
-                    const Divider(height: 20),
+                    const Divider(height: 24),
                     ...List.generate(exercises.length, (idx) {
                       final ex = exercises[idx];
                       final options = List<String>.from(ex['options'] as List);
                       return Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
+                        padding: const EdgeInsets.only(bottom: 24),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                'السؤال ${idx + 1}',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).colorScheme.secondary,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
                             Text(
-                              '${idx + 1}. ${ex['question']}',
+                              ex['question'] as String,
                               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
                               textDirection: TextDirection.ltr,
                             ),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 12),
                             ...List.generate(options.length, (optIdx) {
                               final opt = options[optIdx];
                               final isSelected = _selectedAnswers[idx] == optIdx;
                               final isCorrect = ex['correct'] == optIdx;
-                              
-                              Color? tileColor;
-                              Widget? trailingIcon;
+
+                              Color borderCol = isSelected ? accentCol : (isDark ? Colors.white10 : Colors.black12);
+                              Color bgCol = isSelected ? accentCol.withOpacity(0.05) : Colors.transparent;
+                              Widget? icon;
+
                               if (_showResults) {
                                 if (isCorrect) {
-                                  tileColor = Colors.green.withValues(alpha: 0.1);
-                                  trailingIcon = const Icon(Icons.check, color: Colors.green);
+                                  borderCol = Colors.green;
+                                  bgCol = Colors.green.withOpacity(0.1);
+                                  icon = const Icon(Icons.check_circle_rounded, color: Colors.green, size: 20);
                                 } else if (isSelected) {
-                                  tileColor = Colors.red.withValues(alpha: 0.1);
-                                  trailingIcon = const Icon(Icons.close, color: Colors.red);
+                                  borderCol = Colors.red;
+                                  bgCol = Colors.red.withOpacity(0.1);
+                                  icon = const Icon(Icons.cancel_rounded, color: Colors.red, size: 20);
                                 }
                               }
 
-                              return Container(
-                                margin: const EdgeInsets.only(bottom: 6),
-                                decoration: BoxDecoration(
-                                  color: tileColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: RadioListTile<int>(
-                                  value: optIdx,
-                                  groupValue: _selectedAnswers[idx],
-                                  onChanged: _showResults
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: InkWell(
+                                  onTap: _showResults
                                       ? null
-                                      : (v) {
-                                          if (v != null) {
-                                            setState(() {
-                                              _selectedAnswers[idx] = v;
-                                            });
-                                          }
+                                      : () {
+                                          setState(() {
+                                            _selectedAnswers[idx] = optIdx;
+                                          });
                                         },
-                                  title: Text(opt, textDirection: TextDirection.ltr),
-                                  secondary: trailingIcon,
-                                  controlAffinity: ListTileControlAffinity.trailing,
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                                    decoration: BoxDecoration(
+                                      color: bgCol,
+                                      border: Border.all(color: borderCol, width: isSelected || (_showResults && isCorrect) ? 2 : 1),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            opt,
+                                            style: TextStyle(
+                                              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                                              fontSize: 13,
+                                            ),
+                                            textDirection: TextDirection.ltr,
+                                          ),
+                                        ),
+                                        if (icon != null) icon,
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               );
                             }),
@@ -222,10 +337,8 @@ class _LessonDetailScreenState extends State<_LessonDetailScreen> {
                     if (!_showResults)
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF10B981),
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          minimumSize: const Size.fromHeight(50),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         ),
                         onPressed: _selectedAnswers.length < exercises.length
                             ? null
@@ -243,23 +356,24 @@ class _LessonDetailScreenState extends State<_LessonDetailScreen> {
                                 context.read<AppProvider>().addXP(10);
                                 context.read<AppProvider>().incrementQuizzes();
                               },
-                        child: const Center(child: Text('تحقق من الإجابات 📝', style: TextStyle(fontWeight: FontWeight.bold))),
+                        child: const Text('تحقق من الإجابات 📝', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                       )
                     else
                       Container(
-                        padding: const EdgeInsets.all(12),
+                        padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF10B981).withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.green.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.green.withOpacity(0.3)),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(Icons.emoji_events, color: Colors.orange),
+                            const Icon(Icons.emoji_events_rounded, color: Colors.amber, size: 28),
                             const SizedBox(width: 8),
                             Text(
                               'أحرزت $_score من أصل ${exercises.length} نقاط! (+10 XP)',
-                              style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF10B981)),
+                              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.green, fontSize: 14),
                             ),
                           ],
                         ),
@@ -283,45 +397,188 @@ class _MistakesList extends StatelessWidget {
       itemCount: commonMistakes.length,
       itemBuilder: (ctx, i) {
         final m = commonMistakes[i];
-        return Card(
-          margin: const EdgeInsets.only(bottom: 12),
-          child: ExpansionTile(
-            leading: CircleAvatar(
-              backgroundColor: Colors.red[50],
-              child: const Icon(Icons.close, color: Colors.red, size: 20),
-            ),
-            title: Text(m['titleAr'] as String? ?? '', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-            subtitle: Text('المستوى: ${m["level"] ?? "-"}', style: const TextStyle(fontSize: 12)),
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        return _MistakeCard(mistake: m);
+      },
+    );
+  }
+}
+
+class _MistakeCard extends StatefulWidget {
+  final Map<String, dynamic> mistake;
+  const _MistakeCard({required this.mistake});
+
+  @override
+  State<_MistakeCard> createState() => _MistakeCardState();
+}
+
+class _MistakeCardState extends State<_MistakeCard> {
+  bool _expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final m = widget.mistake;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.close, color: Colors.red, size: 16),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text(m['wrong'] as String? ?? '', style: const TextStyle(color: Colors.red, decoration: TextDecoration.lineThrough), textDirection: TextDirection.ltr)),
-                      ],
+                    Expanded(
+                      child: Text(
+                        m['titleAr'] as String? ?? '',
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                      ),
                     ),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        const Icon(Icons.check, color: Colors.green, size: 16),
-                        const SizedBox(width: 8),
-                        Expanded(child: Text(m['right'] as String? ?? '', style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold), textDirection: TextDirection.ltr)),
-                      ],
-                    ),
-                    if (m['whyAr'] != null) ...[const SizedBox(height: 12), Text('💡 ${m["whyAr"]}')],
-                    if (m['ruleAr'] != null) ...[const SizedBox(height: 8), Text('📏 ${m["ruleAr"]}', style: TextStyle(color: Colors.grey[700], fontSize: 13))],
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        m['level'] as String? ?? '-',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        ),
+                      ),
+                    )
                   ],
                 ),
-              ),
-            ],
+                const SizedBox(height: 16),
+
+                // Wrong Block
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.red.withOpacity(0.05),
+                    border: Border.all(color: Colors.red.withOpacity(0.2)),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.cancel_rounded, color: Colors.red, size: 20),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          m['wrong'] as String? ?? '',
+                          style: const TextStyle(
+                            color: Colors.red,
+                            decoration: TextDecoration.lineThrough,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                          textDirection: TextDirection.ltr,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
+
+                // Right Block
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.green.withOpacity(0.05),
+                    border: Border.all(color: Colors.green.withOpacity(0.2)),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.check_circle_rounded, color: Colors.green, size: 20),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          m['right'] as String? ?? '',
+                          style: const TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                          ),
+                          textDirection: TextDirection.ltr,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        );
-      },
+
+          // Action Expander Bar
+          InkWell(
+            onTap: () {
+              setState(() {
+                _expanded = !_expanded;
+              });
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              decoration: BoxDecoration(
+                color: isDark ? Colors.white10 : Colors.grey[50],
+                borderRadius: const BorderRadius.vertical(bottom: Radius.circular(20)),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    _expanded ? 'إخفاء التفاصيل' : 'لماذا وكيف؟ (القاعدة والتلميح)',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  Icon(
+                    _expanded ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded,
+                    size: 18,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          if (_expanded)
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (m['whyAr'] != null) ...[
+                    const Text('💡 لماذا؟', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.orange)),
+                    const SizedBox(height: 4),
+                    Text(m['whyAr'] as String, style: const TextStyle(fontSize: 12, height: 1.5)),
+                    const SizedBox(height: 12),
+                  ],
+                  if (m['ruleAr'] != null) ...[
+                    const Text('📏 القاعدة:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.blue)),
+                    const SizedBox(height: 4),
+                    Text(m['ruleAr'] as String, style: const TextStyle(fontSize: 12, height: 1.5)),
+                    const SizedBox(height: 12),
+                  ],
+                  if (m['tipAr'] != null) ...[
+                    const Text('🎯 نصيحة سريعة:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.green)),
+                    const SizedBox(height: 4),
+                    Text(m['tipAr'] as String, style: const TextStyle(fontSize: 12, height: 1.5)),
+                  ],
+                ],
+              ),
+            ),
+        ],
+      ),
     );
   }
 }
@@ -334,27 +591,247 @@ class _SatzbauList extends StatelessWidget {
       itemCount: satzbau.length,
       itemBuilder: (ctx, i) {
         final s = satzbau[i];
-        final tokens = List<String>.from(s['tokens'] as List? ?? []);
-        return Card(
-          margin: const EdgeInsets.only(bottom: 12),
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        return _SatzbauGameCard(sentenceData: s, index: i);
+      },
+    );
+  }
+}
+
+class _SatzbauGameCard extends StatefulWidget {
+  final Map<String, dynamic> sentenceData;
+  final int index;
+  const _SatzbauGameCard({required this.sentenceData, required this.index});
+
+  @override
+  State<_SatzbauGameCard> createState() => _SatzbauGameCardState();
+}
+
+class _SatzbauGameCardState extends State<_SatzbauGameCard> {
+  late List<String> _correctTokens;
+  List<String> _userTokens = [];
+  List<String> _scrambledTokens = [];
+  bool? _isCorrect;
+  bool _checked = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _correctTokens = List<String>.from(widget.sentenceData['tokens'] as List? ?? []);
+    _resetGame();
+  }
+
+  void _resetGame() {
+    setState(() {
+      _userTokens = [];
+      _scrambledTokens = List<String>.from(_correctTokens)..shuffle();
+      _isCorrect = null;
+      _checked = false;
+    });
+  }
+
+  void _checkAnswer() {
+    final userStr = _userTokens.join(' ');
+    final correctStr = _correctTokens.join(' ');
+    final correct = userStr == correctStr;
+
+    setState(() {
+      _isCorrect = correct;
+      _checked = true;
+    });
+
+    if (correct) {
+      context.read<AppProvider>().addXP(5);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final s = widget.sentenceData;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('المستوى: ${s["level"] ?? "-"}', style: TextStyle(fontSize: 12, color: Colors.grey[600])),
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 4,
-                  children: tokens.map((t) => Chip(label: Text(t, style: const TextStyle(fontSize: 13)), padding: EdgeInsets.zero, visualDensity: VisualDensity.compact)).toList(),
+                Text(
+                  'تحدي بناء الجملة #${widget.index + 1}',
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.blue),
                 ),
-                if (s['ar'] != null) ...[const SizedBox(height: 8), Text(s['ar'] as String, style: TextStyle(color: Colors.grey[700]))],
-                if (s['tipAr'] != null) ...[const SizedBox(height: 4), Text('💡 ${s["tipAr"]}', style: const TextStyle(fontSize: 12))],
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Text(
+                    s['level'] as String? ?? '-',
+                    style: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.blue),
+                  ),
+                ),
               ],
             ),
-          ),
-        );
-      },
+            const SizedBox(height: 12),
+            Text(
+              s['ar'] as String? ?? '',
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, height: 1.4),
+            ),
+            const SizedBox(height: 16),
+
+            // User Assembly Slot
+            Container(
+              constraints: const BoxConstraints(minHeight: 60),
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: isDark ? Colors.black26 : Colors.grey[50],
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: _checked
+                      ? (_isCorrect! ? Colors.green : Colors.red)
+                      : (isDark ? Colors.white10 : Colors.black12),
+                  width: _checked ? 2 : 1,
+                ),
+              ),
+              child: _userTokens.isEmpty
+                  ? Center(
+                      child: Text(
+                        'انقر على الكلمات بالأسفل لتركيب الجملة',
+                        style: TextStyle(color: isDark ? Colors.white30 : Colors.black38, fontSize: 12),
+                      ),
+                    )
+                  : Wrap(
+                      spacing: 6,
+                      runSpacing: 6,
+                      children: _userTokens.map((token) {
+                        return GestureDetector(
+                          onTap: _checked
+                              ? null
+                              : () {
+                                  setState(() {
+                                    _userTokens.remove(token);
+                                    _scrambledTokens.add(token);
+                                  });
+                                },
+                          child: Chip(
+                            label: Text(token, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                            labelStyle: TextStyle(color: Theme.of(context).colorScheme.onPrimaryContainer),
+                            side: BorderSide.none,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                            visualDensity: VisualDensity.compact,
+                          ),
+                        );
+                      }).toList(),
+                    ),
+            ),
+            const SizedBox(height: 16),
+
+            // Scrambled Tokens Pool
+            if (!_checked)
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                alignment: WrapAlignment.center,
+                children: _scrambledTokens.map((token) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _scrambledTokens.remove(token);
+                        _userTokens.add(token);
+                      });
+                    },
+                    child: Chip(
+                      label: Text(token, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                      side: BorderSide(color: isDark ? Colors.white10 : Colors.black12),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      visualDensity: VisualDensity.compact,
+                    ),
+                  );
+                }).toList(),
+              ),
+
+            // Check feedback box
+            if (_checked) ...[
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: _isCorrect! ? Colors.green.withOpacity(0.1) : Colors.red.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: _isCorrect! ? Colors.green : Colors.red, width: 0.5),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          _isCorrect! ? Icons.check_circle_rounded : Icons.cancel_rounded,
+                          color: _isCorrect! ? Colors.green : Colors.red,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          _isCorrect! ? 'أحسنت! إجابة صحيحة (+5 XP) 🎉' : 'خطأ! الترتيب الصحيح هو:',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: _isCorrect! ? Colors.green : Colors.red,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (!_isCorrect!) ...[
+                      const SizedBox(height: 8),
+                      Text(
+                        _correctTokens.join(' '),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.red),
+                        textDirection: TextDirection.ltr,
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              if (s['tipAr'] != null) ...[
+                const SizedBox(height: 10),
+                Text(
+                  '📏 ${s['tipAr']}',
+                  style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
+                ),
+              ]
+            ],
+            const SizedBox(height: 16),
+
+            // Action Buttons
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                if (_checked || _userTokens.isNotEmpty)
+                  TextButton(
+                    onPressed: _resetGame,
+                    child: const Row(
+                      children: [
+                        Icon(Icons.refresh_rounded, size: 16),
+                        SizedBox(width: 4),
+                        Text('إعادة المحاولة'),
+                      ],
+                    ),
+                  ),
+                const SizedBox(width: 8),
+                if (!_checked)
+                  ElevatedButton(
+                    onPressed: _userTokens.length < _correctTokens.length ? null : _checkAnswer,
+                    child: const Text('تحقق من الترتيب'),
+                  ),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
@@ -378,12 +855,15 @@ class _TrennbarListState extends State<_TrennbarList> {
 
     return Column(
       children: [
+        // Category Pill Selectors
         Padding(
           padding: const EdgeInsets.all(12.0),
           child: Container(
+            padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
-              color: isDark ? Colors.grey[900] : Colors.grey[200],
-              borderRadius: BorderRadius.circular(12),
+              color: isDark ? Colors.grey[900] : Colors.grey[100],
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: isDark ? Colors.white10 : Colors.black12),
             ),
             child: Row(
               children: List.generate(trennbareVerben.length, (index) {
@@ -396,21 +876,18 @@ class _TrennbarListState extends State<_TrennbarList> {
                         _selectedCategoryIndex = index;
                       });
                     },
-                    child: Container(
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
-                        color: isSelected
-                            ? const Color(0xFF10B981)
-                            : Colors.transparent,
+                        color: isSelected ? Theme.of(context).colorScheme.primary : Colors.transparent,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Center(
                         child: Text(
                           cat['titleAr'] as String? ?? '',
                           style: TextStyle(
-                            color: isSelected
-                                ? Colors.white
-                                : (isDark ? Colors.white70 : Colors.black87),
+                            color: isSelected ? Colors.white : (isDark ? Colors.white70 : Colors.black87),
                             fontWeight: FontWeight.bold,
                             fontSize: 13,
                           ),
@@ -430,9 +907,9 @@ class _TrennbarListState extends State<_TrennbarList> {
             child: Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: const Color(0xFF10B981).withOpacity(0.1),
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.08),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFF10B981).withOpacity(0.2)),
+                border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.15)),
               ),
               child: Text(
                 category['intro'] as String,
@@ -449,11 +926,12 @@ class _TrennbarListState extends State<_TrennbarList> {
             itemBuilder: (ctx, verbIdx) {
               final v = verbs[verbIdx];
               final examples = List<Map<String, dynamic>>.from(v['examples'] as List? ?? []);
-              
+
               return Card(
                 margin: const EdgeInsets.only(bottom: 12),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                 child: ExpansionTile(
+                  expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -467,7 +945,7 @@ class _TrennbarListState extends State<_TrennbarList> {
                       const SizedBox(width: 8),
                       Text(
                         v['infinitiv'] as String? ?? '',
-                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF10B981)),
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
                         textDirection: TextDirection.ltr,
                       ),
                     ],
@@ -480,7 +958,7 @@ class _TrennbarListState extends State<_TrennbarList> {
                       children: [
                         _buildBadge(context, 'Prät: ${v['praeteritum'] ?? ''}'),
                         _buildBadge(context, 'P2: ${v['partizip2'] ?? ''}'),
-                        _buildBadge(context, v['hilfsverb'] ?? '', color: const Color(0xFF10B981)),
+                        _buildBadge(context, v['hilfsverb'] ?? '', color: Theme.of(context).colorScheme.secondary),
                       ],
                     ),
                   ),
@@ -506,10 +984,11 @@ class _TrennbarListState extends State<_TrennbarList> {
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 10.0),
                                 child: Container(
-                                  padding: const EdgeInsets.all(10),
+                                  padding: const EdgeInsets.all(12),
                                   decoration: BoxDecoration(
-                                    color: isDark ? Colors.black26 : Colors.grey[100],
+                                    color: isDark ? Colors.black26 : Colors.grey[50],
                                     borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(color: isDark ? Colors.white10 : Colors.black12),
                                   ),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -517,7 +996,7 @@ class _TrennbarListState extends State<_TrennbarList> {
                                       if (ex['context'] != null)
                                         Container(
                                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                                          margin: const EdgeInsets.only(bottom: 4),
+                                          margin: const EdgeInsets.only(bottom: 6),
                                           decoration: BoxDecoration(
                                             color: Colors.blue.withOpacity(0.1),
                                             borderRadius: BorderRadius.circular(4),
@@ -529,7 +1008,7 @@ class _TrennbarListState extends State<_TrennbarList> {
                                         ),
                                       Text(
                                         ex['de'] as String? ?? '',
-                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Theme.of(context).colorScheme.primary),
                                         textDirection: TextDirection.ltr,
                                       ),
                                       const SizedBox(height: 4),
@@ -574,4 +1053,3 @@ class _TrennbarListState extends State<_TrennbarList> {
     );
   }
 }
-
