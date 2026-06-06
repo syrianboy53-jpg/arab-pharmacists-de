@@ -847,6 +847,28 @@ section { padding: 80px 0; }
   </div>
 </section>
 
+<!-- ===== PUBLIC VISITOR STATS ===== -->
+<section style="background: #0B1E12; color: white; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.08); text-align: center;">
+  <div class="container">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+      <h3 style="font-size: 20px; font-weight: 800; color: var(--gold);">📊 إحصائيات زوار الموقع الحية</h3>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 10px;">
+        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 12px 24px; border-radius: 14px; min-width: 140px;">
+          <div style="font-size: 24px; font-weight: 900; color: white;" id="pub-total-visitors">...</div>
+          <div style="font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 4px;">👥 إجمالي الزيارات</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 12px 24px; border-radius: 14px; min-width: 140px;">
+          <div style="font-size: 24px; font-weight: 900; color: #10B981;" id="pub-today-visitors">...</div>
+          <div style="font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 4px;">📅 زوار اليوم</div>
+        </div>
+      </div>
+      <div id="pub-countries-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px; max-width: 650px;">
+        <!-- Countries loaded dynamically -->
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
   <div class="container">
@@ -872,12 +894,55 @@ section { padding: 80px 0; }
 </footer>
 
 <script>
+  function getFlagEmoji(countryCode) {
+    if (!countryCode || countryCode === 'unknown' || countryCode.length !== 2) return '❓';
+    var codePoints = countryCode
+      .toUpperCase()
+      .split('')
+      .map(function(char) { return 127397 + char.charCodeAt(0); });
+    return String.fromCodePoint.apply(String, codePoints);
+  }
+
   fetch('/api/visit')
     .then(function(res) { return res.json(); })
     .then(function(data) {
-      if (data && data.views) {
-        var el = document.getElementById('visitor-count');
-        if (el) el.textContent = Number(data.views).toLocaleString('en-US');
+      if (data) {
+        if (data.views) {
+          var el = document.getElementById('visitor-count');
+          if (el) el.textContent = Number(data.views).toLocaleString('en-US');
+          var pubTotal = document.getElementById('pub-total-visitors');
+          if (pubTotal) pubTotal.textContent = Number(data.views).toLocaleString('en-US');
+        }
+        if (data.today !== undefined) {
+          var pubToday = document.getElementById('pub-today-visitors');
+          if (pubToday) pubToday.textContent = Number(data.today).toLocaleString('en-US');
+        }
+        if (data.countries && data.countries.length > 0) {
+          var container = document.getElementById('pub-countries-container');
+          if (container) {
+            container.innerHTML = '';
+            data.countries.forEach(function(item) {
+              var code = item.country;
+              var count = item.count;
+              var label = code === 'unknown' ? 'أخرى' : code;
+              var flag = getFlagEmoji(code);
+              
+              var badge = document.createElement('div');
+              badge.style.display = 'inline-flex';
+              badge.style.alignItems = 'center';
+              badge.style.gap = '6px';
+              badge.style.background = 'rgba(255,255,255,0.06)';
+              badge.style.border = '1px solid rgba(255,255,255,0.1)';
+              badge.style.padding = '4px 10px';
+              badge.style.borderRadius = '20px';
+              badge.style.fontSize = '12px';
+              badge.style.color = '#e2e8f0';
+              
+              badge.innerHTML = '<span style="font-size:16px;">' + flag + '</span> ' + label + ' (' + count + ')';
+              container.appendChild(badge);
+            });
+          }
+        }
       }
     })
     .catch(function(err) {

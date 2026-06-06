@@ -22,15 +22,26 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       }
     }
 
-    // Count unique IP addresses
-    const countRes = await query(env, "SELECT COUNT(DISTINCT ip_address)::integer FROM visitor_logs")
+    // Run queries in parallel for efficiency
+    const [countRes, todayRes, topCountriesRes] = await Promise.all([
+      query(env, "SELECT COUNT(DISTINCT ip_address)::integer FROM visitor_logs"),
+      query(env, "SELECT COUNT(DISTINCT ip_address)::integer FROM visitor_logs WHERE created_at >= CURRENT_DATE"),
+      query(env, "SELECT country, COUNT(DISTINCT ip_address)::integer AS count FROM visitor_logs GROUP BY country ORDER BY count DESC LIMIT 8")
+    ])
+
     const uniqueCount = countRes.rows[0]?.count || 0
+    const todayCount = todayRes.rows[0]?.count || 0
+    const topCountries = topCountriesRes.rows || []
     
-    // Base offset to maintain the historical count from when the tracker was added
+    // Base offset to maintain the historical count
     const baseOffset = 34820
     const totalViews = baseOffset + uniqueCount
 
-    return new Response(JSON.stringify({ views: totalViews }), {
+    return new Response(JSON.stringify({ 
+      views: totalViews,
+      today: todayCount,
+      countries: topCountries
+    }), {
       headers: {
         'Content-Type': 'application/json',
         'Cache-Control': 'no-store, no-cache, must-revalidate',
