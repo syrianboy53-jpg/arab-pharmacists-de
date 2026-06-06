@@ -34,6 +34,20 @@ interface DBStats {
   week_users: number
   active_users: number
   total_progress_entries: number
+  total_visitors?: number
+  today_visitors?: number
+  week_visitors?: number
+  latest_visitors?: Array<{
+    id: number
+    created_at: string
+    ip_address: string
+    country: string
+    user_agent: string
+  }>
+  top_countries?: Array<{
+    country: string
+    count: number
+  }>
 }
 
 interface SubStats {
@@ -44,6 +58,15 @@ interface SubStats {
   google_play_count: number
   monthly_count: number
   yearly_count: number
+}
+
+function getFlagEmoji(countryCode: string) {
+  if (!countryCode || countryCode === 'unknown' || countryCode.length !== 2) return '❓';
+  const codePoints = countryCode
+    .toUpperCase()
+    .split('')
+    .map(char => 127397 + char.charCodeAt(0));
+  return String.fromCodePoint(...codePoints);
 }
 
 export default function AdminDashboardPage() {
@@ -724,6 +747,76 @@ export default function AdminDashboardPage() {
           </div>
         )}
       </section>
+
+      {/* Website Visitor Stats & Logs */}
+      {usersStats && usersStats.total_visitors !== undefined && (
+        <section className="bg-white border-l-4 border-indigo-500 rounded-xl p-5 shadow-sm space-y-4">
+          <h2 className="text-lg font-bold text-gray-900">🌐 زوار الموقع الأساسي (صفحة الهبوط)</h2>
+          <p className="text-gray-500 text-xs font-semibold">إحصاءات الزوار الفريدين (Unique IPs) من قاعدة البيانات الحيّة.</p>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <StatCard label="👥 إجمالي الزوار الفريدين" value={String(usersStats.total_visitors)} />
+            <StatCard label="📅 اليوم" value={String(usersStats.today_visitors)} />
+            <StatCard label="🗓️ آخر 7 أيام" value={String(usersStats.week_visitors)} />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+            {/* Top Countries List */}
+            <div className="md:col-span-1 space-y-3">
+              <h3 className="font-bold text-sm text-gray-800 border-b pb-1">🌍 الدول الأكثر زيارة</h3>
+              {usersStats.top_countries && usersStats.top_countries.length > 0 ? (
+                <div className="space-y-2">
+                  {usersStats.top_countries.map((item, idx) => (
+                    <div key={idx} className="flex justify-between items-center text-sm p-2 rounded bg-gray-50">
+                      <span className="font-bold flex items-center gap-1.5">
+                        <span className="text-lg">{getFlagEmoji(item.country)}</span>
+                        <span>{item.country === 'unknown' ? 'غير معروف' : item.country}</span>
+                      </span>
+                      <span className="bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded-full text-xs font-bold">{item.count} زائر</span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-400 text-xs italic">لا توجد بيانات دول بعد.</p>
+              )}
+            </div>
+
+            {/* Latest Visitors Table */}
+            <div className="md:col-span-2 space-y-3">
+              <h3 className="font-bold text-sm text-gray-800 border-b pb-1">📋 سجل أحدث الزيارات (آخر 50 زيارة فريدة)</h3>
+              {usersStats.latest_visitors && usersStats.latest_visitors.length > 0 ? (
+                <div className="overflow-x-auto border rounded-xl max-h-[300px] overflow-y-auto">
+                  <table className="w-full border-collapse text-xs text-right">
+                    <thead>
+                      <tr className="bg-indigo-50 text-indigo-950 font-bold sticky top-0">
+                        <th className="p-2.5">الوقت</th>
+                        <th className="p-2.5">IP Address</th>
+                        <th className="p-2.5">البلد</th>
+                        <th className="p-2.5">المتصفح / النظام</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {usersStats.latest_visitors.map((v, index) => (
+                        <tr key={v.id || index} className="border-b hover:bg-gray-50/50">
+                          <td className="p-2.5 text-gray-500 whitespace-nowrap">{new Date(v.created_at).toLocaleString('ar-EG')}</td>
+                          <td className="p-2.5 font-mono text-gray-700">{v.ip_address}</td>
+                          <td className="p-2.5 font-bold text-indigo-700 flex items-center gap-1">
+                            <span>{getFlagEmoji(v.country)}</span>
+                            <span>{v.country}</span>
+                          </td>
+                          <td className="p-2.5 text-gray-600 truncate max-w-[200px]" title={v.user_agent}>{v.user_agent}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <p className="text-gray-400 text-xs italic">لا توجد سجلات زيارات بعد.</p>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Premium Subscriptions List */}
       <section className="bg-white border-l-4 border-[#7C3AED] rounded-xl p-5 shadow-sm space-y-3">
