@@ -30,7 +30,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         final config = json.decode(responseBody) as Map<String, dynamic>;
         
         final remoteVersion = int.tryParse(config['apk_version'] ?? '0') ?? 0;
-        const localVersion = 66; // Current app version code is 66
+        const localVersion = AppProvider.appVersion;
         
         if (mounted) {
           if (localVersion < remoteVersion) {
@@ -212,10 +212,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Card(
             child: Column(
               children: [
-                const ListTile(
-                  leading: Icon(Icons.info),
-                  title: Text('عن التطبيق'),
-                  subtitle: Text('B1 Deutsch للسوريين v2.0 (إصدار 66)'),
+                ListTile(
+                  leading: const Icon(Icons.info),
+                  title: const Text('عن التطبيق'),
+                  subtitle: Text('B1 Deutsch للسوريين v2.0 (إصدار ${AppProvider.appVersion})'),
                 ),
                 ListTile(
                   leading: const Icon(Icons.system_update),
