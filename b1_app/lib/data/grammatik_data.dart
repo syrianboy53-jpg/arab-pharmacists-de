@@ -808,5 +808,164 @@ final List<Map<String, dynamic>> grammarLessons = [
       'correct': 0
     }
   ]
+},
+{
+  'id': 16,
+  'title': 'Relativsätze mit Präpositionen',
+  'titleAr': 'الجمل الموصولة مع حروف الجر',
+  'explanation': 'الجمل الموصولة التي تحتوي على حرف جر تتطلب تحديد حالة الاسم الموصول (Akkusativ أو Dativ) المناسبة لحرف الجر.\n\nكيفية صياغتها:\n1. حرف الجر يوضع دائماً في بداية جملة الصلة (قبل أداة الوصل).\n2. أداة الوصل تأخذ شكل أداة التعريف المناسبة لجنس الاسم وحالته الإعرابية الناتجة عن حرف الجر.\n\nمثال للتوضيح:\n• Der Mann, mit dem ich gesprochen habe. (Dativ لأن mit تأخذ Dativ)\n• Die Stadt, in die ich reise. (Akkusativ لأن reisen حركة مع in)',
+  'examples': [
+    {
+      'de': 'Das ist das Kind, von dem ich dir erzählt habe.',
+      'ar': 'هذا هو الطفل الذي حدثتك عنه (von + Dativ).'
+    },
+    {
+      'de': 'Die Frau, an die ich denke, wohnt in Berlin.',
+      'ar': 'المرأة التي أفكر فيها تسكن في برلين (an + Akkusativ).'
+    },
+    {
+      'de': 'Der Tisch, auf den ich das Buch gelegt habe, ist neu.',
+      'ar': 'الطاولة التي وضعت عليها الكتاب جديدة (auf + Akkusativ حركة).'
+    },
+    {
+      'de': 'Die Freunde, mit denen ich lerne, sind sehr nett.',
+      'ar': 'الأصدقاء الذين أدرس معهم لطيفون جداً (mit + Dativ Plural: denen).'
+    }
+  ],
+  'exercises': [
+    {
+      'question': 'Der Mann, ___ dem ich arbeite, ist nett.',
+      'options': [
+        'mit',
+        'für',
+        'an'
+      ],
+      'correct': 0
+    },
+    {
+      'question': 'Die Schule, ___ die ich gehe, ist groß.',
+      'options': [
+        'in',
+        'an',
+        'zu'
+      ],
+      'correct': 0
+    },
+    {
+      'question': 'Die Leute, mit ___ wir reisen, kommen aus Syrien.',
+      'options': [
+        'denen',
+        'dem',
+        'den'
+      ],
+      'correct': 0
+    }
+  ]
+},
+{
+  'id': 17,
+  'title': 'Infinitivsätze mit um...zu, ohne...zu, anstatt...zu',
+  'titleAr': 'جمل المصدر المتقدمة (um/ohne/anstatt ... zu)',
+  'explanation': 'تُستخدم جمل المصدر المتقدمة لربط الجمل عندما يكون فاعل الجملة الرئيسية وجملة المصدر واحداً.\n\nالصياغة والاستعمال:\n• um...zu: تعني "من أجل أن" (تُعبر عن الهدف والغاية).\n• ohne...zu: تعني "دون أن" (تُعبر عن نفي حدوث الفعل التابع).\n• anstatt...zu: تعني "بدلاً من أن".\n\nالقاعدة:\n• يُكتب الحرف (um / ohne / anstatt) في أول جملة المصدر، ويوضع الفعل في المصدر وقبله "zu" في نهاية الجملة.\n• إذا كان الفعل قابلاً للانفصال، تدخل "zu" في المنتصف (مثال: aufzustehen).',
+  'examples': [
+    {
+      'de': 'Ich lerne Deutsch, um in Deutschland zu arbeiten.',
+      'ar': 'أتعلم الألمانية من أجل العمل في ألمانيا (الهدف).'
+    },
+    {
+      'de': 'Er ging weg, ohne ein Wort zu sagen.',
+      'ar': 'ذهب دون أن يقول كلمة واحدة (بدون).'
+    },
+    {
+      'de': 'Sie bleibt zu Hause, anstatt zur Party zu gehen.',
+      'ar': 'بقيت في المنزل بدلاً من الذهاب إلى الحفلة.'
+    },
+    {
+      'de': 'Ich mache Sport, um fit zu bleiben.',
+      'ar': 'أمارس الرياضة من أجل الحفاظ على اللياقة.'
+    }
+  ],
+  'exercises': [
+    {
+      'question': 'Ich gehe zum Arzt, ___ gesund zu werden.',
+      'options': [
+        'um',
+        'ohne',
+        'anstatt'
+      ],
+      'correct': 0
+    },
+    {
+      'question': 'Er hat die Prüfung bestanden, ___ viel zu lernen.',
+      'options': [
+        'ohne',
+        'um',
+        'anstatt'
+      ],
+      'correct': 0
+    },
+    {
+      'question': 'Ich trinke Wasser, ___ Cola zu kaufen.',
+      'options': [
+        'anstatt',
+        'um',
+        'ohne'
+      ],
+      'correct': 0
+    }
+  ]
+},
+{
+  'id': 18,
+  'title': 'Adjektive mit Präpositionen',
+  'titleAr': 'الصفات مع حروف الجر',
+  'explanation': 'ترتبط العديد من الصفات في الألمانية بحروف جر ثابتة وحالات إعرابية محددة (Akkusativ أو Dativ)، ويجب حفظها معاً.\n\nأشهر الصفات لحروف الجر:\n• stolz auf + Akkusativ: فخور بـ\n• zufrieden mit + Dativ: راضٍ/مكتفٍ بـ\n• interessiert an + Dativ: مهتم بـ\n• wütend auf + Akkusativ: غاضب من (شخص)\n• dankbar für + Akkusativ: ممتن لـ',
+  'examples': [
+    {
+      'de': 'Ich bin stolz auf meinen Sohn.',
+      'ar': 'أنا فخور بابني (stolz auf + Akkusativ).'
+    },
+    {
+      'de': 'Bist du zufrieden mit deiner Arbeit?',
+      'ar': 'هل أنت راضٍ عن عملك؟ (zufrieden mit + Dativ)'
+    },
+    {
+      'de': 'Er ist sehr interessiert an der deutschen Kultur.',
+      'ar': 'هو مهتم جداً بالثقافة الألمانية (interessiert an + Dativ).'
+    },
+    {
+      'de': 'Wir sind dir dankbar für deine Hilfe.',
+      'ar': 'نحن ممتنون لك على مساعدتك (dankbar für + Akkusativ).'
+    }
+  ],
+  'exercises': [
+    {
+      'question': 'Ich bin sehr stolz ___ dich!',
+      'options': [
+        'auf',
+        'mit',
+        'über'
+      ],
+      'correct': 0
+    },
+    {
+      'question': 'Sind Sie zufrieden ___ dem Service?',
+      'options': [
+        'mit',
+        'an',
+        'für'
+      ],
+      'correct': 0
+    },
+    {
+      'question': 'Sie ist wütend ___ ihren Chef.',
+      'options': [
+        'auf',
+        'für',
+        'an'
+      ],
+      'correct': 0
+    }
+  ]
 }
 ];

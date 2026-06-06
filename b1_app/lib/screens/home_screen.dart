@@ -34,6 +34,8 @@ import 'smart_review_screen.dart';
 import 'problems_screen.dart';
 import 'exam_simulation_screen.dart';
 import 'bild_description_screen.dart';
+import 'interactive_practice_screen.dart';
+import 'settings_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -44,6 +46,49 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+
+  Widget _buildFullLeaderboard(bool isDark, Color textMain, Color borderCol, AppProvider provider) {
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 12),
+                Text(
+                  'لوحة المتصدّرين الأسبوعية 🏆',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: textMain),
+                ),
+                const SizedBox(height: 6),
+                const Text(
+                  'تنافس مع زملائك في ألمانيا للوصول للصدارة والـ Premium!',
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+                const SizedBox(height: 16),
+              ],
+            ),
+          ),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate([
+              _leaderboardRow('1', 'أحمد السوري (ميونخ)', '2450 XP', false),
+              _leaderboardRow('2', 'سارة الحلبي (كولن)', '2100 XP', false),
+              _leaderboardRow('3', 'أنت (الآن)', '${provider.xp} XP', true),
+              _leaderboardRow('4', 'خالد محمد (هامبورغ)', '1800 XP', false),
+              _leaderboardRow('5', 'فاطمة الزعبي (برلين)', '1500 XP', false),
+              _leaderboardRow('6', 'مصطفى الكردي (فرنكفورت)', '1250 XP', false),
+              _leaderboardRow('7', 'ندى الحمصي (شتوتغارت)', '1100 XP', false),
+            ]),
+          ),
+        ),
+      ],
+    );
+  }
 
   @override
   void initState() {
@@ -1022,305 +1067,447 @@ class _HomeScreenState extends State<HomeScreen> {
     final textMain = isDark ? Colors.white : const Color(0xFF0F172A);
     final borderCol = isDark ? Colors.white.withOpacity(0.08) : const Color(0xFFE2E8F0);
 
-    return Scaffold(
-      backgroundColor: scaffoldBg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        foregroundColor: textMain,
-        elevation: 0,
-        flexibleSpace: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-            child: Container(
-              color: isDark ? const Color(0x66080D1A) : Colors.white.withOpacity(0.7),
-            ),
-          ),
-        ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+    Widget bodyWidget;
+    switch (_currentIndex) {
+      case 0:
+        bodyWidget = Stack(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: const Color(0xFF0D9488),
-                borderRadius: BorderRadius.circular(6),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0xFF0D9488).withOpacity(0.3),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  )
-                ],
+            // Background ambient mesh glows in dark mode for premium look
+            if (isDark) ...[
+              Positioned(
+                top: -60,
+                right: -60,
+                child: Container(
+                  width: 260,
+                  height: 260,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF0D9488).withOpacity(0.18),
+                        blurRadius: 130,
+                        spreadRadius: 30,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              child: const Text(
-                'B1-B2',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+              Positioned(
+                top: 350,
+                left: -80,
+                child: Container(
+                  width: 280,
+                  height: 280,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF4F46E5).withOpacity(0.12),
+                        blurRadius: 140,
+                        spreadRadius: 40,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(width: 8),
-            Text(
-              'B1-B2 Deutsch للعرب',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: textMain),
-            ),
-          ],
-        ),
-        leading: IconButton(
-          icon: Icon(
-            provider.isDarkMode ? Icons.wb_sunny : Icons.nightlight_round,
-            color: textMain,
-          ),
-          onPressed: () => provider.toggleDarkMode(),
-        ),
-        actions: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                '${provider.streak}',
-                style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.orange, fontSize: 15),
-              ),
-              IconButton(
-                icon: const Icon(Icons.local_fire_department, color: Colors.orange),
-                tooltip: 'الالتزام اليومي',
-                onPressed: _showStreakDetailDialog,
+              Positioned(
+                bottom: 80,
+                right: -100,
+                child: Container(
+                  width: 320,
+                  height: 320,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFFDB2777).withOpacity(0.08),
+                        blurRadius: 150,
+                        spreadRadius: 50,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
-          ),
-          IconButton(
-            icon: const Icon(Icons.star, color: Color(0xFFF59E0B)),
-            tooltip: 'Premium',
-            onPressed: () => _navigate(const PremiumScreen()),
-          ),
-          IconButton(
-            icon: Icon(Icons.settings, color: textMain),
-            onPressed: () => _navigate(const SettingsScreen()),
-          ),
-        ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(color: borderCol, height: 1),
-        ),
-      ),
-      body: Stack(
-        children: [
-          // Background ambient mesh glows in dark mode for premium look
-          if (isDark) ...[
-            Positioned(
-              top: -60,
-              right: -60,
-              child: Container(
-                width: 260,
-                height: 260,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF0D9488).withOpacity(0.18),
-                      blurRadius: 130,
-                      spreadRadius: 30,
+            SafeArea(
+              child: RefreshIndicator(
+                onRefresh: _checkUpdates,
+                color: const Color(0xFF0D9488),
+                backgroundColor: isDark ? const Color(0xFF131C33) : Colors.white,
+                child: CustomScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  slivers: [
+                    // Hero Stats Dashboard Section
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: _buildStatsCard(context, provider, isDark, textMain, borderCol),
+                      ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              top: 350,
-              left: -80,
-              child: Container(
-                width: 280,
-                height: 280,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFF4F46E5).withOpacity(0.12),
-                      blurRadius: 140,
-                      spreadRadius: 40,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 80,
-              right: -100,
-              child: Container(
-                width: 320,
-                height: 320,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFFDB2777).withOpacity(0.08),
-                      blurRadius: 150,
-                      spreadRadius: 50,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-          SafeArea(
-            child: RefreshIndicator(
-              onRefresh: _checkUpdates,
-              color: const Color(0xFF0D9488),
-              backgroundColor: isDark ? const Color(0xFF131C33) : Colors.white,
-              child: CustomScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                slivers: [
-                  // Hero Stats Dashboard Section
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: _buildStatsCard(context, provider, isDark, textMain, borderCol),
-                    ),
-                  ),
 
-                  // CATEGORY 1: الأساسيّات (مجّاني)
-                  _buildCategoryHeader('الأساسيّات (مجّاني) 📚', textMain),
-                  _buildCategoryGrid([
-                    _buildItem('القواعد', 'أزمنة وح حالات وأفعال', Icons.gavel, const Color(0xFF2563EB), () => _navigate(const GrammatikScreen())),
-                    _buildItem('المفردات', '6000+ كلمة مترجمة', Icons.translate, const Color(0xFF0891B2), () => _navigate(const WortschatzScreen())),
-                    _buildItem('القراءة (Lesen)', 'نصوص + أسئلة', Icons.menu_book, const Color(0xFF7C3AED), () => _navigate(const LesenScreen())),
-                    _buildItem('الاستماع (Hören)', 'حوارات وإعلانات', Icons.headphones, const Color(0xFFEA580C), () => _navigate(const HoerenScreen())),
-                    _buildItem('الكتابة (Schreiben)', 'نماذج رسائل وإيميلات', Icons.edit_note, const Color(0xFF0D9488), () => _navigate(const SchreibenScreen())),
-                    _buildItem('المحادثة (Sprechen)', 'الأجزاء الثلاثة', Icons.record_voice_over, const Color(0xFFDC2626), () => _navigate(const SprechenScreen())),
-                    _buildItem('قوالب المحادثة', 'عبارات جاهزة + B2', Icons.chat, const Color(0xFF4F46E5), () => _navigate(const LibraryScreen())),
-                    _buildItem('قاموس العامية', 'لغة الشارع والشباب', Icons.local_fire_department, const Color(0xFFDC2626), () => _navigate(const SlangScreen())),
-                    _buildItem('بناء الجمل', 'تمارين تركيب الكلمات', Icons.format_list_numbered, const Color(0xFFD97706), () => _navigate(const SatzbauScreen())),
-                    _buildItem('Sprachbausteine كاملة', '5 نماذج تدريب كاملة', Icons.extension, const Color(0xFF059669), () => _navigate(const SprachbausteineScreen())),
-                    _buildItem('مراجعة ذكيّة', 'مراجعة بأسلوب SRS', Icons.loop, const Color(0xFF475569), () => _navigate(const SmartReviewScreen())),
-                    _buildItem('مدرّب التصريف', 'أفعال + Modalverben', Icons.refresh, const Color(0xFF1E3A8A), () => _navigate(const ConjugationTrainerScreen())),
-                  ], isDark, borderCol),
-
-                  // CATEGORY 2: تدريبات تفاعليّة (Freemium)
-                  _buildCategoryHeader('تدريبات تفاعليّة (Freemium) 🎯', textMain),
-                  _buildCategoryGrid([
-                    _buildItem('مسابقات وجوائز', 'اربح Premium مجاناً', Icons.emoji_events, const Color(0xFFD97706), () => _showContestsDialog()),
-                    _buildItem('ادعُ صديقاً', 'كود دعوة متبادل', Icons.people, const Color(0xFF2563EB), _showReferralDialog),
-                    _buildItem('خطّتي الشخصيّة لـB1', 'جدولك اليومي للامتحان', Icons.calendar_today, const Color(0xFF0D9488), _showB1Planner),
-                    _buildItem('تقييمات وتعليقات', 'شاركنا تجربتك', Icons.star, const Color(0xFFF59E0B), () => _showSimpleInfoDialog('تقييم التطبيق ⭐', 'رأيك يهمنا! يرجى تقييم التطبيق على متجر بلاي لمساعدتنا على الاستمرار وتطوير ميزات جديدة.')),
-                    _buildItem('تحدّي اليوم', '4 أسئلة جديدة + 90 XP', Icons.wb_sunny, const Color(0xFFEA580C), _showDailyChallenge),
-                    _buildItem('لوحة المتصدّرين', 'تنافس مع زملائك', Icons.insights, const Color(0xFF7C3AED), _showLeaderboard),
-                    _buildItem('صندوق الإسعافات', 'جمل للنجدة في الامتحان', Icons.health_and_safety, const Color(0xFFDC2626), () => _navigate(const EmergencyScreen())),
-                    _buildItem('فخاخ المترادفات', 'لعبة 90 زوج مرادفات', Icons.gamepad, const Color(0xFF059669), () => _navigate(const SynonymsScreen())),
-                    _buildItem('ترتيب البطاقات', 'لعبة der/die/das', Icons.style, const Color(0xFF0891B2), _showCardSortingGame),
-                    _buildItem('مواعيد الكورسات', '30 معهداً في 13 مدينة', Icons.school, const Color(0xFF475569), () => _showSimpleInfoDialog('مواعيد الكورسات 📅', 'تتوفر مواعيد كورسات BAMF و VHS و Goethe بشكل دوري كل شهر في 13 مدينة ألمانية، بالإضافة لكورسات أونلاين مجانية للمسجلين في Jobcenter.')),
-                    _buildItem('30 خطأ شائع DaZ', '7 مجاني / 23 Premium', Icons.warning, const Color(0xFFB45309), () => _navigate(const FehlerScreen())),
-                    _buildItem('Drill - Sprachbausteine', '220 سؤال قواعد مكثف', Icons.offline_bolt, const Color(0xFFDB2777), () => _navigate(const DrillScreen())),
-                    _buildItem('5 نماذج B1 موضوعيّة', '2 مجاني / 3 Premium', Icons.quiz, const Color(0xFF1E3A8A), () => _navigate(const LesenScreen())),
-                    _buildItem('موارد مجّانيّة موثوقة', 'روابط DW + Goethe + telc', Icons.language, const Color(0xFF008080), () => _launchUrl('https://www.dw.com/de/deutsch-lernen/s-2055')),
-                  ], isDark, borderCol),
-
-                  // CATEGORY 3: الامتحان الكامل ومحاكاته
-                  _buildCategoryHeader('الامتحان الكامل ومحاكاته 📝', textMain),
-                  _buildCategoryGrid([
-                    _buildItem('محاكي Telc B1 الحقيقي', 'مؤقت حقيقي لكل الأقسام', Icons.timer, const Color(0xFFDC2626), () => _navigate(const ExamSimulationScreen())),
-                    _buildItem('امتحان كامل (مبسّط)', 'نسخة سريعة للتدريب', Icons.speed, const Color(0xFFEA580C), () => _showSimpleInfoDialog('امتحان كامل مبسط 🎯', 'نسخة تدريبية سريعة تحتوي على نصف عدد الأسئلة لتتمكن من تقييم مستواك خلال 30 دقيقة فقط.')),
-                    _buildItem('تحديد المستوى', 'اختبار مستواك A1-B2', Icons.rule, const Color(0xFF0D9488), () => _navigate(const EinstufungScreen())),
-                    _buildItem('وصف صورة', 'قوالب وصياغات Bildbeschreibung', Icons.image, const Color(0xFF7C3AED), () => _navigate(const BildDescriptionScreen())),
-                    _buildItem('محاكي محادثة تفاعلي', 'حوارات محاكاة لـ B1-B2', Icons.chat_bubble, const Color(0xFF2563EB), () => _navigate(const ChatSimulatorScreen())),
-                  ], isDark, borderCol),
-
-                  // CATEGORY 4: الجنسيّة والاندماج
-                  _buildCategoryHeader('الجنسيّة والاندماج 🇩🇪', textMain),
-                  _buildCategoryGrid([
-                    _buildItem('Leben in Deutschland', '310 سؤال كامل مع الترجمة', Icons.flag, const Color(0xFF1E3A8A), () => _navigate(const LebenScreen())),
-                    _buildItem('Einbürgerungstest', 'كتالوج أسئلة الولايات والجنسية', Icons.account_balance, const Color(0xFF475569), () => _navigate(const EinbuergerungScreen())),
-                    _buildItem('مشاكل وحلول', 'دليل عملي للعيش والاندماج', Icons.lightbulb, const Color(0xFF059669), () => _navigate(const ProblemsScreen())),
-                  ], isDark, borderCol),
-
-                  // CATEGORY 5: محتوى Premium الحصري
-                  _buildCategoryHeader('محتوى Premium الحصري ⭐', textMain),
-                  _buildCategoryGrid([
-                    _buildItem('B2 كامل', 'قواعد متقدمة و 300+ كلمة', Icons.school, const Color(0xFFB45309), () => _navigate(const B2Screen())),
-                    _buildItem('5 نماذج Telc B2', 'كاملة ومصححة بالذكاء الاصطناعي', Icons.assignment, const Color(0xFFDB2777), () => _navigate(const B2Screen())),
-                    _buildItem('AI Writing Corrector', 'تصحيح ومراجعة الرسائل بالذكاء الاصطناعي', Icons.smart_toy, const Color(0xFF10B981), _showAiCorrector),
-                    _buildItem('وضع الضغط للاستماع', 'ضوضاء واقعية (شارع/مقهى)', Icons.volume_off, const Color(0xFF7C3AED), () => _showSimpleInfoDialog('وضع الضغط للاستماع 🔥', 'يحاكي ضوضاء الشارع ومحطات القطار لتدريب أذنيك على الاستماع تحت الضغط وضوضاء الامتحان الحقيقية.')),
-                    _buildItem('مدرّب القراءة السريعة', 'يختفي النص بعد 90/180 ثانية', Icons.bolt, const Color(0xFFEA580C), () => _showSimpleInfoDialog('مدرّب القراءة السريعة ⏱', 'يخفي النص تدريجياً لتدريبك على مهارات القراءة السريعة والـ Skimming لتوفير الوقت بالامتحان.')),
-                    _buildItem('مترادفات Premium', '70+ زوج إضافي للمستوى المتقدم', Icons.games, const Color(0xFF2563EB), () => _navigate(const SynonymsScreen())),
-                    _buildItem('23 خطأ متقدم', 'الأخطاء الشائعة لطلاب B2', Icons.dangerous, const Color(0xFFDC2626), () => _navigate(const B2Screen())),
-                    _buildItem('189 سؤال Drill إضافي', 'أسئلة قواعد مكثفة وحصرية', Icons.psychology, const Color(0xFF0D9488), () => _navigate(const ConjugationTrainerScreen())),
-                    _buildItem('3 نماذج B1 إضافيّة', 'مواضيع الصحة، السفر والبيئة', Icons.library_books, const Color(0xFF0891B2), () => _navigate(const LesenScreen())),
-                  ], isDark, borderCol),
-
-                  // CATEGORY 6: أدوات عمليّة
-                  _buildCategoryHeader('أدوات عمليّة 🛠️', textMain),
-                  _buildCategoryGrid([
-                    _buildItem('لوحتي الشخصيّة', 'تتبع التقدم ومجموع الـ XP', Icons.bar_chart, const Color(0xFF4F46E5), () => _navigate(const SettingsScreen())),
-                    _buildItem('مخطط الدراسة', 'خطة 4 أسابيع للنجاح المضمون', Icons.next_plan, const Color(0xFF059669), _showB1Planner),
-                    _buildItem('اطبع وذاكر', 'ملخصات وملفات PDF جاهزة للتحميل', Icons.picture_as_pdf, const Color(0xFFDC2626), () => _navigate(const LibraryScreen())),
-                    _buildItem('شبكات الكلمات', 'ربط الكلمات لسهولة الحفظ', Icons.hub, const Color(0xFF7C3AED), () => _showSimpleInfoDialog('شبكات الكلمات 🕸️', 'أداة ذهنية ممتازة تقوم بربط الكلمات المتشابهة في شبكات موضوعية (مثل كلمات السكن، العمل، التسوق) لتبسيط الحفظ.')),
-                    _buildItem('بنك المواضيع', 'أفكار لمقالات Schreiben وصور Sprechen', Icons.topic, const Color(0xFF0891B2), () => _navigate(const LibraryScreen())),
-                    _buildItem('أدوات النجاح', 'نصائح واستراتيجيات هامة للممتحنين', Icons.construction, const Color(0xFFB45309), () => _showSimpleInfoDialog('أدوات النجاح 🧰', 'مجموعة نصائح واستراتيجيات عملية لحل كل قسم بأسرع طريقة وتفادي الفخاخ الشائعة التي يقع فيها الطلاب.')),
-                  ], isDark, borderCol),
-
-                  // Bottom Banner for Premium screen
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            colors: [Color(0xFFF59E0B), Color(0xFFD97706)],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color(0xFFD97706).withOpacity(0.25),
-                              blurRadius: 12,
-                              offset: const Offset(0, 4),
+                    // Interactive Mode Discovery Banner
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [Color(0xFF4F46E5), Color(0xFF0D9488)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
                             ),
-                          ],
-                        ),
-                        child: InkWell(
-                          onTap: () => _navigate(const PremiumScreen()),
-                          borderRadius: BorderRadius.circular(16),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                            child: Row(
-                              children: [
-                                const Icon(Icons.star, color: Colors.white, size: 36),
-                                const SizedBox(width: 16),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      const Text(
-                                        'الترقية إلى B1-Syrer Premium ⭐',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                          fontSize: 14,
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color(0xFF4F46E5).withOpacity(0.2),
+                                blurRadius: 12,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                _currentIndex = 1;
+                              });
+                            },
+                            borderRadius: BorderRadius.circular(16),
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                              child: Row(
+                                children: [
+                                  Text('🎮', style: TextStyle(fontSize: 32)),
+                                  SizedBox(width: 16),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'النمط التفاعلي الجديد (Duolingo) 🦉',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: 14.5,
+                                            fontFamily: 'Cairo',
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        'تصفح بدون إعلانات، واحصل على قوالب وميزات B2 الحصرية ومحاكيات متقدمة!',
-                                        style: TextStyle(
-                                          color: Colors.white.withOpacity(0.9),
-                                          fontSize: 11,
+                                        SizedBox(height: 4),
+                                        Text(
+                                          'تدرّب بأسلوب تفاعلي رائع على كافة قواعد ومفردات B1-B2 مع قلوب حية ومكافآت XP!',
+                                          style: TextStyle(
+                                            color: Colors.white70,
+                                            fontSize: 11,
+                                            height: 1.4,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
-                              ],
+                                  Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  const SliverToBoxAdapter(child: SizedBox(height: 32)),
-                ],
+
+                    // CATEGORY 1: الأساسيّات (مجّاني)
+                    _buildCategoryHeader('الأساسيّات (مجّاني) 📚', textMain),
+                    _buildCategoryGrid([
+                      _buildItem('القواعد', 'أزمنة وح حالات وأفعال', Icons.gavel, const Color(0xFF2563EB), () => _navigate(const GrammatikScreen())),
+                      _buildItem('المفردات', '6000+ كلمة مترجمة', Icons.translate, const Color(0xFF0891B2), () => _navigate(const WortschatzScreen())),
+                      _buildItem('القراءة (Lesen)', 'نصوص + أسئلة', Icons.menu_book, const Color(0xFF7C3AED), () => _navigate(const LesenScreen())),
+                      _buildItem('الاستماع (Hören)', 'حوارات وإعلانات', Icons.headphones, const Color(0xFFEA580C), () => _navigate(const HoerenScreen())),
+                      _buildItem('الكتابة (Schreiben)', 'نماذج رسائل وإيميلات', Icons.edit_note, const Color(0xFF0D9488), () => _navigate(const SchreibenScreen())),
+                      _buildItem('المحادثة (Sprechen)', 'الأجزاء الثلاثة', Icons.record_voice_over, const Color(0xFFDC2626), () => _navigate(const SprechenScreen())),
+                      _buildItem('قوالب المحادثة', 'عبارات جاهزة + B2', Icons.chat, const Color(0xFF4F46E5), () => _navigate(const LibraryScreen())),
+                      _buildItem('قاموس العامية', 'لغة الشارع والشباب', Icons.local_fire_department, const Color(0xFFDC2626), () => _navigate(const SlangScreen())),
+                      _buildItem('بناء الجمل', 'تمارين تركيب الكلمات', Icons.format_list_numbered, const Color(0xFFD97706), () => _navigate(const SatzbauScreen())),
+                      _buildItem('Sprachbausteine كاملة', '5 نماذج تدريب كاملة', Icons.extension, const Color(0xFF059669), () => _navigate(const SprachbausteineScreen())),
+                      _buildItem('مراجعة ذكيّة', 'مراجعة بأسلوب SRS', Icons.loop, const Color(0xFF475569), () => _navigate(const SmartReviewScreen())),
+                      _buildItem('مدرّب التصريف', 'أفعال + Modalverben', Icons.refresh, const Color(0xFF1E3A8A), () => _navigate(const ConjugationTrainerScreen())),
+                    ], isDark, borderCol),
+
+                    // CATEGORY 2: تدريبات تفاعليّة (Freemium)
+                    _buildCategoryHeader('تدريبات تفاعليّة (Freemium) 🎯', textMain),
+                    _buildCategoryGrid([
+                      _buildItem('مسابقات وجوائز', 'اربح Premium مجاناً', Icons.emoji_events, const Color(0xFFD97706), () => _showContestsDialog()),
+                      _buildItem('ادعُ صديقاً', 'كود دعوة متبادل', Icons.people, const Color(0xFF2563EB), _showReferralDialog),
+                      _buildItem('خطّتي الشخصيّة لـB1', 'جدولك اليومي للامتحان', Icons.calendar_today, const Color(0xFF0D9488), _showB1Planner),
+                      _buildItem('تقييمات وتعليقات', 'شاركنا تجربتك', Icons.star, const Color(0xFFF59E0B), () => _showSimpleInfoDialog('تقييم التطبيق ⭐', 'رأيك يهمنا! يرجى تقييم التطبيق على متجر بلاي لمساعدتنا على الاستمرار وتطوير ميزات جديدة.')),
+                      _buildItem('تحدّي اليوم', '4 أسئلة جديدة + 90 XP', Icons.wb_sunny, const Color(0xFFEA580C), _showDailyChallenge),
+                      _buildItem('لوحة المتصدّرين', 'تنافس مع زملائك', Icons.insights, const Color(0xFF7C3AED), _showLeaderboard),
+                      _buildItem('صندوق الإسعافات', 'جمل للنجدة في الامتحان', Icons.health_and_safety, const Color(0xFFDC2626), () => _navigate(const EmergencyScreen())),
+                      _buildItem('فخاخ المترادفات', 'لعبة 90 زوج مرادفات', Icons.gamepad, const Color(0xFF059669), () => _navigate(const SynonymsScreen())),
+                      _buildItem('ترتيب البطاقات', 'لعبة der/die/das', Icons.style, const Color(0xFF0891B2), _showCardSortingGame),
+                      _buildItem('مواعيد الكورسات', '30 معهداً في 13 مدينة', Icons.school, const Color(0xFF475569), () => _showSimpleInfoDialog('مواعيد الكورسات 📅', 'تتوفر مواعيد كورسات BAMF و VHS و Goethe بشكل دوري كل شهر في 13 مدينة ألمانية، بالإضافة لكورسات أونلاين مجانية للمسجلين في Jobcenter.')),
+                      _buildItem('30 خطأ شائع DaZ', '7 مجاني / 23 Premium', Icons.warning, const Color(0xFFB45309), () => _navigate(const FehlerScreen())),
+                      _buildItem('Drill - Sprachbausteine', '220 سؤال قواعد مكثف', Icons.offline_bolt, const Color(0xFFDB2777), () => _navigate(const DrillScreen())),
+                      _buildItem('5 نماذج B1 موضوعيّة', '2 مجاني / 3 Premium', Icons.quiz, const Color(0xFF1E3A8A), () => _navigate(const LesenScreen())),
+                      _buildItem('موارد مجّانيّة موثوقة', 'روابط DW + Goethe + telc', Icons.language, const Color(0xFF008080), () => _launchUrl('https://www.dw.com/de/deutsch-lernen/s-2055')),
+                    ], isDark, borderCol),
+
+                    // CATEGORY 3: الامتحان الكامل ومحاكاته
+                    _buildCategoryHeader('الامتحان الكامل ومحاكاته 📝', textMain),
+                    _buildCategoryGrid([
+                      _buildItem('محاكي Telc B1 الحقيقي', 'مؤقت حقيقي لكل الأقسام', Icons.timer, const Color(0xFFDC2626), () => _navigate(const ExamSimulationScreen())),
+                      _buildItem('امتحان كامل (مبسّط)', 'نسخة سريعة للتدريب', Icons.speed, const Color(0xFFEA580C), () => _showSimpleInfoDialog('امتحان كامل مبسط 🎯', 'نسخة تدريبية سريعة تحتوي على نصف عدد الأسئلة لتتمكن من تقييم مستواك خلال 30 دقيقة فقط.')),
+                      _buildItem('تحديد المستوى', 'اختبار مستواك A1-B2', Icons.rule, const Color(0xFF0D9488), () => _navigate(const EinstufungScreen())),
+                      _buildItem('وصف صورة', 'قوالب وصياغات Bildbeschreibung', Icons.image, const Color(0xFF7C3AED), () => _navigate(const BildDescriptionScreen())),
+                      _buildItem('محاكي محادثة تفاعلي', 'حوارات محاكاة لـ B1-B2', Icons.chat_bubble, const Color(0xFF2563EB), () => _navigate(const ChatSimulatorScreen())),
+                    ], isDark, borderCol),
+
+                    // CATEGORY 4: الجنسيّة والاندماج
+                    _buildCategoryHeader('الجنسيّة والاندماج 🇩🇪', textMain),
+                    _buildCategoryGrid([
+                      _buildItem('Leben in Deutschland', '310 سؤال كامل مع الترجمة', Icons.flag, const Color(0xFF1E3A8A), () => _navigate(const LebenScreen())),
+                      _buildItem('Einbürgerungstest', 'كتالوج أسئلة الولايات والجنسية', Icons.account_balance, const Color(0xFF475569), () => _navigate(const EinbuergerungScreen())),
+                      _buildItem('مشاكل وحلول', 'دليل عملي للعيش والاندماج', Icons.lightbulb, const Color(0xFF059669), () => _navigate(const ProblemsScreen())),
+                    ], isDark, borderCol),
+
+                    // CATEGORY 5: محتوى Premium الحصري
+                    _buildCategoryHeader('محتوى Premium الحصري ⭐', textMain),
+                    _buildCategoryGrid([
+                      _buildItem('B2 كامل', 'قواعد متقدمة و 300+ كلمة', Icons.school, const Color(0xFFB45309), () => _navigate(const B2Screen())),
+                      _buildItem('5 نماذج Telc B2', 'كاملة ومصححة بالذكاء الاصطناعي', Icons.assignment, const Color(0xFFDB2777), () => _navigate(const B2Screen())),
+                      _buildItem('AI Writing Corrector', 'تصحيح ومراجعة الرسائل بالذكاء الاصطناعي', Icons.smart_toy, const Color(0xFF10B981), _showAiCorrector),
+                      _buildItem('وضع الضغط للاستماع', 'ضوضاء واقعية (شارع/مقهى)', Icons.volume_off, const Color(0xFF7C3AED), () => _showSimpleInfoDialog('وضع الضغط للاستماع 🔥', 'يحاكي ضوضاء الشارع ومحطات القطار لتدريب أذنيك على الاستماع تحت الضغط وضوضاء الامتحان الحقيقية.')),
+                      _buildItem('مدرّب القراءة السريعة', 'يختفي النص بعد 90/180 ثانية', Icons.bolt, const Color(0xFFEA580C), () => _showSimpleInfoDialog('مدرّب القراءة السريعة ⏱', 'يخفي النص تدريجياً لتدريبك على مهارات القراءة السريعة والـ Skimming لتوفير الوقت بالامتحان.')),
+                      _buildItem('مترادفات Premium', '70+ زوج إضافي للمستوى المتقدم', Icons.games, const Color(0xFF2563EB), () => _navigate(const SynonymsScreen())),
+                      _buildItem('23 خطأ متقدم', 'الأخطاء الشائعة لطلاب B2', Icons.dangerous, const Color(0xFFDC2626), () => _navigate(const B2Screen())),
+                      _buildItem('189 سؤال Drill إضافي', 'أسئلة قواعد مكثفة وحصرية', Icons.psychology, const Color(0xFF0D9488), () => _navigate(const ConjugationTrainerScreen())),
+                      _buildItem('3 نماذج B1 إضافيّة', 'مواضيع الصحة، السفر والبيئة', Icons.library_books, const Color(0xFF0891B2), () => _navigate(const LesenScreen())),
+                    ], isDark, borderCol),
+
+                    // CATEGORY 6: أدوات عمليّة
+                    _buildCategoryHeader('أدوات عمليّة 🛠️', textMain),
+                    _buildCategoryGrid([
+                      _buildItem('لوحتي الشخصيّة', 'تتبع التقدم ومجموع الـ XP', Icons.bar_chart, const Color(0xFF4F46E5), () => _navigate(const SettingsScreen())),
+                      _buildItem('مخطط الدراسة', 'خطة 4 أسابيع للنجاح المضمون', Icons.next_plan, const Color(0xFF059669), _showB1Planner),
+                      _buildItem('اطبع وذاكر', 'ملخصات وملفات PDF جاهزة للتحميل', Icons.picture_as_pdf, const Color(0xFFDC2626), () => _navigate(const LibraryScreen())),
+                      _buildItem('شبكات الكلمات', 'ربط الكلمات لسهولة الحفظ', Icons.hub, const Color(0xFF7C3AED), () => _showSimpleInfoDialog('شبكات الكلمات 🕸️', 'أداة ذهنية ممتازة تقوم بربط الكلمات المتشابهة في شبكات موضوعية (مثل كلمات السكن، العمل، التسوق) لتبسيط الحفظ.')),
+                      _buildItem('بنك المواضيع', 'أفكار لمقالات Schreiben وصور Sprechen', Icons.topic, const Color(0xFF0891B2), () => _navigate(const LibraryScreen())),
+                      _buildItem('أدوات النجاح', 'نصائح واستراتيجيات هامة للممتحنين', Icons.construction, const Color(0xFFB45309), () => _showSimpleInfoDialog('أدوات النجاح 🧰', 'مجموعة نصائح واستراتيجيات عملية لحل كل قسم بأسرع طريقة وتفادي الفخاخ الشائعة التي يقع فيها الطلاب.')),
+                    ], isDark, borderCol),
+
+                    // Bottom Banner for Premium screen
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              colors: [Color(0xFFF59E0B), Color(0xFFD97706)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            borderRadius: BorderRadius.circular(16),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color(0xFFD97706).withOpacity(0.25),
+                                blurRadius: 12,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: InkWell(
+                            onTap: () => _navigate(const PremiumScreen()),
+                            borderRadius: BorderRadius.circular(16),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                              child: Row(
+                                children: [
+                                  const Icon(Icons.star, color: Colors.white, size: 36),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          'الترقية إلى B1-Syrer Premium ⭐',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          'تصفح بدون إعلانات، واحصل على قوالب وميزات B2 الحصرية ومحاكيات متقدمة!',
+                                          style: TextStyle(
+                                            color: Colors.white.withOpacity(0.9),
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SliverToBoxAdapter(child: SizedBox(height: 32)),
+                  ],
+                ),
               ),
             ),
+          ],
+        );
+        break;
+      case 1:
+        bodyWidget = const InteractivePracticeScreen();
+        break;
+      case 2:
+        bodyWidget = _buildFullLeaderboard(isDark, textMain, borderCol, provider);
+        break;
+      case 3:
+        bodyWidget = const SettingsScreen();
+        break;
+      default:
+        bodyWidget = Container();
+    }
+
+    return Scaffold(
+      backgroundColor: scaffoldBg,
+      appBar: _currentIndex == 0
+          ? AppBar(
+              backgroundColor: Colors.transparent,
+              foregroundColor: textMain,
+              elevation: 0,
+              flexibleSpace: ClipRect(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                  child: Container(
+                    color: isDark ? const Color(0x66080D1A) : Colors.white.withOpacity(0.7),
+                  ),
+                ),
+              ),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF0D9488),
+                      borderRadius: BorderRadius.circular(6),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFF0D9488).withOpacity(0.3),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        )
+                      ],
+                    ),
+                    child: const Text(
+                      'B1-B2',
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    'B1-B2 Deutsch للعرب',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: textMain),
+                  ),
+                ],
+              ),
+              leading: IconButton(
+                icon: Icon(
+                  provider.isDarkMode ? Icons.wb_sunny : Icons.nightlight_round,
+                  color: textMain,
+                ),
+                onPressed: () => provider.toggleDarkMode(),
+              ),
+              actions: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      '${provider.streak}',
+                      style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.orange, fontSize: 15),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.local_fire_department, color: Colors.orange),
+                      tooltip: 'الالتزام اليومي',
+                      onPressed: _showStreakDetailDialog,
+                    ),
+                  ],
+                ),
+                IconButton(
+                  icon: const Icon(Icons.star, color: Color(0xFFF59E0B)),
+                  tooltip: 'Premium',
+                  onPressed: () => _navigate(const PremiumScreen()),
+                ),
+                IconButton(
+                  icon: Icon(Icons.settings, color: textMain),
+                  onPressed: () => _navigate(const SettingsScreen()),
+                ),
+              ],
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(1),
+                child: Container(color: borderCol, height: 1),
+              ),
+            )
+          : (_currentIndex == 2
+              ? AppBar(
+                  backgroundColor: Colors.transparent,
+                  foregroundColor: textMain,
+                  elevation: 0,
+                  flexibleSpace: ClipRect(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                      child: Container(
+                        color: isDark ? const Color(0x66080D1A) : Colors.white.withOpacity(0.7),
+                      ),
+                    ),
+                  ),
+                  title: const Text('لوحة المتصدرين الأسبوعية 🏆', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  bottom: PreferredSize(
+                    preferredSize: const Size.fromHeight(1),
+                    child: Container(color: borderCol, height: 1),
+                  ),
+                )
+              : null),
+      body: bodyWidget,
+      bottomNavigationBar: ClipRRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+          child: NavigationBar(
+            selectedIndex: _currentIndex,
+            onDestinationSelected: (idx) {
+              setState(() {
+                _currentIndex = idx;
+              });
+            },
+            backgroundColor: isDark ? const Color(0x66080D1A) : Colors.white.withOpacity(0.85),
+            destinations: const [
+              NavigationDestination(
+                icon: Icon(Icons.home_rounded),
+                selectedIcon: Icon(Icons.home_rounded, color: Color(0xFF0D9488)),
+                label: 'الرئيسية',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.psychology_rounded),
+                selectedIcon: Icon(Icons.psychology_rounded, color: Color(0xFF0D9488)),
+                label: 'التدريب التفاعلي',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.emoji_events_rounded),
+                selectedIcon: Icon(Icons.emoji_events_rounded, color: Color(0xFF0D9488)),
+                label: 'المتصدّرين',
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.settings_rounded),
+                selectedIcon: Icon(Icons.settings_rounded, color: Color(0xFF0D9488)),
+                label: 'الإعدادات',
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
