@@ -864,8 +864,28 @@ section { padding: 80px 0; }
       <a href="privacy/index.html">Privacy</a> ·
       <a href="app/index.html">App</a>
     </p>
+    <div id="visitor-counter" style="margin-top: 15px; font-size: 13px; color: rgba(255,255,255,0.4); display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 5px 12px; border-radius: 20px;">
+      <span>👁️ عدد الزيارات:</span>
+      <span id="visitor-count" style="font-weight: bold; color: var(--gold);">...</span>
+    </div>
   </div>
 </footer>
+
+<script>
+  fetch('/api/visit')
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data && data.views) {
+        var el = document.getElementById('visitor-count');
+        if (el) el.textContent = Number(data.views).toLocaleString('en-US');
+      }
+    })
+    .catch(function(err) {
+      console.error(err);
+      var container = document.getElementById('visitor-counter');
+      if (container) container.style.display = 'none';
+    });
+</script>
 
 <!-- Jotform AI Agent (chat assistant) -->
 <script data-cfasync="false" src="cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src='https://cdn.jotfor.ms/agent/embedjs/019e228faa8370939eb96e1db4ecd6992d9e/embed.js?autoOpenChatIn=1'></script>
