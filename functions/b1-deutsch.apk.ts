@@ -23,11 +23,14 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     console.error('Error logging download click:', e)
   }
 
-  // 3. Redirect to the actual APK file
+  // 3. Redirect to the actual APK file with a cache-buster query param
+  const separator = apkUrl.includes('?') ? '&' : '?';
+  const redirectUrl = `${apkUrl}${separator}t=${Date.now()}`;
+
   return new Response(null, {
     status: 302,
     headers: {
-      'Location': apkUrl,
+      'Location': redirectUrl,
       'Cache-Control': 'no-store, no-cache, must-revalidate'
     }
   })
