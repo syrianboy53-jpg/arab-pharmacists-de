@@ -10,6 +10,7 @@ class AppProvider extends ChangeNotifier {
   int _streak = 0;
   int _completedQuizzes = 0;
   String _lastStudyDate = '';
+  List<int> _completedGrammarLessons = [];
 
   String? _token;
   String? _userId;
@@ -20,6 +21,7 @@ class AppProvider extends ChangeNotifier {
   int get xp => _xp;
   int get streak => _streak;
   int get completedQuizzes => _completedQuizzes;
+  List<int> get completedGrammarLessons => _completedGrammarLessons;
 
   String? get token => _token;
   String? get userId => _userId;
@@ -34,6 +36,8 @@ class AppProvider extends ChangeNotifier {
     _streak = prefs.getInt('streak') ?? 0;
     _completedQuizzes = prefs.getInt('completedQuizzes') ?? 0;
     _lastStudyDate = prefs.getString('lastStudyDate') ?? '';
+    final completedList = prefs.getStringList('completedGrammarLessons') ?? [];
+    _completedGrammarLessons = completedList.map((idStr) => int.tryParse(idStr) ?? 0).where((id) => id > 0).toList();
     
     _token = prefs.getString('token');
     _userId = prefs.getString('userId');
@@ -234,6 +238,15 @@ class AppProvider extends ChangeNotifier {
       await _flutterTts.speak(text);
     } catch (e) {
       debugPrint('TTS speak error: $e');
+    }
+  }
+
+  void completeGrammarLesson(int lessonId) async {
+    if (!_completedGrammarLessons.contains(lessonId)) {
+      _completedGrammarLessons.add(lessonId);
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setStringList('completedGrammarLessons', _completedGrammarLessons.map((id) => id.toString()).toList());
+      notifyListeners();
     }
   }
 }

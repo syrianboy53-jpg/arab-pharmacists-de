@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../data/grammatik_data.dart';
 import '../providers/app_provider.dart';
 
@@ -47,11 +46,95 @@ class _LessonsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final provider = context.watch<AppProvider>();
+    final completedLessons = provider.completedGrammarLessons;
+
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      itemCount: grammarLessons.length,
+      itemCount: grammarLessons.length + 1,
       itemBuilder: (ctx, i) {
-        final l = grammarLessons[i];
+        if (i == 0) {
+          return Card(
+            margin: const EdgeInsets.only(bottom: 16),
+            clipBehavior: Clip.antiAlias,
+            elevation: 3,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: isDark
+                      ? [Colors.blueGrey.shade800, Colors.teal.shade900]
+                      : [Colors.blue.shade700, Colors.teal.shade600],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const _RandomGrammarPracticeScreen()),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.psychology_rounded,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'تدريب عشوائي على القواعد',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                fontFamily: 'Cairo',
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'اختبر نفسك بـ 10 أسئلة عشوائية من جميع الدروس',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.9),
+                                fontSize: 12,
+                                fontFamily: 'Cairo',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Icon(
+                        Icons.play_circle_outline_rounded,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+
+        final l = grammarLessons[i - 1];
+        final lessonId = l['id'] as int? ?? 0;
+        final isCompleted = completedLessons.contains(lessonId);
+
         return Card(
           margin: const EdgeInsets.only(bottom: 12),
           clipBehavior: Clip.antiAlias,
@@ -59,7 +142,7 @@ class _LessonsList extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border(
                 right: BorderSide(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: isCompleted ? Colors.green : Theme.of(context).colorScheme.primary,
                   width: 4,
                 ),
               ),
@@ -70,18 +153,27 @@ class _LessonsList extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primaryContainer,
+                  color: isCompleted
+                      ? Colors.green.withOpacity(0.15)
+                      : Theme.of(context).colorScheme.primaryContainer,
                   shape: BoxShape.circle,
+                  border: isCompleted ? Border.all(color: Colors.green, width: 2) : null,
                 ),
                 child: Center(
-                  child: Text(
-                    '${i + 1}',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
-                  ),
+                  child: isCompleted
+                      ? const Icon(
+                          Icons.check_rounded,
+                          color: Colors.green,
+                          size: 22,
+                        )
+                      : Text(
+                          '$i',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimaryContainer,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
                 ),
               ),
               title: Text(
@@ -101,7 +193,7 @@ class _LessonsList extends StatelessWidget {
               trailing: Icon(
                 Icons.arrow_forward_ios_rounded,
                 size: 16,
-                color: Theme.of(context).colorScheme.primary,
+                color: isCompleted ? Colors.green : Theme.of(context).colorScheme.primary,
               ),
               onTap: () {
                 Navigator.push(
@@ -379,6 +471,11 @@ class _LessonDetailScreenState extends State<_LessonDetailScreen> {
                                 });
                                 context.read<AppProvider>().addXP(10);
                                 context.read<AppProvider>().incrementQuizzes();
+                                
+                                final lessonId = widget.lesson['id'] as int? ?? 0;
+                                if (lessonId > 0) {
+                                  context.read<AppProvider>().completeGrammarLesson(lessonId);
+                                }
                               },
                         child: const Text('تحقق من الإجابات 📝', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                       )
@@ -1130,6 +1227,307 @@ class _TrennbarListState extends State<_TrennbarList> {
       child: Text(
         text,
         style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: textColor),
+      ),
+    );
+  }
+}
+
+class _RandomGrammarPracticeScreen extends StatefulWidget {
+  const _RandomGrammarPracticeScreen();
+
+  @override
+  State<_RandomGrammarPracticeScreen> createState() => _RandomGrammarPracticeScreenState();
+}
+
+class _RandomGrammarPracticeScreenState extends State<_RandomGrammarPracticeScreen> {
+  List<Map<String, dynamic>> _selectedQuestions = [];
+  int _currentQuestionIndex = 0;
+  int? _selectedOptionIndex;
+  bool _isAnswered = false;
+  int _score = 0;
+  bool _quizFinished = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _prepareQuestions();
+  }
+
+  void _prepareQuestions() {
+    final List<Map<String, dynamic>> allQuestions = [];
+    for (var lesson in grammarLessons) {
+      final exercises = lesson['exercises'] as List?;
+      if (exercises != null) {
+        for (var ex in exercises) {
+          allQuestions.add({
+            'question': ex['question'],
+            'options': List<String>.from(ex['options']),
+            'correct': ex['correct'],
+            'lessonTitle': lesson['titleAr'] ?? lesson['title'],
+          });
+        }
+      }
+    }
+
+    allQuestions.shuffle();
+    setState(() {
+      _selectedQuestions = allQuestions.take(10).toList();
+      _currentQuestionIndex = 0;
+      _selectedOptionIndex = null;
+      _isAnswered = false;
+      _score = 0;
+      _quizFinished = false;
+    });
+  }
+
+  void _answerQuestion(int optionIndex) {
+    if (_isAnswered) return;
+    setState(() {
+      _selectedOptionIndex = optionIndex;
+      _isAnswered = true;
+      if (optionIndex == _selectedQuestions[_currentQuestionIndex]['correct']) {
+        _score++;
+      }
+    });
+  }
+
+  void _nextQuestion() {
+    if (_currentQuestionIndex < _selectedQuestions.length - 1) {
+      setState(() {
+        _currentQuestionIndex++;
+        _selectedOptionIndex = null;
+        _isAnswered = false;
+      });
+    } else {
+      setState(() {
+        _quizFinished = true;
+      });
+      context.read<AppProvider>().addXP(25);
+      context.read<AppProvider>().incrementQuizzes();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    if (_selectedQuestions.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('تدريب عشوائي على القواعد', style: TextStyle(fontWeight: FontWeight.bold)),
+        ),
+        body: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    if (_quizFinished) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('نتيجة التدريب', style: TextStyle(fontWeight: FontWeight.bold)),
+          automaticallyImplyLeading: false,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Icon(
+                Icons.emoji_events_rounded,
+                color: Colors.amber,
+                size: 80,
+              ),
+              const SizedBox(height: 24),
+              const Text(
+                'أحسنت! لقد أكملت التدريب',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, fontFamily: 'Cairo'),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                'النتيجة: $_score من أصل ${_selectedQuestions.length} إجابات صحيحة',
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'حصلت على +25 نقطة خبرة (XP) ⚡',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16, color: Colors.green, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 40),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                onPressed: _prepareQuestions,
+                icon: const Icon(Icons.refresh_rounded),
+                label: const Text('ابدأ تدريباً جديداً', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, fontFamily: 'Cairo')),
+              ),
+              const SizedBox(height: 12),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('العودة لقائمة القواعد', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, fontFamily: 'Cairo')),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    final currentQuestion = _selectedQuestions[_currentQuestionIndex];
+    final options = currentQuestion['options'] as List<String>;
+    final progress = (_currentQuestionIndex + 1) / _selectedQuestions.length;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('تدريب عشوائي على القواعد', style: TextStyle(fontWeight: FontWeight.bold)),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'السؤال ${_currentQuestionIndex + 1} من ${_selectedQuestions.length}',
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                ),
+                Text(
+                  'النقاط: $_score',
+                  style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.green, fontSize: 14),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: LinearProgressIndicator(
+                value: progress,
+                minHeight: 8,
+                backgroundColor: isDark ? Colors.white10 : Colors.black12,
+                valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.primary),
+              ),
+            ),
+            const SizedBox(height: 24),
+            Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        'من درس: ${currentQuestion['lessonTitle']}',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      currentQuestion['question'] as String,
+                      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      textDirection: TextDirection.ltr,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            ...List.generate(options.length, (optIdx) {
+              final opt = options[optIdx];
+              final isCorrectOption = currentQuestion['correct'] == optIdx;
+              final isSelectedOption = _selectedOptionIndex == optIdx;
+
+              Color borderCol = isDark ? Colors.white10 : Colors.black12;
+              Color bgCol = Colors.transparent;
+              Widget? trailingIcon;
+
+              if (_isAnswered) {
+                if (isCorrectOption) {
+                  borderCol = Colors.green;
+                  bgCol = Colors.green.withOpacity(0.12);
+                  trailingIcon = const Icon(Icons.check_circle_rounded, color: Colors.green, size: 24);
+                } else if (isSelectedOption) {
+                  borderCol = Colors.red;
+                  bgCol = Colors.red.withOpacity(0.12);
+                  trailingIcon = const Icon(Icons.cancel_rounded, color: Colors.red, size: 24);
+                }
+              } else if (isSelectedOption) {
+                borderCol = Theme.of(context).colorScheme.primary;
+                bgCol = Theme.of(context).colorScheme.primary.withOpacity(0.08);
+              }
+
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 12.0),
+                child: InkWell(
+                  onTap: _isAnswered ? null : () => _answerQuestion(optIdx),
+                  borderRadius: BorderRadius.circular(14),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                    decoration: BoxDecoration(
+                      color: bgCol,
+                      border: Border.all(
+                        color: borderCol,
+                        width: isSelectedOption || (_isAnswered && isCorrectOption) ? 2 : 1,
+                      ),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            opt,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: isSelectedOption ? FontWeight.bold : FontWeight.normal,
+                            ),
+                            textDirection: TextDirection.ltr,
+                          ),
+                        ),
+                        if (trailingIcon != null) trailingIcon,
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }),
+            const SizedBox(height: 20),
+            if (_isAnswered)
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(54),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                ),
+                onPressed: _nextQuestion,
+                child: Text(
+                  _currentQuestionIndex < _selectedQuestions.length - 1 ? 'السؤال التالي ➡️' : 'عرض النتيجة 🏆',
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, fontFamily: 'Cairo'),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
