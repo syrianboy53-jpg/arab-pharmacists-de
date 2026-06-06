@@ -110,5 +110,21 @@ for (const asset of legalAssets) {
   }
 }
 
+// Copy robots.txt to root dist/ so it is served at the domain root
+const robotsSrc = path.resolve('public/robots.txt');
+const robotsDest = path.resolve('dist/robots.txt');
+if (fs.existsSync(robotsSrc)) {
+  fs.copyFileSync(robotsSrc, robotsDest);
+  console.log('robots.txt copied to root dist.');
+}
+
+// Copy sitemap.xml to root dist/ so it is served at the domain root
+const sitemapSrc = path.resolve('public/sitemap.xml');
+const sitemapDest = path.resolve('dist/sitemap.xml');
+if (fs.existsSync(sitemapSrc)) {
+  fs.copyFileSync(sitemapSrc, sitemapDest);
+  console.log('sitemap.xml copied to root dist.');
+}
+
 
 
