@@ -768,16 +768,16 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('${t["id"]}) ${t["titleDe"]} (${t["titleAr"]})',
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.secondary, fontSize: 13)),
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.secondary, fontSize: 14)),
                     const SizedBox(height: 4),
-                    Text(t['textDe'] as String, style: const TextStyle(fontSize: 12), textDirection: TextDirection.ltr),
+                    Text(t['textDe'] as String, style: const TextStyle(fontSize: 15), textDirection: TextDirection.ltr),
                   ],
                 ),
               ),
             );
           }),
           const SizedBox(height: 16),
-          const Text('✏️ اربط الجمل بالشخص المناسب (A - E):', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+          const Text('✏️ اربط الجمل بالشخص المناسب (A - E):', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
           const SizedBox(height: 8),
           ...statements.map((s) {
             final id = s['id'] as String;
@@ -791,9 +791,9 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(s['textAr'] as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                    Text(s['textAr'] as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                     const SizedBox(height: 4),
-                    Text(s['textDe'] as String, style: const TextStyle(fontSize: 11, color: Colors.grey), textDirection: TextDirection.ltr),
+                    Text(s['textDe'] as String, style: const TextStyle(fontSize: 14, color: Colors.grey), textDirection: TextDirection.ltr),
                     const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -840,7 +840,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                             ),
                             child: Center(
                                 child: Text(letter,
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: textCol))),
+                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: textCol))),
                           ),
                         );
                       }).toList(),
@@ -871,9 +871,9 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   if (promptAr.isNotEmpty)
-                    Text(promptAr, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                    Text(promptAr, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                   Text(promptDe,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, fontStyle: FontStyle.italic),
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, fontStyle: FontStyle.italic),
                       textDirection: TextDirection.ltr),
                   const SizedBox(height: 12),
                   ...options.map((opt) {
@@ -918,7 +918,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                             border: Border.all(color: borderCol, width: isSelected ? 2 : 1),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Text(optDe, style: const TextStyle(fontSize: 12), textDirection: TextDirection.ltr),
+                          child: Text(optDe, style: const TextStyle(fontSize: 14), textDirection: TextDirection.ltr),
                         ),
                       ),
                     );
@@ -926,7 +926,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                   if (_partChecked && q['explanation'] != null) ...[
                     const SizedBox(height: 8),
                     Text('💡 توضيح: ${q["explanation"]}',
-                        style: const TextStyle(color: Colors.green, fontSize: 11, fontWeight: FontWeight.bold))
+                        style: const TextStyle(color: Colors.green, fontSize: 14, fontWeight: FontWeight.bold))
                   ]
                 ],
               ),
@@ -941,7 +941,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text('📰 الإعلانات المتوفرة:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+          const Text('📰 الإعلانات المتوفرة:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
           const SizedBox(height: 8),
           ...ads.map((ad) {
             return Card(
@@ -953,16 +953,16 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('${ad["id"]?.toString().toUpperCase()}) ${ad["titleDe"]}',
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.secondary, fontSize: 12)),
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.secondary, fontSize: 14)),
                     const SizedBox(height: 4),
-                    Text(ad['textDe'] as String, style: const TextStyle(fontSize: 12), textDirection: TextDirection.ltr),
+                    Text(ad['textDe'] as String, style: const TextStyle(fontSize: 15), textDirection: TextDirection.ltr),
                   ],
                 ),
               ),
             );
           }),
           const SizedBox(height: 16),
-          const Text('✏️ طابق رغبات الأشخاص بالإعلان المناسب:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+          const Text('✏️ طابق رغبات الأشخاص بالإعلان المناسب:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
           const SizedBox(height: 8),
           ...situations.map((s) {
             final id = s['id'] as String;
@@ -976,9 +976,9 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(s['textAr'] as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                    Text(s['textAr'] as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                     const SizedBox(height: 4),
-                    Text(s['textDe'] as String, style: const TextStyle(fontSize: 11, color: Colors.grey), textDirection: TextDirection.ltr),
+                    Text(s['textDe'] as String, style: const TextStyle(fontSize: 14, color: Colors.grey), textDirection: TextDirection.ltr),
                     const SizedBox(height: 10),
                     DropdownButtonFormField<String>(
                       value: selected,
@@ -1015,7 +1015,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                         style: TextStyle(
                             color: selected == correctAd ? Colors.green : Colors.red,
                             fontWeight: FontWeight.bold,
-                            fontSize: 11),
+                            fontSize: 14),
                       ),
                     ]
                   ],
@@ -1043,8 +1043,8 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(statementAr, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-                  Text(statementDe, style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic), textDirection: TextDirection.ltr),
+                  Text(statementAr, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                  Text(statementDe, style: const TextStyle(fontSize: 15, fontStyle: FontStyle.italic), textDirection: TextDirection.ltr),
                   const SizedBox(height: 12),
                   Row(
                     children: [
@@ -1092,7 +1092,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                   if (_partChecked && q['explanation'] != null) ...[
                     const SizedBox(height: 8),
                     Text('💡 توضيح: ${q["explanation"]}',
-                        style: const TextStyle(color: Colors.green, fontSize: 11, fontWeight: FontWeight.bold))
+                        style: const TextStyle(color: Colors.green, fontSize: 14, fontWeight: FontWeight.bold))
                   ]
                 ],
               ),
@@ -1115,7 +1115,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text('القسم 2: القواعد (Sprachbausteine)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
+        const Text('القسم 2: القواعد (Sprachbausteine)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue, fontSize: 16)),
         const SizedBox(height: 12),
         Card(
           child: Padding(
@@ -1170,7 +1170,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                   border: Border.all(color: borderCol, width: isSelected ? 2 : 1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Text(opt, style: const TextStyle(fontWeight: FontWeight.bold), textDirection: TextDirection.ltr),
+                child: Text(opt, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15), textDirection: TextDirection.ltr),
               ),
             ),
           );
@@ -1181,7 +1181,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(color: Colors.green.withOpacity(0.05), borderRadius: BorderRadius.circular(8)),
             child: Text('💡 التوضيح: ${q["explanation"]}',
-                style: const TextStyle(fontSize: 12, color: Colors.green, fontWeight: FontWeight.bold)),
+                style: const TextStyle(fontSize: 14, color: Colors.green, fontWeight: FontWeight.bold)),
           ),
         ]
       ],
@@ -1211,7 +1211,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: Colors.blue.withOpacity(0.2)),
           ),
-          child: Text(instructions, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+          child: Text(instructions, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
         ),
         const SizedBox(height: 16),
         // Transcripts player-like view
@@ -1222,7 +1222,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
               children: [
                 const Icon(Icons.volume_up_rounded, color: Colors.blue, size: 48),
                 const SizedBox(height: 12),
-                const Text('🔊 تخيّل سماع المقاطع أو اقرأ نصوصها التالية لتجيب:', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                const Text('🔊 تخيّل سماع المقاطع أو اقرأ نصوصها التالية لتجيب:', style: TextStyle(fontSize: 14, color: Colors.grey)),
                 const Divider(height: 20),
                 ...transcripts.map((t) {
                   return Padding(
@@ -1232,10 +1232,10 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                       children: [
                         if (t['speaker'] != null)
                           Text(t['speaker'] as String,
-                              style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.secondary, fontSize: 12)),
+                              style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.secondary, fontSize: 14)),
                         Text(
                           t['textDe'] as String? ?? '',
-                          style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
+                          style: const TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
                           textDirection: TextDirection.ltr,
                         ),
                       ],
@@ -1272,8 +1272,8 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   if (textAr.isNotEmpty)
-                    Text(textAr, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                  Text(textDe, style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic), textDirection: TextDirection.ltr),
+                    Text(textAr, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                  Text(textDe, style: const TextStyle(fontSize: 15, fontStyle: FontStyle.italic), textDirection: TextDirection.ltr),
                   const SizedBox(height: 12),
                   if (isTf) ...[
                     Row(
@@ -1363,7 +1363,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                               border: Border.all(color: borderCol, width: isSelected ? 2 : 1),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Text(optDe, style: const TextStyle(fontSize: 12), textDirection: TextDirection.ltr),
+                            child: Text(optDe, style: const TextStyle(fontSize: 14), textDirection: TextDirection.ltr),
                           ),
                         ),
                       );
@@ -1372,7 +1372,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                   if (_partChecked && q['explanation'] != null) ...[
                     const SizedBox(height: 8),
                     Text('💡 توضيح: ${q["explanation"]}',
-                        style: const TextStyle(color: Colors.green, fontSize: 11, fontWeight: FontWeight.bold))
+                        style: const TextStyle(color: Colors.green, fontSize: 14, fontWeight: FontWeight.bold))
                   ]
                 ],
               ),
@@ -1387,7 +1387,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text('✏️ طابق المتحدث بالخيار أو الرأي المناسب:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+          const Text('✏️ طابق المتحدث بالخيار أو الرأي المناسب:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
           const SizedBox(height: 8),
           ...matchItems.map((item) {
             final id = item['id'] as String;
@@ -1402,7 +1402,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text('المتحدث: $speakerText', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                    Text('المتحدث: $speakerText', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                     const SizedBox(height: 10),
                     DropdownButtonFormField<String>(
                       value: selected,
@@ -1424,7 +1424,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                         final optAr = opt['textDe'] as String? ?? '';
                         return DropdownMenuItem<String>(
                           value: optId,
-                          child: Text('$optTitle ${optAr.isNotEmpty ? "($optAr)" : ""}'),
+                          child: Text('$optTitle ${optAr.isNotEmpty ? "($optAr)" : ""}', style: const TextStyle(fontSize: 14)),
                         );
                       }).toList(),
                     ),
@@ -1435,7 +1435,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                         style: TextStyle(
                             color: selected == correctAd ? Colors.green : Colors.red,
                             fontWeight: FontWeight.bold,
-                            fontSize: 11),
+                            fontSize: 14),
                       ),
                     ]
                   ],
@@ -1462,7 +1462,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(statementDe, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold), textDirection: TextDirection.ltr),
+                  Text(statementDe, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold), textDirection: TextDirection.ltr),
                   const SizedBox(height: 12),
                   Row(
                     children: [
@@ -1510,7 +1510,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                   if (_partChecked && q['explanation'] != null) ...[
                     const SizedBox(height: 8),
                     Text('💡 توضيح: ${q["explanation"]}',
-                        style: const TextStyle(color: Colors.green, fontSize: 11, fontWeight: FontWeight.bold))
+                        style: const TextStyle(color: Colors.green, fontSize: 14, fontWeight: FontWeight.bold))
                   ]
                 ],
               ),
@@ -1532,7 +1532,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text('القسم 4: الكتابة (Schreiben)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
+        const Text('القسم 4: الكتابة (Schreiben)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue, fontSize: 16)),
         const SizedBox(height: 12),
         // Task selection pills
         Row(
@@ -1562,7 +1562,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: isSelected ? Colors.white : (isDark ? Colors.white70 : Colors.black87),
-                        fontSize: 12,
+                        fontSize: 14,
                       ),
                     ),
                   ),
@@ -1580,7 +1580,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
           const SizedBox(height: 4),
           Text(
             _selectedSchreibenTask!['promptAr'] as String? ?? '',
-            style: const TextStyle(fontSize: 13, color: Colors.grey, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 14, color: Colors.grey, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 12),
           // Task points
@@ -1591,7 +1591,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                   children: [
                     const Icon(Icons.circle, size: 8, color: Colors.blue),
                     const SizedBox(width: 8),
-                    Expanded(child: Text(p as String, style: const TextStyle(fontSize: 12))),
+                    Expanded(child: Text(p as String, style: const TextStyle(fontSize: 15))),
                   ],
                 ),
               )),

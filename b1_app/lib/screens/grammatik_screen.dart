@@ -161,7 +161,7 @@ class _LessonDetailScreenState extends State<_LessonDetailScreen> {
                     const Divider(height: 24),
                     Text(
                       l['explanation'] as String,
-                      style: const TextStyle(fontSize: 14, height: 1.6),
+                      style: const TextStyle(fontSize: 16, height: 1.6),
                     ),
                   ],
                 ),
@@ -187,37 +187,61 @@ class _LessonDetailScreenState extends State<_LessonDetailScreen> {
                       ],
                     ),
                     const Divider(height: 24),
-                    ...examples.map((ex) => Container(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: isDark ? Colors.black26 : Colors.grey[50],
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: isDark ? Colors.white10 : Colors.black12),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                ex['de'] as String,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14,
-                                  color: Theme.of(context).colorScheme.primary,
+                    ...examples.map((ex) {
+                      return Card(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        elevation: 1,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        child: InkWell(
+                          onTap: () => Provider.of<AppProvider>(context, listen: false).speak(ex['de'] as String),
+                          borderRadius: BorderRadius.circular(12),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        ex['de'] as String,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                          color: Theme.of(context).colorScheme.primary,
+                                        ),
+                                        textDirection: TextDirection.ltr,
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Text(
+                                        ex['ar'] as String,
+                                        style: TextStyle(
+                                          color: isDark ? Colors.white70 : Colors.black87,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                textDirection: TextDirection.ltr,
-                              ),
-                              const SizedBox(height: 6),
-                              Text(
-                                ex['ar'] as String,
-                                style: TextStyle(
-                                  color: isDark ? Colors.white60 : Colors.grey[700],
-                                  fontSize: 12,
+                                const SizedBox(width: 8),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: IconButton(
+                                    icon: const Icon(Icons.volume_up_rounded),
+                                    color: Theme.of(context).colorScheme.primary,
+                                    onPressed: () => Provider.of<AppProvider>(context, listen: false).speak(ex['de'] as String),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        )),
+                        ),
+                      );
+                    }),
                   ],
                 ),
               ),
@@ -268,7 +292,7 @@ class _LessonDetailScreenState extends State<_LessonDetailScreen> {
                             const SizedBox(height: 8),
                             Text(
                               ex['question'] as String,
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                               textDirection: TextDirection.ltr,
                             ),
                             const SizedBox(height: 12),
@@ -435,7 +459,7 @@ class _MistakeCardState extends State<_MistakeCard> {
                     Expanded(
                       child: Text(
                         m['titleAr'] as String? ?? '',
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                     ),
                     Container(
@@ -476,7 +500,7 @@ class _MistakeCardState extends State<_MistakeCard> {
                             color: Colors.red,
                             decoration: TextDecoration.lineThrough,
                             fontWeight: FontWeight.bold,
-                            fontSize: 13,
+                            fontSize: 15,
                           ),
                           textDirection: TextDirection.ltr,
                         ),
@@ -487,29 +511,46 @@ class _MistakeCardState extends State<_MistakeCard> {
                 const SizedBox(height: 8),
 
                 // Right Block
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.green.withOpacity(0.05),
-                    border: Border.all(color: Colors.green.withOpacity(0.2)),
+                Card(
+                  margin: EdgeInsets.zero,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(color: Colors.green.withOpacity(0.3)),
                   ),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.check_circle_rounded, color: Colors.green, size: 20),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          m['right'] as String? ?? '',
-                          style: const TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                          ),
-                          textDirection: TextDirection.ltr,
-                        ),
+                  child: InkWell(
+                    onTap: () => Provider.of<AppProvider>(context, listen: false).speak(m['right'] as String? ?? ''),
+                    borderRadius: BorderRadius.circular(12),
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.green.withOpacity(0.05),
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                    ],
+                      child: Row(
+                        children: [
+                          const Icon(Icons.check_circle_rounded, color: Colors.green, size: 20),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              m['right'] as String? ?? '',
+                              style: const TextStyle(
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                              textDirection: TextDirection.ltr,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Icon(
+                            Icons.volume_up_rounded,
+                            color: Colors.green[700],
+                            size: 20,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -558,21 +599,21 @@ class _MistakeCardState extends State<_MistakeCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (m['whyAr'] != null) ...[
-                    const Text('💡 لماذا؟', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.orange)),
+                    const Text('💡 لماذا؟', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.orange)),
                     const SizedBox(height: 4),
-                    Text(m['whyAr'] as String, style: const TextStyle(fontSize: 12, height: 1.5)),
+                    Text(m['whyAr'] as String, style: const TextStyle(fontSize: 14, height: 1.5)),
                     const SizedBox(height: 12),
                   ],
                   if (m['ruleAr'] != null) ...[
-                    const Text('📏 القاعدة:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.blue)),
+                    const Text('📏 القاعدة:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.blue)),
                     const SizedBox(height: 4),
-                    Text(m['ruleAr'] as String, style: const TextStyle(fontSize: 12, height: 1.5)),
+                    Text(m['ruleAr'] as String, style: const TextStyle(fontSize: 14, height: 1.5)),
                     const SizedBox(height: 12),
                   ],
                   if (m['tipAr'] != null) ...[
-                    const Text('🎯 نصيحة سريعة:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.green)),
+                    const Text('🎯 نصيحة سريعة:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.green)),
                     const SizedBox(height: 4),
-                    Text(m['tipAr'] as String, style: const TextStyle(fontSize: 12, height: 1.5)),
+                    Text(m['tipAr'] as String, style: const TextStyle(fontSize: 14, height: 1.5)),
                   ],
                 ],
               ),
@@ -768,20 +809,33 @@ class _SatzbauGameCardState extends State<_SatzbauGameCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Icon(
-                          _isCorrect! ? Icons.check_circle_rounded : Icons.cancel_rounded,
-                          color: _isCorrect! ? Colors.green : Colors.red,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          _isCorrect! ? 'أحسنت! إجابة صحيحة (+5 XP) 🎉' : 'خطأ! الترتيب الصحيح هو:',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: _isCorrect! ? Colors.green : Colors.red,
-                            fontSize: 13,
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Icon(
+                                _isCorrect! ? Icons.check_circle_rounded : Icons.cancel_rounded,
+                                color: _isCorrect! ? Colors.green : Colors.red,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  _isCorrect! ? 'أحسنت! إجابة صحيحة (+5 XP) 🎉' : 'خطأ! الترتيب الصحيح هو:',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: _isCorrect! ? Colors.green : Colors.red,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.volume_up_rounded, color: _isCorrect! ? Colors.green : Colors.red),
+                          onPressed: () => context.read<AppProvider>().speak(_correctTokens.join(' ')),
                         ),
                       ],
                     ),
@@ -789,7 +843,7 @@ class _SatzbauGameCardState extends State<_SatzbauGameCard> {
                       const SizedBox(height: 8),
                       Text(
                         _correctTokens.join(' '),
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.red),
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.red),
                         textDirection: TextDirection.ltr,
                       ),
                     ],
@@ -800,7 +854,7 @@ class _SatzbauGameCardState extends State<_SatzbauGameCard> {
                 const SizedBox(height: 10),
                 Text(
                   '📏 ${s['tipAr']}',
-                  style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
+                  style: const TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
                 ),
               ]
             ],
@@ -983,41 +1037,68 @@ class _TrennbarListState extends State<_TrennbarList> {
                             ...examples.map((ex) {
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 10.0),
-                                child: Container(
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                    color: isDark ? Colors.black26 : Colors.grey[50],
+                                child: Card(
+                                  margin: EdgeInsets.zero,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(color: isDark ? Colors.white10 : Colors.black12),
+                                    side: BorderSide(color: isDark ? Colors.white10 : Colors.black12),
                                   ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      if (ex['context'] != null)
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                                          margin: const EdgeInsets.only(bottom: 6),
-                                          decoration: BoxDecoration(
-                                            color: Colors.blue.withOpacity(0.1),
-                                            borderRadius: BorderRadius.circular(4),
+                                  child: InkWell(
+                                    onTap: () => Provider.of<AppProvider>(context, listen: false).speak(ex['de'] as String? ?? ''),
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(12),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                if (ex['context'] != null)
+                                                  Container(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                                    margin: const EdgeInsets.only(bottom: 6),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.blue.withOpacity(0.1),
+                                                      borderRadius: BorderRadius.circular(4),
+                                                    ),
+                                                    child: Text(
+                                                      ex['context'] as String,
+                                                      style: const TextStyle(fontSize: 10, color: Colors.blue, fontWeight: FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                Text(
+                                                  ex['de'] as String? ?? '',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15,
+                                                    color: Theme.of(context).colorScheme.primary,
+                                                  ),
+                                                  textDirection: TextDirection.ltr,
+                                                ),
+                                                const SizedBox(height: 4),
+                                                Text(
+                                                  ex['ar'] as String? ?? '',
+                                                  style: TextStyle(
+                                                    fontSize: 13,
+                                                    color: isDark ? Colors.white70 : Colors.black87,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                  textAlign: TextAlign.right,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          child: Text(
-                                            ex['context'] as String,
-                                            style: const TextStyle(fontSize: 10, color: Colors.blue, fontWeight: FontWeight.bold),
+                                          const SizedBox(width: 8),
+                                          Icon(
+                                            Icons.volume_up_rounded,
+                                            color: Theme.of(context).colorScheme.primary,
+                                            size: 20,
                                           ),
-                                        ),
-                                      Text(
-                                        ex['de'] as String? ?? '',
-                                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Theme.of(context).colorScheme.primary),
-                                        textDirection: TextDirection.ltr,
+                                        ],
                                       ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        ex['ar'] as String? ?? '',
-                                        style: TextStyle(fontSize: 12, color: isDark ? Colors.white60 : Colors.grey[700]),
-                                        textAlign: TextAlign.right,
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               );

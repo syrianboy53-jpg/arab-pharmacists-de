@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class AppProvider extends ChangeNotifier {
   bool _isDarkMode = false;
@@ -208,5 +209,31 @@ class AppProvider extends ChangeNotifier {
     await prefs.remove('userName');
     
     notifyListeners();
+  }
+
+  // ==================== Text-to-Speech (TTS) ====================
+  final FlutterTts _flutterTts = FlutterTts();
+  bool _ttsInitialized = false;
+
+  Future<void> _initTts() async {
+    if (_ttsInitialized) return;
+    try {
+      await _flutterTts.setLanguage('de-DE');
+      await _flutterTts.setSpeechRate(0.4); // slightly slower for learners
+      await _flutterTts.setVolume(1.0);
+      _ttsInitialized = true;
+    } catch (e) {
+      debugPrint('Error initializing TTS: $e');
+    }
+  }
+
+  Future<void> speak(String text) async {
+    await _initTts();
+    try {
+      await _flutterTts.stop();
+      await _flutterTts.speak(text);
+    } catch (e) {
+      debugPrint('TTS speak error: $e');
+    }
   }
 }

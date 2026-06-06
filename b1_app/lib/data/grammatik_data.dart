@@ -746,5 +746,67 @@ final List<Map<String, dynamic>> grammarLessons = [
       'correct': 0
     }
   ]
+},
+{
+  'id': 15,
+  'title': 'Konjunktiv I (Indirekte Rede)',
+  'titleAr': 'صيغة الخطاب غير المباشر (نقل الكلام)',
+  'explanation': 'صيغة Konjunktiv I تُستخدم لنقل الكلام عن الآخرين دون تبني رأيهم (مثل لغة الصحافة والأخبار والتقارير الرسمية).\n\nكيف يتم صياغتها:\n• نأخذ جذر الفعل في المصدر ونضيف اللواحق التالية:\n- ich: -e\n- du: -est\n- er/sie/es: -e  (أهم تصريف والأكثر استخداماً!)\n- wir: -en\n- ihr: -et\n- sie/Sie: -en\n\nأمثلة تصريف الفعل (haben / sagen):\n• er habe (بدلاً من hat)\n• er sage (بدلاً من sagt)\n\nالفعل الشاذ الأهم (sein):\n• ich sei, du seiest, er sei, wir seien, ihr seiet, sie seien\n\n*ملاحظة: إذا تشابه تصريف Konjunktiv I مع الحاضر البسيط (Präsens)، يتم الانتقال إلى Konjunktiv II بدلاً منه (مثال: ich sage تصبح ich würde sagen).*',
+  'examples': [
+    {
+      'de': 'Der Arzt sagt: "Ich habe keine Zeit." => Der Arzt sagt, er habe keine Zeit.',
+      'ar': 'الطبيب يقول أنه ليس لديه وقت (نقل كلام).'
+    },
+    {
+      'de': 'Sie behauptet: "Er ist krank." => Sie behauptet, er sei krank.',
+      'ar': 'هي تزعم أنه مريض.'
+    },
+    {
+      'de': 'Der Minister erklärte, die Krise sei beendet.',
+      'ar': 'صرح الوزير بأن الأزمة قد انتهت.'
+    },
+    {
+      'de': 'Die Nachrichten berichten, die Preise seien gestiegen.',
+      'ar': 'تناقلت الأخبار أن الأسعار قد ارتفعت.'
+    }
+  ],
+  'exercises': [
+    {
+      'question': 'Der Arzt sagte, er ___ müde. (sein)',
+      'options': [
+        'sei',
+        'ist',
+        'wäre'
+      ],
+      'correct': 0
+    },
+    {
+      'question': 'Sie berichtet, sie ___ ein neues Auto. (haben)',
+      'options': [
+        'habe',
+        'hat',
+        'hätte'
+      ],
+      'correct': 0
+    },
+    {
+      'question': 'Der Zeuge meint, er ___ den Dieb. (kennen)',
+      'options': [
+        'kenne',
+        'kennt',
+        'kennte'
+      ],
+      'correct': 0
+    },
+    {
+      'question': 'Die Zeitung schreibt, der Präsident ___ morgen nach Berlin. (reisen)',
+      'options': [
+        'reise',
+        'reist',
+        'reiste'
+      ],
+      'correct': 0
+    }
+  ]
 }
 ];
