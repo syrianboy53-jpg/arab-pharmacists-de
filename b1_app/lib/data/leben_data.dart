@@ -1,4 +1,4 @@
-// Automatically generated from Web data (leben.ts) on 2026-06-05T17:19:01.936Z
+// Automatically generated from Web data (leben.ts) on 2026-06-06T17:40:21.385Z
 import 'dart:convert';
 import '../models/question.dart';
 

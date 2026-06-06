@@ -2891,6 +2891,88 @@ export const vocabCategories = [
         "example": "Wie ist das Wetter heute?"
       }
     ]
+  },
+  {
+    "id": "b2-redemittel",
+    "titleAr": "تعبيرات ومصطلحات متقدمة B2",
+    "titleDe": "B2 Redemittel & Ausdrücke",
+    "words": [
+      {
+        "de": "Meiner Meinung nach (+ Verb)",
+        "ar": "في رأيي (يأتي الفعل بعد هذا التعبير مباشرة)",
+        "example": "Meiner Meinung nach ist Umweltschutz sehr wichtig. (في رأيي حماية البيئة مهمة جداً.)"
+      },
+      {
+        "de": "Ich bin der festen Überzeugung, dass ...",
+        "ar": "أنا على قناعة تامة بأن ...",
+        "example": "Ich bin der festen Überzeugung, dass jeder mithelfen muss. (أنا على قناعة تامة بأن على الجميع المساعدة.)"
+      },
+      {
+        "de": "Es spielt eine entscheidende Rolle.",
+        "ar": "يلعب دوراً حاسماً/مصيرياً.",
+        "example": "Bildung spielt eine entscheidende Rolle für die Zukunft. (التعليم يلعب دوراً حاسماً للمستقبل.)"
+      },
+      {
+        "de": "Ein großer Vorteil / Nachteil ist ...",
+        "ar": "ميزة كبرى / عيب كبير هو ...",
+        "example": "Ein großer Vorteil von Elektroautos ist der Umweltschutz. (ميزة كبرى للسيارات الكهربائية هي حماية البيئة.)"
+      },
+      {
+        "de": "Im Gegensatz zu (+ Dativ)",
+        "ar": "على العكس من / على النقيض من",
+        "example": "Im Gegensatz zu gestern regnet es heute nicht. (على العكس من يوم أمس لا تمطر اليوم.)"
+      },
+      {
+        "de": "Zusammenfassend lässt sich sagen, dass ...",
+        "ar": "خلاصة القول هي أن ... / تلخيصاً لما قيل يمكن القول أن ...",
+        "example": "Zusammenfassend lässt sich sagen, dass das Projekt erfolgreich war. (خلاصة القول هي أن المشروع كان ناجحاً.)"
+      },
+      {
+        "de": "Es liegt auf der Hand, dass ...",
+        "ar": "من البديهي / من الواضح جداً أن ...",
+        "example": "Es liegt auf der Hand, dass wir Energie sparen müssen. (من الواضح جداً أننا يجب أن نوفر الطاقة.)"
+      },
+      {
+        "de": "Aus diesem Grund (+ Verb)",
+        "ar": "لهذا السبب (يأتي الفعل بعد هذا التعبير مباشرة)",
+        "example": "Ich war krank, aus diesem Grund konnte ich nicht kommen. (كنت مريضاً، ولهذا السبب لم أستطع المجيء.)"
+      },
+      {
+        "de": "Darüber hinaus",
+        "ar": "علاوة على ذلك / بالإضافة إلى ذلك",
+        "example": "Das Handy ist teuer. Darüber hinaus ist es sehr schwer. (الهاتف غالي الثمن، علاوة على ذلك هو ثقيل جداً.)"
+      },
+      {
+        "de": "Ich möchte betonen, dass ...",
+        "ar": "أود أن أؤكد على أن ...",
+        "example": "Ich möchte betonen, dass diese Regel für alle gilt. (أود أن أؤكد على أن هذه القاعدة تسري على الجميع.)"
+      },
+      {
+        "de": "Es steht außer Frage, dass ...",
+        "ar": "ليس هناك أدنى شك في أن ...",
+        "example": "Es steht außer Frage, dass Deutschlernen viel Geduld erfordert. (ليس هناك أدنى شك في أن تعلم الألمانية يتطلب الكثير من الصبر.)"
+      },
+      {
+        "de": "Es ist allgemein bekannt, dass ...",
+        "ar": "من المعروف للعامة أن ... / من الشائع أن ...",
+        "example": "Es ist allgemein bekannt, dass Sport gesund ist. (من المعروف للجميع أن الرياضة صحية.)"
+      },
+      {
+        "de": "im Vergleich zu (+ Dativ)",
+        "ar": "مقارنة بـ ...",
+        "example": "Im Vergleich zum letzten Jahr sind die Preise gestiegen. (مقارنة بالعام الماضي ارتفعت الأسعار.)"
+      },
+      {
+        "de": "in der heutigen Zeit",
+        "ar": "في الوقت الحاضر / في عصرنا هذا",
+        "example": "In der heutigen Zeit nutzen fast alle ein Smartphone. (في وقتنا الحاضر يستخدم الجميع تقريباً الهاتف الذكي.)"
+      },
+      {
+        "de": "Ich stehe auf dem Standpunkt, dass ...",
+        "ar": "أتبنى وجهة نظر أن ...",
+        "example": "Ich stehe auf dem Standpunkt, dass Bildung kostenlos sein sollte. (أتبنى وجهة نظر أن التعليم يجب أن يكون مجانياً.)"
+      }
+    ]
   }
 ];
 

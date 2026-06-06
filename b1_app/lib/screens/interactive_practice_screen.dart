@@ -5,6 +5,12 @@ import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
 import '../data/grammatik_data.dart';
 import '../data/vocab_data.dart';
+import 'conjugation_trainer_screen.dart';
+import 'synonyms_screen.dart';
+import 'drill_screen.dart';
+import 'fehler_screen.dart';
+import 'chat_simulator_screen.dart';
+import 'einstufung_screen.dart';
 
 class InteractivePracticeScreen extends StatefulWidget {
   const InteractivePracticeScreen({super.key});
@@ -420,10 +426,80 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
               ),
               _buildPracticeHubCard(
                 'مدرّب التصريف 🔁',
-                'تحدي تصريف الأفعال الشاذة والناقصة والمساعدة في الأزمنة.',
+                'تحدي تصريف الأفعال الشاذة والناقصة والمساعدة في الأزمنة المختلفة.',
                 Icons.autorenew,
                 const Color(0xFFDC2626),
-                () => _startGrammarQuiz(3), // Starts Perfekt quiz
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ConjugationTrainerScreen()),
+                  );
+                },
+                isDark,
+              ),
+              _buildPracticeHubCard(
+                'فخاخ المترادفات 🔀',
+                'لعبة تفاعلية لمطابقة 90 زوجاً من المرادفات المهمة لمستويات اللغة.',
+                Icons.compare_arrows,
+                const Color(0xFF059669),
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SynonymsScreen()),
+                  );
+                },
+                isDark,
+              ),
+              _buildPracticeHubCard(
+                'الأسئلة المكثّفة (Drill) ⚡',
+                'أجب عن 220 سؤال قواعد واختبارات لغوية شاملة للامتحان.',
+                Icons.offline_bolt,
+                const Color(0xFFDB2777),
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const DrillScreen()),
+                  );
+                },
+                isDark,
+              ),
+              _buildPracticeHubCard(
+                'الأخطاء الشائعة ⚠️',
+                'تعلّم كيفية تجنب 30 من الأخطاء القواعدية الأكثر شيوعاً في DaZ.',
+                Icons.warning_amber_rounded,
+                const Color(0xFFB45309),
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const FehlerScreen()),
+                  );
+                },
+                isDark,
+              ),
+              _buildPracticeHubCard(
+                'تحديد المستوى 📈',
+                'اختبار تفاعلي متكامل لتقييم مستواك اللغوي من A1 إلى B2.',
+                Icons.trending_up,
+                const Color(0xFF0891B2),
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const EinstufungScreen()),
+                  );
+                },
+                isDark,
+              ),
+              _buildPracticeHubCard(
+                'محاكي المحادثة 💬',
+                'حوارات محاكاة تفاعلية بالذكاء الاصطناعي للاستعداد لقسم Sprechen.',
+                Icons.chat_bubble_outline,
+                const Color(0xFF2563EB),
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ChatSimulatorScreen()),
+                  );
+                },
                 isDark,
               ),
             ]),
