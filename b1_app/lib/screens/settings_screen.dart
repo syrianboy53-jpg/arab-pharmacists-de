@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../providers/app_provider.dart';
@@ -19,6 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _isChecking = false;
 
   Future<void> _checkManualUpdates(BuildContext context) async {
+    if (kIsWeb) return;
     setState(() => _isChecking = true);
     try {
       final client = HttpClient();
@@ -217,19 +219,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   title: const Text('عن التطبيق'),
                   subtitle: Text('B1 Deutsch للسوريين v2.0 (إصدار ${AppProvider.appVersion})'),
                 ),
-                ListTile(
-                  leading: const Icon(Icons.system_update),
-                  title: const Text('التحقق من وجود تحديثات'),
-                  subtitle: const Text('تأكد من استخدامك لآخر إصدار'),
-                  trailing: _isChecking
-                      ? const SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Icon(Icons.refresh),
-                  onTap: _isChecking ? null : () => _checkManualUpdates(context),
-                ),
+                if (!kIsWeb)
+                  ListTile(
+                    leading: const Icon(Icons.system_update),
+                    title: const Text('التحقق من وجود تحديثات'),
+                    subtitle: const Text('تأكد من استخدامك لآخر إصدار'),
+                    trailing: _isChecking
+                        ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(Icons.refresh),
+                    onTap: _isChecking ? null : () => _checkManualUpdates(context),
+                  ),
                 const ListTile(
                   leading: Icon(Icons.person),
                   title: Text('المطوّر'),

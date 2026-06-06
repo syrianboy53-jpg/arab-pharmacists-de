@@ -94,6 +94,25 @@ async function run() {
     return res.json();
   }
 
+  // Copy b1-deutsch.apk to b1-deutsch-v{newVersion}.apk to prevent raw.githubusercontent caching
+  const apkDir = path.join(rootDir, 'landing', 'apk');
+  const srcApk = path.join(apkDir, 'b1-deutsch.apk');
+  const destApk = path.join(apkDir, `b1-deutsch-v${newVersion}.apk`);
+
+  try {
+    await fs.copyFile(srcApk, destApk);
+    console.log(`[✔] Copied APK to version-specific path: ${destApk}`);
+  } catch (err) {
+    // Try copying from root as fallback
+    try {
+      const rootApk = path.join(rootDir, 'b1-deutsch.apk');
+      await fs.copyFile(rootApk, destApk);
+      console.log(`[✔] Copied APK from root to version-specific path: ${destApk}`);
+    } catch (fallbackErr) {
+      console.warn(`[⚠️] Warning: Could not create versioned APK file: ${fallbackErr.message}`);
+    }
+  }
+
   // Update apk_version
   await queryDb("UPDATE config SET value = $1 WHERE key = 'apk_version'", [newVersion.toString()]);
   console.log(`[✔] Neon Database: Updated 'apk_version' to '${newVersion}'`);
@@ -102,13 +121,18 @@ async function run() {
   await queryDb("UPDATE config SET value = 'https://www.b1-syrer.de/b1-deutsch.apk' WHERE key = 'apk_url'");
   console.log(`[✔] Neon Database: Ensured 'apk_url' is set to custom redirection`);
 
+  // Update apk_raw_url
+  const newApkRawUrl = `https://raw.githubusercontent.com/syrianboy53-jpg/arab-pharmacists-de/main/landing/apk/b1-deutsch-v${newVersion}.apk`;
+  await queryDb("UPDATE config SET value = $1 WHERE key = 'apk_raw_url'", [newApkRawUrl]);
+  console.log(`[✔] Neon Database: Updated 'apk_raw_url' to '${newApkRawUrl}'`);
+
   // Update dynamic announcement
   const announcementText = `تنبيه: يتوفر تحديث جديد وهام جداً للتطبيق (إصدار ${newVersion}) يحل مشكلة تكرار إشعار التحديث نهائياً، ويحتوي على قسم التدريب العشوائي والشامل على القواعد (قاعدة بيانات تدريب القواعد) مع نظام تتبع التقدم وعلامات إتمام الدروس (+25 XP عند إكمال التدريب). يرجى تنزيل التحديث الآن.`;
   await queryDb("UPDATE config SET value = $1 WHERE key = 'announcement'", [announcementText]);
   console.log(`[✔] Neon Database: Updated 'announcement' text referencing version ${newVersion}`);
 
   // Fetch updated config values to verify
-  const verifyRes = await queryDb("SELECT key, value FROM config WHERE key IN ('apk_version', 'apk_url', 'announcement')");
+  const verifyRes = await queryDb("SELECT key, value FROM config WHERE key IN ('apk_version', 'apk_url', 'apk_raw_url', 'announcement')");
   console.log("Database Verification Output:", verifyRes.rows);
 
   console.log(`\n🎉 Success! Version ${newVersion} has been fully applied to code files, functions fallback, and remote database configuration.`);

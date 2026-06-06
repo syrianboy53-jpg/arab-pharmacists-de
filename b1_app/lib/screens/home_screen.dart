@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:provider/provider.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../providers/app_provider.dart';
 import 'lesen_screen.dart';
@@ -114,19 +116,25 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _checkUpdates() async {
+    if (kIsWeb) return; // Do not check for updates on the web
+
     final config = await _fetchConfig();
 
     if (config != null) {
       final remoteVersion = int.tryParse(config['apk_version'] ?? '0') ?? 0;
       const localVersion = AppProvider.appVersion;
       if (localVersion < remoteVersion) {
-        final apkUrl = config['apk_url'] ?? 'https://www.b1-syrer.de/b1-deutsch.apk';
-        _showUpdateDialog(apkUrl);
+        final prefs = await SharedPreferences.getInstance();
+        final skippedVersion = prefs.getInt('skipped_apk_version') ?? 0;
+        if (skippedVersion < remoteVersion) {
+          final apkUrl = config['apk_url'] ?? 'https://www.b1-syrer.de/b1-deutsch.apk';
+          _showUpdateDialog(apkUrl, remoteVersion);
+        }
       }
     }
   }
 
-  void _showUpdateDialog(String downloadUrl) {
+  void _showUpdateDialog(String downloadUrl, int remoteVersion) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     showDialog(
       context: context,
@@ -152,6 +160,16 @@ class _HomeScreenState extends State<HomeScreen> {
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
             child: Text('لاحقاً', style: TextStyle(color: isDark ? Colors.white38 : Colors.grey)),
+          ),
+          TextButton(
+            onPressed: () async {
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.setInt('skipped_apk_version', remoteVersion);
+              if (mounted) {
+                Navigator.of(ctx).pop();
+              }
+            },
+            child: const Text('تجاهل هذا الإصدار', style: TextStyle(color: Colors.redAccent)),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
