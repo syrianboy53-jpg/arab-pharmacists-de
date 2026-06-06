@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /app/admin/
+Disallow: /api/
+
+Sitemap: https://www.b1-syrer.de/sitemap.xml
