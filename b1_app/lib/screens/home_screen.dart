@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (config != null) {
       final remoteVersion = int.tryParse(config['apk_version'] ?? '0') ?? 0;
-      const localVersion = 64; // Native app version 59
+      const localVersion = 65; // Native app version 59
       if (localVersion < remoteVersion) {
         final apkUrl = config['apk_url'] ?? 'https://www.b1-syrer.de/b1-deutsch.apk';
         _showUpdateDialog(apkUrl);
@@ -113,7 +113,9 @@ class _HomeScreenState extends State<HomeScreen> {
               foregroundColor: Colors.white,
             ),
             onPressed: () async {
-              final uri = Uri.parse(downloadUrl);
+              final separator = downloadUrl.contains('?') ? '&' : '?';
+              final cacheBusterUrl = '$downloadUrl${separator}t=${DateTime.now().millisecondsSinceEpoch}';
+              final uri = Uri.parse(cacheBusterUrl);
               try {
                 await launchUrl(uri, mode: LaunchMode.externalApplication);
               } catch (e) {
