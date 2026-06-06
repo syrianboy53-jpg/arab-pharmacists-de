@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -1017,25 +1018,39 @@ class _HomeScreenState extends State<HomeScreen> {
     final provider = context.watch<AppProvider>();
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    final scaffoldBg = isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC);
-    final barBg = isDark ? const Color(0xFF1E293B) : Colors.white;
-    final textMain = isDark ? Colors.white : const Color(0xFF1E293B);
-    final borderCol = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
+    final scaffoldBg = isDark ? const Color(0xFF080D1A) : const Color(0xFFF1F5F9);
+    final textMain = isDark ? Colors.white : const Color(0xFF0F172A);
+    final borderCol = isDark ? Colors.white.withOpacity(0.08) : const Color(0xFFE2E8F0);
 
     return Scaffold(
       backgroundColor: scaffoldBg,
       appBar: AppBar(
-        backgroundColor: barBg,
+        backgroundColor: Colors.transparent,
         foregroundColor: textMain,
         elevation: 0,
+        flexibleSpace: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+            child: Container(
+              color: isDark ? const Color(0x66080D1A) : Colors.white.withOpacity(0.7),
+            ),
+          ),
+        ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: const Color(0xFF10B981),
+                color: const Color(0xFF0D9488),
                 borderRadius: BorderRadius.circular(6),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF0D9488).withOpacity(0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  )
+                ],
               ),
               child: const Text(
                 'B1-B2',
@@ -1086,156 +1101,226 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Container(color: borderCol, height: 1),
         ),
       ),
-      body: RefreshIndicator(
-        onRefresh: _checkUpdates,
-        color: const Color(0xFF10B981),
-        backgroundColor: barBg,
-        child: CustomScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          slivers: [
-            // Hero Stats Dashboard Section
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: _buildStatsCard(context, provider, isDark, textMain, borderCol),
-              ),
-            ),
-
-            // CATEGORY 1: الأساسيّات (مجّاني)
-            _buildCategoryHeader('الأساسيّات (مجّاني) 📚', textMain),
-            _buildCategoryGrid([
-              _buildItem('القواعد', 'أزمنة وح حالات وأفعال', Icons.gavel, const Color(0xFF2563EB), () => _navigate(const GrammatikScreen())),
-              _buildItem('المفردات', '6000+ كلمة مترجمة', Icons.translate, const Color(0xFF0891B2), () => _navigate(const WortschatzScreen())),
-              _buildItem('القراءة (Lesen)', 'نصوص + أسئلة', Icons.menu_book, const Color(0xFF7C3AED), () => _navigate(const LesenScreen())),
-              _buildItem('الاستماع (Hören)', 'حوارات وإعلانات', Icons.headphones, const Color(0xFFEA580C), () => _navigate(const HoerenScreen())),
-              _buildItem('الكتابة (Schreiben)', 'نماذج رسائل وإيميلات', Icons.edit_note, const Color(0xFF0D9488), () => _navigate(const SchreibenScreen())),
-              _buildItem('المحادثة (Sprechen)', 'الأجزاء الثلاثة', Icons.record_voice_over, const Color(0xFFDC2626), () => _navigate(const SprechenScreen())),
-              _buildItem('قوالب المحادثة', 'عبارات جاهزة + B2', Icons.chat, const Color(0xFF4F46E5), () => _navigate(const LibraryScreen())),
-              _buildItem('قاموس العامية', 'لغة الشارع والشباب', Icons.local_fire_department, const Color(0xFFDC2626), () => _navigate(const SlangScreen())),
-              _buildItem('بناء الجمل', 'تمارين تركيب الكلمات', Icons.format_list_numbered, const Color(0xFFD97706), () => _navigate(const SatzbauScreen())),
-              _buildItem('Sprachbausteine كاملة', '5 نماذج تدريب كاملة', Icons.extension, const Color(0xFF059669), () => _navigate(const SprachbausteineScreen())),
-              _buildItem('مراجعة ذكيّة', 'مراجعة بأسلوب SRS', Icons.loop, const Color(0xFF475569), () => _navigate(const SmartReviewScreen())),
-              _buildItem('مدرّب التصريف', 'أفعال + Modalverben', Icons.refresh, const Color(0xFF1E3A8A), () => _navigate(const ConjugationTrainerScreen())),
-            ], isDark, borderCol),
-
-            // CATEGORY 2: تدريبات تفاعليّة (Freemium)
-            _buildCategoryHeader('تدريبات تفاعليّة (Freemium) 🎯', textMain),
-            _buildCategoryGrid([
-              _buildItem('مسابقات وجوائز', 'اربح Premium مجاناً', Icons.emoji_events, const Color(0xFFD97706), () => _showContestsDialog()),
-              _buildItem('ادعُ صديقاً', 'كود دعوة متبادل', Icons.people, const Color(0xFF2563EB), _showReferralDialog),
-              _buildItem('خطّتي الشخصيّة لـB1', 'جدولك اليومي للامتحان', Icons.calendar_today, const Color(0xFF0D9488), _showB1Planner),
-              _buildItem('تقييمات وتعليقات', 'شاركنا تجربتك', Icons.star, const Color(0xFFF59E0B), () => _showSimpleInfoDialog('تقييم التطبيق ⭐', 'رأيك يهمنا! يرجى تقييم التطبيق على متجر بلاي لمساعدتنا على الاستمرار وتطوير ميزات جديدة.')),
-              _buildItem('تحدّي اليوم', '4 أسئلة جديدة + 90 XP', Icons.wb_sunny, const Color(0xFFEA580C), _showDailyChallenge),
-              _buildItem('لوحة المتصدّرين', 'تنافس مع زملائك', Icons.insights, const Color(0xFF7C3AED), _showLeaderboard),
-              _buildItem('صندوق الإسعافات', 'جمل للنجدة في الامتحان', Icons.health_and_safety, const Color(0xFFDC2626), () => _navigate(const EmergencyScreen())),
-              _buildItem('فخاخ المترادفات', 'لعبة 90 زوج مرادفات', Icons.gamepad, const Color(0xFF059669), () => _navigate(const SynonymsScreen())),
-              _buildItem('ترتيب البطاقات', 'لعبة der/die/das', Icons.style, const Color(0xFF0891B2), _showCardSortingGame),
-              _buildItem('مواعيد الكورسات', '30 معهداً في 13 مدينة', Icons.school, const Color(0xFF475569), () => _showSimpleInfoDialog('مواعيد الكورسات 📅', 'تتوفر مواعيد كورسات BAMF و VHS و Goethe بشكل دوري كل شهر في 13 مدينة ألمانية، بالإضافة لكورسات أونلاين مجانية للمسجلين في Jobcenter.')),
-              _buildItem('30 خطأ شائع DaZ', '7 مجاني / 23 Premium', Icons.warning, const Color(0xFFB45309), () => _navigate(const FehlerScreen())),
-              _buildItem('Drill - Sprachbausteine', '220 سؤال قواعد مكثف', Icons.offline_bolt, const Color(0xFFDB2777), () => _navigate(const DrillScreen())),
-              _buildItem('5 نماذج B1 موضوعيّة', '2 مجاني / 3 Premium', Icons.quiz, const Color(0xFF1E3A8A), () => _navigate(const LesenScreen())),
-              _buildItem('موارد مجّانيّة موثوقة', 'روابط DW + Goethe + telc', Icons.language, const Color(0xFF008080), () => _launchUrl('https://www.dw.com/de/deutsch-lernen/s-2055')),
-            ], isDark, borderCol),
-
-            // CATEGORY 3: الامتحان الكامل ومحاكاته
-            _buildCategoryHeader('الامتحان الكامل ومحاكاته 📝', textMain),
-            _buildCategoryGrid([
-              _buildItem('محاكي Telc B1 الحقيقي', 'مؤقت حقيقي لكل الأقسام', Icons.timer, const Color(0xFFDC2626), () => _navigate(const ExamSimulationScreen())),
-              _buildItem('امتحان كامل (مبسّط)', 'نسخة سريعة للتدريب', Icons.speed, const Color(0xFFEA580C), () => _showSimpleInfoDialog('امتحان كامل مبسط 🎯', 'نسخة تدريبية سريعة تحتوي على نصف عدد الأسئلة لتتمكن من تقييم مستواك خلال 30 دقيقة فقط.')),
-              _buildItem('تحديد المستوى', 'اختبار مستواك A1-B2', Icons.rule, const Color(0xFF0D9488), () => _navigate(const EinstufungScreen())),
-              _buildItem('وصف صورة', 'قوالب وصياغات Bildbeschreibung', Icons.image, const Color(0xFF7C3AED), () => _navigate(const BildDescriptionScreen())),
-              _buildItem('محاكي محادثة تفاعلي', 'حوارات محاكاة لـ B1-B2', Icons.chat_bubble, const Color(0xFF2563EB), () => _navigate(const ChatSimulatorScreen())),
-            ], isDark, borderCol),
-
-            // CATEGORY 4: الجنسيّة والاندماج
-            _buildCategoryHeader('الجنسيّة والاندماج 🇩🇪', textMain),
-            _buildCategoryGrid([
-              _buildItem('Leben in Deutschland', '310 سؤال كامل مع الترجمة', Icons.flag, const Color(0xFF1E3A8A), () => _navigate(const LebenScreen())),
-              _buildItem('Einbürgerungstest', 'كتالوج أسئلة الولايات والجنسية', Icons.account_balance, const Color(0xFF475569), () => _navigate(const EinbuergerungScreen())),
-              _buildItem('مشاكل وحلول', 'دليل عملي للعيش والاندماج', Icons.lightbulb, const Color(0xFF059669), () => _navigate(const ProblemsScreen())),
-            ], isDark, borderCol),
-
-            // CATEGORY 5: محتوى Premium الحصري
-            _buildCategoryHeader('محتوى Premium الحصري ⭐', textMain),
-            _buildCategoryGrid([
-              _buildItem('B2 كامل', 'قواعد متقدمة و 300+ كلمة', Icons.school, const Color(0xFFB45309), () => _navigate(const B2Screen())),
-              _buildItem('5 نماذج Telc B2', 'كاملة ومصححة بالذكاء الاصطناعي', Icons.assignment, const Color(0xFFDB2777), () => _navigate(const B2Screen())),
-              _buildItem('AI Writing Corrector', 'تصحيح ومراجعة الرسائل بالذكاء الاصطناعي', Icons.smart_toy, const Color(0xFF10B981), _showAiCorrector),
-              _buildItem('وضع الضغط للاستماع', 'ضوضاء واقعية (شارع/مقهى)', Icons.volume_off, const Color(0xFF7C3AED), () => _showSimpleInfoDialog('وضع الضغط للاستماع 🔥', 'يحاكي ضوضاء الشارع ومحطات القطار لتدريب أذنيك على الاستماع تحت الضغط وضوضاء الامتحان الحقيقية.')),
-              _buildItem('مدرّب القراءة السريعة', 'يختفي النص بعد 90/180 ثانية', Icons.bolt, const Color(0xFFEA580C), () => _showSimpleInfoDialog('مدرّب القراءة السريعة ⏱', 'يخفي النص تدريجياً لتدريبك على مهارات القراءة السريعة والـ Skimming لتوفير الوقت بالامتحان.')),
-              _buildItem('مترادفات Premium', '70+ زوج إضافي للمستوى المتقدم', Icons.games, const Color(0xFF2563EB), () => _navigate(const SynonymsScreen())),
-              _buildItem('23 خطأ متقدم', 'الأخطاء الشائعة لطلاب B2', Icons.dangerous, const Color(0xFFDC2626), () => _navigate(const B2Screen())),
-              _buildItem('189 سؤال Drill إضافي', 'أسئلة قواعد مكثفة وحصرية', Icons.psychology, const Color(0xFF0D9488), () => _navigate(const ConjugationTrainerScreen())),
-              _buildItem('3 نماذج B1 إضافيّة', 'مواضيع الصحة، السفر والبيئة', Icons.library_books, const Color(0xFF0891B2), () => _navigate(const LesenScreen())),
-            ], isDark, borderCol),
-
-            // CATEGORY 6: أدوات عمليّة
-            _buildCategoryHeader('أدوات عمليّة 🛠️', textMain),
-            _buildCategoryGrid([
-              _buildItem('لوحتي الشخصيّة', 'تتبع التقدم ومجموع الـ XP', Icons.bar_chart, const Color(0xFF4F46E5), () => _navigate(const SettingsScreen())),
-              _buildItem('مخطط الدراسة', 'خطة 4 أسابيع للنجاح المضمون', Icons.next_plan, const Color(0xFF059669), _showB1Planner),
-              _buildItem('اطبع وذاكر', 'ملخصات وملفات PDF جاهزة للتحميل', Icons.picture_as_pdf, const Color(0xFFDC2626), () => _navigate(const LibraryScreen())),
-              _buildItem('شبكات الكلمات', 'ربط الكلمات لسهولة الحفظ', Icons.hub, const Color(0xFF7C3AED), () => _showSimpleInfoDialog('شبكات الكلمات 🕸️', 'أداة ذهنية ممتازة تقوم بربط الكلمات المتشابهة في شبكات موضوعية (مثل كلمات السكن، العمل، التسوق) لتبسيط الحفظ.')),
-              _buildItem('بنك المواضيع', 'أفكار لمقالات Schreiben وصور Sprechen', Icons.topic, const Color(0xFF0891B2), () => _navigate(const LibraryScreen())),
-              _buildItem('أدوات النجاح', 'نصائح واستراتيجيات هامة للممتحنين', Icons.construction, const Color(0xFFB45309), () => _showSimpleInfoDialog('أدوات النجاح 🧰', 'مجموعة نصائح واستراتيجيات عملية لحل كل قسم بأسرع طريقة وتفادي الفخاخ الشائعة التي يقع فيها الطلاب.')),
-            ], isDark, borderCol),
-
-            // Bottom Banner for Premium screen
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFFF59E0B), Color(0xFFD97706)],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
+      body: Stack(
+        children: [
+          // Background ambient mesh glows in dark mode for premium look
+          if (isDark) ...[
+            Positioned(
+              top: -60,
+              right: -60,
+              child: Container(
+                width: 260,
+                height: 260,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF0D9488).withOpacity(0.18),
+                      blurRadius: 130,
+                      spreadRadius: 30,
                     ),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: InkWell(
-                    onTap: () => _navigate(const PremiumScreen()),
-                    borderRadius: BorderRadius.circular(16),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.star, color: Colors.white, size: 36),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'الترقية إلى B1-Syrer Premium ⭐',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  'تصفح بدون إعلانات، واحصل على قوالب وميزات B2 الحصرية ومحاكيات متقدمة!',
-                                  style: TextStyle(
-                                    color: Colors.white.withValues(alpha: 0.9),
-                                    fontSize: 11,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
-                        ],
-                      ),
-                    ),
-                  ),
+                  ],
                 ),
               ),
             ),
-            const SliverToBoxAdapter(child: SizedBox(height: 32)),
+            Positioned(
+              top: 350,
+              left: -80,
+              child: Container(
+                width: 280,
+                height: 280,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF4F46E5).withOpacity(0.12),
+                      blurRadius: 140,
+                      spreadRadius: 40,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 80,
+              right: -100,
+              child: Container(
+                width: 320,
+                height: 320,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFFDB2777).withOpacity(0.08),
+                      blurRadius: 150,
+                      spreadRadius: 50,
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
-        ),
+          SafeArea(
+            child: RefreshIndicator(
+              onRefresh: _checkUpdates,
+              color: const Color(0xFF0D9488),
+              backgroundColor: isDark ? const Color(0xFF131C33) : Colors.white,
+              child: CustomScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                slivers: [
+                  // Hero Stats Dashboard Section
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: _buildStatsCard(context, provider, isDark, textMain, borderCol),
+                    ),
+                  ),
+
+                  // CATEGORY 1: الأساسيّات (مجّاني)
+                  _buildCategoryHeader('الأساسيّات (مجّاني) 📚', textMain),
+                  _buildCategoryGrid([
+                    _buildItem('القواعد', 'أزمنة وح حالات وأفعال', Icons.gavel, const Color(0xFF2563EB), () => _navigate(const GrammatikScreen())),
+                    _buildItem('المفردات', '6000+ كلمة مترجمة', Icons.translate, const Color(0xFF0891B2), () => _navigate(const WortschatzScreen())),
+                    _buildItem('القراءة (Lesen)', 'نصوص + أسئلة', Icons.menu_book, const Color(0xFF7C3AED), () => _navigate(const LesenScreen())),
+                    _buildItem('الاستماع (Hören)', 'حوارات وإعلانات', Icons.headphones, const Color(0xFFEA580C), () => _navigate(const HoerenScreen())),
+                    _buildItem('الكتابة (Schreiben)', 'نماذج رسائل وإيميلات', Icons.edit_note, const Color(0xFF0D9488), () => _navigate(const SchreibenScreen())),
+                    _buildItem('المحادثة (Sprechen)', 'الأجزاء الثلاثة', Icons.record_voice_over, const Color(0xFFDC2626), () => _navigate(const SprechenScreen())),
+                    _buildItem('قوالب المحادثة', 'عبارات جاهزة + B2', Icons.chat, const Color(0xFF4F46E5), () => _navigate(const LibraryScreen())),
+                    _buildItem('قاموس العامية', 'لغة الشارع والشباب', Icons.local_fire_department, const Color(0xFFDC2626), () => _navigate(const SlangScreen())),
+                    _buildItem('بناء الجمل', 'تمارين تركيب الكلمات', Icons.format_list_numbered, const Color(0xFFD97706), () => _navigate(const SatzbauScreen())),
+                    _buildItem('Sprachbausteine كاملة', '5 نماذج تدريب كاملة', Icons.extension, const Color(0xFF059669), () => _navigate(const SprachbausteineScreen())),
+                    _buildItem('مراجعة ذكيّة', 'مراجعة بأسلوب SRS', Icons.loop, const Color(0xFF475569), () => _navigate(const SmartReviewScreen())),
+                    _buildItem('مدرّب التصريف', 'أفعال + Modalverben', Icons.refresh, const Color(0xFF1E3A8A), () => _navigate(const ConjugationTrainerScreen())),
+                  ], isDark, borderCol),
+
+                  // CATEGORY 2: تدريبات تفاعليّة (Freemium)
+                  _buildCategoryHeader('تدريبات تفاعليّة (Freemium) 🎯', textMain),
+                  _buildCategoryGrid([
+                    _buildItem('مسابقات وجوائز', 'اربح Premium مجاناً', Icons.emoji_events, const Color(0xFFD97706), () => _showContestsDialog()),
+                    _buildItem('ادعُ صديقاً', 'كود دعوة متبادل', Icons.people, const Color(0xFF2563EB), _showReferralDialog),
+                    _buildItem('خطّتي الشخصيّة لـB1', 'جدولك اليومي للامتحان', Icons.calendar_today, const Color(0xFF0D9488), _showB1Planner),
+                    _buildItem('تقييمات وتعليقات', 'شاركنا تجربتك', Icons.star, const Color(0xFFF59E0B), () => _showSimpleInfoDialog('تقييم التطبيق ⭐', 'رأيك يهمنا! يرجى تقييم التطبيق على متجر بلاي لمساعدتنا على الاستمرار وتطوير ميزات جديدة.')),
+                    _buildItem('تحدّي اليوم', '4 أسئلة جديدة + 90 XP', Icons.wb_sunny, const Color(0xFFEA580C), _showDailyChallenge),
+                    _buildItem('لوحة المتصدّرين', 'تنافس مع زملائك', Icons.insights, const Color(0xFF7C3AED), _showLeaderboard),
+                    _buildItem('صندوق الإسعافات', 'جمل للنجدة في الامتحان', Icons.health_and_safety, const Color(0xFFDC2626), () => _navigate(const EmergencyScreen())),
+                    _buildItem('فخاخ المترادفات', 'لعبة 90 زوج مرادفات', Icons.gamepad, const Color(0xFF059669), () => _navigate(const SynonymsScreen())),
+                    _buildItem('ترتيب البطاقات', 'لعبة der/die/das', Icons.style, const Color(0xFF0891B2), _showCardSortingGame),
+                    _buildItem('مواعيد الكورسات', '30 معهداً في 13 مدينة', Icons.school, const Color(0xFF475569), () => _showSimpleInfoDialog('مواعيد الكورسات 📅', 'تتوفر مواعيد كورسات BAMF و VHS و Goethe بشكل دوري كل شهر في 13 مدينة ألمانية، بالإضافة لكورسات أونلاين مجانية للمسجلين في Jobcenter.')),
+                    _buildItem('30 خطأ شائع DaZ', '7 مجاني / 23 Premium', Icons.warning, const Color(0xFFB45309), () => _navigate(const FehlerScreen())),
+                    _buildItem('Drill - Sprachbausteine', '220 سؤال قواعد مكثف', Icons.offline_bolt, const Color(0xFFDB2777), () => _navigate(const DrillScreen())),
+                    _buildItem('5 نماذج B1 موضوعيّة', '2 مجاني / 3 Premium', Icons.quiz, const Color(0xFF1E3A8A), () => _navigate(const LesenScreen())),
+                    _buildItem('موارد مجّانيّة موثوقة', 'روابط DW + Goethe + telc', Icons.language, const Color(0xFF008080), () => _launchUrl('https://www.dw.com/de/deutsch-lernen/s-2055')),
+                  ], isDark, borderCol),
+
+                  // CATEGORY 3: الامتحان الكامل ومحاكاته
+                  _buildCategoryHeader('الامتحان الكامل ومحاكاته 📝', textMain),
+                  _buildCategoryGrid([
+                    _buildItem('محاكي Telc B1 الحقيقي', 'مؤقت حقيقي لكل الأقسام', Icons.timer, const Color(0xFFDC2626), () => _navigate(const ExamSimulationScreen())),
+                    _buildItem('امتحان كامل (مبسّط)', 'نسخة سريعة للتدريب', Icons.speed, const Color(0xFFEA580C), () => _showSimpleInfoDialog('امتحان كامل مبسط 🎯', 'نسخة تدريبية سريعة تحتوي على نصف عدد الأسئلة لتتمكن من تقييم مستواك خلال 30 دقيقة فقط.')),
+                    _buildItem('تحديد المستوى', 'اختبار مستواك A1-B2', Icons.rule, const Color(0xFF0D9488), () => _navigate(const EinstufungScreen())),
+                    _buildItem('وصف صورة', 'قوالب وصياغات Bildbeschreibung', Icons.image, const Color(0xFF7C3AED), () => _navigate(const BildDescriptionScreen())),
+                    _buildItem('محاكي محادثة تفاعلي', 'حوارات محاكاة لـ B1-B2', Icons.chat_bubble, const Color(0xFF2563EB), () => _navigate(const ChatSimulatorScreen())),
+                  ], isDark, borderCol),
+
+                  // CATEGORY 4: الجنسيّة والاندماج
+                  _buildCategoryHeader('الجنسيّة والاندماج 🇩🇪', textMain),
+                  _buildCategoryGrid([
+                    _buildItem('Leben in Deutschland', '310 سؤال كامل مع الترجمة', Icons.flag, const Color(0xFF1E3A8A), () => _navigate(const LebenScreen())),
+                    _buildItem('Einbürgerungstest', 'كتالوج أسئلة الولايات والجنسية', Icons.account_balance, const Color(0xFF475569), () => _navigate(const EinbuergerungScreen())),
+                    _buildItem('مشاكل وحلول', 'دليل عملي للعيش والاندماج', Icons.lightbulb, const Color(0xFF059669), () => _navigate(const ProblemsScreen())),
+                  ], isDark, borderCol),
+
+                  // CATEGORY 5: محتوى Premium الحصري
+                  _buildCategoryHeader('محتوى Premium الحصري ⭐', textMain),
+                  _buildCategoryGrid([
+                    _buildItem('B2 كامل', 'قواعد متقدمة و 300+ كلمة', Icons.school, const Color(0xFFB45309), () => _navigate(const B2Screen())),
+                    _buildItem('5 نماذج Telc B2', 'كاملة ومصححة بالذكاء الاصطناعي', Icons.assignment, const Color(0xFFDB2777), () => _navigate(const B2Screen())),
+                    _buildItem('AI Writing Corrector', 'تصحيح ومراجعة الرسائل بالذكاء الاصطناعي', Icons.smart_toy, const Color(0xFF10B981), _showAiCorrector),
+                    _buildItem('وضع الضغط للاستماع', 'ضوضاء واقعية (شارع/مقهى)', Icons.volume_off, const Color(0xFF7C3AED), () => _showSimpleInfoDialog('وضع الضغط للاستماع 🔥', 'يحاكي ضوضاء الشارع ومحطات القطار لتدريب أذنيك على الاستماع تحت الضغط وضوضاء الامتحان الحقيقية.')),
+                    _buildItem('مدرّب القراءة السريعة', 'يختفي النص بعد 90/180 ثانية', Icons.bolt, const Color(0xFFEA580C), () => _showSimpleInfoDialog('مدرّب القراءة السريعة ⏱', 'يخفي النص تدريجياً لتدريبك على مهارات القراءة السريعة والـ Skimming لتوفير الوقت بالامتحان.')),
+                    _buildItem('مترادفات Premium', '70+ زوج إضافي للمستوى المتقدم', Icons.games, const Color(0xFF2563EB), () => _navigate(const SynonymsScreen())),
+                    _buildItem('23 خطأ متقدم', 'الأخطاء الشائعة لطلاب B2', Icons.dangerous, const Color(0xFFDC2626), () => _navigate(const B2Screen())),
+                    _buildItem('189 سؤال Drill إضافي', 'أسئلة قواعد مكثفة وحصرية', Icons.psychology, const Color(0xFF0D9488), () => _navigate(const ConjugationTrainerScreen())),
+                    _buildItem('3 نماذج B1 إضافيّة', 'مواضيع الصحة، السفر والبيئة', Icons.library_books, const Color(0xFF0891B2), () => _navigate(const LesenScreen())),
+                  ], isDark, borderCol),
+
+                  // CATEGORY 6: أدوات عمليّة
+                  _buildCategoryHeader('أدوات عمليّة 🛠️', textMain),
+                  _buildCategoryGrid([
+                    _buildItem('لوحتي الشخصيّة', 'تتبع التقدم ومجموع الـ XP', Icons.bar_chart, const Color(0xFF4F46E5), () => _navigate(const SettingsScreen())),
+                    _buildItem('مخطط الدراسة', 'خطة 4 أسابيع للنجاح المضمون', Icons.next_plan, const Color(0xFF059669), _showB1Planner),
+                    _buildItem('اطبع وذاكر', 'ملخصات وملفات PDF جاهزة للتحميل', Icons.picture_as_pdf, const Color(0xFFDC2626), () => _navigate(const LibraryScreen())),
+                    _buildItem('شبكات الكلمات', 'ربط الكلمات لسهولة الحفظ', Icons.hub, const Color(0xFF7C3AED), () => _showSimpleInfoDialog('شبكات الكلمات 🕸️', 'أداة ذهنية ممتازة تقوم بربط الكلمات المتشابهة في شبكات موضوعية (مثل كلمات السكن، العمل، التسوق) لتبسيط الحفظ.')),
+                    _buildItem('بنك المواضيع', 'أفكار لمقالات Schreiben وصور Sprechen', Icons.topic, const Color(0xFF0891B2), () => _navigate(const LibraryScreen())),
+                    _buildItem('أدوات النجاح', 'نصائح واستراتيجيات هامة للممتحنين', Icons.construction, const Color(0xFFB45309), () => _showSimpleInfoDialog('أدوات النجاح 🧰', 'مجموعة نصائح واستراتيجيات عملية لحل كل قسم بأسرع طريقة وتفادي الفخاخ الشائعة التي يقع فيها الطلاب.')),
+                  ], isDark, borderCol),
+
+                  // Bottom Banner for Premium screen
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFFF59E0B), Color(0xFFD97706)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFFD97706).withOpacity(0.25),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: InkWell(
+                          onTap: () => _navigate(const PremiumScreen()),
+                          borderRadius: BorderRadius.circular(16),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.star, color: Colors.white, size: 36),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'الترقية إلى B1-Syrer Premium ⭐',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        'تصفح بدون إعلانات، واحصل على قوالب وميزات B2 الحصرية ومحاكيات متقدمة!',
+                                        style: TextStyle(
+                                          color: Colors.white.withOpacity(0.9),
+                                          fontSize: 11,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 16),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SliverToBoxAdapter(child: SizedBox(height: 32)),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -1273,86 +1358,97 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // Helper: Individual Item Card
+  // Helper: Individual Item Card (Frosted Glassmorphism)
   Widget _buildItem(String title, String subtitle, IconData icon, Color color, VoidCallback onTap) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final cardBg = isDark ? const Color(0x991E293B) : Colors.white;
-    final textMain = isDark ? Colors.white : const Color(0xFF1E293B);
-    final textMuted = isDark ? Colors.white38 : const Color(0xFF94A3B8);
-    final borderCol = isDark ? const Color(0x1FADF7D5) : const Color(0xFFE2E8F0);
+    final textMain = isDark ? Colors.white : const Color(0xFF0F172A);
+    final textMuted = isDark ? Colors.white38 : const Color(0xFF64748B);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: cardBg,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isDark ? const Color(0xFF1E293B).withOpacity(0.5) : borderCol,
-          width: 1.2,
-        ),
-        boxShadow: isDark
-            ? [
-                BoxShadow(
-                  color: color.withOpacity(0.04),
-                  blurRadius: 8,
-                  offset: const Offset(0, 3),
-                ),
-              ]
-            : null,
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(12),
-          onTap: onTap,
-          splashColor: color.withOpacity(0.12),
-          highlightColor: color.withOpacity(0.06),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: isDark ? Colors.white.withOpacity(0.04) : Colors.white.withOpacity(0.85),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: isDark ? Colors.white.withOpacity(0.06) : const Color(0xFFE2E8F0),
+              width: 1.2,
+            ),
+            boxShadow: isDark
+                ? [
+                    BoxShadow(
+                      color: color.withOpacity(0.06),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ]
+                : [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.02),
+                      blurRadius: 6,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+          ),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(16),
+              onTap: onTap,
+              splashColor: color.withOpacity(0.12),
+              highlightColor: color.withOpacity(0.06),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        color: isDark ? color.withOpacity(0.18) : color.withOpacity(0.12),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Icon(icon, color: isDark ? color.withOpacity(0.9) : color, size: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            color: isDark ? color.withOpacity(0.2) : color.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(icon, color: isDark ? color.withOpacity(0.9) : color, size: 18),
+                        ),
+                        Icon(Icons.arrow_forward_ios, size: 8, color: textMuted.withOpacity(0.5)),
+                      ],
                     ),
-                    Icon(Icons.arrow_forward_ios, size: 8, color: textMuted.withOpacity(0.5)),
+                    const SizedBox(height: 6),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: TextStyle(
+                            color: textMain,
+                            fontSize: 12.5,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.1,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          subtitle,
+                          style: TextStyle(
+                            color: textMuted,
+                            fontSize: 9.5,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-                const SizedBox(height: 4),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        color: textMain,
-                        fontSize: 11.5,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 1),
-                    Text(
-                      subtitle,
-                      style: TextStyle(
-                        color: textMuted,
-                        fontSize: 9,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ],
+              ),
             ),
           ),
         ),
@@ -1384,133 +1480,140 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // Stats Card with high fidelity frosted Glassmorphism
   Widget _buildStatsCard(BuildContext context, AppProvider provider, bool isDark, Color textMain, Color borderCol) {
     final textMuted = isDark ? Colors.white70 : const Color(0xFF64748B);
     final textSub = isDark ? Colors.white38 : const Color(0xFF94A3B8);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: isDark ? const Color(0xFF131C33) : Colors.white,
-        gradient: isDark
-            ? const LinearGradient(
-                colors: [
-                  Color(0xFF0F172A),
-                  Color(0xFF1E1E38),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              )
-            : null,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: isDark ? const Color(0xFF1E293B) : borderCol,
-          width: 1.5,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: isDark
-                ? const Color(0xFF0D9488).withOpacity(0.08)
-                : Colors.black.withOpacity(0.05),
-            blurRadius: 15,
-            spreadRadius: 2,
-            offset: const Offset(0, 6),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(24),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+        child: Container(
+          decoration: BoxDecoration(
+            color: isDark ? Colors.white.withOpacity(0.05) : Colors.white.withOpacity(0.85),
+            gradient: isDark
+                ? LinearGradient(
+                    colors: [
+                      const Color(0xFF1E293B).withOpacity(0.15),
+                      const Color(0xFF0F172A).withOpacity(0.4),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : null,
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(
+              color: isDark ? Colors.white.withOpacity(0.08) : const Color(0xFFE2E8F0),
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: isDark
+                    ? const Color(0xFF0D9488).withOpacity(0.1)
+                    : Colors.black.withOpacity(0.04),
+                blurRadius: 20,
+                spreadRadius: 2,
+                offset: const Offset(0, 8),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Row(
-          children: [
-            CircularPercentIndicator(
-              radius: 42,
-              lineWidth: 7,
-              percent: (provider.xp % 100) / 100,
-              center: Text(
-                '${provider.level}',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: isDark ? const Color(0xFF2DD4BF) : const Color(0xFF10B981),
-                ),
-              ),
-              progressColor: isDark ? const Color(0xFF2DD4BF) : const Color(0xFF10B981),
-              backgroundColor: isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0),
-              circularStrokeCap: CircularStrokeCap.round,
-              animation: true,
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'المستوى الحالي: ${provider.levelTitle}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: textMain,
-                      fontSize: 16,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'مجموع نقاط الخبرة: ${provider.xp} XP',
-                    style: TextStyle(
-                      color: textMuted,
-                      fontSize: 13,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    'النقاط للمستوى التالي: ${100 - (provider.xp % 100)} XP',
-                    style: TextStyle(
-                      color: textSub,
-                      fontSize: 11,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Column(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Row(
               children: [
-                Row(
-                  children: [
-                    const Icon(Icons.local_fire_department, color: Colors.orange, size: 24),
-                    const SizedBox(width: 4),
-                    Text(
-                      '${provider.streak}',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: textMain,
+                CircularPercentIndicator(
+                  radius: 42,
+                  lineWidth: 7,
+                  percent: (provider.xp % 100) / 100,
+                  center: Text(
+                    '${provider.level}',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: isDark ? const Color(0xFF2DD4BF) : const Color(0xFF10B981),
+                    ),
+                  ),
+                  progressColor: isDark ? const Color(0xFF2DD4BF) : const Color(0xFF10B981),
+                  backgroundColor: isDark ? const Color(0xFF1E293B) : const Color(0xFFE2E8F0),
+                  circularStrokeCap: CircularStrokeCap.round,
+                  animation: true,
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'المستوى الحالي: ${provider.levelTitle}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: textMain,
+                          fontSize: 16,
+                        ),
                       ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'مجموع نقاط الخبرة: ${provider.xp} XP',
+                        style: TextStyle(
+                          color: textMuted,
+                          fontSize: 13,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'النقاط للمستوى التالي: ${100 - (provider.xp % 100)} XP',
+                        style: TextStyle(
+                          color: textSub,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.local_fire_department, color: Colors.orange, size: 24),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${provider.streak}',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: textMain,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      'يوم متتالي',
+                      style: TextStyle(color: textSub, fontSize: 10),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Icon(Icons.check_circle_outline, color: isDark ? const Color(0xFF2DD4BF) : const Color(0xFF10B981), size: 18),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${provider.completedQuizzes}',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: textMain,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      'اختبار مكتمل',
+                      style: TextStyle(color: textSub, fontSize: 10),
                     ),
                   ],
-                ),
-                Text(
-                  'يوم متتالي',
-                  style: TextStyle(color: textSub, fontSize: 10),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Icon(Icons.check_circle_outline, color: isDark ? const Color(0xFF2DD4BF) : const Color(0xFF10B981), size: 18),
-                    const SizedBox(width: 4),
-                    Text(
-                      '${provider.completedQuizzes}',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: textMain,
-                      ),
-                    ),
-                  ],
-                ),
-                Text(
-                  'اختبار مكتمل',
-                  style: TextStyle(color: textSub, fontSize: 10),
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );
