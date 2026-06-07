@@ -46,6 +46,8 @@ export async function onRequestPost(context: { request: Request; env: EnvExt }) 
     formData.append('cancel_url', `${origin}/app/#/premium?status=cancel`)
     formData.append('metadata[user_id]', String(userId))
     formData.append('subscription_data[metadata][user_id]', String(userId))
+    formData.append('metadata[plan]', plan)
+    formData.append('subscription_data[metadata][plan]', plan)
 
     const stripeRes = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
