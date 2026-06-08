@@ -52,7 +52,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <header className="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-sm border-b border-gray-100 dark:border-gray-700">
           <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
             <a href="/app/#/" className="flex items-center gap-2 text-xl font-bold text-green">
-              <span className="bg-green text-white px-2 py-0.5 rounded text-sm">B1</span>
+              <span className="bg-emerald-600 text-white px-2 py-0.5 rounded text-sm">B1</span>
               <span>Deutsch للعرب والسوريين</span>
             </a>
             <div className="flex items-center gap-3">

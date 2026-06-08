@@ -24,7 +24,7 @@ export default function ExamSimulationPage() {
   if (!examStarted || currentSection === 'intro') {
     return (
       <div className="p-4 max-w-4xl mx-auto mb-20 animate-fade-in">
-        <div className="bg-gradient-to-br from-green to-emerald-700 rounded-2xl p-8 text-white text-center shadow-lg mb-8">
+        <div className="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-8 text-white text-center shadow-lg mb-8">
           <Award size={64} className="mx-auto mb-4 opacity-90" />
           <h1 className="text-3xl font-bold mb-4">محاكاة امتحان B1 (telc / Goethe)</h1>
           <p className="text-lg opacity-90 mb-6">
@@ -36,7 +36,7 @@ export default function ExamSimulationPage() {
           </div>
           <button 
             onClick={startExam}
-            className="bg-white text-green font-bold text-lg px-8 py-4 rounded-xl shadow-md hover:scale-105 transition-transform"
+            className="bg-white text-emerald-600 font-bold text-lg px-8 py-4 rounded-xl shadow-md hover:scale-105 transition-transform"
           >
             بدء الامتحان الآن
           </button>
@@ -71,7 +71,7 @@ export default function ExamSimulationPage() {
             </div>
           </div>
           <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 flex items-start gap-4">
-            <div className="bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 p-3 rounded-xl">
+            <div className="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 p-3 rounded-xl">
               <Mic size={24} />
             </div>
             <div>
@@ -223,7 +223,7 @@ export default function ExamSimulationPage() {
       <div className="p-4 max-w-3xl mx-auto mb-20 animate-slide-up">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold dark:text-white flex items-center gap-2">
-            <Mic className="text-green-500" /> قسم المحادثة (Sprechen)
+            <Mic className="text-emerald-500" /> قسم المحادثة (Sprechen)
           </h2>
           <span className="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full text-sm font-bold text-gray-600 dark:text-gray-300">4 / 4</span>
         </div>
@@ -234,18 +234,18 @@ export default function ExamSimulationPage() {
             Ein Kollege von Ihnen hat bald Geburtstag. Sie möchten mit Ihrem Partner/Ihrer Partnerin ein Geschenk kaufen und eine kleine Überraschung planen.
           </p>
           
-          <div className="bg-green-50 dark:bg-green-900/30 p-6 rounded-xl text-center mb-6 border border-green-100 dark:border-green-800">
-            <div className="w-20 h-20 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg animate-pulse">
+          <div className="bg-emerald-50 dark:bg-emerald-900/30 p-6 rounded-xl text-center mb-6 border border-emerald-100 dark:border-emerald-800">
+            <div className="w-20 h-20 bg-emerald-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg animate-pulse">
               <Mic size={32} />
             </div>
-            <p className="font-bold text-green-800 dark:text-green-300 mb-2">اضغط للتحدث (قريباً)</p>
-            <p className="text-sm text-green-600 dark:text-green-400">تدرب على المحادثة مع المدرب الصوتي الذكي.</p>
+            <p className="font-bold text-emerald-800 dark:text-emerald-300 mb-2">اضغط للتحدث (قريباً)</p>
+            <p className="text-sm text-emerald-600 dark:text-emerald-400">تدرب على المحادثة مع المدرب الصوتي الذكي.</p>
           </div>
         </div>
         
         <button 
           onClick={() => completeSection(25, 'result')}
-          className="w-full bg-green hover:bg-green-700 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2"
+          className="w-full bg-emerald-600 hover:bg-green-700 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2"
         >
           إنهاء الامتحان وعرض النتيجة <Award size={20} />
         </button>
@@ -257,7 +257,7 @@ export default function ExamSimulationPage() {
   return (
     <div className="p-4 max-w-2xl mx-auto mb-20 animate-fade-in text-center">
       <div className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700">
-        <div className="w-24 h-24 bg-gradient-to-tr from-green to-emerald-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+        <div className="w-24 h-24 bg-gradient-to-tr from-emerald-600 to-emerald-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
           <CheckCircle size={48} className="text-white" />
         </div>
         <h2 className="text-3xl font-bold dark:text-white mb-2">تهانينا! 🎉</h2>
@@ -265,7 +265,7 @@ export default function ExamSimulationPage() {
         
         <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 mb-8 border border-gray-100 dark:border-gray-700">
           <p className="text-sm font-bold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wider">النتيجة التقديرية</p>
-          <p className="text-5xl font-black text-green">{score} <span className="text-2xl text-gray-400">/ 100</span></p>
+          <p className="text-5xl font-black text-emerald-600">{score} <span className="text-2xl text-gray-400">/ 100</span></p>
         </div>
         
         <button 
