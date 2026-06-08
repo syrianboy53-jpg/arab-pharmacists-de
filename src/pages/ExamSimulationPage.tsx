@@ -24,10 +24,10 @@ export default function ExamSimulationPage() {
   if (!examStarted || currentSection === 'intro') {
     return (
       <div className="p-4 max-w-4xl mx-auto mb-20 animate-fade-in">
-        <div className="bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-8 text-white text-center shadow-lg mb-8">
-          <Award size={64} className="mx-auto mb-4 opacity-90" />
+        <div className="bg-emerald-50 dark:bg-emerald-900/40 border border-emerald-200 dark:border-emerald-800 rounded-2xl p-8 text-emerald-900 dark:text-emerald-100 text-center shadow-sm mb-8">
+          <Award size={64} className="mx-auto mb-4 text-emerald-600 dark:text-emerald-400" />
           <h1 className="text-3xl font-bold mb-4">محاكاة امتحان B1 (telc / Goethe)</h1>
-          <p className="text-lg opacity-90 mb-6">
+          <p className="text-lg opacity-90 mb-6 font-medium">
             اختبر نفسك في الأقسام الأربعة (القراءة، الاستماع، الكتابة، المحادثة) في ظروف مشابهة للامتحان الحقيقي.
           </p>
           <div className="flex justify-center gap-4 text-sm font-medium opacity-80 mb-8">
@@ -36,7 +36,7 @@ export default function ExamSimulationPage() {
           </div>
           <button 
             onClick={startExam}
-            className="bg-white text-emerald-600 font-bold text-lg px-8 py-4 rounded-xl shadow-md hover:scale-105 transition-transform"
+            className="bg-emerald-600 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-md hover:scale-105 transition-transform hover:bg-emerald-700"
           >
             بدء الامتحان الآن
           </button>
