@@ -1,21 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { type ReactNode, useState, useEffect } from 'react'
-
-const navItems = [
-  { path: '/', label: 'الرئيسية', icon: '🏠' },
-  { path: '/lesen', label: 'القراءة', icon: '📖' },
-  { path: '/hoeren', label: 'الاستماع', icon: '🎧' },
-  { path: '/schreiben', label: 'الكتابة', icon: '✍️' },
-  { path: '/sprechen', label: 'المحادثة', icon: '🗣️' },
-  { path: '/chat-simulator', label: 'محاكي المحادثة', icon: '💬' },
-  { path: '/slang', label: 'قاموس العامية', icon: '🔥' },
-  { path: '/grammar', label: 'القواعد', icon: '📐' },
-  { path: '/vocabulary', label: 'المفردات', icon: '📚' },
-  { path: '/sprachbausteine', label: 'Sprachbausteine', icon: '🧩' },
-  { path: '/leben', label: 'الحياة في ألمانيا', icon: '🇩🇪' },
-  { path: '/b2', label: 'B2', icon: '🎓' },
-  { path: '/premium', label: 'Premium', icon: '⭐' },
-]
+import { Home, BookOpen, LayoutGrid, Menu } from 'lucide-react'
 
 export default function Layout({ children }: { children: ReactNode }) {
   const location = useLocation()
@@ -66,10 +51,10 @@ export default function Layout({ children }: { children: ReactNode }) {
         {/* Header */}
         <header className="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-sm border-b border-gray-100 dark:border-gray-700">
           <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-2 text-xl font-bold text-green">
+            <a href="/app/#/" className="flex items-center gap-2 text-xl font-bold text-green">
               <span className="bg-green text-white px-2 py-0.5 rounded text-sm">B1</span>
               <span>Deutsch للعرب والسوريين</span>
-            </Link>
+            </a>
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setDarkMode(!darkMode)}
@@ -82,20 +67,26 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
           {/* Navigation */}
           <nav className="max-w-6xl mx-auto px-4 pb-2 overflow-x-auto">
-            <div className="flex gap-2 whitespace-nowrap">
-              {navItems.map(item => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                    location.pathname === item.path
-                      ? 'bg-green text-white'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-green/10'
-                  }`}
-                >
-                  {item.icon} {item.label}
-                </Link>
-              ))}
+            <div className="flex justify-around items-center border-t border-gray-100 dark:border-gray-700 pt-2">
+              <a href="/app/#/" className={`flex flex-col items-center p-2 rounded-xl transition-all`}>
+                <Home size={24} className="mb-1" />
+                <span className="text-xs font-medium">الرئيسية</span>
+              </a>
+              
+              <a href="/app/#/lernzentrum" className={`flex flex-col items-center p-2 rounded-xl transition-all`}>
+                <BookOpen size={24} className="mb-1" />
+                <span className="text-xs font-medium">دروسي</span>
+              </a>
+
+              <a href="/app/#/tools" className={`flex flex-col items-center p-2 rounded-xl transition-all`}>
+                <LayoutGrid size={24} className="mb-1" />
+                <span className="text-xs font-medium">المركز</span>
+              </a>
+
+              <a href="/app/#/more" className={`flex flex-col items-center p-2 rounded-xl transition-all`}>
+                <Menu size={24} className="mb-1" />
+                <span className="text-xs font-medium">المزيد</span>
+              </a>
             </div>
           </nav>
         </header>

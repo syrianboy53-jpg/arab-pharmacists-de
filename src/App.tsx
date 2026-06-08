@@ -24,6 +24,7 @@ const SatzbauPage = lazy(() => import('./pages/SatzbauPage'))
 const DrillPage = lazy(() => import('./pages/DrillPage'))
 const SynonymsPage = lazy(() => import('./pages/SynonymsPage'))
 const FehlerPage = lazy(() => import('./pages/FehlerPage'))
+const ExamSimulationPage = lazy(() => import('./pages/ExamSimulationPage'))
 
 function Loading() {
   return (
@@ -60,6 +61,7 @@ export default function App() {
           <Route path="/drill" element={<DrillPage />} />
           <Route path="/synonyms" element={<SynonymsPage />} />
           <Route path="/fehler" element={<FehlerPage />} />
+          <Route path="/exam-simulation" element={<ExamSimulationPage />} />
         </Routes>
       </Suspense>
     </Layout>

@@ -42,6 +42,14 @@ if (fs.existsSync(srcDir)) {
   process.exit(1);
 }
 
+// Preserve the newly built Vite React app (which contains the new features) as a separate entry point
+const builtViteIndex = path.resolve('dist/app/index.html');
+const newFeaturesDest = path.resolve('dist/app/new-features.html');
+if (fs.existsSync(builtViteIndex)) {
+  console.log(`Preserving new features app at ${newFeaturesDest}...`);
+  fs.copyFileSync(builtViteIndex, newFeaturesDest);
+}
+
 // Copy the restored React app index.html to dist/app/index.html
 const restoredAppIndexSrc = path.resolve('public/index.html');
 const restoredAppIndexDest = path.resolve('dist/app/index.html');
