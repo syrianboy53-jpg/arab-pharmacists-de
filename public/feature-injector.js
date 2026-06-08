@@ -123,10 +123,11 @@
     switcher.style.right = currentLang === 'ar' ? 'auto' : '16px';
     switcher.style.left = currentLang === 'ar' ? '16px' : 'auto';
     switcher.style.zIndex = '99999';
-    switcher.style.background = '#fff';
-    switcher.style.padding = '4px 8px';
+    switcher.style.background = '#ffffff';
+    switcher.style.border = '2px solid #059669'; // Green border
+    switcher.style.padding = '6px 12px';
     switcher.style.borderRadius = '20px';
-    switcher.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+    switcher.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
     switcher.style.display = 'flex';
     switcher.style.alignItems = 'center';
     switcher.style.gap = '8px';
@@ -135,10 +136,11 @@
     const select = document.createElement('select');
     select.style.border = 'none';
     select.style.background = 'transparent';
+    select.style.color = '#000000'; // Explicit dark text
     select.style.outline = 'none';
     select.style.cursor = 'pointer';
-    select.style.fontWeight = 'bold';
-    select.style.fontSize = '14px';
+    select.style.fontWeight = '800';
+    select.style.fontSize = '15px';
 
     const options = [
       { code: 'ar', label: '🇸🇾 AR' },

@@ -5,6 +5,11 @@ export default function ExamSimulationPage() {
   const [examStarted, setExamStarted] = useState(false);
   const [currentSection, setCurrentSection] = useState<'intro' | 'lesen' | 'hoeren' | 'schreiben' | 'sprechen'>('intro');
   const [score, setScore] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+
+  const handleSelect = (questionId: string, value: string) => {
+    setAnswers(prev => ({ ...prev, [questionId]: value }));
+  };
 
   const startExam = () => {
     setExamStarted(true);
@@ -99,17 +104,17 @@ export default function ExamSimulationPage() {
           
           <div className="space-y-4 text-left" dir="ltr">
             <p className="font-bold dark:text-white">1. Warum schreibt Julia die E-Mail?</p>
-            <label className="flex items-center gap-3 p-3 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700 cursor-pointer transition-colors dark:text-gray-200">
-              <input type="radio" name="q1" className="w-5 h-5 text-blue-600" />
-              <span>A) Sie sucht eine neue Wohnung.</span>
+            <label className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-colors ${answers['q1'] === 'A' ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30' : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'}`}>
+              <input type="radio" name="q1" value="A" onChange={() => handleSelect('q1', 'A')} checked={answers['q1'] === 'A'} className="w-5 h-5 text-blue-600" />
+              <span className={`font-medium ${answers['q1'] === 'A' ? 'text-blue-700 dark:text-blue-300' : 'dark:text-gray-200'}`}>A) Sie sucht eine neue Wohnung.</span>
             </label>
-            <label className="flex items-center gap-3 p-3 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700 cursor-pointer transition-colors dark:text-gray-200">
-              <input type="radio" name="q1" className="w-5 h-5 text-blue-600" />
-              <span>B) Sie lädt Sarah zu einer Party ein.</span>
+            <label className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-colors ${answers['q1'] === 'B' ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30' : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'}`}>
+              <input type="radio" name="q1" value="B" onChange={() => handleSelect('q1', 'B')} checked={answers['q1'] === 'B'} className="w-5 h-5 text-blue-600" />
+              <span className={`font-medium ${answers['q1'] === 'B' ? 'text-blue-700 dark:text-blue-300' : 'dark:text-gray-200'}`}>B) Sie lädt Sarah zu einer Party ein.</span>
             </label>
-            <label className="flex items-center gap-3 p-3 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700 cursor-pointer transition-colors dark:text-gray-200">
-              <input type="radio" name="q1" className="w-5 h-5 text-blue-600" />
-              <span>C) Sie fährt nach Berlin in den Urlaub.</span>
+            <label className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-colors ${answers['q1'] === 'C' ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30' : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'}`}>
+              <input type="radio" name="q1" value="C" onChange={() => handleSelect('q1', 'C')} checked={answers['q1'] === 'C'} className="w-5 h-5 text-blue-600" />
+              <span className={`font-medium ${answers['q1'] === 'C' ? 'text-blue-700 dark:text-blue-300' : 'dark:text-gray-200'}`}>C) Sie fährt nach Berlin in den Urlaub.</span>
             </label>
           </div>
         </div>
@@ -146,17 +151,17 @@ export default function ExamSimulationPage() {
           
           <div className="space-y-4 text-left" dir="ltr">
             <p className="font-bold dark:text-white">1. Der Zug nach München...</p>
-            <label className="flex items-center gap-3 p-3 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-orange-50 dark:hover:bg-gray-700 cursor-pointer transition-colors dark:text-gray-200">
-              <input type="radio" name="q2" className="w-5 h-5 text-orange-600" />
-              <span>A) fällt heute aus.</span>
+            <label className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-colors ${answers['q2'] === 'A' ? 'border-orange-500 bg-orange-50 dark:bg-orange-900/30' : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'}`}>
+              <input type="radio" name="q2" value="A" onChange={() => handleSelect('q2', 'A')} checked={answers['q2'] === 'A'} className="w-5 h-5 text-orange-600" />
+              <span className={`font-medium ${answers['q2'] === 'A' ? 'text-orange-700 dark:text-orange-300' : 'dark:text-gray-200'}`}>A) fällt heute aus.</span>
             </label>
-            <label className="flex items-center gap-3 p-3 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-orange-50 dark:hover:bg-gray-700 cursor-pointer transition-colors dark:text-gray-200">
-              <input type="radio" name="q2" className="w-5 h-5 text-orange-600" />
-              <span>B) hat 20 Minuten Verspätung.</span>
+            <label className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-colors ${answers['q2'] === 'B' ? 'border-orange-500 bg-orange-50 dark:bg-orange-900/30' : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'}`}>
+              <input type="radio" name="q2" value="B" onChange={() => handleSelect('q2', 'B')} checked={answers['q2'] === 'B'} className="w-5 h-5 text-orange-600" />
+              <span className={`font-medium ${answers['q2'] === 'B' ? 'text-orange-700 dark:text-orange-300' : 'dark:text-gray-200'}`}>B) hat 20 Minuten Verspätung.</span>
             </label>
-            <label className="flex items-center gap-3 p-3 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-orange-50 dark:hover:bg-gray-700 cursor-pointer transition-colors dark:text-gray-200">
-              <input type="radio" name="q2" className="w-5 h-5 text-orange-600" />
-              <span>C) fährt auf Gleis 5 ab.</span>
+            <label className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-colors ${answers['q2'] === 'C' ? 'border-orange-500 bg-orange-50 dark:bg-orange-900/30' : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'}`}>
+              <input type="radio" name="q2" value="C" onChange={() => handleSelect('q2', 'C')} checked={answers['q2'] === 'C'} className="w-5 h-5 text-orange-600" />
+              <span className={`font-medium ${answers['q2'] === 'C' ? 'text-orange-700 dark:text-orange-300' : 'dark:text-gray-200'}`}>C) fährt auf Gleis 5 ab.</span>
             </label>
           </div>
         </div>
