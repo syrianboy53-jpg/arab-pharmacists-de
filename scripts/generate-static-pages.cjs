@@ -248,19 +248,19 @@ const commonHead = (title, description, canonicalUrl) => `
 const commonHeaderHTML = `
   <nav class="nav">
     <div class="nav-inner">
-      <a href="../index.html" class="brand">
-        <img src="../brand/icon.png" alt="B1 Deutsch">
-        <span>B1 Deutsch للسوريين</span>
+      <a href="../" class="brand">
+        <img src="../brand/logo.png" alt="B1-Syrer Logo" class="brand-logo">
+        <span class="brand-text">B1-Syrer</span>
       </a>
       <div class="nav-links">
-        <a href="../index.html">الرئيسية</a>
-        <a href="../grammatik/index.html">القواعد</a>
-        <a href="../wortschatz/index.html">المفردات</a>
-        <a href="../schreiben/index.html">الرسائل جاهزة</a>
-        <a href="../redemittel/index.html">العامية الألمانية</a>
-        <a href="../leben-in-deutschland/index.html">اختبار الجنسية</a>
+        <a href="../">الرئيسية</a>
+        <a href="../grammatik/">القواعد</a>
+        <a href="../wortschatz/">المفردات</a>
+        <a href="../schreiben/">نماذج كتابة</a>
+        <a href="../redemittel/">الشفهي</a>
+        <a href="../leben-in-deutschland/">الحياة في ألمانيا</a>
       </div>
-      <a href="../index.html#download" class="nav-cta">📥 تحميل APK</a>
+      <a href="../#download" class="nav-cta">📥 تحميل APK</a>
     </div>
   </nav>
 `;
@@ -269,9 +269,9 @@ const commonFooterHTML = `
   <footer class="footer">
     <p>B1 Deutsch للسوريين — تطبيق مجاني تماماً لمساعدة اللاجئين في ألمانيا.</p>
     <p style="margin-top:10px;">
-      <a href="../impressum/index.html">الناشر (Impressum)</a> | 
-      <a href="../datenschutz/index.html">خصوصية البيانات (Datenschutz)</a> | 
-      <a href="../agb/index.html">الشروط والأحكام (AGB)</a>
+      <a href="../impressum/">الناشر (Impressum)</a> | 
+      <a href="../datenschutz/">خصوصية البيانات (Datenschutz)</a> | 
+      <a href="../agb/">الشروط والأحكام (AGB)</a>
     </p>
     <p style="margin-top:15px; font-size:12px; color:rgba(255,255,255,0.4);">© 2026 صنع بحب من فادي الحلواني من الحسكة.</p>
   </footer>
@@ -328,7 +328,7 @@ function generateGrammatikPage() {
       
       <main class="container">
         <div class="cta-container">
-          <a href="../app/index.html#/grammatik" class="app-cta-btn">🌐 جرب اختبارات القواعد التفاعلية في التطبيق الآن</a>
+          <a href="../app/#/grammatik" class="app-cta-btn">🌐 جرب اختبارات القواعد التفاعلية في التطبيق الآن</a>
         </div>
         
         <div class="content-grid">
@@ -336,7 +336,7 @@ function generateGrammatikPage() {
         </div>
         
         <div class="cta-container">
-          <a href="../app/index.html#/grammatik" class="app-cta-btn">🎮 ابدأ حل تمارين القواعد (مثل دولينجو)</a>
+          <a href="../app/#/grammatik" class="app-cta-btn">🎮 ابدأ حل تمارين القواعد (مثل دولينجو)</a>
         </div>
       </main>
       
@@ -376,7 +376,7 @@ function generateWortschatzPage() {
           ${wordsHTML}
         </div>
         <p style="margin-top: 15px; font-size:13px; font-style:italic; text-align:center;">
-          <a href="../app/index.html#/vocabulary" style="color:var(--green); font-weight:700;">+ عرض كل كلمات هذا القسم بالتطبيق التفاعلي</a>
+          <a href="../app/#/vocabulary" style="color:var(--green); font-weight:700;">+ عرض كل كلمات هذا القسم بالتطبيق التفاعلي</a>
         </p>
       </div>
     `;
@@ -404,7 +404,7 @@ function generateWortschatzPage() {
       
       <main class="container">
         <div class="cta-container">
-          <a href="../app/index.html#/vocabulary" class="app-cta-btn">🌐 افتح قاموس الكلمات التفاعلي ونطقها الصوتي</a>
+          <a href="../app/#/vocabulary" class="app-cta-btn">🌐 افتح قاموس الكلمات التفاعلي ونطقها الصوتي</a>
         </div>
         
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:24px; margin: 40px 0;">
@@ -412,7 +412,7 @@ function generateWortschatzPage() {
         </div>
         
         <div class="cta-container">
-          <a href="../app/index.html#/vocabulary" class="app-cta-btn">🚀 احفظ واختبر نفسك بكلمات B1 كاملة</a>
+          <a href="../app/#/vocabulary" class="app-cta-btn">🚀 احفظ واختبر نفسك بكلمات B1 كاملة</a>
         </div>
       </main>
       
@@ -495,7 +495,7 @@ function generateSchreibenPage() {
       
       <main class="container">
         <div class="cta-container">
-          <a href="../app/index.html#/schreiben" class="app-cta-btn">🌐 افتح قسم الرسائل التفاعلي وانسخ النماذج فوراً</a>
+          <a href="../app/#/schreiben" class="app-cta-btn">🌐 افتح قسم الرسائل التفاعلي وانسخ النماذج فوراً</a>
         </div>
         
         <div class="content-grid">
@@ -503,7 +503,7 @@ function generateSchreibenPage() {
         </div>
         
         <div class="cta-container">
-          <a href="../app/index.html#/schreiben" class="app-cta-btn">🚀 تمرن على كتابة مواضيع B1 وأرسلها للمراجعة</a>
+          <a href="../app/#/schreiben" class="app-cta-btn">🚀 تمرن على كتابة مواضيع B1 وأرسلها للمراجعة</a>
         </div>
       </main>
       
@@ -574,7 +574,7 @@ function generateRedemittelPage() {
       
       <main class="container">
         <div class="cta-container">
-          <a href="../app/index.html#/slang" class="app-cta-btn">🌐 افتح قاموس العامية والشارع الصوتي بالتطبيق</a>
+          <a href="../app/#/slang" class="app-cta-btn">🌐 افتح قاموس العامية والشارع الصوتي بالتطبيق</a>
         </div>
         
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap:24px; margin: 40px 0;">
@@ -582,7 +582,7 @@ function generateRedemittelPage() {
         </div>
         
         <div class="cta-container">
-          <a href="../app/index.html#/slang" class="app-cta-btn">🚀 احفظ مئات التعبيرات الشعبية والمجازية الألمانية</a>
+          <a href="../app/#/slang" class="app-cta-btn">🚀 احفظ مئات التعبيرات الشعبية والمجازية الألمانية</a>
         </div>
       </main>
       
@@ -650,7 +650,7 @@ function generateLebenPage() {
       
       <main class="container">
         <div class="cta-container">
-          <a href="../app/index.html#/leben" class="app-cta-btn">🌐 اختبر نفسك في وضع الامتحان الحقيقي (460 سؤال)</a>
+          <a href="../app/#/leben" class="app-cta-btn">🌐 اختبر نفسك في وضع الامتحان الحقيقي (460 سؤال)</a>
         </div>
         
         <div class="sidebar-card">
@@ -671,7 +671,7 @@ function generateLebenPage() {
         </div>
         
         <div class="cta-container">
-          <a href="../app/index.html#/leben" class="app-cta-btn">🎮 ابدأ التدريب التفاعلي على كل أسئلة الولايات الـ 16</a>
+          <a href="../app/#/leben" class="app-cta-btn">🎮 ابدأ التدريب التفاعلي على كل أسئلة الولايات الـ 16</a>
         </div>
       </main>
       
