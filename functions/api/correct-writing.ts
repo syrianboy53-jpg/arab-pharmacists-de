@@ -21,42 +21,87 @@ interface GrammarRule {
 }
 
 const GRAMMAR_RULES: GrammarRule[] = [
-  // Modal verbs + Infinitiv
-  { pattern: /\b(kann|kann nicht|könnte|möchte|will|muss|darf|soll)\s+([\w]+en?)\s+nicht\b/gi, correct: '', explanation: 'ترتيب "nicht" مع الأفعال الناقصة: ضع "nicht" قبل الفعل الأصلي' },
-  // mochte vs möchte
-  { pattern: /\bmochte\b/g, correct: 'möchte', explanation: '"mochte" خطأ، الصحيح "möchte" (أريد)' },
-  // bin/ist confusion
+  // === VERB CONJUGATION ===
   { pattern: /\bIch ist\b/g, correct: 'Ich bin', explanation: 'مع "Ich" نستخدم "bin" وليس "ist"' },
-  // Er/Sie bin confusion
+  { pattern: /\bIch sind\b/g, correct: 'Ich bin', explanation: 'مع "Ich" نستخدم "bin" وليس "sind"' },
+  { pattern: /\bIch haben\b/g, correct: 'Ich habe', explanation: 'مع "Ich" نستخدم "habe" وليس "haben"' },
+  { pattern: /\bIch sein\b/g, correct: 'Ich bin', explanation: 'مع "Ich" الفعل يُصرّف: "Ich bin"' },
+  { pattern: /\bDu ist\b/g, correct: 'Du bist', explanation: 'مع "Du" نستخدم "bist" وليس "ist"' },
+  { pattern: /\bDu haben\b/g, correct: 'Du hast', explanation: 'مع "Du" نستخدم "hast" وليس "haben"' },
+  { pattern: /\bDu bin\b/g, correct: 'Du bist', explanation: 'مع "Du" نستخدم "bist" وليس "bin"' },
   { pattern: /\b(Er|Sie|Es) bin\b/g, correct: '$1 ist', explanation: 'مع Er/Sie/Es نستخدم "ist" وليس "bin"' },
-  // haben vs sein confusion with adjectives
-  { pattern: /\bIch habe\s+(\d+)\s+Jahre?\b/g, correct: 'Ich bin $1 Jahre alt', explanation: 'للعمر نستخدم "sein" وليس "haben": "Ich bin ... Jahre alt"' },
-  // mit + Dativ
-  { pattern: /\bmit mein\b/g, correct: 'mit meinem/meiner', explanation: 'بعد "mit" نستخدم حالة المفعول به الغير مباشر (Dativ): "mit meinem/meiner"' },
-  // in + Dativ for location
-  { pattern: /\bin der\s+(\w+)e\b/gi, correct: '', explanation: 'تحقق من حالة الاسم بعد "in" عند الحديث عن مكان' },
-  // weil + Verb am Ende
-  { pattern: /\bweil\s+(?:ich|er|sie|es|wir|ihr|Sie)\s+\w+\s+(bin|ist|sind|habe|hat|haben|war|wurde)\b/gi, correct: '', explanation: 'بعد "weil" الفعل يأتي في نهاية الجملة' },
-  // Formal greeting
-  { pattern: /\bLiebe Damen\b/g, correct: 'Sehr geehrte Damen', explanation: 'في الرسائل الرسمية نستخدم "Sehr geehrte" وليس "Liebe"' },
-  // freundlich Grüße  
-  { pattern: /\bMit freundlich(e|en)?\s+Gruß(e)?\b/gi, correct: 'Mit freundlichen Grüßen', explanation: 'الختام الرسمي الصحيح: "Mit freundlichen Grüßen"' },
-  // Groß vs grosse
-  { pattern: /\bgrosse\b/g, correct: 'große', explanation: '"grosse" خطأ إملائي، الصحيح "große"' },
-  // konnen
-  { pattern: /\bkonnen\b/g, correct: 'können', explanation: '"konnen" خطأ إملائي، الصحيح "können"' },
-  // ich mochte
+  { pattern: /\b(Er|Sie|Es) haben\b/g, correct: '$1 hat', explanation: 'مع Er/Sie/Es نستخدم "hat" وليس "haben"' },
+  { pattern: /\bWir ist\b/g, correct: 'Wir sind', explanation: 'مع "Wir" نستخدم "sind" وليس "ist"' },
+  { pattern: /\bWir habe\b/g, correct: 'Wir haben', explanation: 'مع "Wir" نستخدم "haben" وليس "habe"' },
+  { pattern: /\bSie\s+ist\b/g, correct: 'Sie sind (للتعدد/التبجيل)', explanation: 'تحقق: "Sie ist" للمؤنث المفرد، "Sie sind" لضمير التبجيل أو الجمع' },
+
+  // === MODAL VERBS ===
+  { pattern: /\bmochte\b/g, correct: 'möchte', explanation: '"mochte" خطأ، الصحيح "möchte" (أريد)' },
   { pattern: /\bich mochte\b/g, correct: 'ich möchte', explanation: '"mochte" خطأ، الصحيح "möchte"' },
-  // Umlaut missing: uber
+  { pattern: /\bmochten\b/g, correct: 'möchten', explanation: '"mochten" خطأ، الصحيح "möchten"' },
+  { pattern: /\bkonnen\b/gi, correct: 'können', explanation: '"konnen" خطأ إملائي، الصحيح "können"' },
+  { pattern: /\bwollen\b/g, correct: 'wollen ✓', explanation: '"wollen" صحيح ✓ (نريد)' },
+  { pattern: /\bich habe gekonnt\b/g, correct: 'ich konnte', explanation: 'للأفعال الناقصة نستخدم Präteritum: "ich konnte" وليس "habe gekonnt"' },
+  { pattern: /\bich habe gemusst\b/g, correct: 'ich musste', explanation: 'الصحيح: "ich musste" وليس "ich habe gemusst"' },
+  { pattern: /\bich habe gewollt\b/g, correct: 'ich wollte', explanation: 'الصحيح: "ich wollte" وليس "ich habe gewollt"' },
+
+  // === AGE MISTAKE ===
+  { pattern: /\bIch habe\s+(\d+)\s+Jahre?\b/g, correct: 'Ich bin $1 Jahre alt', explanation: 'للعمر نستخدم "sein": "Ich bin ... Jahre alt" (وليس "haben")' },
+  { pattern: /\b(Er|Sie) hat\s+(\d+)\s+Jahre?\b/g, correct: '$1 ist $2 Jahre alt', explanation: 'للعمر: "Er/Sie ist ... Jahre alt"' },
+
+  // === MISSING UMLAUTS ===
   { pattern: /\buber\b/g, correct: 'über', explanation: '"uber" خطأ إملائي، الصحيح "über"' },
-  // fur
+  { pattern: /\bUber\b/g, correct: 'Über', explanation: '"Uber" خطأ إملائي، الصحيح "Über"' },
   { pattern: /\bfur\b/g, correct: 'für', explanation: '"fur" خطأ إملائي، الصحيح "für"' },
-  // danke/Danke schon
-  { pattern: /\b[Dd]anke schon\b/g, correct: 'Danke schön', explanation: '"schon" تعني "بالفعل"، أما "schön" فتعني "جميل" في "Danke schön"' },
-  // uber das
-  { pattern: /\buber das\b/g, correct: 'über das / darüber', explanation: 'استخدم "über" مع Umlaut أو "darüber"' },
-  // Plural issues - common mistake
-  { pattern: /\bviele\s+(\w+)s\b/g, correct: '', explanation: 'في الألمانية نادراً ما تُستخدم لاحقة "-s" للجمع — تحقق من صيغة الجمع الصحيحة' },
+  { pattern: /\bFur\b/g, correct: 'Für', explanation: '"Fur" خطأ إملائي، الصحيح "Für"' },
+  { pattern: /\bgrosse\b/g, correct: 'große', explanation: '"grosse" خطأ إملائي، الصحيح "große"' },
+  { pattern: /\bDanke schon\b/g, correct: 'Danke schön', explanation: 'الصحيح: "Danke schön" (شكراً) وليس "Danke schon" (شكراً بالفعل؟)' },
+  { pattern: /\bschone\b/g, correct: 'schöne', explanation: '"schone" خطأ، الصحيح "schöne"' },
+  { pattern: /\bJahre\b/g, correct: 'Jahre ✓', explanation: '"Jahre" جمع "Jahr" — صحيح ✓' },
+
+  // === LETTER GREETINGS / CLOSING ===
+  { pattern: /\bLiebe Damen\b/g, correct: 'Sehr geehrte Damen', explanation: 'في الرسائل الرسمية: "Sehr geehrte Damen und Herren"' },
+  { pattern: /\bMit freundlich(e|en)?\s+Gru(ss|ß)(e)?\b/gi, correct: 'Mit freundlichen Grüßen', explanation: 'الختام الرسمي الصحيح: "Mit freundlichen Grüßen"' },
+  { pattern: /\bFreundliche Gr(ü|u)(ß|ss)e\b/gi, correct: 'Mit freundlichen Grüßen', explanation: 'الختام الرسمي الصحيح: "Mit freundlichen Grüßen"' },
+  { pattern: /\bFreundlich Grusse\b/gi, correct: 'Mit freundlichen Grüßen', explanation: 'الختام الصحيح: "Mit freundlichen Grüßen"' },
+  { pattern: /\bViel Gruse\b/gi, correct: 'Viele Grüße', explanation: 'الختام غير الرسمي الصحيح: "Viele Grüße"' },
+
+  // === DATIV AFTER PREPOSITIONS ===
+  { pattern: /\bmit mein\b/g, correct: 'mit meinem/meiner', explanation: 'بعد "mit" نستخدم Dativ: "mit meinem" (مذكر/محايد) أو "mit meiner" (مؤنث)' },
+  { pattern: /\bmit dein\b/g, correct: 'mit deinem/deiner', explanation: 'بعد "mit" نستخدم Dativ: "mit deinem/deiner"' },
+  { pattern: /\bzu der\b/g, correct: 'zur', explanation: '"zu der" يُختصر إلى "zur"' },
+  { pattern: /\bzu dem\b/g, correct: 'zum', explanation: '"zu dem" يُختصر إلى "zum"' },
+  { pattern: /\bin dem\b/g, correct: 'im', explanation: '"in dem" يُختصر إلى "im"' },
+  { pattern: /\ban dem\b/g, correct: 'am', explanation: '"an dem" يُختصر إلى "am"' },
+  { pattern: /\bvon dem\b/g, correct: 'vom', explanation: '"von dem" يُختصر إلى "vom"' },
+
+  // === WORD ORDER ===
+  { pattern: /\bweil\s+(?:ich|er|sie|es|wir|ihr|Sie)\s+\w+\s+(bin|ist|sind|habe|hat|haben|war|wurde|kann|muss|will)\b/gi, correct: '', explanation: 'بعد "weil": الفعل يذهب لنهاية الجملة' },
+  { pattern: /\bdass\s+(?:ich|er|sie|es|wir)\s+\w+\s+(bin|ist|habe|hat|kann|muss|will)\b/gi, correct: '', explanation: 'بعد "dass": الفعل يذهب لنهاية الجملة' },
+  { pattern: /\bobwohl\s+(?:ich|er|sie|es|wir)\s+\w+\s+(bin|ist|habe|hat|kann|muss)\b/gi, correct: '', explanation: 'بعد "obwohl": الفعل يذهب لنهاية الجملة' },
+  { pattern: /\bdeshalb\s+ich\b/g, correct: 'deshalb + Verb + Ich', explanation: 'بعد "deshalb" يأتي الفعل: "deshalb bin ich..."' },
+  { pattern: /\baußerdem\s+ich\b/g, correct: 'außerdem + Verb + Ich', explanation: 'بعد "außerdem" يأتي الفعل: "außerdem habe ich..."' },
+  { pattern: /\btrotzdem\s+ich\b/g, correct: 'trotzdem + Verb + Ich', explanation: 'بعد "trotzdem" يأتي الفعل: "trotzdem bin ich..."' },
+
+  // === SEPARABLE VERBS ===
+  { pattern: /\bIch anrufe\b/g, correct: 'Ich rufe ... an', explanation: '"anrufen" فعل منفصل: الجزء "an" يذهب لنهاية الجملة' },
+  { pattern: /\bIch aufstehe\b/g, correct: 'Ich stehe ... auf', explanation: '"aufstehen" فعل منفصل: الجزء "auf" يذهب لنهاية الجملة' },
+  { pattern: /\bIch einkaufe\b/g, correct: 'Ich kaufe ... ein', explanation: '"einkaufen" فعل منفصل: الجزء "ein" يذهب لنهاية الجملة' },
+  { pattern: /\bIch mitnehme\b/g, correct: 'Ich nehme ... mit', explanation: '"mitnehmen" فعل منفصل: الجزء "mit" يذهب لنهاية الجملة' },
+
+  // === ARTICLE GENDER ===
+  { pattern: /\beine Problem\b/g, correct: 'ein Problem', explanation: '"Problem" محايد: "ein Problem" (وليس eine)' },
+  { pattern: /\bdie Problem\b/g, correct: 'das Problem', explanation: '"Problem" محايد: "das Problem" (وليس die)' },
+  { pattern: /\bdie Brief\b/g, correct: 'der Brief', explanation: '"Brief" مذكر: "der Brief"' },
+  { pattern: /\bdie Termin\b/g, correct: 'der Termin', explanation: '"Termin" مذكر: "der Termin"' },
+  { pattern: /\bdie Job\b/g, correct: 'der Job', explanation: '"Job" مذكر: "der Job"' },
+  { pattern: /\bder Arbeit\b(?!\s+nachgehen)/g, correct: 'die Arbeit', explanation: '"Arbeit" مؤنث: "die Arbeit"' },
+  { pattern: /\bder Email\b/gi, correct: 'die E-Mail', explanation: '"E-Mail" مؤنث: "die E-Mail"' },
+
+  // === SPELLING ===
+  { pattern: /\bwieviel\b/g, correct: 'wie viel', explanation: '"wieviel" يُكتب منفصلاً: "wie viel"' },
+  { pattern: /\bviele\s+(\w+)s\b/g, correct: '', explanation: 'في الألمانية نادراً ما تُستخدم لاحقة "-s" للجمع' },
+  { pattern: /\bmachen Urlaub\b/g, correct: 'Urlaub machen', explanation: 'الترتيب الصحيح: "Urlaub machen" وليس "machen Urlaub"' },
 ]
 
 // Positive phrase patterns to detect

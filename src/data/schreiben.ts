@@ -1533,6 +1533,955 @@ export const schreibenModels = [
         "sampleAnswer": "Liebe Frau Schmidt,\n\nvielen Dank für Ihre nette Einladung zur Geburtstagsfeier von Mia. Leider kann ich nicht kommen, weil ich an diesem Wochenende eine Pflicht-Veranstaltung an der Universität habe, die ich nicht verschieben kann.\n\nBitte richten Sie Mia meine herzlichen Glückwünsche aus! Ich werde ihr ein kleines Geschenk vor die Tür stellen.\n\nVielleicht können wir uns nächste Woche auf einen Kaffee treffen? Donnerstag oder Freitag Nachmittag würde mir passen.\n\nLiebe Grüße,\nLina"
       }
     ]
+  },
+  {
+    "id": "schreiben-12",
+    "title": "نموذج Schreiben رقم 12",
+    "description": "رسائل تتعلق بالسكن والإيجار والمشاكل المنزلية",
+    "tasks": [
+      {
+        "id": "schreiben-12-1",
+        "taskNumber": 1,
+        "typeAr": "رسالة غير رسمية إلى صديق",
+        "typeDe": "Informeller E-Mail - Neue Wohnung",
+        "promptAr": "صديقك يسألك عن شقتك الجديدة. اكتب له إيميلاً تصف فيه الشقة والحي.",
+        "promptDe": "Dein Freund fragt dich nach deiner neuen Wohnung. Schreib ihm eine E-Mail.",
+        "requirements": [
+          "وصف الشقة (الغرف والمساحة)",
+          "وصف الحي",
+          "ذكر الإيجار أو التكاليف",
+          "توجيه سؤال للصديق"
+        ],
+        "wordCount": "حوالي 80 كلمة",
+        "usefulPhrases": [
+          {
+            "de": "Ich habe endlich eine neue Wohnung gefunden!",
+            "ar": "وجدت أخيراً شقة جديدة!"
+          },
+          {
+            "de": "Die Wohnung liegt im … Stock.",
+            "ar": "الشقة في الطابق..."
+          },
+          {
+            "de": "Sie hat … Zimmer.",
+            "ar": "فيها ... غرف."
+          },
+          {
+            "de": "Das Beste ist die Lage.",
+            "ar": "أفضل شيء هو الموقع."
+          },
+          {
+            "de": "Die Miete beträgt … Euro warm.",
+            "ar": "الإيجار شامل ... يورو."
+          },
+          {
+            "de": "Und du? Bist du zufrieden mit deiner Wohnung?",
+            "ar": "وأنت؟ هل أنت راضٍ عن شقتك؟"
+          }
+        ],
+        "sampleAnswer": "Hallo Karim,\nvielen Dank für deine Nachricht! Ich habe tatsächlich eine neue Wohnung gefunden – ich bin so glücklich!\nDie Wohnung liegt im vierten Stock und hat drei Zimmer: ein Wohnzimmer, ein Schlafzimmer und ein kleines Arbeitszimmer. Die Küche ist neu und modern, und das Badezimmer ist auch sehr schön.\nDas Beste ist die Lage: Ich wohne jetzt im Stadtzentrum, fünf Minuten vom Bahnhof entfernt. Es gibt viele Supermärkte, Cafés und Parks in der Nähe.\nDie Miete ist 850 Euro warm, das ist für mich okay.\nUnd du? Bist du noch zufrieden mit deiner Wohnung?\nViele Grüße\nOmar",
+        "sampleAnswerNotes": [
+          "تم توظيف الأوصاف بشكل منظّم: الشقة أولاً ثم الحي ثم التكلفة.",
+          "السؤال في الختام يجعل الرسالة حوارية وطبيعية.",
+          "استخدم 'warm' لتوضيح أن الإيجار شامل للتكاليف الإضافية."
+        ]
+      },
+      {
+        "id": "schreiben-12-2",
+        "taskNumber": 2,
+        "typeAr": "رسالة رسمية — شكوى للمالك",
+        "typeDe": "Formeller Brief - Mängelanzeige",
+        "promptAr": "الغسالة في شقتك معطلة منذ أسبوع. اكتب رسالة رسمية للمالك.",
+        "promptDe": "Die Waschmaschine in Ihrer Wohnung funktioniert seit einer Woche nicht mehr. Schreiben Sie einen formellen Brief an den Vermieter.",
+        "requirements": [
+          "ذكر المشكلة وتاريخ بدئها",
+          "طلب الإصلاح العاجل",
+          "ذكر التأثير على حياتك اليومية",
+          "طلب الرد في مدة محددة"
+        ],
+        "wordCount": "حوالي 100 كلمة",
+        "usefulPhrases": [
+          {
+            "de": "Sehr geehrter Herr …,",
+            "ar": "حضرة السيد المحترم..."
+          },
+          {
+            "de": "ich wende mich an Sie bezüglich eines dringenden Problems.",
+            "ar": "أتوجه إليكم بشأن مشكلة عاجلة."
+          },
+          {
+            "de": "Seit dem … funktioniert … nicht mehr.",
+            "ar": "منذ تاريخ ... لا يعمل ... بعد الآن."
+          },
+          {
+            "de": "Ich bitte Sie, einen Techniker zu beauftragen.",
+            "ar": "أرجوكم إرسال تقني متخصص."
+          },
+          {
+            "de": "Ich bitte um eine schriftliche Rückmeldung.",
+            "ar": "أطلب رداً كتابياً."
+          },
+          {
+            "de": "Mit freundlichen Grüßen",
+            "ar": "مع أطيب التحيات"
+          }
+        ],
+        "sampleAnswer": "Sehr geehrter Herr Bauer,\nych wende mich an Sie bezüglich eines dringenden Problems in meiner Wohnung (Lindenstraße 12, 3. OG).\nSeit dem 05. Juni 2025 funktioniert die Waschmaschine in meiner Wohnung nicht mehr. Das Gerät gibt einen lauten Knallton von sich und startet nicht. Ich habe versucht, das Problem selbst zu lösen, aber ohne Erfolg.\nDiese Situation ist sehr unangenehm für mich, da ich keine Möglichkeit habe, meine Kleidung zu waschen. Ich muss nun auf eigene Kosten in die Waschsalon gehen.\nIch bitte Sie daher, einen Techniker zu beauftragen und das Problem so schnell wie möglich zu beheben, spätestens bis zum 20. Juni.\nIch bitte um eine schriftliche Rückmeldung innerhalb von drei Werktagen.\nMit freundlichen Grüßen\nAhmad Khalil",
+        "sampleAnswerNotes": [
+          "ذكر العنوان الكامل في البداية يوضّح الموقف فوراً.",
+          "'spätestens bis zum' = أسلوب راقٍ لتحديد موعد نهائي.",
+          "ذكر التأثير الشخصي (الذهاب للغسيل على نفقته) يُقوّي الطلب."
+        ]
+      },
+      {
+        "id": "schreiben-12-3",
+        "taskNumber": 3,
+        "typeAr": "إنهاء عقد الإيجار",
+        "typeDe": "Kündigung des Mietvertrages",
+        "promptAr": "تريد إنهاء عقد الإيجار. اكتب إيميلاً للمالك تخبره بذلك.",
+        "promptDe": "Sie möchten Ihren Mietvertrag kündigen. Schreiben Sie eine E-Mail an den Vermieter.",
+        "requirements": [
+          "إخبار المالك بقرار الانتقال",
+          "ذكر تاريخ المغادرة",
+          "شكر المالك",
+          "طلب استرداد التأمين"
+        ],
+        "wordCount": "حوالي 80 كلمة",
+        "usefulPhrases": [
+          {
+            "de": "hiermit kündige ich meinen Mietvertrag … fristgerecht zum …",
+            "ar": "بهذا أُنهي عقد إيجاري ... في الموعد القانوني بتاريخ..."
+          },
+          {
+            "de": "Ich habe mich entschlossen, umzuziehen.",
+            "ar": "لقد قررت الانتقال."
+          },
+          {
+            "de": "Ich möchte mich für die gute Zusammenarbeit bedanken.",
+            "ar": "أودّ أن أشكركم على التعاون الجيد."
+          },
+          {
+            "de": "Könnten Sie mir bitte mitteilen, wie ich die Kaution zurückbekomme?",
+            "ar": "هل يمكنكم إعلامي كيف أسترد التأمين؟"
+          },
+          {
+            "de": "Über eine schriftliche Bestätigung würde ich mich freuen.",
+            "ar": "سأكون سعيداً بتأكيد خطي."
+          }
+        ],
+        "sampleAnswer": "Sehr geehrter Herr Bauer,\nhiermit kündige ich meinen Mietvertrag für die Wohnung in der Lindenstraße 12, 3. OG, fristgerecht zum 31. August 2025.\nIch habe mich entschlossen, in eine andere Stadt umzuziehen, da ich dort eine neue Arbeitsstelle angetreten habe.\nIch möchte mich für die gute Zusammenarbeit und die angenehme Mietverhältnis der letzten zwei Jahre bedanken. Die Wohnung werde ich in einwandfreiem Zustand übergeben.\nKönnten Sie mir bitte mitteilen, wie und wann ich die Mietkaution von 1.700 Euro zurückbekomme?\nÜber eine schriftliche Bestätigung der Kündigung würde ich mich sehr freuen.\nMit freundlichen Grüßen\nAhmad Khalil",
+        "sampleAnswerNotes": [
+          "'fristgerecht' = في الموعد القانوني المحدد — كلمة مهمة في الإيجارات الألمانية.",
+          "تحديد مبلغ التأمين بالأرقام يُسرّع الإجراءات.",
+          "طلب التأكيد الخطي حق قانوني للمستأجر في ألمانيا."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "schreiben-13",
+    "title": "نموذج Schreiben رقم 13",
+    "description": "رسائل تتعلق بالعمل والتقديم الوظيفي وأماكن العمل",
+    "tasks": [
+      {
+        "id": "schreiben-13-1",
+        "taskNumber": 1,
+        "typeAr": "رسالة غير رسمية — العمل الجديد",
+        "typeDe": "Informeller E-Mail - Neuer Job",
+        "promptAr": "صديقتك تريد أن تعرف عن عملك الجديد. اكتبي لها إيميلاً.",
+        "promptDe": "Deine Freundin möchte wissen, wie dein neuer Job ist. Schreib ihr eine E-Mail.",
+        "requirements": [
+          "وصف طبيعة العمل الجديد",
+          "ذكر ما يعجبك وما لا يعجبك",
+          "ذكر زملاء العمل",
+          "توجيه سؤال للصديقة"
+        ],
+        "wordCount": "حوالي 80 كلمة",
+        "usefulPhrases": [
+          {
+            "de": "Ich arbeite jetzt seit … als …",
+            "ar": "أعمل الآن منذ ... كـ..."
+          },
+          {
+            "de": "Die Arbeit macht mir wirklich Spaß.",
+            "ar": "أستمتع حقاً بالعمل."
+          },
+          {
+            "de": "Was mir nicht so gut gefällt, ist …",
+            "ar": "ما لا يعجبني هو..."
+          },
+          {
+            "de": "Meine Kollegen sind sehr nett.",
+            "ar": "زملاؤني لطيفون جداً."
+          },
+          {
+            "de": "Insgesamt bin ich sehr zufrieden.",
+            "ar": "بشكل عام أنا راضية جداً."
+          },
+          {
+            "de": "Hast du auch einen neuen Job gefunden?",
+            "ar": "هل وجدتِ أنتِ أيضاً عملاً جديداً؟"
+          }
+        ],
+        "sampleAnswer": "Hallo Nadia,\ndanke für deine liebe Nachricht! Ich bin jetzt seit zwei Wochen in meinem neuen Job und möchte dir alles erzählen!\nIch arbeite als Verkäuferin in einem großen Supermarkt im Stadtzentrum. Die Arbeit macht mir wirklich Spaß – ich spreche viel Deutsch mit den Kunden, was sehr gut für meine Sprachkenntnisse ist.\nWas ich besonders mag: Die Arbeitszeiten sind flexibel, und das Team ist sehr nett. Meine Kollegin Julia hilft mir immer, wenn ich etwas nicht verstehe.\nWas mir nicht so gut gefällt: Die Arbeit am Samstag ist manchmal anstrengend, weil es sehr voll ist. Aber insgesamt bin ich sehr zufrieden!\nUnd du? Hast du auch einen neuen Job gefunden?\nLiebe Grüße\nRania",
+        "sampleAnswerNotes": [
+          "استُخدمت 'was ich besonders mag' و'was mir nicht gefällt' لتنظيم المقارنة.",
+          "ذكر زميلة بالاسم يُضفي طابعاً شخصياً وحقيقياً على الرسالة.",
+          "السؤال الختامي يُبقي الحوار مفتوحاً."
+        ]
+      },
+      {
+        "id": "schreiben-13-2",
+        "taskNumber": 2,
+        "typeAr": "رسالة تقديم وظيفي",
+        "typeDe": "Bewerbungsschreiben - Restaurant",
+        "promptAr": "رأيت إعلاناً عن وظيفة مساعد في مطعم. اكتب رسالة تقديم.",
+        "promptDe": "Sie haben eine Stellenanzeige für eine Stelle als Küchenhilfe in einem Restaurant gesehen. Schreiben Sie eine Bewerbung.",
+        "requirements": [
+          "ذكر مصدر الإعلان وسبب الاهتمام",
+          "ذكر خبراتك المناسبة",
+          "ذكر نقاط قوتك",
+          "التعبير عن الاستعداد للمقابلة"
+        ],
+        "wordCount": "حوالي 100 كلمة",
+        "usefulPhrases": [
+          {
+            "de": "mit großem Interesse habe ich Ihre Stellenanzeige gelesen.",
+            "ar": "قرأت إعلانكم الوظيفي باهتمام كبير."
+          },
+          {
+            "de": "Ich bewerbe mich hiermit um die Stelle als …",
+            "ar": "أتقدم بهذا للوظيفة كـ..."
+          },
+          {
+            "de": "In meinem letzten Job habe ich gelernt, …",
+            "ar": "في عملي الأخير تعلمت كيف..."
+          },
+          {
+            "de": "Ich bin zuverlässig, pünktlich und teamfähig.",
+            "ar": "أنا موثوق، منضبط وأعمل بروح الفريق."
+          },
+          {
+            "de": "Gerne stelle ich mich in einem Gespräch vor.",
+            "ar": "يسعدني تقديم نفسي في مقابلة شخصية."
+          },
+          {
+            "de": "Ich freue mich auf Ihre Antwort.",
+            "ar": "أتطلع لردّكم."
+          }
+        ],
+        "sampleAnswer": "Sehr geehrte Damen und Herren,\nmit großem Interesse habe ich Ihre Stellenanzeige auf der Website jobs.de gelesen. Ich bewerbe mich hiermit um die Stelle als Küchenhilfe in Ihrem Restaurant.\nIch bin 28 Jahre alt und arbeite seit drei Jahren in der Gastronomie. In meinem letzten Job als Küchenhilfe im Restaurant \"Bella Italia\" habe ich gelernt, wie man Lebensmittel richtig lagert, Küche und Geräte reinigt und schnell und sauber arbeitet.\nIch bin zuverlässig, pünktlich und teamfähig. Ich kann sowohl morgens als auch abends arbeiten, auch am Wochenende. Meine Deutschkenntnisse sind auf B1-Niveau.\nGerne stelle ich mich in einem persönlichen Gespräch vor. Ich freue mich auf Ihre Antwort.\nMit freundlichen Grüßen\nKhalid Mansour",
+        "sampleAnswerNotes": [
+          "ذكر مصدر الإعلان (jobs.de) يُظهر اهتماماً حقيقياً بالوظيفة.",
+          "الخبرة المحددة في مطعم بالاسم أكثر إقناعاً من الوصف العام.",
+          "ذكر مستوى اللغة (B1) مهم جداً في سوق العمل الألماني."
+        ]
+      },
+      {
+        "id": "schreiben-13-3",
+        "taskNumber": 3,
+        "typeAr": "مشاركة في منتدى — العمل الليلي",
+        "typeDe": "Forenbeitrag - Nachtschicht",
+        "promptAr": "في أحد المنتديات يسألون: هل العمل في نوبات ليلية مناسب للعائلة؟ اكتب رأيك.",
+        "promptDe": "In einem Forum fragt man: Ist die Nachtschicht für Familien geeignet? Schreiben Sie Ihren Beitrag.",
+        "requirements": [
+          "إبداء رأيك بوضوح",
+          "ذكر إيجابية واحدة على الأقل",
+          "ذكر سلبية واحدة على الأقل",
+          "ختام مناسب"
+        ],
+        "wordCount": "حوالي 80 كلمة",
+        "usefulPhrases": [
+          {
+            "de": "Meiner Meinung nach ist die Nachtschicht …",
+            "ar": "في رأيي النوبة الليلية..."
+          },
+          {
+            "de": "Einerseits … andererseits …",
+            "ar": "من ناحية... ومن ناحية أخرى..."
+          },
+          {
+            "de": "Man verdient meistens mehr Geld.",
+            "ar": "يكسب المرء في الغالب مالاً أكثر."
+          },
+          {
+            "de": "Man sieht seine Kinder weniger.",
+            "ar": "يرى المرء أطفاله أقل."
+          },
+          {
+            "de": "Ich würde sie nicht empfehlen.",
+            "ar": "لن أنصح بها."
+          }
+        ],
+        "sampleAnswer": "Meiner Meinung nach ist die Nachtschicht ein schwieriges Thema für Familien.\nEinerseits hat die Nachtschicht Vorteile: Man verdient meistens mehr Geld, und tagsüber hat man Zeit für Arzttermine oder Behördengänge. Manche Menschen schlafen auch besser am Tag.\nAndererseits gibt es große Nachteile: Man sieht seine Kinder weniger, weil man schläft, wenn sie wach sind. Die Gesundheit leidet auch, da der Körper sich schwer an Nachtarbeit gewöhnt. Meine Kollegin arbeitet seit Jahren in der Nachtschicht und klagt oft über Schlafprobleme.\nIch denke, Nachtschicht ist nur dann gut, wenn es wirklich keine andere Möglichkeit gibt. Für Familien mit kleinen Kindern würde ich sie nicht empfehlen.\nWas meinen Sie dazu?",
+        "sampleAnswerNotes": [
+          "'Einerseits / Andererseits' = تعبير متوازن مثالي لمهام الرأي.",
+          "المثال الشخصي (مثال الزميلة) يُقوّي الحجة.",
+          "السؤال الختامي يُشجّع على التفاعل في المنتدى."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "schreiben-14",
+    "title": "نموذج Schreiben رقم 14",
+    "description": "رسائل تتعلق بالصحة والمواعيد الطبية والأمراض",
+    "tasks": [
+      {
+        "id": "schreiben-14-1",
+        "taskNumber": 1,
+        "typeAr": "رسالة غير رسمية — المرض والغياب",
+        "typeDe": "Informeller E-Mail - Krankheit",
+        "promptAr": "صديقك يسألك لماذا لم تأت للحفلة أمس. اكتب له أنك كنت مريضاً.",
+        "promptDe": "Dein Freund fragt, warum du gestern nicht zur Party gekommen bist. Schreib ihm, dass du krank warst.",
+        "requirements": [
+          "الاعتذار عن الغياب",
+          "شرح المرض والأعراض",
+          "شرح ما فعلته (طبيب / دواء)",
+          "السؤال عن الحفلة والاقتراح للقاء آخر"
+        ],
+        "wordCount": "حوالي 80 كلمة",
+        "usefulPhrases": [
+          {
+            "de": "Es tut mir wirklich leid, dass ich nicht kommen konnte.",
+            "ar": "آسف جداً لأنني لم أستطع المجيء."
+          },
+          {
+            "de": "Leider war ich krank.",
+            "ar": "للأسف كنت مريضاً."
+          },
+          {
+            "de": "Ich hatte Fieber / Kopfschmerzen.",
+            "ar": "كان عندي حمّى / صداع."
+          },
+          {
+            "de": "Der Arzt hat mir gesagt, ich soll zu Hause bleiben.",
+            "ar": "قال لي الطبيب أن أبقى في البيت."
+          },
+          {
+            "de": "Wie war die Party?",
+            "ar": "كيف كانت الحفلة؟"
+          },
+          {
+            "de": "Können wir uns nächste Woche treffen?",
+            "ar": "هل يمكننا اللقاء الأسبوع القادم؟"
+          }
+        ],
+        "sampleAnswer": "Hallo Felix,\nes tut mir wirklich leid, dass ich gestern nicht kommen konnte! Ich wollte unbedingt zu deiner Party, aber leider war ich krank.\nSchon am Morgen hatte ich starke Kopfschmerzen und Fieber – fast 39 Grad! Ich bin zum Arzt gegangen, und er hat mir gesagt, ich soll zu Hause bleiben und mich ausruhen. Er hat mir auch Tabletten gegeben.\nHeute geht es mir schon etwas besser, aber ich bin noch müde.\nWie war die Party? Ich hoffe, du hattest viel Spaß! Vielleicht können wir uns nächste Woche treffen und du erzählst mir alles?\nIch würde mich sehr freuen.\nLiebe Grüße und gute Besserung – ich meine, für mich! 😄\nSamir",
+        "sampleAnswerNotes": [
+          "ذكر درجة الحرارة (39 Grad) يُضفي مصداقية على العذر.",
+          "الاعتذار في البداية ثم الشرح = ترتيب منطقي ومؤدَّب.",
+          "اللمسة الفكاهية في النهاية تُعيد الجو الودّي."
+        ]
+      },
+      {
+        "id": "schreiben-14-2",
+        "taskNumber": 2,
+        "typeAr": "رسالة رسمية — طلب موعد طبي",
+        "typeDe": "Formeller Brief - Arzttermin",
+        "promptAr": "اكتب رسالة لطبيبك تطلب فيها موعداً وتصف أعراضك.",
+        "promptDe": "Schreiben Sie einen Brief an Ihren Arzt, in dem Sie einen Termin anfragen und Ihre Beschwerden beschreiben.",
+        "requirements": [
+          "تقديم نفسك",
+          "وصف الأعراض بدقة",
+          "ذكر منذ متى وأنت تعاني",
+          "طلب موعد قريب وذكر أوقات مناسبة"
+        ],
+        "wordCount": "حوالي 100 كلمة",
+        "usefulPhrases": [
+          {
+            "de": "mein Name ist … und ich bin Ihre Patientin.",
+            "ar": "اسمي ... وأنا مريضتكم."
+          },
+          {
+            "de": "Ich leide seit … Tagen unter …",
+            "ar": "أعاني منذ ... أيام من..."
+          },
+          {
+            "de": "Die Schmerzen strahlen bis in … aus.",
+            "ar": "يمتد الألم حتى..."
+          },
+          {
+            "de": "Schmerzmittel helfen nur kurz.",
+            "ar": "المسكّنات تساعد لفترة قصيرة فقط."
+          },
+          {
+            "de": "Ich bitte um einen baldigen Termin.",
+            "ar": "أرجو موعداً في أقرب وقت."
+          },
+          {
+            "de": "Ich bin … ab … Uhr verfügbar.",
+            "ar": "أنا متاح/ة يوم ... من الساعة..."
+          }
+        ],
+        "sampleAnswer": "Sehr geehrtes Praxisteam,\nmein Name ist Leila Hamdan, und ich bin Ihre Patientin (Geburtsdatum: 15.03.1990).\nIch wende mich an Sie, weil ich seit etwa zehn Tagen unter starken Rückenschmerzen leide. Die Schmerzen beginnen morgens beim Aufstehen und bleiben den ganzen Tag. Manchmal strahlen sie bis in die Beine aus. Schmerzmittel helfen nur kurz.\nIch bitte Sie um einen baldigen Termin, am besten noch in dieser Woche. Ich bin montags bis freitags ab 14 Uhr verfügbar, und samstags den ganzen Tag.\nKönnen Sie mir bitte einen Termin bestätigen? Am besten per E-Mail oder telefonisch unter 0151-23456789.\nVielen Dank im Voraus!\nMit freundlichen Grüßen\nLeila Hamdan",
+        "sampleAnswerNotes": [
+          "ذكر تاريخ الميلاد في المراسلات الطبية ضروري للتعرف على المريض.",
+          "وصف الأعراض بالتسلسل (متى + أين + كيف) يُسهّل التشخيص.",
+          "ذكر أوقات محددة للإتاحة يُسرّع تحديد الموعد."
+        ]
+      },
+      {
+        "id": "schreiben-14-3",
+        "taskNumber": 3,
+        "typeAr": "مشاركة في منتدى — الصحة في الشتاء",
+        "typeDe": "Forenbeitrag - Gesundheit im Winter",
+        "promptAr": "منتدى صحي يسأل: كيف تحافظ على صحتك في الشتاء؟ اكتب مشاركتك.",
+        "promptDe": "In einem Gesundheitsforum fragt man: Wie bleiben Sie im Winter gesund? Schreiben Sie Ihren Beitrag.",
+        "requirements": [
+          "ذكر نصيحتين على الأقل",
+          "شرح سبب أهمية كل نصيحة",
+          "ذكر تجربة شخصية",
+          "ختام يدعو للمشاركة"
+        ],
+        "wordCount": "حوالي 100 كلمة",
+        "usefulPhrases": [
+          {
+            "de": "Hier sind meine Tipps:",
+            "ar": "إليكم نصائحي:"
+          },
+          {
+            "de": "Erstens … Zweitens … Drittens …",
+            "ar": "أولاً... ثانياً... ثالثاً..."
+          },
+          {
+            "de": "Das hilft wirklich!",
+            "ar": "هذا يساعد فعلاً!"
+          },
+          {
+            "de": "Bewegung stärkt das Immunsystem.",
+            "ar": "الحركة تُقوّي جهاز المناعة."
+          },
+          {
+            "de": "Letztes Jahr hatte ich fast keinen Schnupfen.",
+            "ar": "العام الماضي لم أصب بزكام تقريباً."
+          },
+          {
+            "de": "Was sind eure Tipps?",
+            "ar": "ما هي نصائحكم؟"
+          }
+        ],
+        "sampleAnswer": "Hallo zusammen!\nDer Winter ist die Zeit der Erkältungen – aber man kann viel tun, um gesund zu bleiben! Hier sind meine Tipps:\nErstens: Viel Tee trinken und warm anziehen. Ich trinke jeden Morgen einen Ingwertee mit Zitrone und Honig. Das hilft wirklich!\nZweitens: Regelmäßig lüften, auch im Winter. Frische Luft tötet Bakterien und macht das Zimmer sauber. Ich lüfte mindestens zweimal am Tag für zehn Minuten.\nDrittens: Sport machen, auch wenn es kalt ist. Ich gehe dreimal pro Woche spazieren, selbst wenn es regnet. Bewegung stärkt das Immunsystem.\nUnd natürlich: Ausreichend schlafen! Wenn man müde ist, wird man schneller krank.\nLetztes Jahr habe ich fast keinen Schnupfen gehabt – ich glaube, diese Tipps haben wirklich geholfen!\nWas sind eure Tipps für den Winter?",
+        "sampleAnswerNotes": [
+          "Erstens / Zweitens / Drittens = تنظيم واضح يُسهّل القراءة والمراجعة.",
+          "التجربة الشخصية (العام الماضي) تُضفي مصداقية على النصائح.",
+          "السؤال الختامي يُحوّل المشاركة إلى حوار حقيقي."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "schreiben-15",
+    "title": "نموذج Schreiben رقم 15",
+    "description": "رسائل تتعلق بالسفر والإجازات والأنشطة الترفيهية",
+    "tasks": [
+      {
+        "id": "schreiben-15-1",
+        "taskNumber": 1,
+        "typeAr": "رسالة غير رسمية — وصف رحلة",
+        "typeDe": "Informeller E-Mail - Urlaubsbericht",
+        "promptAr": "أرسل لصديقك رسالة تخبره عن رحلتك الأخيرة.",
+        "promptDe": "Schreib deinem Freund eine E-Mail über deine letzte Reise.",
+        "requirements": [
+          "ذكر الوجهة ومدة الرحلة",
+          "وصف شيء ممتع فعلته",
+          "ذكر شيء غير متوقع أو مضحك",
+          "السؤال عن خطط الصديق للإجازة"
+        ],
+        "wordCount": "حوالي 80 كلمة",
+        "usefulPhrases": [
+          {
+            "de": "Ich bin gerade aus … zurückgekommen.",
+            "ar": "لقد عدت للتو من..."
+          },
+          {
+            "de": "Ich war … Tage dort.",
+            "ar": "كنت هناك ... أيام."
+          },
+          {
+            "de": "Wir haben … besucht und ich war total begeistert.",
+            "ar": "زرنا ... وكنت في غاية الإعجاب."
+          },
+          {
+            "de": "Das Lustigste war: …",
+            "ar": "أطرف ما حدث: ..."
+          },
+          {
+            "de": "Trotzdem hat mir die Reise sehr gut gefallen.",
+            "ar": "ومع ذلك أعجبتني الرحلة كثيراً."
+          },
+          {
+            "de": "Hast du auch Urlaubspläne?",
+            "ar": "هل لديك خطط لإجازة؟"
+          }
+        ],
+        "sampleAnswer": "Hallo Jana,\nich bin gerade aus Wien zurückgekommen und muss dir sofort davon erzählen!\nIch war vier Tage dort – von Donnerstag bis Sonntag. Wien ist wirklich eine wunderschöne Stadt! Wir haben das Schloss Schönbrunn besucht, und ich war total begeistert von den Gärten. Abends haben wir in einem typischen Wiener Restaurant gegessen – Wiener Schnitzel natürlich!\nDas Lustigste war: Ich habe mich in der U-Bahn verfahren und bin am Ende am Flughafen gelandet! Zum Glück hatte ich genug Zeit und konnte lachen.\nDas Wetter war leider nicht so gut – es hat viel geregnet. Aber trotzdem hat mir die Reise sehr gut gefallen.\nHast du auch Urlaubspläne? Wohin möchtest du diesen Sommer fahren?\nLiebe Grüße\nSarah",
+        "sampleAnswerNotes": [
+          "'muss dir sofort davon erzählen' = فتح قوي ومثير للاهتمام.",
+          "القصة الطريفة (التوه في المترو) تجعل الرسالة حية وممتعة.",
+          "الانتقال من السلبي (الطقس) إلى الإيجابي (أعجبتني الرحلة) يُوازن الرسالة."
+        ]
+      },
+      {
+        "id": "schreiben-15-2",
+        "taskNumber": 2,
+        "typeAr": "رسالة رسمية — طلب معلومات عن دورة",
+        "typeDe": "Formeller Brief - Kursanfrage VHS",
+        "promptAr": "تريد حضور دورة طبخ في Volkshochschule. اكتب رسالة رسمية للاستفسار.",
+        "promptDe": "Sie möchten einen Kochkurs in der Volkshochschule besuchen. Schreiben Sie eine formelle Anfrage.",
+        "requirements": [
+          "ذكر سبب الاهتمام بالدورة",
+          "طلب معلومات محددة (المواعيد والتكاليف والمستوى)",
+          "ذكر خبرتك السابقة",
+          "طلب رد"
+        ],
+        "wordCount": "حوالي 100 كلمة",
+        "usefulPhrases": [
+          {
+            "de": "Ich habe auf Ihrer Website von Ihrem Angebot erfahren.",
+            "ar": "علمت بعرضكم عبر موقعكم الإلكتروني."
+          },
+          {
+            "de": "Ich interessiere mich sehr für den Kurs …",
+            "ar": "أنا مهتم جداً بدورة..."
+          },
+          {
+            "de": "Könnten Sie mir bitte mitteilen, wann und wie oft der Kurs stattfindet?",
+            "ar": "هل يمكنكم إعلامي متى وكم مرة تُعقد الدورة؟"
+          },
+          {
+            "de": "Wie hoch sind die Kursgebühren?",
+            "ar": "كم تبلغ رسوم الدورة؟"
+          },
+          {
+            "de": "Ich habe bereits einen Grundkurs belegt.",
+            "ar": "سبق لي أن حضرت دورة أساسية."
+          },
+          {
+            "de": "Ich wäre Ihnen sehr dankbar für Ihre Antwort.",
+            "ar": "سأكون ممتناً جداً لردّكم."
+          }
+        ],
+        "sampleAnswer": "Sehr geehrte Damen und Herren,\nych habe auf Ihrer Website von Ihrem Kochkurs-Angebot erfahren und interessiere mich sehr dafür.\nIch möchte gerne den Kurs \"Mediterrane Küche für Anfänger\" besuchen. Könnten Sie mir bitte folgende Informationen mitteilen: Wann genau findet der Kurs statt? Wie hoch sind die Kursgebühren? Muss man eigenes Kochgeschirr mitbringen?\nIch habe bereits einen Grundkochkurs bei der VHS Hannover belegt und koche gerne in meiner Freizeit. Ich suche jetzt nach einem Kurs, bei dem ich neue Techniken und internationale Gerichte lernen kann.\nIch wäre Ihnen sehr dankbar, wenn Sie mir die gewünschten Informationen zusenden könnten.\nMit freundlichen Grüßen\nMohammed Al-Rashid",
+        "sampleAnswerNotes": [
+          "تقديم الأسئلة في قائمة مرقّمة يُسهّل الإجابة على المرسَل إليه.",
+          "ذكر الخبرة السابقة يُظهر الجدّية والاهتمام الحقيقي.",
+          "'die gewünschten Informationen' = أسلوب راقٍ لتلخيص الطلب."
+        ]
+      },
+      {
+        "id": "schreiben-15-3",
+        "taskNumber": 3,
+        "typeAr": "مشاركة في منتدى — الإجازة في الداخل أم الخارج",
+        "typeDe": "Forenbeitrag - Urlaub im In- oder Ausland",
+        "promptAr": "في منتدى الإنترنت يسألون: إجازة في الخارج أم في ألمانيا — أيهما أفضل؟ اكتب مشاركتك.",
+        "promptDe": "In einem Internet-Forum fragt man: Urlaub im Ausland oder in Deutschland – was ist besser? Schreiben Sie Ihren Beitrag.",
+        "requirements": [
+          "إبداء رأيك بوضوح",
+          "ذكر حجة لصالح رأيك",
+          "الاعتراف بوجهة النظر الأخرى",
+          "ختام"
+        ],
+        "wordCount": "حوالي 80 كلمة",
+        "usefulPhrases": [
+          {
+            "de": "Ich persönlich bevorzuge …",
+            "ar": "أنا شخصياً أُفضّل..."
+          },
+          {
+            "de": "weil ich neue Kulturen kennenlernen möchte.",
+            "ar": "لأنني أريد التعرف على ثقافات جديدة."
+          },
+          {
+            "de": "Natürlich verstehe ich, dass …",
+            "ar": "بالطبع أفهم أن..."
+          },
+          {
+            "de": "Aber für mich ist das Wichtigste …",
+            "ar": "لكن بالنسبة لي الأهم هو..."
+          },
+          {
+            "de": "Mein Tipp: eine Kombination aus beidem!",
+            "ar": "نصيحتي: الجمع بين الاثنتين!"
+          }
+        ],
+        "sampleAnswer": "Das ist eine interessante Frage!\nIch persönlich bevorzuge Urlaub im Ausland, weil ich neue Kulturen, Sprachen und Essen kennenlernen möchte. Wenn man nur in Deutschland Urlaub macht, sieht man immer das Gleiche. Im Ausland erlebt man echte Abenteuer!\nNatürlich verstehe ich, dass Urlaub im Ausland teurer ist und man manchmal Sprachprobleme hat. Deutschland hat auch wunderschöne Orte – die Ostsee, Bayern und der Schwarzwald sind fantastisch.\nAber für mich ist die wichtigste Sache beim Urlaub: neue Erfahrungen machen. Und das geht am besten im Ausland.\nMein Tipp: Einmal pro Jahr ins Ausland, und einmal ein Kurzurlaub in Deutschland – das ist die perfekte Kombination!\nWas denken Sie?",
+        "sampleAnswerNotes": [
+          "البدء بـ 'Das ist eine interessante Frage!' = مشاركة ودية وطبيعية.",
+          "الاعتراف بالحجة المعاكسة يُظهر التفكير النقدي والتوازن.",
+          "الاقتراح في الختام (Kombination) يُعطي إجابة عملية ومُقنعة."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "schreiben-12",
+    "title": "نموذج Schreiben رقم 12",
+    "description": "رسائل تتعلق بالسكن والإيجار والمشاكل المنزلية",
+    "tasks": [
+      {
+        "id": "schreiben-12-1",
+        "taskNumber": 1,
+        "typeAr": "رسالة غير رسمية إلى صديق — الشقة الجديدة",
+        "typeDe": "Informeller E-Mail - Neue Wohnung",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "صديقك يسألك عن شقتك الجديدة. اكتب له إيميلاً تصف فيه الشقة والحي والإيجار.",
+        "promptDe": "Dein Freund Karim fragt nach deiner neuen Wohnung. Schreibe ihm eine E-Mail.",
+        "requirements": [
+          "وصف الشقة (الغرف والمساحة)",
+          "وصف الحي والموقع",
+          "ذكر الإيجار أو التكاليف",
+          "توجيه سؤال للصديق"
+        ],
+        "usefulPhrases": [
+          { "de": "Hallo Karim,", "ar": "مرحباً كريم،" },
+          { "de": "Ich habe eine neue Wohnung gefunden!", "ar": "لقد وجدت شقة جديدة!" },
+          { "de": "Die Wohnung hat ... Zimmer.", "ar": "الشقة فيها ... غرف." },
+          { "de": "Die Lage ist super, weil ...", "ar": "الموقع رائع، لأن ..." },
+          { "de": "Die Miete beträgt ... Euro warm.", "ar": "الإيجار ... يورو شاملاً." },
+          { "de": "Wie ist deine Wohnung?", "ar": "كيف شقتك أنت؟" }
+        ],
+        "sampleAnswer": "Hallo Karim,\n\nvielen Dank für deine Nachricht! Ich habe tatsächlich eine neue Wohnung gefunden – ich bin so glücklich!\n\nDie Wohnung liegt im vierten Stock und hat drei Zimmer: ein Wohnzimmer, ein Schlafzimmer und ein kleines Arbeitszimmer. Die Küche ist neu und modern, und das Badezimmer ist auch sehr schön.\n\nDas Beste ist die Lage: Ich wohne jetzt im Stadtzentrum, fünf Minuten vom Bahnhof entfernt. Es gibt viele Supermärkte, Cafés und Parks in der Nähe.\n\nDie Miete ist 850 Euro warm, das ist für mich okay.\n\nUnd du? Bist du noch zufrieden mit deiner Wohnung?\n\nViele Grüße\nOmar",
+        "sampleAnswerNotes": [
+          "لاحظ: استخدام \"warm\" يعني الإيجار شامل التكاليف الإضافية.",
+          "جملة \"Das Beste ist ...\" تُعبّر عن الإيجابية بشكل مميز.",
+          "السؤال في النهاية يجعل الرسالة أكثر طبيعية وتفاعلية."
+        ]
+      },
+      {
+        "id": "schreiben-12-2",
+        "taskNumber": 2,
+        "typeAr": "رسالة رسمية — شكوى للمالك بسبب عطل",
+        "typeDe": "Formeller Brief - Mängelanzeige",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "الغسالة في شقتك معطلة منذ أسبوع. اكتب رسالة رسمية للمالك تطلب فيها الإصلاح العاجل.",
+        "promptDe": "Die Waschmaschine in Ihrer Wohnung funktioniert seit einer Woche nicht. Schreiben Sie einen formellen Brief an den Vermieter.",
+        "requirements": [
+          "ذكر المشكلة وتاريخ بدئها",
+          "طلب الإصلاح العاجل",
+          "ذكر التأثير على حياتك اليومية",
+          "طلب الرد في مدة محددة"
+        ],
+        "usefulPhrases": [
+          { "de": "Sehr geehrter Herr / Sehr geehrte Frau ...,", "ar": "السيد / السيدة العزيز/ة ..." },
+          { "de": "Ich wende mich an Sie bezüglich ...", "ar": "أتوجه إليكم بشأن ..." },
+          { "de": "Seit dem ... funktioniert ... nicht mehr.", "ar": "منذ ... لم يعد ... يعمل." },
+          { "de": "Ich bitte Sie, einen Techniker zu beauftragen.", "ar": "أطلب منكم تكليف فني بالإصلاح." },
+          { "de": "spätestens bis zum ...", "ar": "في موعد أقصاه ..." },
+          { "de": "Mit freundlichen Grüßen,", "ar": "مع أطيب التحيات،" }
+        ],
+        "sampleAnswer": "Sehr geehrter Herr Bauer,\n\nich wende mich an Sie bezüglich eines dringenden Problems in meiner Wohnung (Lindenstraße 12, 3. OG).\n\nSeit dem 05. Juni funktioniert die Waschmaschine in meiner Wohnung nicht mehr. Das Gerät gibt einen lauten Ton von sich und startet nicht. Ich habe versucht, das Problem selbst zu lösen, aber ohne Erfolg.\n\nDiese Situation ist sehr unangenehm, da ich keine Möglichkeit habe, meine Kleidung zu waschen. Ich muss auf eigene Kosten in den Waschsalon gehen.\n\nIch bitte Sie daher, einen Techniker zu beauftragen, spätestens bis zum 20. Juni.\n\nMit freundlichen Grüßen\nAhmad Khalil",
+        "sampleAnswerNotes": [
+          "ذكر العنوان الكامل مهم في الرسائل الرسمية.",
+          "\"bezüglich\" = بخصوص — كلمة مهمة في الرسائل الرسمية.",
+          "ذكر التأريخ الدقيق يُقوّي موقفك."
+        ]
+      },
+      {
+        "id": "schreiben-12-3",
+        "taskNumber": 3,
+        "typeAr": "رسالة رسمية — إنهاء عقد الإيجار",
+        "typeDe": "Kündigung des Mietvertrages",
+        "wordCount": "حوالي 70 كلمة",
+        "promptAr": "تريد الانتقال إلى مدينة أخرى بسبب عمل جديد. اكتب رسالة رسمية للمالك لإنهاء عقد الإيجار.",
+        "promptDe": "Sie möchten umziehen. Schreiben Sie eine Kündigung des Mietvertrages.",
+        "requirements": [
+          "إخبار المالك بقرار الانتقال وذكر السبب",
+          "ذكر تاريخ المغادرة بدقة",
+          "شكر المالك على التعاون",
+          "طلب استرداد التأمين (Kaution)"
+        ],
+        "usefulPhrases": [
+          { "de": "Hiermit kündige ich meinen Mietvertrag ...", "ar": "بموجب هذا أُنهي عقد إيجاري ..." },
+          { "de": "fristgerecht zum ...", "ar": "في الموعد القانوني بتاريخ ..." },
+          { "de": "Ich habe eine neue Arbeitsstelle in ... angetreten.", "ar": "لقد تسلّمت وظيفة جديدة في ..." },
+          { "de": "Könnten Sie mir die Kaution zurückgeben?", "ar": "هل يمكنكم إعادة التأمين إليّ؟" },
+          { "de": "Ich werde die Wohnung in einwandfreiem Zustand übergeben.", "ar": "سأُسلّم الشقة بحالة ممتازة." }
+        ],
+        "sampleAnswer": "Sehr geehrter Herr Bauer,\n\nhiermit kündige ich meinen Mietvertrag für die Wohnung in der Lindenstraße 12, 3. OG, fristgerecht zum 31. August 2025.\n\nIch habe mich entschlossen, in eine andere Stadt umzuziehen, da ich dort eine neue Arbeitsstelle angetreten habe.\n\nIch möchte mich für die gute Zusammenarbeit der letzten zwei Jahre bedanken. Die Wohnung werde ich in einwandfreiem Zustand übergeben.\n\nKönnten Sie mir bitte mitteilen, wann ich die Mietkaution von 1.700 Euro zurückbekomme?\n\nMit freundlichen Grüßen\nAhmad Khalil",
+        "sampleAnswerNotes": [
+          "\"hiermit kündige ich\" = الصيغة الرسمية لإنهاء العقد.",
+          "\"fristgerecht\" تعني في الموعد القانوني المحدد في العقد (عادة 3 أشهر).",
+          "الشكر في نهاية الرسالة يُحسّن العلاقة ويُسهّل استرداد التأمين."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "schreiben-13",
+    "title": "نموذج Schreiben رقم 13",
+    "description": "رسائل تتعلق بالعمل والتقديم الوظيفي وأماكن العمل",
+    "tasks": [
+      {
+        "id": "schreiben-13-1",
+        "taskNumber": 1,
+        "typeAr": "رسالة غير رسمية — العمل الجديد",
+        "typeDe": "Informeller E-Mail - Neuer Job",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "صديقتك تريد أن تعرف عن عملك الجديد منذ أسبوعين. اكتبي لها إيميلاً تصفين فيه العمل وما يعجبك.",
+        "promptDe": "Deine Freundin Nadia fragt nach deinem neuen Job. Schreibe ihr eine E-Mail.",
+        "requirements": [
+          "وصف طبيعة العمل الجديد",
+          "ذكر ما يعجبك في العمل",
+          "ذكر ما لا يعجبك (نقطة واحدة)",
+          "توجيه سؤال للصديقة"
+        ],
+        "usefulPhrases": [
+          { "de": "Ich arbeite jetzt als ... bei ...", "ar": "أعمل الآن كـ ... في ..." },
+          { "de": "Die Arbeit macht mir Spaß, weil ...", "ar": "العمل ممتع لأن ..." },
+          { "de": "Was mir besonders gefällt, ist ...", "ar": "ما يعجبني بشكل خاص هو ..." },
+          { "de": "Was mir nicht so gut gefällt, ist ...", "ar": "ما لا يعجبني كثيراً هو ..." },
+          { "de": "Meine Kollegen sind sehr nett.", "ar": "زملائي طيبون جداً." },
+          { "de": "Und du? Hast du auch einen neuen Job?", "ar": "وأنت؟ هل وجدت عملاً جديداً أيضاً؟" }
+        ],
+        "sampleAnswer": "Hallo Nadia,\n\ndanke für deine liebe Nachricht! Ich bin jetzt seit zwei Wochen in meinem neuen Job und möchte dir alles erzählen!\n\nIch arbeite als Verkäuferin in einem großen Supermarkt im Stadtzentrum. Die Arbeit macht mir wirklich Spaß – ich spreche viel Deutsch mit den Kunden, was sehr gut für meine Sprachkenntnisse ist.\n\nWas mir besonders gefällt: Die Arbeitszeiten sind flexibel, und das Team ist sehr nett. Meine Kollegin Julia hilft mir immer, wenn ich etwas nicht verstehe.\n\nWas mir nicht so gut gefällt: Die Arbeit am Samstag ist manchmal anstrengend, weil es sehr voll ist.\n\nUnd du? Hast du auch einen neuen Job gefunden?\n\nLiebe Grüße\nRania",
+        "sampleAnswerNotes": [
+          "\"was sehr gut für ... ist\" = جملة نسبية مفيدة في الكتابة.",
+          "ذكر نقطة سلبية واحدة يجعل الرسالة أكثر واقعية وصدقاً.",
+          "السؤال في النهاية يُكمل متطلبات المهمة."
+        ]
+      },
+      {
+        "id": "schreiben-13-2",
+        "taskNumber": 2,
+        "typeAr": "رسالة تقديم وظيفي — مطعم",
+        "typeDe": "Bewerbungsschreiben - Stelle als Küchenhilfe",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "رأيت إعلاناً عن وظيفة مساعد مطبخ في مطعم. اكتب رسالة تقديم رسمية.",
+        "promptDe": "Sie haben eine Stellenanzeige für eine Küchenhilfe gelesen. Schreiben Sie ein Bewerbungsschreiben.",
+        "requirements": [
+          "ذكر مصدر الإعلان وسبب الاهتمام",
+          "ذكر خبراتك السابقة المناسبة",
+          "ذكر نقاط قوتك الشخصية",
+          "التعبير عن الاستعداد للمقابلة"
+        ],
+        "usefulPhrases": [
+          { "de": "Mit großem Interesse habe ich Ihre Anzeige gelesen.", "ar": "قرأت إعلانكم باهتمام كبير." },
+          { "de": "Ich bewerbe mich um die Stelle als ...", "ar": "أتقدم لشغل وظيفة ..." },
+          { "de": "Ich habe ... Jahre Erfahrung in ...", "ar": "لدي ... سنوات خبرة في ..." },
+          { "de": "Ich bin zuverlässig, pünktlich und teamfähig.", "ar": "أنا موثوق، منضبط، وأعمل ضمن الفريق." },
+          { "de": "Gerne stelle ich mich in einem Gespräch vor.", "ar": "يسعدني تقديم نفسي في مقابلة شخصية." }
+        ],
+        "sampleAnswer": "Sehr geehrte Damen und Herren,\n\nmit großem Interesse habe ich Ihre Stellenanzeige auf jobs.de gelesen. Ich bewerbe mich hiermit um die Stelle als Küchenhilfe in Ihrem Restaurant.\n\nIch bin 28 Jahre alt und arbeite seit drei Jahren in der Gastronomie. In meinem letzten Job habe ich gelernt, wie man Lebensmittel richtig lagert, die Küche reinigt und schnell sowie sauber arbeitet.\n\nIch bin zuverlässig, pünktlich und teamfähig. Ich kann sowohl morgens als auch abends arbeiten, auch am Wochenende. Meine Deutschkenntnisse sind auf B1-Niveau.\n\nGerne stelle ich mich in einem persönlichen Gespräch vor. Ich freue mich auf Ihre Antwort.\n\nMit freundlichen Grüßen\nKhalid Mansour",
+        "sampleAnswerNotes": [
+          "ابدأ دائماً بمصدر الإعلان (jobs.de, Zeitung, ...).",
+          "\"hiermit bewerbe ich mich\" = الصيغة الرسمية للتقديم.",
+          "ذكر مستوى اللغة الألمانية مهم جداً في طلبات العمل."
+        ]
+      },
+      {
+        "id": "schreiben-13-3",
+        "taskNumber": 3,
+        "typeAr": "مشاركة في منتدى — العمل في نوبات ليلية",
+        "typeDe": "Forenbeitrag - Nachtschicht und Familie",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "في منتدى على الإنترنت يسألون: هل العمل في نوبات ليلية مناسب للعائلة؟ اكتب رأيك.",
+        "promptDe": "In einem Internet-Forum fragt man: Ist die Nachtschicht gut für Familien? Schreiben Sie Ihren Beitrag.",
+        "requirements": [
+          "إبداء رأيك بوضوح",
+          "ذكر إيجابية واحدة على الأقل",
+          "ذكر سلبية واحدة على الأقل",
+          "ختام مناسب"
+        ],
+        "usefulPhrases": [
+          { "de": "Meiner Meinung nach ...", "ar": "في رأيي ..." },
+          { "de": "Einerseits ... Andererseits ...", "ar": "من جهة ... ومن جهة أخرى ..." },
+          { "de": "Ein Vorteil ist, dass ...", "ar": "ميزة هي أن ..." },
+          { "de": "Ein Nachteil ist, dass ...", "ar": "عيب هو أن ..." },
+          { "de": "Ich würde ... empfehlen / nicht empfehlen.", "ar": "أنصح بـ / لا أنصح بـ ..." },
+          { "de": "Was meinen Sie dazu?", "ar": "ما رأيكم في ذلك؟" }
+        ],
+        "sampleAnswer": "Meiner Meinung nach ist die Nachtschicht ein schwieriges Thema für Familien.\n\nEinerseits hat die Nachtschicht Vorteile: Man verdient meistens mehr Geld, und tagsüber hat man Zeit für Arzttermine oder Behördengänge.\n\nAndererseits gibt es große Nachteile: Man sieht seine Kinder weniger, weil man schläft, wenn sie wach sind. Die Gesundheit leidet auch, da der Körper sich schwer an Nachtarbeit gewöhnt.\n\nIch denke, Nachtschicht ist nur dann gut, wenn es keine andere Möglichkeit gibt. Für Familien mit kleinen Kindern würde ich sie nicht empfehlen.\n\nWas meinen Sie dazu?",
+        "sampleAnswerNotes": [
+          "\"Einerseits ... Andererseits\" = من أقوى التراكيب في مهام الرأي.",
+          "\"da der Körper sich schwer ... gewöhnt\" = جملة سببية ب dass أو da.",
+          "السؤال في الختام يُظهر انخراطك في النقاش."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "schreiben-14",
+    "title": "نموذج Schreiben رقم 14",
+    "description": "رسائل تتعلق بالصحة والمواعيد الطبية والأمراض",
+    "tasks": [
+      {
+        "id": "schreiben-14-1",
+        "taskNumber": 1,
+        "typeAr": "رسالة غير رسمية — المرض والغياب",
+        "typeDe": "Informeller E-Mail - Krankheit und Absage",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "صديقك يسألك لماذا لم تأت لحفلته أمس. اكتب له إيميلاً تشرح فيه أنك كنت مريضاً.",
+        "promptDe": "Dein Freund Felix fragt, warum du nicht zu seiner Party gekommen bist. Du warst krank. Schreibe ihm eine E-Mail.",
+        "requirements": [
+          "الاعتذار عن الغياب بصدق",
+          "شرح المرض والأعراض",
+          "شرح ما فعلته (طبيب أو دواء)",
+          "السؤال عن الحفلة واقتراح لقاء آخر"
+        ],
+        "usefulPhrases": [
+          { "de": "Es tut mir wirklich leid, dass ich nicht kommen konnte.", "ar": "أنا آسف جداً لأنني لم أستطع القدوم." },
+          { "de": "Ich hatte starke Kopfschmerzen und Fieber.", "ar": "كان لدي صداع شديد وحمى." },
+          { "de": "Der Arzt hat mir gesagt, ich soll ...", "ar": "قال لي الطبيب أنني يجب ..." },
+          { "de": "Heute geht es mir schon besser.", "ar": "اليوم أشعر بتحسن." },
+          { "de": "Wie war die Party?", "ar": "كيف كانت الحفلة؟" },
+          { "de": "Vielleicht können wir uns nächste Woche treffen.", "ar": "ربما يمكننا اللقاء الأسبوع القادم." }
+        ],
+        "sampleAnswer": "Hallo Felix,\n\nes tut mir wirklich leid, dass ich gestern nicht kommen konnte! Ich wollte unbedingt zu deiner Party, aber leider war ich krank.\n\nSchon am Morgen hatte ich starke Kopfschmerzen und Fieber – fast 39 Grad! Ich bin zum Arzt gegangen, und er hat mir gesagt, ich soll zu Hause bleiben und mich ausruhen. Er hat mir auch Tabletten gegeben.\n\nHeute geht es mir schon etwas besser, aber ich bin noch müde.\n\nWie war die Party? Ich hoffe, du hattest viel Spaß! Vielleicht können wir uns nächste Woche treffen?\n\nLiebe Grüße\nSamir",
+        "sampleAnswerNotes": [
+          "\"unbedingt\" = بشدة/حتماً — تعبير عن الحماس يُحسّن أسلوبك.",
+          "\"Er hat mir gesagt, ich soll ...\" = Indirekte Rede.",
+          "ذكر درجة الحرارة (39 Grad) يُضيف تفصيلاً واقعياً مقنعاً."
+        ]
+      },
+      {
+        "id": "schreiben-14-2",
+        "taskNumber": 2,
+        "typeAr": "رسالة رسمية — طلب موعد طبي",
+        "typeDe": "Formeller Brief - Arzttermin anfragen",
+        "wordCount": "حوالي 70 كلمة",
+        "promptAr": "تعاني من آلام في الظهر منذ عشرة أيام. اكتب رسالة رسمية لعيادة طبيبك تطلب موعداً.",
+        "promptDe": "Sie leiden seit zehn Tagen an Rückenschmerzen. Schreiben Sie einen formellen Brief an die Arztpraxis.",
+        "requirements": [
+          "تقديم نفسك (الاسم والتاريخ كمريض)",
+          "وصف الأعراض بدقة",
+          "ذكر منذ متى وأنت تعاني",
+          "طلب موعد وذكر أوقات مناسبة"
+        ],
+        "usefulPhrases": [
+          { "de": "Ich bin Ihr Patient / Ihre Patientin seit ...", "ar": "أنا مريضكم/مريضتكم منذ ..." },
+          { "de": "Ich leide seit ... Tagen an ...", "ar": "أعاني منذ ... أيام من ..." },
+          { "de": "Die Schmerzen beginnen morgens und ...", "ar": "تبدأ الآلام في الصباح و..." },
+          { "de": "Ich bitte um einen baldigen Termin.", "ar": "أطلب موعداً في أقرب وقت ممكن." },
+          { "de": "Ich bin verfügbar ...", "ar": "أنا متاح/ة ..." }
+        ],
+        "sampleAnswer": "Sehr geehrtes Praxisteam,\n\nmein Name ist Leila Hamdan, und ich bin Ihre Patientin (Geburtsdatum: 15.03.1990).\n\nIch wende mich an Sie, weil ich seit etwa zehn Tagen unter starken Rückenschmerzen leide. Die Schmerzen beginnen morgens beim Aufstehen und bleiben den ganzen Tag. Manchmal strahlen sie bis in die Beine aus. Schmerzmittel helfen nur kurz.\n\nIch bitte Sie um einen baldigen Termin. Ich bin montags bis freitags ab 14 Uhr verfügbar, und samstags den ganzen Tag.\n\nVielen Dank im Voraus!\n\nMit freundlichen Grüßen\nLeila Hamdan",
+        "sampleAnswerNotes": [
+          "\"Sehr geehrtes Praxisteam\" = مخاطبة الفريق كاملاً (مناسب لعيادات الأطباء).",
+          "\"strahlen bis in die Beine\" = تعبير طبي شائع للتعبير عن الانتشار.",
+          "ذكر أوقات التفضيل يُسهّل على العيادة تحديد الموعد."
+        ]
+      },
+      {
+        "id": "schreiben-14-3",
+        "taskNumber": 3,
+        "typeAr": "مشاركة في منتدى — الصحة في الشتاء",
+        "typeDe": "Forenbeitrag - Gesund bleiben im Winter",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "في منتدى صحي يسألون: كيف تحافظ على صحتك في الشتاء؟ اكتب مشاركتك ونصائحك.",
+        "promptDe": "In einem Gesundheitsforum fragt man: Wie bleibst du im Winter gesund? Schreibe deinen Beitrag.",
+        "requirements": [
+          "ذكر نصيحتين على الأقل",
+          "شرح سبب أهمية كل نصيحة",
+          "ذكر تجربة شخصية",
+          "ختام يدعو للمشاركة"
+        ],
+        "usefulPhrases": [
+          { "de": "Erstens ... Zweitens ... Drittens ...", "ar": "أولاً ... ثانياً ... ثالثاً ..." },
+          { "de": "Das hilft wirklich gegen Erkältungen.", "ar": "هذا يساعد فعلاً ضد نزلات البرد." },
+          { "de": "Bewegung stärkt das Immunsystem.", "ar": "الحركة تقوّي الجهاز المناعي." },
+          { "de": "Letztes Jahr habe ich kaum Schnupfen gehabt.", "ar": "العام الماضي لم أُصب تقريباً بزكام." },
+          { "de": "Was sind eure Tipps?", "ar": "ما هي نصائحكم؟" }
+        ],
+        "sampleAnswer": "Hallo zusammen!\n\nDer Winter ist die Zeit der Erkältungen – aber man kann viel tun, um gesund zu bleiben!\n\nErstens: Viel Tee trinken, besonders Ingwertee mit Zitrone und Honig. Das stärkt das Immunsystem.\n\nZweitens: Regelmäßig lüften, auch wenn es kalt ist. Frische Luft tötet Bakterien und macht das Zimmer sauber. Ich lüfte mindestens zweimal am Tag für zehn Minuten.\n\nDrittens: Ausreichend schlafen! Wenn man müde ist, wird man schneller krank.\n\nLetztes Jahr habe ich fast keinen Schnupfen gehabt – ich glaube, diese Tipps haben wirklich geholfen!\n\nWas sind eure Tipps für den Winter?",
+        "sampleAnswerNotes": [
+          "\"Erstens / Zweitens / Drittens\" = طريقة احترافية لتنظيم النقاط.",
+          "\"Letztes Jahr habe ich ... gehabt\" = Perfekt للتحدث عن الماضي.",
+          "جملة السبب \"weil/wenn\" تُثري الأسلوب وترفع الدرجة."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "schreiben-15",
+    "title": "نموذج Schreiben رقم 15",
+    "description": "رسائل تتعلق بالسفر والإجازات والأنشطة الترفيهية",
+    "tasks": [
+      {
+        "id": "schreiben-15-1",
+        "taskNumber": 1,
+        "typeAr": "رسالة غير رسمية — وصف رحلة",
+        "typeDe": "Informeller E-Mail - Urlaubsbericht",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "عدت للتو من رحلة إلى فيينا. أرسل لصديقتك رسالة تخبرها عن الرحلة وأجمل ما فيها.",
+        "promptDe": "Du bist gerade aus Wien zurückgekommen. Schreibe deiner Freundin Jana eine E-Mail.",
+        "requirements": [
+          "ذكر الوجهة ومدة الرحلة",
+          "وصف شيء ممتع فعلته",
+          "ذكر شيء طريف أو غير متوقع",
+          "السؤال عن خطط الصديقة للإجازة"
+        ],
+        "usefulPhrases": [
+          { "de": "Ich bin gerade aus ... zurückgekommen!", "ar": "عدت للتو من ...!" },
+          { "de": "Wir haben ... besucht / besichtigt.", "ar": "زرنا ..." },
+          { "de": "Das Lustigste war ...", "ar": "أطرف شيء كان ..." },
+          { "de": "Das Wetter war leider nicht so gut.", "ar": "الطقس للأسف لم يكن جيداً." },
+          { "de": "Hast du auch Urlaubspläne?", "ar": "هل لديك خطط لإجازة؟" }
+        ],
+        "sampleAnswer": "Hallo Jana,\n\nich bin gerade aus Wien zurückgekommen und muss dir sofort davon erzählen!\n\nIch war vier Tage dort – von Donnerstag bis Sonntag. Wien ist wirklich eine wunderschöne Stadt! Wir haben das Schloss Schönbrunn besucht – die Gärten sind traumhaft! Abends haben wir in einem typischen Wiener Restaurant gegessen.\n\nDas Lustigste war: Ich habe mich in der U-Bahn verfahren und bin am Ende am Flughafen gelandet! Zum Glück hatte ich noch Zeit.\n\nDas Wetter war leider nicht so gut – es hat viel geregnet. Aber trotzdem hat mir die Reise sehr gut gefallen!\n\nHast du auch Urlaubspläne für diesen Sommer?\n\nLiebe Grüße\nSarah",
+        "sampleAnswerNotes": [
+          "\"muss dir sofort davon erzählen\" = تعبير حيوي يُظهر الحماس.",
+          "\"traumhaft\" = رائع كالحلم — مفردة راقية بدل \"sehr schön\".",
+          "ذكر حادثة طريفة يجعل الرسالة شخصية وطبيعية."
+        ]
+      },
+      {
+        "id": "schreiben-15-2",
+        "taskNumber": 2,
+        "typeAr": "رسالة رسمية — طلب معلومات عن دورة في VHS",
+        "typeDe": "Formeller Brief - Kursanfrage Volkshochschule",
+        "wordCount": "حوالي 70 كلمة",
+        "promptAr": "تريد الالتحاق بدورة طبخ في Volkshochschule. اكتب رسالة رسمية تطلب فيها معلومات عن الدورة.",
+        "promptDe": "Sie interessieren sich für einen Kochkurs an der VHS. Schreiben Sie eine formelle Anfrage.",
+        "requirements": [
+          "ذكر سبب الاهتمام بالدورة",
+          "طلب معلومات محددة (المواعيد والتكاليف والمستوى)",
+          "ذكر خبرتك السابقة",
+          "طلب رد"
+        ],
+        "usefulPhrases": [
+          { "de": "Ich habe auf Ihrer Website von Ihrem Angebot erfahren.", "ar": "علمت بعرضكم من موقعكم الإلكتروني." },
+          { "de": "Könnten Sie mir bitte mitteilen ...", "ar": "هل يمكنكم إخباري من فضلكم بـ ..." },
+          { "de": "Wann findet der Kurs statt?", "ar": "متى يُعقد الكورس؟" },
+          { "de": "Wie hoch sind die Kursgebühren?", "ar": "كم رسوم الكورس؟" },
+          { "de": "Ich würde mich über eine Antwort freuen.", "ar": "سأكون سعيداً بردّكم." }
+        ],
+        "sampleAnswer": "Sehr geehrte Damen und Herren,\n\nich habe auf Ihrer Website von Ihrem Kochkurs-Angebot erfahren und interessiere mich sehr dafür.\n\nKönnten Sie mir bitte folgende Informationen mitteilen: Wann genau findet der Kurs statt? Wie hoch sind die Kursgebühren? Muss man eigenes Kochgeschirr mitbringen?\n\nIch habe bereits einen Grundkochkurs bei der VHS Hannover belegt und koche gerne in meiner Freizeit. Ich möchte neue Kochtechniken lernen.\n\nIch würde mich über eine baldige Antwort sehr freuen.\n\nMit freundlichen Grüßen\nMohammed Al-Rashid",
+        "sampleAnswerNotes": [
+          "طرح أسئلة محددة يُظهر اهتمامك الجدي ويُسهّل على الجهة الرد.",
+          "ذكر خبرتك السابقة يُعزز طلبك.",
+          "\"Ich würde mich ... freuen\" = Konjunktiv II للتعبير المهذب."
+        ]
+      },
+      {
+        "id": "schreiben-15-3",
+        "taskNumber": 3,
+        "typeAr": "مشاركة في منتدى — إجازة في الداخل أم الخارج",
+        "typeDe": "Forenbeitrag - Urlaub im In- oder Ausland",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "في منتدى إنترنت يسألون: الإجازة في ألمانيا أم في الخارج — أيهما أفضل؟ اكتب رأيك.",
+        "promptDe": "In einem Internet-Forum fragt man: Urlaub im In- oder Ausland – was ist besser? Schreibe deinen Beitrag.",
+        "requirements": [
+          "إبداء رأيك بوضوح في البداية",
+          "ذكر حجة قوية لصالح رأيك",
+          "الاعتراف بوجهة النظر الأخرى",
+          "ختام يدعو للنقاش"
+        ],
+        "usefulPhrases": [
+          { "de": "Ich persönlich bevorzuge ..., weil ...", "ar": "أنا شخصياً أُفضّل ...، لأن ..." },
+          { "de": "Natürlich verstehe ich, dass ...", "ar": "بالطبع أفهم أن ..." },
+          { "de": "Trotzdem bin ich der Meinung, dass ...", "ar": "ومع ذلك، رأيي هو أن ..." },
+          { "de": "neue Kulturen kennenlernen", "ar": "التعرف على ثقافات جديدة" },
+          { "de": "Was denken Sie?", "ar": "ما رأيكم؟" }
+        ],
+        "sampleAnswer": "Das ist eine interessante Frage!\n\nIch persönlich bevorzuge Urlaub im Ausland, weil ich neue Kulturen, Sprachen und Essen kennenlernen möchte. Im Ausland erlebt man echte Abenteuer und Dinge, die man zu Hause nicht findet.\n\nNatürlich verstehe ich, dass Urlaub im Ausland teurer ist und manchmal Sprachprobleme entstehen. Deutschland hat auch wunderschöne Orte – die Ostsee, Bayern und der Schwarzwald sind fantastisch.\n\nAber für mich ist das Wichtigste beim Urlaub: neue Erfahrungen machen. Und das gelingt am besten im Ausland.\n\nWas denken Sie?",
+        "sampleAnswerNotes": [
+          "\"Natürlich verstehe ich, dass ...\" = الاعتراف بالرأي الآخر يُظهر نضجاً فكرياً.",
+          "\"das gelingt am besten\" = تعبير راقٍ بدل \"das ist möglich\".",
+          "تنويع الجمل بين قصيرة وطويلة يُحسّن الأسلوب."
+        ]
+      }
+    ]
   }
 ];
 
