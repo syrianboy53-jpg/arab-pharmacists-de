@@ -130,3 +130,10 @@ if (fs.existsSync(sitemapSrc)) {
 
 
 
+
+const headersSrc = path.resolve('public/_headers');
+const headersDest = path.resolve('dist/_headers');
+if (fs.existsSync(headersSrc)) {
+  fs.copyFileSync(headersSrc, headersDest);
+  console.log('_headers file copied successfully.');
+}
