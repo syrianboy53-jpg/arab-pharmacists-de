@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'providers/app_provider.dart';
 import 'services/sound_service.dart';
+import 'services/notification_service.dart';
 import 'theme/app_theme.dart';
 import 'screens/home_screen.dart';
 
@@ -19,6 +20,11 @@ Future<void> main() async {
   final appProvider = AppProvider();
   await appProvider.init();
   await SoundService().init();
+  
+  final notifService = NotificationService();
+  await notifService.init();
+  await notifService.requestPermissions();
+  await notifService.scheduleDailyReminder();
 
   runApp(
     ChangeNotifierProvider.value(

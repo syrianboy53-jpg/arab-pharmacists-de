@@ -32,6 +32,7 @@ import 'exam_simulation_screen.dart';
 import 'interactive_practice_screen.dart';
 import 'brief_corrector_screen.dart';
 import 'pronunciation_lab_screen.dart';
+import 'duels_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -1295,6 +1296,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           _buildPathNode('المراجعة الذكية', Icons.loop, const Color(0xFF475569), () => _navigate(const SmartReviewScreen()), 0.0),
                           _buildPathNode('الأخطاء الشائعة', Icons.warning, const Color(0xFFB45309), () => _navigate(const FehlerScreen()), -0.4),
                           _buildPathNode('لعبة المرادفات', Icons.gamepad, const Color(0xFF059669), () => _navigate(const SynonymsScreen()), 0.4),
+                          _buildPathNode('تحديات الأصدقاء', Icons.sports_esports, const Color(0xFFF59E0B), () => _navigate(const DuelsScreen()), -0.2),
                         ],
                       ),
                     ),

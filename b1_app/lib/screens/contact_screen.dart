@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../providers/app_provider.dart';
 
 class ContactScreen extends StatefulWidget {
@@ -65,46 +66,48 @@ class _ContactScreenState extends State<ContactScreen> {
     final email = _emailController.text.trim();
     final subject = _subjectController.text.trim();
     final message = _messageController.text.trim();
-    final topic = _selectedTopic;
+    final topicLabel = _topics[_selectedTopic] ?? 'استفسار';
+
+    final String finalSubject = subject.isNotEmpty ? '[$topicLabel] $subject' : '[$topicLabel] رسالة من التطبيق';
+    final String body = 'الاسم: $name\nالبريد الإلكتروني: $email\n\nالرسالة:\n$message';
+
+    final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: 'support@b1-syrer.de',
+      query: _encodeQueryParameters(<String, String>{
+        'subject': finalSubject,
+        'body': body,
+      }),
+    );
 
     try {
-      final client = HttpClient();
-      client.connectionTimeout = const Duration(seconds: 10);
-      
-      // Post to contact API
-      final request = await client.postUrl(Uri.parse('https://b1-syrer.de/api/contact'));
-      request.headers.set(HttpHeaders.contentTypeHeader, 'application/json');
-      
-      final body = json.encode({
-        'name': name,
-        'email': email,
-        'subject': subject.isNotEmpty ? subject : null,
-        'message': message,
-        'topic': topic,
-        'website': '' // Honeypot field must be empty
-      });
-      
-      request.write(body);
-      
-      final response = await request.close();
-      final responseBody = await response.transform(utf8.decoder).join();
-      final data = json.decode(responseBody) as Map<String, dynamic>;
-
-      setState(() {
-        _isLoading = false;
-      });
-
-      if (response.statusCode == 200 && data['ok'] == true) {
-        _showSuccessDialog();
+      if (await canLaunchUrl(emailLaunchUri)) {
+        await launchUrl(emailLaunchUri);
+        // Show success
+        if (mounted) {
+          _showSuccessDialog();
+        }
       } else {
-        _showErrorSnackBar(data['detail'] ?? 'فشل إرسال الرسالة، يرجى المحاولة لاحقاً.');
+        throw Exception('Could not launch email app');
       }
     } catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
-      _showErrorSnackBar('فشل الاتصال بالخادم. يرجى التحقق من اتصال الإنترنت.');
+      if (mounted) {
+        _showErrorSnackBar('تعذر فتح تطبيق البريد الإلكتروني. يرجى مراسلتنا مباشرة على support@b1-syrer.de');
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
+  }
+
+  String? _encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((MapEntry<String, String> e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
   }
 
   void _showErrorSnackBar(String message) {
