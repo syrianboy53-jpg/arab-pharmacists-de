@@ -29,6 +29,26 @@ mappings.forEach(m => {
     return;
   }
 
+  // Backup manual additions from existing app files BEFORE processing
+  let manualAdditions = '';
+  if (fs.existsSync(appPath)) {
+    const original = fs.readFileSync(appPath, 'utf8');
+    if (m.app === 'b2_data.dart') {
+      const startIdx = original.indexOf('final List<Map<String, dynamic>> b2Essays');
+      if (startIdx !== -1) manualAdditions = original.substring(startIdx);
+    } else if (m.app === 'grammatik_data.dart') {
+      const startIdx = original.indexOf('final List<Map<String, dynamic>> satzbau');
+      if (startIdx !== -1) manualAdditions = original.substring(startIdx);
+    } else if (m.app === 'schreiben_data.dart') {
+      const startIdx = original.indexOf('final List<Map<String, dynamic>> schreibenTemplates');
+      if (startIdx !== -1) {
+        // Cut before schreibenLetters mapping since it's re-added later
+        const endIdx = original.indexOf('final List<Map<String, dynamic>> schreibenLetters');
+        manualAdditions = endIdx !== -1 ? original.substring(startIdx, endIdx) : original.substring(startIdx);
+      }
+    }
+  }
+
   console.log(`Processing: ${m.web} -> ${m.app}`);
 
   let content = fs.readFileSync(webPath, 'utf8');
@@ -37,8 +57,6 @@ mappings.forEach(m => {
   content = content.replace(/export\s+interface\s+\w+\s*\{[\s\S]*?\}/g, '');
 
   // Strip type annotations from variable declarations:
-  // e.g., export const lebenQuestions: LebenQuestion[] = ...
-  // becomes export const lebenQuestions = ...
   content = content.replace(/export\s+const\s+(\w+):\s*\w+(?:\[\])?\s*=/g, 'export const $1 =');
   content = content.replace(/export\s+const\s+(\w+):\s*Array<[^>]+>\s*=/g, 'export const $1 =');
 
@@ -70,27 +88,12 @@ mappings.forEach(m => {
   fs.writeFileSync(appPath, dartContent, 'utf8');
 
   // Custom additions to preserve app-only data
-  if (m.app === 'b2_data.dart') {
-    const original = fs.readFileSync('scratch/utf8_b2_data.dart', 'utf8');
-    const startIdx = original.indexOf('final List<Map<String, dynamic>> b2Essays');
-    if (startIdx !== -1) {
-      fs.appendFileSync(appPath, '\n' + original.substring(startIdx), 'utf8');
-      console.log('Appended b2Essays to b2_data.dart');
-    }
-  } else if (m.app === 'grammatik_data.dart') {
-    const original = fs.readFileSync('scratch/utf8_grammatik_data.dart', 'utf8');
-    const startIdx = original.indexOf('final List<Map<String, dynamic>> satzbau');
-    if (startIdx !== -1) {
-      fs.appendFileSync(appPath, '\n' + original.substring(startIdx), 'utf8');
-      console.log('Appended satzbau and grammarLessons to grammatik_data.dart');
-    }
-  } else if (m.app === 'schreiben_data.dart') {
-    const original = fs.readFileSync('scratch/utf8_schreiben_data.dart', 'utf8');
-    const startIdx = original.indexOf('final List<Map<String, dynamic>> schreibenTemplates');
-    if (startIdx !== -1) {
-      fs.appendFileSync(appPath, '\n' + original.substring(startIdx), 'utf8');
-      console.log('Appended schreibenTemplates to schreiben_data.dart');
-    }
+  if (manualAdditions) {
+    fs.appendFileSync(appPath, '\n' + manualAdditions, 'utf8');
+    console.log(`Appended manual additions to ${m.app}`);
+  }
+
+  if (m.app === 'schreiben_data.dart') {
     const mapLetters = `
 final List<Map<String, dynamic>> schreibenLetters = schreibenModels.expand((model) {
   final tasks = model['tasks'] as List<dynamic>? ?? [];
