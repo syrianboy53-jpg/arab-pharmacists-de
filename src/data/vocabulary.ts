@@ -1,5 +1,3 @@
-// Automatically generated from B1 Flutter data - v52
-
 export const vocabCategories = [
   {
     "id": "alltag",
@@ -2975,4 +2973,3 @@ export const vocabCategories = [
     ]
   }
 ];
-
