@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { playCorrectSound, playWrongSound, playTadaSound } from '../utils/gamification'
 
 interface Question {
   q: string
@@ -204,7 +205,10 @@ export default function EinstufungPage() {
     setSelectedAnswer(idx)
     setAnswered(true)
     if (idx === questions[currentIdx].correct) {
+      playCorrectSound()
       setScore((s) => s + 1)
+    } else {
+      playWrongSound()
     }
   }
 
@@ -214,6 +218,7 @@ export default function EinstufungPage() {
       setSelectedAnswer(null)
       setAnswered(false)
     } else {
+      playTadaSound()
       setFinished(true)
       // Save level locally
       const lvl = getLevel(score + (selectedAnswer === questions[currentIdx].correct ? 1 : 0))

@@ -187,6 +187,17 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* Legal Footer for AdSense Compliance */}
+      <footer className="text-center text-xs text-muted pt-6 pb-2 border-t border-gray-100 dark:border-gray-800">
+        <div className="flex flex-wrap justify-center gap-4 mb-2">
+          <a href="/impressum/" className="hover:text-green transition-colors">Impressum</a>
+          <a href="/datenschutz/" className="hover:text-green transition-colors">Datenschutz</a>
+          <a href="/agb/" className="hover:text-green transition-colors">AGB</a>
+          <a href="/privacy/" className="hover:text-green transition-colors">Privacy</a>
+        </div>
+        <p>© 2026 B1-Syrer.de — Made with ❤️ in Germany</p>
+      </footer>
     </div>
   )
 }

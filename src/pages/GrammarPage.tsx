@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { commonMistakes, trennbareVerben } from '../data/grammar'
+import { playCorrectSound, playWrongSound, playTadaSound, triggerConfetti } from '../utils/gamification'
 
 interface LessonTopic {
   id: number
@@ -202,7 +203,23 @@ export default function GrammarPage() {
                 </div>
                 {!showLessonResults && Object.keys(lessonAnswers).length > 0 && (
                   <button
-                    onClick={() => setShowLessonResults(true)}
+                    onClick={() => {
+                      setShowLessonResults(true)
+                      const lesson = originalLessons[selectedLesson]
+                      const total = lesson.exercises.length
+                      let correctCount = 0
+                      for (let i = 0; i < total; i++) {
+                        if (lessonAnswers[i] === lesson.exercises[i].correct) correctCount++
+                      }
+                      if (correctCount === total && total > 0) {
+                        playTadaSound()
+                        triggerConfetti()
+                      } else if (correctCount >= total / 2) {
+                        playCorrectSound()
+                      } else {
+                        playWrongSound()
+                      }
+                    }}
                     className="mt-4 w-full bg-green text-white hover:bg-green-600 py-3 rounded-xl font-bold transition-all shadow-md cursor-pointer"
                   >
                     تحقّق من الإجابات

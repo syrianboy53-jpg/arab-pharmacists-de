@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { satzbau, commonMistakes } from '../data/grammar'
+import { playCorrectSound, playWrongSound, playTadaSound, triggerConfetti } from '../utils/gamification'
 
 interface SentenceItem {
   right: string
@@ -141,10 +142,12 @@ export default function SatzbauPage() {
     setAnswered(true)
 
     if (correct) {
+      playCorrectSound()
       setScore((s) => s + 1)
       const phrase = correctPhrases[Math.floor(Math.random() * correctPhrases.length)]
       setMascotPhrase(phrase)
     } else {
+      playWrongSound()
       const phrase = incorrectPhrases[Math.floor(Math.random() * incorrectPhrases.length)]
       setMascotPhrase(phrase)
       setLives((l) => {
@@ -166,6 +169,10 @@ export default function SatzbauPage() {
       setMascotPhrase('رتب الكلمات لتصيغ الجملة التالية! 🦉')
       initRound(roundSentences[nextIdx])
     } else {
+      if (lives > 0) {
+        playTadaSound()
+        triggerConfetti()
+      }
       setGameWon(true)
     }
   }

@@ -339,55 +339,54 @@ class _SatzbauScreenState extends State<SatzbauScreen> {
                   const SizedBox(height: 24),
 
                   // Workspace (Assembled Words)
-                  Container(
-                    constraints: const BoxConstraints(minHeight: 120),
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: isDark ? const Color(0xFF1E293B) : Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: _answered
-                            ? (_isCorrect! ? Colors.green : Colors.red)
-                            : (isDark ? Colors.white10 : Colors.grey[300]!),
-                        width: 2.5,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.02),
-                          blurRadius: 10,
-                          offset: const Offset(0, 5),
-                        )
-                      ],
-                    ),
-                    child: _userWords.isEmpty
-                        ? Center(
-                            child: Text(
-                              'اضغط على الكلمات المتاحة لبناء الجملة',
-                              style: TextStyle(color: Colors.grey[400], fontSize: 13),
-                            ),
-                          )
-                        : Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: _userWords.map((word) {
-                              return ActionChip(
-                                backgroundColor: const Color(0xFF10B981).withOpacity(0.1),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  side: const BorderSide(color: Color(0xFF10B981), width: 1.5),
-                                ),
-                                label: Text(
-                                  word,
-                                  style: TextStyle(
-                                    color: isDark ? Colors.white : const Color(0xFF1E293B),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                onPressed: () => _deselectWord(word),
-                              );
-                            }).toList(),
+                  DragTarget<String>(
+                    onAcceptWithDetails: (details) {
+                      if (_shuffledWords.contains(details.data)) {
+                        _selectWord(details.data);
+                      }
+                    },
+                    builder: (context, candidateData, rejectedData) {
+                      return Container(
+                        constraints: const BoxConstraints(minHeight: 120),
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: isDark ? const Color(0xFF1E293B) : Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: _answered
+                                ? (_isCorrect! ? Colors.green : Colors.red)
+                                : (candidateData.isNotEmpty ? const Color(0xFF10B981) : (isDark ? Colors.white10 : Colors.grey[300]!)),
+                            width: candidateData.isNotEmpty ? 3.0 : 2.5,
                           ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.02),
+                              blurRadius: 10,
+                              offset: const Offset(0, 5),
+                            )
+                          ],
+                        ),
+                        child: _userWords.isEmpty
+                            ? Center(
+                                child: Text(
+                                  'اضغط أو اسحب الكلمات إلى هنا',
+                                  style: TextStyle(color: Colors.grey[400], fontSize: 13),
+                                ),
+                              )
+                            : Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: _userWords.map((word) {
+                                  return _buildDraggableChip(
+                                    word: word,
+                                    isDark: isDark,
+                                    isWorkspace: true,
+                                    onTap: () => _deselectWord(word),
+                                  );
+                                }).toList(),
+                              ),
+                      );
+                    },
                   ),
 
                   const SizedBox(height: 24),
@@ -398,38 +397,40 @@ class _SatzbauScreenState extends State<SatzbauScreen> {
                     style: TextStyle(fontSize: 12, color: Colors.grey, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: isDark ? const Color(0xFF1E293B).withOpacity(0.4) : Colors.grey[100],
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: isDark ? Colors.white10 : Colors.transparent),
-                    ),
-                    child: _shuffledWords.isEmpty && _userWords.isEmpty
-                        ? const SizedBox(height: 60)
-                        : Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            alignment: WrapAlignment.center,
-                            children: _shuffledWords.map((word) {
-                              return ActionChip(
-                                backgroundColor: isDark ? const Color(0xFF1E293B) : Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  side: BorderSide(color: isDark ? Colors.white10 : Colors.grey[300]!, width: 1.5),
-                                ),
-                                label: Text(
-                                  word,
-                                  style: TextStyle(
-                                    color: isDark ? Colors.white : const Color(0xFF1E293B),
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                onPressed: () => _selectWord(word),
-                              );
-                            }).toList(),
+                  DragTarget<String>(
+                    onAcceptWithDetails: (details) {
+                      if (_userWords.contains(details.data)) {
+                        _deselectWord(details.data);
+                      }
+                    },
+                    builder: (context, candidateData, rejectedData) {
+                      return Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: isDark ? const Color(0xFF1E293B).withOpacity(0.4) : Colors.grey[100],
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: candidateData.isNotEmpty ? const Color(0xFF10B981) : (isDark ? Colors.white10 : Colors.transparent),
+                            width: candidateData.isNotEmpty ? 2.0 : 1.0,
                           ),
+                        ),
+                        child: _shuffledWords.isEmpty && _userWords.isEmpty
+                            ? const SizedBox(height: 60)
+                            : Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                alignment: WrapAlignment.center,
+                                children: _shuffledWords.map((word) {
+                                  return _buildDraggableChip(
+                                    word: word,
+                                    isDark: isDark,
+                                    isWorkspace: false,
+                                    onTap: () => _selectWord(word),
+                                  );
+                                }).toList(),
+                              ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -705,6 +706,50 @@ class _SatzbauScreenState extends State<SatzbauScreen> {
           ),
         ),
       ),
+    );
+  }
+  Widget _buildDraggableChip({
+    required String word,
+    required bool isDark,
+    required bool isWorkspace,
+    required VoidCallback onTap,
+  }) {
+    final chip = ActionChip(
+      backgroundColor: isWorkspace 
+          ? const Color(0xFF10B981).withOpacity(0.1) 
+          : (isDark ? const Color(0xFF1E293B) : Colors.white),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+        side: BorderSide(
+          color: isWorkspace 
+              ? const Color(0xFF10B981) 
+              : (isDark ? Colors.white10 : Colors.grey[300]!), 
+          width: 1.5
+        ),
+      ),
+      label: Text(
+        word,
+        style: TextStyle(
+          color: isDark ? Colors.white : const Color(0xFF1E293B),
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+        ),
+        textDirection: TextDirection.ltr,
+      ),
+      onPressed: onTap,
+    );
+
+    return Draggable<String>(
+      data: word,
+      feedback: Material(
+        color: Colors.transparent,
+        child: Opacity(opacity: 0.8, child: chip),
+      ),
+      childWhenDragging: Opacity(
+        opacity: 0.3,
+        child: chip,
+      ),
+      child: chip,
     );
   }
 }

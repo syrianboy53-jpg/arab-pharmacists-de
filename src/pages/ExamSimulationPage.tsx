@@ -1,15 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PlayCircle, CheckCircle, Clock, Award, FileText, Headphones, Edit3, Mic } from 'lucide-react';
+import { playTadaSound, triggerConfetti } from '../utils/gamification';
 
 export default function ExamSimulationPage() {
   const [examStarted, setExamStarted] = useState(false);
-  const [currentSection, setCurrentSection] = useState<'intro' | 'lesen' | 'hoeren' | 'schreiben' | 'sprechen'>('intro');
+  const [currentSection, setCurrentSection] = useState<'intro' | 'lesen' | 'hoeren' | 'schreiben' | 'sprechen' | 'result'>('intro');
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
 
   const handleSelect = (questionId: string, value: string) => {
     setAnswers(prev => ({ ...prev, [questionId]: value }));
   };
+
+  useEffect(() => {
+    if (currentSection === 'result') {
+      playTadaSound();
+      triggerConfetti();
+    }
+  }, [currentSection]);
 
   const startExam = () => {
     setExamStarted(true);

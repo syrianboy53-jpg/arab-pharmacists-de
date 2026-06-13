@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { pruefungsFragen } from '../data/sprachbausteine'
+import { playCorrectSound, playWrongSound, playTadaSound, triggerConfetti } from '../utils/gamification'
 
 interface DrillItem {
   id: string
@@ -75,9 +76,11 @@ export default function DrillPage() {
     const isCorrect = idx === roundDrills[currentIdx].correct
 
     if (isCorrect) {
+      playCorrectSound()
       setScore((s) => s + 1)
       setMascotPhrase(correctPhrases[Math.floor(Math.random() * correctPhrases.length)])
     } else {
+      playWrongSound()
       setMascotPhrase(incorrectPhrases[Math.floor(Math.random() * incorrectPhrases.length)])
       setLives((l) => {
         const newL = l - 1
@@ -96,6 +99,10 @@ export default function DrillPage() {
       setAnswered(false)
       setMascotPhrase('اختر الكلمة أو الحرف المناسب لإكمال الفراغ! 🦉')
     } else {
+      if (lives > 0) {
+        playTadaSound()
+        triggerConfetti()
+      }
       setGameWon(true)
     }
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../data/sprechen_data.dart';
+import '../providers/app_provider.dart';
 
 class SprechenScreen extends StatefulWidget {
   const SprechenScreen({super.key});
@@ -83,6 +85,15 @@ class _SprechenScreenState extends State<SprechenScreen> with SingleTickerProvid
                               ],
                             ),
                           ),
+                          IconButton(
+                            icon: const Icon(Icons.volume_up_rounded, size: 20),
+                            color: Theme.of(context).colorScheme.primary,
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                            onPressed: () {
+                              Provider.of<AppProvider>(context, listen: false).speak(line['de'] as String? ?? '');
+                            },
+                          ),
                         ],
                       ),
                     )),
@@ -134,6 +145,15 @@ class _SprechenScreenState extends State<SprechenScreen> with SingleTickerProvid
                           ],
                         ),
                       ),
+                      IconButton(
+                        icon: const Icon(Icons.volume_up_rounded, size: 20),
+                        color: Theme.of(context).colorScheme.primary,
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        onPressed: () {
+                          Provider.of<AppProvider>(context, listen: false).speak(ph['de'] as String? ?? '');
+                        },
+                      ),
                     ],
                   ),
                 )),
@@ -168,11 +188,27 @@ class _SprechenScreenState extends State<SprechenScreen> with SingleTickerProvid
                     const SizedBox(height: 8),
                     ...phrases.map((ph) => Padding(
                       padding: const EdgeInsets.only(bottom: 6),
-                      child: Column(
+                      child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(ph['de'] as String? ?? '', textDirection: TextDirection.ltr, style: const TextStyle(fontWeight: FontWeight.w500)),
-                          if (ph['ar'] != null) Text(ph['ar'] as String, style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(ph['de'] as String? ?? '', textDirection: TextDirection.ltr, style: const TextStyle(fontWeight: FontWeight.w500)),
+                                if (ph['ar'] != null) Text(ph['ar'] as String, style: TextStyle(fontSize: 13, color: Colors.grey[600])),
+                              ],
+                            ),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.volume_up_rounded, size: 20),
+                            color: Theme.of(context).colorScheme.primary,
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                            onPressed: () {
+                              Provider.of<AppProvider>(context, listen: false).speak(ph['de'] as String? ?? '');
+                            },
+                          ),
                         ],
                       ),
                     )),

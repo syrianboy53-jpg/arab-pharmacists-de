@@ -37,6 +37,15 @@ const commonHead = (title, description, canonicalUrl) => `
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>${title} — B1 Deutsch للسوريين 🇸🇾</title>
   <meta name="description" content="${description}">
+  <meta property="og:title" content="${title}">
+  <meta property="og:description" content="${description}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="${canonicalUrl}">
+  <meta property="og:image" content="https://www.b1-syrer.de/brand/hero.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${title}">
+  <meta name="twitter:description" content="${description}">
+  <meta name="twitter:image" content="https://www.b1-syrer.de/brand/hero.png">
   <link rel="icon" type="image/png" href="../brand/icon.png">
   <link rel="canonical" href="${canonicalUrl}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
