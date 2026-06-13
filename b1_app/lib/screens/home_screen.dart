@@ -30,6 +30,8 @@ import 'emergency_screen.dart';
 import 'smart_review_screen.dart';
 import 'exam_simulation_screen.dart';
 import 'interactive_practice_screen.dart';
+import 'brief_corrector_screen.dart';
+import 'pronunciation_lab_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -1265,7 +1267,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         children: [
                           _buildPathNode('التحدث', Icons.record_voice_over, const Color(0xFFDC2626), () => _navigate(const SprechenScreen()), 0.2),
+                          _buildPathNode('مختبر النطق', Icons.mic, const Color(0xFF9333EA), () => _navigate(const PronunciationLabScreen()), 0.5),
                           _buildPathNode('الكتابة', Icons.edit_note, const Color(0xFF2563EB), () => _navigate(const SchreibenScreen()), -0.4, isLarge: true),
+                          _buildPathNode('المصحح الذكي', Icons.auto_awesome, const Color(0xFF10B981), () => _navigate(const BriefCorrectorScreen()), -0.1),
                           _buildPathNode('تصريف الأفعال', Icons.refresh, const Color(0xFF65A30D), () => _navigate(const ConjugationTrainerScreen()), -0.7),
                         ],
                       ),
