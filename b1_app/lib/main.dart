@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/app_provider.dart';
+import 'services/sound_service.dart';
 import 'theme/app_theme.dart';
 import 'screens/home_screen.dart';
 
@@ -17,6 +18,7 @@ Future<void> main() async {
 
   final appProvider = AppProvider();
   await appProvider.init();
+  await SoundService().init();
 
   runApp(
     ChangeNotifierProvider.value(

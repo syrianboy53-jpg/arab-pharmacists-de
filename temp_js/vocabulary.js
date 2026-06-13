@@ -1,5 +1,137 @@
-// Automatically generated from B1 Flutter data - v52
 export const vocabCategories = [
+    {
+        "id": "a1-begruessung",
+        "titleAr": "التحيات والتعارف A1",
+        "titleDe": "A1 Begrüßung & Kennenlernen",
+        "words": [
+            {
+                "de": "Hallo",
+                "ar": "مرحباً",
+                "example": "Hallo, wie geht es dir?"
+            },
+            {
+                "de": "Guten Morgen",
+                "ar": "صباح الخير",
+                "example": "Guten Morgen! Hast du gut geschlafen?"
+            },
+            {
+                "de": "Tschüss",
+                "ar": "وداعاً",
+                "example": "Tschüss, bis morgen!"
+            },
+            {
+                "de": "heißen",
+                "ar": "يُدعى / يُسمى",
+                "example": "Ich heiße Ahmad."
+            },
+            {
+                "de": "kommen",
+                "ar": "يأتي",
+                "example": "Ich komme aus Syrien."
+            },
+            {
+                "de": "wohnen",
+                "ar": "يسكن",
+                "example": "Ich wohne in Berlin."
+            }
+        ]
+    },
+    {
+        "id": "a1-zahlen",
+        "titleAr": "الأرقام والأيام A1",
+        "titleDe": "A1 Zahlen & Tage",
+        "words": [
+            {
+                "de": "eins",
+                "ar": "واحد",
+                "example": "Ich habe einen Bruder."
+            },
+            {
+                "de": "heute",
+                "ar": "اليوم",
+                "example": "Heute ist Montag."
+            },
+            {
+                "de": "die Woche",
+                "ar": "الأسبوع",
+                "example": "Eine Woche hat sieben Tage."
+            },
+            {
+                "de": "der Monat",
+                "ar": "الشهر",
+                "example": "Der Januar ist der erste Monat."
+            },
+            {
+                "de": "das Jahr",
+                "ar": "السنة",
+                "example": "Ein Jahr hat zwölf Monate."
+            }
+        ]
+    },
+    {
+        "id": "a2-einkaufen",
+        "titleAr": "التسوق والطعام A2",
+        "titleDe": "A2 Einkaufen & Essen",
+        "words": [
+            {
+                "de": "einkaufen",
+                "ar": "يتسوق",
+                "example": "Ich gehe im Supermarkt einkaufen."
+            },
+            {
+                "de": "der Preis",
+                "ar": "السعر",
+                "example": "Der Preis ist sehr günstig."
+            },
+            {
+                "de": "bezahlen",
+                "ar": "يدفع",
+                "example": "Ich möchte bitte bezahlen."
+            },
+            {
+                "de": "das Lebensmittel",
+                "ar": "المواد الغذائية",
+                "example": "Wir brauchen frische Lebensmittel."
+            },
+            {
+                "de": "kosten",
+                "ar": "يُكلف",
+                "example": "Wie viel kostet das?"
+            }
+        ]
+    },
+    {
+        "id": "a2-gesundheit",
+        "titleAr": "الصحة والطبيب A2",
+        "titleDe": "A2 Gesundheit & Arzt",
+        "words": [
+            {
+                "de": "der Arzt",
+                "ar": "الطبيب",
+                "example": "Ich muss zum Arzt gehen."
+            },
+            {
+                "de": "die Apotheke",
+                "ar": "الصيدلية",
+                "example": "Ich hole die Medikamente aus der Apotheke."
+            },
+            {
+                "de": "krank",
+                "ar": "مريض",
+                "example": "Ich bin leider krank."
+            },
+            {
+                "de": "die Schmerzen",
+                "ar": "الألم",
+                "example": "Ich habe starke Kopfschmerzen."
+            },
+            {
+                "de": "der Termin",
+                "ar": "الموعد",
+                "example": "Ich brauche einen Termin beim Zahnarzt."
+            }
+        ]
+    },
     {
         "id": "alltag",
         "titleAr": "الحياة اليومية",

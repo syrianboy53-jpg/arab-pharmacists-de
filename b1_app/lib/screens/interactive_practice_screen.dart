@@ -11,6 +11,8 @@ import 'drill_screen.dart';
 import 'fehler_screen.dart';
 import 'chat_simulator_screen.dart';
 import 'einstufung_screen.dart';
+import '../services/sound_service.dart';
+import 'package:confetti/confetti.dart';
 
 class InteractivePracticeScreen extends StatefulWidget {
   const InteractivePracticeScreen({super.key});
@@ -41,6 +43,21 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
   String _sentenceTranslation = '';
   bool _sentenceChecked = false;
   bool? _sentenceIsCorrect;
+
+  // Confetti controller
+  late ConfettiController _confettiController;
+
+  @override
+  void initState() {
+    super.initState();
+    _confettiController = ConfettiController(duration: const Duration(seconds: 3));
+  }
+
+  @override
+  void dispose() {
+    _confettiController.dispose();
+    super.dispose();
+  }
 
   // Mascot quotes
   final List<String> _successQuotes = [
@@ -243,10 +260,12 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
       _explanationText = q['explanation'] ?? '';
 
       if (isCorrect) {
+        SoundService().playCorrect();
         _score++;
         _mascotQuote = _successQuotes[random.nextInt(_successQuotes.length)];
         context.read<AppProvider>().addXP(5);
       } else {
+        SoundService().playWrong();
         _lives--;
         _mascotQuote = _failQuotes[random.nextInt(_failQuotes.length)];
       }
@@ -269,6 +288,8 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
       });
       // Increment completed quizzes
       context.read<AppProvider>().incrementQuizzes();
+      SoundService().playTada();
+      _confettiController.play();
     }
   }
 
@@ -283,10 +304,13 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
       _sentenceIsCorrect = isCorrect;
       _sentenceChecked = true;
       if (isCorrect) {
+        SoundService().playTada();
+        _confettiController.play();
         _score = 1; // Completed sentence
         _mascotQuote = 'رائع جداً! تركيب سليم 100% 🎉';
         context.read<AppProvider>().addXP(10);
       } else {
+        SoundService().playWrong();
         _lives = 0; // Trigger fail UI
         _mascotQuote = 'الترتيب خاطئ! انظر إلى الترتيب الصحيح بالأسفل 🦉';
       }
@@ -335,6 +359,15 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
           
           SafeArea(
             child: _buildCurrentView(isDark),
+          ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: ConfettiWidget(
+              confettiController: _confettiController,
+              blastDirectionality: BlastDirectionality.explosive,
+              shouldLoop: false,
+              colors: const [Colors.green, Colors.blue, Colors.pink, Colors.orange, Colors.purple],
+            ),
           ),
         ],
       ),
