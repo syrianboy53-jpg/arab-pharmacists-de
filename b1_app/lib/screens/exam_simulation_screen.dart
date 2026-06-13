@@ -844,6 +844,11 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                         );
                       }).toList(),
                     ),
+                    if (_partChecked && s['explanation'] != null) ...[
+                      const SizedBox(height: 12),
+                      Text('💡 توضيح: ${s["explanation"]}',
+                          style: const TextStyle(color: Colors.green, fontSize: 14, fontWeight: FontWeight.bold))
+                    ]
                   ],
                 ),
               ),
@@ -1016,6 +1021,11 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                             fontWeight: FontWeight.bold,
                             fontSize: 14),
                       ),
+                      if (s['explanation'] != null) ...[
+                        const SizedBox(height: 8),
+                        Text('💡 توضيح: ${s["explanation"]}',
+                            style: const TextStyle(color: Colors.green, fontSize: 14, fontWeight: FontWeight.bold))
+                      ]
                     ]
                   ],
                 ),

@@ -73,7 +73,7 @@ class _ContactScreenState extends State<ContactScreen> {
 
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
-      path: 'support@b1-syrer.de',
+      path: 'shami.fadi@gmx.de',
       query: _encodeQueryParameters(<String, String>{
         'subject': finalSubject,
         'body': body,
@@ -83,16 +83,17 @@ class _ContactScreenState extends State<ContactScreen> {
     try {
       if (await canLaunchUrl(emailLaunchUri)) {
         await launchUrl(emailLaunchUri);
-        // Show success
         if (mounted) {
           _showSuccessDialog();
+          _messageController.clear();
+          _subjectController.clear();
         }
       } else {
         throw Exception('Could not launch email app');
       }
     } catch (e) {
       if (mounted) {
-        _showErrorSnackBar('تعذر فتح تطبيق البريد الإلكتروني. يرجى مراسلتنا مباشرة على support@b1-syrer.de');
+        _showErrorSnackBar('تعذر فتح تطبيق البريد الإلكتروني. يرجى التواصل مباشرة عبر shami.fadi@gmx.de');
       }
     } finally {
       if (mounted) {
