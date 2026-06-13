@@ -34,31 +34,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
         final remoteVersion = int.tryParse(config['apk_version'] ?? '0') ?? 0;
         const localVersion = AppProvider.appVersion;
         
-        if (mounted) {
-          if (localVersion < remoteVersion) {
-            final apkUrl = config['apk_url'] ?? 'https://b1-syrer.de';
-            _showUpdateDialog(context, apkUrl);
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text('أنت تستخدم أحدث إصدار بالفعل! (النسخة $localVersion) 🎉'),
-                backgroundColor: Colors.green,
-              ),
-            );
-          }
+        if (!context.mounted) return;
+        if (localVersion < remoteVersion) {
+          final apkUrl = config['apk_url'] ?? 'https://b1-syrer.de';
+          _showUpdateDialog(context, apkUrl);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('أنت تستخدم أحدث إصدار بالفعل! (النسخة $localVersion) 🎉'),
+              backgroundColor: Colors.green,
+            ),
+          );
         }
       } else {
         throw 'خطأ في استجابة الخادم';
       }
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('فشل التحقق من التحديثات: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('فشل التحقق من التحديثات: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
     } finally {
       if (mounted) {
         setState(() => _isChecking = false);

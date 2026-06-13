@@ -336,7 +336,7 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   boxShadow: [
-                    BoxShadow(color: const Color(0xFF0D9488).withOpacity(0.15), blurRadius: 120, spreadRadius: 20),
+                    BoxShadow(color: const Color(0xFF0D9488).withValues(alpha: 0.15), blurRadius: 120, spreadRadius: 20),
                   ],
                 ),
               ),
@@ -350,7 +350,7 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   boxShadow: [
-                    BoxShadow(color: const Color(0xFF4F46E5).withOpacity(0.12), blurRadius: 130, spreadRadius: 30),
+                    BoxShadow(color: const Color(0xFF4F46E5).withValues(alpha: 0.12), blurRadius: 130, spreadRadius: 30),
                   ],
                 ),
               ),
@@ -548,9 +548,9 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? Colors.white.withOpacity(0.04) : Colors.white,
+        color: isDark ? Colors.white.withValues(alpha: 0.04) : Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: isDark ? Colors.white.withOpacity(0.08) : const Color(0xFFE2E8F0)),
+        border: Border.all(color: isDark ? Colors.white.withValues(alpha: 0.08) : const Color(0xFFE2E8F0)),
       ),
       child: Row(
         children: [
@@ -603,10 +603,10 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
         filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
         child: Container(
           decoration: BoxDecoration(
-            color: isDark ? Colors.white.withOpacity(0.04) : Colors.white.withOpacity(0.85),
+            color: isDark ? Colors.white.withValues(alpha: 0.04) : Colors.white.withValues(alpha: 0.85),
             borderRadius: BorderRadius.circular(24),
             border: Border.all(
-              color: isDark ? Colors.white.withOpacity(0.06) : const Color(0xFFE2E8F0),
+              color: isDark ? Colors.white.withValues(alpha: 0.06) : const Color(0xFFE2E8F0),
               width: 1.2,
             ),
           ),
@@ -614,7 +614,7 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
             color: Colors.transparent,
             child: InkWell(
               onTap: onTap,
-              splashColor: accentColor.withOpacity(0.12),
+              splashColor: accentColor.withValues(alpha: 0.12),
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Row(
@@ -622,7 +622,7 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: accentColor.withOpacity(0.15),
+                        color: accentColor.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Icon(icon, color: accentColor, size: 36),
@@ -647,7 +647,7 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
                         ],
                       ),
                     ),
-                    Icon(Icons.arrow_forward_ios, color: textMuted.withOpacity(0.3), size: 16),
+                    Icon(Icons.arrow_forward_ios, color: textMuted.withValues(alpha: 0.3), size: 16),
                   ],
                 ),
               ),
@@ -689,7 +689,7 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
               if (i == 0) {
                 // Random mix option card
                 return Card(
-                  color: const Color(0xFF4F46E5).withOpacity(0.1),
+                  color: const Color(0xFF4F46E5).withValues(alpha: 0.1),
                   child: ListTile(
                     leading: const CircleAvatar(
                       backgroundColor: Color(0xFF4F46E5),
@@ -762,7 +762,7 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
               if (i == 0) {
                 // Random mix option card
                 return Card(
-                  color: const Color(0xFF0D9488).withOpacity(0.1),
+                  color: const Color(0xFF0D9488).withValues(alpha: 0.1),
                   child: ListTile(
                     leading: const CircleAvatar(
                       backgroundColor: Color(0xFF0D9488),
@@ -889,9 +889,9 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
                       width: 50,
                       height: 50,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF10B981).withOpacity(0.1),
+                        color: const Color(0xFF10B981).withValues(alpha: 0.1),
                         shape: BoxShape.circle,
-                        border: Border.all(color: const Color(0xFF10B981).withOpacity(0.3), width: 1.5),
+                        border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3), width: 1.5),
                       ),
                       child: const Center(child: Text('🦉', style: TextStyle(fontSize: 28))),
                     ),
@@ -927,9 +927,9 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
                     child: Container(
                       padding: const EdgeInsets.all(24),
                       decoration: BoxDecoration(
-                        color: isDark ? Colors.white.withOpacity(0.03) : Colors.white.withOpacity(0.9),
+                        color: isDark ? Colors.white.withValues(alpha: 0.03) : Colors.white.withValues(alpha: 0.9),
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: isDark ? Colors.white.withOpacity(0.06) : const Color(0xFFE2E8F0)),
+                        border: Border.all(color: isDark ? Colors.white.withValues(alpha: 0.06) : const Color(0xFFE2E8F0)),
                       ),
                       child: Text(
                         q['question'] as String? ?? '',
@@ -959,14 +959,14 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
                   if (_answered) {
                     if (isCorrect) {
                       borderCol = Colors.green;
-                      bgCol = Colors.green.withOpacity(0.1);
+                      bgCol = Colors.green.withValues(alpha: 0.1);
                       statusIcon = const Icon(Icons.check_circle_rounded, color: Colors.green, size: 20);
                     } else if (isSelected) {
                       borderCol = Colors.red;
-                      bgCol = Colors.red.withOpacity(0.1);
+                      bgCol = Colors.red.withValues(alpha: 0.1);
                       statusIcon = const Icon(Icons.cancel_rounded, color: Colors.red, size: 20);
                     } else {
-                      bgCol = isDark ? const Color(0xFF131C33).withOpacity(0.4) : Colors.grey[50]!;
+                      bgCol = isDark ? const Color(0xFF131C33).withValues(alpha: 0.4) : Colors.grey[50]!;
                     }
                   } else if (isSelected) {
                     borderCol = const Color(0xFF10B981);
@@ -1168,7 +1168,7 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
                   constraints: const BoxConstraints(minHeight: 80),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: isDark ? Colors.white.withOpacity(0.02) : Colors.white,
+                    color: isDark ? Colors.white.withValues(alpha: 0.02) : Colors.white,
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: isDark ? Colors.white10 : Colors.grey[300]!),
                   ),
@@ -1180,7 +1180,7 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
                           children: _userTokens.map((tok) {
                             return ActionChip(
                               label: Text(tok, style: const TextStyle(fontWeight: FontWeight.bold)),
-                              backgroundColor: Colors.teal.withOpacity(0.15),
+                              backgroundColor: Colors.teal.withValues(alpha: 0.15),
                               onPressed: _sentenceChecked ? null : () {
                                 setState(() {
                                   _userTokens.remove(tok);

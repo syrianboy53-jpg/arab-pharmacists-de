@@ -227,9 +227,9 @@ class _SynonymsScreenState extends State<SynonymsScreen> {
                         width: 55,
                         height: 55,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF10B981).withOpacity(0.1),
+                          color: const Color(0xFF10B981).withValues(alpha: 0.1),
                           shape: BoxShape.circle,
-                          border: Border.all(color: const Color(0xFF10B981).withOpacity(0.3), width: 2),
+                          border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3), width: 2),
                         ),
                         child: const Center(
                           child: Text('🦉', style: TextStyle(fontSize: 32)),
@@ -248,7 +248,7 @@ class _SynonymsScreenState extends State<SynonymsScreen> {
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.05),
+                                color: Colors.black.withValues(alpha: 0.05),
                                 blurRadius: 6,
                                 offset: const Offset(0, 3),
                               )
@@ -283,7 +283,7 @@ class _SynonymsScreenState extends State<SynonymsScreen> {
                                 Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                   decoration: BoxDecoration(
-                                    color: Colors.blue.withOpacity(0.1),
+                                    color: Colors.blue.withValues(alpha: 0.1),
                                     borderRadius: BorderRadius.circular(4),
                                   ),
                                   child: Text(
@@ -326,14 +326,14 @@ class _SynonymsScreenState extends State<SynonymsScreen> {
                     if (_answered) {
                       if (isCorrectOpt) {
                         borderColor = Colors.green;
-                        itemBg = Colors.green.withOpacity(0.1);
+                        itemBg = Colors.green.withValues(alpha: 0.1);
                         trailingIcon = const Icon(Icons.check_circle, color: Colors.green);
                       } else if (isSelected) {
                         borderColor = Colors.red;
-                        itemBg = Colors.red.withOpacity(0.1);
+                        itemBg = Colors.red.withValues(alpha: 0.1);
                         trailingIcon = const Icon(Icons.cancel, color: Colors.red);
                       } else {
-                        itemBg = isDark ? const Color(0xFF1E293B).withOpacity(0.5) : Colors.grey[100]!;
+                        itemBg = isDark ? const Color(0xFF1E293B).withValues(alpha: 0.5) : Colors.grey[100]!;
                       }
                     } else if (isSelected) {
                       borderColor = const Color(0xFF10B981);
@@ -426,7 +426,7 @@ class _SynonymsScreenState extends State<SynonymsScreen> {
         borderRadius: const BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, -5),
           )

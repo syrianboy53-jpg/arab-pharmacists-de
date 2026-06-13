@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -117,6 +116,8 @@ class _SmartReviewScreenState extends State<SmartReviewScreen> {
     await prefs.setInt('srs_box_$de', newBox);
     await prefs.setInt('srs_next_review_$de', nextReviewDate);
 
+    if (!mounted) return;
+
     // Show feedback
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -143,10 +144,7 @@ class _SmartReviewScreenState extends State<SmartReviewScreen> {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final scaffoldBg = isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC);
-    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
     final textMain = isDark ? Colors.white : const Color(0xFF1E293B);
-    final textMuted = isDark ? Colors.white60 : const Color(0xFF64748B);
-    final borderCol = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
 
     return Scaffold(
       backgroundColor: scaffoldBg,
@@ -174,9 +172,6 @@ class _SmartReviewScreenState extends State<SmartReviewScreen> {
   }
 
   Widget _buildEmptyState() {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
-
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

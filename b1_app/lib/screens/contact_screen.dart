@@ -183,9 +183,9 @@ class _ContactScreenState extends State<ContactScreen> {
                 Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF10B981).withOpacity(0.1),
+                    color: const Color(0xFF10B981).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFF10B981).withOpacity(0.2)),
+                    border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.2)),
                   ),
                   child: Row(
                     children: [
@@ -255,7 +255,7 @@ class _ContactScreenState extends State<ContactScreen> {
 
                 // Topic Field
                 DropdownButtonFormField<String>(
-                  value: _selectedTopic,
+                  initialValue: _selectedTopic,
                   alignment: Alignment.centerRight,
                   decoration: InputDecoration(
                     labelText: 'قسم الاستفسار',

@@ -24,4 +24,26 @@ body {
   color: var(--color-ink);
   line-height: 1.7;
   direction: rtl;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode support */
+.dark body {
+  background: #0f172a; /* Slate 900 */
+  color: #f1f5f9; /* Slate 100 */
+}
+
+/* Glassmorphism utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dark .glass-panel {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }

@@ -13,6 +13,14 @@ const dailyWords = [
 
 const sections = [
   {
+    title: 'الميزات العصرية 🚀 (جديد)',
+    items: [
+      { label: 'بطاقات الذاكرة', path: '/flashcards', icon: '🃏', count: 'حفظ بأسلوب Tinder' },
+      { label: 'مختبر النطق الذكي', path: '/pronunciation', icon: '🎙️', count: 'تدرب وقيم نطقك' },
+      { label: 'المصحح الذكي للرسائل', path: '/brief-corrector', icon: '🤖', count: 'صحح أخطاء كتابتك' },
+    ],
+  },
+  {
     title: 'نماذج Telc B1',
     items: [
       { label: 'القراءة (Lesen)', path: '/lesen', icon: '📖', count: '11 نموذج' },

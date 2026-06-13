@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:confetti/confetti.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../providers/app_provider.dart';
 import '../data/lesen_data.dart';
 import '../data/hoeren_data.dart';
@@ -47,7 +46,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
   int _totalLesenQ = 0;
 
   int _scoreSprach = 0;
-  int _totalSprachQ = 10;
+  final int _totalSprachQ = 10;
 
   int _scoreHoeren = 0;
   int _totalHoerenQ = 0;
@@ -244,8 +243,8 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
                     color: _secondsRemaining < 60
-                        ? Colors.red.withOpacity(0.1)
-                        : Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                        ? Colors.red.withValues(alpha: 0.1)
+                        : Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: _secondsRemaining < 60 ? Colors.red : Theme.of(context).colorScheme.primary,
@@ -497,10 +496,10 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
               padding: const EdgeInsets.all(12),
               margin: const EdgeInsets.only(bottom: 12),
               decoration: BoxDecoration(
-                color: _partCorrectCount > 0 ? Colors.green.withOpacity(0.08) : Colors.amber.withOpacity(0.08),
+                color: _partCorrectCount > 0 ? Colors.green.withValues(alpha: 0.08) : Colors.amber.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: _partCorrectCount > 0 ? Colors.green.withOpacity(0.3) : Colors.amber.withOpacity(0.3),
+                  color: _partCorrectCount > 0 ? Colors.green.withValues(alpha: 0.3) : Colors.amber.withValues(alpha: 0.3),
                 ),
               ),
               child: Row(
@@ -723,9 +722,9 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Colors.blue.withOpacity(0.05),
+            color: Colors.blue.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.blue.withOpacity(0.2)),
+            border: Border.all(color: Colors.blue.withValues(alpha: 0.2)),
           ),
           child: Text(instructions, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
         ),
@@ -886,17 +885,17 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
 
                     if (isSelected) {
                       borderCol = Theme.of(context).colorScheme.primary;
-                      bgCol = Theme.of(context).colorScheme.primary.withOpacity(0.05);
+                      bgCol = Theme.of(context).colorScheme.primary.withValues(alpha: 0.05);
                     }
 
                     if (_partChecked) {
                       final isCorrect = optId.toString() == correctVal;
                       if (isCorrect) {
                         borderCol = Colors.green;
-                        bgCol = Colors.green.withOpacity(0.1);
+                        bgCol = Colors.green.withValues(alpha: 0.1);
                       } else if (isSelected) {
                         borderCol = Colors.red;
-                        bgCol = Colors.red.withOpacity(0.1);
+                        bgCol = Colors.red.withValues(alpha: 0.1);
                       }
                     }
 
@@ -981,7 +980,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                     Text(s['textDe'] as String, style: const TextStyle(fontSize: 14, color: Colors.grey), textDirection: TextDirection.ltr),
                     const SizedBox(height: 10),
                     DropdownButtonFormField<String>(
-                      value: selected,
+                      initialValue: selected,
                       hint: const Text('اختر الإعلان المناسب...'),
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -1138,17 +1137,17 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
 
           if (isSelected) {
             borderCol = Theme.of(context).colorScheme.primary;
-            bgCol = Theme.of(context).colorScheme.primary.withOpacity(0.05);
+            bgCol = Theme.of(context).colorScheme.primary.withValues(alpha: 0.05);
           }
 
           if (_partChecked) {
             final isCorrect = idx == correct;
             if (isCorrect) {
               borderCol = Colors.green;
-              bgCol = Colors.green.withOpacity(0.1);
+              bgCol = Colors.green.withValues(alpha: 0.1);
             } else if (isSelected) {
               borderCol = Colors.red;
-              bgCol = Colors.red.withOpacity(0.1);
+              bgCol = Colors.red.withValues(alpha: 0.1);
             }
           }
 
@@ -1179,7 +1178,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
           const SizedBox(height: 12),
           Container(
             padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(color: Colors.green.withOpacity(0.05), borderRadius: BorderRadius.circular(8)),
+            decoration: BoxDecoration(color: Colors.green.withValues(alpha: 0.05), borderRadius: BorderRadius.circular(8)),
             child: Text('💡 التوضيح: ${q["explanation"]}',
                 style: const TextStyle(fontSize: 14, color: Colors.green, fontWeight: FontWeight.bold)),
           ),
@@ -1207,9 +1206,9 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Colors.blue.withOpacity(0.05),
+            color: Colors.blue.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.blue.withOpacity(0.2)),
+            border: Border.all(color: Colors.blue.withValues(alpha: 0.2)),
           ),
           child: Text(instructions, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
         ),
@@ -1331,17 +1330,17 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
 
                       if (isSelected) {
                         borderCol = Theme.of(context).colorScheme.primary;
-                        bgCol = Theme.of(context).colorScheme.primary.withOpacity(0.05);
+                        bgCol = Theme.of(context).colorScheme.primary.withValues(alpha: 0.05);
                       }
 
                       if (_partChecked) {
                         final isCorrect = optId.toString() == q['correct'].toString();
                         if (isCorrect) {
                           borderCol = Colors.green;
-                          bgCol = Colors.green.withOpacity(0.1);
+                          bgCol = Colors.green.withValues(alpha: 0.1);
                         } else if (isSelected) {
                           borderCol = Colors.red;
-                          bgCol = Colors.red.withOpacity(0.1);
+                          bgCol = Colors.red.withValues(alpha: 0.1);
                         }
                       }
 
@@ -1405,7 +1404,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
                     Text('المتحدث: $speakerText', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                     const SizedBox(height: 10),
                     DropdownButtonFormField<String>(
-                      value: selected,
+                      initialValue: selected,
                       hint: const Text('طابق الرأي...'),
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -1627,9 +1626,9 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Colors.green.withOpacity(0.05),
+                color: Colors.green.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.green.withOpacity(0.2)),
+                border: Border.all(color: Colors.green.withValues(alpha: 0.2)),
               ),
               child: const Text('✅ تم استلام إجابتك بنجاح! قارن نصك بالحل النموذجي المقترح أدناه:',
                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green, fontSize: 13)),

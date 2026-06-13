@@ -278,9 +278,9 @@ class _SatzbauScreenState extends State<SatzbauScreen> {
                         width: 55,
                         height: 55,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF10B981).withOpacity(0.1),
+                          color: const Color(0xFF10B981).withValues(alpha: 0.1),
                           shape: BoxShape.circle,
-                          border: Border.all(color: const Color(0xFF10B981).withOpacity(0.3), width: 2),
+                          border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3), width: 2),
                         ),
                         child: const Center(
                           child: Text(
@@ -303,7 +303,7 @@ class _SatzbauScreenState extends State<SatzbauScreen> {
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.05),
+                                color: Colors.black.withValues(alpha: 0.05),
                                 blurRadius: 6,
                                 offset: const Offset(0, 3),
                               )
@@ -360,7 +360,7 @@ class _SatzbauScreenState extends State<SatzbauScreen> {
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.02),
+                              color: Colors.black.withValues(alpha: 0.02),
                               blurRadius: 10,
                               offset: const Offset(0, 5),
                             )
@@ -407,7 +407,7 @@ class _SatzbauScreenState extends State<SatzbauScreen> {
                       return Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: isDark ? const Color(0xFF1E293B).withOpacity(0.4) : Colors.grey[100],
+                          color: isDark ? const Color(0xFF1E293B).withValues(alpha: 0.4) : Colors.grey[100],
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
                             color: candidateData.isNotEmpty ? const Color(0xFF10B981) : (isDark ? Colors.white10 : Colors.transparent),
@@ -492,7 +492,7 @@ class _SatzbauScreenState extends State<SatzbauScreen> {
         borderRadius: const BorderRadius.only(topLeft: Radius.circular(24), topRight: Radius.circular(24)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, -5),
           )
@@ -716,7 +716,7 @@ class _SatzbauScreenState extends State<SatzbauScreen> {
   }) {
     final chip = ActionChip(
       backgroundColor: isWorkspace 
-          ? const Color(0xFF10B981).withOpacity(0.1) 
+          ? const Color(0xFF10B981).withValues(alpha: 0.1) 
           : (isDark ? const Color(0xFF1E293B) : Colors.white),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),

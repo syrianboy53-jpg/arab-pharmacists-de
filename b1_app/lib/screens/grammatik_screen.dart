@@ -83,7 +83,7 @@ class _LessonsList extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.white.withValues(alpha: 0.2),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(
@@ -110,7 +110,7 @@ class _LessonsList extends StatelessWidget {
                             Text(
                               'اختبر نفسك بـ 10 أسئلة عشوائية من جميع الدروس',
                               style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
+                                color: Colors.white.withValues(alpha: 0.9),
                                 fontSize: 12,
                                 fontFamily: 'Cairo',
                               ),
@@ -154,7 +154,7 @@ class _LessonsList extends StatelessWidget {
                 height: 40,
                 decoration: BoxDecoration(
                   color: isCompleted
-                      ? Colors.green.withOpacity(0.15)
+                      ? Colors.green.withValues(alpha: 0.15)
                       : Theme.of(context).colorScheme.primaryContainer,
                   shape: BoxShape.circle,
                   border: isCompleted ? Border.all(color: Colors.green, width: 2) : null,
@@ -369,7 +369,7 @@ class _LessonDetailScreenState extends State<_LessonDetailScreen> {
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                               decoration: BoxDecoration(
-                                color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+                                color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
@@ -394,17 +394,17 @@ class _LessonDetailScreenState extends State<_LessonDetailScreen> {
                               final isCorrect = ex['correct'] == optIdx;
 
                               Color borderCol = isSelected ? accentCol : (isDark ? const Color(0xFF1E293B) : Colors.black12);
-                              Color bgCol = isSelected ? accentCol.withOpacity(0.05) : Colors.transparent;
+                              Color bgCol = isSelected ? accentCol.withValues(alpha: 0.05) : Colors.transparent;
                               Widget? icon;
 
                               if (_showResults) {
                                 if (isCorrect) {
                                   borderCol = const Color(0xFF2DD4BF);
-                                  bgCol = const Color(0xFF2DD4BF).withOpacity(0.1);
+                                  bgCol = const Color(0xFF2DD4BF).withValues(alpha: 0.1);
                                   icon = const Icon(Icons.check_circle_rounded, color: Color(0xFF2DD4BF), size: 20);
                                 } else if (isSelected) {
                                   borderCol = const Color(0xFFF43F5E);
-                                  bgCol = const Color(0xFFF43F5E).withOpacity(0.1);
+                                  bgCol = const Color(0xFFF43F5E).withValues(alpha: 0.1);
                                   icon = const Icon(Icons.cancel_rounded, color: Color(0xFFF43F5E), size: 20);
                                 }
                               }
@@ -483,9 +483,9 @@ class _LessonDetailScreenState extends State<_LessonDetailScreen> {
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: Colors.green.withOpacity(0.1),
+                          color: Colors.green.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.green.withOpacity(0.3)),
+                          border: Border.all(color: Colors.green.withValues(alpha: 0.3)),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -582,8 +582,8 @@ class _MistakeCardState extends State<_MistakeCard> {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.red.withOpacity(0.05),
-                    border: Border.all(color: Colors.red.withOpacity(0.2)),
+                    color: Colors.red.withValues(alpha: 0.05),
+                    border: Border.all(color: Colors.red.withValues(alpha: 0.2)),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
@@ -613,7 +613,7 @@ class _MistakeCardState extends State<_MistakeCard> {
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
-                    side: BorderSide(color: Colors.green.withOpacity(0.3)),
+                    side: BorderSide(color: Colors.green.withValues(alpha: 0.3)),
                   ),
                   child: InkWell(
                     onTap: () => Provider.of<AppProvider>(context, listen: false).speak(m['right'] as String? ?? ''),
@@ -621,7 +621,7 @@ class _MistakeCardState extends State<_MistakeCard> {
                     child: Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.green.withOpacity(0.05),
+                        color: Colors.green.withValues(alpha: 0.05),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
@@ -804,7 +804,7 @@ class _SatzbauGameCardState extends State<_SatzbauGameCard> {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                   decoration: BoxDecoration(
-                    color: Colors.blue.withOpacity(0.1),
+                    color: Colors.blue.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
@@ -898,7 +898,7 @@ class _SatzbauGameCardState extends State<_SatzbauGameCard> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: _isCorrect! ? Colors.green.withOpacity(0.1) : Colors.red.withOpacity(0.1),
+                  color: _isCorrect! ? Colors.green.withValues(alpha: 0.1) : Colors.red.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: _isCorrect! ? Colors.green : Colors.red, width: 0.5),
                 ),
@@ -1058,9 +1058,9 @@ class _TrennbarListState extends State<_TrennbarList> {
             child: Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.08),
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.15)),
+                border: Border.all(color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.15)),
               ),
               child: Text(
                 category['intro'] as String,
@@ -1157,7 +1157,7 @@ class _TrennbarListState extends State<_TrennbarList> {
                                                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                                     margin: const EdgeInsets.only(bottom: 6),
                                                     decoration: BoxDecoration(
-                                                      color: Colors.blue.withOpacity(0.1),
+                                                      color: Colors.blue.withValues(alpha: 0.1),
                                                       borderRadius: BorderRadius.circular(4),
                                                     ),
                                                     child: Text(
@@ -1220,9 +1220,9 @@ class _TrennbarListState extends State<_TrennbarList> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: color != null ? badgeColor : badgeColor.withOpacity(0.1),
+        color: color != null ? badgeColor : badgeColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: badgeColor.withOpacity(0.3)),
+        border: Border.all(color: badgeColor.withValues(alpha: 0.3)),
       ),
       child: Text(
         text,
@@ -1432,7 +1432,7 @@ class _RandomGrammarPracticeScreenState extends State<_RandomGrammarPracticeScre
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
+                        color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
@@ -1467,16 +1467,16 @@ class _RandomGrammarPracticeScreenState extends State<_RandomGrammarPracticeScre
               if (_isAnswered) {
                 if (isCorrectOption) {
                   borderCol = const Color(0xFF2DD4BF);
-                  bgCol = const Color(0xFF2DD4BF).withOpacity(0.12);
+                  bgCol = const Color(0xFF2DD4BF).withValues(alpha: 0.12);
                   trailingIcon = const Icon(Icons.check_circle_rounded, color: Color(0xFF2DD4BF), size: 24);
                 } else if (isSelectedOption) {
                   borderCol = const Color(0xFFF43F5E);
-                  bgCol = const Color(0xFFF43F5E).withOpacity(0.12);
+                  bgCol = const Color(0xFFF43F5E).withValues(alpha: 0.12);
                   trailingIcon = const Icon(Icons.cancel_rounded, color: Color(0xFFF43F5E), size: 24);
                 }
               } else if (isSelectedOption) {
                 borderCol = Theme.of(context).colorScheme.primary;
-                bgCol = Theme.of(context).colorScheme.primary.withOpacity(0.08);
+                bgCol = Theme.of(context).colorScheme.primary.withValues(alpha: 0.08);
               }
 
               return Padding(

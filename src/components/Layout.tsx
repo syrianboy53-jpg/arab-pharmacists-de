@@ -1,11 +1,25 @@
 import { Link, useLocation } from 'react-router-dom'
 import { type ReactNode, useState, useEffect } from 'react'
-import { Home, BookOpen, LayoutGrid, Menu } from 'lucide-react'
+import { Home, BookOpen, LayoutGrid, Menu, Moon, Sun } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Layout({ children }: { children: ReactNode }) {
   const location = useLocation()
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('darkMode')
+    if (saved !== null) return JSON.parse(saved)
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+  })
   const [updateUrl, setUpdateUrl] = useState<string | null>(null)
+
+  useEffect(() => {
+    localStorage.setItem('darkMode', JSON.stringify(darkMode))
+    if (darkMode) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [darkMode])
 
   useEffect(() => {
     const ua = navigator.userAgent
@@ -47,21 +61,21 @@ export default function Layout({ children }: { children: ReactNode }) {
           </a>
         </div>
       )}
-      <div className="min-h-screen bg-bg-light dark:bg-gray-900">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-900 dark:to-slate-800 text-gray-900 dark:text-gray-100 transition-colors duration-300">
         {/* Header */}
-        <header className="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-sm border-b border-gray-100 dark:border-gray-700">
+        <header className="sticky top-0 z-50 glass-panel shadow-sm border-b border-white/20 dark:border-gray-700/30">
           <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-            <a href="/app/#/" className="flex items-center gap-2 text-xl font-bold text-green">
-              <span className="bg-emerald-600 text-white px-2 py-0.5 rounded text-sm">B1</span>
-              <span>Deutsch للعرب والسوريين</span>
+            <a href="/app/#/" className="flex items-center gap-2 text-xl font-bold text-green dark:text-emerald-400">
+              <span className="bg-emerald-600 text-white px-2 py-0.5 rounded text-sm shadow-sm">B1</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-500 dark:from-emerald-400 dark:to-teal-300">Deutsch للعرب والسوريين</span>
             </a>
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setDarkMode(!darkMode)}
-                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="p-2 rounded-xl bg-white/50 dark:bg-gray-800/50 hover:bg-white/80 dark:hover:bg-gray-700/80 shadow-sm backdrop-blur-sm transition-all"
                 aria-label="تبديل الوضع الليلي"
               >
-                {darkMode ? '☀️' : '🌙'}
+                {darkMode ? <Sun size={20} className="text-yellow-400" /> : <Moon size={20} className="text-slate-600" />}
               </button>
             </div>
           </div>
@@ -93,7 +107,17 @@ export default function Layout({ children }: { children: ReactNode }) {
 
         {/* Main Content */}
         <main className="max-w-6xl mx-auto px-4 py-6">
-          {children}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
         </main>
 
         {/* Footer */}

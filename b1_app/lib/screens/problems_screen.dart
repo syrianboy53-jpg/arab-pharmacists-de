@@ -189,7 +189,7 @@ class _ProblemsScreenState extends State<ProblemsScreen> with SingleTickerProvid
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
     final textMain = isDark ? Colors.white : const Color(0xFF1E293B);
-    final textMuted = isDark ? Colors.white60 : const Color(0xFF64748B);
+    
     final borderCol = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
 
     final List<String> steps = List<String>.from(guide['steps'] as List);

@@ -25,7 +25,9 @@ const DrillPage = lazy(() => import('./pages/DrillPage'))
 const SynonymsPage = lazy(() => import('./pages/SynonymsPage'))
 const FehlerPage = lazy(() => import('./pages/FehlerPage'))
 const ExamSimulationPage = lazy(() => import('./pages/ExamSimulationPage'))
-
+const FlashcardsPage = lazy(() => import('./pages/FlashcardsPage'))
+const PronunciationLabPage = lazy(() => import('./pages/PronunciationLabPage'))
+const BriefCorrectorPage = lazy(() => import('./pages/BriefCorrectorPage'))
 function Loading() {
   return (
     <div className="flex items-center justify-center min-h-[50vh]">
@@ -62,6 +64,9 @@ export default function App() {
           <Route path="/synonyms" element={<SynonymsPage />} />
           <Route path="/fehler" element={<FehlerPage />} />
           <Route path="/exam-simulation" element={<ExamSimulationPage />} />
+          <Route path="/flashcards" element={<FlashcardsPage />} />
+          <Route path="/pronunciation" element={<PronunciationLabPage />} />
+          <Route path="/brief-corrector" element={<BriefCorrectorPage />} />
         </Routes>
       </Suspense>
     </Layout>
