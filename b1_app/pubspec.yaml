@@ -1,7 +1,7 @@
 name: b1_deutsch
 description: "B1 Deutsch - تحضير امتحان الألماني للسوريين"
 publish_to: 'none'
-version: 2.1.0+84
+version: 2.1.0+85
 
 environment:
   sdk: ^3.8.1

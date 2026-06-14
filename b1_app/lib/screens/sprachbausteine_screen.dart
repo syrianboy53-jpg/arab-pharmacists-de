@@ -10,6 +10,7 @@ class SprachbausteineScreen extends StatefulWidget {
 }
 
 class _SprachbausteineScreenState extends State<SprachbausteineScreen> {
+  List<Map<String, dynamic>> get validQuestions => pruefungsFragen.where((q) => q.containsKey('options')).toList();
   int _currentQ = 0;
   int? _selectedAnswer;
   int _score = 0;
@@ -19,11 +20,11 @@ class _SprachbausteineScreenState extends State<SprachbausteineScreen> {
   @override
   Widget build(BuildContext context) {
     if (_showResult) return _buildResult();
-    if (_currentQ >= pruefungsFragen.length) {
+    if (_currentQ >= validQuestions.length) {
       return const Center(child: Text('لا توجد أسئلة'));
     }
-    final q = pruefungsFragen[_currentQ];
-    final options = List<Map<String, dynamic>>.from(q['options'] as List? ?? []);
+    final q = validQuestions[_currentQ];
+    final options = List<String>.from(q['options'] as List? ?? []);
     final correct = q['correct'] as int? ?? 0;
     
     return Scaffold(
@@ -33,7 +34,7 @@ class _SprachbausteineScreenState extends State<SprachbausteineScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8),
-            child: Center(child: Text('${_currentQ + 1}/${pruefungsFragen.length}', style: const TextStyle(fontWeight: FontWeight.bold))),
+            child: Center(child: Text('${_currentQ + 1}/${validQuestions.length}', style: const TextStyle(fontWeight: FontWeight.bold))),
           ),
         ],
       ),
@@ -42,7 +43,7 @@ class _SprachbausteineScreenState extends State<SprachbausteineScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            LinearProgressIndicator(value: (_currentQ + 1) / pruefungsFragen.length),
+            LinearProgressIndicator(value: (_currentQ + 1) / validQuestions.length),
             const SizedBox(height: 16),
             if (q['context'] != null) ...[
               Container(
@@ -75,7 +76,7 @@ class _SprachbausteineScreenState extends State<SprachbausteineScreen> {
                 child: RadioListTile<int>(
                   value: i,
                   groupValue: _selectedAnswer,
-                  title: Text(opt['text'] as String? ?? opt.toString(), textDirection: TextDirection.ltr),
+                  title: Text(opt, textDirection: TextDirection.ltr),
                   onChanged: _answered ? null : (v) => setState(() => _selectedAnswer = v),
                 ),
               );
@@ -105,7 +106,7 @@ class _SprachbausteineScreenState extends State<SprachbausteineScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      if (_currentQ < pruefungsFragen.length - 1) {
+                      if (_currentQ < validQuestions.length - 1) {
                         _currentQ++;
                         _selectedAnswer = null;
                         _answered = false;
@@ -115,7 +116,7 @@ class _SprachbausteineScreenState extends State<SprachbausteineScreen> {
                       }
                     });
                   },
-                  child: Text(_currentQ < pruefungsFragen.length - 1 ? 'التالي' : 'النتيجة'),
+                  child: Text(_currentQ < validQuestions.length - 1 ? 'التالي' : 'النتيجة'),
                 ),
               ),
             ],
@@ -126,7 +127,7 @@ class _SprachbausteineScreenState extends State<SprachbausteineScreen> {
   }
 
   Widget _buildResult() {
-    final pct = (pruefungsFragen.isNotEmpty) ? (_score / pruefungsFragen.length * 100).round() : 0;
+    final pct = (validQuestions.isNotEmpty) ? (_score / validQuestions.length * 100).round() : 0;
     return Scaffold(
       appBar: AppBar(title: const Text('النتيجة')),
       body: Center(
@@ -136,7 +137,7 @@ class _SprachbausteineScreenState extends State<SprachbausteineScreen> {
             Icon(pct >= 60 ? Icons.celebration : Icons.refresh, size: 64, color: pct >= 60 ? Colors.green : Colors.orange),
             const SizedBox(height: 16),
             Text('$pct%', style: Theme.of(context).textTheme.displayMedium),
-            Text('$_score / ${pruefungsFragen.length}'),
+            Text('$_score / ${validQuestions.length}'),
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () => setState(() { _currentQ = 0; _score = 0; _showResult = false; _selectedAnswer = null; _answered = false; }),
