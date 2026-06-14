@@ -1831,13 +1831,21 @@ class _HomeScreenState extends State<HomeScreen> {
         margin: const EdgeInsets.only(left: 16, right: 16, top: 24, bottom: 16),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         decoration: BoxDecoration(
-          color: color,
+          gradient: LinearGradient(
+            colors: [
+              color.withValues(alpha: 0.8),
+              color,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
           borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.2), width: 1.5),
           boxShadow: [
             BoxShadow(
-              color: color.withValues(alpha: 0.3),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
+              color: color.withValues(alpha: 0.4),
+              blurRadius: 12,
+              offset: const Offset(0, 6),
             ),
           ],
         ),
@@ -1884,13 +1892,20 @@ class _HomeScreenState extends State<HomeScreen> {
               height: size,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: color,
-                border: Border.all(color: Colors.white.withValues(alpha: 0.5), width: 3),
+                gradient: LinearGradient(
+                  colors: [
+                    color.withValues(alpha: 0.6),
+                    color,
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.8), width: 3),
                 boxShadow: [
                   BoxShadow(
-                    color: color.withValues(alpha: 0.4),
-                    blurRadius: 12,
-                    offset: const Offset(0, 6),
+                    color: color.withValues(alpha: 0.6),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8),
                   ),
                   // Solid bottom border for 3D effect
                   BoxShadow(

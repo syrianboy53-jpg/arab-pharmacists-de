@@ -997,6 +997,41 @@ export const commonMistakes = [
       "Prädikativ",
       "sein + Adjektiv"
     ]
+  },
+  {
+    id: "g-adjektiv-1",
+    category: "تصريف الصفات (Adjektivdeklination)",
+    mistake: "Ich habe ein neu Auto gekauft.",
+    correction: "Ich habe ein neues Auto gekauft.",
+    explanation: "كلمة Auto تأخذ أداة das. في حالة النصب (Akkusativ) مع أداة النكرة (ein)، تأخذ الصفة النهاية -es لتصبح neues."
+  },
+  {
+    id: "g-adjektiv-2",
+    category: "تصريف الصفات (Adjektivdeklination)",
+    mistake: "Er spricht mit dem nett Mann.",
+    correction: "Er spricht mit dem netten Mann.",
+    explanation: "بعد حرف الجر mit تأتي حالة الجر (Dativ). بعد أداة المعرفة (dem)، تأخذ الصفة دائماً النهاية -en لتصبح netten."
+  },
+  {
+    id: "g-konnektor-1",
+    category: "الروابط (Konnektoren)",
+    mistake: "Ich lerne Deutsch, weil ich möchte in Deutschland arbeiten.",
+    correction: "Ich lerne Deutsch, weil ich in Deutschland arbeiten möchte.",
+    explanation: "الرابط weil يجعل الجملة جانبية (Nebensatz)، مما يعني أن الفعل المصرّف (möchte) يجب أن يذهب إلى نهاية الجملة."
+  },
+  {
+    id: "g-konnektor-2",
+    category: "الروابط (Konnektoren)",
+    mistake: "Obwohl es regnet, ich gehe spazieren.",
+    correction: "Obwohl es regnet, gehe ich spazieren.",
+    explanation: "عندما تبدأ الجملة برابط جانبي مثل Obwohl، فإن الجملة الرئيسية التي تليها يجب أن تبدأ بالفعل مباشرة (gehe) قبل الفاعل (ich)."
+  },
+  {
+    id: "g-konnektor-3",
+    category: "الروابط (Konnektoren)",
+    mistake: "Es regnet, deshalb ich bleibe zu Hause.",
+    correction: "Es regnet, deshalb bleibe ich zu Hause.",
+    explanation: "الرابط deshalb يحتل الموقع الأول في الجملة الثانية، لذلك يجب أن يتبعه الفعل المصرّف مباشرة (bleibe) ثم الفاعل (ich)."
   }
 ];
 

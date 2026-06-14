@@ -2111,5 +2111,133 @@ export const schreibenModels = [
         ]
       }
     ]
+  },
+  {
+    id: 'schreiben-9',
+    title: 'نموذج Schreiben رقم 9 (العمل والسكن)',
+    description: 'نماذج عن التقدم لعمل، مشكلة مع إدارة السكن، ورسالة لزميل.',
+    tasks: [
+      {
+        id: 'schreiben-9-1',
+        taskNumber: 1,
+        typeAr: 'بريد لزميل العمل',
+        typeDe: 'E-Mail an einen Kollegen',
+        wordCount: 'حوالي 80 كلمة',
+        promptAr: 'تريد أن تدعو زميلك الجديد في العمل لتناول القهوة للتعرف عليه أكثر.',
+        promptDe: 'Sie möchten Ihren neuen Kollegen auf einen Kaffee einladen, um ihn besser kennenzulernen.',
+        requirements: [
+          'رحب به في الفريق.',
+          'اقترح موعداً ومكاناً.',
+          'اسأله إن كان يفضل الشاي أم القهوة.',
+          'اطلب منه الرد.'
+        ],
+        usefulPhrases: [
+          { de: 'Herzlich willkommen im Team!', ar: 'أهلاً بك في الفريق!' },
+          { de: 'Hättest du Lust, ...', ar: 'هل لديك رغبة...' },
+          { de: 'Ich würde vorschlagen, dass...', ar: 'أقترح أن...' },
+          { de: 'Lass mich wissen, ob...', ar: 'دعني أعرف إذا...' }
+        ],
+        sampleAnswer: "Hallo Markus,\n\nerstmal herzlich willkommen im Team! Ich freue mich, dass du da bist.\n\nDa wir jetzt zusammenarbeiten, dachte ich, wir könnten vielleicht nächste Woche in der Mittagspause zusammen einen Kaffee trinken gehen. So können wir uns besser kennenlernen.\n\nHättest du am Mittwoch oder Donnerstag Zeit? Direkt neben unserem Büro gibt es ein nettes Café. Trinkst du überhaupt Kaffee oder bevorzugst du Tee?\n\nLass mich einfach wissen, wann es dir am besten passt.\n\nViele Grüße,\nDein Kollege",
+      },
+      {
+        id: 'schreiben-9-2',
+        taskNumber: 2,
+        typeAr: 'مشاركة في منتدى: المواصلات العامة',
+        typeDe: 'Forumsbeitrag: Öffentliche Verkehrsmittel',
+        wordCount: 'حوالي 80 كلمة',
+        promptAr: 'تقرأ في منتدى: "هل يجب أن تكون المواصلات العامة مجانية للجميع؟" اكتب رأيك.',
+        promptDe: 'Sie lesen im Forum: "Sollen öffentliche Verkehrsmittel für alle kostenlos sein?"',
+        requirements: [
+          'اذكر رأيك بوضوح.',
+          'اعط سببين.',
+          'تحدث عن وضع المواصلات في مدينتك.',
+          'الخاتمة.'
+        ],
+        usefulPhrases: [
+          { de: 'Meiner Meinung nach...', ar: 'في رأيي...' },
+          { de: 'Ein wichtiger Punkt ist...', ar: 'نقطة مهمة هي...' },
+          { de: 'In meiner Stadt...', ar: 'في مدينتي...' },
+          { de: 'Zusammenfassend...', ar: 'باختصار...' }
+        ],
+        sampleAnswer: "Hallo zusammen,\n\ndas ist eine sehr interessante Frage. Meiner Meinung nach sollten öffentliche Verkehrsmittel tatsächlich kostenlos sein.\n\nErstens würden dann mehr Menschen den Bus oder die Bahn nehmen. Das ist viel besser für die Umwelt und es gäbe weniger Stau. Zweitens ist das Ticket für viele Menschen mit wenig Geld momentan zu teuer.\n\nIn meiner Stadt fahren die Busse zwar oft, aber sie kosten fast 3 Euro pro Fahrt.\n\nZusammenfassend glaube ich, dass kostenlose Verkehrsmittel die Lebensqualität für alle verbessern würden.\n\nViele Grüße",
+      },
+      {
+        id: 'schreiben-9-3',
+        taskNumber: 3,
+        typeAr: 'شكوى إلى إدارة المبنى',
+        typeDe: 'Beschwerde an die Hausverwaltung',
+        wordCount: 'حوالي 40 كلمة',
+        promptAr: 'التدفئة في شقتك معطلة منذ يومين والجو بارد جداً. اكتب رسالة لإدارة المبنى.',
+        promptDe: 'Die Heizung in Ihrer Wohnung ist seit zwei Tagen kaputt und es ist sehr kalt. Schreiben Sie an die Hausverwaltung.',
+        requirements: [
+          'التحية الرسمية.',
+          'وصف المشكلة (التدفئة معطلة).',
+          'طلب إرسال فني بأسرع وقت.',
+          'الختام الرسمي.'
+        ],
+        usefulPhrases: [
+          { de: 'Sehr geehrte Damen und Herren,', ar: 'حضرات السيدات والسادة،' },
+          { de: 'leider funktioniert meine Heizung nicht.', ar: 'للأسف التدفئة لا تعمل.' },
+          { de: 'Ich bitte Sie, ...', ar: 'أرجو منكم...' },
+          { de: 'Mit freundlichen Grüßen', ar: 'مع أطيب التحيات' }
+        ],
+        sampleAnswer: "Sehr geehrte Damen und Herren,\n\nleider funktioniert die Heizung in meiner Wohnung (Wohnung 4, 2. Stock) seit zwei Tagen überhaupt nicht mehr. Es ist sehr kalt.\n\nIch bitte Sie dringend, so schnell wie möglich einen Techniker zu schicken, um das Problem zu reparieren.\n\nMit freundlichen Grüßen,\nAhmad Ali",
+      }
+    ]
+  },
+  {
+    id: 'schreiben-10',
+    title: 'نموذج Schreiben رقم 10 (التعليم والرياضة)',
+    description: 'شراء دراجة، رأي عن الرياضة للأطفال، واعتذار للمدرسة.',
+    tasks: [
+      {
+        id: 'schreiben-10-1',
+        taskNumber: 1,
+        typeAr: 'بريد لشراء دراجة مستعملة',
+        typeDe: 'E-Mail: Gebrauchtes Fahrrad kaufen',
+        wordCount: 'حوالي 80 كلمة',
+        promptAr: 'رأيت إعلاناً لبيع دراجة مستعملة. اكتب رسالة للبائع.',
+        promptDe: 'Sie haben eine Anzeige für ein gebrauchtes Fahrrad gesehen. Schreiben Sie dem Verkäufer.',
+        requirements: [
+          'عبر عن اهتمامك بالدراجة.',
+          'اسأل عن حالتها وعمرها.',
+          'استفسر عن السعر النهائي.',
+          'اطلب موعداً لتجربتها.'
+        ],
+        sampleAnswer: "Hallo,\n\nich habe Ihre Anzeige im Internet gesehen und interessiere mich sehr für das Fahrrad.\n\nKönnten Sie mir bitte sagen, wie alt das Fahrrad ist und ob es irgendwelche Mängel hat? Funktionieren die Bremsen und das Licht einwandfrei?\n\nMich würde auch interessieren, ob der Preis verhandelbar ist.\n\nWenn alles passt, würde ich das Fahrrad gerne einmal Probe fahren. Hätten Sie am Samstagvormittag Zeit dafür?\n\nVielen Dank und liebe Grüße,\nSamir",
+      },
+      {
+        id: 'schreiben-10-2',
+        taskNumber: 2,
+        typeAr: 'منتدى: الهواتف الذكية في المدرسة',
+        typeDe: 'Forumsbeitrag: Smartphones in der Schule',
+        wordCount: 'حوالي 80 كلمة',
+        promptAr: 'تشارك في نقاش: هل يجب منع الهواتف الذكية في المدرسة؟',
+        promptDe: 'Diskussion: Sollen Smartphones in der Schule verboten werden?',
+        requirements: [
+          'رأيك الشخصي.',
+          'أسباب (التركيز، التنمر الإلكتروني...).',
+          'استثناءات محتملة.',
+          'الخلاصة.'
+        ],
+        sampleAnswer: "Hallo in die Runde,\n\nich bin der Meinung, dass Smartphones während des Unterrichts verboten sein sollten.\n\nEin wichtiger Grund ist, dass die Kinder sich besser auf den Lehrer und die Aufgaben konzentrieren können, wenn sie kein Handy auf dem Tisch haben. Außerdem verringert es das Risiko von Cybermobbing auf dem Schulhof.\n\nAllerdings sollten die Kinder nach der Schule ihre Handys benutzen dürfen, um ihre Eltern anzurufen, wenn etwas passiert.\n\nInsgesamt ist ein klares Verbot im Unterricht der beste Weg.\n\nViele Grüße",
+      },
+      {
+        id: 'schreiben-10-3',
+        taskNumber: 3,
+        typeAr: 'رسالة اعتذار لمدرسة ابنتك',
+        typeDe: 'Entschuldigungsschreiben an die Schule',
+        wordCount: 'حوالي 40 كلمة',
+        promptAr: 'ابنتك مريضة ولن تستطيع الذهاب للمدرسة لعدة أيام. اكتب للمدير.',
+        promptDe: 'Ihre Tochter ist krank und kann mehrere Tage nicht zur Schule gehen. Schreiben Sie an den Schulleiter.',
+        requirements: [
+          'أخبره أن ابنتك مريضة.',
+          'حدد المدة (من وإلى).',
+          'أخبره أنك سترسل التقرير الطبي.',
+          'التحية والختام الرسمي.'
+        ],
+        sampleAnswer: "Sehr geehrter Herr Direktor,\n\nhiermit möchte ich Ihnen mitteilen, dass meine Tochter Sara (Klasse 5b) leider krank ist und von Montag bis voraussichtlich Mittwoch nicht zur Schule kommen kann.\n\nDas ärztliche Attest werde ich Ihnen am Donnerstag mitgeben.\n\nVielen Dank für Ihr Verständnis.\n\nMit freundlichen Grüßen,\nYara Hassan",
+      }
+    ]
   }
 ];

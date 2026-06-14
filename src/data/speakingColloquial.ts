@@ -1628,5 +1628,89 @@ export const speakingColloquialData = {
         }
       ]
     }
+    ,{
+    "id": "teil-2-diskussion",
+    "title": "Teil 2: Diskussion (نقاش موضوع)",
+    "description": "عبارات هامة للتعبير عن الرأي ومناقشة موضوع مع شريكك في الامتحان.",
+    "phrases": [
+      {
+        "de": "Meiner Meinung nach...",
+        "ar": "في رأيي...",
+        "example": "Meiner Meinung nach ist Sport sehr wichtig für die Gesundheit."
+      },
+      {
+        "de": "Ich bin der Meinung, dass...",
+        "ar": "أنا أرى أن...",
+        "example": "Ich bin der Meinung, dass Kinder nicht so viel Zeit am Handy verbringen sollten."
+      },
+      {
+        "de": "Da stimme ich dir voll und ganz zu.",
+        "ar": "أوافقك الرأي تماماً في هذا.",
+        "example": "Da stimme ich dir voll und ganz zu, die Mieten sind zu teuer."
+      },
+      {
+        "de": "Das sehe ich auch so.",
+        "ar": "أنا أرى ذلك أيضاً.",
+        "example": "Das sehe ich auch so. Wir müssen mehr für die Umwelt tun."
+      },
+      {
+        "de": "Das sehe ich anders, weil...",
+        "ar": "أنا أرى ذلك بشكل مختلف لأن...",
+        "example": "Das sehe ich anders, weil nicht jeder ein Auto braucht."
+      },
+      {
+        "de": "Ein großer Vorteil ist...",
+        "ar": "ميزة كبيرة هي...",
+        "example": "Ein großer Vorteil ist, dass man beim Online-Lernen flexibel ist."
+      },
+      {
+        "de": "Auf der einen Seite... auf der anderen Seite...",
+        "ar": "من ناحية... ومن ناحية أخرى...",
+        "example": "Auf der einen Seite ist das Internet nützlich, auf der anderen Seite kann es gefährlich sein."
+      }
+    ]
+  },
+  {
+    "id": "teil-3-planen",
+    "title": "Teil 3: Etwas gemeinsam planen (التخطيط لشيء معاً)",
+    "description": "عبارات لتقديم اقتراحات، رفضها، والاتفاق على خطة.",
+    "phrases": [
+      {
+        "de": "Wir müssen... planen. Hast du eine Idee?",
+        "ar": "يجب علينا تخطيط... هل لديك فكرة؟",
+        "example": "Wir müssen die Party planen. Hast du eine Idee, wann wir uns treffen sollen?"
+      },
+      {
+        "de": "Ich würde vorschlagen, dass wir...",
+        "ar": "أقترح أن نقوم بـ...",
+        "example": "Ich würde vorschlagen, dass wir ein Geschenk zusammen kaufen."
+      },
+      {
+        "de": "Wie wäre es, wenn wir...?",
+        "ar": "ما رأيك لو...؟",
+        "example": "Wie wäre es, wenn wir am Samstag grillen?"
+      },
+      {
+        "de": "Das ist eine großartige Idee!",
+        "ar": "هذه فكرة رائعة!",
+        "example": "Das ist eine großartige Idee! Das machen wir so."
+      },
+      {
+        "de": "Das finde ich nicht so gut. Besser wäre es, wenn...",
+        "ar": "لا أرى ذلك جيداً. سيكون من الأفضل لو...",
+        "example": "Das finde ich nicht so gut. Besser wäre es, wenn wir uns am Bahnhof treffen."
+      },
+      {
+        "de": "Wann und wo wollen wir uns treffen?",
+        "ar": "متى وأين نريد أن نلتقي؟",
+        "example": "Wann und wo wollen wir uns am Samstag treffen?"
+      },
+      {
+        "de": "Dann sind wir uns also einig.",
+        "ar": "إذن نحن متفقون.",
+        "example": "Super, dann sind wir uns also einig. Wir sehen uns am Samstag um 10 Uhr."
+      }
+    ]
+  }
   ]
 };

@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 
-const webDataDir = 'C:\\Users\\hadi9\\.gemini\\antigravity\\scratch\\arab-pharmacists-de\\src\\data';
-const appDataDir = 'C:\\Users\\hadi9\\.gemini\\antigravity\\scratch\\arab-pharmacists-de\\b1_app\\lib\\data';
+const webDataDir = path.join(__dirname, '..', 'src', 'data');
+const appDataDir = path.join(__dirname, '..', 'b1_app', 'lib', 'data');
 
 console.log('Syncing data from Web (TS) to App (Dart):');
 console.log('-----------------------------------------');
