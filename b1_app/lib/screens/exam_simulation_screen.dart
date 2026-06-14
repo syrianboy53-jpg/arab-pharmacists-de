@@ -1,8 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:provider/provider.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:confetti/confetti.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../providers/app_provider.dart';
+import '../utils/ad_manager.dart';
 import '../data/lesen_data.dart';
 import '../data/hoeren_data.dart';
 import '../data/schreiben_data.dart';
@@ -56,18 +60,36 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
   int _secondsRemaining = 0;
   bool _timerExpired = false;
 
+  InterstitialAd? _interstitialAd;
+  bool _isInterstitialAdLoaded = false;
+
   late ConfettiController _confettiController;
 
   @override
   void initState() {
     super.initState();
     _confettiController = ConfettiController(duration: const Duration(seconds: 3));
+    _loadInterstitialAd();
+  }
+
+  void _loadInterstitialAd() {
+    if (kIsWeb) return;
+    AdManager.loadInterstitialAd(
+      onAdLoaded: (ad) {
+        _interstitialAd = ad;
+        _isInterstitialAdLoaded = true;
+      },
+      onAdFailedToLoad: (error) {
+        debugPrint('InterstitialAd failed to load: $error');
+      },
+    );
   }
 
   @override
   void dispose() {
     _timer?.cancel();
     _confettiController.dispose();
+    _interstitialAd?.dispose();
     _schreibenController.dispose();
     super.dispose();
   }
@@ -207,9 +229,29 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
 
   void _showResultSummary() {
     final double totalPercent = (((_scoreLesen + _scoreSprach + _scoreHoeren) / (_totalLesenQ + _totalSprachQ + _totalHoerenQ)) * 100);
-    if (totalPercent >= 60) {
-      _confettiController.play();
-      context.read<AppProvider>().addXP(150); // XP reward
+    
+    void _triggerSuccess() {
+      if (totalPercent >= 60) {
+        _confettiController.play();
+        context.read<AppProvider>().addXP(150); // XP reward
+      }
+    }
+
+    if (_isInterstitialAdLoaded && _interstitialAd != null) {
+      _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+        onAdDismissedFullScreenContent: (ad) {
+          ad.dispose();
+          _triggerSuccess();
+        },
+        onAdFailedToShowFullScreenContent: (ad, error) {
+          ad.dispose();
+          _triggerSuccess();
+        },
+      );
+      _interstitialAd!.show();
+      _interstitialAd = null;
+    } else {
+      _triggerSuccess();
     }
   }
 

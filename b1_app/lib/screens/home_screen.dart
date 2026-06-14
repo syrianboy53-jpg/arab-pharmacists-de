@@ -8,8 +8,10 @@ import 'package:provider/provider.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../providers/app_provider.dart';
+import '../utils/ad_manager.dart';
 import 'lesen_screen.dart';
 import 'hoeren_screen.dart';
 import 'schreiben_screen.dart';
@@ -44,6 +46,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
+  BannerAd? _bannerAd;
+  bool _isBannerAdLoaded = false;
 
   Widget _buildFullLeaderboard(bool isDark, Color textMain, Color borderCol, AppProvider provider) {
     return CustomScrollView(
@@ -92,6 +96,28 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     // Run update check on startup
     _checkUpdates();
+    
+    // Load Banner Ad
+    if (!kIsWeb) {
+      _bannerAd = AdManager.createBannerAd(
+        onAdLoaded: () {
+          if (mounted) {
+            setState(() {
+              _isBannerAdLoaded = true;
+            });
+          }
+        },
+        onAdFailedToLoad: (error) {
+          debugPrint('BannerAd failed to load: $error');
+        },
+      )..load();
+    }
+  }
+
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+    super.dispose();
   }
 
   Future<Map<String, dynamic>?> _fetchConfig() async {
@@ -1482,41 +1508,55 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               : null),
       body: bodyWidget,
-      bottomNavigationBar: ClipRRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-          child: NavigationBar(
-            selectedIndex: _currentIndex,
-            onDestinationSelected: (idx) {
-              setState(() {
-                _currentIndex = idx;
-              });
-            },
-            backgroundColor: isDark ? const Color(0x66080D1A) : Colors.white.withValues(alpha: 0.85),
-            destinations: const [
-              NavigationDestination(
-                icon: Icon(Icons.home_rounded),
-                selectedIcon: Icon(Icons.home_rounded, color: Color(0xFF0D9488)),
-                label: 'الرئيسية',
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (_isBannerAdLoaded && _bannerAd != null)
+            SafeArea(
+              bottom: false,
+              child: SizedBox(
+                width: _bannerAd!.size.width.toDouble(),
+                height: _bannerAd!.size.height.toDouble(),
+                child: AdWidget(ad: _bannerAd!),
               ),
-              NavigationDestination(
-                icon: Icon(Icons.psychology_rounded),
-                selectedIcon: Icon(Icons.psychology_rounded, color: Color(0xFF0D9488)),
-                label: 'التدريب التفاعلي',
+            ),
+          ClipRRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+              child: NavigationBar(
+                selectedIndex: _currentIndex,
+                onDestinationSelected: (idx) {
+                  setState(() {
+                    _currentIndex = idx;
+                  });
+                },
+                backgroundColor: isDark ? const Color(0x66080D1A) : Colors.white.withValues(alpha: 0.85),
+                destinations: const [
+                  NavigationDestination(
+                    icon: Icon(Icons.home_rounded),
+                    selectedIcon: Icon(Icons.home_rounded, color: Color(0xFF0D9488)),
+                    label: 'الرئيسية',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.psychology_rounded),
+                    selectedIcon: Icon(Icons.psychology_rounded, color: Color(0xFF0D9488)),
+                    label: 'التدريب التفاعلي',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.emoji_events_rounded),
+                    selectedIcon: Icon(Icons.emoji_events_rounded, color: Color(0xFF0D9488)),
+                    label: 'المتصدّرين',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.settings_rounded),
+                    selectedIcon: Icon(Icons.settings_rounded, color: Color(0xFF0D9488)),
+                    label: 'الإعدادات',
+                  ),
+                ],
               ),
-              NavigationDestination(
-                icon: Icon(Icons.emoji_events_rounded),
-                selectedIcon: Icon(Icons.emoji_events_rounded, color: Color(0xFF0D9488)),
-                label: 'المتصدّرين',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.settings_rounded),
-                selectedIcon: Icon(Icons.settings_rounded, color: Color(0xFF0D9488)),
-                label: 'الإعدادات',
-              ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
