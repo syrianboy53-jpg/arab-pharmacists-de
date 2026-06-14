@@ -10,6 +10,8 @@ import 'synonyms_screen.dart';
 import 'drill_screen.dart';
 import 'fehler_screen.dart';
 import 'chat_simulator_screen.dart';
+import 'ai_chat_screen.dart';
+import 'brief_corrector_screen.dart';
 import 'einstufung_screen.dart';
 import '../services/sound_service.dart';
 import 'package:confetti/confetti.dart';
@@ -531,6 +533,19 @@ class _InteractivePracticeScreenState extends State<InteractivePracticeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const ChatSimulatorScreen()),
+                  );
+                },
+                isDark,
+              ),
+              _buildPracticeHubCard(
+                'الدردشة الحرة مع الذكاء الاصطناعي 🤖',
+                'تحدث بشكل مفتوح مع مدرس ألماني، أو موظف الجوب سنتر في محادثة حقيقية وحية عبر الخادم.',
+                Icons.smart_toy,
+                const Color(0xFF8B5CF6),
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AiChatScreen()),
                   );
                 },
                 isDark,

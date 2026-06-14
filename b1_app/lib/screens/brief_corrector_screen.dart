@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 
 class BriefCorrectorScreen extends StatefulWidget {
   const BriefCorrectorScreen({Key? key}) : super(key: key);
@@ -15,6 +18,12 @@ class _BriefCorrectorScreenState extends State<BriefCorrectorScreen> {
   String? _originalText;
   String? _correctedText;
   List<String> _feedbacks = [];
+  int? _score;
+  String? _scoreLabel;
+  List<dynamic> _errors = [];
+  List<dynamic> _improvements = [];
+  List<dynamic> _positives = [];
+  String? _engine;
 
   final List<Map<String, dynamic>> _commonMistakes = [
     {
@@ -58,47 +67,64 @@ class _BriefCorrectorScreenState extends State<BriefCorrectorScreen> {
       _originalText = null;
       _correctedText = null;
       _feedbacks.clear();
+      _errors.clear();
+      _improvements.clear();
+      _positives.clear();
+      _score = null;
+      _scoreLabel = null;
+      _engine = null;
     });
 
-    // Simulate AI delay
-    await Future.delayed(const Duration(seconds: 2));
+    try {
+      final response = await http.post(
+        Uri.parse('https://www.b1-syrer.de/api/correct-writing'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'text': text,
+          'taskType': 'Freier Text',
+          'taskPromptDe': 'Korrigieren Sie diesen Text auf B1-Niveau',
+          'taskPromptAr': 'صحح هذا النص لمستوى B1'
+        }),
+      );
 
-    String corrected = text;
-    List<String> currentFeedbacks = [];
-
-    // Basic rule-based correction
-    for (var rule in _commonMistakes) {
-      RegExp regExp = rule['wrong'];
-      if (regExp.hasMatch(corrected)) {
-        corrected = corrected.replaceAllMapped(regExp, rule['replace'] as String Function(Match));
-        currentFeedbacks.add(rule['feedback']);
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['ok'] == true) {
+          final result = data['result'];
+          setState(() {
+            _originalText = text;
+            _correctedText = result['correctedText'] ?? text;
+            _score = result['score'];
+            _scoreLabel = result['scoreLabel'];
+            _errors = result['errors'] ?? [];
+            _improvements = result['improvements'] ?? [];
+            _positives = result['positives'] ?? [];
+            _engine = data['engine'];
+            
+            _feedbacks = _errors.map((e) => "${e['original']} -> ${e['corrected']}\n${e['explanation']}").toList().cast<String>();
+          });
+        } else {
+          setState(() {
+            _feedbacks = [data['error'] ?? 'حدث خطأ غير معروف'];
+            _originalText = text;
+          });
+        }
+      } else {
+        setState(() {
+          _feedbacks = ['فشل الاتصال بالخادم. يرجى التحقق من الإنترنت.'];
+          _originalText = text;
+        });
       }
+    } catch (e) {
+      setState(() {
+        _feedbacks = ['حدث خطأ أثناء فحص النص: $e'];
+        _originalText = text;
+      });
+    } finally {
+      setState(() {
+        _isAnalyzing = false;
+      });
     }
-
-    // Capitalize first letters of sentences
-    corrected = corrected.replaceAllMapped(RegExp(r'(^\w|\.\s+\w)'), (match) {
-      return match.group(0)!.toUpperCase();
-    });
-
-    // Capitalize nouns (basic heuristic: words after articles)
-    corrected = corrected.replaceAllMapped(
-        RegExp(r'\b(der|die|das|den|dem|des|ein|eine|einen|einem|einer|eines)\s+([a-zäöüß]+)', caseSensitive: false),
-        (match) {
-      String article = match.group(1)!;
-      String noun = match.group(2)!;
-      return '$article ${noun[0].toUpperCase()}${noun.substring(1)}';
-    });
-
-    if (corrected == text && currentFeedbacks.isEmpty) {
-      currentFeedbacks.add('ممتاز! النص يبدو جيداً ولا توجد أخطاء واضحة.');
-    }
-
-    setState(() {
-      _originalText = text;
-      _correctedText = corrected;
-      _feedbacks = currentFeedbacks;
-      _isAnalyzing = false;
-    });
   }
 
   @override
