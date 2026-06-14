@@ -11,7 +11,6 @@ import 'drill_screen.dart';
 import 'fehler_screen.dart';
 import 'chat_simulator_screen.dart';
 import 'ai_chat_screen.dart';
-import 'brief_corrector_screen.dart';
 import 'einstufung_screen.dart';
 import '../services/sound_service.dart';
 import 'package:confetti/confetti.dart';

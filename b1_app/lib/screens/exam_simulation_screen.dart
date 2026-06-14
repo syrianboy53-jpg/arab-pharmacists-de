@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:provider/provider.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:confetti/confetti.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../providers/app_provider.dart';
@@ -230,7 +229,7 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
   void _showResultSummary() {
     final double totalPercent = (((_scoreLesen + _scoreSprach + _scoreHoeren) / (_totalLesenQ + _totalSprachQ + _totalHoerenQ)) * 100);
     
-    void _triggerSuccess() {
+    void triggerSuccess() {
       if (totalPercent >= 60) {
         _confettiController.play();
         context.read<AppProvider>().addXP(150); // XP reward
@@ -241,17 +240,17 @@ class _ExamSimulationScreenState extends State<ExamSimulationScreen> {
       _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
         onAdDismissedFullScreenContent: (ad) {
           ad.dispose();
-          _triggerSuccess();
+          triggerSuccess();
         },
         onAdFailedToShowFullScreenContent: (ad, error) {
           ad.dispose();
-          _triggerSuccess();
+          triggerSuccess();
         },
       );
       _interstitialAd!.show();
       _interstitialAd = null;
     } else {
-      _triggerSuccess();
+      triggerSuccess();
     }
   }
 

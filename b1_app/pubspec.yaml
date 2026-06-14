@@ -1,7 +1,7 @@
 name: b1_deutsch
 description: "B1 Deutsch - تحضير امتحان الألماني للسوريين"
 publish_to: 'none'
-version: 2.1.0+89
+version: 2.1.0+90
 
 environment:
   sdk: ^3.8.1
@@ -27,6 +27,7 @@ dependencies:
   timezone: 0.11.0
   google_mobile_ads: ^5.1.0
 
+  http: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

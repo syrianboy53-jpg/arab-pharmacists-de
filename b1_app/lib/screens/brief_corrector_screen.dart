@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 
 class BriefCorrectorScreen extends StatefulWidget {
-  const BriefCorrectorScreen({Key? key}) : super(key: key);
+  const BriefCorrectorScreen({super.key});
 
   @override
   _BriefCorrectorScreenState createState() => _BriefCorrectorScreenState();
@@ -168,7 +168,7 @@ class _BriefCorrectorScreenState extends State<BriefCorrectorScreen> {
                   border: Border.all(color: colorScheme.outlineVariant),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
+                      color: Colors.black.withValues(alpha: 0.05),
                       blurRadius: 10,
                       offset: const Offset(0, 4),
                     )
@@ -208,12 +208,50 @@ class _BriefCorrectorScreenState extends State<BriefCorrectorScreen> {
               ),
               const SizedBox(height: 32),
               if (_correctedText != null) ...[
+                if (_score != null && _score! > 0) ...[
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: _score! >= 80 ? const Color(0xFF10B981).withValues(alpha: 0.1) : (_score! >= 60 ? Colors.orange.withValues(alpha: 0.1) : Colors.red.withValues(alpha: 0.1)),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: _score! >= 80 ? const Color(0xFF10B981).withValues(alpha: 0.3) : (_score! >= 60 ? Colors.orange.withValues(alpha: 0.3) : Colors.red.withValues(alpha: 0.3))),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'التقييم: $_score%',
+                          style: GoogleFonts.cairo(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: _score! >= 80 ? const Color(0xFF047857) : (_score! >= 60 ? Colors.orange[800] : Colors.red[800]),
+                          ),
+                        ),
+                        if (_scoreLabel != null && _scoreLabel!.isNotEmpty) ...[
+                          const SizedBox(width: 12),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: _score! >= 80 ? const Color(0xFF10B981) : (_score! >= 60 ? Colors.orange : Colors.red),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              _scoreLabel!,
+                              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                ],
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF10B981).withOpacity(0.1),
+                    color: const Color(0xFF10B981).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: const Color(0xFF10B981).withOpacity(0.3)),
+                    border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -277,7 +315,7 @@ class _BriefCorrectorScreenState extends State<BriefCorrectorScreen> {
                             ),
                           ],
                         ),
-                      )).toList(),
+                      )),
                     ],
                   ),
                 ),

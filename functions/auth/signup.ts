@@ -1,5 +1,5 @@
 import { Env, query, base64urlEncode } from '../utils'
-import bcrypt from 'bcryptjs'
+
 
 async function createJWT(payload: object, secret: string): Promise<string> {
   const header = base64urlEncode(JSON.stringify({ alg: 'HS256', typ: 'JWT' }))
@@ -11,6 +11,13 @@ async function createJWT(payload: object, secret: string): Promise<string> {
   return `${header}.${body}.${signature}`
 }
 
+async function hashPassword(password: string): Promise<string> {
+  const data = new TextEncoder().encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 export async function onRequestPost(context: { request: Request; env: Env }) {
   const { request, env } = context
   const { email, password, name } = await request.json() as any
@@ -20,7 +27,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
   }
 
   // Hash password
-  const pwHash = bcrypt.hashSync(password, 10)
+  const pwHash = await hashPassword(password)
 
   // Insert user
   try {

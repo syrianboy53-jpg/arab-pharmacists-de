@@ -4,7 +4,7 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'dart:math';
 
 class PronunciationLabScreen extends StatefulWidget {
-  const PronunciationLabScreen({Key? key}) : super(key: key);
+  const PronunciationLabScreen({super.key});
 
   @override
   _PronunciationLabScreenState createState() => _PronunciationLabScreenState();

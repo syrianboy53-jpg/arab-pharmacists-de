@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../providers/app_provider.dart';
 
 class ContactScreen extends StatefulWidget {
@@ -68,8 +67,6 @@ class _ContactScreenState extends State<ContactScreen> {
     final message = _messageController.text.trim();
     final topicLabel = _topics[_selectedTopic] ?? 'استفسار';
 
-    final String finalSubject = subject.isNotEmpty ? '[$topicLabel] $subject' : '[$topicLabel] رسالة من التطبيق';
-    final String body = 'الاسم: $name\nالبريد الإلكتروني: $email\n\nالرسالة:\n$message';
 
     try {
       final client = HttpClient();
@@ -109,12 +106,7 @@ class _ContactScreenState extends State<ContactScreen> {
     }
   }
 
-  String? _encodeQueryParameters(Map<String, String> params) {
-    return params.entries
-        .map((MapEntry<String, String> e) =>
-            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-        .join('&');
-  }
+
 
   void _showErrorSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(

@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class AppProvider extends ChangeNotifier {
-  static const int appVersion = 89;
+  static const int appVersion = 90;
 
   bool _isDarkMode = false;
   int _xp = 0;

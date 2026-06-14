@@ -11,6 +11,13 @@ async function createJWT(payload: object, secret: string): Promise<string> {
   return `${header}.${body}.${signature}`
 }
 
+async function hashPassword(password: string): Promise<string> {
+  const data = new TextEncoder().encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 export async function onRequestPost(context: { request: Request; env: Env }) {
   const { request, env } = context
   const { email, password } = await request.json() as any
@@ -31,23 +38,37 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
 
   const user = result.rows[0]
 
-  // Compare passwords using bcryptjs or fallback to legacy btoa
+  // Compare passwords
   let isMatched = false
-  try {
-    isMatched = bcrypt.compareSync(password, user.password_hash)
-  } catch (err: any) {
-    // If it's a legacy btoa hash, compareSync might throw an error
+  
+  // Try new SHA-256 hash
+  if (user.password_hash === await hashPassword(password)) {
+    isMatched = true
   }
 
+  // Fallback 1: Legacy btoa
   if (!isMatched && user.password_hash === btoa(password)) {
     isMatched = true
-    // Auto-upgrade password hash to bcryptjs
+  }
+
+  // Fallback 2: bcryptjs
+  if (!isMatched) {
     try {
-      const newBcryptHash = bcrypt.hashSync(password, 10)
-      await query(env, 'UPDATE "user" SET password_hash = $1 WHERE id = $2', [newBcryptHash, user.id])
-    } catch (dbErr) {
-      console.error('Failed to auto-upgrade password hash:', dbErr)
+      if (bcrypt.compareSync(password, user.password_hash)) {
+        isMatched = true;
+      }
+    } catch (err: any) {
     }
+  }
+
+  if (isMatched && user.password_hash !== await hashPassword(password)) {
+     // Upgrade to SHA-256 hash
+     try {
+       const newHash = await hashPassword(password)
+       await query(env, 'UPDATE "user" SET password_hash = $1 WHERE id = $2', [newHash, user.id])
+     } catch (dbErr) {
+       console.error('Failed to auto-upgrade password hash:', dbErr)
+     }
   }
 
   if (!isMatched) {
