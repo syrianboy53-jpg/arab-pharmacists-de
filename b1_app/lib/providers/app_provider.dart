@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class AppProvider extends ChangeNotifier {
-  static const int appVersion = 85;
+  static const int appVersion = 86;
 
   bool _isDarkMode = false;
   int _xp = 0;
@@ -132,7 +132,7 @@ class AppProvider extends ChangeNotifier {
     try {
       final client = HttpClient();
       client.connectionTimeout = const Duration(seconds: 8);
-      final request = await client.postUrl(Uri.parse('https://b1-syrer.de/auth/login'));
+      final request = await client.postUrl(Uri.parse('https://www.b1-syrer.de/auth/login'));
       request.headers.set(HttpHeaders.contentTypeHeader, 'application/json');
       
       final body = json.encode({'email': email, 'password': password});
@@ -169,7 +169,7 @@ class AppProvider extends ChangeNotifier {
     try {
       final client = HttpClient();
       client.connectionTimeout = const Duration(seconds: 8);
-      final request = await client.postUrl(Uri.parse('https://b1-syrer.de/auth/signup'));
+      final request = await client.postUrl(Uri.parse('https://www.b1-syrer.de/auth/signup'));
       request.headers.set(HttpHeaders.contentTypeHeader, 'application/json');
       
       final body = json.encode({'name': name, 'email': email, 'password': password});

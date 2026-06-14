@@ -71,29 +71,34 @@ class _ContactScreenState extends State<ContactScreen> {
     final String finalSubject = subject.isNotEmpty ? '[$topicLabel] $subject' : '[$topicLabel] رسالة من التطبيق';
     final String body = 'الاسم: $name\nالبريد الإلكتروني: $email\n\nالرسالة:\n$message';
 
-    final Uri emailLaunchUri = Uri(
-      scheme: 'mailto',
-      path: 'shami.fadi@gmx.de',
-      query: _encodeQueryParameters(<String, String>{
-        'subject': finalSubject,
-        'body': body,
-      }),
-    );
-
     try {
-      if (await canLaunchUrl(emailLaunchUri)) {
-        await launchUrl(emailLaunchUri);
+      final client = HttpClient();
+      client.connectionTimeout = const Duration(seconds: 10);
+      final request = await client.postUrl(Uri.parse('https://www.b1-syrer.de/api/contact'));
+      request.headers.set(HttpHeaders.contentTypeHeader, 'application/json');
+      
+      final payload = json.encode({
+        'name': name,
+        'email': email,
+        'subject': subject,
+        'message': message,
+        'topic': _selectedTopic,
+      });
+      request.write(payload);
+      
+      final response = await request.close();
+      if (response.statusCode == 200 || response.statusCode == 201) {
         if (mounted) {
           _showSuccessDialog();
           _messageController.clear();
           _subjectController.clear();
         }
       } else {
-        throw Exception('Could not launch email app');
+        throw Exception('فشل الإرسال. رمز الخطأ: ${response.statusCode}');
       }
     } catch (e) {
       if (mounted) {
-        _showErrorSnackBar('تعذر فتح تطبيق البريد الإلكتروني. يرجى التواصل مباشرة عبر shami.fadi@gmx.de');
+        _showErrorSnackBar('تعذر الإرسال. يرجى التحقق من اتصالك بالإنترنت أو المحاولة لاحقاً.');
       }
     } finally {
       if (mounted) {
