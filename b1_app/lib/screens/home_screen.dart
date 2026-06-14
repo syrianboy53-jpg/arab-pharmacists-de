@@ -1677,141 +1677,110 @@ class _HomeScreenState extends State<HomeScreen> {
 //   }
 
   // Stats Card with high fidelity frosted Glassmorphism
-  Widget _buildStatsCard(BuildContext context, AppProvider provider, bool isDark, Color textMain, Color borderCol) {
-    final textMuted = isDark ? Colors.white70 : const Color(0xFF64748B);
-    final textSub = isDark ? Colors.white38 : const Color(0xFF94A3B8);
-
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(24),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-        child: Container(
-          decoration: BoxDecoration(
-            color: isDark ? Colors.white.withValues(alpha: 0.05) : Colors.white.withValues(alpha: 0.85),
-            gradient: isDark
-                ? LinearGradient(
-                    colors: [
-                      const Color(0xFF1E293B).withValues(alpha: 0.15),
-                      const Color(0xFF0F172A).withValues(alpha: 0.4),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  )
-                : null,
-            borderRadius: BorderRadius.circular(24),
-            border: Border.all(
-              color: isDark ? Colors.white.withValues(alpha: 0.08) : const Color(0xFFE2E8F0),
-              width: 1.5,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: isDark
-                    ? const Color(0xFF0D9488).withValues(alpha: 0.1)
-                    : Colors.black.withValues(alpha: 0.04),
-                blurRadius: 20,
-                spreadRadius: 2,
-                offset: const Offset(0, 8),
-              ),
-            ],
+    Widget _buildStatsCard(BuildContext context, AppProvider provider, bool isDark, Color textMain, Color borderCol) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF131F24) : Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: isDark ? const Color(0xFF2A3A40) : const Color(0xFFE5E5E5), width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: isDark ? Colors.black.withOpacity(0.5) : Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Row(
-              children: [
-                CircularPercentIndicator(
-                  radius: 42,
-                  lineWidth: 7,
-                  percent: (provider.xp % 100) / 100,
-                  center: Text(
-                    '${provider.level}',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: isDark ? const Color(0xFF2DD4BF) : const Color(0xFF10B981),
-                    ),
-                  ),
-                  progressColor: isDark ? const Color(0xFF2DD4BF) : const Color(0xFF10B981),
-                  backgroundColor: isDark ? const Color(0xFF1E293B) : const Color(0xFFE2E8F0),
-                  circularStrokeCap: CircularStrokeCap.round,
-                  animation: true,
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'المستوى الحالي: ${provider.levelTitle}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: textMain,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'مجموع نقاط الخبرة: ${provider.xp} XP',
-                        style: TextStyle(
-                          color: textMuted,
-                          fontSize: 13,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'النقاط للمستوى التالي: ${100 - (provider.xp % 100)} XP',
-                        style: TextStyle(
-                          color: textSub,
-                          fontSize: 11,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Column(
+          // Duolingo-style bottom border shadow
+          BoxShadow(
+            color: isDark ? const Color(0xFF0D1418) : const Color(0xFFD1D5DB),
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: const Color(0xFF58CC02).withOpacity(0.2),
+                child: const Text('🦉', style: TextStyle(fontSize: 32)),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.local_fire_department, color: Colors.orange, size: 24),
-                        const SizedBox(width: 4),
-                        Text(
-                          '${provider.streak}',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: textMain,
-                          ),
-                        ),
-                      ],
-                    ),
                     Text(
-                      'يوم متتالي',
-                      style: TextStyle(color: textSub, fontSize: 10),
+                      'مرحباً بك يا بطل! 🌟',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: isDark ? Colors.white : const Color(0xFF4B4B4B),
+                      ),
                     ),
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        Icon(Icons.check_circle_outline, color: isDark ? const Color(0xFF2DD4BF) : const Color(0xFF10B981), size: 18),
-                        const SizedBox(width: 4),
-                        Text(
-                          '${provider.completedQuizzes}',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: textMain,
-                          ),
-                        ),
-                      ],
-                    ),
+                    const SizedBox(height: 4),
                     Text(
-                      'اختبار مكتمل',
-                      style: TextStyle(color: textSub, fontSize: 10),
+                      'أنت على الطريق الصحيح لإتقان الـ B1',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: isDark ? Colors.white70 : const Color(0xFF777777),
+                      ),
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildStatItem('المستوى', '${provider.level}', '🎯', const Color(0xFF1CB0F6), isDark),
+              _buildStatItem('النقاط', '${provider.xp}', '⚡', const Color(0xFFFF9600), isDark),
+              _buildStatItem('الالتزام', '${provider.streak} يوم', '🔥', const Color(0xFFFF4B4B), isDark),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatItem(String label, String value, String icon, Color color, bool isDark) {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.15),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: color.withOpacity(0.5), width: 1.5),
+          ),
+          child: Row(
+            children: [
+              Text(icon, style: const TextStyle(fontSize: 18)),
+              const SizedBox(width: 6),
+              Text(
+                value,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                ),
+              ),
+            ],
           ),
         ),
-      ),
+        const SizedBox(height: 6),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            color: isDark ? Colors.white70 : const Color(0xFF777777),
+          ),
+        ),
+      ],
     );
   }
 
