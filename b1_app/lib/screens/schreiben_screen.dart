@@ -1,3 +1,5 @@
+import 'package:provider/provider.dart';
+import '../providers/app_provider.dart';
 import 'package:flutter/material.dart';
 import '../data/schreiben_data.dart';
 
@@ -17,6 +19,7 @@ class _SchreibenScreenState extends State<SchreibenScreen> with SingleTickerProv
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
   }
+
 
   @override
   void dispose() {
@@ -97,12 +100,25 @@ class _SchreibenScreenState extends State<SchreibenScreen> with SingleTickerProv
                     if (task['promptDe'] != null) ...[const SizedBox(height: 8), Text(task['promptDe'] as String, textDirection: TextDirection.ltr, style: TextStyle(color: Colors.grey[700]))],
                     if (task['sampleAnswer'] != null) ...[
                       const Divider(height: 24),
-                      const Text('✍️ نموذج إجابة:', style: TextStyle(fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text('✍️ نموذج إجابة:', style: TextStyle(fontWeight: FontWeight.bold)),
+                          IconButton(
+                            icon: const Icon(Icons.volume_up, color: Color(0xFF58CC02)),
+                            onPressed: () => Provider.of<AppProvider>(context, listen: false).speak(task['sampleAnswer'] as String),
+                          ),
+                        ],
+                      ),
                       Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest, borderRadius: BorderRadius.circular(8)),
-                        child: Text(task['sampleAnswer'] as String, textDirection: TextDirection.ltr, style: const TextStyle(height: 1.6)),
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(color: const Color(0xFFE5E5E5)),
+                        ),
+                        child: Text(task['sampleAnswer'] as String, textDirection: TextDirection.ltr, style: const TextStyle(height: 1.6, fontSize: 15)),
                       ),
                     ],
                     if (task['tips'] != null) ...[
@@ -158,10 +174,25 @@ class _SchreibenScreenState extends State<SchreibenScreen> with SingleTickerProv
           if (tmpl['scenario'] != null) ...[const SizedBox(height: 12), Text('📋 ${tmpl["scenario"]}', style: const TextStyle(fontSize: 15))],
           if (tmpl['body'] != null) ...[
             const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('📝 نص الرسالة:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                IconButton(
+                  icon: const Icon(Icons.volume_up, color: Color(0xFF58CC02)),
+                  onPressed: () => Provider.of<AppProvider>(context, listen: false).speak(tmpl['body'] as String),
+                ),
+              ],
+            ),
             Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(color: Theme.of(context).colorScheme.surfaceContainerHighest, borderRadius: BorderRadius.circular(8)),
-              child: Text(tmpl['body'] as String, textDirection: TextDirection.ltr, style: const TextStyle(height: 1.6)),
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: const Color(0xFFE5E5E5)),
+              ),
+              child: Text(tmpl['body'] as String, textDirection: TextDirection.ltr, style: const TextStyle(height: 1.6, fontSize: 15)),
             ),
           ],
           if (tmpl['hinweise'] != null) ...[
