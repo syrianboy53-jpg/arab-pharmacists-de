@@ -48,16 +48,19 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     ]
 
     for (const msg of history) {
+      const textContent = msg.content || msg.text || msg.parts || '';
       contents.push({
         role: msg.role === 'user' ? 'user' : 'model',
-        parts: [{ text: msg.content }]
+        parts: [{ text: textContent }]
       })
     }
 
-    contents.push({
-      role: 'user',
-      parts: [{ text: userMessage }]
-    })
+    if (userMessage.trim()) {
+      contents.push({
+        role: 'user',
+        parts: [{ text: userMessage }]
+      })
+    }
 
     const geminiRes = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${env.GEMINI_API_KEY}`,
