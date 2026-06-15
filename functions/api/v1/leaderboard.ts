@@ -1,4 +1,4 @@
-import { Env, query } from '../../../utils'
+import { Env, query } from '../../utils'
 
 export async function onRequestGet(context: { request: Request; env: Env }) {
   const { env } = context

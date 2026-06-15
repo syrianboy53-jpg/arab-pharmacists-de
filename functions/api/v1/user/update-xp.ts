@@ -1,4 +1,4 @@
-import { Env, query, verifyJWT } from '../../../../utils'
+import { Env, query, verifyJWT } from '../../../utils'
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
   const { request, env } = context
