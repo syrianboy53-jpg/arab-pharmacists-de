@@ -53,9 +53,9 @@ export default function GrammarPage() {
     return commonMistakes.filter(m => {
       const matchCat = selectedCategory === 'all' || m.category === selectedCategory
       const matchText = !q || 
-        m.titleAr.toLowerCase().includes(q) ||
-        m.wrong.toLowerCase().includes(q) ||
-        m.right.toLowerCase().includes(q) ||
+        (m.titleAr && m.titleAr.toLowerCase().includes(q)) ||
+        (m.wrong && m.wrong.toLowerCase().includes(q)) ||
+        (m.right && m.right.toLowerCase().includes(q)) ||
         (m.ruleAr && m.ruleAr.toLowerCase().includes(q))
       return matchCat && matchText
     })

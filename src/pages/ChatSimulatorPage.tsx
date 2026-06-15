@@ -29,7 +29,7 @@ export default function ChatSimulatorPage() {
 
   // Start/Reset conversation
   const startConversation = () => {
-    if (!scenario) return
+    if (!scenario || !scenario.steps) return
 
     const firstStep = scenario.steps.find(s => s.id === 1)
     if (!firstStep) return
@@ -69,7 +69,7 @@ export default function ChatSimulatorPage() {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [chatHistory])
 
-  if (!scenario) {
+  if (!scenario || !scenario.steps) {
     return (
       <div className="glass p-10 text-center rounded-2xl border border-white/5">
         <p className="text-muted text-sm">لا توجد محاكيات محادثة متاحة حالياً.</p>
@@ -91,7 +91,7 @@ export default function ChatSimulatorPage() {
   }
 
   // Handle Option Select
-  const handleSelectOption = (option: typeof scenario.steps[0]['options'][0]) => {
+  const handleSelectOption = (option: any) => {
     // 1. Add user message
     const userMsgId = `user-${Date.now()}`
     const userMsg: MessageItem = {
