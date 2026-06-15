@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class AppProvider extends ChangeNotifier {
-  static const int appVersion = 90;
+  static const int appVersion = 91;
 
   bool _isDarkMode = false;
   int _xp = 0;
@@ -57,12 +57,29 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  String get apiBaseUrl => 'https://www.b1-syrer.de';
+
   void addXP(int points) async {
     _xp += points;
     final prefs = await SharedPreferences.getInstance();
     prefs.setInt('xp', _xp);
     _updateStreak();
     notifyListeners();
+    
+    // Sync to backend if logged in
+    if (_token != null) {
+      try {
+        final client = HttpClient();
+        client.connectionTimeout = const Duration(seconds: 5);
+        final request = await client.postUrl(Uri.parse('$apiBaseUrl/api/v1/user/update-xp'));
+        request.headers.set(HttpHeaders.contentTypeHeader, 'application/json');
+        request.headers.set(HttpHeaders.authorizationHeader, 'Bearer $_token');
+        request.write(json.encode({'amount': points}));
+        await request.close();
+      } catch (e) {
+        debugPrint('Failed to sync XP: $e');
+      }
+    }
   }
 
   void incrementQuizzes() async {

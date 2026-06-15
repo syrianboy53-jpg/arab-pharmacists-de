@@ -18,8 +18,13 @@ import 'sprechen_screen.dart';
 import 'sprachbausteine_screen.dart';
 import 'grammatik_screen.dart';
 import 'wortschatz_screen.dart';
+import 'flashcards_screen.dart';
+import 'voice_roleplay_screen.dart';
+import '../widgets/daily_quests_widget.dart';
+import 'grammatik_screen.dart';
 import 'leben_screen.dart';
 import 'settings_screen.dart';
+import 'leaderboard_screen.dart';
 import 'library_screen.dart';
 import 'premium_screen.dart';
 import 'einstufung_screen.dart';
@@ -1251,6 +1256,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
 
 
+                    // --- DAILY QUESTS ---
+                    const SliverToBoxAdapter(
+                      child: DailyQuestsWidget(),
+                    ),
+                    const SliverToBoxAdapter(child: SizedBox(height: 16)),
+
                     // --- ZIGZAG PATH UI ---
                     // Unit 1
                     _buildPathUnitHeader('الوحدة 1', 'البدايات وتحديد المستوى 🚀', const Color(0xFF7C3AED), isDark),
@@ -1259,6 +1270,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           _buildPathNode('تحديد المستوى', Icons.rule, const Color(0xFF7C3AED), () => _navigate(const EinstufungScreen()), -0.5, isLarge: true),
                           _buildPathNode('المفردات', Icons.translate, const Color(0xFF0891B2), () => _navigate(const WortschatzScreen()), 0.2),
+                          _buildPathNode('بطاقات الذاكرة', Icons.style, const Color(0xFF16A34A), () => _navigate(const FlashcardsCategoryScreen()), -0.3),
                         ],
                       ),
                     ),
@@ -1294,6 +1306,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           _buildPathNode('التحدث', Icons.record_voice_over, const Color(0xFFDC2626), () => _navigate(const SprechenScreen()), 0.2),
                           _buildPathNode('مختبر النطق', Icons.mic, const Color(0xFF9333EA), () => _navigate(const PronunciationLabScreen()), 0.5),
+                          _buildPathNode('محاكي المحادثة (الذكاء الاصطناعي)', Icons.record_voice_over, const Color(0xFF1E3A8A), () => _navigate(const VoiceRoleplayCategoryScreen()), 0.1),
                           _buildPathNode('الكتابة', Icons.edit_note, const Color(0xFF2563EB), () => _navigate(const SchreibenScreen()), -0.4, isLarge: true),
                           _buildPathNode('المصحح الذكي', Icons.auto_awesome, const Color(0xFF10B981), () => _navigate(const BriefCorrectorScreen()), -0.1),
                           _buildPathNode('تصريف الأفعال', Icons.refresh, const Color(0xFF65A30D), () => _navigate(const ConjugationTrainerScreen()), -0.7),
@@ -1397,7 +1410,7 @@ class _HomeScreenState extends State<HomeScreen> {
         bodyWidget = const InteractivePracticeScreen();
         break;
       case 2:
-        bodyWidget = _buildFullLeaderboard(isDark, textMain, borderCol, provider);
+        bodyWidget = LeaderboardScreen(isDark: isDark, textMain: textMain, borderCol: borderCol);
         break;
       case 3:
         bodyWidget = const SettingsScreen();
