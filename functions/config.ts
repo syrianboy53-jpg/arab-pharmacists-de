@@ -32,6 +32,10 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       }
     }
 
+    // Force override for V91 update
+    config.apk_version = '91'
+    config.apk_changelog = 'تحديث ضخم: إضافة لوحة صدارة عالمية، محادثات الذكاء الاصطناعي مع الصوت، تحديات يومية، وبطاقات ذاكرة!'
+
     return new Response(JSON.stringify(config), {
       headers: {
         'Content-Type': 'application/json',
