@@ -51,7 +51,7 @@ export default function App() {
           <Route path="/leben" element={<LebenPage />} />
           <Route path="/b2" element={<B2Page />} />
           <Route path="/premium" element={<PremiumPage />} />
-          <Route path="/admin" element={<AdminDashboardPage />} />
+          <Route path="/admin/*" element={<AdminDashboardPage />} />
           <Route path="/sprachbausteine" element={<SprachbausteinePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/chat-simulator" element={<ChatSimulatorPage />} />

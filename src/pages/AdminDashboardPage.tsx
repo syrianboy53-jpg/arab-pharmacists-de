@@ -474,7 +474,7 @@ export default function AdminDashboardPage() {
       })
       if (res.ok) {
         const data = await res.json()
-        setSuggestions(data.feedback || [])
+        setSuggestions(data.entries || [])
         setUnreadSuggestionsCount(data.unread_count || 0)
       }
     } catch {}
@@ -483,13 +483,13 @@ export default function AdminDashboardPage() {
 
   async function updateSuggestionStatus(id: number, status: string) {
     try {
-      const res = await fetch(`${API_BASE}/admin/feedback/${id}`, {
+      const res = await fetch(`${API_BASE}/admin/feedback`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           'X-Admin-Token': adminToken.trim()
         },
-        body: JSON.stringify({ status })
+        body: JSON.stringify({ id, status })
       })
       if (res.ok) {
         fetchSuggestions()
