@@ -5,7 +5,7 @@ export async function onRequest(context: any) {
   if (request.method === 'OPTIONS') {
     const corsHeaders = new Headers({
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Admin-Token'
     })
     return new Response(null, { status: 204, headers: corsHeaders })
@@ -14,7 +14,7 @@ export async function onRequest(context: any) {
   const response = await context.next()
   const newHeaders = new Headers(response.headers)
   newHeaders.set('Access-Control-Allow-Origin', '*')
-  newHeaders.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+  newHeaders.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
   newHeaders.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Admin-Token')
 
   const path = url.pathname
