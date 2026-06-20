@@ -41,7 +41,7 @@ export default function LebenPage() {
       )}
 
       {currentQuestions.map(q => (
-        <div key={q.id} className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+        <div key={q.id} className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm border border-gray-200 dark:border-white/5">
           <p className="font-bold text-sm mb-1" dir="ltr">{q.id}. {q.question}</p>
           <p className="text-xs text-muted mb-3">{q.questionAr}</p>
           <div className="space-y-2">

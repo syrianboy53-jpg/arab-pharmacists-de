@@ -34,7 +34,7 @@ export default function B1ModelsPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-black flex items-center gap-2">📝 5 نماذج B1 موضوعيّة</h1>
-      <p className="text-sm text-gray-500">نماذج كاملة مقسّمة بحسب الموضوع — اختر نموذجاً وابدأ</p>
+      <p className="text-sm text-gray-500 dark:text-gray-400">نماذج كاملة مقسّمة بحسب الموضوع — اختر نموذجاً وابدأ</p>
       <div className="grid sm:grid-cols-2 gap-3">
         {models.map((m, mi) => (
           <div key={mi} className="bg-white dark:bg-[#1a1a2e] rounded-xl border border-gray-100 dark:border-white/5 overflow-hidden">

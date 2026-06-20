@@ -6,14 +6,14 @@ export default function AboutPage() {
         <p className="text-muted">B1 Deutsch للعرب والسوريين</p>
       </div>
 
-      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+      <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-white/5">
         <h2 className="font-bold text-lg mb-3">🇸🇾 القصّة</h2>
         <p className="text-sm leading-relaxed">
           بدأ هذا المشروع كفكرة بسيطة: مساعدة السوريين والعرب في ألمانيا على اجتياز امتحان B1 بشرح بالعربي وبأسلوب قريب من حياتهم اليومية. اليوم أصبح تطبيقاً شاملاً يغطّي كل أقسام الامتحان.
         </p>
       </div>
 
-      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+      <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-white/5">
         <h2 className="font-bold text-lg mb-3">👨‍💻 المؤسّس</h2>
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 bg-green rounded-full flex items-center justify-center text-white text-2xl font-bold">ف</div>
@@ -28,7 +28,7 @@ export default function AboutPage() {
         </blockquote>
       </div>
 
-      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+      <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-white/5">
         <h2 className="font-bold text-lg mb-3">📊 إحصائيات</h2>
         <div className="grid grid-cols-3 gap-4 text-center">
           <div>
@@ -46,7 +46,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+      <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-white/5">
         <h2 className="font-bold text-lg mb-3">📬 تواصل معنا</h2>
         <div className="space-y-2 text-sm">
           <p>📧 <a href="mailto:shami.fadi@gmx.de" className="text-green hover:underline">shami.fadi@gmx.de</a></p>

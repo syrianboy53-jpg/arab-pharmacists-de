@@ -268,7 +268,7 @@ export default function EinstufungPage() {
     return (
       <div className="max-w-2xl mx-auto p-4 md:p-8 relative">
         <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-50 w-full h-full" />
-        <div className="bg-white dark:bg-gray-800 rounded-3xl p-6 md:p-10 text-center shadow-xl border border-gray-100 dark:border-gray-700 animate-fadeIn">
+        <div className="bg-white dark:bg-[#1a1a2e] rounded-3xl p-6 md:p-10 text-center shadow-xl border border-gray-100 dark:border-white/5 animate-fadeIn">
           <div className="inline-block p-4 bg-gold/10 text-gold rounded-full mb-6">
             <span className="text-5xl">🏆</span>
           </div>
@@ -332,7 +332,7 @@ export default function EinstufungPage() {
       </div>
 
       {/* Progress Card */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+      <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
         <div className="flex justify-between items-center mb-3">
           <span className="text-sm text-muted font-semibold">
             سؤال {currentIdx + 1} من {questions.length}
@@ -343,7 +343,7 @@ export default function EinstufungPage() {
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full bg-gray-100 dark:bg-gray-700 h-2.5 rounded-full overflow-hidden mb-6">
+        <div className="w-full bg-gray-100 dark:bg-white/10 h-2.5 rounded-full overflow-hidden mb-6">
           <div
             className="bg-green h-full transition-all duration-300"
             style={{ width: `${progress * 100}%` }}
@@ -351,7 +351,7 @@ export default function EinstufungPage() {
         </div>
 
         {/* Question Text */}
-        <h2 className="text-xl md:text-2xl font-bold text-center py-6 leading-relaxed border-b border-gray-50 dark:border-gray-700" dir="ltr">
+        <h2 className="text-xl md:text-2xl font-bold text-center py-6 leading-relaxed border-b border-gray-50 dark:border-white/5" dir="ltr">
           {q.q}
         </h2>
 
@@ -370,10 +370,10 @@ export default function EinstufungPage() {
               } else if (isSelected) {
                 btnClass += 'border-red bg-red/10 text-red dark:text-red-300'
               } else {
-                btnClass += 'border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 opacity-60 text-muted'
+                btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50/50 dark:bg-[#1a1a2e]/50 opacity-60 text-muted'
               }
             } else {
-              btnClass += 'border-gray-200 dark:border-gray-700 hover:border-green hover:bg-green/5'
+              btnClass += 'border-gray-200 dark:border-white/5 hover:border-green hover:bg-green/5'
             }
 
             return (

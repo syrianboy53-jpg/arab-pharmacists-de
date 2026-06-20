@@ -60,7 +60,7 @@ export default function SprachbausteinePage() {
         </div>
         <div className="grid gap-3">
           {exercises.map((e, i) => (
-            <button key={e.id} onClick={() => setSelectedEx(i)} className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow border border-gray-100 text-right">
+            <button key={e.id} onClick={() => setSelectedEx(i)} className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow border border-gray-200 dark:border-white/5 text-right">
               <h3 className="font-bold text-green">نموذج {e.id}</h3>
               <p className="text-xs text-muted mt-1">{e.gaps.length} فراغات</p>
             </button>
@@ -82,13 +82,13 @@ export default function SprachbausteinePage() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+      <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm border border-gray-200 dark:border-white/5">
         <pre className="text-sm whitespace-pre-wrap leading-relaxed" dir="ltr">{ex.text}</pre>
       </div>
 
       <div className="space-y-4">
         {ex.gaps.map((gap) => (
-          <div key={gap.position} className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+          <div key={gap.position} className="bg-white dark:bg-[#1a1a2e] rounded-xl p-4 shadow-sm border border-gray-200 dark:border-white/5">
             <p className="font-bold text-sm mb-2" dir="ltr">{gap.position}</p>
             <div className="flex flex-wrap gap-2">
               {gap.options.map((opt, oi) => {

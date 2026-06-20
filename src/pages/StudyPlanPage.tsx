@@ -8,7 +8,7 @@ export default function StudyPlanPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-black flex items-center gap-2">📅 مخطّط الدراسة</h1>
-      <p className="text-sm text-gray-500">خطّة 4 أسابيع للتحضير الكامل لامتحان B1</p>
+      <p className="text-sm text-gray-500 dark:text-gray-400">خطّة 4 أسابيع للتحضير الكامل لامتحان B1</p>
       <div className="space-y-4">{weeks.map((w, i) => (
         <div key={i} className={`bg-white dark:bg-[#1a1a2e] rounded-xl p-5 border-r-4 ${w.color} border border-gray-100 dark:border-white/5`}>
           <div className="flex items-center gap-2 mb-3">

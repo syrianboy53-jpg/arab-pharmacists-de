@@ -13,7 +13,7 @@ export default function BildbeschreibungPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-black flex items-center gap-2">🖼️ وصف صورة — Bildbeschreibung</h1>
-      <p className="text-sm text-gray-500">تعلّم كيف تصف صورة بالألمانية — عبارات مفيدة مع الترجمة</p>
+      <p className="text-sm text-gray-500 dark:text-gray-400">تعلّم كيف تصف صورة بالألمانية — عبارات مفيدة مع الترجمة</p>
       <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-5 border border-gray-100 dark:border-white/5">
         <h3 className="font-bold text-sm mb-4">📝 خطوات وصف الصورة</h3>
         <ol className="space-y-2 text-sm text-gray-600 dark:text-gray-400 list-decimal list-inside">
@@ -31,7 +31,7 @@ export default function BildbeschreibungPage() {
             <div className="flex items-start justify-between gap-2">
               <div>
                 <p className="font-bold text-sm text-[#0984e3]" dir="ltr">{p.de}</p>
-                <p className="text-xs text-gray-500 mt-1">{p.ar}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{p.ar}</p>
               </div>
               <span className={`text-[9px] px-2 py-0.5 rounded-full font-bold shrink-0 ${typeColors[p.type] || ''}`}>{p.type}</span>
             </div>

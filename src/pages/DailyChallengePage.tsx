@@ -42,20 +42,20 @@ export default function DailyChallengePage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold flex items-center gap-2">📅 تحدّي اليوم</h1>
+        <h1 className="text-2xl font-black flex items-center gap-2 text-gray-900 dark:text-white">📅 تحدّي اليوم</h1>
         <span className="text-sm bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-3 py-1 rounded-full font-bold">{current + 1} / {questions.length}</span>
       </div>
-      <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-        <p className="text-xs text-gray-500 mb-2">{q.ar}</p>
+      <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
+        <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">{q.ar}</p>
         <p className="text-xl font-bold mb-6" dir="ltr">{q.q}</p>
         <div className="grid grid-cols-2 gap-3">
           {q.options.map((opt, i) => (
             <button key={i} onClick={() => handleAnswer(i)}
               className={`p-4 rounded-xl font-bold text-center transition-all cursor-pointer border-2 ${
-                answered === null ? 'bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 hover:border-emerald-500' :
+                answered === null ? 'bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-white/10 hover:border-emerald-500' :
                 i === q.correct ? 'bg-emerald-100 dark:bg-emerald-900/30 border-emerald-500 text-emerald-700' :
                 i === answered ? 'bg-red-100 dark:bg-red-900/30 border-red-500 text-red-700' :
-                'bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 opacity-50'
+                'bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-white/10 opacity-50'
               }`} dir="ltr">{opt}</button>
           ))}
         </div>

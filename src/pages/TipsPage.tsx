@@ -8,7 +8,7 @@ export default function TipsPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-black flex items-center gap-2">🧰 أدوات النجاح</h1>
-      <p className="text-sm text-gray-500">نصائح واستراتيجيّات لكل قسم من الامتحان</p>
+      <p className="text-sm text-gray-500 dark:text-gray-400">نصائح واستراتيجيّات لكل قسم من الامتحان</p>
       <div className="space-y-4">{sections.map((s, i) => (
         <div key={i} className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 border border-gray-100 dark:border-white/5">
           <h3 className="font-bold text-sm mb-3 flex items-center gap-2">{s.icon} {s.title}</h3>

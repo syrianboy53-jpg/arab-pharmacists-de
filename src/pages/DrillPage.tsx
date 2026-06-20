@@ -127,7 +127,7 @@ export default function DrillPage() {
     const won = gameWon && lives > 0
     return (
       <div className="max-w-xl mx-auto p-4 animate-fadeIn">
-        <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 text-center shadow-lg border border-gray-100 dark:border-gray-700">
+        <div className="bg-white dark:bg-[#1a1a2e] rounded-3xl p-8 text-center shadow-lg border border-gray-100 dark:border-white/5">
           <div className="text-6xl mb-4">{won ? '🎉' : '💔'}</div>
           <h1 className="text-2xl md:text-3xl font-bold mb-4">{won ? 'عمل رائع! لقد نجحت' : 'انتهت الفرص!'}</h1>
           <p className="text-muted text-sm md:text-base mb-6">
@@ -197,7 +197,7 @@ export default function DrillPage() {
       </div>
 
       {/* Mascot Speech Bubble */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex gap-4 items-center mb-6 animate-pulseOnce">
+      <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5 flex gap-4 items-center mb-6 animate-pulseOnce">
         <span className="text-4xl">🦉</span>
         <div className="flex-1">
           <div className="text-xs text-muted font-bold mb-0.5">مدرّب B1-Syrer</div>
@@ -206,7 +206,7 @@ export default function DrillPage() {
       </div>
 
       {/* Drill Question Card */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+      <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
         <div className="flex justify-between items-center mb-3">
           <span className="text-xs text-muted font-bold">
             سؤال {currentIdx + 1} من {roundDrills.length}
@@ -222,7 +222,7 @@ export default function DrillPage() {
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full bg-gray-100 dark:bg-gray-700 h-2.5 rounded-full overflow-hidden mb-6">
+        <div className="w-full bg-gray-100 dark:bg-white/10 h-2.5 rounded-full overflow-hidden mb-6">
           <div
             className="bg-green h-full transition-all duration-300"
             style={{ width: `${progress * 100}%` }}
@@ -230,7 +230,7 @@ export default function DrillPage() {
         </div>
 
         {/* Question Text */}
-        <h2 className="text-xl md:text-2xl font-bold text-center py-6 leading-relaxed border-b border-gray-50 dark:border-gray-700" dir="ltr">
+        <h2 className="text-xl md:text-2xl font-bold text-center py-6 leading-relaxed border-b border-gray-50 dark:border-white/5" dir="ltr">
           {q.context}
         </h2>
 
@@ -249,10 +249,10 @@ export default function DrillPage() {
               } else if (isSelected) {
                 btnClass += 'border-red bg-red/10 text-red dark:text-red-300'
               } else {
-                btnClass += 'border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/50 opacity-60 text-muted'
+                btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50/50 dark:bg-[#1a1a2e]/50 opacity-60 text-muted'
               }
             } else {
-              btnClass += 'border-gray-200 dark:border-gray-700 hover:border-green hover:bg-green/5'
+              btnClass += 'border-gray-200 dark:border-white/5 hover:border-green hover:bg-green/5'
             }
 
             return (

@@ -316,7 +316,7 @@ export default function HomePage() {
       {/* ── Donate ── */}
       <section className="bg-gradient-to-r from-[#fdcb6e]/10 to-[#e17055]/10 dark:from-[#fdcb6e]/5 dark:to-[#e17055]/5 rounded-2xl p-6 text-center border border-[#fdcb6e]/20">
         <p className="text-base font-black mb-1">☕ ادعم المشروع</p>
-        <p className="text-xs text-gray-500 mb-4">تطبيق مجّاني بالكامل. دعمك يساعدنا نستمر.</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">تطبيق مجّاني بالكامل. دعمك يساعدنا نستمر.</p>
         <a href="https://buymeacoffee.com/halawanyfav" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#FFDD00] hover:bg-[#f5d400] text-black px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm hover:shadow-md transition-all">
           ☕ Buy me a Coffee
         </a>

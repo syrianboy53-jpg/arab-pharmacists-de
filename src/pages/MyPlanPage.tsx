@@ -16,14 +16,14 @@ export default function MyPlanPage() {
   }
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold flex items-center gap-2">🎯 خطّتي الشخصيّة لـB1</h1>
-      <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+      <h1 className="text-2xl font-black flex items-center gap-2 text-gray-900 dark:text-white">🎯 خطّتي الشخصيّة لـB1</h1>
+      <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
         <label className="block text-sm font-bold mb-2">📅 متى موعد امتحانك؟</label>
-        <input type="date" value={examDate} onChange={e => setExamDate(e.target.value)} className="w-full p-3 rounded-xl border border-gray-200 dark:border-gray-600 dark:bg-gray-700 mb-4" />
+        <input type="date" value={examDate} onChange={e => setExamDate(e.target.value)} className="w-full p-3 rounded-xl border border-gray-200 dark:border-white/10 dark:bg-gray-700 mb-4" />
         <button onClick={generate} className="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold cursor-pointer hover:bg-emerald-700 transition-colors">أنشئ خطّتي</button>
       </div>
       {plan.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
           <h2 className="font-bold mb-4">📋 خطّتك اليومية</h2>
           <div className="space-y-2">{plan.map((p, i) => (<div key={i} className="p-3 bg-gray-50 dark:bg-gray-700 rounded-xl text-sm">{p}</div>))}</div>
         </div>

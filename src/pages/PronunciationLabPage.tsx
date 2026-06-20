@@ -122,7 +122,7 @@ export default function PronunciationLabPage() {
         </div>
 
         {transcript && (
-          <div className="mb-8 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
+          <div className="mb-8 p-4 bg-gray-50 dark:bg-[#1a1a2e]/50 rounded-xl">
             <span className="text-sm font-bold text-gray-400 mb-2 block">ما سمعناه:</span>
             <p className="text-lg italic text-gray-700 dark:text-gray-300">"{transcript}"</p>
           </div>
@@ -146,7 +146,7 @@ export default function PronunciationLabPage() {
               setTranscript('')
               setScore(null)
             }}
-            className="p-3 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            className="p-3 bg-gray-100 dark:bg-[#1a1a2e] rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
             ← السابق
           </button>
@@ -168,7 +168,7 @@ export default function PronunciationLabPage() {
               setTranscript('')
               setScore(null)
             }}
-            className="p-3 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            className="p-3 bg-gray-100 dark:bg-[#1a1a2e] rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
             التالي →
           </button>

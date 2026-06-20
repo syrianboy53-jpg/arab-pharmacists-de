@@ -109,12 +109,12 @@ export default function FehlerPage() {
         onClick={() => setFlipped(!flipped)}
       >
         <div
-          className={`absolute inset-0 w-full h-full rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700 transition-transform duration-500 transform-style-3d ${
+          className={`absolute inset-0 w-full h-full rounded-3xl shadow-lg border border-gray-100 dark:border-white/5 transition-transform duration-500 transform-style-3d ${
             flipped ? 'rotate-y-180' : ''
           }`}
         >
           {/* CARD FRONT */}
-          <div className="absolute inset-0 w-full h-full rounded-3xl bg-white dark:bg-gray-800 backface-hidden p-6 md:p-8 flex flex-col justify-between">
+          <div className="absolute inset-0 w-full h-full rounded-3xl bg-white dark:bg-[#1a1a2e] backface-hidden p-6 md:p-8 flex flex-col justify-between">
             <div>
               <div className="text-center mb-6">
                 <span className="bg-red/10 text-red text-xs font-bold px-3 py-1 rounded-full">خطأ شائع احذره! ⚠️</span>
@@ -154,7 +154,7 @@ export default function FehlerPage() {
           {/* CARD BACK */}
           <div className="absolute inset-0 w-full h-full rounded-3xl bg-gray-50 dark:bg-gray-750 backface-hidden rotate-y-180 p-6 md:p-8 flex flex-col justify-between overflow-y-auto">
             <div>
-              <h3 className="font-bold text-green mb-3 border-b border-gray-200 dark:border-gray-700 pb-2">
+              <h3 className="font-bold text-green mb-3 border-b border-gray-200 dark:border-white/5 pb-2">
                 لماذا حدث هذا الخطأ؟ 🧐
               </h3>
               <p className="text-sm text-ink-soft dark:text-gray-300 leading-relaxed mb-4">
@@ -182,13 +182,13 @@ export default function FehlerPage() {
 
       {/* Additional Examples list */}
       {item.examples && item.examples.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700 mb-8 animate-fadeIn">
-          <h3 className="font-bold text-base mb-4 border-b border-gray-100 dark:border-gray-700 pb-2">
+        <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-white/5 mb-8 animate-fadeIn">
+          <h3 className="font-bold text-base mb-4 border-b border-gray-100 dark:border-white/5 pb-2">
             📋 أمثلة وتطبيقات إضافية:
           </h3>
           <div className="space-y-4">
             {item.examples.map((ex, idx) => (
-              <div key={idx} className="p-3 bg-gray-50 dark:bg-gray-800/30 rounded-xl border border-gray-100 dark:border-gray-800">
+              <div key={idx} className="p-3 bg-gray-50 dark:bg-[#1a1a2e]/30 rounded-xl border border-gray-100 dark:border-gray-800">
                 <div className="flex justify-between items-center text-xs text-muted mb-1">
                   <span>مثال {idx + 1}</span>
                   <span className="font-bold">{ex.ar}</span>

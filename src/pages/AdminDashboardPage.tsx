@@ -646,7 +646,7 @@ export default function AdminDashboardPage() {
             )}
           </div>
         ) : (
-          !downloadError && <p className="text-gray-400 dark:text-gray-500 italic">⏳ جاري التحميل...</p>
+          !downloadError && <p className="text-gray-400 dark:text-gray-500 dark:text-gray-400 italic">⏳ جاري التحميل...</p>
         )}
       </section>
 
@@ -984,7 +984,7 @@ export default function AdminDashboardPage() {
       </section>
 
       {/* Admin Account Settings */}
-      <section className="bg-white dark:bg-[#1a1a2e] border-r-4 border-gray-400 dark:border-gray-600 rounded-xl p-5 border border-gray-200 dark:border-white/5 space-y-4">
+      <section className="bg-white dark:bg-[#1a1a2e] border-r-4 border-gray-400 dark:border-white/10 rounded-xl p-5 border border-gray-200 dark:border-white/5 space-y-4">
         <h2 className="text-base font-black text-gray-900 dark:text-white">🔑 تغيير كلمة المرور</h2>
         <div className="max-w-md space-y-3">
           <input

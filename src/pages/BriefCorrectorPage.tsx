@@ -62,7 +62,7 @@ export default function BriefCorrectorPage() {
         <div className="space-y-4">
           <label className="block text-sm font-bold text-gray-700 dark:text-gray-300">نص الرسالة:</label>
           <textarea
-            className="w-full h-80 p-4 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-green focus:border-transparent resize-none shadow-sm transition-all"
+            className="w-full h-80 p-4 rounded-2xl bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 focus:ring-2 focus:ring-green focus:border-transparent resize-none shadow-sm transition-all"
             placeholder="Sehr geehrte Damen und Herren,..."
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -100,7 +100,7 @@ export default function BriefCorrectorPage() {
                 </p>
               </div>
 
-              <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+              <div className="bg-white dark:bg-[#1a1a2e] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-white/5">
                 <h3 className="font-bold text-gray-900 dark:text-white mb-4">💡 ملاحظات وتوجيهات:</h3>
                 <ul className="space-y-3">
                   {result.feedbacks.map((feedback, idx) => (

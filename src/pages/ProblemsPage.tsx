@@ -10,7 +10,7 @@ export default function ProblemsPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-black flex items-center gap-2">💡 مشاكل وحلول</h1>
-      <p className="text-sm text-gray-500">دليل عملي لحل المشاكل الشائعة في ألمانيا</p>
+      <p className="text-sm text-gray-500 dark:text-gray-400">دليل عملي لحل المشاكل الشائعة في ألمانيا</p>
       <div className="space-y-3">{problems.map((p, i) => (
         <div key={i} className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 border border-gray-100 dark:border-white/5">
           <h3 className="font-bold text-sm mb-2 flex items-center gap-2">{p.icon} {p.problem}</h3>

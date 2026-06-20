@@ -42,7 +42,7 @@ export default function ConjugationPage() {
           <div className="space-y-3">
             {pronouns.map(p => (
               <div key={p} className="flex items-center gap-3">
-                <span className="w-16 text-xs font-bold text-gray-500 shrink-0" dir="ltr">{p}</span>
+                <span className="w-16 text-xs font-bold text-gray-500 dark:text-gray-400 shrink-0" dir="ltr">{p}</span>
                 <input dir="ltr" value={answers[p] || ''} onChange={e => setAnswers(prev => ({ ...prev, [p]: e.target.value }))} placeholder="..." className={`flex-1 px-3 py-2 rounded-lg border text-sm font-bold ${showResults ? (answers[p]?.toLowerCase().trim() === (verb.conjugations as Record<string, string>)[p] ? 'border-green-500 bg-green-50 dark:bg-green-900/20' : 'border-red-500 bg-red-50 dark:bg-red-900/20') : 'border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5'}`} />
                 {showResults && answers[p]?.toLowerCase().trim() !== (verb.conjugations as Record<string, string>)[p] && <span className="text-xs text-red-500 font-bold" dir="ltr">{(verb.conjugations as Record<string, string>)[p]}</span>}
               </div>

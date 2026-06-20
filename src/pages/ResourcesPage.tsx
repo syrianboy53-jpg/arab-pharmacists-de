@@ -12,7 +12,7 @@ export default function ResourcesPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-black flex items-center gap-2">🌐 موارد مجّانيّة موثوقة</h1>
-      <p className="text-sm text-gray-500">مواقع رسمية وموثوقة لتعلّم الألمانية</p>
+      <p className="text-sm text-gray-500 dark:text-gray-400">مواقع رسمية وموثوقة لتعلّم الألمانية</p>
       <div className="space-y-3">{resources.map((r, i) => (
         <a key={i} href={r.url} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 bg-white dark:bg-[#1a1a2e] rounded-xl p-4 border border-gray-100 dark:border-white/5 hover:border-gray-300 dark:hover:border-white/15 transition-all">
           <span className="text-2xl shrink-0">{r.icon}</span>

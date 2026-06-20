@@ -15,12 +15,12 @@ export default function LeaderboardPage() {
   ]
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold flex items-center gap-2">🏆 لوحة المتصدّرين</h1>
-      <p className="text-sm text-gray-500">ترتيب هذا الأسبوع — تحديث كل يوم اثنين</p>
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+      <h1 className="text-2xl font-black flex items-center gap-2 text-gray-900 dark:text-white">🏆 لوحة المتصدّرين</h1>
+      <p className="text-sm text-gray-500 dark:text-gray-400">ترتيب هذا الأسبوع — تحديث كل يوم اثنين</p>
+      <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl shadow-sm border border-gray-100 dark:border-white/5 overflow-hidden">
         {leaders.map((l, i) => (
-          <div key={i} className={`flex items-center gap-4 p-4 border-b border-gray-100 dark:border-gray-700 last:border-0 ${l.name === 'أنت' ? 'bg-emerald-50 dark:bg-emerald-900/20' : ''}`}>
-            <span className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${i < 3 ? 'bg-gradient-to-br from-amber-400 to-orange-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'}`}>{i + 1}</span>
+          <div key={i} className={`flex items-center gap-4 p-4 border-b border-gray-100 dark:border-white/5 last:border-0 ${l.name === 'أنت' ? 'bg-emerald-50 dark:bg-emerald-900/20' : ''}`}>
+            <span className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${i < 3 ? 'bg-gradient-to-br from-amber-400 to-orange-500 text-white' : 'bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-400'}`}>{i + 1}</span>
             <span className="flex-1 font-bold text-sm">{l.name}</span>
             <span className="text-sm text-orange-500">🔥 {l.streak}</span>
             <span className="text-sm font-bold text-emerald-600">{l.xp} XP</span>

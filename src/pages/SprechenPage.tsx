@@ -120,7 +120,7 @@ export default function SprechenPage() {
             <button
               key={p.id}
               onClick={() => setSelectedPart(i)}
-              className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow border border-gray-100 text-right"
+              className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow border border-gray-200 dark:border-white/5 text-right"
             >
               <h3 className="font-bold text-green">{p.title}</h3>
               <p className="text-sm text-muted mt-1">{p.description}</p>
@@ -135,7 +135,7 @@ export default function SprechenPage() {
     <div className="space-y-6">
       <button onClick={() => { setSelectedPart(null); setShowSample(false); setShowPhrases(false) }} className="text-green font-bold text-sm">→ العودة</button>
 
-      <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+      <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm border border-gray-200 dark:border-white/5">
         <h2 className="text-lg font-bold text-green mb-2">{part.title}</h2>
         <p className="text-sm mb-3">{part.description}</p>
         <div className="flex flex-wrap gap-2">
@@ -156,7 +156,7 @@ export default function SprechenPage() {
         {showPhrases ? 'إخفاء' : '🌟'} العبارات الذهبية
       </button>
       {showPhrases && (
-        <div className="bg-white rounded-xl p-5 shadow-sm border border-gold/30">
+        <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm border border-gold/30">
           <ul className="space-y-2">
             {part.goldenPhrases.map((ph, i) => (
               <li key={i} className="text-sm bg-gold/5 rounded-lg p-2" dir="ltr">✨ {ph}</li>
@@ -169,7 +169,7 @@ export default function SprechenPage() {
         {showSample ? 'إخفاء' : '👁️'} نموذج الإجابة
       </button>
       {showSample && (
-        <div className="bg-white rounded-xl p-5 shadow-sm border border-green/30">
+        <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm border border-green/30">
           <pre className="text-sm whitespace-pre-wrap leading-relaxed" dir="ltr">{part.sampleAnswer}</pre>
         </div>
       )}

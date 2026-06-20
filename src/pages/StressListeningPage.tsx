@@ -17,7 +17,7 @@ export default function StressListeningPage() {
       <p className="text-sm text-gray-500 dark:text-gray-400">تدرّب على الاستماع مع ضوضاء خلفية واقعية — مثل ظروف الامتحان الحقيقية</p>
 
       <div className="bg-gradient-to-br from-[#e17055] to-[#d63031] rounded-2xl p-6 text-white">
-        <h2 className="font-bold mb-2">🎯 لماذا وضع الضغط؟</h2>
+        <h2 className="font-bold mb-2 text-gray-800 dark:text-gray-200">🎯 لماذا وضع الضغط؟</h2>
         <p className="text-white/80 text-sm leading-relaxed">في الامتحان الحقيقي، لن تستمع في هدوء تام. تدرّب على التركيز رغم الضوضاء لتكون مستعداً!</p>
       </div>
 

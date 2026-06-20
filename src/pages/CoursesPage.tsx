@@ -15,7 +15,7 @@ export default function CoursesPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-black flex items-center gap-2">📅 مواعيد الكورسات</h1>
-      <p className="text-sm text-gray-500">معاهد معتمدة في ألمانيا + كورسات أونلاين</p>
+      <p className="text-sm text-gray-500 dark:text-gray-400">معاهد معتمدة في ألمانيا + كورسات أونلاين</p>
       <div className="space-y-3">{institutes.map((inst, i) => (
         <a key={i} href={inst.url} target="_blank" rel="noopener noreferrer" className="block bg-white dark:bg-[#1a1a2e] rounded-xl p-4 border border-gray-100 dark:border-white/5 hover:border-gray-300 dark:hover:border-white/15 transition-all">
           <div className="flex items-start justify-between gap-3">

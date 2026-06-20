@@ -91,7 +91,7 @@ export default function FlashcardsPage() {
             dragElastic={0.8}
             onDragEnd={handleDragEnd}
             onClick={() => setIsFlipped(!isFlipped)}
-            className="absolute w-80 h-96 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700 cursor-grab active:cursor-grabbing flex flex-col justify-center items-center p-8 text-center"
+            className="absolute w-80 h-96 bg-white dark:bg-[#1a1a2e] rounded-3xl shadow-2xl border border-gray-100 dark:border-white/5 cursor-grab active:cursor-grabbing flex flex-col justify-center items-center p-8 text-center"
             initial={{ scale: 0.95, opacity: 0, y: 50 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, transition: { duration: 0.2 } }}

@@ -197,7 +197,7 @@ export default function SatzbauPage() {
     const won = gameWon && lives > 0
     return (
       <div className="max-w-xl mx-auto p-4 animate-fadeIn">
-        <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 text-center shadow-lg border border-gray-100 dark:border-gray-700">
+        <div className="bg-white dark:bg-[#1a1a2e] rounded-3xl p-8 text-center shadow-lg border border-gray-100 dark:border-white/5">
           <div className="text-6xl mb-4">{won ? '🎉' : '💔'}</div>
           <h1 className="text-2xl md:text-3xl font-bold mb-4">{won ? 'أحسنت! فوز ساحق' : 'انتهت المحاولات!'}</h1>
           <p className="text-muted text-sm md:text-base mb-6">
@@ -266,7 +266,7 @@ export default function SatzbauPage() {
       </div>
 
       {/* Mascot Speech Bubble */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 flex gap-4 items-center mb-6 animate-pulseOnce">
+      <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5 flex gap-4 items-center mb-6 animate-pulseOnce">
         <span className="text-4xl">🦉</span>
         <div className="flex-1">
           <div className="text-xs text-muted font-bold mb-0.5">مدرّب B1-Syrer</div>
@@ -281,7 +281,7 @@ export default function SatzbauPage() {
       </div>
 
       {/* User Construction Area */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border-2 border-dashed border-gray-200 dark:border-gray-700 min-h-[100px] mb-6 flex flex-wrap gap-2 items-center justify-center">
+      <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 shadow-sm border-2 border-dashed border-gray-200 dark:border-white/5 min-h-[100px] mb-6 flex flex-wrap gap-2 items-center justify-center">
         {userWords.map((word, i) => (
           <button
             key={i}
@@ -298,13 +298,13 @@ export default function SatzbauPage() {
       </div>
 
       {/* Scrambled Word Bubbles Shelf */}
-      <div className="bg-gray-50 dark:bg-gray-800/30 rounded-2xl p-6 border border-gray-100 dark:border-gray-800 flex flex-wrap gap-2 justify-center mb-6 min-h-[80px]">
+      <div className="bg-gray-50 dark:bg-[#1a1a2e]/30 rounded-2xl p-6 border border-gray-100 dark:border-gray-800 flex flex-wrap gap-2 justify-center mb-6 min-h-[80px]">
         {shuffledWords.map((word, i) => (
           <button
             key={i}
             onClick={() => selectWord(word, i)}
             disabled={answered}
-            className="bg-white dark:bg-gray-700 text-ink dark:text-white border-2 border-gray-200 dark:border-gray-600 hover:border-green hover:bg-green/5 font-bold px-4 py-2 rounded-xl text-lg transition-transform hover:scale-105 active:scale-95 shadow-sm"
+            className="bg-white dark:bg-gray-700 text-ink dark:text-white border-2 border-gray-200 dark:border-white/10 hover:border-green hover:bg-green/5 font-bold px-4 py-2 rounded-xl text-lg transition-transform hover:scale-105 active:scale-95 shadow-sm"
           >
             {word}
           </button>
@@ -324,7 +324,7 @@ export default function SatzbauPage() {
             </p>
           )}
           {current.explain && (
-            <div className="pt-2 border-t border-gray-100 dark:border-gray-700">
+            <div className="pt-2 border-t border-gray-100 dark:border-white/5">
               <span className="text-xs text-muted font-bold block mb-1">نصيحة نحوية:</span>
               <p className="text-sm text-ink-soft dark:text-gray-300 leading-relaxed">{current.explain}</p>
             </div>
