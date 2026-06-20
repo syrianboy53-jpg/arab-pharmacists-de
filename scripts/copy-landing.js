@@ -44,17 +44,10 @@ if (fs.existsSync(srcDir)) {
 
 
 
-// Copy the restored React app index.html to dist/app/index.html
-const restoredAppIndexSrc = path.resolve('public/index.html');
-const restoredAppIndexDest = path.resolve('dist/app/index.html');
-console.log(`Copying restored app entry from ${restoredAppIndexSrc} to ${restoredAppIndexDest}...`);
-if (fs.existsSync(restoredAppIndexSrc)) {
-  fs.copyFileSync(restoredAppIndexSrc, restoredAppIndexDest);
-  console.log('Restored React app index.html copied successfully.');
-} else {
-  console.error(`Error: Restored app index file ${restoredAppIndexSrc} does not exist!`);
-  process.exit(1);
-}
+// REMOVED: Do NOT overwrite dist/app/index.html with public/index.html
+// Vite already generates the correct index.html with proper hashed asset references.
+// The old public/index.html had stale, hardcoded asset filenames that broke the app.
+console.log('Skipping public/index.html copy — using Vite-generated index.html instead.');
 
 // Copy _redirects to dist/_redirects so Cloudflare Pages reads it
 const redirectsSrc = path.resolve('public/_redirects');
