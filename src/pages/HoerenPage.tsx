@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback, useRef, useEffect } from 'react'
 import { hoerenModels } from '../data/hoeren'
 
 export default function HoerenPage() {
@@ -7,6 +7,78 @@ export default function HoerenPage() {
   const [showResults, setShowResults] = useState(false)
   const [showTranscripts, setShowTranscripts] = useState<Record<number, boolean>>({})
   const [showExplanations, setShowExplanations] = useState<Record<string, boolean>>({})
+  
+  // Audio TTS State
+  const [playingId, setPlayingId] = useState<string | null>(null)
+  const [playingAll, setPlayingAll] = useState<number | null>(null) // part index
+  const [ttsSpeed, setTtsSpeed] = useState(0.85)
+  const synthRef = useRef(window.speechSynthesis)
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => { synthRef.current.cancel() }
+  }, [])
+
+  // Speak a single transcript
+  const speakText = useCallback((text: string, id: string) => {
+    const synth = synthRef.current
+    synth.cancel()
+    
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.lang = 'de-DE'
+    utterance.rate = ttsSpeed
+    utterance.pitch = 1.0
+
+    // Try to find a German voice
+    const voices = synth.getVoices()
+    const deVoice = voices.find(v => v.lang.startsWith('de')) || voices.find(v => v.lang.includes('DE'))
+    if (deVoice) utterance.voice = deVoice
+
+    utterance.onstart = () => setPlayingId(id)
+    utterance.onend = () => setPlayingId(null)
+    utterance.onerror = () => setPlayingId(null)
+
+    synth.speak(utterance)
+  }, [ttsSpeed])
+
+  // Play all transcripts in a part sequentially
+  const playAllTranscripts = useCallback((partIndex: number) => {
+    const synth = synthRef.current
+    synth.cancel()
+    
+    const part = model?.parts[partIndex]
+    if (!part?.transcripts) return
+
+    setPlayingAll(partIndex)
+    const texts = part.transcripts.map(t => t.textDe)
+    
+    texts.forEach((text, i) => {
+      const utterance = new SpeechSynthesisUtterance(text)
+      utterance.lang = 'de-DE'
+      utterance.rate = ttsSpeed
+      utterance.pitch = 1.0
+
+      const voices = synth.getVoices()
+      const deVoice = voices.find(v => v.lang.startsWith('de'))
+      if (deVoice) utterance.voice = deVoice
+
+      const tId = part.transcripts![i]?.id || `t-${i}`
+      utterance.onstart = () => setPlayingId(tId)
+      utterance.onend = () => {
+        setPlayingId(null)
+        if (i === texts.length - 1) setPlayingAll(null)
+      }
+      utterance.onerror = () => { setPlayingId(null); setPlayingAll(null) }
+
+      synth.speak(utterance)
+    })
+  }, [ttsSpeed])
+
+  const stopSpeaking = useCallback(() => {
+    synthRef.current.cancel()
+    setPlayingId(null)
+    setPlayingAll(null)
+  }, [])
 
   const model = selectedModelIndex !== null ? hoerenModels[selectedModelIndex] : null
 
@@ -119,24 +191,87 @@ export default function HoerenPage() {
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">{part.instructionsAr}</p>
             </div>
 
-            {/* Transcript Area */}
+            {/* 🎧 Audio Player Controls */}
             {part.transcripts && part.transcripts.length > 0 && (
-              <div className="space-y-2">
+              <div className="space-y-3">
+                {/* Main Audio Controls */}
+                <div className="flex flex-wrap items-center gap-2">
+                  {/* Play All / Stop Button */}
+                  {playingAll === pIdx || playingId ? (
+                    <button
+                      onClick={stopSpeaking}
+                      className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all cursor-pointer shadow-lg animate-pulse"
+                    >
+                      ⏹ إيقاف
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => playAllTranscripts(pIdx)}
+                      className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00b894] to-[#00cec9] hover:from-[#00a884] hover:to-[#00beb9] text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all cursor-pointer shadow-lg hover:shadow-[#00b894]/25"
+                    >
+                      ▶ استمع للحوار كاملاً
+                    </button>
+                  )}
+
+                  {/* Speed Control */}
+                  <div className="flex items-center gap-2 bg-gray-100 dark:bg-white/5 px-3 py-1.5 rounded-xl border border-gray-200 dark:border-white/10">
+                    <span className="text-[10px] text-gray-500 dark:text-gray-400">السرعة:</span>
+                    {[0.6, 0.85, 1.0, 1.2].map(s => (
+                      <button
+                        key={s}
+                        onClick={() => setTtsSpeed(s)}
+                        className={`px-2 py-0.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                          ttsSpeed === s
+                            ? 'bg-[#00b894] text-white shadow'
+                            : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+                        }`}
+                      >
+                        {s === 0.6 ? '🐢' : s === 0.85 ? '🔈' : s === 1.0 ? '🔊' : '⚡'}
+                        {s}x
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Transcript Toggle + Individual Audio */}
                 <button
                   onClick={() => setShowTranscripts(prev => ({ ...prev, [pIdx]: !prev[pIdx] }))}
-                  className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
                 >
-                  📝 {showTranscripts[pIdx] ? 'إخفاء النص المكتوب (Transkript)' : 'عرض النص المكتوب (Transkript)'}
+                  📝 {showTranscripts[pIdx] ? 'إخفاء النص (Transkript)' : 'عرض النص (Transkript)'}
                 </button>
 
                 {showTranscripts[pIdx] && (
-                  <div className="bg-slate-950/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl space-y-3">
-                    {part.transcripts.map((t, tIdx) => (
-                      <div key={t.id || tIdx} className="space-y-1 text-left" dir="ltr">
-                        {(t as any).speaker && <span className="text-[10px] text-amber-600 dark:text-amber-400 font-bold">{(t as any).speaker}:</span>}
-                        <p className="text-xs text-gray-600 dark:text-gray-400 font-sans leading-relaxed whitespace-pre-wrap">{t.textDe}</p>
-                      </div>
-                    ))}
+                  <div className="bg-gray-50 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 p-4 rounded-xl space-y-3">
+                    {part.transcripts.map((t, tIdx) => {
+                      const tId = t.id || `t-${tIdx}`
+                      const isThisPlaying = playingId === tId
+                      return (
+                        <div key={tId} className={`flex items-start gap-3 p-3 rounded-lg border transition-all ${
+                          isThisPlaying 
+                            ? 'bg-[#00b894]/10 border-[#00b894]/30 shadow-md' 
+                            : 'bg-white dark:bg-white/5 border-gray-100 dark:border-white/5'
+                        }`} dir="ltr">
+                          {/* Play individual button */}
+                          <button
+                            onClick={() => isThisPlaying ? stopSpeaking() : speakText(t.textDe, tId)}
+                            className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all cursor-pointer ${
+                              isThisPlaying
+                                ? 'bg-red-500 text-white animate-pulse'
+                                : 'bg-[#00b894]/10 text-[#00b894] hover:bg-[#00b894]/20'
+                            }`}
+                          >
+                            {isThisPlaying ? '⏸' : '▶'}
+                          </button>
+                          <div className="flex-1 space-y-1">
+                            {(t as any).speaker && (
+                              <span className="text-[10px] text-amber-600 dark:text-amber-400 font-bold">{(t as any).speaker}:</span>
+                            )}
+                            <p className="text-xs text-gray-700 dark:text-gray-300 font-sans leading-relaxed whitespace-pre-wrap">{t.textDe}</p>
+                          </div>
+                        </div>
+                      )
+                    })}
                   </div>
                 )}
               </div>
