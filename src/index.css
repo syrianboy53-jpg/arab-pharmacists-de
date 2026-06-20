@@ -22,6 +22,7 @@ body {
   font-family: 'Cairo', 'Segoe UI', Tahoma, Arial, sans-serif;
   background: #f8f9fb;
   color: #1f2937;
+  font-size: 14px;
   line-height: 1.7;
   direction: rtl;
   transition: background-color 0.3s ease, color 0.3s ease;

@@ -38,7 +38,7 @@ export default function B1ModelsPage() {
       <div className="grid sm:grid-cols-2 gap-3">
         {models.map((m, mi) => (
           <div key={mi} className="bg-white dark:bg-[#1a1a2e] rounded-xl border border-gray-100 dark:border-white/5 overflow-hidden">
-            <button onClick={() => setActiveModel(activeModel === mi ? null : mi)} className="w-full p-4 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-white/5 dark:bg-white/5 dark:hover:bg-white dark:bg-[#1a1a2e]/5 transition-colors cursor-pointer text-right">
+            <button onClick={() => setActiveModel(activeModel === mi ? null : mi)} className="w-full p-4 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-white/5 dark:bg-white/5 dark:hover:bg-gray-100 dark:bg-white/5 transition-colors cursor-pointer text-right">
               <span className="text-3xl">{m.icon}</span>
               <div><h3 className="font-bold text-sm">{m.theme}</h3><p className="text-xs text-gray-400">{m.questions.length} أسئلة</p></div>
             </button>

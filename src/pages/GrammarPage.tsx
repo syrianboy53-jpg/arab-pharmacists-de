@@ -115,7 +115,7 @@ export default function GrammarPage() {
                 <button
                   key={l.id}
                   onClick={() => setSelectedLesson(i)}
-                  className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-[#00b894]/20 hover:bg-white dark:bg-[#1a1a2e]/5 transition-all shadow-md flex items-center justify-between"
+                  className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-[#00b894]/20 hover:bg-gray-100 dark:bg-white/5 transition-all shadow-md flex items-center justify-between"
                 >
                   <span className="text-[#00b894] text-xs font-bold bg-[#00b894]/10 border border-[#00b894]/20 px-3 py-1.5 rounded-full">
                     شرح + اختبار 📝
@@ -179,7 +179,7 @@ export default function GrammarPage() {
                           if (showLessonResults) {
                             if (oi === ex.correct) cls += 'border-[#00b894] bg-[#00b894]/20 text-[#00b894]'
                             else if (lessonAnswers[i] === oi) cls += 'border-red-500 bg-red-500/20 text-red-500 shadow-inner'
-                            else cls += 'border-white/5 bg-white dark:bg-[#1a1a2e]/5 text-gray-500 dark:text-gray-400'
+                            else cls += 'border-white/5 bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-gray-400'
                           } else {
                             cls += lessonAnswers[i] === oi 
                               ? 'border-[#00b894] bg-[#00b894]/10 text-[#00b894]' 
@@ -335,7 +335,7 @@ export default function GrammarPage() {
                             <h4 className="text-xs font-bold text-gray-900 dark:text-white mb-2">📎 أمثلة إضافية صحيحة:</h4>
                             <div className="space-y-2" dir="ltr">
                               {mistake.examples.map((ex, idx) => (
-                                <div key={idx} className="bg-white dark:bg-[#1a1a2e]/5 p-2.5 rounded-lg flex items-center justify-between gap-2 text-left">
+                                <div key={idx} className="bg-gray-100 dark:bg-white/5 p-2.5 rounded-lg flex items-center justify-between gap-2 text-left">
                                   <div className="text-xs">
                                     <p className="text-red-400 line-through scale-90">{ex.wrong}</p>
                                     <p className="text-green-400 font-semibold">{ex.right}</p>
@@ -436,7 +436,7 @@ export default function GrammarPage() {
                       <div className="space-y-2.5" dir="ltr">
                         {verb.examples.map((ex, exIdx) => (
                           <div key={exIdx} className="bg-gray-100 dark:bg-[#1a1a2e] p-3 rounded-xl border border-gray-200 dark:border-white/5 text-left space-y-1">
-                            <span className="text-[10px] bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 px-1.5 py-0.5 rounded text-gray-500 dark:text-gray-400 font-bold">
+                            <span className="text-[10px] bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 px-1.5 py-0.5 rounded text-gray-500 dark:text-gray-400 font-bold">
                               {ex.context}
                             </span>
                             <p className="text-xs text-gray-900 dark:text-white font-medium leading-relaxed">{ex.de}</p>

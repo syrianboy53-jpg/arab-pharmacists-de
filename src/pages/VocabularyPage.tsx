@@ -151,7 +151,7 @@ export default function VocabularyPage() {
                   <h3 className="font-bold text-[#00b894]">{cat.titleAr}</h3>
                   <p className="text-xs text-gray-500 dark:text-gray-400" dir="ltr">{cat.titleDe}</p>
                 </div>
-                <span className="mr-auto text-xs bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 px-2 py-0.5 rounded-full text-gray-500 dark:text-gray-400">
+                <span className="mr-auto text-xs bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 px-2 py-0.5 rounded-full text-gray-500 dark:text-gray-400">
                   {cat.words.length} كلمة
                 </span>
               </div>
@@ -183,7 +183,7 @@ export default function VocabularyPage() {
                           {/* Audio play button */}
                           <button
                             onClick={() => speak(w.de)}
-                            className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-[#00b894] hover:bg-[#00b894]/10 hover:border-[#00b894]/20 p-2 rounded-lg text-xs transition-all"
+                            className="bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-[#00b894] hover:bg-[#00b894]/10 hover:border-[#00b894]/20 p-2 rounded-lg text-xs transition-all"
                             title="استمع للنطق"
                           >
                             🔊
@@ -195,7 +195,7 @@ export default function VocabularyPage() {
                             className={`text-xs px-3 py-1.5 rounded-lg border transition-all ${
                               showMeaning[key] 
                                 ? 'bg-[#00b894]/20 border-[#00b894]/30 text-[#00b894] font-medium' 
-                                : 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-500 dark:text-gray-400 hover:text-white'
+                                : 'bg-gray-100 dark:bg-white/5 border-white/10 text-gray-500 dark:text-gray-400 hover:text-white'
                             }`}
                           >
                             {showMeaning[key] ? 'إخفاء' : 'معنى'}

@@ -164,7 +164,7 @@ export default function ChatSimulatorPage() {
                   className={`w-full text-right p-3 rounded-xl border transition-all text-xs flex items-center justify-between gap-2 cursor-pointer ${
                     isActive
                       ? 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
-                      : 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
+                      : 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/10'
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -196,7 +196,7 @@ export default function ChatSimulatorPage() {
             </div>
           </div>
           <div className="flex items-center gap-2 text-xs">
-            <span className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 px-2 py-0.5 rounded text-gray-500 dark:text-gray-400 font-mono" dir="ltr">
+            <span className="bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 px-2 py-0.5 rounded text-gray-500 dark:text-gray-400 font-mono" dir="ltr">
               Diff: {scenario.difficulty}
             </span>
             <span className="bg-gold/10 border border-gold/20 px-2 py-0.5 rounded text-amber-600 dark:text-amber-400 font-bold">
@@ -236,7 +236,7 @@ export default function ChatSimulatorPage() {
                 <div className={`w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold ${
                   isUser 
                     ? 'bg-[#00b894]/10 border border-[#00b894]/20 text-[#00b894]' 
-                    : 'bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400'
+                    : 'bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400'
                 }`}>
                   {isUser ? '👤' : scenario.icon}
                 </div>

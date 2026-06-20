@@ -658,7 +658,7 @@ export default function AdminDashboardPage() {
           <button onClick={() => fetchUsers(userSearch)} disabled={isUsersLoading} className="bg-[#e84393] hover:bg-[#d63384] text-white px-5 py-2 rounded-lg text-sm font-bold transition-all cursor-pointer">
             {isUsersLoading ? '⏳ جاري...' : '🔄 تحديث'}
           </button>
-          <button onClick={exportUsersCSV} disabled={users.length === 0} className="bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white dark:bg-[#1a1a2e]/10 text-gray-800 dark:text-gray-200 px-5 py-2 rounded-lg text-sm font-bold transition-all border border-gray-200 dark:border-white/10 cursor-pointer">
+          <button onClick={exportUsersCSV} disabled={users.length === 0} className="bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-gray-50 dark:hover:bg-white/10 text-gray-800 dark:text-gray-200 px-5 py-2 rounded-lg text-sm font-bold transition-all border border-gray-200 dark:border-white/10 cursor-pointer">
             💾 تصدير CSV
           </button>
         </div>
@@ -699,7 +699,7 @@ export default function AdminDashboardPage() {
                 </thead>
                 <tbody>
                   {users.map(u => (
-                    <tr key={u.id} className="border-b border-gray-100 dark:border-white/5 hover:bg-gray-50 dark:hover:bg-white/5 dark:bg-white/5/50 dark:hover:bg-white dark:bg-[#1a1a2e]/5">
+                    <tr key={u.id} className="border-b border-gray-100 dark:border-white/5 hover:bg-gray-50 dark:hover:bg-white/5 dark:bg-white/5/50 dark:hover:bg-gray-100 dark:bg-white/5">
                       <td className="p-3 font-semibold text-gray-500 dark:text-gray-400">{u.id}</td>
                       <td className="p-3 font-mono text-gray-700 dark:text-gray-300">
                         {u.email}
@@ -773,7 +773,7 @@ export default function AdminDashboardPage() {
                     </thead>
                     <tbody>
                       {usersStats.latest_visitors.map((v, index) => (
-                        <tr key={v.id || index} className="border-b border-gray-100 dark:border-white/5 hover:bg-gray-50 dark:hover:bg-white/5 dark:bg-white/5/50 dark:hover:bg-white dark:bg-[#1a1a2e]/5">
+                        <tr key={v.id || index} className="border-b border-gray-100 dark:border-white/5 hover:bg-gray-50 dark:hover:bg-white/5 dark:bg-white/5/50 dark:hover:bg-gray-100 dark:bg-white/5">
                           <td className="p-2.5 text-gray-500 dark:text-gray-400 whitespace-nowrap">{new Date(v.created_at).toLocaleString('ar-EG')}</td>
                           <td className="p-2.5 font-mono text-gray-700 dark:text-gray-300">{v.ip_address}</td>
                           <td className="p-2.5 font-bold text-[#6c5ce7] flex items-center gap-1">
@@ -924,7 +924,7 @@ export default function AdminDashboardPage() {
             <button
               key={filter}
               onClick={() => setSuggestionsFilter(filter)}
-              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${suggestionsFilter === filter ? 'bg-[#e17055] text-white' : 'bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white dark:bg-[#1a1a2e]/10'}`}
+              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${suggestionsFilter === filter ? 'bg-[#e17055] text-white' : 'bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-50 dark:hover:bg-white/10'}`}
             >
               {filter === 'all' && '📋 الكلّ'}
               {filter === 'unread' && `🔴 جديد (${unreadSuggestionsCount})`}

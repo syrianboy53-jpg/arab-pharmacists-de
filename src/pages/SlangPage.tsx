@@ -252,7 +252,7 @@ export default function SlangPage() {
                   <h3 className="font-bold text-[#00b894]">{cat.nameAr}</h3>
                   <p className="text-[11px] text-gray-500 dark:text-gray-400">{cat.descriptionAr}</p>
                 </div>
-                <span className="mr-auto text-xs bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 px-2.5 py-0.5 rounded-full text-gray-500 dark:text-gray-400 font-mono">
+                <span className="mr-auto text-xs bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 px-2.5 py-0.5 rounded-full text-gray-500 dark:text-gray-400 font-mono">
                   {cat.phrases.length} تعبير
                 </span>
               </div>
@@ -311,14 +311,14 @@ export default function SlangPage() {
                         <div className="flex items-center gap-1.5">
                           <button
                             onClick={() => speak(phrase.german, 1.0)}
-                            className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-[#00b894] hover:bg-[#00b894]/10 hover:border-[#00b894]/20 p-2 rounded-xl text-xs transition-all flex items-center gap-1 cursor-pointer"
+                            className="bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-[#00b894] hover:bg-[#00b894]/10 hover:border-[#00b894]/20 p-2 rounded-xl text-xs transition-all flex items-center gap-1 cursor-pointer"
                             title="نطق طبيعي"
                           >
                             🔊
                           </button>
                           <button
                             onClick={() => speak(phrase.german, slowRate)}
-                            className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-red-500 hover:bg-red-500/10 hover:border-red-500/20 p-2 rounded-xl text-xs transition-all flex items-center gap-1 cursor-pointer"
+                            className="bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-red-500 hover:bg-red-500/10 hover:border-red-500/20 p-2 rounded-xl text-xs transition-all flex items-center gap-1 cursor-pointer"
                             title="نطق بطيء 🐌"
                           >
                             🐌

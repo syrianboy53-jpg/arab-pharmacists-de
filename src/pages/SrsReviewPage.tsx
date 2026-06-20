@@ -62,7 +62,7 @@ export default function SrsReviewPage() {
             <p className="text-2xl font-black text-[#00b894]">{card.back}</p>
             <div className="flex gap-2 mt-6">
               {['😟 صعب', '🤔 متوسط', '😊 سهل', '🔥 أتقنته'].map((label, i) => (
-                <button key={i} onClick={(e) => { e.stopPropagation(); handleRate() }} className="px-3 py-2 bg-gray-100 dark:bg-white/5 rounded-lg text-xs font-bold hover:bg-gray-200 dark:hover:bg-white dark:bg-[#1a1a2e]/10 transition-colors cursor-pointer">{label}</button>
+                <button key={i} onClick={(e) => { e.stopPropagation(); handleRate() }} className="px-3 py-2 bg-gray-100 dark:bg-white/5 rounded-lg text-xs font-bold hover:bg-gray-200 dark:hover:bg-gray-50 dark:hover:bg-white/10 transition-colors cursor-pointer">{label}</button>
               ))}
             </div>
           </>

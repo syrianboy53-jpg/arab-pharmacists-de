@@ -97,7 +97,7 @@ export default function B2Page() {
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                 activeTab === tab
                   ? 'bg-[#00b894] text-white shadow-lg'
-                  : 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-white dark:bg-[#1a1a2e]/10'
+                  : 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/10'
               }`}
             >
               {tab === 'lesen' && '📖 Lesen'}
@@ -139,7 +139,7 @@ export default function B2Page() {
                     return (
                       <div key={q.id} className="border-t border-gray-200 dark:border-white/5 pt-4 space-y-3">
                         <div className="flex gap-2.5 items-start">
-                          <span className="bg-white dark:bg-[#1a1a2e]/5 text-gray-500 dark:text-gray-400 w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs mt-0.5 font-bold">
+                          <span className="bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-gray-400 w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs mt-0.5 font-bold">
                             {qIdx + 1}
                           </span>
                           <p className="text-sm font-semibold text-gray-900 dark:text-white text-left font-sans" dir="ltr">{q.promptDe}</p>
@@ -151,7 +151,7 @@ export default function B2Page() {
                             const isSelected = selectedOpt === opt.id
                             const isCorrect = opt.id === q.correct
                             
-                            let optStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
+                            let optStyle = 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/10'
                             if (selectedOpt) {
                               if (isCorrect) {
                                 optStyle = 'bg-[#00b894]/10 border-[#00b894]/40 text-[#00b894] font-medium'
@@ -239,7 +239,7 @@ export default function B2Page() {
                         const isSelected = selectedOpt === opt.id
                         const isCorrect = opt.id === sb.correct
 
-                        let optStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
+                        let optStyle = 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/10'
                         if (selectedOpt) {
                           if (isCorrect) {
                             optStyle = 'bg-[#00b894]/10 border-[#00b894]/40 text-[#00b894] font-medium'
@@ -430,7 +430,7 @@ export default function B2Page() {
                   </div>
                   <button
                     onClick={() => speak(part.sampleAnswerDe)}
-                    className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-[#00b894] hover:bg-[#00b894]/10 hover:border-[#00b894]/20 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                    className="bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-[#00b894] hover:bg-[#00b894]/10 hover:border-[#00b894]/20 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
                   >
                     <span>🔊 استمع للإجابة النموذجية</span>
                   </button>
@@ -452,7 +452,7 @@ export default function B2Page() {
                           <div
                             key={pIdx}
                             onClick={() => navigator.clipboard.writeText(ph)}
-                            className="font-sans text-xs bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-[#00b894] transition-all cursor-pointer truncate text-left"
+                            className="font-sans text-xs bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-[#00b894] transition-all cursor-pointer truncate text-left"
                             dir="ltr"
                             title="انقر للنسخ"
                           >

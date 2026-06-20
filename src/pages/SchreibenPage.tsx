@@ -163,7 +163,7 @@ export default function SchreibenPage() {
               className={`flex-1 text-center py-2.5 rounded-xl text-xs font-bold transition-all border ${
                 selectedTaskIndex === idx
                   ? 'bg-[#00b894]/20 border-[#00b894]/40 text-[#00b894] shadow-inner'
-                  : 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-white dark:bg-[#1a1a2e]/10'
+                  : 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/10'
               }`}
             >
               المهمة {task.taskNumber} ({task.typeDe.split(' ')[0]})
@@ -223,7 +223,7 @@ export default function SchreibenPage() {
           <span className={`text-xs px-2.5 py-1 rounded-full ${
             wordCount >= 70 && wordCount <= 120 
               ? 'bg-[#00b894]/10 text-[#00b894] border border-[#00b894]/20' 
-              : 'bg-white dark:bg-[#1a1a2e]/5 text-gray-500 dark:text-gray-400'
+              : 'bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-gray-400'
           }`}>
             عدد الكلمات: {wordCount}
           </span>
@@ -245,7 +245,7 @@ export default function SchreibenPage() {
             isAnalyzing
               ? 'bg-gold/10 border-gold/20 text-amber-600 dark:text-amber-400/70 cursor-not-allowed'
               : typedText.trim().length < 10
-              ? 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+              ? 'bg-gray-100 dark:bg-white/5 border-white/10 text-gray-500 dark:text-gray-400 cursor-not-allowed'
               : 'bg-gradient-to-r from-gold/20 to-amber-500/20 border-gold/40 text-amber-600 dark:text-amber-400 hover:from-gold/30 hover:to-amber-500/30 hover:border-gold/60 hover:shadow-gold/20 hover:shadow-xl active:scale-[0.99]'
           }`}
         >
@@ -321,7 +321,7 @@ export default function SchreibenPage() {
           </div>
 
           {correctionResult.taskFulfillmentNote && (
-            <p className="text-xs text-gray-500 dark:text-gray-400 bg-white dark:bg-[#1a1a2e]/5 rounded-xl p-3 text-right">
+            <p className="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-white/5 rounded-xl p-3 text-right">
               💬 {correctionResult.taskFulfillmentNote}
             </p>
           )}
@@ -398,7 +398,7 @@ export default function SchreibenPage() {
             {activeTask.usefulPhrases.map((phrase, idx) => (
               <div 
                 key={idx} 
-                className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/5 p-3 rounded-xl flex flex-col gap-1 text-left hover:bg-white dark:bg-[#1a1a2e]/10 transition-colors"
+                className="bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/5 p-3 rounded-xl flex flex-col gap-1 text-left hover:bg-gray-50 dark:hover:bg-white/10 transition-colors"
               >
                 <span className="text-gray-900 dark:text-white font-medium text-xs">{phrase.de}</span>
                 <span className="text-gray-500 dark:text-gray-400 text-xs text-right" dir="rtl">{phrase.ar}</span>
@@ -429,7 +429,7 @@ export default function SchreibenPage() {
             </pre>
 
             {(activeTask as any).sampleAnswerNotes && (activeTask as any).sampleAnswerNotes.length > 0 && (
-              <div className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/5 rounded-xl p-4 space-y-2">
+              <div className="bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/5 rounded-xl p-4 space-y-2">
                 <h4 className="text-xs font-bold text-amber-600 dark:text-amber-400">🔍 تحليل نموذج الإجابة وملاحظات هامة:</h4>
                 <ul className="text-xs space-y-1.5 list-disc list-inside text-gray-500 dark:text-gray-400">
                   {(activeTask as any).sampleAnswerNotes.map((note: any, i: number) => (

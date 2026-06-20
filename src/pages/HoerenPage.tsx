@@ -236,7 +236,7 @@ export default function HoerenPage() {
                 {/* Transcript Toggle + Individual Audio */}
                 <button
                   onClick={() => setShowTranscripts(prev => ({ ...prev, [pIdx]: !prev[pIdx] }))}
-                  className="bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
                 >
                   📝 {showTranscripts[pIdx] ? 'إخفاء النص (Transkript)' : 'عرض النص (Transkript)'}
                 </button>
@@ -287,7 +287,7 @@ export default function HoerenPage() {
                 return (
                   <div key={q.id} className="border-t border-gray-200 dark:border-white/5 pt-4 space-y-3">
                     <div className="flex gap-2 items-start">
-                      <span className="bg-white dark:bg-[#1a1a2e]/5 text-gray-500 dark:text-gray-400 w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                      <span className="bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-gray-400 w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                         {qIdx + 1}
                       </span>
                       <div className="text-left font-sans" dir="ltr">
@@ -309,7 +309,7 @@ export default function HoerenPage() {
                           const isSelected = selectedVal === val
                           const isOptCorrect = q.correct === val
 
-                          let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
+                          let btnStyle = 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/10'
                           if (showResults) {
                             if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/40 text-[#00b894] font-bold'
                             else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/40 text-red-500 font-bold'
@@ -341,7 +341,7 @@ export default function HoerenPage() {
                           const isSelected = selectedVal === optionId
                           const isOptCorrect = q.correct === optionId
 
-                          let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
+                          let btnStyle = 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/10'
                           if (showResults) {
                             if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/40 text-[#00b894] font-bold'
                             else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/40 text-red-500 font-bold'
@@ -407,7 +407,7 @@ export default function HoerenPage() {
       {showResults && (
         <button 
           onClick={() => { setAnswers({}); setShowResults(false); setShowExplanations({}) }} 
-          className="w-full bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white py-3.5 rounded-2xl font-bold hover:bg-white dark:bg-[#1a1a2e]/10 transition-all cursor-pointer shadow-lg"
+          className="w-full bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white py-3.5 rounded-2xl font-bold hover:bg-gray-50 dark:hover:bg-white/10 transition-all cursor-pointer shadow-lg"
         >
           🔄 إعادة الاختبار والتدريب
         </button>
