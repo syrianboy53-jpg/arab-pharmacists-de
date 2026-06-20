@@ -95,7 +95,7 @@ export default function VocabularyPage() {
       </div>
 
       {/* Controls Container */}
-      <div className="glass p-5 rounded-2xl border border-white/5 space-y-4 shadow-xl">
+      <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4 shadow-xl">
         <div className="grid md:grid-cols-2 gap-4">
           {/* Category Dropdown */}
           <div className="space-y-1">
@@ -106,7 +106,7 @@ export default function VocabularyPage() {
                 setSelectedCatId(e.target.value)
                 setShowMeaning({})
               }}
-              className="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green text-ink"
+              className="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green text-gray-900 dark:text-white"
             >
               <option value="all">📦 كل التصنيفات ({vocabCategories.length})</option>
               {vocabCategories.map(cat => (
@@ -126,7 +126,7 @@ export default function VocabularyPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="مثال: Arzt, ينهض, Miete..."
-                className="w-full bg-slate-900/60 border border-white/10 rounded-xl pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:border-green text-ink text-left"
+                className="w-full bg-slate-900/60 border border-white/10 rounded-xl pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:border-green text-gray-900 dark:text-white text-left"
                 dir="ltr"
               />
               <span className="absolute right-3 top-3 text-muted text-xs">🔍</span>
@@ -137,7 +137,7 @@ export default function VocabularyPage() {
 
       {/* Word Listings */}
       {filteredData.length === 0 ? (
-        <div className="glass p-10 text-center rounded-2xl border border-white/5">
+        <div className="glass p-10 text-center rounded-2xl border border-gray-200 dark:border-white/5">
           <p className="text-muted text-sm">لم يتم العثور على أي نتائج تطابق البحث.</p>
         </div>
       ) : (
@@ -165,11 +165,11 @@ export default function VocabularyPage() {
                   return (
                     <div
                       key={key}
-                      className="glass p-4 rounded-xl border border-white/5 hover:border-green/20 transition-all flex flex-col justify-between gap-3 shadow-md group"
+                      className="glass p-4 rounded-xl border border-gray-200 dark:border-white/5 hover:border-green/20 transition-all flex flex-col justify-between gap-3 shadow-md group"
                     >
                       <div className="flex items-start justify-between gap-2" dir="ltr">
                         <div className="text-left">
-                          <h4 className="font-bold text-white group-hover:text-green transition-colors text-base">
+                          <h4 className="font-bold text-gray-900 dark:text-white group-hover:text-green transition-colors text-base">
                             {w.de}
                           </h4>
                           {showMeaning[key] && hasExample && (
@@ -205,7 +205,7 @@ export default function VocabularyPage() {
 
                       {/* Display Arabic Translation if revealed */}
                       {showMeaning[key] && (
-                        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-right">
+                        <div className="pt-2 border-t border-gray-200 dark:border-white/5 flex items-center justify-between text-right">
                           <p className="text-green text-sm font-medium w-full">
                             {w.ar}
                           </p>

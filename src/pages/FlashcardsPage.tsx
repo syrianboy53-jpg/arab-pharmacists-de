@@ -73,7 +73,7 @@ export default function FlashcardsPage() {
   return (
     <div className="max-w-md mx-auto h-[600px] flex flex-col pt-8">
       <div className="text-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">بطاقات الذاكرة الذكية</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-900 dark:text-white mb-2">بطاقات الذاكرة الذكية</h1>
         <p className="text-sm text-gray-500 dark:text-gray-400">اسحب لليمين إذا كنت تعرف الكلمة، أو لليسار إذا كنت لا تعرفها.</p>
         <div className="flex justify-between items-center mt-4 px-8 text-sm font-bold">
           <span className="text-red-500 bg-red-100 dark:bg-red-900/30 px-3 py-1 rounded-full">أحتاج مراجعة: {unknownWords}</span>
@@ -101,7 +101,7 @@ export default function FlashcardsPage() {
             {/* Front of card */}
             {!isFlipped ? (
               <>
-                <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{currentCard.de}</h2>
+                <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-900 dark:text-white mb-4">{currentCard.de}</h2>
                 <p className="text-sm text-gray-400 mt-8">(اضغط على البطاقة لقلبها)</p>
               </>
             ) : (

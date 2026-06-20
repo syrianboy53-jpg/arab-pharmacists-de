@@ -73,7 +73,7 @@ export default function GrammarPage() {
       </div>
 
       {/* Main Tabs Segmented Control */}
-      <div className="flex bg-slate-950/60 p-1.5 rounded-2xl border border-white/5 shadow-inner">
+      <div className="flex bg-slate-950/60 p-1.5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-inner">
         <button
           onClick={() => setActiveTab('lessons')}
           className={`flex-1 text-center py-3 rounded-xl text-xs md:text-sm font-bold transition-all ${
@@ -115,13 +115,13 @@ export default function GrammarPage() {
                 <button
                   key={l.id}
                   onClick={() => setSelectedLesson(i)}
-                  className="glass p-5 rounded-2xl border border-white/5 text-right hover:border-green/20 hover:bg-white dark:bg-[#1a1a2e]/5 transition-all shadow-md flex items-center justify-between"
+                  className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-green/20 hover:bg-white dark:bg-[#1a1a2e]/5 transition-all shadow-md flex items-center justify-between"
                 >
                   <span className="text-green text-xs font-bold bg-green/10 border border-green/20 px-3 py-1.5 rounded-full">
                     شرح + اختبار 📝
                   </span>
                   <div>
-                    <h3 className="font-bold text-white text-base" dir="ltr">{l.title}</h3>
+                    <h3 className="font-bold text-gray-900 dark:text-white text-base" dir="ltr">{l.title}</h3>
                     <p className="text-xs text-muted mt-1">{l.titleAr}</p>
                   </div>
                 </button>
@@ -141,23 +141,23 @@ export default function GrammarPage() {
               </button>
 
               {/* Lesson Details */}
-              <div className="glass p-5 rounded-2xl border border-white/5 space-y-4">
+              <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4">
                 <div className="border-b border-white/10 pb-2">
                   <h2 className="text-lg font-bold text-green" dir="ltr">{originalLessons[selectedLesson].title}</h2>
                   <p className="text-xs text-muted">{originalLessons[selectedLesson].titleAr}</p>
                 </div>
-                <pre className="text-sm text-white whitespace-pre-wrap leading-relaxed bg-slate-950/80 rounded-xl p-5 border border-white/5 font-sans">
+                <pre className="text-sm text-gray-900 dark:text-white whitespace-pre-wrap leading-relaxed bg-slate-950/80 rounded-xl p-5 border border-gray-200 dark:border-white/5 font-sans">
                   {originalLessons[selectedLesson].explanation}
                 </pre>
               </div>
 
               {/* Examples */}
-              <div className="glass p-5 rounded-2xl border border-white/5 space-y-3">
-                <h3 className="font-bold text-white text-sm">💡 أمثلة توضيحية:</h3>
+              <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-3">
+                <h3 className="font-bold text-gray-900 dark:text-white text-sm">💡 أمثلة توضيحية:</h3>
                 <div className="grid md:grid-cols-2 gap-3" dir="ltr">
                   {originalLessons[selectedLesson].examples.map((ex, idx) => (
-                    <div key={idx} className="bg-slate-900/60 p-4 rounded-xl border border-white/5 text-left">
-                      <p className="text-sm font-semibold text-white">{ex.de}</p>
+                    <div key={idx} className="bg-slate-900/60 p-4 rounded-xl border border-gray-200 dark:border-white/5 text-left">
+                      <p className="text-sm font-semibold text-gray-900 dark:text-white">{ex.de}</p>
                       <p className="text-xs text-muted mt-1 text-right" dir="rtl">{ex.ar}</p>
                     </div>
                   ))}
@@ -165,12 +165,12 @@ export default function GrammarPage() {
               </div>
 
               {/* Quizzes */}
-              <div className="glass p-5 rounded-2xl border border-white/5 space-y-4">
-                <h3 className="font-bold text-white text-sm">✏️ تمارّين اختبار الفهم:</h3>
+              <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4">
+                <h3 className="font-bold text-gray-900 dark:text-white text-sm">✏️ تمارّين اختبار الفهم:</h3>
                 <div className="space-y-4">
                   {originalLessons[selectedLesson].exercises.map((ex, i) => (
-                    <div key={i} className="border-b border-white/5 pb-4 last:border-b dark:border-white/10-0 last:pb-0">
-                      <p className="text-sm text-white font-medium mb-3" dir="ltr">
+                    <div key={i} className="border-b border-gray-200 dark:border-white/5 pb-4 last:border-b dark:border-white/10-0 last:pb-0">
+                      <p className="text-sm text-gray-900 dark:text-white font-medium mb-3" dir="ltr">
                         {i + 1}. {ex.question}
                       </p>
                       <div className="flex gap-2.5">
@@ -183,7 +183,7 @@ export default function GrammarPage() {
                           } else {
                             cls += lessonAnswers[i] === oi 
                               ? 'border-green bg-green/10 text-green' 
-                              : 'border-white/10 bg-slate-900/40 text-muted hover:border-green'
+                              : 'border-white/10 bg-gray-50 dark:bg-white/5 text-muted hover:border-green'
                           }
                           return (
                             <button
@@ -235,7 +235,7 @@ export default function GrammarPage() {
       {activeTab === 'mistakes' && (
         <div className="space-y-6">
           {/* Filters Bar */}
-          <div className="glass p-5 rounded-2xl border border-white/5 space-y-4 shadow-xl">
+          <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4 shadow-xl">
             <div className="grid md:grid-cols-2 gap-4">
               {/* Category Filter */}
               <div className="space-y-1">
@@ -243,7 +243,7 @@ export default function GrammarPage() {
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green text-ink"
+                  className="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green text-gray-900 dark:text-white"
                 >
                   <option value="all">📦 كل تصنيفات الأخطاء</option>
                   {mistakeCategories.filter(c => c !== 'all').map(cat => (
@@ -262,7 +262,7 @@ export default function GrammarPage() {
                   value={searchMistakeQuery}
                   onChange={(e) => setSearchMistakeQuery(e.target.value)}
                   placeholder="ابحث عن كلمة، قاعدة، أو جملة..."
-                  className="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green text-ink text-right"
+                  className="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green text-gray-900 dark:text-white text-right"
                 />
               </div>
             </div>
@@ -276,14 +276,14 @@ export default function GrammarPage() {
               return (
                 <div
                   key={mistake.id}
-                  className="glass p-5 rounded-2xl border border-white/5 hover:border-white/10 transition-all shadow-md space-y-4"
+                  className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 hover:border-white/10 transition-all shadow-md space-y-4"
                 >
                   {/* Title & Level Badge */}
-                  <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
+                  <div className="flex items-center justify-between border-b border-gray-200 dark:border-white/5 pb-2.5">
                     <span className="text-xs bg-red/10 border border-red/20 text-red px-2.5 py-1 rounded-full font-bold">
                       {mistake.level}
                     </span>
-                    <h3 className="font-bold text-white text-base text-right">
+                    <h3 className="font-bold text-gray-900 dark:text-white text-base text-right">
                       {mistake.titleAr}
                     </h3>
                   </div>
@@ -292,12 +292,12 @@ export default function GrammarPage() {
                   <div className="grid md:grid-cols-2 gap-3" dir="ltr">
                     <div className="bg-red-500/10 border border-red-500/20 p-4 rounded-xl text-left">
                       <span className="text-[10px] bg-red-500 text-white font-bold px-1.5 py-0.5 rounded mr-1">WRONG</span>
-                      <p className="text-white font-medium text-sm mt-1">{mistake.wrong}</p>
+                      <p className="text-gray-900 dark:text-white font-medium text-sm mt-1">{mistake.wrong}</p>
                     </div>
 
                     <div className="bg-green-500/10 border border-green-500/20 p-4 rounded-xl text-left">
                       <span className="text-[10px] bg-green-500 text-white font-bold px-1.5 py-0.5 rounded mr-1">RIGHT</span>
-                      <p className="text-white font-medium text-sm mt-1">{mistake.right}</p>
+                      <p className="text-gray-900 dark:text-white font-medium text-sm mt-1">{mistake.right}</p>
                     </div>
                   </div>
 
@@ -305,13 +305,13 @@ export default function GrammarPage() {
                   <div className="space-y-3">
                     <button
                       onClick={() => setRevealedMistakes(p => ({ ...p, [mistake.id]: !isRevealed }))}
-                      className="w-full bg-white dark:bg-[#1a1a2e]/5 hover:bg-white dark:bg-[#1a1a2e]/10 border border-white/5 py-2 rounded-xl text-xs font-bold transition-all text-center text-muted hover:text-white cursor-pointer"
+                      className="w-full bg-white dark:bg-[#1a1a2e]/5 hover:bg-white dark:bg-[#1a1a2e]/10 border border-gray-200 dark:border-white/5 py-2 rounded-xl text-xs font-bold transition-all text-center text-muted hover:text-white cursor-pointer"
                     >
                       {isRevealed ? '🙈 إخفاء تفاصيل القاعدة' : '🔎 لماذا هذا الخطأ؟ وما هي القاعدة؟'}
                     </button>
 
                     {isRevealed && (
-                      <div className="bg-slate-950/80 border border-white/5 rounded-xl p-4 text-right space-y-3.5 animate-fade-in">
+                      <div className="bg-slate-950/80 border border-gray-200 dark:border-white/5 rounded-xl p-4 text-right space-y-3.5 animate-fade-in">
                         {/* Why */}
                         <div>
                           <h4 className="text-xs font-bold text-red mb-1">🤔 سبب الوقوع في هذا الخطأ:</h4>
@@ -331,8 +331,8 @@ export default function GrammarPage() {
                         )}
                         {/* Extra Examples */}
                         {mistake.examples && mistake.examples.length > 0 && (
-                          <div className="border-t border-white/5 pt-3">
-                            <h4 className="text-xs font-bold text-white mb-2">📎 أمثلة إضافية صحيحة:</h4>
+                          <div className="border-t border-gray-200 dark:border-white/5 pt-3">
+                            <h4 className="text-xs font-bold text-gray-900 dark:text-white mb-2">📎 أمثلة إضافية صحيحة:</h4>
                             <div className="space-y-2" dir="ltr">
                               {mistake.examples.map((ex, idx) => (
                                 <div key={idx} className="bg-white dark:bg-[#1a1a2e]/5 p-2.5 rounded-lg flex items-center justify-between gap-2 text-left">
@@ -360,7 +360,7 @@ export default function GrammarPage() {
       {activeTab === 'verbs' && (
         <div className="space-y-6">
           {/* Verb Type Selector Switcher */}
-          <div className="flex bg-slate-950/60 p-1.5 rounded-2xl border border-white/5 shadow-inner">
+          <div className="flex bg-slate-950/60 p-1.5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-inner">
             <button
               onClick={() => {
                 setSelectedVerbType('trennbar')
@@ -390,7 +390,7 @@ export default function GrammarPage() {
           </div>
 
           {/* Intro description */}
-          <div className="bg-slate-900/40 border border-white/5 rounded-2xl p-4 text-right">
+          <div className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/5 rounded-2xl p-4 text-right">
             <p className="text-xs text-muted leading-relaxed">
               {activeVerbGroup.intro}
             </p>
@@ -405,13 +405,13 @@ export default function GrammarPage() {
               return (
                 <div
                   key={key}
-                  className="glass p-4 rounded-xl border border-white/5 hover:border-white/10 transition-all shadow-md"
+                  className="glass p-4 rounded-xl border border-gray-200 dark:border-white/5 hover:border-white/10 transition-all shadow-md"
                 >
                   <div className="flex items-center justify-between gap-2 cursor-pointer" onClick={() => setExpandedVerbs(p => ({ ...p, [key]: !isExpanded }))}>
                     {/* Conjugation preview */}
                     <div className="flex items-center gap-3 text-xs text-muted" dir="ltr">
-                      <span>P2: <strong className="text-white">{verb.partizip2}</strong></span>
-                      <span className="hidden md:inline">Prät: <strong className="text-white">{verb.praeteritum}</strong></span>
+                      <span>P2: <strong className="text-gray-900 dark:text-white">{verb.partizip2}</strong></span>
+                      <span className="hidden md:inline">Prät: <strong className="text-gray-900 dark:text-white">{verb.praeteritum}</strong></span>
                       <span className="bg-white dark:bg-[#1a1a2e]/5 border border-white/10 px-2 py-0.5 rounded text-white font-mono scale-90">
                         {verb.hilfsverb}
                       </span>
@@ -423,7 +423,7 @@ export default function GrammarPage() {
                         {verb.type}
                       </span>
                       <span className="text-sm text-green font-medium mr-2">{verb.ar}</span>
-                      <h4 className="font-bold text-white text-base hover:text-green" dir="ltr">
+                      <h4 className="font-bold text-gray-900 dark:text-white text-base hover:text-green" dir="ltr">
                         {verb.infinitiv}
                       </h4>
                     </div>
@@ -431,15 +431,15 @@ export default function GrammarPage() {
 
                   {/* Examples details collapsible */}
                   {isExpanded && (
-                    <div className="mt-4 pt-3 border-t border-white/5 space-y-3 animate-fade-in text-right">
+                    <div className="mt-4 pt-3 border-t border-gray-200 dark:border-white/5 space-y-3 animate-fade-in text-right">
                       <h5 className="text-xs font-bold text-muted">أمثلة على الاستخدام في أزمنة مختلفة:</h5>
                       <div className="space-y-2.5" dir="ltr">
                         {verb.examples.map((ex, exIdx) => (
-                          <div key={exIdx} className="bg-slate-950/60 p-3 rounded-xl border border-white/5 text-left space-y-1">
+                          <div key={exIdx} className="bg-slate-950/60 p-3 rounded-xl border border-gray-200 dark:border-white/5 text-left space-y-1">
                             <span className="text-[10px] bg-white dark:bg-[#1a1a2e]/5 border border-white/10 px-1.5 py-0.5 rounded text-muted font-bold">
                               {ex.context}
                             </span>
-                            <p className="text-xs text-white font-medium leading-relaxed">{ex.de}</p>
+                            <p className="text-xs text-gray-900 dark:text-white font-medium leading-relaxed">{ex.de}</p>
                             <p className="text-[11px] text-muted text-right" dir="rtl">{ex.ar}</p>
                           </div>
                         ))}

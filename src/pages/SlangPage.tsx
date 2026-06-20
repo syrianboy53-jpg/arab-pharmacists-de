@@ -186,7 +186,7 @@ export default function SlangPage() {
       </div>
 
       {/* Controls Container */}
-      <div className="glass p-5 rounded-2xl border border-white/5 space-y-4 shadow-xl">
+      <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4 shadow-xl">
         <div className="grid md:grid-cols-2 gap-4">
           
           {/* Category Filter */}
@@ -199,7 +199,7 @@ export default function SlangPage() {
                 setFeedbacks({})
                 setShowExplanation({})
               }}
-              className="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green text-ink"
+              className="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green text-gray-900 dark:text-white"
             >
               <option value="all">📦 جميع الفئات ({speakingColloquialData.categories.length})</option>
               {speakingColloquialData.categories.map(cat => (
@@ -219,7 +219,7 @@ export default function SlangPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="مثال: Bock, Wurst, فرطان, قهوة..."
-                className="w-full bg-slate-900/60 border border-white/10 rounded-xl pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:border-green text-ink text-left"
+                className="w-full bg-slate-900/60 border border-white/10 rounded-xl pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:border-green text-gray-900 dark:text-white text-left"
                 dir="ltr"
               />
               <span className="absolute right-3 top-3 text-muted text-xs">🔍</span>
@@ -237,7 +237,7 @@ export default function SlangPage() {
 
       {/* List display */}
       {filteredData.length === 0 ? (
-        <div className="glass p-10 text-center rounded-2xl border border-white/5">
+        <div className="glass p-10 text-center rounded-2xl border border-gray-200 dark:border-white/5">
           <p className="text-muted text-sm">لم نجد أي تعبيرات تطابق بحثك الحالي.</p>
         </div>
       ) : (
@@ -267,7 +267,7 @@ export default function SlangPage() {
                   return (
                     <div
                       key={phraseId}
-                      className="glass p-5 rounded-2xl border border-white/5 hover:border-green/20 transition-all flex flex-col justify-between gap-4 shadow-md group relative overflow-hidden"
+                      className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 hover:border-green/20 transition-all flex flex-col justify-between gap-4 shadow-md group relative overflow-hidden"
                     >
                       {/* Badge and title */}
                       <div className="flex justify-between items-center">
@@ -287,7 +287,7 @@ export default function SlangPage() {
 
                       {/* Phrase content block */}
                       <div className="space-y-2 text-left" dir="ltr">
-                        <h4 className="font-bold text-white text-base font-sans select-all leading-snug">
+                        <h4 className="font-bold text-gray-900 dark:text-white text-base font-sans select-all leading-snug">
                           {phrase.german}
                         </h4>
                         
@@ -295,7 +295,7 @@ export default function SlangPage() {
                           <p className="text-[11px] text-muted font-sans font-medium">
                             <span className="text-gold">Standard:</span> {phrase.hochdeutsch}
                           </p>
-                          <p className="text-xs text-ink-soft text-right font-medium" dir="rtl">
+                          <p className="text-xs text-gray-600 dark:text-gray-400 text-right font-medium" dir="rtl">
                             💬 {phrase.arabic}
                           </p>
                           <p className="text-[10px] text-muted font-sans font-light">
@@ -305,7 +305,7 @@ export default function SlangPage() {
                       </div>
 
                       {/* Action buttons controls */}
-                      <div className="flex items-center gap-2 border-t border-white/5 pt-3 justify-between flex-wrap">
+                      <div className="flex items-center gap-2 border-t border-gray-200 dark:border-white/5 pt-3 justify-between flex-wrap">
                         
                         {/* Audio controls */}
                         <div className="flex items-center gap-1.5">
@@ -340,7 +340,7 @@ export default function SlangPage() {
                         {/* Arabic explanation toggle */}
                         <button
                           onClick={() => setShowExplanation(prev => ({ ...prev, [phraseId]: !prev[phraseId] }))}
-                          className="text-[10px] text-muted hover:text-white px-2 py-1"
+                          className="text-[10px] text-muted hover:text-gray-900 dark:text-white px-2 py-1"
                         >
                           {showExplanation[phraseId] ? '🙈 إخفاء السياق' : '💡 سياق الشرح'}
                         </button>
@@ -348,7 +348,7 @@ export default function SlangPage() {
 
                       {/* Explanation box popup */}
                       {showExplanation[phraseId] && phrase.context && (
-                        <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-ink-soft leading-relaxed animate-fadeIn">
+                        <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed animate-fadeIn">
                           <p className="font-semibold text-gold mb-1">الاستعمال والشرح العامي:</p>
                           {phrase.context}
                         </div>

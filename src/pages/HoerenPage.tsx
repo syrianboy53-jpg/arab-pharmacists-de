@@ -56,13 +56,13 @@ export default function HoerenPage() {
                 setShowTranscripts({})
                 setShowExplanations({})
               }}
-              className="glass p-5 rounded-2xl border border-white/5 text-right hover:border-green/20 transition-all flex flex-col justify-between shadow-md cursor-pointer group"
+              className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-green/20 transition-all flex flex-col justify-between shadow-md cursor-pointer group"
             >
               <div>
-                <h3 className="font-bold text-white group-hover:text-green transition-colors">{m.title}</h3>
+                <h3 className="font-bold text-gray-900 dark:text-white group-hover:text-green transition-colors">{m.title}</h3>
                 <p className="text-xs text-muted mt-2 leading-relaxed">{m.description}</p>
               </div>
-              <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center w-full">
+              <div className="mt-4 pt-3 border-t border-gray-200 dark:border-white/5 flex justify-between items-center w-full">
                 <span className="text-[10px] bg-green/10 text-green px-2 py-0.5 rounded-full">نموذج B1</span>
                 <span className="text-[10px] text-muted font-mono">{m.parts?.length || 0} أجزاء</span>
               </div>
@@ -93,7 +93,7 @@ export default function HoerenPage() {
         >
           → العودة للنماذج
         </button>
-        <h1 className="text-lg font-bold text-white">{model.title}</h1>
+        <h1 className="text-lg font-bold text-gray-900 dark:text-white">{model.title}</h1>
       </div>
 
       {/* Result Panel */}
@@ -111,11 +111,11 @@ export default function HoerenPage() {
       {/* Parts Loop */}
       <div className="space-y-8">
         {model.parts.map((part, pIdx) => (
-          <div key={pIdx} className="glass p-6 rounded-2xl border border-white/5 space-y-5 shadow-xl">
+          <div key={pIdx} className="glass p-6 rounded-2xl border border-gray-200 dark:border-white/5 space-y-5 shadow-xl">
             {/* Title & Instructions */}
-            <div className="border-b border-white/5 pb-3">
+            <div className="border-b border-gray-200 dark:border-white/5 pb-3">
               <span className="text-xs text-green font-bold uppercase tracking-wider">Teil {pIdx + 1}</span>
-              <h3 className="text-base font-bold text-white mt-0.5">{part.title}</h3>
+              <h3 className="text-base font-bold text-gray-900 dark:text-white mt-0.5">{part.title}</h3>
               <p className="text-xs text-muted mt-1 leading-relaxed">{part.instructionsAr}</p>
             </div>
 
@@ -124,17 +124,17 @@ export default function HoerenPage() {
               <div className="space-y-2">
                 <button
                   onClick={() => setShowTranscripts(prev => ({ ...prev, [pIdx]: !prev[pIdx] }))}
-                  className="bg-white dark:bg-[#1a1a2e]/5 border border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="bg-white dark:bg-[#1a1a2e]/5 border border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
                 >
                   📝 {showTranscripts[pIdx] ? 'إخفاء النص المكتوب (Transkript)' : 'عرض النص المكتوب (Transkript)'}
                 </button>
 
                 {showTranscripts[pIdx] && (
-                  <div className="bg-slate-950/40 border border-white/5 p-4 rounded-xl space-y-3">
+                  <div className="bg-slate-950/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl space-y-3">
                     {part.transcripts.map((t, tIdx) => (
                       <div key={t.id || tIdx} className="space-y-1 text-left" dir="ltr">
                         {(t as any).speaker && <span className="text-[10px] text-gold font-bold">{(t as any).speaker}:</span>}
-                        <p className="text-xs text-ink-soft font-sans leading-relaxed whitespace-pre-wrap">{t.textDe}</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-400 font-sans leading-relaxed whitespace-pre-wrap">{t.textDe}</p>
                       </div>
                     ))}
                   </div>
@@ -150,7 +150,7 @@ export default function HoerenPage() {
                 const showEx = showExplanations[q.id]
 
                 return (
-                  <div key={q.id} className="border-t border-white/5 pt-4 space-y-3">
+                  <div key={q.id} className="border-t border-gray-200 dark:border-white/5 pt-4 space-y-3">
                     <div className="flex gap-2 items-start">
                       <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                         {qIdx + 1}
@@ -158,11 +158,11 @@ export default function HoerenPage() {
                       <div className="text-left font-sans" dir="ltr">
                         {isTF ? (
                           <>
-                            <p className="text-sm font-semibold text-white">{q.statementDe}</p>
+                            <p className="text-sm font-semibold text-gray-900 dark:text-white">{q.statementDe}</p>
                             {q.statementAr && <p className="text-xs text-muted mt-1 text-right" dir="rtl">💡 {q.statementAr}</p>}
                           </>
                         ) : (
-                          <p className="text-sm font-semibold text-white">{q.promptDe}</p>
+                          <p className="text-sm font-semibold text-gray-900 dark:text-white">{q.promptDe}</p>
                         )}
                       </div>
                     </div>
@@ -174,7 +174,7 @@ export default function HoerenPage() {
                           const isSelected = selectedVal === val
                           const isOptCorrect = q.correct === val
 
-                          let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
+                          let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                           if (showResults) {
                             if (isOptCorrect) btnStyle = 'bg-green/10 border-green/40 text-green font-bold'
                             else if (isSelected) btnStyle = 'bg-red/10 border-red/40 text-red font-bold'
@@ -206,7 +206,7 @@ export default function HoerenPage() {
                           const isSelected = selectedVal === optionId
                           const isOptCorrect = q.correct === optionId
 
-                          let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
+                          let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                           if (showResults) {
                             if (isOptCorrect) btnStyle = 'bg-green/10 border-green/40 text-green font-bold'
                             else if (isSelected) btnStyle = 'bg-red/10 border-red/40 text-red font-bold'
@@ -237,12 +237,12 @@ export default function HoerenPage() {
                       <div className="mr-8 space-y-2">
                         <button
                           onClick={() => setShowExplanations(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
-                          className="text-[10px] text-muted hover:text-white transition-colors cursor-pointer"
+                          className="text-[10px] text-muted hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
                         >
                           {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
                         </button>
                         {showEx && (
-                          <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-ink-soft leading-relaxed">
+                          <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
                             {q.explanation}
                           </div>
                         )}

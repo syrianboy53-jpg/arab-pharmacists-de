@@ -15,7 +15,7 @@ export default function EmergencyPage() {
   ]
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-black flex items-center gap-2 text-gray-900 dark:text-white">🚨 صندوق الإسعافات للامتحان</h1>
+      <h1 className="text-2xl font-black flex items-center gap-2 text-gray-900 dark:text-gray-900 dark:text-white">🚨 صندوق الإسعافات للامتحان</h1>
       <p className="text-sm text-gray-500 dark:text-gray-400">جمل تنقذك في أي موقف أثناء الامتحان — احفظها جيداً!</p>
       <div className="space-y-3">{phrases.map((p, i) => (
         <div key={i} className="bg-white dark:bg-[#1a1a2e] rounded-xl p-4 shadow-sm border border-gray-100 dark:border-white/5">

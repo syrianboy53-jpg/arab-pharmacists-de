@@ -541,7 +541,7 @@ export default function AdminDashboardPage() {
       <div className="max-w-md mx-auto mt-20 bg-white dark:bg-[#1a1a2e] rounded-2xl p-8 border border-gray-200 dark:border-white/5">
         <div className="text-center mb-6">
           <span className="bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 px-3 py-1 rounded-full text-xs font-bold">🔒 لوحة المصمّم</span>
-          <h1 className="text-2xl font-black mt-2 text-gray-900 dark:text-white">تسجيل الدخول</h1>
+          <h1 className="text-2xl font-black mt-2 text-gray-900 dark:text-gray-900 dark:text-white">تسجيل الدخول</h1>
           <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">هذه المنطقة مخصّصة للمسؤول (المصمّم فادي الحلواني)</p>
         </div>
         <div className="space-y-4">
@@ -573,7 +573,7 @@ export default function AdminDashboardPage() {
             👑 لوحة المصمّم
           </span>
           <h1 className="text-2xl font-black mt-3">مرحباً فادي 🇸🇾</h1>
-          <p className="text-white/60 text-sm mt-1">تحكّم كامل بمحتوى التطبيق والإعلانات والبيانات.</p>
+          <p className="text-gray-900 dark:text-white/60 text-sm mt-1">تحكّم كامل بمحتوى التطبيق والإعلانات والبيانات.</p>
           <div className="flex flex-wrap gap-2 mt-4">
             <button onClick={handleLogout} className="bg-white dark:bg-[#1a1a2e]/10 hover:bg-white dark:bg-[#1a1a2e]/20 text-white px-4 py-2 rounded-xl text-sm font-bold border border-white/10 transition-all cursor-pointer">
               🚪 خروج
@@ -587,7 +587,7 @@ export default function AdminDashboardPage() {
 
       {/* Global Admin API Token Input */}
       <section className="bg-white dark:bg-[#1a1a2e] border-r-4 border-[#00b894] rounded-xl p-5 border border-gray-200 dark:border-white/5 space-y-3">
-        <h2 className="text-base font-black text-gray-900 dark:text-white">🔑 رمز وصول المسؤول</h2>
+        <h2 className="text-base font-black text-gray-900 dark:text-gray-900 dark:text-white">🔑 رمز وصول المسؤول</h2>
         <p className="text-gray-500 dark:text-gray-400 text-xs">أدخل الرمز لتفعيل إدارة المستخدمين والميزات المتقدّمة.</p>
         <div className="flex flex-wrap gap-3">
           <input
@@ -605,7 +605,7 @@ export default function AdminDashboardPage() {
 
       {/* Database Quick Stats */}
       <section className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 border border-gray-200 dark:border-white/5 space-y-3">
-        <h2 className="text-base font-black text-gray-900 dark:text-white">📊 إحصاءات سريعة</h2>
+        <h2 className="text-base font-black text-gray-900 dark:text-gray-900 dark:text-white">📊 إحصاءات سريعة</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
           <StatCard label="🔥 تتابع حالي" value={String(studyStats.streak.current)} />
           <StatCard label="🏆 أطول تتابع" value={String(studyStats.streak.longest)} />
@@ -618,7 +618,7 @@ export default function AdminDashboardPage() {
 
       {/* APK Download Stats */}
       <section className="bg-white dark:bg-[#1a1a2e] border-r-4 border-[#fdcb6e] rounded-xl p-5 border border-gray-200 dark:border-white/5 space-y-3">
-        <h2 className="text-base font-black text-gray-900 dark:text-white">📥 إحصاءات تحميل APK</h2>
+        <h2 className="text-base font-black text-gray-900 dark:text-gray-900 dark:text-white">📥 إحصاءات تحميل APK</h2>
         <p className="text-gray-500 dark:text-gray-400 text-xs">يتحدّث كل دقيقة.</p>
         {downloadError && <div className="text-red-600 dark:text-red-400 font-bold text-sm">❌ {downloadError}</div>}
         {downloadStats ? (
@@ -652,7 +652,7 @@ export default function AdminDashboardPage() {
 
       {/* Registered Users List */}
       <section className="bg-white dark:bg-[#1a1a2e] border-r-4 border-[#e84393] rounded-xl p-5 border border-gray-200 dark:border-white/5 space-y-3">
-        <h2 className="text-base font-black text-gray-900 dark:text-white">👥 المستخدمون المسجّلون</h2>
+        <h2 className="text-base font-black text-gray-900 dark:text-gray-900 dark:text-white">👥 المستخدمون المسجّلون</h2>
         <p className="text-gray-500 dark:text-gray-400 text-xs">مباشر من القاعدة الحيّة.</p>
         <div className="flex flex-wrap gap-2">
           <button onClick={() => fetchUsers(userSearch)} disabled={isUsersLoading} className="bg-[#e84393] hover:bg-[#d63384] text-white px-5 py-2 rounded-lg text-sm font-bold transition-all cursor-pointer">
@@ -726,7 +726,7 @@ export default function AdminDashboardPage() {
       {/* Website Visitor Stats & Logs */}
       {usersStats && usersStats.total_visitors !== undefined && (
         <section className="bg-white dark:bg-[#1a1a2e] border-r-4 border-[#6c5ce7] rounded-xl p-5 border border-gray-200 dark:border-white/5 space-y-4">
-          <h2 className="text-base font-black text-gray-900 dark:text-white">🌐 زوار الموقع</h2>
+          <h2 className="text-base font-black text-gray-900 dark:text-gray-900 dark:text-white">🌐 زوار الموقع</h2>
           <p className="text-gray-500 dark:text-gray-400 text-xs">إحصاءات الزوار الفريدين من قاعدة البيانات الحيّة.</p>
           
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -799,7 +799,7 @@ export default function AdminDashboardPage() {
 
       {/* Broadcast Config */}
       <section className="bg-white dark:bg-[#1a1a2e] border-r-4 border-[#fdcb6e] rounded-xl p-5 border border-gray-200 dark:border-white/5 space-y-4">
-        <h2 className="text-base font-black text-gray-900 dark:text-white">📡 إعدادات التطبيق والإعلانات</h2>
+        <h2 className="text-base font-black text-gray-900 dark:text-gray-900 dark:text-white">📡 إعدادات التطبيق والإعلانات</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-3">
             <h3 className="font-bold text-sm text-gray-800 dark:text-gray-200 border-b border-gray-100 dark:border-white/10 pb-1">📢 الإعلانات العامة</h3>
@@ -856,7 +856,7 @@ export default function AdminDashboardPage() {
 
       {/* Firebase Push Notifications */}
       <section className="bg-white dark:bg-[#1a1a2e] border-r-4 border-[#0984e3] rounded-xl p-5 border border-gray-200 dark:border-white/5 space-y-4">
-        <h2 className="text-base font-black text-gray-900 dark:text-white">📲 إشعارات Push</h2>
+        <h2 className="text-base font-black text-gray-900 dark:text-gray-900 dark:text-white">📲 إشعارات Push</h2>
         {pushStats && (
           <div className="grid grid-cols-2 gap-3 mb-2 max-w-sm">
             <StatCard label="الأجهزة النشطة" value={String(pushStats.active_devices)} />
@@ -912,7 +912,7 @@ export default function AdminDashboardPage() {
       {/* Suggestions Mailbox */}
       <section className="bg-white dark:bg-[#1a1a2e] border-r-4 border-[#e17055] rounded-xl p-5 border border-gray-200 dark:border-white/5 space-y-4">
         <div className="flex justify-between items-center flex-wrap gap-2">
-          <h2 className="text-base font-black text-gray-900 dark:text-white">📬 صندوق الاقتراحات ({suggestions.length})</h2>
+          <h2 className="text-base font-black text-gray-900 dark:text-gray-900 dark:text-white">📬 صندوق الاقتراحات ({suggestions.length})</h2>
           <button onClick={fetchSuggestions} disabled={isSuggestionsLoading} className="bg-[#e17055] hover:bg-[#d35400] text-white px-4 py-1.5 rounded-lg text-sm font-bold transition-all cursor-pointer">
             {isSuggestionsLoading ? '⏳ جاري...' : '🔄 تحديث'}
           </button>
@@ -947,7 +947,7 @@ export default function AdminDashboardPage() {
                   <div className="flex justify-between items-start flex-wrap gap-2 mb-2">
                     <div className="flex items-center gap-2">
                       {isUnread && <span className="bg-red-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">جديد</span>}
-                      <strong className="text-gray-900 dark:text-white text-base">{s.subject}</strong>
+                      <strong className="text-gray-900 dark:text-gray-900 dark:text-white text-base">{s.subject}</strong>
                     </div>
                     <span className="text-xs text-gray-400">{new Date(s.created_at).toLocaleString('ar-EG')}</span>
                   </div>
@@ -985,7 +985,7 @@ export default function AdminDashboardPage() {
 
       {/* Admin Account Settings */}
       <section className="bg-white dark:bg-[#1a1a2e] border-r-4 border-gray-400 dark:border-white/10 rounded-xl p-5 border border-gray-200 dark:border-white/5 space-y-4">
-        <h2 className="text-base font-black text-gray-900 dark:text-white">🔑 تغيير كلمة المرور</h2>
+        <h2 className="text-base font-black text-gray-900 dark:text-gray-900 dark:text-white">🔑 تغيير كلمة المرور</h2>
         <div className="max-w-md space-y-3">
           <input
             type="password"
@@ -1001,7 +1001,7 @@ export default function AdminDashboardPage() {
             placeholder="كلمة المرور الجديدة"
             className="w-full border rounded-lg p-2.5 text-sm outline-none focus:border-gray-500"
           />
-          <button onClick={changePassword} disabled={isChangingPassword} className="bg-gray-800 hover:bg-gray-900 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition duration-200">
+          <button onClick={changePassword} disabled={isChangingPassword} className="bg-gray-800 hover:bg-gray-900 text-gray-900 dark:text-white px-6 py-2.5 rounded-lg text-sm font-bold transition duration-200">
             {isChangingPassword ? '⏳ جاري التغيير...' : 'تحديث كلمة المرور'}
           </button>
           {passwordStatus && <div className="text-sm font-semibold">{passwordStatus}</div>}
@@ -1012,7 +1012,7 @@ export default function AdminDashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* LocalTemplates section */}
         <section className="bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 rounded-xl p-5 space-y-4">
-          <h2 className="text-base font-black text-gray-900 dark:text-white">✉️ نماذج الرسائل</h2>
+          <h2 className="text-base font-black text-gray-900 dark:text-gray-900 dark:text-white">✉️ نماذج الرسائل</h2>
           <div className="space-y-3">
             <input placeholder="العنوان بالعربية" value={templateAr} onChange={e => setTemplateAr(e.target.value)} className="w-full border rounded p-2 text-sm outline-none" />
             <input placeholder="العنوان بالألمانية" value={templateDe} onChange={e => setTemplateDe(e.target.value)} className="w-full border rounded p-2 text-sm outline-none" dir="ltr" />
@@ -1028,7 +1028,7 @@ export default function AdminDashboardPage() {
               {templates.map(t => (
                 <div key={t.id} className="p-3 border rounded-lg bg-gray-50 dark:bg-white/5/30">
                   <div className="flex justify-between items-center gap-2 mb-2">
-                    <strong className="text-gray-900 dark:text-white">{t.titleAr}</strong>
+                    <strong className="text-gray-900 dark:text-gray-900 dark:text-white">{t.titleAr}</strong>
                     <span className="text-xs text-gray-500 dark:text-gray-400" dir="ltr">{t.titleDe}</span>
                     <button onClick={() => deleteTemplate(t.id)} className="text-red-600 hover:text-red-800 text-xs font-bold">🗑️</button>
                   </div>
@@ -1041,7 +1041,7 @@ export default function AdminDashboardPage() {
 
         {/* Local Leben Questions section */}
         <section className="bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 rounded-xl p-5 space-y-4">
-          <h2 className="text-base font-black text-gray-900 dark:text-white">🇩🇪 أسئلة Leben in Deutschland</h2>
+          <h2 className="text-base font-black text-gray-900 dark:text-gray-900 dark:text-white">🇩🇪 أسئلة Leben in Deutschland</h2>
           <div className="space-y-3">
             <input placeholder="السؤال بالألمانية" value={questionDe} onChange={e => setQuestionDe(e.target.value)} className="w-full border rounded p-2 text-sm outline-none" dir="ltr" />
             {questionAnswers.map((ans, idx) => (
@@ -1066,7 +1066,7 @@ export default function AdminDashboardPage() {
               {customQuestions.map(q => (
                 <div key={q.id} className="p-3 border rounded-lg bg-gray-50 dark:bg-white/5/30 flex justify-between items-start gap-2">
                   <div className="space-y-1">
-                    <div className="font-bold text-gray-900 dark:text-white" dir="ltr">{q.question}</div>
+                    <div className="font-bold text-gray-900 dark:text-gray-900 dark:text-white" dir="ltr">{q.question}</div>
                     <div className="text-xs text-green font-bold" dir="ltr">✓ {q.answers[q.correct]}</div>
                   </div>
                   <button onClick={() => deleteLebenQuestion(q.id)} className="text-red-600 hover:text-red-800 text-xs font-bold">🗑️</button>

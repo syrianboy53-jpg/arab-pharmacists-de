@@ -141,7 +141,7 @@ export default function DrillPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={handleShare}
-              className="bg-gold hover:bg-gold/90 text-white font-bold px-6 py-3 rounded-full transition-colors flex items-center justify-center gap-2"
+              className="bg-gold hover:bg-gold/90 text-gray-900 dark:text-white font-bold px-6 py-3 rounded-full transition-colors flex items-center justify-center gap-2"
             >
               <span>📢 مشاركة النتيجة</span>
             </button>
@@ -155,7 +155,7 @@ export default function DrillPage() {
 
           <Link
             to="/"
-            className="text-muted hover:text-ink text-sm font-semibold mt-6 block underline transition-colors"
+            className="text-muted hover:text-gray-900 dark:text-white text-sm font-semibold mt-6 block underline transition-colors"
           >
             العودة للرئيسية
           </Link>
@@ -201,7 +201,7 @@ export default function DrillPage() {
         <span className="text-4xl">🦉</span>
         <div className="flex-1">
           <div className="text-xs text-muted font-bold mb-0.5">مدرّب B1-Syrer</div>
-          <p className="text-sm font-bold text-ink-soft dark:text-gray-300 leading-relaxed">{mascotPhrase}</p>
+          <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed">{mascotPhrase}</p>
         </div>
       </div>
 
@@ -277,7 +277,7 @@ export default function DrillPage() {
             <span className="text-2xl">💡</span>
             <div>
               <h4 className="font-bold text-gold text-sm mb-1">الشرح بالعربية:</h4>
-              <p className="text-sm text-ink-soft dark:text-gray-300 leading-relaxed">{q.explanation}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed">{q.explanation}</p>
             </div>
           </div>
         )}

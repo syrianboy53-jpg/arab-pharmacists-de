@@ -15,7 +15,7 @@ export default function LeaderboardPage() {
   ]
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-black flex items-center gap-2 text-gray-900 dark:text-white">🏆 لوحة المتصدّرين</h1>
+      <h1 className="text-2xl font-black flex items-center gap-2 text-gray-900 dark:text-gray-900 dark:text-white">🏆 لوحة المتصدّرين</h1>
       <p className="text-sm text-gray-500 dark:text-gray-400">ترتيب هذا الأسبوع — تحديث كل يوم اثنين</p>
       <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl shadow-sm border border-gray-100 dark:border-white/5 overflow-hidden">
         {leaders.map((l, i) => (

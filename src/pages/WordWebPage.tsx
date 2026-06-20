@@ -50,7 +50,7 @@ export default function WordWebPage() {
         <div className="text-center mb-6">
           <div className="inline-block bg-gradient-to-br from-[#6c5ce7] to-[#a29bfe] text-white px-6 py-3 rounded-2xl">
             <span className="text-xl font-black" dir="ltr">{web.center}</span>
-            <p className="text-xs text-white/70">{web.meaning}</p>
+            <p className="text-xs text-gray-900 dark:text-white/70">{web.meaning}</p>
           </div>
         </div>
 

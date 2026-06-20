@@ -18,7 +18,7 @@ export default function StressListeningPage() {
 
       <div className="bg-gradient-to-br from-[#e17055] to-[#d63031] rounded-2xl p-6 text-white">
         <h2 className="font-bold mb-2 text-gray-800 dark:text-gray-200">🎯 لماذا وضع الضغط؟</h2>
-        <p className="text-white/80 text-sm leading-relaxed">في الامتحان الحقيقي، لن تستمع في هدوء تام. تدرّب على التركيز رغم الضوضاء لتكون مستعداً!</p>
+        <p className="text-gray-900 dark:text-white/80 text-sm leading-relaxed">في الامتحان الحقيقي، لن تستمع في هدوء تام. تدرّب على التركيز رغم الضوضاء لتكون مستعداً!</p>
       </div>
 
       <div className="grid grid-cols-2 gap-3">

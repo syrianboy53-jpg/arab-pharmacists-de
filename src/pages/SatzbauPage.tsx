@@ -211,7 +211,7 @@ export default function SatzbauPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={handleShare}
-              className="bg-gold hover:bg-gold/90 text-white font-bold px-6 py-3 rounded-full transition-colors flex items-center justify-center gap-2"
+              className="bg-gold hover:bg-gold/90 text-gray-900 dark:text-white font-bold px-6 py-3 rounded-full transition-colors flex items-center justify-center gap-2"
             >
               <span>📢 مشاركة النتيجة</span>
             </button>
@@ -225,7 +225,7 @@ export default function SatzbauPage() {
 
           <Link
             to="/"
-            className="text-muted hover:text-ink text-sm font-semibold mt-6 block underline transition-colors"
+            className="text-muted hover:text-gray-900 dark:text-white text-sm font-semibold mt-6 block underline transition-colors"
           >
             العودة للرئيسية
           </Link>
@@ -270,7 +270,7 @@ export default function SatzbauPage() {
         <span className="text-4xl">🦉</span>
         <div className="flex-1">
           <div className="text-xs text-muted font-bold mb-0.5">مدرّب B1-Syrer</div>
-          <p className="text-sm font-bold text-ink-soft dark:text-gray-300 leading-relaxed">{mascotPhrase}</p>
+          <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed">{mascotPhrase}</p>
         </div>
       </div>
 
@@ -304,7 +304,7 @@ export default function SatzbauPage() {
             key={i}
             onClick={() => selectWord(word, i)}
             disabled={answered}
-            className="bg-white dark:bg-gray-700 text-ink dark:text-white border-2 border-gray-200 dark:border-white/10 hover:border-green hover:bg-green/5 font-bold px-4 py-2 rounded-xl text-lg transition-transform hover:scale-105 active:scale-95 shadow-sm"
+            className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white dark:text-gray-900 dark:text-white border-2 border-gray-200 dark:border-white/10 hover:border-green hover:bg-green/5 font-bold px-4 py-2 rounded-xl text-lg transition-transform hover:scale-105 active:scale-95 shadow-sm"
           >
             {word}
           </button>
@@ -326,7 +326,7 @@ export default function SatzbauPage() {
           {current.explain && (
             <div className="pt-2 border-t border-gray-100 dark:border-white/5">
               <span className="text-xs text-muted font-bold block mb-1">نصيحة نحوية:</span>
-              <p className="text-sm text-ink-soft dark:text-gray-300 leading-relaxed">{current.explain}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed">{current.explain}</p>
             </div>
           )}
         </div>

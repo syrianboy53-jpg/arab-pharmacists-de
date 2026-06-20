@@ -282,14 +282,14 @@ export default function EinstufungPage() {
             <div className="text-6xl font-black text-green leading-none">{finalLevel}</div>
           </div>
 
-          <p className="text-sm md:text-base text-ink-soft dark:text-gray-300 leading-relaxed mb-8 max-w-md mx-auto">
+          <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed mb-8 max-w-md mx-auto">
             {getLevelDescription(finalLevel)}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={handleShare}
-              className="bg-gold hover:bg-gold/90 text-white font-bold px-8 py-3 rounded-full transition-colors flex items-center justify-center gap-2"
+              className="bg-gold hover:bg-gold/90 text-gray-900 dark:text-white font-bold px-8 py-3 rounded-full transition-colors flex items-center justify-center gap-2"
             >
               <span>📢 مشاركة النتيجة</span>
             </button>
@@ -309,7 +309,7 @@ export default function EinstufungPage() {
               setAnswered(false)
               setFinished(false)
             }}
-            className="text-muted hover:text-ink text-sm font-bold mt-6 underline block mx-auto transition-colors"
+            className="text-muted hover:text-gray-900 dark:text-white text-sm font-bold mt-6 underline block mx-auto transition-colors"
           >
             إعادة الاختبار 🔄
           </button>
@@ -398,7 +398,7 @@ export default function EinstufungPage() {
             <span className="text-2xl">💡</span>
             <div>
               <h4 className="font-bold text-gold text-sm mb-1">الشرح بالعربية:</h4>
-              <p className="text-sm text-ink-soft dark:text-gray-300 leading-relaxed">{q.explain}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed">{q.explain}</p>
             </div>
           </div>
         )}

@@ -119,7 +119,7 @@ export default function FehlerPage() {
               <div className="text-center mb-6">
                 <span className="bg-red/10 text-red text-xs font-bold px-3 py-1 rounded-full">خطأ شائع احذره! ⚠️</span>
               </div>
-              <h3 className="text-lg md:text-xl font-bold text-ink-soft dark:text-gray-200 text-center leading-relaxed mb-8">
+              <h3 className="text-lg md:text-xl font-bold text-gray-600 dark:text-gray-400 dark:text-gray-200 text-center leading-relaxed mb-8">
                 {item.titleAr}
               </h3>
 
@@ -157,12 +157,12 @@ export default function FehlerPage() {
               <h3 className="font-bold text-green mb-3 border-b border-gray-200 dark:border-white/5 pb-2">
                 لماذا حدث هذا الخطأ؟ 🧐
               </h3>
-              <p className="text-sm text-ink-soft dark:text-gray-300 leading-relaxed mb-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed mb-4">
                 {item.whyAr}
               </p>
 
               <h3 className="font-bold text-gold mb-2">القاعدة النحوية 📝</h3>
-              <p className="text-sm text-ink-soft dark:text-gray-300 leading-relaxed mb-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed mb-4">
                 {item.ruleAr}
               </p>
 

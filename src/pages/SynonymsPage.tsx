@@ -271,7 +271,7 @@ export default function SynonymsPage() {
                   btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-white/5/50 dark:bg-[#1a1a2e]/50 opacity-60 text-muted'
                 }
               } else {
-                btnClass += 'border-gray-200 dark:border-white/5 hover:border-green hover:bg-green/5 text-ink dark:text-white'
+                btnClass += 'border-gray-200 dark:border-white/5 hover:border-green hover:bg-green/5 text-gray-900 dark:text-white'
               }
 
               return (
@@ -366,7 +366,7 @@ export default function SynonymsPage() {
               <div className="flex gap-2 justify-center">
                 <button
                   onClick={() => handleShareResult(matchScore, 'مطابقة البطاقات')}
-                  className="bg-gold hover:bg-gold/90 text-white font-bold px-4 py-2 rounded-full text-xs transition-colors"
+                  className="bg-gold hover:bg-gold/90 text-gray-900 dark:text-white font-bold px-4 py-2 rounded-full text-xs transition-colors"
                 >
                   📢 مشاركة
                 </button>

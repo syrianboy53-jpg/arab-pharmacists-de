@@ -54,7 +54,7 @@ export default function BriefCorrectorPage() {
   return (
     <div className="max-w-4xl mx-auto py-8 px-4">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">المصحح الذكي للرسائل 🤖</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-900 dark:text-white mb-2">المصحح الذكي للرسائل 🤖</h1>
         <p className="text-gray-500 dark:text-gray-400">اكتب رسالة B1 (Brief) وسيقوم الذكاء الاصطناعي بتحليلها وتصحيحها وإعطائك نصائح.</p>
       </div>
 
@@ -101,7 +101,7 @@ export default function BriefCorrectorPage() {
               </div>
 
               <div className="bg-white dark:bg-[#1a1a2e] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-white/5">
-                <h3 className="font-bold text-gray-900 dark:text-white mb-4">💡 ملاحظات وتوجيهات:</h3>
+                <h3 className="font-bold text-gray-900 dark:text-gray-900 dark:text-white mb-4">💡 ملاحظات وتوجيهات:</h3>
                 <ul className="space-y-3">
                   {result.feedbacks.map((feedback, idx) => (
                     <li key={idx} className="flex gap-3 text-sm">

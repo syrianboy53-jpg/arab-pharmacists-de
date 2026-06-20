@@ -6,7 +6,7 @@ export default function ReferralPage() {
   const copy = () => { navigator.clipboard.writeText(code); setCopied(true); setTimeout(() => setCopied(false), 2000) }
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-black flex items-center gap-2 text-gray-900 dark:text-white">👥 ادعُ صديقاً</h1>
+      <h1 className="text-2xl font-black flex items-center gap-2 text-gray-900 dark:text-gray-900 dark:text-white">👥 ادعُ صديقاً</h1>
       <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-white/5 text-center">
         <div className="text-5xl mb-4">🎁</div>
         <h2 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-200">شارك كودك مع أصدقائك</h2>

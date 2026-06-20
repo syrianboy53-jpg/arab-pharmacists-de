@@ -33,7 +33,7 @@ export default function DailyChallengePage() {
         <div className="text-5xl mb-4">🎉</div>
         <h1 className="text-3xl font-bold mb-2">أحسنت!</h1>
         <p className="text-xl">{score} / {questions.length} إجابات صحيحة</p>
-        <p className="text-white/80 mt-2">+ {score * 22} XP</p>
+        <p className="text-gray-900 dark:text-white/80 mt-2">+ {score * 22} XP</p>
       </div>
     </div>
   )
@@ -42,7 +42,7 @@ export default function DailyChallengePage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-black flex items-center gap-2 text-gray-900 dark:text-white">📅 تحدّي اليوم</h1>
+        <h1 className="text-2xl font-black flex items-center gap-2 text-gray-900 dark:text-gray-900 dark:text-white">📅 تحدّي اليوم</h1>
         <span className="text-sm bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-3 py-1 rounded-full font-bold">{current + 1} / {questions.length}</span>
       </div>
       <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-white/5">

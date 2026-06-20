@@ -105,7 +105,7 @@ export default function PronunciationLabPage() {
   return (
     <div className="max-w-2xl mx-auto py-8">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">مختبر النطق الذكي 🎙️</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-900 dark:text-white mb-2">مختبر النطق الذكي 🎙️</h1>
         <p className="text-gray-500 dark:text-gray-400">تدرب على النطق الصحيح للقسم الشفهي. اقرأ الجملة بصوت واضح.</p>
       </div>
 
@@ -159,7 +159,7 @@ export default function PronunciationLabPage() {
                 : 'bg-green hover:bg-green-dark'
             }`}
           >
-            <span className="text-3xl text-white">{isRecording ? '⏹️' : '🎙️'}</span>
+            <span className="text-3xl text-gray-900 dark:text-white">{isRecording ? '⏹️' : '🎙️'}</span>
           </button>
 
           <button 

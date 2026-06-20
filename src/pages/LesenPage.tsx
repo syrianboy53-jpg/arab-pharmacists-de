@@ -81,13 +81,13 @@ export default function LesenPage() {
             <button
               key={m.id}
               onClick={() => setSelectedModelIndex(i)}
-              className="glass p-5 rounded-2xl border border-white/5 text-right hover:border-green/20 transition-all flex flex-col justify-between shadow-md cursor-pointer group"
+              className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-green/20 transition-all flex flex-col justify-between shadow-md cursor-pointer group"
             >
               <div>
-                <h3 className="font-bold text-white group-hover:text-green transition-colors">{m.title}</h3>
+                <h3 className="font-bold text-gray-900 dark:text-white group-hover:text-green transition-colors">{m.title}</h3>
                 <p className="text-xs text-muted mt-2 leading-relaxed">{m.description}</p>
               </div>
-              <div className="mt-4 pt-3 border-t border-white/5 flex justify-between items-center w-full">
+              <div className="mt-4 pt-3 border-t border-gray-200 dark:border-white/5 flex justify-between items-center w-full">
                 <span className="text-[10px] bg-green/10 text-green px-2 py-0.5 rounded-full">B1 Niveau</span>
                 <span className="text-[10px] text-muted font-mono">
                   {(m as any).parts ? `${(m as any).parts.length} أجزاء` : `${(m as any).questions.length} أسئلة`}
@@ -109,7 +109,7 @@ export default function LesenPage() {
         <button onClick={reset} className="text-green font-bold text-sm hover:underline cursor-pointer">
           → العودة للنماذج
         </button>
-        <h1 className="text-lg font-bold text-white">{model.title}</h1>
+        <h1 className="text-lg font-bold text-gray-900 dark:text-white">{model.title}</h1>
       </div>
 
       {/* Results Header */}
@@ -129,11 +129,11 @@ export default function LesenPage() {
         <div className="space-y-8">
           {(model as any).parts.map((part: any, pIdx: number) => {
             return (
-              <div key={pIdx} className="glass p-6 rounded-2xl border border-white/5 space-y-5 shadow-xl">
+              <div key={pIdx} className="glass p-6 rounded-2xl border border-gray-200 dark:border-white/5 space-y-5 shadow-xl">
                 {/* Part Header */}
-                <div className="border-b border-white/5 pb-3">
+                <div className="border-b border-gray-200 dark:border-white/5 pb-3">
                   <span className="text-xs text-green font-bold uppercase tracking-wider">Teil {pIdx + 1}</span>
-                  <h3 className="text-base font-bold text-white mt-0.5">{part.title}</h3>
+                  <h3 className="text-base font-bold text-gray-900 dark:text-white mt-0.5">{part.title}</h3>
                   <p className="text-xs text-muted mt-1 leading-relaxed">{part.instructionsAr}</p>
                 </div>
 
@@ -141,11 +141,11 @@ export default function LesenPage() {
                 {part.type === 'match-blog' && part.texts && (
                   <div className="space-y-6">
                     {/* Authors and texts */}
-                    <div className="grid md:grid-cols-2 gap-3 bg-slate-950/20 p-4 rounded-xl border border-white/5">
+                    <div className="grid md:grid-cols-2 gap-3 bg-gray-100 dark:bg-white/5 p-4 rounded-xl border border-gray-200 dark:border-white/5">
                       {part.texts.map((item: any) => (
-                        <div key={item.id} className="p-3 rounded-lg border border-white/5 bg-slate-900/40 text-left font-sans" dir="ltr">
+                        <div key={item.id} className="p-3 rounded-lg border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-white/5 text-left font-sans" dir="ltr">
                           <span className="text-xs text-gold font-bold">{item.id}) {item.titleDe} ({item.titleAr}):</span>
-                          <p className="text-xs text-ink-soft mt-1 leading-relaxed">{item.textDe}</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">{item.textDe}</p>
                         </div>
                       ))}
                     </div>
@@ -158,13 +158,13 @@ export default function LesenPage() {
                         
                         
                         return (
-                          <div key={s.id} className="border-t border-white/5 pt-4 space-y-2">
+                          <div key={s.id} className="border-t border-gray-200 dark:border-white/5 pt-4 space-y-2">
                             <div className="flex gap-2.5 items-start">
                               <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                                 {sIdx + 1}
                               </span>
-                              <div className="text-left font-sans text-sm text-ink-soft leading-normal" dir="ltr">
-                                <p className="font-medium text-white">{s.textDe}</p>
+                              <div className="text-left font-sans text-sm text-gray-600 dark:text-gray-400 leading-normal" dir="ltr">
+                                <p className="font-medium text-gray-900 dark:text-white">{s.textDe}</p>
                                 {s.textAr && <p className="text-xs text-muted mt-1 text-right font-sans" dir="rtl">💡 {s.textAr}</p>}
                               </div>
                             </div>
@@ -175,7 +175,7 @@ export default function LesenPage() {
                                 const isSelected = selectedVal === item.id
                                 const isOptCorrect = s.correctAd === item.id
 
-                                let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
+                                let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                                 if (showResults) {
                                   if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
                                   else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
@@ -206,7 +206,7 @@ export default function LesenPage() {
                 {/* Newspaper Article Text / Rules text / Opinions text */}
                 {part.textDe && (
                   <div 
-                    className="bg-slate-950/40 border border-white/5 p-5 rounded-xl text-sm leading-relaxed text-ink-soft whitespace-pre-wrap select-text text-left font-sans"
+                    className="bg-slate-950/40 border border-gray-200 dark:border-white/5 p-5 rounded-xl text-sm leading-relaxed text-gray-600 dark:text-gray-400 whitespace-pre-wrap select-text text-left font-sans"
                     dir="ltr"
                   >
                     {part.textDe}
@@ -220,12 +220,12 @@ export default function LesenPage() {
                       const selectedVal = answers[q.id]
                       const showEx = showExplanations[q.id]
                       return (
-                        <div key={q.id} className="border-t border-white/5 pt-4 space-y-3">
+                        <div key={q.id} className="border-t border-gray-200 dark:border-white/5 pt-4 space-y-3">
                           <div className="flex gap-2.5 items-start">
                             <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                               {qIdx + 1}
                             </span>
-                            <div className="text-left font-sans text-sm text-white" dir="ltr">
+                            <div className="text-left font-sans text-sm text-gray-900 dark:text-white" dir="ltr">
                               <p className="font-semibold">{q.promptDe}</p>
                               {q.promptAr && <p className="text-xs text-muted mt-1 text-right" dir="rtl">💡 {q.promptAr}</p>}
                             </div>
@@ -238,7 +238,7 @@ export default function LesenPage() {
                               const isSelected = selectedVal === optionId
                               const isOptCorrect = q.correct === optionId
 
-                              let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
+                              let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                               if (showResults) {
                                 if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
                                 else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
@@ -267,12 +267,12 @@ export default function LesenPage() {
                             <div className="mr-8 space-y-2">
                               <button
                                 onClick={() => setShowExplanations(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
-                                className="text-[10px] text-muted hover:text-white transition-colors cursor-pointer"
+                                className="text-[10px] text-muted hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
                               >
                                 {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
                               </button>
                               {showEx && (
-                                <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-ink-soft leading-relaxed">
+                                <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
                                   {q.explanation}
                                 </div>
                               )}
@@ -288,11 +288,11 @@ export default function LesenPage() {
                 {part.type === 'match-ads' && part.ads && (
                   <div className="space-y-6">
                     {/* Ads catalog */}
-                    <div className="grid sm:grid-cols-2 gap-3 bg-slate-950/20 p-4 rounded-xl border border-white/5 max-h-96 overflow-y-auto nav-scroll">
+                    <div className="grid sm:grid-cols-2 gap-3 bg-gray-100 dark:bg-white/5 p-4 rounded-xl border border-gray-200 dark:border-white/5 max-h-96 overflow-y-auto nav-scroll">
                       {part.ads.map((ad: any) => (
-                        <div key={ad.id} className="p-3 rounded-lg border border-white/5 bg-slate-900/40 text-left font-sans" dir="ltr">
+                        <div key={ad.id} className="p-3 rounded-lg border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-white/5 text-left font-sans" dir="ltr">
                           <span className="text-xs text-gold font-bold">إعلان ({ad.id}): {ad.titleDe}</span>
-                          <p className="text-[11px] text-ink-soft mt-1 leading-relaxed">{ad.textDe}</p>
+                          <p className="text-[11px] text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">{ad.textDe}</p>
                         </div>
                       ))}
                     </div>
@@ -305,13 +305,13 @@ export default function LesenPage() {
                          
 
                         return (
-                          <div key={sit.id} className="border-t border-white/5 pt-4 space-y-2">
+                          <div key={sit.id} className="border-t border-gray-200 dark:border-white/5 pt-4 space-y-2">
                             <div className="flex gap-2.5 items-start">
                               <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                                 {sIdx + 1}
                               </span>
-                              <div className="text-left font-sans text-sm text-white" dir="ltr">
-                                <p className="font-medium text-white">{sit.textDe}</p>
+                              <div className="text-left font-sans text-sm text-gray-900 dark:text-white" dir="ltr">
+                                <p className="font-medium text-gray-900 dark:text-white">{sit.textDe}</p>
                                 {sit.textAr && <p className="text-xs text-muted mt-1 text-right font-sans" dir="rtl">💡 {sit.textAr}</p>}
                               </div>
                             </div>
@@ -322,7 +322,7 @@ export default function LesenPage() {
                                 const isSelected = selectedVal === ad.id
                                 const isOptCorrect = sit.correctAd === ad.id
 
-                                let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
+                                let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                                 if (showResults) {
                                   if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
                                   else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
@@ -357,12 +357,12 @@ export default function LesenPage() {
                       const selectedVal = answers[q.id]
                       const showEx = showExplanations[q.id]
                       return (
-                        <div key={q.id} className="border-t border-white/5 pt-4 space-y-3">
+                        <div key={q.id} className="border-t border-gray-200 dark:border-white/5 pt-4 space-y-3">
                           <div className="flex gap-2.5 items-start">
                             <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                               {qIdx + 1}
                             </span>
-                            <div className="text-left font-sans text-sm text-white" dir="ltr">
+                            <div className="text-left font-sans text-sm text-gray-900 dark:text-white" dir="ltr">
                               <p className="font-semibold">{q.statementDe}</p>
                               {q.statementAr && <p className="text-xs text-muted mt-1 text-right" dir="rtl">💡 {q.statementAr}</p>}
                             </div>
@@ -373,7 +373,7 @@ export default function LesenPage() {
                               const isSelected = selectedVal === val
                               const isOptCorrect = q.correct === val
 
-                              let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
+                              let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                               if (showResults) {
                                 if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
                                 else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
@@ -399,12 +399,12 @@ export default function LesenPage() {
                             <div className="mr-8 space-y-2">
                               <button
                                 onClick={() => setShowExplanations(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
-                                className="text-[10px] text-muted hover:text-white transition-colors cursor-pointer"
+                                className="text-[10px] text-muted hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
                               >
                                 {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
                               </button>
                               {showEx && (
-                                <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-ink-soft leading-relaxed">
+                                <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
                                   {q.explanation}
                                 </div>
                               )}
@@ -428,10 +428,10 @@ export default function LesenPage() {
             const showEx = showExplanations[q.id]
 
             return (
-              <div key={q.id} className="glass p-5 rounded-2xl border border-white/5 space-y-4 shadow-xl">
+              <div key={q.id} className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4 shadow-xl">
                 {/* Passage Text */}
                 <div 
-                  className="bg-slate-950/40 border border-white/5 p-4 rounded-xl text-xs text-ink-soft leading-relaxed select-text text-left font-sans"
+                  className="bg-slate-950/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-xs text-gray-600 dark:text-gray-400 leading-relaxed select-text text-left font-sans"
                   dir="ltr"
                 >
                   {q.text}
@@ -442,7 +442,7 @@ export default function LesenPage() {
                   <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                     {qIdx + 1}
                   </span>
-                  <p className="text-sm font-semibold text-white text-left font-sans" dir="ltr">{q.question}</p>
+                  <p className="text-sm font-semibold text-gray-900 dark:text-white text-left font-sans" dir="ltr">{q.question}</p>
                 </div>
 
                 {/* Multiple choices buttons */}
@@ -451,7 +451,7 @@ export default function LesenPage() {
                     const isSelected = selectedVal === oi
                     const isOptCorrect = q.correct === oi
 
-                    let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
+                    let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                     if (showResults) {
                       if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
                       else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
@@ -481,12 +481,12 @@ export default function LesenPage() {
                   <div className="mr-8 space-y-2">
                     <button
                       onClick={() => setShowExplanations(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
-                      className="text-[10px] text-muted hover:text-white transition-colors cursor-pointer"
+                      className="text-[10px] text-muted hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
                     >
                       {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
                     </button>
                     {showEx && (
-                      <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-ink-soft leading-relaxed">
+                      <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
                         {q.explanation}
                       </div>
                     )}

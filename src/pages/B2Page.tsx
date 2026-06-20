@@ -16,7 +16,7 @@ export default function B2Page() {
 
   if (!currentModel) {
     return (
-      <div className="glass p-10 text-center rounded-2xl border border-white/5">
+      <div className="glass p-10 text-center rounded-2xl border border-gray-200 dark:border-white/5">
         <p className="text-muted text-sm">لا توجد نماذج B2 متاحة حالياً.</p>
       </div>
     )
@@ -65,7 +65,7 @@ export default function B2Page() {
           <select
             value={selectedModelId}
             onChange={(e) => handleModelChange(e.target.value)}
-            className="bg-slate-900/60 border border-white/10 rounded-xl px-3 py-1.5 text-sm focus:outline-none focus:border-green text-ink"
+            className="bg-slate-900/60 border border-white/10 rounded-xl px-3 py-1.5 text-sm focus:outline-none focus:border-green text-gray-900 dark:text-white"
           >
             {telcB2Models.map(model => (
               <option key={model.id} value={model.id}>
@@ -77,7 +77,7 @@ export default function B2Page() {
       </div>
 
       {/* Model Overview Card */}
-      <div className="glass p-5 rounded-2xl border border-white/5 flex justify-between items-center flex-wrap gap-4 shadow-xl">
+      <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 flex justify-between items-center flex-wrap gap-4 shadow-xl">
         <div>
           <h2 className="text-lg font-bold text-green flex items-center gap-2">
             <span>{currentModel.titleDe}</span>
@@ -97,7 +97,7 @@ export default function B2Page() {
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                 activeTab === tab
                   ? 'bg-green text-white shadow-lg'
-                  : 'bg-white dark:bg-[#1a1a2e]/5 border border-white/5 text-muted hover:text-white hover:bg-white dark:bg-[#1a1a2e]/10'
+                  : 'bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/5 text-muted hover:text-white hover:bg-white dark:bg-[#1a1a2e]/10'
               }`}
             >
               {tab === 'lesen' && '📖 Lesen'}
@@ -116,15 +116,15 @@ export default function B2Page() {
         {activeTab === 'lesen' && (
           <div className="space-y-8 animate-fadeIn">
             {currentModel.readingPassages.map((passage, pIdx) => (
-              <div key={passage.id} className="glass p-6 rounded-2xl border border-white/5 space-y-6 shadow-md">
-                <div className="border-b border-white/5 pb-3">
+              <div key={passage.id} className="glass p-6 rounded-2xl border border-gray-200 dark:border-white/5 space-y-6 shadow-md">
+                <div className="border-b border-gray-200 dark:border-white/5 pb-3">
                   <span className="text-xs text-green font-bold uppercase tracking-wider">Passage {pIdx + 1}</span>
-                  <h3 className="text-lg font-bold text-white mt-0.5" dir="ltr">{passage.titleDe}</h3>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mt-0.5" dir="ltr">{passage.titleDe}</h3>
                 </div>
 
                 {/* German Text Box */}
                 <div 
-                  className="bg-slate-950/40 border border-white/5 p-5 rounded-xl text-sm leading-relaxed text-ink-soft whitespace-pre-wrap select-text text-left font-sans"
+                  className="bg-slate-950/40 border border-gray-200 dark:border-white/5 p-5 rounded-xl text-sm leading-relaxed text-gray-600 dark:text-gray-400 whitespace-pre-wrap select-text text-left font-sans"
                   dir="ltr"
                 >
                   {passage.textDe}
@@ -137,12 +137,12 @@ export default function B2Page() {
                     const selectedOpt = selectedAnswers[q.id]
                     const showEx = showExplanation[q.id]
                     return (
-                      <div key={q.id} className="border-t border-white/5 pt-4 space-y-3">
+                      <div key={q.id} className="border-t border-gray-200 dark:border-white/5 pt-4 space-y-3">
                         <div className="flex gap-2.5 items-start">
                           <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs mt-0.5 font-bold">
                             {qIdx + 1}
                           </span>
-                          <p className="text-sm font-semibold text-white text-left font-sans" dir="ltr">{q.promptDe}</p>
+                          <p className="text-sm font-semibold text-gray-900 dark:text-white text-left font-sans" dir="ltr">{q.promptDe}</p>
                         </div>
 
                         {/* Options */}
@@ -151,7 +151,7 @@ export default function B2Page() {
                             const isSelected = selectedOpt === opt.id
                             const isCorrect = opt.id === q.correct
                             
-                            let optStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
+                            let optStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                             if (selectedOpt) {
                               if (isCorrect) {
                                 optStyle = 'bg-green/10 border-green/40 text-green font-medium'
@@ -183,13 +183,13 @@ export default function B2Page() {
                           <div className="mr-8 space-y-2">
                             <button
                               onClick={() => setShowExplanation(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
-                              className="text-xs text-muted hover:text-white flex items-center gap-1.5 transition-colors"
+                              className="text-xs text-muted hover:text-gray-900 dark:text-white flex items-center gap-1.5 transition-colors"
                             >
                               <span>{showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}</span>
                             </button>
 
                             {showEx && (
-                              <div className="bg-gold/5 border border-gold/20 p-3.5 rounded-xl text-xs text-ink-soft leading-relaxed">
+                              <div className="bg-gold/5 border border-gold/20 p-3.5 rounded-xl text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                                 {q.explanationAr}
                               </div>
                             )}
@@ -206,10 +206,10 @@ export default function B2Page() {
 
         {/* 2. SPRACHBAUSTEINE TAB */}
         {activeTab === 'sprachbausteine' && (
-          <div className="glass p-6 rounded-2xl border border-white/5 space-y-6 shadow-md animate-fadeIn">
-            <div className="border-b border-white/5 pb-3">
+          <div className="glass p-6 rounded-2xl border border-gray-200 dark:border-white/5 space-y-6 shadow-md animate-fadeIn">
+            <div className="border-b border-gray-200 dark:border-white/5 pb-3">
               <span className="text-xs text-green font-bold uppercase tracking-wider">Teil 1 — Grammatik & Wortschatz</span>
-              <h3 className="text-lg font-bold text-white mt-0.5">عناصر اللغة وتطبيقات القواعد</h3>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mt-0.5">عناصر اللغة وتطبيقات القواعد</h3>
               <p className="text-xs text-muted mt-1">اختر الكلمة أو القاعدة الصحيحة لإكمال الفراغات في سياق الجمل التالية.</p>
             </div>
 
@@ -218,13 +218,13 @@ export default function B2Page() {
                 const selectedOpt = selectedSbAnswers[sb.id]
                 const showEx = showExplanation[sb.id]
                 return (
-                  <div key={sb.id} className="border-b border-white/5 pb-5 last:border-0 last:pb-0 space-y-3">
+                  <div key={sb.id} className="border-b border-gray-200 dark:border-white/5 pb-5 last:border-0 last:pb-0 space-y-3">
                     {/* Sentence Context */}
                     <div className="flex gap-3 items-start">
                       <span className="bg-green/10 border border-green/20 text-green w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans">
                         {sbIdx + 1}
                       </span>
-                      <div className="text-left font-sans text-sm text-ink-soft leading-relaxed pt-0.5" dir="ltr">
+                      <div className="text-left font-sans text-sm text-gray-600 dark:text-gray-400 leading-relaxed pt-0.5" dir="ltr">
                         {sb.contextDe.split('___')[0]}
                         <span className="bg-gold/10 border border-gold/30 text-gold px-2 py-0.5 rounded mx-1.5 font-bold">
                           ({sbIdx + 1})
@@ -239,7 +239,7 @@ export default function B2Page() {
                         const isSelected = selectedOpt === opt.id
                         const isCorrect = opt.id === sb.correct
 
-                        let optStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
+                        let optStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                         if (selectedOpt) {
                           if (isCorrect) {
                             optStyle = 'bg-green/10 border-green/40 text-green font-medium'
@@ -269,15 +269,15 @@ export default function B2Page() {
                       <div className="mr-10 space-y-2 pt-1">
                         <button
                           onClick={() => setShowExplanation(prev => ({ ...prev, [sb.id]: !prev[sb.id] }))}
-                          className="text-xs text-muted hover:text-white flex items-center gap-1.5 transition-colors"
+                          className="text-xs text-muted hover:text-gray-900 dark:text-white flex items-center gap-1.5 transition-colors"
                         >
                           <span>{showEx ? '🙈 إخفاء التحليل النحوي' : '💡 عرض التحليل النحوي والترجمة العربية'}</span>
                         </button>
 
                         {showEx && (
-                          <div className="bg-gold/5 border border-gold/20 p-3.5 rounded-xl text-xs text-ink-soft leading-relaxed">
-                            <p className="font-bold text-gold mb-1">البلانك: <span className="text-white font-normal" dir="ltr">{sb.blank}</span></p>
-                            <div className="text-ink-soft" dangerouslySetInnerHTML={{ __html: sb.explanationAr.replace(/\n/g, '<br/>') }} />
+                          <div className="bg-gold/5 border border-gold/20 p-3.5 rounded-xl text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                            <p className="font-bold text-gold mb-1">البلانك: <span className="text-gray-900 dark:text-white font-normal" dir="ltr">{sb.blank}</span></p>
+                            <div className="text-gray-600 dark:text-gray-400" dangerouslySetInnerHTML={{ __html: sb.explanationAr.replace(/\n/g, '<br/>') }} />
                           </div>
                         )}
                       </div>
@@ -294,14 +294,14 @@ export default function B2Page() {
           <div className="grid md:grid-cols-3 gap-6 animate-fadeIn">
             {/* Task prompt panel */}
             <div className="md:col-span-1 space-y-4">
-              <div className="glass p-5 rounded-2xl border border-white/5 space-y-4 shadow-md">
+              <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4 shadow-md">
                 <div>
                   <span className="text-xs text-green font-bold uppercase tracking-wider">Teil 1 — Forumsbeitrag</span>
-                  <h3 className="text-base font-bold text-white mt-0.5">{currentModel.schreiben.topicAr}</h3>
+                  <h3 className="text-base font-bold text-gray-900 dark:text-white mt-0.5">{currentModel.schreiben.topicAr}</h3>
                   <p className="text-xs text-muted font-sans mt-1" dir="ltr">{currentModel.schreiben.topicDe}</p>
                 </div>
 
-                <div className="bg-slate-950/40 border border-white/5 p-4 rounded-xl text-xs text-ink-soft leading-relaxed space-y-3">
+                <div className="bg-slate-950/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-xs text-gray-600 dark:text-gray-400 leading-relaxed space-y-3">
                   <p className="font-semibold text-gold">التعليمات المطلوبة (150–200 كلمة):</p>
                   <p className="font-sans italic mb-2 text-left" dir="ltr">{currentModel.schreiben.contextDe}</p>
                   <ul className="list-disc list-inside space-y-1 text-xs" dir="ltr">
@@ -322,7 +322,7 @@ export default function B2Page() {
                           navigator.clipboard.writeText(phrase)
                           alert('تم نسخ الجملة بنجاح!')
                         }}
-                        className="text-left font-sans text-xs bg-white dark:bg-[#1a1a2e]/5 hover:bg-white dark:bg-[#1a1a2e]/10 border border-white/10 px-3 py-2 rounded-xl text-ink-soft truncate transition-all flex items-center justify-between gap-1 group cursor-pointer"
+                        className="text-left font-sans text-xs bg-white dark:bg-[#1a1a2e]/5 hover:bg-white dark:bg-[#1a1a2e]/10 border border-white/10 px-3 py-2 rounded-xl text-gray-600 dark:text-gray-400 truncate transition-all flex items-center justify-between gap-1 group cursor-pointer"
                         dir="ltr"
                         title="انقر لنسخ الجملة"
                       >
@@ -337,9 +337,9 @@ export default function B2Page() {
 
             {/* Interactive writing pad */}
             <div className="md:col-span-2 space-y-4">
-              <div className="glass p-5 rounded-2xl border border-white/5 space-y-4 shadow-md">
+              <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4 shadow-md">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-bold text-white">لوحة الكتابة والتدريب (Writing Pad)</h3>
+                  <h3 className="text-sm font-bold text-gray-900 dark:text-white">لوحة الكتابة والتدريب (Writing Pad)</h3>
                   <span className={`text-xs px-2.5 py-1 rounded-full font-bold ${
                     getWordCount(writingInput) >= 150 && getWordCount(writingInput) <= 200
                       ? 'bg-green/10 text-green border border-green/20'
@@ -353,7 +353,7 @@ export default function B2Page() {
                   value={writingInput}
                   onChange={(e) => setWritingInput(e.target.value)}
                   placeholder="اكتب موضوعك هنا باللغة الألمانية للتدريب الشخصي وحساب الكلمات..."
-                  className="w-full h-80 bg-slate-900/60 border border-white/10 rounded-xl p-4 text-sm focus:outline-none focus:border-green text-ink text-left font-sans"
+                  className="w-full h-80 bg-slate-900/60 border border-white/10 rounded-xl p-4 text-sm focus:outline-none focus:border-green text-gray-900 dark:text-white text-left font-sans"
                   dir="ltr"
                 />
 
@@ -382,8 +382,8 @@ export default function B2Page() {
               {showModelAnswer && (
                 <div className="grid sm:grid-cols-2 gap-4 animate-slideDown">
                   {/* German Model Essay */}
-                  <div className="glass p-5 rounded-2xl border border-white/5 space-y-3">
-                    <div className="flex justify-between items-center border-b border-white/5 pb-2">
+                  <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-3">
+                    <div className="flex justify-between items-center border-b border-gray-200 dark:border-white/5 pb-2">
                       <span className="text-xs text-green font-bold">Modellantwort (DE)</span>
                       <button
                         onClick={() => speak(currentModel.schreiben.sampleEssayDe)}
@@ -393,7 +393,7 @@ export default function B2Page() {
                       </button>
                     </div>
                     <div 
-                      className="text-xs font-sans text-left leading-relaxed text-ink whitespace-pre-wrap select-text" 
+                      className="text-xs font-sans text-left leading-relaxed text-gray-900 dark:text-white whitespace-pre-wrap select-text" 
                       dir="ltr"
                     >
                       {currentModel.schreiben.sampleEssayDe}
@@ -401,12 +401,12 @@ export default function B2Page() {
                   </div>
 
                   {/* Arabic translation of essay */}
-                  <div className="glass p-5 rounded-2xl border border-white/5 space-y-3">
-                    <div className="border-b border-white/5 pb-2">
+                  <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-3">
+                    <div className="border-b border-gray-200 dark:border-white/5 pb-2">
                       <span className="text-xs text-gold font-bold">الترجمة والشرح (AR)</span>
                     </div>
                     <div 
-                      className="text-xs leading-relaxed text-ink-soft whitespace-pre-wrap select-text"
+                      className="text-xs leading-relaxed text-gray-600 dark:text-gray-400 whitespace-pre-wrap select-text"
                     >
                       {currentModel.schreiben.sampleEssayAr}
                     </div>
@@ -421,11 +421,11 @@ export default function B2Page() {
         {activeTab === 'sprechen' && currentModel.sprechen && (
           <div className="space-y-6 animate-fadeIn">
             {currentModel.sprechen.map((part, idx) => (
-              <div key={part.id} className="glass p-6 rounded-2xl border border-white/5 space-y-4 shadow-md">
-                <div className="flex items-center justify-between border-b border-white/5 pb-3">
+              <div key={part.id} className="glass p-6 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4 shadow-md">
+                <div className="flex items-center justify-between border-b border-gray-200 dark:border-white/5 pb-3">
                   <div>
                     <span className="text-xs text-green font-bold uppercase tracking-wider">Teil {idx + 1}</span>
-                    <h3 className="text-base font-bold text-white mt-0.5">{part.partAr}</h3>
+                    <h3 className="text-base font-bold text-gray-900 dark:text-white mt-0.5">{part.partAr}</h3>
                     <p className="text-xs text-muted font-sans mt-0.5" dir="ltr">{part.partDe}</p>
                   </div>
                   <button
@@ -439,9 +439,9 @@ export default function B2Page() {
                 <div className="grid md:grid-cols-3 gap-5">
                   {/* Topic prompt details */}
                   <div className="md:col-span-1 space-y-3">
-                    <div className="bg-slate-950/40 p-4 border border-white/5 rounded-xl space-y-2">
+                    <div className="bg-slate-950/40 p-4 border border-gray-200 dark:border-white/5 rounded-xl space-y-2">
                       <p className="text-xs font-bold text-gold">المطلوب مناقشته:</p>
-                      <p className="text-sm text-white font-medium">{part.topicAr}</p>
+                      <p className="text-sm text-gray-900 dark:text-white font-medium">{part.topicAr}</p>
                       <p className="text-xs text-muted font-sans text-left" dir="ltr">{part.topicDe}</p>
                     </div>
 
@@ -452,7 +452,7 @@ export default function B2Page() {
                           <div
                             key={pIdx}
                             onClick={() => navigator.clipboard.writeText(ph)}
-                            className="font-sans text-xs bg-white dark:bg-[#1a1a2e]/5 border border-white/10 p-2 rounded-lg text-ink-soft hover:text-green transition-all cursor-pointer truncate text-left"
+                            className="font-sans text-xs bg-white dark:bg-[#1a1a2e]/5 border border-white/10 p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-green transition-all cursor-pointer truncate text-left"
                             dir="ltr"
                             title="انقر للنسخ"
                           >
@@ -465,10 +465,10 @@ export default function B2Page() {
 
                   {/* Sample Answer Speech response */}
                   <div className="md:col-span-2">
-                    <div className="bg-slate-900/40 p-4 border border-white/5 rounded-xl space-y-2">
+                    <div className="bg-gray-50 dark:bg-white/5 p-4 border border-gray-200 dark:border-white/5 rounded-xl space-y-2">
                       <p className="text-xs font-bold text-green">الإجابة والتقديم الإرشادي (Modellantwort):</p>
                       <p 
-                        className="text-xs font-sans text-left leading-relaxed text-ink-soft whitespace-pre-wrap select-text" 
+                        className="text-xs font-sans text-left leading-relaxed text-gray-600 dark:text-gray-400 whitespace-pre-wrap select-text" 
                         dir="ltr"
                       >
                         {part.sampleAnswerDe}
