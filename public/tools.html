@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B1 Deutsch - أدوات ومسابقات احترافية</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Cairo', sans-serif; background-color: #f8fafc; }
+    .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    [x-cloak] { display: none !important; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased" x-data="appData()">
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="hover:bg-white/20 p-2 rounded-full transition"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></a>
+        <h1 class="text-xl font-bold">أدوات ومسابقات 🌟</h1>
+      </div>
+      <div class="text-sm bg-white/20 px-3 py-1 rounded-full font-semibold">مرحلة B1</div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-8 space-y-8">
+    
+    <!-- Tab Navigation -->
+    <div class="flex overflow-x-auto gap-2 pb-2 hide-scroll">
+      <template x-for="tab in tabs" :key="tab.id">
+        <button 
+          @click="currentTab = tab.id"
+          class="px-5 py-3 rounded-2xl font-bold text-sm whitespace-nowrap transition-all shadow-sm"
+          :class="currentTab === tab.id ? 'bg-teal-600 text-white shadow-md scale-105' : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'"
+          x-text="tab.name">
+        </button>
+      </template>
+    </div>
+
+    <!-- 1. Pro Quiz -->
+    <section x-show="currentTab === 'quiz'" x-cloak class="space-y-6 animate-[fadeIn_0.3s_ease-out]">
+      <div class="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
+        <div class="absolute -right-10 -top-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+        <div class="relative z-10 flex justify-between items-center">
+          <div>
+            <p class="text-indigo-200 text-sm font-bold mb-1">مسابقة المحترفين</p>
+            <p class="text-3xl font-black" x-text="'النقاط: ' + (quiz.score * 10)"></p>
+          </div>
+          <div class="flex gap-1">
+            <template x-for="i in 3">
+              <svg class="w-8 h-8 drop-shadow-md transition-all duration-300" :class="i <= quiz.lives ? 'text-red-500 fill-current' : 'text-white/20 fill-current'" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <template x-if="quiz.gameOver">
+        <div class="bg-white rounded-3xl p-8 text-center shadow-sm border border-slate-100">
+          <div class="w-20 h-20 bg-yellow-100 text-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">🏆</div>
+          <h2 class="text-2xl font-black mb-2" x-text="quiz.lives > 0 ? 'أداء رائع!' : 'انتهت المحاولات'"></h2>
+          <p class="text-slate-500 mb-6" x-text="'لقد جمعت ' + (quiz.score * 10) + ' نقطة'"></p>
+          <button @click="resetQuiz()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl transition shadow-md">العب مرة أخرى</button>
+        </div>
+      </template>
+
+      <template x-if="!quiz.gameOver">
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+          <div class="flex justify-between items-center mb-4 text-sm font-bold text-slate-500">
+            <span x-text="'السؤال ' + (quiz.currentIndex + 1) + ' من ' + quiz.questions.length"></span>
+            <span class="text-indigo-600 flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> <span x-text="quiz.timer"></span> ثانية</span>
+          </div>
+          <div class="w-full bg-slate-100 h-2 rounded-full mb-6 overflow-hidden">
+            <div class="bg-indigo-500 h-full transition-all duration-1000 linear" :style="'width: ' + ((quiz.timer / 15) * 100) + '%'"></div>
+          </div>
+          <h3 class="text-xl font-bold text-center mb-6 leading-relaxed" dir="ltr" x-text="quiz.questions[quiz.currentIndex].q"></h3>
+          <div class="grid gap-3">
+            <template x-for="(opt, idx) in quiz.questions[quiz.currentIndex].options">
+              <button 
+                @click="answerQuiz(idx)"
+                :disabled="quiz.showFeedback"
+                class="p-4 rounded-xl border-2 font-bold text-lg text-left transition-all"
+                dir="ltr"
+                :class="getQuizBtnClass(idx)"
+                x-text="opt">
+              </button>
+            </template>
+          </div>
+        </div>
+      </template>
+    </section>
+
+    <!-- 2. Brief Generator -->
+    <section x-show="currentTab === 'brief'" x-cloak class="space-y-6 animate-[fadeIn_0.3s_ease-out]">
+      <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+        <h2 class="text-xl font-bold mb-4 flex items-center gap-2">✉️ مُولّد الرسائل (B1)</h2>
+        <p class="text-slate-500 text-sm mb-6">اختر الموضوع وسنقوم بتوليد رسالة ألمانية احترافية جاهزة لتعديلها.</p>
+        
+        <div class="grid gap-3 mb-6">
+          <template x-for="topic in briefTopics">
+            <button @click="brief.selected = topic" class="p-4 border-2 rounded-xl text-right font-bold transition-all" :class="brief.selected === topic ? 'border-teal-500 bg-teal-50 text-teal-700' : 'border-slate-200 hover:border-teal-200 text-slate-700'">
+              <div x-text="topic.title"></div>
+              <div class="text-xs font-normal mt-1 opacity-70" x-text="topic.desc"></div>
+            </button>
+          </template>
+        </div>
+        <button @click="generateBrief()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 rounded-xl transition shadow-md disabled:opacity-50" :disabled="!brief.selected">توليد الرسالة</button>
+      </div>
+
+      <template x-if="brief.output">
+        <div class="bg-slate-800 text-slate-100 p-6 rounded-3xl shadow-lg relative" dir="ltr">
+          <button @click="copyText(brief.output)" class="absolute top-4 right-4 bg-white/10 hover:bg-white/20 p-2 rounded-lg transition text-xs font-bold">نسخ 📋</button>
+          <pre class="whitespace-pre-wrap font-sans text-lg leading-relaxed mt-4" x-text="brief.output"></pre>
+        </div>
+      </template>
+    </section>
+
+    <!-- 3. Redemittel -->
+    <section x-show="currentTab === 'redemittel'" x-cloak class="space-y-6 animate-[fadeIn_0.3s_ease-out]">
+      <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+        <h2 class="text-xl font-bold mb-6 flex items-center gap-2">🗣️ العبارات اليومية</h2>
+        <div class="space-y-4">
+          <template x-for="category in redemittel">
+            <div class="border border-slate-200 rounded-2xl overflow-hidden">
+              <button @click="category.open = !category.open" class="w-full p-4 flex justify-between items-center bg-slate-50 hover:bg-slate-100 transition font-bold text-slate-700">
+                <span x-text="category.title"></span>
+                <span class="text-xl transition-transform" :class="category.open ? 'rotate-180' : ''">▾</span>
+              </button>
+              <div x-show="category.open" class="p-4 bg-white space-y-3" x-collapse>
+                <template x-for="phrase in category.phrases">
+                  <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                    <p class="font-bold text-lg text-teal-700" dir="ltr" x-text="phrase.de"></p>
+                    <p class="text-sm text-slate-600 mt-1" x-text="phrase.ar"></p>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Exam Checklist -->
+    <section x-show="currentTab === 'checklist'" x-cloak class="space-y-6 animate-[fadeIn_0.3s_ease-out]">
+      <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-bold flex items-center gap-2">📋 مراجعة الامتحان</h2>
+          <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-sm font-bold" x-text="checklistProgress + '%'"></span>
+        </div>
+        
+        <div class="space-y-3">
+          <template x-for="(item, idx) in checklist">
+            <label class="flex items-center gap-4 p-4 rounded-xl border transition cursor-pointer" :class="item.done ? 'bg-teal-50 border-teal-200' : 'bg-slate-50 border-slate-200 hover:border-teal-300'">
+              <input type="checkbox" x-model="item.done" class="w-6 h-6 rounded text-teal-600 focus:ring-teal-500 border-slate-300">
+              <span class="font-bold text-slate-700" :class="item.done ? 'line-through opacity-60' : ''" x-text="item.text"></span>
+            </label>
+          </template>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function appData() {
+      return {
+        currentTab: 'quiz',
+        tabs: [
+          { id: 'quiz', name: '🏆 مسابقة المحترفين' },
+          { id: 'brief', name: '✉️ مُولّد الرسائل' },
+          { id: 'redemittel', name: '🗣️ عبارات المحادثة' },
+          { id: 'checklist', name: '📋 خطة الامتحان' },
+        ],
+        // Quiz Data
+        quiz: {
+          questions: [
+            { q: "Wenn ich reich ____, würde ich ein Haus kaufen.", options: ["bin", "wäre", "hätte", "war"], correct: 1 },
+            { q: "Ich freue mich ____ deinen Besuch morgen.", options: ["auf", "über", "an", "für"], correct: 0 },
+            { q: "Der Brief ____ gestern geschrieben.", options: ["wurde", "worden", "wird", "war"], correct: 0 },
+            { q: "Trotz ____ Regens sind wir spazieren gegangen.", options: ["dem", "den", "des", "der"], correct: 2 },
+            { q: "Je mehr du lernst, ____ besser sprichst du.", options: ["so", "desto", "als", "wie"], correct: 1 },
+          ],
+          currentIndex: 0,
+          lives: 3,
+          score: 0,
+          timer: 15,
+          timerInterval: null,
+          selectedAnswer: null,
+          showFeedback: false,
+          gameOver: false,
+        },
+        // Brief Data
+        briefTopics: [
+          { title: "الاعتذار عن موعد (Termin absagen)", desc: "كتابة إيميل لطبيب أو مدرسة للاعتذار عن موعد وتحديد آخر.", template: "Sehr geehrte(r) Herr/Frau [اسم],\n\nleider muss ich unseren Termin am [تاريخ] absagen, da ich plötzlich krank geworden bin.\n\nKönnten wir bitte einen neuen Termin vereinbaren? Am besten passt es mir am [تاريخ جديد].\n\nVielen Dank für Ihr Verständnis.\n\nMit freundlichen Grüßen\n[اسمك]" },
+          { title: "دعوة لحفلة (Einladung)", desc: "دعوة صديق أو زميل لحفلة عيد ميلاد.", template: "Liebe(r) [اسم],\n\nich lade dich herzlich zu meiner Geburtstagsparty ein! Wir feiern am [تاريخ] um [وقت] Uhr bei mir zu Hause.\n\nEs gibt leckeres Essen und Getränke. Bitte sag mir bis [تاريخ الرد] Bescheid, ob du kommen kannst.\n\nIch freue mich auf dich!\n\nViele Grüße\n[اسمك]" },
+          { title: "الشكوى (Beschwerde)", desc: "رسالة شكوى رسمية لشركة بسبب منتج أو خدمة سيئة.", template: "Sehr geehrte Damen und Herren,\n\nhiermit möchte ich mich über [المنتج/الخدمة] beschweren, den/die ich am [تاريخ] bei Ihnen gekauft habe.\n\nLeider ist das Gerät defekt / war der Service sehr schlecht. Ich fordere Sie auf, mir das Geld zurückzuerstatten oder einen Ersatz zu liefern.\n\nIch erwarte Ihre schnelle Antwort.\n\nMit freundlichen Grüßen\n[اسمك]" }
+        ],
+        brief: { selected: null, output: "" },
+        // Redemittel Data
+        redemittel: [
+          { open: false, title: "في عيادة الطبيب (Beim Arzt)", phrases: [{ de: "Ich habe Kopfschmerzen.", ar: "لدي صداع." }, { de: "Mir ist schwindelig.", ar: "أشعر بالدوار." }, { de: "Ich brauche ein Rezept.", ar: "أحتاج إلى وصفة طبية." }] },
+          { open: false, title: "الموافقة والرفض (Zustimmen & Ablehnen)", phrases: [{ de: "Ich bin ganz deiner Meinung.", ar: "أنا أتفق معك تماماً." }, { de: "Das sehe ich auch so.", ar: "أرى ذلك أيضاً." }, { de: "Da bin ich anderer Meinung.", ar: "أنا أختلف معك في هذا الرأي." }] },
+          { open: false, title: "في العمل (Auf der Arbeit)", phrases: [{ de: "Wann haben wir Pause?", ar: "متى لدينا استراحة؟" }, { de: "Können Sie mir dabei helfen?", ar: "هل يمكنك مساعدتي في هذا؟" }, { de: "Ich habe den Termin verschoben.", ar: "لقد قمت بتأجيل الموعد." }] },
+        ],
+        // Checklist Data
+        checklist: [
+          { text: "فهم القواعد الأساسية (Nebensätze, Passiv)", done: false },
+          { text: "حفظ أهم 300 كلمة للمستوى B1", done: false },
+          { text: "كتابة 5 رسائل (Briefe) كتدريب", done: false },
+          { text: "التدرب على وصف صورة (Bildbeschreibung)", done: false },
+          { text: "حل نماذج امتحانات سابقة (Goethe/telc)", done: false }
+        ],
+        get checklistProgress() {
+          let done = this.checklist.filter(i => i.done).length;
+          return Math.round((done / this.checklist.length) * 100);
+        },
+
+        init() {
+          this.startQuiz();
+        },
+        startQuiz() {
+          this.quiz.questions = this.quiz.questions.sort(() => Math.random() - 0.5);
+          this.startTimer();
+        },
+        startTimer() {
+          clearInterval(this.quiz.timerInterval);
+          this.quiz.timerInterval = setInterval(() => {
+            if (this.quiz.timer > 0 && !this.quiz.showFeedback && !this.quiz.gameOver) {
+              this.quiz.timer--;
+            } else if (this.quiz.timer <= 0 && !this.quiz.showFeedback) {
+              this.answerQuiz(-1); // timeout = wrong
+            }
+          }, 1000);
+        },
+        answerQuiz(idx) {
+          if (this.quiz.showFeedback || this.quiz.gameOver) return;
+          this.quiz.selectedAnswer = idx;
+          this.quiz.showFeedback = true;
+          
+          let isCorrect = idx === this.quiz.questions[this.quiz.currentIndex].correct;
+          if (isCorrect) {
+            this.quiz.score++;
+            setTimeout(() => this.nextQuestion(), 1000);
+          } else {
+            setTimeout(() => {
+              this.quiz.lives--;
+              if (this.quiz.lives <= 0) {
+                this.quiz.gameOver = true;
+                clearInterval(this.quiz.timerInterval);
+              } else {
+                this.nextQuestion();
+              }
+            }, 1000);
+          }
+        },
+        nextQuestion() {
+          if (this.quiz.currentIndex < this.quiz.questions.length - 1) {
+            this.quiz.currentIndex++;
+            this.quiz.selectedAnswer = null;
+            this.quiz.showFeedback = false;
+            this.quiz.timer = 15;
+          } else {
+            this.quiz.gameOver = true;
+            clearInterval(this.quiz.timerInterval);
+          }
+        },
+        resetQuiz() {
+          this.quiz.currentIndex = 0;
+          this.quiz.lives = 3;
+          this.quiz.score = 0;
+          this.quiz.timer = 15;
+          this.quiz.selectedAnswer = null;
+          this.quiz.showFeedback = false;
+          this.quiz.gameOver = false;
+          this.startQuiz();
+        },
+        getQuizBtnClass(idx) {
+          if (!this.quiz.showFeedback) {
+            return this.quiz.selectedAnswer === idx ? 'bg-indigo-100 border-indigo-500' : 'bg-slate-50 border-slate-200 hover:border-indigo-300';
+          }
+          if (idx === this.quiz.questions[this.quiz.currentIndex].correct) return 'bg-green-500 border-green-600 text-white scale-[1.02] shadow-lg';
+          if (idx === this.quiz.selectedAnswer) return 'bg-red-500 border-red-600 text-white opacity-80';
+          return 'bg-slate-100 border-slate-200 text-slate-400 opacity-50';
+        },
+        generateBrief() {
+          if(this.brief.selected) {
+            this.brief.output = this.brief.selected.template;
+          }
+        },
+        copyText(text) {
+          navigator.clipboard.writeText(text);
+          alert('تم النسخ!');
+        }
+      }
+    }
+  </script>
+</body>
+</html>
