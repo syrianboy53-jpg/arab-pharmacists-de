@@ -342,17 +342,6 @@ h1 .accent-gold {
   transform: translateY(-2px);
 }
 
-.btn-premium {
-  background: var(--gradient-gold);
-  color: #1a1a1a;
-  box-shadow: 0 8px 20px rgba(251, 191, 36, 0.25);
-  font-weight: 900;
-}
-
-.btn-premium:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(251, 191, 36, 0.4);
-}
 
 .btn-info {
   background: transparent;
@@ -618,7 +607,6 @@ h1 .accent-gold {
       <a href="app/dtz-pro.html" class="btn btn-secondary" style="background: linear-gradient(135deg, #4F46E5, #312E81); color: white; border: none; font-weight: bold; border-radius: 12px; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);">🇩🇪 قسم DTZ المطور</a>
       <a href="app/grammar-pro.html" class="btn btn-secondary" style="background: linear-gradient(135deg, #0D9488, #047857); color: white; border: none; font-weight: bold; border-radius: 12px; box-shadow: 0 4px 15px rgba(13, 148, 136, 0.4);">📚 قسم القواعد المطور</a>
       <a href="b1-deutsch.apk" download class="btn btn-secondary" id="btn-download-apk">📥 تحميل تطبيق الأندرويد (APK)</a>
-      <a href="#premium-modal" class="btn btn-premium" id="btn-premium">⭐ اشتراك بريميوم — ادعم المشروع</a>
       <a href="#ios-modal" class="btn btn-info">🍏 تثبيت للأيفون (Safari PWA)</a>
     </div>
   </div>
@@ -654,32 +642,6 @@ h1 .accent-gold {
       <li>اضغط <strong>إضافة</strong>، وسيظهر التطبيق كأيقونة على شاشة جوالك مباشرة!</li>
     </ol>
     <a href="app/index.html" class="btn btn-primary" style="display:block;text-align:center;">🌐 فتح التطبيق الآن في Safari</a>
-  </div>
-</div>
-
-<!-- ===== PREMIUM SUBSCRIPTION MODAL ===== -->
-<div id="premium-modal" class="modal">
-  <div class="modal-content">
-    <a href="#" class="modal-close">✕</a>
-    <h3>⭐ اشتراك بريميوم</h3>
-    <p style="color: var(--text-muted); font-size: 14px; line-height: 1.8; margin-bottom: 20px;">
-      ادعم المشروع واحصل على ميزات حصرية:
-      <br>✅ جلسات خاصة مع مدرّس
-      <br>✅ محتوى B2 متقدّم
-      <br>✅ بدون إعلانات
-      <br>✅ أولوية في الدعم
-    </p>
-    <div style="display:flex; flex-direction:column; gap:12px;">
-      <button onclick="startCheckout('monthly')" class="btn btn-premium" style="width:100%; justify-content:center;">
-        📅 شهري — 9.99€
-      </button>
-      <button onclick="startCheckout('yearly')" class="btn btn-premium" style="width:100%; justify-content:center; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white;">
-        📆 سنوي — 49.99€ <span style="font-size:12px; opacity:0.8;">(وفّر 70€)</span>
-      </button>
-    </div>
-    <p style="text-align:center; margin-top: 14px; font-size: 12px; color: var(--text-muted);">
-      الدفع آمن عبر Stripe · يمكنك الإلغاء في أي وقت
-    </p>
   </div>
 </div>
 

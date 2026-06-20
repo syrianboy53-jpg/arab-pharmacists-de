@@ -112,9 +112,7 @@ export default function HomePage() {
             <Link to="/lesen" className="bg-red hover:bg-red-dark px-6 py-2.5 rounded-full font-bold text-sm transition-colors">
               🚀 ابدأ امتحاناً كاملاً
             </Link>
-            <Link to="/premium" className="bg-white/20 hover:bg-white/30 px-6 py-2.5 rounded-full font-bold text-sm transition-colors">
-              🔑 مفتاح النجاح
-            </Link>
+
             <button onClick={handleShareApp} className="bg-gold hover:bg-gold/90 px-6 py-2.5 rounded-full font-bold text-sm transition-colors flex items-center gap-1.5 cursor-pointer">
               📢 شارك التطبيق
             </button>

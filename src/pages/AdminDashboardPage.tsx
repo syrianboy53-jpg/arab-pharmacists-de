@@ -10,23 +10,11 @@ interface UserRecord {
   progress_entries: number
   streak_current: number
   streak_longest: number
-  is_premium: boolean
+
   subscription_id: number | null
   subscription_status: string | null
 }
 
-interface SubscriptionRecord {
-  id: number
-  user_id: number
-  email: string
-  display_name: string | null
-  platform: string
-  product_id: string
-  status: string
-  is_active: boolean
-  start_date: string | null
-  expiry_date: string | null
-}
 
 interface DBStats {
   total_users: number
@@ -51,15 +39,7 @@ interface DBStats {
   }>
 }
 
-interface SubStats {
-  total: number
-  active: number
-  stripe_count: number
-  paypal_count: number
-  google_play_count: number
-  monthly_count: number
-  yearly_count: number
-}
+
 
 function getFlagEmoji(countryCode: string) {
   if (!countryCode || countryCode === 'unknown' || countryCode.length !== 2) return '❓';
@@ -94,7 +74,7 @@ function getPathLabel(path?: string) {
     '/app/#/sprachbausteine': '🧩 Sprachbausteine',
     '/app/#/leben': '🇩🇪 الحياة في ألمانيا',
     '/app/#/b2': '🎓 B2',
-    '/app/#/premium': '⭐ Premium',
+
     '/app/#/admin': '🔑 لوحة التحكم',
     '/app/#/about': 'ℹ️ عن التطبيق',
     '/app/#/einstufung': '📊 تحديد المستوى',
@@ -146,11 +126,7 @@ export default function AdminDashboardPage() {
   const [usersStats, setUsersStats] = useState<DBStats | null>(null)
   const [userSearch, setUserSearch] = useState('')
 
-  // Subscriptions list
-  const [subscriptions, setSubscriptions] = useState<SubscriptionRecord[]>([])
-  const [subStats, setSubStats] = useState<Partial<SubStats>>({})
-  const [isSubsLoading, setIsSubsLoading] = useState(false)
-  const [subsError, setSubsError] = useState('')
+
 
   // FCM and Push
   const [pushTitle, setPushTitle] = useState('')
@@ -276,7 +252,6 @@ export default function AdminDashboardPage() {
 
   async function fetchData() {
     fetchUsers()
-    fetchSubscriptions()
   }
 
   async function fetchUsers(search = '') {
@@ -304,29 +279,7 @@ export default function AdminDashboardPage() {
     }
   }
 
-  async function fetchSubscriptions() {
-    if (!adminToken.trim()) {
-      setSubsError('أدخل Admin API Token أولاً.')
-      return
-    }
-    setIsSubsLoading(true)
-    setSubsError('')
-    try {
-      const res = await fetch(`${API_BASE}/admin/subscriptions?limit=200`, {
-        headers: { 'X-Admin-Token': adminToken.trim() }
-      })
-      if (!res.ok) {
-        throw new Error(res.status === 401 || res.status === 403 ? 'Token غير صحيح.' : 'فشل الجلب.')
-      }
-      const data = await res.json()
-      setSubscriptions(data.subscriptions || [])
-      setSubStats(data.stats || {})
-    } catch (err: any) {
-      setSubsError(err.message)
-    } finally {
-      setIsSubsLoading(false)
-    }
-  }
+
 
   async function fetchPushStats() {
     if (!adminToken.trim()) return
@@ -380,29 +333,7 @@ export default function AdminDashboardPage() {
     }
   }
 
-  async function cancelUserSub(subId: number, email: string) {
-    if (!adminToken.trim() || !confirm(`هل أنت متأكّد من إلغاء اشتراك ${email}؟`)) return
-    try {
-      const res = await fetch(`${API_BASE}/admin/subscriptions`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Admin-Token': adminToken.trim()
-        },
-        body: JSON.stringify({ id: subId, is_active: false, status: 'cancelled' })
-      })
-      if (res.ok) {
-        alert('تم إلغاء الاشتراك بنجاح.')
-        fetchSubscriptions()
-        fetchUsers(userSearch)
-      } else {
-        const err = await res.json()
-        alert(`فشل الإلغاء: ${err.error || res.statusText}`)
-      }
-    } catch (err: any) {
-      alert(`خطأ: ${err.message}`)
-    }
-  }
+
 
   async function deleteUser(userId: number, email: string) {
     if (!confirm(`حذف المستخدم ${email}؟ لا يمكن التراجع.`)) return
@@ -763,11 +694,6 @@ export default function AdminDashboardPage() {
                       <td className="p-3 font-semibold text-gray-500">{u.id}</td>
                       <td className="p-3 font-mono text-gray-700">
                         {u.email}
-                        {u.is_premium && (
-                          <span className="inline-block mr-2 px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#D1FAE5] text-[#065F46]">
-                            ⭐ Premium
-                          </span>
-                        )}
                       </td>
                       <td className="p-3">{u.display_name || '—'}</td>
                       <td className="p-3 text-xs text-gray-500">{u.created_at ? new Date(u.created_at).toLocaleDateString('ar-EG') : '—'}</td>
@@ -777,11 +703,7 @@ export default function AdminDashboardPage() {
                         <button onClick={() => deleteUser(u.id, u.email)} className="bg-red hover:bg-red-700 text-white px-2 py-1 rounded text-xs font-bold transition duration-200">
                           🗑️
                         </button>
-                        {u.is_premium && u.subscription_id && (
-                          <button onClick={() => cancelUserSub(u.subscription_id!, u.email)} className="bg-[#CE1126] hover:bg-red-800 text-white px-2.5 py-1 rounded text-xs font-bold transition duration-200">
-                            إلغاء Premium
-                          </button>
-                        )}
+
                       </td>
                     </tr>
                   ))}
@@ -865,73 +787,6 @@ export default function AdminDashboardPage() {
           </div>
         </section>
       )}
-
-      {/* Premium Subscriptions List */}
-      <section className="bg-white border-l-4 border-[#7C3AED] rounded-xl p-5 shadow-sm space-y-3">
-        <div className="flex justify-between items-center flex-wrap gap-2">
-          <h2 className="text-lg font-bold text-gray-900">⭐ الاشتراكات Premium</h2>
-          <button onClick={fetchSubscriptions} disabled={isSubsLoading} className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white px-4 py-1.5 rounded-lg text-sm font-bold transition duration-200">
-            {isSubsLoading ? '⏳ جاري...' : '🔄 تحديث'}
-          </button>
-        </div>
-        {subsError && <div className="text-red-600 font-bold text-sm">❌ {subsError}</div>}
-        
-        {subStats.total !== undefined && (
-          <div className="grid grid-cols-2 sm:grid-cols-7 gap-2 mt-2">
-            <StatCard label="📊 الإجمالي" value={String(subStats.total)} />
-            <StatCard label="✅ نشط" value={String(subStats.active)} />
-            <StatCard label="💳 Stripe" value={String(subStats.stripe_count)} />
-            <StatCard label="🅿️ PayPal" value={String(subStats.paypal_count)} />
-            <StatCard label="🤖 Google Play" value={String(subStats.google_play_count)} />
-            <StatCard label="📅 شهريّ" value={String(subStats.monthly_count)} />
-            <StatCard label="🗓️ سنويّ" value={String(subStats.yearly_count)} />
-          </div>
-        )}
-
-        {subscriptions.length > 0 ? (
-          <div className="overflow-x-auto border rounded-xl mt-4">
-            <table className="w-full border-collapse text-sm text-right">
-              <thead>
-                <tr className="bg-[#F3E8FF] text-purple-950 font-bold">
-                  <th className="p-3">👤 المستخدم</th>
-                  <th className="p-3">🏷️ المنصّة</th>
-                  <th className="p-3">📦 المنتج</th>
-                  <th className="p-3">📊 الحالة</th>
-                  <th className="p-3">📅 ينتهي في</th>
-                  <th className="p-3">⚙️ إجراء</th>
-                </tr>
-              </thead>
-              <tbody>
-                {subscriptions.map(s => (
-                  <tr key={s.id} className="border-b hover:bg-gray-50/50">
-                    <td className="p-3">
-                      <div className="font-bold">{s.display_name || '—'}</div>
-                      <div className="text-xs text-gray-500 font-mono">{s.email}</div>
-                    </td>
-                    <td className="p-3 text-xs font-semibold">{s.platform}</td>
-                    <td className="p-3 font-mono text-xs text-purple-900">{s.product_id}</td>
-                    <td className="p-3">
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${s.is_active && s.status === 'active' ? 'bg-[#D1FAE5] text-[#065F46]' : 'bg-[#FEE2E2] text-[#991B1B]'}`}>
-                        {s.status}
-                      </span>
-                    </td>
-                    <td className="p-3 text-xs text-gray-500">{s.expiry_date ? new Date(s.expiry_date).toLocaleDateString('ar-EG') : '—'}</td>
-                    <td className="p-3">
-                      {s.is_active && s.status === 'active' && (
-                        <button onClick={() => cancelUserSub(s.id, s.email)} className="bg-red hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-bold transition duration-200">
-                          إلغاء
-                        </button>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          !isSubsLoading && <p className="text-gray-400 italic">لا يوجد اشتراكات بعد. اضغط "تحديث" لجلب آخر البيانات.</p>
-        )}
-      </section>
 
       {/* Broadcast Config */}
       <section className="bg-white border-l-4 border-amber-500 rounded-xl p-5 shadow-sm space-y-4">
