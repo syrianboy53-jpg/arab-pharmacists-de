@@ -116,6 +116,10 @@ export default function HomePage() {
             <button onClick={handleShareApp} className="bg-gold hover:bg-gold/90 px-6 py-2.5 rounded-full font-bold text-sm transition-colors flex items-center gap-1.5 cursor-pointer">
               📢 شارك التطبيق
             </button>
+
+            <Link to="/premium" className="bg-white/20 hover:bg-white/30 text-white px-6 py-2.5 rounded-full font-bold text-sm transition-colors backdrop-blur-sm border border-white/30 flex items-center gap-2">
+              🎉 ميزات Premium مجاناً
+            </Link>
           </div>
         </div>
       </section>

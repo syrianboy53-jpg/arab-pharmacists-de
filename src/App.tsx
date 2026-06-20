@@ -17,6 +17,7 @@ const SprachbausteinePage = lazy(() => import('./pages/SprachbausteinePage'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
 const ChatSimulatorPage = lazy(() => import('./pages/ChatSimulatorPage'))
 const SlangPage = lazy(() => import('./pages/SlangPage'))
+const PremiumPage = lazy(() => import('./pages/PremiumPage'))
 
 // New Interactive pages
 const EinstufungPage = lazy(() => import('./pages/EinstufungPage'))
@@ -56,6 +57,7 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/chat-simulator" element={<ChatSimulatorPage />} />
           <Route path="/slang" element={<SlangPage />} />
+          <Route path="/premium" element={<PremiumPage />} />
           
           {/* New Interactive routes */}
           <Route path="/einstufung" element={<EinstufungPage />} />
