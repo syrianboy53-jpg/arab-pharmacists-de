@@ -20,6 +20,22 @@ export async function onRequest(context: any) {
   const path = url.pathname
   const contentType = response.headers.get('content-type') || ''
   
+  if (response.status === 405 || response.status === 404) {
+    if (request.method === 'POST' || request.method === 'PUT' || request.method === 'PATCH' || request.method === 'DELETE') {
+      newHeaders.set('Content-Type', 'application/json')
+      return new Response(JSON.stringify({
+        ok: true,
+        error: `DEBUG_405: ${request.method} to ${path}`,
+        reply: `DEBUG_405: The app is trying to send a ${request.method} request to ${path}. Please tell Fadi this exact message!`,
+        message: `DEBUG_405: ${request.method} to ${path}`,
+        detail: `The endpoint returned ${response.status}`
+      }), {
+        status: 200, // Force 200 so the APK parses the JSON and shows the message
+        headers: newHeaders
+      })
+    }
+  }
+
   // Intercept HTML fallbacks on API/Admin/Auth endpoints and return clean JSON
   if (
     (path.startsWith('/admin/') || path.startsWith('/api/') || path.startsWith('/auth/')) &&

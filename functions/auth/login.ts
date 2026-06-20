@@ -33,7 +33,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
   )
 
   if (!result.rows || result.rows.length === 0) {
-    return new Response(JSON.stringify({ error: 'Invalid credentials' }), { status: 401 })
+    return new Response(JSON.stringify({ error: 'الحساب غير موجود، يرجى إنشاء حساب جديد' }), { status: 404 })
   }
 
   const user = result.rows[0]
@@ -51,6 +51,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     isMatched = true
   }
 
+  let bcryptError = '';
   // Fallback 2: bcryptjs
   if (!isMatched) {
     try {
@@ -58,6 +59,8 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
         isMatched = true;
       }
     } catch (err: any) {
+      console.error('Bcrypt error:', err)
+      bcryptError = err.message || String(err);
     }
   }
 
@@ -72,7 +75,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
   }
 
   if (!isMatched) {
-    return new Response(JSON.stringify({ error: 'Invalid credentials' }), { status: 401 })
+    return new Response(JSON.stringify({ error: `Invalid credentials. ${bcryptError ? 'Bcrypt: ' + bcryptError : ''}` }), { status: 401 })
   }
 
   const token = await createJWT(

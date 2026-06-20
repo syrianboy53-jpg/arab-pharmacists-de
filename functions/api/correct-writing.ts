@@ -242,46 +242,12 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
     }
 
     // === TRY GEMINI API FIRST (if key available) ===
+    // User requested to disable AI. Bypassing Gemini completely and using rule-based engine.
+    /*
     if (env.GEMINI_API_KEY && env.GEMINI_API_KEY.startsWith('AIza')) {
-      const systemPrompt = `أنت مصحح لغوي متخصص في تعليم اللغة الألمانية لمستوى B1 (CEFR).
-مهمتك تصحيح النصوص الألمانية من متعلمين عرب. استجب بـ JSON فقط.
-
-صيغة JSON المطلوبة:
-{
-  "score": <0-100>,
-  "scoreLabel": "<ممتاز|جيد جداً|جيد|مقبول|يحتاج تحسيناً>",
-  "scoreColor": "<emerald|blue|yellow|orange|red>",
-  "correctedText": "<النص بعد التصحيح>",
-  "errors": [{"original":"<الخطأ>","corrected":"<التصحيح>","explanation":"<شرح بالعربية>"}],
-  "improvements": ["<اقتراح>"],
-  "positives": ["<نقطة إيجابية>"],
-  "taskFulfillment": "<نعم|جزئياً|لا>",
-  "taskFulfillmentNote": "<ملاحظة>"
-}`
-
-      try {
-        const geminiRes = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${env.GEMINI_API_KEY}`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              contents: [{ role: 'user', parts: [{ text: `${systemPrompt}\n\nالمهمة: ${taskType}\n${taskPromptDe}\n\nالنص:\n${userText.trim()}` }] }],
-              generationConfig: { responseMimeType: 'application/json', temperature: 0.3, maxOutputTokens: 2048 }
-            })
-          }
-        )
-
-        if (geminiRes.ok) {
-          const geminiData = await geminiRes.json() as any
-          const rawText = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text || ''
-          const result = JSON.parse(rawText)
-          return new Response(JSON.stringify({ ok: true, result, engine: 'gemini' }), { headers: CORS_HEADERS })
-        }
-      } catch {
-        // Fall through to rule-based engine
-      }
+    ...
     }
+    */
 
     // === FALLBACK: RULE-BASED ENGINE ===
     const result = runRuleBasedCorrection(userText, taskType, taskPromptAr)

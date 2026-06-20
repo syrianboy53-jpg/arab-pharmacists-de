@@ -62,30 +62,12 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       })
     }
 
-    const geminiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${env.GEMINI_API_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: contents,
-          generationConfig: { 
-            responseMimeType: 'text/plain', 
-            temperature: 0.7, 
-            maxOutputTokens: 256 
-          }
-        })
-      }
-    )
-
-    if (geminiRes.ok) {
-      const geminiData = await geminiRes.json() as any
-      const reply = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text || ''
-      return new Response(JSON.stringify({ ok: true, reply, engine: 'gemini' }), { headers: CORS_HEADERS })
-    } else {
-      const errorText = await geminiRes.text()
-      return new Response(JSON.stringify({ ok: false, error: 'Gemini API Error', details: errorText }), { status: 500, headers: CORS_HEADERS })
-    }
+    // The user has requested to disable the AI feature completely.
+    return new Response(JSON.stringify({ 
+      ok: true, 
+      reply: "عذراً، المحادثة مع الذكاء الاصطناعي متوقفة حالياً بطلب من الإدارة. يمكنك الاستمرار في تصفح باقي الدروس والتمارين في التطبيق.", 
+      engine: 'offline' 
+    }), { headers: CORS_HEADERS })
 
   } catch (e: any) {
     return new Response(JSON.stringify({
