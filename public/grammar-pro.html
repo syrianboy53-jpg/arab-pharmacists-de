@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grammar Pro 📚 | B1 Deutsch للسوريين</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body { font-family: 'Cairo', sans-serif; background-color: #f8fafc; }
+    .german-text { font-family: 'Tajawal', sans-serif; direction: ltr; display: inline-block; }
+    [x-cloak] { display: none !important; }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body x-data="grammarApp()" x-init="initData()" class="text-slate-800">
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-teal-600 to-emerald-700 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/app/index.html" class="hover:bg-white/20 p-2 rounded-full transition" title="العودة للتطبيق">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </a>
+        <h1 class="text-xl font-bold">قواعد اللغة الألمانية (Grammar Pro) 📚</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    
+    <!-- Loading State -->
+    <div x-show="isLoading" class="flex flex-col items-center justify-center py-20">
+      <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-teal-600 border-solid mb-4"></div>
+      <p class="text-gray-500 font-semibold animate-pulse">جاري تحميل القواعد...</p>
+    </div>
+
+    <!-- Main Content -->
+    <div x-show="!isLoading" x-cloak class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      
+      <!-- Sidebar / Lesson List -->
+      <aside class="md:col-span-1 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden h-[calc(100vh-140px)] flex flex-col">
+        <div class="p-4 border-b border-slate-100 bg-slate-50 font-bold text-slate-700">
+          الدروس المتاحة (<span x-text="lessons.length"></span>)
+        </div>
+        <div class="overflow-y-auto flex-1 p-2 space-y-1">
+          <template x-for="(lesson, index) in lessons" :key="lesson.id">
+            <button @click="selectLesson(index)" 
+                    :class="{'bg-teal-50 border-teal-500 text-teal-700': activeIndex === index, 'border-transparent hover:bg-slate-50 text-slate-600': activeIndex !== index}"
+                    class="w-full text-right p-3 rounded-xl border-l-4 transition-all duration-200 flex flex-col gap-1">
+              <span class="text-sm font-bold" x-text="lesson.titleAr"></span>
+              <span class="text-xs german-text text-gray-400" x-text="lesson.title"></span>
+            </button>
+          </template>
+        </div>
+      </aside>
+
+      <!-- Main Panel / Active Lesson -->
+      <section class="md:col-span-3 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden h-[calc(100vh-140px)] flex flex-col" x-show="activeLesson">
+        
+        <!-- Lesson Header -->
+        <div class="p-6 border-b border-slate-100 bg-gradient-to-r from-teal-50 to-emerald-50">
+          <h2 class="text-2xl font-bold text-teal-800 mb-2" x-text="activeLesson?.titleAr"></h2>
+          <p class="text-lg german-text text-teal-600 font-semibold" x-text="activeLesson?.title"></p>
+        </div>
+
+        <div class="overflow-y-auto flex-1 p-6 space-y-8">
+          
+          <!-- Explanation -->
+          <div class="bg-blue-50 border border-blue-100 rounded-2xl p-5">
+            <h3 class="flex items-center gap-2 font-bold text-blue-800 mb-4 border-b border-blue-200 pb-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              الشرح المختصر
+            </h3>
+            <p class="text-slate-700 leading-relaxed whitespace-pre-line" x-text="activeLesson?.explanation"></p>
+          </div>
+
+          <!-- Examples -->
+          <div x-show="activeLesson?.examples && activeLesson.examples.length > 0">
+            <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              أمثلة توضيحية
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <template x-for="ex in activeLesson?.examples" :key="ex.de">
+                <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md transition">
+                  <p class="german-text text-lg font-bold text-slate-800 mb-2" x-text="ex.de"></p>
+                  <p class="text-slate-500 text-sm" x-text="ex.ar"></p>
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <!-- Interactive Exercises -->
+          <div x-show="activeLesson?.exercises && activeLesson.exercises.length > 0" class="pt-6 border-t border-slate-100">
+            <h3 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+              اختبر نفسك (تدريب سريع)
+            </h3>
+            
+            <div class="space-y-6">
+              <template x-for="(exercise, index) in activeLesson?.exercises" :key="index">
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                  <p class="german-text text-lg font-bold text-slate-800 mb-4" x-text="exercise.question.replace('___', '______')"></p>
+                  
+                  <div class="flex flex-wrap gap-3">
+                    <template x-for="(option, optIndex) in exercise.options" :key="optIndex">
+                      <button @click="checkAnswer(index, optIndex, exercise.correct)"
+                              :class="{
+                                'bg-white border-slate-300 hover:border-teal-500 hover:bg-teal-50': userAnswers[index] === undefined,
+                                'bg-emerald-500 border-emerald-600 text-white': userAnswers[index] !== undefined && optIndex === exercise.correct,
+                                'bg-red-500 border-red-600 text-white': userAnswers[index] === optIndex && optIndex !== exercise.correct,
+                                'opacity-50 cursor-not-allowed': userAnswers[index] !== undefined && optIndex !== exercise.correct && userAnswers[index] !== optIndex
+                              }"
+                              :disabled="userAnswers[index] !== undefined"
+                              class="px-5 py-2 border rounded-lg german-text font-semibold transition-colors duration-200">
+                        <span x-text="option"></span>
+                      </button>
+                    </template>
+                  </div>
+                  
+                  <!-- Feedback -->
+                  <div x-show="userAnswers[index] !== undefined" class="mt-3 text-sm font-bold flex items-center gap-1"
+                       :class="userAnswers[index] === exercise.correct ? 'text-emerald-600' : 'text-red-600'" x-cloak>
+                    <svg x-show="userAnswers[index] === exercise.correct" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    <svg x-show="userAnswers[index] !== exercise.correct" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <span x-text="userAnswers[index] === exercise.correct ? 'إجابة صحيحة! أحسنت.' : 'إجابة خاطئة. حاول التركيز في القاعدة.'"></span>
+                  </div>
+                </div>
+              </template>
+            </div>
+            
+            <div class="mt-6 text-center" x-show="Object.keys(userAnswers).length > 0">
+              <button @click="resetAnswers()" class="text-teal-600 hover:text-teal-800 text-sm font-bold underline">إعادة المحاولة</button>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+      
+    </div>
+  </main>
+
+  <script>
+    function grammarApp() {
+      return {
+        isLoading: true,
+        lessons: [],
+        activeIndex: 0,
+        userAnswers: {},
+
+        get activeLesson() {
+          return this.lessons[this.activeIndex] || null;
+        },
+
+        async initData() {
+          try {
+            const res = await fetch('grammarLessons.json');
+            if (res.ok) {
+              const data = await res.json();
+              this.lessons = data;
+            } else {
+              console.error("Failed to load grammar data");
+            }
+          } catch (e) {
+            console.error("Error fetching grammar:", e);
+          } finally {
+            this.isLoading = false;
+          }
+        },
+
+        selectLesson(index) {
+          this.activeIndex = index;
+          this.userAnswers = {};
+          // Scroll to top of main panel
+          const panel = document.querySelector('.md\\:col-span-3 > div.overflow-y-auto');
+          if(panel) panel.scrollTop = 0;
+        },
+
+        checkAnswer(exerciseIndex, selectedOption, correctOption) {
+          if (this.userAnswers[exerciseIndex] !== undefined) return;
+          this.userAnswers[exerciseIndex] = selectedOption;
+        },
+
+        resetAnswers() {
+          this.userAnswers = {};
+        }
+      }
+    }
+  </script>
+</body>
+</html>
