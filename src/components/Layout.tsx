@@ -79,27 +79,60 @@ export default function Layout({ children }: { children: ReactNode }) {
       )}
       <div className="min-h-screen bg-[#f8f9fb] dark:bg-[#0f0f1a] text-gray-900 dark:text-gray-100 transition-colors duration-300">
         {/* ── Header ── */}
-        <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#1a1a2e]/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-white/5">
-          <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-            {/* Logo */}
-            <a href="/app/#/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00b894] to-[#00cec9] flex items-center justify-center text-white text-xs font-black shadow-sm">B1</div>
-              <span className="font-black text-sm text-gray-800 dark:text-white hidden sm:block">Syrer.de</span>
+        <header className="sticky top-0 z-50 bg-white/90 dark:bg-[#12122a]/90 backdrop-blur-xl border-b border-gray-200/60 dark:border-white/5 shadow-sm dark:shadow-none">
+          <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            {/* Logo + Brand */}
+            <a href="/app/#/" className="flex items-center gap-2.5 group">
+              <div className="relative">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00b894] to-[#0984e3] flex items-center justify-center text-white text-sm font-black shadow-lg shadow-[#00b894]/20 group-hover:shadow-[#00b894]/40 transition-all group-hover:scale-105">
+                  B1
+                </div>
+                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-white dark:border-[#12122a] rounded-full" />
+              </div>
+              <div className="hidden sm:block">
+                <span className="font-black text-base text-gray-900 dark:text-white leading-none block">B1-Syrer</span>
+                <span className="text-[10px] text-gray-400 dark:text-gray-500 leading-none">.de — مجّاني 100%</span>
+              </div>
             </a>
 
-            {/* XP & Streak mini bar */}
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1.5 bg-orange-50 dark:bg-orange-500/10 px-2.5 py-1 rounded-lg">
-                <span className="text-xs">🔥</span>
-                <span className="text-xs font-bold text-orange-600 dark:text-orange-400">{streak}</span>
+            {/* Center: Desktop Nav Links */}
+            <nav className="hidden md:flex items-center gap-1">
+              {navItems.map((item) => {
+                const Icon = item.icon
+                const active = isActive(item.path)
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                      active
+                        ? 'bg-[#00b894]/10 text-[#00b894]'
+                        : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5'
+                    }`}
+                  >
+                    <Icon size={14} strokeWidth={active ? 2.5 : 1.5} />
+                    {item.label}
+                  </Link>
+                )
+              })}
+            </nav>
+
+            {/* Right: Stats + Controls */}
+            <div className="flex items-center gap-2">
+              {/* Streak */}
+              <div className="flex items-center gap-1 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-500/10 dark:to-amber-500/10 px-2.5 py-1.5 rounded-xl border border-orange-100 dark:border-orange-500/10">
+                <span className="text-sm">🔥</span>
+                <span className="text-xs font-black text-orange-600 dark:text-orange-400">{streak}</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-500/10 px-2.5 py-1 rounded-lg">
-                <Zap size={12} className="text-emerald-600 dark:text-emerald-400" />
-                <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">{xp} XP</span>
+              {/* XP */}
+              <div className="flex items-center gap-1 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-500/10 dark:to-teal-500/10 px-2.5 py-1.5 rounded-xl border border-emerald-100 dark:border-emerald-500/10">
+                <Zap size={13} className="text-emerald-600 dark:text-emerald-400" />
+                <span className="text-xs font-black text-emerald-600 dark:text-emerald-400">{xp}</span>
               </div>
+              {/* Dark Mode Toggle */}
               <button
                 onClick={() => setDarkMode(!darkMode)}
-                className="p-2 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors"
+                className="p-2 rounded-xl bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition-all border border-gray-200 dark:border-white/5"
                 aria-label="تبديل الوضع الليلي"
               >
                 {darkMode ? <Sun size={16} className="text-yellow-400" /> : <Moon size={16} className="text-gray-500" />}
