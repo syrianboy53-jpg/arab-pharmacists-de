@@ -124,7 +124,7 @@ export default function B2Page() {
 
                 {/* German Text Box */}
                 <div 
-                  className="bg-slate-950/40 border border-gray-200 dark:border-white/5 p-5 rounded-xl text-sm leading-relaxed text-gray-600 dark:text-gray-400 whitespace-pre-wrap select-text text-left font-sans"
+                  className="bg-gray-100 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 p-5 rounded-xl text-sm leading-relaxed text-gray-600 dark:text-gray-400 whitespace-pre-wrap select-text text-left font-sans"
                   dir="ltr"
                 >
                   {passage.textDe}
@@ -189,7 +189,7 @@ export default function B2Page() {
                             </button>
 
                             {showEx && (
-                              <div className="bg-gold/5 border border-gold/20 p-3.5 rounded-xl text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                              <div className="bg-amber-100 dark:bg-amber-900/5 border border-amber-200 dark:border-amber-700/20 p-3.5 rounded-xl text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                                 {q.explanationAr}
                               </div>
                             )}
@@ -226,7 +226,7 @@ export default function B2Page() {
                       </span>
                       <div className="text-left font-sans text-sm text-gray-600 dark:text-gray-400 leading-relaxed pt-0.5" dir="ltr">
                         {sb.contextDe.split('___')[0]}
-                        <span className="bg-gold/10 border border-gold/30 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded mx-1.5 font-bold">
+                        <span className="bg-amber-100 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-700/30 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded mx-1.5 font-bold">
                           ({sbIdx + 1})
                         </span>
                         {sb.contextDe.split('___')[1]}
@@ -275,7 +275,7 @@ export default function B2Page() {
                         </button>
 
                         {showEx && (
-                          <div className="bg-gold/5 border border-gold/20 p-3.5 rounded-xl text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+                          <div className="bg-amber-100 dark:bg-amber-900/5 border border-amber-200 dark:border-amber-700/20 p-3.5 rounded-xl text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
                             <p className="font-bold text-amber-600 dark:text-amber-400 mb-1">البلانك: <span className="text-gray-900 dark:text-white font-normal" dir="ltr">{sb.blank}</span></p>
                             <div className="text-gray-600 dark:text-gray-400" dangerouslySetInnerHTML={{ __html: sb.explanationAr.replace(/\n/g, '<br/>') }} />
                           </div>
@@ -301,7 +301,7 @@ export default function B2Page() {
                   <p className="text-xs text-gray-500 dark:text-gray-400 font-sans mt-1" dir="ltr">{currentModel.schreiben.topicDe}</p>
                 </div>
 
-                <div className="bg-slate-950/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-xs text-gray-600 dark:text-gray-400 leading-relaxed space-y-3">
+                <div className="bg-gray-100 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 p-4 rounded-xl text-xs text-gray-600 dark:text-gray-400 leading-relaxed space-y-3">
                   <p className="font-semibold text-amber-600 dark:text-amber-400">التعليمات المطلوبة (150–200 كلمة):</p>
                   <p className="font-sans italic mb-2 text-left" dir="ltr">{currentModel.schreiben.contextDe}</p>
                   <ul className="list-disc list-inside space-y-1 text-xs" dir="ltr">
@@ -343,7 +343,7 @@ export default function B2Page() {
                   <span className={`text-xs px-2.5 py-1 rounded-full font-bold ${
                     getWordCount(writingInput) >= 150 && getWordCount(writingInput) <= 200
                       ? 'bg-[#00b894]/10 text-[#00b894] border border-[#00b894]/20'
-                      : 'bg-gold/10 text-amber-600 dark:text-amber-400 border border-gold/20'
+                      : 'bg-amber-100 dark:bg-amber-900/10 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-700/20'
                   }`}>
                     عدد الكلمات: {getWordCount(writingInput)} / 200
                   </span>
@@ -371,7 +371,7 @@ export default function B2Page() {
 
                   <button
                     onClick={() => setShowModelAnswer(!showModelAnswer)}
-                    className="bg-gold text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl hover:bg-gold-accent transition-all cursor-pointer"
+                    className="bg-amber-500 text-slate-950 font-bold text-xs px-5 py-2.5 rounded-xl hover:bg-amber-500-accent transition-all cursor-pointer"
                   >
                     {showModelAnswer ? '🙈 إخفاء النموذج الإرشادي' : '🔑 عرض نموذج الحل والترجمة'}
                   </button>
@@ -439,7 +439,7 @@ export default function B2Page() {
                 <div className="grid md:grid-cols-3 gap-5">
                   {/* Topic prompt details */}
                   <div className="md:col-span-1 space-y-3">
-                    <div className="bg-slate-950/40 p-4 border border-gray-200 dark:border-white/5 rounded-xl space-y-2">
+                    <div className="bg-gray-100 dark:bg-[#1a1a2e] p-4 border border-gray-200 dark:border-white/5 rounded-xl space-y-2">
                       <p className="text-xs font-bold text-amber-600 dark:text-amber-400">المطلوب مناقشته:</p>
                       <p className="text-sm text-gray-900 dark:text-white font-medium">{part.topicAr}</p>
                       <p className="text-xs text-gray-500 dark:text-gray-400 font-sans text-left" dir="ltr">{part.topicDe}</p>

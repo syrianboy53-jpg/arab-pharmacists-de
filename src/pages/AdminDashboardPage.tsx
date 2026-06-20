@@ -575,7 +575,7 @@ export default function AdminDashboardPage() {
           <h1 className="text-2xl font-black mt-3">مرحباً فادي 🇸🇾</h1>
           <p className="text-gray-900 dark:text-white/60 text-sm mt-1">تحكّم كامل بمحتوى التطبيق والإعلانات والبيانات.</p>
           <div className="flex flex-wrap gap-2 mt-4">
-            <button onClick={handleLogout} className="bg-white dark:bg-[#1a1a2e]/10 hover:bg-white dark:bg-[#1a1a2e]/20 text-white px-4 py-2 rounded-xl text-sm font-bold border border-gray-200 dark:border-white/10 transition-all cursor-pointer">
+            <button onClick={handleLogout} className="bg-white dark:bg-[#1a1a2e]/10 hover:bg-gray-50 dark:hover:bg-white/20 text-white px-4 py-2 rounded-xl text-sm font-bold border border-gray-200 dark:border-white/10 transition-all cursor-pointer">
               🚪 خروج
             </button>
             <button onClick={fetchData} className="bg-[#00b894] hover:bg-[#00a884] text-white px-4 py-2 rounded-xl text-sm font-bold transition-all cursor-pointer">

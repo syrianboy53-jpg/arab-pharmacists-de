@@ -106,13 +106,13 @@ export default function TelcSimPage() {
           <div className="flex gap-2">
             <button
               onClick={() => setRunning(!running)}
-              className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer border border-white/10"
+              className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer border border-gray-200 dark:border-white/10"
             >
               {running ? '⏸️ إيقاف' : '▶️ ابدأ'}
             </button>
             <button
               onClick={() => { setTime(65*60); setRunning(false) }}
-              className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-3 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer border border-white/10"
+              className="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white px-3 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer border border-gray-200 dark:border-white/10"
             >
               🔄
             </button>

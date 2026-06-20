@@ -142,7 +142,7 @@ export default function ChatSimulatorPage() {
   const getPerformanceBadge = () => {
     const percent = maxScore > 0 ? (score / maxScore) * 100 : 0
     if (percent >= 90) return { text: 'ألماني فصيح (Profi) 🌟', color: 'bg-[#00b894]/10 text-[#00b894] border-[#00b894]/20' }
-    if (percent >= 70) return { text: 'متحدث جيد جداً (Gut) 👍', color: 'bg-gold/10 text-amber-600 dark:text-amber-400 border-gold/20' }
+    if (percent >= 70) return { text: 'متحدث جيد جداً (Gut) 👍', color: 'bg-amber-100 dark:bg-amber-900/10 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-700/20' }
     return { text: 'مبتدئ يحتاج للتدريب (Übung) 📚', color: 'bg-red-500/10 text-red-500 border-red-500/20' }
   }
 
@@ -199,7 +199,7 @@ export default function ChatSimulatorPage() {
             <span className="bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 px-2 py-0.5 rounded text-gray-500 dark:text-gray-400 font-mono" dir="ltr">
               Diff: {scenario.difficulty}
             </span>
-            <span className="bg-gold/10 border border-gold/20 px-2 py-0.5 rounded text-amber-600 dark:text-amber-400 font-bold">
+            <span className="bg-amber-100 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-700/20 px-2 py-0.5 rounded text-amber-600 dark:text-amber-400 font-bold">
               النقاط: {score}
             </span>
           </div>
@@ -216,7 +216,7 @@ export default function ChatSimulatorPage() {
             if (isSystem) {
               return (
                 <div key={msg.id || index} className="flex justify-center my-2 animate-fadeIn">
-                  <div className="bg-gold/5 border border-gold/20 text-gray-600 dark:text-gray-400 text-[11px] rounded-xl px-4 py-2 text-center max-w-[85%] leading-relaxed">
+                  <div className="bg-amber-100 dark:bg-amber-900/5 border border-amber-200 dark:border-amber-700/20 text-gray-600 dark:text-gray-400 text-[11px] rounded-xl px-4 py-2 text-center max-w-[85%] leading-relaxed">
                     <span className="font-bold text-amber-600 dark:text-amber-400">نقاط الاختيار: +{msg.points} 🌟</span>
                     <p className="mt-0.5">{msg.feedback}</p>
                   </div>
@@ -292,7 +292,7 @@ export default function ChatSimulatorPage() {
           
           {/* Completion summary */}
           {isFinished && (
-            <div className="glass p-5 border border-gold/30 rounded-2xl max-w-md mx-auto text-center space-y-4 animate-slideDown shadow-xl mt-6">
+            <div className="glass p-5 border border-amber-200 dark:border-amber-700/30 rounded-2xl max-w-md mx-auto text-center space-y-4 animate-slideDown shadow-xl mt-6">
               <span className="text-3xl">🏆</span>
               <div>
                 <h4 className="text-base font-bold text-gray-900 dark:text-white">اكتملت المحاكاة بنجاح!</h4>
@@ -300,12 +300,12 @@ export default function ChatSimulatorPage() {
               </div>
 
               <div className="flex justify-center gap-3 items-center">
-                <div className="bg-slate-900 border border-white/15 px-4 py-2 rounded-xl text-center">
+                <div className="bg-slate-900 border border-gray-200 dark:border-white/15 px-4 py-2 rounded-xl text-center">
                   <p className="text-[10px] text-gray-500 dark:text-gray-400">مجموع نقاطك</p>
                   <p className="text-lg font-bold text-amber-600 dark:text-amber-400">{score}</p>
                 </div>
                 <span className="text-gray-500 dark:text-gray-400">من أصل</span>
-                <div className="bg-slate-900 border border-white/15 px-4 py-2 rounded-xl text-center">
+                <div className="bg-slate-900 border border-gray-200 dark:border-white/15 px-4 py-2 rounded-xl text-center">
                   <p className="text-[10px] text-gray-500 dark:text-gray-400">أعلى تقييم</p>
                   <p className="text-lg font-bold text-gray-500 dark:text-gray-400">{maxScore}</p>
                 </div>

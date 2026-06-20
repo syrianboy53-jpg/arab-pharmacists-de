@@ -80,7 +80,7 @@ export default function FehlerPage() {
         <div className="flex gap-2">
           <button
             onClick={handleShare}
-            className="text-xs font-bold text-amber-600 dark:text-amber-400 bg-gold/10 px-3 py-1 rounded-full hover:bg-gold/20 transition-colors"
+            className="text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-900/10 px-3 py-1 rounded-full hover:bg-amber-100 dark:bg-amber-900/20 transition-colors"
           >
             📢 مشاركة البطاقة
           </button>

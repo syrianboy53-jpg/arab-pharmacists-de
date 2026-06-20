@@ -211,7 +211,7 @@ export default function SatzbauPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={handleShare}
-              className="bg-gold hover:bg-gold/90 text-gray-900 dark:text-white font-bold px-6 py-3 rounded-full transition-colors flex items-center justify-center gap-2"
+              className="bg-amber-500 hover:bg-amber-100 dark:bg-amber-900/90 text-gray-900 dark:text-white font-bold px-6 py-3 rounded-full transition-colors flex items-center justify-center gap-2"
             >
               <span>📢 مشاركة النتيجة</span>
             </button>
@@ -259,7 +259,7 @@ export default function SatzbauPage() {
               </span>
             ))}
           </div>
-          <span className="bg-gold/10 text-amber-600 dark:text-amber-400 font-bold px-3 py-1 rounded-full text-sm">
+          <span className="bg-amber-100 dark:bg-amber-900/10 text-amber-600 dark:text-amber-400 font-bold px-3 py-1 rounded-full text-sm">
             🏆 {score * 10} XP
           </span>
         </div>

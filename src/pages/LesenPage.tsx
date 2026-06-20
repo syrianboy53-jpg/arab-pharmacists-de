@@ -206,7 +206,7 @@ export default function LesenPage() {
                 {/* Newspaper Article Text / Rules text / Opinions text */}
                 {part.textDe && (
                   <div 
-                    className="bg-slate-950/40 border border-gray-200 dark:border-white/5 p-5 rounded-xl text-sm leading-relaxed text-gray-600 dark:text-gray-400 whitespace-pre-wrap select-text text-left font-sans"
+                    className="bg-gray-100 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 p-5 rounded-xl text-sm leading-relaxed text-gray-600 dark:text-gray-400 whitespace-pre-wrap select-text text-left font-sans"
                     dir="ltr"
                   >
                     {part.textDe}
@@ -272,7 +272,7 @@ export default function LesenPage() {
                                 {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
                               </button>
                               {showEx && (
-                                <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <div className="bg-amber-100 dark:bg-amber-900/5 border border-amber-200 dark:border-amber-700/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
                                   {q.explanation}
                                 </div>
                               )}
@@ -404,7 +404,7 @@ export default function LesenPage() {
                                 {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
                               </button>
                               {showEx && (
-                                <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
+                                <div className="bg-amber-100 dark:bg-amber-900/5 border border-amber-200 dark:border-amber-700/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
                                   {q.explanation}
                                 </div>
                               )}
@@ -431,7 +431,7 @@ export default function LesenPage() {
               <div key={q.id} className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4 shadow-xl">
                 {/* Passage Text */}
                 <div 
-                  className="bg-slate-950/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl text-xs text-gray-600 dark:text-gray-400 leading-relaxed select-text text-left font-sans"
+                  className="bg-gray-100 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 p-4 rounded-xl text-xs text-gray-600 dark:text-gray-400 leading-relaxed select-text text-left font-sans"
                   dir="ltr"
                 >
                   {q.text}
@@ -486,7 +486,7 @@ export default function LesenPage() {
                       {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
                     </button>
                     {showEx && (
-                      <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
+                      <div className="bg-amber-100 dark:bg-amber-900/5 border border-amber-200 dark:border-amber-700/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
                         {q.explanation}
                       </div>
                     )}

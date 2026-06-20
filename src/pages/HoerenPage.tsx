@@ -377,7 +377,7 @@ export default function HoerenPage() {
                           {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
                         </button>
                         {showEx && (
-                          <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
+                          <div className="bg-amber-100 dark:bg-amber-900/5 border border-amber-200 dark:border-amber-700/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed">
                             {q.explanation}
                           </div>
                         )}

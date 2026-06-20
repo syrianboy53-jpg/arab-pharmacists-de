@@ -30,7 +30,7 @@ export default function EinbuergerungPage() {
       <h1 className="text-2xl font-black mb-2">النتيجة</h1>
       <p className="text-3xl font-black">{score} / {questions.length}</p>
       <p className="text-gray-900 dark:text-white/70 mt-2">{score >= 6 ? 'ممتاز! أنت جاهز!' : 'حاول مرة أخرى'}</p>
-      <button onClick={() => { setCurrent(0); setScore(0) }} className="mt-4 bg-white dark:bg-[#1a1a2e]/20 hover:bg-white dark:bg-[#1a1a2e]/30 px-6 py-2 rounded-xl font-bold text-sm transition-colors cursor-pointer">أعد المحاولة</button>
+      <button onClick={() => { setCurrent(0); setScore(0) }} className="mt-4 bg-white dark:bg-[#1a1a2e]/20 hover:bg-gray-50 dark:hover:bg-white/30 px-6 py-2 rounded-xl font-bold text-sm transition-colors cursor-pointer">أعد المحاولة</button>
     </div>
   )
 

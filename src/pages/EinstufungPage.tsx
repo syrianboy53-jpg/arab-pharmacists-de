@@ -269,7 +269,7 @@ export default function EinstufungPage() {
       <div className="max-w-2xl mx-auto p-4 md:p-8 relative">
         <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-50 w-full h-full" />
         <div className="bg-white dark:bg-[#1a1a2e] rounded-3xl p-6 md:p-10 text-center shadow-xl border border-gray-100 dark:border-white/5 animate-fadeIn">
-          <div className="inline-block p-4 bg-gold/10 text-amber-600 dark:text-amber-400 rounded-full mb-6">
+          <div className="inline-block p-4 bg-amber-100 dark:bg-amber-900/10 text-amber-600 dark:text-amber-400 rounded-full mb-6">
             <span className="text-5xl">🏆</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-bold mb-4">اكتمل اختبار تحديد المستوى!</h1>
@@ -289,7 +289,7 @@ export default function EinstufungPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={handleShare}
-              className="bg-gold hover:bg-gold/90 text-gray-900 dark:text-white font-bold px-8 py-3 rounded-full transition-colors flex items-center justify-center gap-2"
+              className="bg-amber-500 hover:bg-amber-100 dark:bg-amber-900/90 text-gray-900 dark:text-white font-bold px-8 py-3 rounded-full transition-colors flex items-center justify-center gap-2"
             >
               <span>📢 مشاركة النتيجة</span>
             </button>
@@ -394,7 +394,7 @@ export default function EinstufungPage() {
 
         {/* Explanation Card */}
         {answered && (
-          <div className="mt-6 p-4 bg-gold/5 dark:bg-gold/10 border border-gold/20 rounded-xl flex gap-3 animate-fadeIn">
+          <div className="mt-6 p-4 bg-amber-100 dark:bg-amber-900/5 dark:bg-amber-100 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-700/20 rounded-xl flex gap-3 animate-fadeIn">
             <span className="text-2xl">💡</span>
             <div>
               <h4 className="font-bold text-amber-600 dark:text-amber-400 text-sm mb-1">الشرح بالعربية:</h4>

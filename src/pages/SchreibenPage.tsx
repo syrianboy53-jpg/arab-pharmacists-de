@@ -179,7 +179,7 @@ export default function SchreibenPage() {
             <h2 className="text-lg font-bold text-[#00b894]">{activeTask.typeAr}</h2>
             <p className="text-xs text-gray-500 dark:text-gray-400" dir="ltr">{activeTask.typeDe}</p>
           </div>
-          <span className="text-xs bg-gold/20 text-amber-600 dark:text-amber-400 border border-gold/30 px-3 py-1 rounded-full font-medium">
+          <span className="text-xs bg-amber-100 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-700/30 px-3 py-1 rounded-full font-medium">
             📋 المتطلب: {activeTask.wordCount || 'حوالي 80 كلمة'}
           </span>
         </div>
@@ -232,7 +232,7 @@ export default function SchreibenPage() {
         <textarea
           value={typedText}
           onChange={(e) => handleTextChange(e.target.value)}
-          className="w-full bg-slate-900/80 border border-gray-200 dark:border-white/10 rounded-xl p-4 min-h-[220px] text-sm focus:outline-none focus:border-[#00b894] text-gray-900 dark:text-white leading-relaxed font-sans"
+          className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-4 min-h-[220px] text-sm focus:outline-none focus:border-[#00b894] text-gray-900 dark:text-white leading-relaxed font-sans"
           dir="ltr"
           placeholder="Sehr geehrte Damen und Herren, / Lieber Lukas, ..."
         />
@@ -243,10 +243,10 @@ export default function SchreibenPage() {
           disabled={isAnalyzing || typedText.trim().length < 10}
           className={`w-full py-3.5 rounded-xl font-bold text-sm transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer border ${
             isAnalyzing
-              ? 'bg-gold/10 border-gold/20 text-amber-600 dark:text-amber-400/70 cursor-not-allowed'
+              ? 'bg-amber-100 dark:bg-amber-900/10 border-amber-200 dark:border-amber-700/20 text-amber-600 dark:text-amber-400/70 cursor-not-allowed'
               : typedText.trim().length < 10
               ? 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 cursor-not-allowed'
-              : 'bg-gradient-to-r from-gold/20 to-amber-500/20 border-gold/40 text-amber-600 dark:text-amber-400 hover:from-gold/30 hover:to-amber-500/30 hover:border-gold/60 hover:shadow-gold/20 hover:shadow-xl active:scale-[0.99]'
+              : 'bg-gradient-to-r from-gold/20 to-amber-500/20 border-amber-200 dark:border-amber-700/40 text-amber-600 dark:text-amber-400 hover:from-gold/30 hover:to-amber-500/30 hover:border-amber-200 dark:border-amber-700/60 hover:shadow-gold/20 hover:shadow-xl active:scale-[0.99]'
           }`}
         >
           {isAnalyzing ? (
@@ -274,7 +274,7 @@ export default function SchreibenPage() {
 
       {/* AI Correction Results Card */}
       {correctionResult && (
-        <div className="glass p-6 rounded-2xl border border-gold/20 shadow-2xl space-y-5 animate-fade-in">
+        <div className="glass p-6 rounded-2xl border border-amber-200 dark:border-amber-700/20 shadow-2xl space-y-5 animate-fade-in">
           {/* Header with score */}
           <div className="flex items-center justify-between gap-4 border-b border-gray-200 dark:border-white/10 pb-4">
             <div>

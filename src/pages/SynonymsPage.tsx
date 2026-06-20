@@ -232,7 +232,7 @@ export default function SynonymsPage() {
             <span className="text-xs text-gray-500 dark:text-gray-400 font-bold">
               سؤال {quizIdx + 1} من {quizRound.length}
             </span>
-            <span className="bg-gold/10 text-amber-600 dark:text-amber-400 text-xs font-bold px-2 py-0.5 rounded-md">
+            <span className="bg-amber-100 dark:bg-amber-900/10 text-amber-600 dark:text-amber-400 text-xs font-bold px-2 py-0.5 rounded-md">
               {quizRound[quizIdx].level}
             </span>
           </div>
@@ -290,7 +290,7 @@ export default function SynonymsPage() {
 
           {/* Explanation Notes */}
           {quizAnswered && (
-            <div className="mt-6 p-4 bg-gold/5 dark:bg-gold/10 border border-gold/20 rounded-xl animate-fadeIn">
+            <div className="mt-6 p-4 bg-amber-100 dark:bg-amber-900/5 dark:bg-amber-100 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-700/20 rounded-xl animate-fadeIn">
               <div className="text-sm font-semibold mb-2">
                 مرادف <span className="text-[#00b894] font-bold" dir="ltr">{quizRound[quizIdx].a}</span> هو{' '}
                 <span className="text-[#00b894] font-bold" dir="ltr">{quizRound[quizIdx].b}</span>.
@@ -320,7 +320,7 @@ export default function SynonymsPage() {
         <div className="space-y-6">
           <div className="flex justify-between items-center bg-white dark:bg-[#1a1a2e] p-4 rounded-xl border border-gray-100 dark:border-white/5">
             <span className="text-sm font-bold text-gray-500 dark:text-gray-400">المحاولات: {matchAttempts}</span>
-            <span className="bg-gold/10 text-amber-600 dark:text-amber-400 font-bold px-3 py-1 rounded-full text-xs">
+            <span className="bg-amber-100 dark:bg-amber-900/10 text-amber-600 dark:text-amber-400 font-bold px-3 py-1 rounded-full text-xs">
               🏆 {matchScore} XP
             </span>
           </div>
@@ -337,10 +337,10 @@ export default function SynonymsPage() {
               if (isMatched) {
                 cardClass += 'bg-[#00b894]/10 border-[#00b894] text-[#00b894] cursor-default scale-95 opacity-80'
               } else if (isSelected) {
-                cardClass += 'bg-gold/10 border-gold text-amber-600 dark:text-amber-400 scale-105 shadow-md'
+                cardClass += 'bg-amber-100 dark:bg-amber-900/10 border-amber-300 text-amber-600 dark:text-amber-400 scale-105 shadow-md'
               } else {
                 cardClass +=
-                  'bg-white dark:bg-[#1a1a2e] border-gray-200 dark:border-white/5 hover:border-gold hover:shadow-sm'
+                  'bg-white dark:bg-[#1a1a2e] border-gray-200 dark:border-white/5 hover:border-amber-300 hover:shadow-sm'
               }
 
               return (
@@ -366,7 +366,7 @@ export default function SynonymsPage() {
               <div className="flex gap-2 justify-center">
                 <button
                   onClick={() => handleShareResult(matchScore, 'مطابقة البطاقات')}
-                  className="bg-gold hover:bg-gold/90 text-gray-900 dark:text-white font-bold px-4 py-2 rounded-full text-xs transition-colors"
+                  className="bg-amber-500 hover:bg-amber-100 dark:bg-amber-900/90 text-gray-900 dark:text-white font-bold px-4 py-2 rounded-full text-xs transition-colors"
                 >
                   📢 مشاركة
                 </button>

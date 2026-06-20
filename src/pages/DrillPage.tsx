@@ -141,7 +141,7 @@ export default function DrillPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={handleShare}
-              className="bg-gold hover:bg-gold/90 text-gray-900 dark:text-white font-bold px-6 py-3 rounded-full transition-colors flex items-center justify-center gap-2"
+              className="bg-amber-500 hover:bg-amber-100 dark:bg-amber-900/90 text-gray-900 dark:text-white font-bold px-6 py-3 rounded-full transition-colors flex items-center justify-center gap-2"
             >
               <span>📢 مشاركة النتيجة</span>
             </button>
@@ -190,7 +190,7 @@ export default function DrillPage() {
               </span>
             ))}
           </div>
-          <span className="bg-gold/10 text-amber-600 dark:text-amber-400 font-bold px-3 py-1 rounded-full text-sm">
+          <span className="bg-amber-100 dark:bg-amber-900/10 text-amber-600 dark:text-amber-400 font-bold px-3 py-1 rounded-full text-sm">
             🏆 {score * 10} XP
           </span>
         </div>
@@ -273,7 +273,7 @@ export default function DrillPage() {
 
         {/* Explanation Card */}
         {answered && q.explanation && (
-          <div className="mt-6 p-4 bg-gold/5 dark:bg-gold/10 border border-gold/20 rounded-xl flex gap-3 animate-fadeIn">
+          <div className="mt-6 p-4 bg-amber-100 dark:bg-amber-900/5 dark:bg-amber-100 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-700/20 rounded-xl flex gap-3 animate-fadeIn">
             <span className="text-2xl">💡</span>
             <div>
               <h4 className="font-bold text-amber-600 dark:text-amber-400 text-sm mb-1">الشرح بالعربية:</h4>

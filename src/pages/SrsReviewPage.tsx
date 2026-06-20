@@ -39,7 +39,7 @@ export default function SrsReviewPage() {
         <div className="text-5xl mb-4">✅</div>
         <h1 className="text-2xl font-black mb-2">انتهت المراجعة!</h1>
         <p className="text-gray-900 dark:text-white/80">راجعت {reviewed} بطاقة</p>
-        <button onClick={() => { setCurrent(0); setReviewed(0) }} className="mt-4 bg-white dark:bg-[#1a1a2e]/20 hover:bg-white dark:bg-[#1a1a2e]/30 px-6 py-2 rounded-xl font-bold text-sm transition-colors cursor-pointer">أعد المراجعة</button>
+        <button onClick={() => { setCurrent(0); setReviewed(0) }} className="mt-4 bg-white dark:bg-[#1a1a2e]/20 hover:bg-gray-50 dark:hover:bg-white/30 px-6 py-2 rounded-xl font-bold text-sm transition-colors cursor-pointer">أعد المراجعة</button>
       </div>
     </div>
   )

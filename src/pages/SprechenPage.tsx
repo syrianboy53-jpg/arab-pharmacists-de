@@ -152,14 +152,14 @@ export default function SprechenPage() {
         </ul>
       </div>
 
-      <button onClick={() => setShowPhrases(!showPhrases)} className="w-full bg-gold/20 text-amber-600 dark:text-amber-400 border border-gold/30 py-3 rounded-xl font-bold">
+      <button onClick={() => setShowPhrases(!showPhrases)} className="w-full bg-amber-100 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-700/30 py-3 rounded-xl font-bold">
         {showPhrases ? 'إخفاء' : '🌟'} العبارات الذهبية
       </button>
       {showPhrases && (
-        <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm border border-gold/30">
+        <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm border border-amber-200 dark:border-amber-700/30">
           <ul className="space-y-2">
             {part.goldenPhrases.map((ph, i) => (
-              <li key={i} className="text-sm bg-gold/5 rounded-lg p-2" dir="ltr">✨ {ph}</li>
+              <li key={i} className="text-sm bg-amber-100 dark:bg-amber-900/5 rounded-lg p-2" dir="ltr">✨ {ph}</li>
             ))}
           </ul>
         </div>

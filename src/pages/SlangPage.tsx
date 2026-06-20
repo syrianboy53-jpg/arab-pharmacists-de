@@ -122,7 +122,7 @@ export default function SlangPage() {
       ratingClass = 'border-green-400/30 text-[#00b894] bg-[#00b894]/5'
     } else if (score >= 60) {
       ratingLabel = '👍 لفظ مقبول وجيد'
-      ratingClass = 'border-gold/30 text-amber-600 dark:text-amber-400 bg-gold/5'
+      ratingClass = 'border-amber-200 dark:border-amber-700/30 text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-900/5'
     } else {
       ratingLabel = '💪 حاول مجدداً بنطق أوضح'
       ratingClass = 'border-red-400/30 text-red-500 bg-red-500/5'
@@ -246,7 +246,7 @@ export default function SlangPage() {
             <div key={cat.id} className="space-y-4">
               
               {/* Category Subheader */}
-              <div className="flex items-center gap-2.5 border-b border-white/15 pb-2">
+              <div className="flex items-center gap-2.5 border-b border-gray-200 dark:border-white/15 pb-2">
                 <span className="text-2xl">{cat.icon}</span>
                 <div>
                   <h3 className="font-bold text-[#00b894]">{cat.nameAr}</h3>
@@ -348,7 +348,7 @@ export default function SlangPage() {
 
                       {/* Explanation box popup */}
                       {showExplanation[phraseId] && phrase.context && (
-                        <div className="bg-gold/5 border border-gold/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed animate-fadeIn">
+                        <div className="bg-amber-100 dark:bg-amber-900/5 border border-amber-200 dark:border-amber-700/15 p-3 rounded-xl text-[11px] text-gray-600 dark:text-gray-400 leading-relaxed animate-fadeIn">
                           <p className="font-semibold text-amber-600 dark:text-amber-400 mb-1">الاستعمال والشرح العامي:</p>
                           {phrase.context}
                         </div>
