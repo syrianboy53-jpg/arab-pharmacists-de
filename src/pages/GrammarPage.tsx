@@ -79,7 +79,7 @@ export default function GrammarPage() {
           className={`flex-1 text-center py-3 rounded-xl text-xs md:text-sm font-bold transition-all ${
             activeTab === 'lessons'
               ? 'bg-[#00b894] text-white shadow-lg'
-              : 'text-gray-500 dark:text-gray-400 hover:text-white'
+              : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
           }`}
         >
           📖 شرح القواعد والتمارين
@@ -89,7 +89,7 @@ export default function GrammarPage() {
           className={`flex-1 text-center py-3 rounded-xl text-xs md:text-sm font-bold transition-all ${
             activeTab === 'mistakes'
               ? 'bg-[#00b894] text-white shadow-lg'
-              : 'text-gray-500 dark:text-gray-400 hover:text-white'
+              : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
           }`}
         >
           ❌ الأخطاء الشائعة ({commonMistakes.length})
@@ -99,7 +99,7 @@ export default function GrammarPage() {
           className={`flex-1 text-center py-3 rounded-xl text-xs md:text-sm font-bold transition-all ${
             activeTab === 'verbs'
               ? 'bg-[#00b894] text-white shadow-lg'
-              : 'text-gray-500 dark:text-gray-400 hover:text-white'
+              : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
           }`}
         >
           🧩 الأفعال المركبة

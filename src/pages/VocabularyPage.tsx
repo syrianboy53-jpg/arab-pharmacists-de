@@ -195,7 +195,7 @@ export default function VocabularyPage() {
                             className={`text-xs px-3 py-1.5 rounded-lg border transition-all ${
                               showMeaning[key] 
                                 ? 'bg-[#00b894]/20 border-[#00b894]/30 text-[#00b894] font-medium' 
-                                : 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-white'
+                                : 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                             }`}
                           >
                             {showMeaning[key] ? 'إخفاء' : 'معنى'}
