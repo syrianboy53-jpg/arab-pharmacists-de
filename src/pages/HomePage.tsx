@@ -116,10 +116,6 @@ export default function HomePage() {
             <button onClick={handleShareApp} className="bg-gold hover:bg-gold/90 px-6 py-2.5 rounded-full font-bold text-sm transition-colors flex items-center gap-1.5 cursor-pointer">
               📢 شارك التطبيق
             </button>
-
-            <Link to="/premium" className="bg-white/20 hover:bg-white/30 text-white px-6 py-2.5 rounded-full font-bold text-sm transition-colors backdrop-blur-sm border border-white/30 flex items-center gap-2">
-              🎉 ميزات Premium مجاناً
-            </Link>
           </div>
         </div>
       </section>
@@ -155,7 +151,7 @@ export default function HomePage() {
             { icon: '📱', title: 'يعمل أوفلاين بالكامل', desc: 'ثبّت التطبيق مرّة واحدة — يعمل بدون إنترنت.' },
             { icon: '🎯', title: 'محاكاة كاملة للامتحان', desc: 'كلّ أقسام Lesen / Hören / Schreiben / Sprechen.' },
             { icon: '⚡', title: 'تقدّم سريع ومتابعة يوميّة', desc: 'XP، streak، شارات، خطّة دراسة شخصيّة.' },
-            { icon: '🆓', title: '90% من المحتوى مجّاني', desc: 'استخدمه مجاناً وادفع فقط لو أردت ميزات إضافيّة.' },
+            { icon: '🆓', title: 'مجّاني بالكامل', desc: 'كل المحتوى والميزات مجّانية ومفتوحة المصدر للجميع.' },
             { icon: '🏆', title: 'مستندات Goethe / telc / DTZ', desc: 'محتوى مبنيّ على الامتحانات الرسميّة.' },
           ].map((f, i) => (
             <div key={i} className="flex gap-3 p-3 rounded-xl bg-gray-50 dark:bg-gray-700">
