@@ -39,5 +39,37 @@
 </head>
 <body>
     <div id="root"></div>
+
+    <!-- DTZ Pro Redirect Banner -->
+    <script>
+      function checkDTZ() {
+        if (window.location.hash.includes('dtz')) {
+          if (!document.getElementById('dtz-pro-banner')) {
+            const banner = document.createElement('div');
+            banner.id = 'dtz-pro-banner';
+            banner.innerHTML = `
+              <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-w: 400px; background: linear-gradient(135deg, #4F46E5, #312E81); color: white; padding: 20px; border-radius: 20px; z-index: 999999; box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align: center; font-family: 'Cairo', sans-serif; animation: slideUp 0.5s ease-out;">
+                <h3 style="margin: 0 0 10px 0; font-size: 1.2rem; font-weight: bold;">تم تحديث قسم DTZ! 🚀</h3>
+                <p style="margin: 0 0 15px 0; font-size: 0.9rem; opacity: 0.9;">لقد قمنا بنقل وتحديث قسم DTZ بميزات جديدة وتصميم أروع (DTZ Pro).</p>
+                <a href="/app/dtz-pro.html" style="display: block; background: #FF9800; color: white; text-decoration: none; padding: 12px; border-radius: 12px; font-weight: bold; box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4);">انتقل للنسخة المطورة الآن 🌟</a>
+                <button onclick="document.getElementById('dtz-pro-banner').style.display='none'" style="background: none; border: none; color: white; opacity: 0.6; margin-top: 10px; cursor: pointer; text-decoration: underline;">البقاء في النسخة القديمة</button>
+              </div>
+              <style>
+                @keyframes slideUp { from { bottom: -100px; opacity: 0; } to { bottom: 20px; opacity: 1; } }
+              </style>
+            `;
+            document.body.appendChild(banner);
+          }
+        } else {
+          const banner = document.getElementById('dtz-pro-banner');
+          if (banner) banner.style.display = 'none';
+        }
+      }
+
+      window.addEventListener('hashchange', checkDTZ);
+      window.addEventListener('load', checkDTZ);
+      // Fallback check
+      setTimeout(checkDTZ, 1000);
+    </script>
 </body>
 </html>

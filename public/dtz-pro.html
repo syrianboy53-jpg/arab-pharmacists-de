@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B1 Deutsch - DTZ Pro المطور</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Cairo', sans-serif; background-color: #f8fafc; }
+    .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.4); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    [x-cloak] { display: none !important; }
+    .hide-scroll::-webkit-scrollbar { display: none; }
+    .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="text-slate-800 antialiased" x-data="dtzApp()">
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="app/index.html" class="hover:bg-white/20 p-2 rounded-full transition" title="العودة للتطبيق">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </a>
+        <h1 class="text-xl font-bold">امتحان DTZ الشامل 🇩🇪</h1>
+      </div>
+      <div class="text-sm bg-white/20 px-3 py-1 rounded-full font-semibold">تحديث 2024</div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-8 space-y-8">
+    
+    <!-- Tab Navigation -->
+    <div class="flex overflow-x-auto gap-2 pb-2 hide-scroll">
+      <template x-for="tab in tabs" :key="tab.id">
+        <button 
+          @click="currentTab = tab.id"
+          class="px-5 py-3 rounded-2xl font-bold text-sm whitespace-nowrap transition-all shadow-sm flex items-center gap-2"
+          :class="currentTab === tab.id ? 'bg-indigo-600 text-white shadow-md scale-105' : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'"
+          >
+          <span x-text="tab.icon"></span>
+          <span x-text="tab.name"></span>
+        </button>
+      </template>
+    </div>
+
+    <!-- 1. Lesen & Hören (Simulator) -->
+    <section x-show="currentTab === 'lesen'" x-cloak class="space-y-6 animate-[fadeIn_0.3s_ease-out]">
+      <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-bold text-slate-800">محاكي القراءة والاستماع</h2>
+          <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-bold">Teil 1</span>
+        </div>
+        <p class="text-slate-500 mb-6">اقرأ النص التالي ثم أجب عن الأسئلة المرفقة لتدريب نفسك على نمط امتحان DTZ الحقيقي.</p>
+        
+        <div class="bg-indigo-50 p-5 rounded-2xl border border-indigo-100 mb-6 text-left" dir="ltr">
+          <h3 class="font-bold text-indigo-900 mb-2">Liebe Nachbarn,</h3>
+          <p class="text-indigo-800 leading-relaxed mb-4">
+            am kommenden Samstag, den 15. Mai, feiere ich meinen 30. Geburtstag. Ich möchte Sie alle herzlich zu einer kleinen Gartenparty einladen. 
+            Wir fangen um 15 Uhr an. Für Essen und Getränke ist gesorgt, aber wenn jemand einen Salat oder einen Kuchen mitbringen möchte, freue ich mich sehr.
+          </p>
+          <p class="text-indigo-800 leading-relaxed">
+            Bitte sagen Sie mir bis Mittwoch Bescheid, ob Sie kommen können.<br><br>Viele Grüße,<br>Thomas Müller (Erdgeschoss)
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <p class="font-bold mb-3" dir="ltr">1. Warum schreibt Thomas diesen Brief?</p>
+            <div class="space-y-2" dir="ltr">
+              <label class="flex items-center gap-3 p-3 rounded-lg border hover:bg-white cursor-pointer transition" :class="answers.q1 === 'a' ? 'border-indigo-500 bg-indigo-50' : 'border-slate-200'">
+                <input type="radio" name="q1" value="a" x-model="answers.q1" class="w-5 h-5 text-indigo-600">
+                <span>a) Weil er Hilfe im Garten braucht.</span>
+              </label>
+              <label class="flex items-center gap-3 p-3 rounded-lg border hover:bg-white cursor-pointer transition" :class="answers.q1 === 'b' ? 'border-indigo-500 bg-indigo-50' : 'border-slate-200'">
+                <input type="radio" name="q1" value="b" x-model="answers.q1" class="w-5 h-5 text-indigo-600">
+                <span>b) Weil er seine Nachbarn zu seiner Geburtstagsparty einlädt.</span>
+              </label>
+              <label class="flex items-center gap-3 p-3 rounded-lg border hover:bg-white cursor-pointer transition" :class="answers.q1 === 'c' ? 'border-indigo-500 bg-indigo-50' : 'border-slate-200'">
+                <input type="radio" name="q1" value="c" x-model="answers.q1" class="w-5 h-5 text-indigo-600">
+                <span>c) Weil er sich über den Lärm beschwert.</span>
+              </label>
+            </div>
+            <div x-show="showResults" class="mt-3 p-3 rounded-lg text-sm" :class="answers.q1 === 'b' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'" x-cloak>
+              <span x-text="answers.q1 === 'b' ? 'إجابة صحيحة ✅' : 'إجابة خاطئة ❌ الصحيح هو b'"></span>
+            </div>
+          </div>
+        </div>
+
+        <button @click="showResults = true" class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-md transition">
+          التحقق من الإجابات
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. Schreiben -->
+    <section x-show="currentTab === 'schreiben'" x-cloak class="space-y-6 animate-[fadeIn_0.3s_ease-out]">
+      <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+        <h2 class="text-2xl font-bold text-slate-800 mb-2">كتابة الرسائل (Schreiben)</h2>
+        <p class="text-slate-500 mb-6">أهم القوالب والنماذج الجاهزة لاجتياز قسم الكتابة في امتحان DTZ بنجاح.</p>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <template x-for="(letter, index) in letters" :key="index">
+            <div class="border border-slate-200 rounded-2xl p-5 hover:shadow-md transition cursor-pointer" @click="activeLetter = letter">
+              <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold mb-3" x-text="index + 1"></div>
+              <h3 class="font-bold text-lg mb-1" x-text="letter.title"></h3>
+              <p class="text-sm text-slate-500 line-clamp-2" x-text="letter.desc"></p>
+            </div>
+          </template>
+        </div>
+
+        <!-- Letter Modal -->
+        <div x-show="activeLetter" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4" x-cloak>
+          <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" @click.outside="activeLetter = null">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center sticky top-0 bg-white/90 backdrop-blur">
+              <h3 class="text-xl font-bold" x-text="activeLetter?.title"></h3>
+              <button @click="activeLetter = null" class="w-8 h-8 flex items-center justify-center bg-slate-100 text-slate-500 rounded-full hover:bg-slate-200">✕</button>
+            </div>
+            <div class="p-6">
+              <div class="bg-amber-50 border border-amber-200 text-amber-800 p-4 rounded-xl mb-6 text-sm">
+                <strong>المطلوب في الامتحان:</strong> <span x-text="activeLetter?.task"></span>
+              </div>
+              <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 font-mono text-left" dir="ltr" style="white-space: pre-line;" x-text="activeLetter?.content">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Sprechen -->
+    <section x-show="currentTab === 'sprechen'" x-cloak class="space-y-6 animate-[fadeIn_0.3s_ease-out]">
+      <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+        <h2 class="text-2xl font-bold text-slate-800 mb-2">المحادثة الشفوية (Sprechen)</h2>
+        <p class="text-slate-500 mb-6">يتكون امتحان المحادثة DTZ من ثلاثة أجزاء. إليك أهم الجمل المفتاحية (Redemittel) لكل جزء.</p>
+
+        <div class="space-y-4">
+          <!-- Teil 1 -->
+          <details class="group bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden">
+            <summary class="flex justify-between items-center font-bold cursor-pointer list-none p-5 text-lg group-open:bg-indigo-50 group-open:text-indigo-700 transition">
+              <span>الجزء الأول: التعريف عن النفس (Sich vorstellen)</span>
+              <span class="transition group-open:rotate-180">▼</span>
+            </summary>
+            <div class="p-5 pt-0 border-t border-slate-200 group-open:border-indigo-100 mt-2 space-y-3" dir="ltr">
+              <ul class="list-disc pl-5 space-y-2 text-slate-700">
+                <li><strong class="text-indigo-600">Name:</strong> Mein Name ist... / Ich heiße...</li>
+                <li><strong class="text-indigo-600">Alter:</strong> Ich bin ... Jahre alt.</li>
+                <li><strong class="text-indigo-600">Land:</strong> Ich komme aus Syrien.</li>
+                <li><strong class="text-indigo-600">Wohnort:</strong> Ich lebe seit 2 Jahren in Deutschland. Ich wohne in Berlin.</li>
+                <li><strong class="text-indigo-600">Sprachen:</strong> Meine Muttersprache ist Arabisch und ich spreche ein bisschen Deutsch und Englisch.</li>
+                <li><strong class="text-indigo-600">Beruf:</strong> Ich bin von Beruf... / In meiner Heimat habe ich als ... gearbeitet.</li>
+                <li><strong class="text-indigo-600">Hobby:</strong> In meiner Freizeit spiele ich gerne Fußball.</li>
+              </ul>
+            </div>
+          </details>
+
+          <!-- Teil 2 -->
+          <details class="group bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden">
+            <summary class="flex justify-between items-center font-bold cursor-pointer list-none p-5 text-lg group-open:bg-indigo-50 group-open:text-indigo-700 transition">
+              <span>الجزء الثاني: وصف صورة (Bildbeschreibung)</span>
+              <span class="transition group-open:rotate-180">▼</span>
+            </summary>
+            <div class="p-5 pt-0 border-t border-slate-200 group-open:border-indigo-100 mt-2 space-y-3" dir="ltr">
+              <p class="text-right text-sm text-slate-500 mb-3" dir="rtl">في هذا الجزء، يجب أن تصف صورة تتحدث عن موضوع معين في الحياة اليومية، وتتحدث عن تجربتك الشخصية المتعلقة بها.</p>
+              <ul class="list-disc pl-5 space-y-2 text-slate-700">
+                <li>Auf dem Bild sehe ich... (im Vordergrund / im Hintergrund / links / rechts)</li>
+                <li>Das Bild zeigt eine Situation in...</li>
+                <li>Ich glaube, die Personen sind... (glücklich / gestresst / bei der Arbeit)</li>
+                <li><strong class="text-indigo-600">Erfahrung (التجربة):</strong> In meiner Heimat ist das (genauso / ganz anders).</li>
+                <li>Als ich in Syrien war, habe ich auch...</li>
+                <li>In Deutschland habe ich gemerkt, dass...</li>
+              </ul>
+            </div>
+          </details>
+
+          <!-- Teil 3 -->
+          <details class="group bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden">
+            <summary class="flex justify-between items-center font-bold cursor-pointer list-none p-5 text-lg group-open:bg-indigo-50 group-open:text-indigo-700 transition">
+              <span>الجزء الثالث: التخطيط لشيء معاً (Gemeinsam etwas planen)</span>
+              <span class="transition group-open:rotate-180">▼</span>
+            </summary>
+            <div class="p-5 pt-0 border-t border-slate-200 group-open:border-indigo-100 mt-2 space-y-3" dir="ltr">
+              <p class="text-right text-sm text-slate-500 mb-3" dir="rtl">هنا عليك الحوار مع زميلك لتنظيم حفلة، زيارة مريض، أو رحلة.</p>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                  <h4 class="font-bold text-green-600 mb-2">Vorschläge machen (اقتراحات)</h4>
+                  <ul class="list-disc pl-4 text-sm space-y-1">
+                    <li>Wir könnten...</li>
+                    <li>Ich schlage vor, dass wir...</li>
+                    <li>Was hältst du davon, wenn wir...</li>
+                    <li>Hast du Lust, am Wochenende zu...</li>
+                  </ul>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                  <h4 class="font-bold text-blue-600 mb-2">Zustimmen / Ablehnen (موافقة / رفض)</h4>
+                  <ul class="list-disc pl-4 text-sm space-y-1">
+                    <li>Das ist eine tolle Idee!</li>
+                    <li>Ich bin ganz deiner Meinung.</li>
+                    <li>Das finde ich nicht so gut. Besser wäre...</li>
+                    <li>Tut mir leid, aber da habe ich keine Zeit.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    function dtzApp() {
+      return {
+        currentTab: 'lesen',
+        tabs: [
+          { id: 'lesen', name: 'قراءة واستماع', icon: '📖' },
+          { id: 'schreiben', name: 'كتابة الرسائل', icon: '✍️' },
+          { id: 'sprechen', name: 'المحادثة الشفوية', icon: '🗣️' }
+        ],
+        answers: { q1: '' },
+        showResults: false,
+        activeLetter: null,
+        letters: [
+          {
+            title: 'رسالة اعتذار للمدرسة (Entschuldigung)',
+            desc: 'ابنك مريض ولا يستطيع الذهاب للمدرسة.',
+            task: 'Sie schreiben an die Lehrerin Ihres Sohnes. Ihr Sohn ist krank und kann nicht in die Schule gehen. Bitten Sie um Entschuldigung und fragen Sie nach den Hausaufgaben.',
+            content: `Liebe Frau Müller,
+
+ich schreibe Ihnen, weil mein Sohn Ahmad heute und morgen leider nicht in die Schule kommen kann. Er ist krank und hat hohes Fieber. Wir waren schon beim Arzt und er muss im Bett bleiben.
+
+Könnten Sie mir bitte sagen, welche Hausaufgaben er machen muss? Ich kann die Bücher von einem Mitschüler abholen.
+
+Vielen Dank für Ihr Verständnis.
+
+Mit freundlichen Grüßen
+[Dein Name]`
+          },
+          {
+            title: 'رسالة لشركة التأمين (Krankenkasse)',
+            desc: 'طلب بطاقة تأمين جديدة لأنك أضعتها.',
+            task: 'Sie haben Ihre Versichertenkarte verloren. Schreiben Sie an Ihre Krankenkasse. Erklären Sie das Problem und bitten Sie um eine neue Karte.',
+            content: `Sehr geehrte Damen und Herren,
+
+hiermit möchte ich Ihnen mitteilen, dass ich leider meine Versichertenkarte verloren habe. Ich habe überall gesucht, aber ich kann sie nicht finden.
+
+Könnten Sie mir bitte so schnell wie möglich eine neue Karte zuschicken? Meine Adresse ist immer noch dieselbe.
+Meine Versicherungsnummer ist: 123456789.
+
+Ich danke Ihnen im Voraus für Ihre Hilfe.
+
+Mit freundlichen Grüßen
+[Dein Name]`
+          },
+          {
+            title: 'رسالة لصاحب العمل (Kündigung)',
+            desc: 'إنهاء عقد العمل (الاستقالة).',
+            task: 'Sie möchten Ihren Arbeitsvertrag kündigen. Schreiben Sie eine formelle Kündigung an Ihren Arbeitgeber.',
+            content: `Sehr geehrte(r) Herr/Frau [Name des Chefs],
+
+hiermit kündige ich meinen Arbeitsvertrag fristgerecht zum [Datum, z.B. 31.10.2024].
+
+Ich bedanke mich für die gute Zusammenarbeit und die wertvollen Erfahrungen, die ich in Ihrem Unternehmen sammeln konnte. 
+
+Bitte senden Sie mir eine schriftliche Bestätigung der Kündigung sowie mein Arbeitszeugnis an meine Adresse.
+
+Mit freundlichen Grüßen
+[Dein Name]
+[Unterschrift]`
+          }
+        ]
+      }
+    }
+  </script>
+</body>
+</html>
