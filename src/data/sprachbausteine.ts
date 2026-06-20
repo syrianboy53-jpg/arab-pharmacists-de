@@ -75,7 +75,7 @@ export const pruefungsFragen = [
     "id": "pf-6",
     "category": "perfekt",
     "level": "A2",
-    "premium": true,
+    "premium": false,
     "context": "Er ___ den ganzen Tag im Bett geblieben.",
     "options": [
       "hat",
@@ -89,7 +89,7 @@ export const pruefungsFragen = [
     "id": "pf-7",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich habe das Buch ___ .",
     "options": [
       "lesen",
@@ -103,7 +103,7 @@ export const pruefungsFragen = [
     "id": "pf-8",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir haben uns gestern ___ .",
     "options": [
       "getroffen",
@@ -117,7 +117,7 @@ export const pruefungsFragen = [
     "id": "pf-9",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie ist im Sessel ___ .",
     "options": [
       "eingeschlafen",
@@ -131,7 +131,7 @@ export const pruefungsFragen = [
     "id": "pf-10",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Was hat er ___ ?",
     "options": [
       "sagen",
@@ -145,7 +145,7 @@ export const pruefungsFragen = [
     "id": "pf-11",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir haben den ganzen Film ___ .",
     "options": [
       "sehen",
@@ -159,7 +159,7 @@ export const pruefungsFragen = [
     "id": "pf-12",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich habe meine Tasche ___ .",
     "options": [
       "vergessen",
@@ -173,7 +173,7 @@ export const pruefungsFragen = [
     "id": "pf-13",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Habt ihr eure Hausaufgaben ___ ?",
     "options": [
       "gemacht",
@@ -187,7 +187,7 @@ export const pruefungsFragen = [
     "id": "pf-14",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie hat den Termin ___ .",
     "options": [
       "vergessen",
@@ -201,7 +201,7 @@ export const pruefungsFragen = [
     "id": "pf-15",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Bist du schon mal nach Italien ___ ?",
     "options": [
       "geflogen",
@@ -215,7 +215,7 @@ export const pruefungsFragen = [
     "id": "pf-16",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir haben den Brief ___ .",
     "options": [
       "schreibt",
@@ -229,7 +229,7 @@ export const pruefungsFragen = [
     "id": "pf-17",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Er ___ eine neue Wohnung gefunden.",
     "options": [
       "hat",
@@ -243,7 +243,7 @@ export const pruefungsFragen = [
     "id": "pf-18",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich ___ in Damaskus geboren.",
     "options": [
       "habe",
@@ -257,7 +257,7 @@ export const pruefungsFragen = [
     "id": "pf-19",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie hat das Geld ___ .",
     "options": [
       "verloren",
@@ -271,7 +271,7 @@ export const pruefungsFragen = [
     "id": "pf-20",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir haben uns sehr ___ .",
     "options": [
       "gefreut",
@@ -285,7 +285,7 @@ export const pruefungsFragen = [
     "id": "pf-21",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wann seid ihr ___ ?",
     "options": [
       "ankommen",
@@ -299,7 +299,7 @@ export const pruefungsFragen = [
     "id": "pf-22",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Hast du das Geschirr ___ ?",
     "options": [
       "abgewaschen",
@@ -313,7 +313,7 @@ export const pruefungsFragen = [
     "id": "pf-23",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Er hat den Schlüssel ___ .",
     "options": [
       "mitnehmen",
@@ -327,7 +327,7 @@ export const pruefungsFragen = [
     "id": "pf-24",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich habe gestern lange ___ .",
     "options": [
       "telefoniert",
@@ -341,7 +341,7 @@ export const pruefungsFragen = [
     "id": "pf-25",
     "category": "perfekt",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie hat Medizin ___ .",
     "options": [
       "studiert",
@@ -425,7 +425,7 @@ export const pruefungsFragen = [
     "id": "mod-6",
     "category": "modal",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Mein Arzt sagt, ich ___ mehr Sport machen.",
     "options": [
       "kann",
@@ -439,7 +439,7 @@ export const pruefungsFragen = [
     "id": "mod-7",
     "category": "modal",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Mit 18 ___ man wählen.",
     "options": [
       "darf",
@@ -453,7 +453,7 @@ export const pruefungsFragen = [
     "id": "mod-8",
     "category": "modal",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich ___ keinen Kaffee mehr.",
     "options": [
       "mag",
@@ -467,7 +467,7 @@ export const pruefungsFragen = [
     "id": "mod-9",
     "category": "modal",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich konnte gestern nicht kommen, weil ich arbeiten ___ .",
     "options": [
       "muss",
@@ -481,7 +481,7 @@ export const pruefungsFragen = [
     "id": "mod-10",
     "category": "modal",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir ___ schon vor zwei Stunden gehen wollen.",
     "options": [
       "hätten",
@@ -495,7 +495,7 @@ export const pruefungsFragen = [
     "id": "mod-11",
     "category": "modal",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich ___ ein Glas Wasser, bitte.",
     "options": [
       "möchte",
@@ -509,7 +509,7 @@ export const pruefungsFragen = [
     "id": "mod-12",
     "category": "modal",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Du ___ leiser sprechen!",
     "options": [
       "solltest",
@@ -523,7 +523,7 @@ export const pruefungsFragen = [
     "id": "mod-13",
     "category": "modal",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie ___ heute zu Hause bleiben (لأنّها مريضة).",
     "options": [
       "kann",
@@ -537,7 +537,7 @@ export const pruefungsFragen = [
     "id": "mod-14",
     "category": "modal",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Hier ___ es gefährlich sein.",
     "options": [
       "kann",
@@ -551,7 +551,7 @@ export const pruefungsFragen = [
     "id": "mod-15",
     "category": "modal",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Er hat es nicht gewusst, also ___ er es nicht tun.",
     "options": [
       "hat können",
@@ -565,7 +565,7 @@ export const pruefungsFragen = [
     "id": "mod-16",
     "category": "modal",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich ___ heute keinen Sport machen, ich bin müde.",
     "options": [
       "will",
@@ -579,7 +579,7 @@ export const pruefungsFragen = [
     "id": "mod-17",
     "category": "modal",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ Sie mir helfen?",
     "options": [
       "Wollen",
@@ -593,7 +593,7 @@ export const pruefungsFragen = [
     "id": "mod-18",
     "category": "modal",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Du ___ das nicht tun!",
     "options": [
       "darfst",
@@ -607,7 +607,7 @@ export const pruefungsFragen = [
     "id": "mod-19",
     "category": "modal",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie ___ um 7 Uhr aufstehen, sonst kommt sie zu spät.",
     "options": [
       "muss",
@@ -621,7 +621,7 @@ export const pruefungsFragen = [
     "id": "mod-20",
     "category": "modal",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Er ___ das Buch gelesen ___ .",
     "options": [
       "hat / haben",
@@ -663,7 +663,7 @@ export const pruefungsFragen = [
     "id": "pas-3",
     "category": "passiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Der Brief ___ schon geschrieben ___ .",
     "options": [
       "wird / werden",
@@ -677,7 +677,7 @@ export const pruefungsFragen = [
     "id": "pas-4",
     "category": "passiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Hier ___ Deutsch gesprochen.",
     "options": [
       "wird",
@@ -691,7 +691,7 @@ export const pruefungsFragen = [
     "id": "pas-5",
     "category": "passiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das Problem muss ___ ___ .",
     "options": [
       "werden / lösen",
@@ -705,7 +705,7 @@ export const pruefungsFragen = [
     "id": "pas-6",
     "category": "passiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Die Tür ___ um 8 Uhr geöffnet.",
     "options": [
       "wird",
@@ -719,7 +719,7 @@ export const pruefungsFragen = [
     "id": "pas-7",
     "category": "passiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das Fenster ___ jeden Tag geputzt.",
     "options": [
       "ist",
@@ -733,7 +733,7 @@ export const pruefungsFragen = [
     "id": "pas-8",
     "category": "passiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Diese Aufgabe ___ schon erledigt.",
     "options": [
       "ist",
@@ -747,7 +747,7 @@ export const pruefungsFragen = [
     "id": "pas-9",
     "category": "passiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das Buch ___ von vielen Studenten gelesen.",
     "options": [
       "wird",
@@ -761,7 +761,7 @@ export const pruefungsFragen = [
     "id": "pas-10",
     "category": "passiv",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Der Computer ___ gestern repariert ___ .",
     "options": [
       "wurde / worden",
@@ -775,7 +775,7 @@ export const pruefungsFragen = [
     "id": "pas-11",
     "category": "passiv",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Das Haus ___ nächste Woche verkauft ___ .",
     "options": [
       "wird / werden",
@@ -789,7 +789,7 @@ export const pruefungsFragen = [
     "id": "pas-12",
     "category": "passiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Die Briefe ___ jeden Morgen verteilt.",
     "options": [
       "werden",
@@ -803,7 +803,7 @@ export const pruefungsFragen = [
     "id": "pas-13",
     "category": "passiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das Auto kann nicht ___ ___ .",
     "options": [
       "repariert / sein",
@@ -817,7 +817,7 @@ export const pruefungsFragen = [
     "id": "pas-14",
     "category": "passiv",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Es ___ viel über das Thema diskutiert.",
     "options": [
       "wird",
@@ -831,7 +831,7 @@ export const pruefungsFragen = [
     "id": "pas-15",
     "category": "passiv",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Der Patient ___ vom Arzt untersucht.",
     "options": [
       "wird",
@@ -915,7 +915,7 @@ export const pruefungsFragen = [
     "id": "nb-6",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ er müde ist, arbeitet er weiter.",
     "options": [
       "Weil",
@@ -929,7 +929,7 @@ export const pruefungsFragen = [
     "id": "nb-7",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich lerne Deutsch, ___ ich in Deutschland leben kann.",
     "options": [
       "weil",
@@ -943,7 +943,7 @@ export const pruefungsFragen = [
     "id": "nb-8",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ die Sonne scheint, gehen wir spazieren.",
     "options": [
       "Wenn",
@@ -957,7 +957,7 @@ export const pruefungsFragen = [
     "id": "nb-9",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ du nach Hause kommst, ruf mich an.",
     "options": [
       "Bevor",
@@ -971,7 +971,7 @@ export const pruefungsFragen = [
     "id": "nb-10",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ wir essen, waschen wir die Hände.",
     "options": [
       "Bevor",
@@ -985,7 +985,7 @@ export const pruefungsFragen = [
     "id": "nb-11",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ruf mich an, ___ du Hilfe brauchst.",
     "options": [
       "falls",
@@ -999,7 +999,7 @@ export const pruefungsFragen = [
     "id": "nb-12",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich komme nicht, ___ ich keine Zeit ___ .",
     "options": [
       "weil / habe",
@@ -1013,7 +1013,7 @@ export const pruefungsFragen = [
     "id": "nb-13",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie weiß nicht, ___ ihr Mann arbeitet.",
     "options": [
       "ob",
@@ -1027,7 +1027,7 @@ export const pruefungsFragen = [
     "id": "nb-14",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich freue mich, ___ du kommst.",
     "options": [
       "ob",
@@ -1041,7 +1041,7 @@ export const pruefungsFragen = [
     "id": "nb-15",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ es regnet, nehme ich einen Schirm.",
     "options": [
       "Wenn",
@@ -1055,7 +1055,7 @@ export const pruefungsFragen = [
     "id": "nb-16",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich gehe ins Bett, ___ ich müde bin.",
     "options": [
       "weil",
@@ -1069,7 +1069,7 @@ export const pruefungsFragen = [
     "id": "nb-17",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Er fragt, ___ ich Zeit habe.",
     "options": [
       "ob",
@@ -1083,7 +1083,7 @@ export const pruefungsFragen = [
     "id": "nb-18",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich glaube, ___ er recht ___ .",
     "options": [
       "dass / hat",
@@ -1097,7 +1097,7 @@ export const pruefungsFragen = [
     "id": "nb-19",
     "category": "nebensatz",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Er arbeitet, ___ er das Geld ___ .",
     "options": [
       "damit / verdient",
@@ -1111,7 +1111,7 @@ export const pruefungsFragen = [
     "id": "nb-20",
     "category": "nebensatz",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Er ist krank, ___ er nicht zur Arbeit kommt.",
     "options": [
       "so dass",
@@ -1125,7 +1125,7 @@ export const pruefungsFragen = [
     "id": "nb-21",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Bevor ich ins Bett ___ , putze ich die Zähne.",
     "options": [
       "gehe",
@@ -1139,7 +1139,7 @@ export const pruefungsFragen = [
     "id": "nb-22",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Nachdem er gegessen ___ , ging er spazieren.",
     "options": [
       "hat",
@@ -1153,7 +1153,7 @@ export const pruefungsFragen = [
     "id": "nb-23",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Während ich ___ , klingelte das Telefon.",
     "options": [
       "las",
@@ -1167,7 +1167,7 @@ export const pruefungsFragen = [
     "id": "nb-24",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich weiß, ___ er heißt.",
     "options": [
       "wie",
@@ -1181,7 +1181,7 @@ export const pruefungsFragen = [
     "id": "nb-25",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Können Sie mir sagen, ___ der Bahnhof ___ ?",
     "options": [
       "wo / ist",
@@ -1195,7 +1195,7 @@ export const pruefungsFragen = [
     "id": "nb-26",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie kann nicht kommen, ___ sie krank ___ .",
     "options": [
       "weil / ist",
@@ -1209,7 +1209,7 @@ export const pruefungsFragen = [
     "id": "nb-27",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ es schneit, kann ich nicht fahren.",
     "options": [
       "Falls",
@@ -1223,7 +1223,7 @@ export const pruefungsFragen = [
     "id": "nb-28",
     "category": "nebensatz",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Er ist nicht gekommen, ___ er versprochen ___ .",
     "options": [
       "obwohl / hatte",
@@ -1237,7 +1237,7 @@ export const pruefungsFragen = [
     "id": "nb-29",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir warten, ___ der Bus ___ .",
     "options": [
       "bis / kommt",
@@ -1251,7 +1251,7 @@ export const pruefungsFragen = [
     "id": "nb-30",
     "category": "nebensatz",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ ich nach Hause komme, esse ich.",
     "options": [
       "Sobald",
@@ -1307,7 +1307,7 @@ export const pruefungsFragen = [
     "id": "pr-4",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das Bild hängt ___ der Wand.",
     "options": [
       "auf",
@@ -1321,7 +1321,7 @@ export const pruefungsFragen = [
     "id": "pr-5",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich wohne ___ einer kleinen Stadt.",
     "options": [
       "in",
@@ -1335,7 +1335,7 @@ export const pruefungsFragen = [
     "id": "pr-6",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie arbeitet ___ Donnerstag.",
     "options": [
       "an",
@@ -1349,7 +1349,7 @@ export const pruefungsFragen = [
     "id": "pr-7",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ Sommer fahren wir ans Meer.",
     "options": [
       "Im",
@@ -1363,7 +1363,7 @@ export const pruefungsFragen = [
     "id": "pr-8",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich treffe mich ___ meinem Freund.",
     "options": [
       "mit",
@@ -1377,7 +1377,7 @@ export const pruefungsFragen = [
     "id": "pr-9",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das Geschenk ist ___ dich.",
     "options": [
       "für",
@@ -1391,7 +1391,7 @@ export const pruefungsFragen = [
     "id": "pr-10",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie kommt ___ der Türkei.",
     "options": [
       "von",
@@ -1405,7 +1405,7 @@ export const pruefungsFragen = [
     "id": "pr-11",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich wohne ___ meinen Eltern.",
     "options": [
       "mit",
@@ -1419,7 +1419,7 @@ export const pruefungsFragen = [
     "id": "pr-12",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ einer Stunde komme ich zurück.",
     "options": [
       "Vor",
@@ -1433,7 +1433,7 @@ export const pruefungsFragen = [
     "id": "pr-13",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Er ist ___ einem Jahr in Deutschland.",
     "options": [
       "vor",
@@ -1447,7 +1447,7 @@ export const pruefungsFragen = [
     "id": "pr-14",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich gehe ___ Freitag ins Kino.",
     "options": [
       "am",
@@ -1461,7 +1461,7 @@ export const pruefungsFragen = [
     "id": "pr-15",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Er fährt ___ Auto zur Arbeit.",
     "options": [
       "mit",
@@ -1475,7 +1475,7 @@ export const pruefungsFragen = [
     "id": "pr-16",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir sind ___ Wochenende zu Hause.",
     "options": [
       "am",
@@ -1489,7 +1489,7 @@ export const pruefungsFragen = [
     "id": "pr-17",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie kommt ___ 9 Uhr.",
     "options": [
       "um",
@@ -1503,7 +1503,7 @@ export const pruefungsFragen = [
     "id": "pr-18",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir bleiben ___ Wochenende in der Stadt.",
     "options": [
       "über das",
@@ -1517,7 +1517,7 @@ export const pruefungsFragen = [
     "id": "pr-19",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich fahre ___ Türkei.",
     "options": [
       "nach",
@@ -1531,7 +1531,7 @@ export const pruefungsFragen = [
     "id": "pr-20",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ des Wetters bleiben wir zu Hause.",
     "options": [
       "Wegen",
@@ -1545,7 +1545,7 @@ export const pruefungsFragen = [
     "id": "pr-21",
     "category": "praeposition",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "___ des Regens gehen wir spazieren.",
     "options": [
       "Wegen",
@@ -1559,7 +1559,7 @@ export const pruefungsFragen = [
     "id": "pr-22",
     "category": "praeposition",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Er kommt ___ Bahn.",
     "options": [
       "mit der",
@@ -1573,7 +1573,7 @@ export const pruefungsFragen = [
     "id": "pr-23",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das Heft liegt ___ dem Buch.",
     "options": [
       "unter",
@@ -1587,7 +1587,7 @@ export const pruefungsFragen = [
     "id": "pr-24",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie sitzt ___ dem Fenster.",
     "options": [
       "neben",
@@ -1601,7 +1601,7 @@ export const pruefungsFragen = [
     "id": "pr-25",
     "category": "praeposition",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Er steht ___ der Tür und dem Fenster.",
     "options": [
       "neben",
@@ -1657,7 +1657,7 @@ export const pruefungsFragen = [
     "id": "ar-4",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich helfe ___ Mann.",
     "options": [
       "der",
@@ -1671,7 +1671,7 @@ export const pruefungsFragen = [
     "id": "ar-5",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich danke ___ Frau.",
     "options": [
       "die",
@@ -1685,7 +1685,7 @@ export const pruefungsFragen = [
     "id": "ar-6",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das Buch ___ ist neu.",
     "options": [
       "des Vater",
@@ -1699,7 +1699,7 @@ export const pruefungsFragen = [
     "id": "ar-7",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich kenne ___ nicht.",
     "options": [
       "er",
@@ -1713,7 +1713,7 @@ export const pruefungsFragen = [
     "id": "ar-8",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Kannst du ___ helfen?",
     "options": [
       "mich",
@@ -1727,7 +1727,7 @@ export const pruefungsFragen = [
     "id": "ar-9",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das Buch gehört ___ .",
     "options": [
       "mich",
@@ -1741,7 +1741,7 @@ export const pruefungsFragen = [
     "id": "ar-10",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich sehe ___ jeden Tag.",
     "options": [
       "er",
@@ -1755,7 +1755,7 @@ export const pruefungsFragen = [
     "id": "ar-11",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir besuchen ___ heute.",
     "options": [
       "sie",
@@ -1769,7 +1769,7 @@ export const pruefungsFragen = [
     "id": "ar-12",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie geht zu ___ Eltern.",
     "options": [
       "ihre",
@@ -1783,7 +1783,7 @@ export const pruefungsFragen = [
     "id": "ar-13",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir sprechen mit ___ Freunden.",
     "options": [
       "unsere",
@@ -1797,7 +1797,7 @@ export const pruefungsFragen = [
     "id": "ar-14",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Hast du ___ Buch gelesen?",
     "options": [
       "das",
@@ -1811,7 +1811,7 @@ export const pruefungsFragen = [
     "id": "ar-15",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich gebe ___ Kindern Süßigkeiten.",
     "options": [
       "die",
@@ -1825,7 +1825,7 @@ export const pruefungsFragen = [
     "id": "ar-16",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie ist ___ Tochter ___ Lehrers.",
     "options": [
       "die / des",
@@ -1839,7 +1839,7 @@ export const pruefungsFragen = [
     "id": "ar-17",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir kommen aus ___ Schweiz.",
     "options": [
       "die",
@@ -1853,7 +1853,7 @@ export const pruefungsFragen = [
     "id": "ar-18",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich gehe in ___ Apotheke.",
     "options": [
       "die",
@@ -1867,7 +1867,7 @@ export const pruefungsFragen = [
     "id": "ar-19",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie wohnt seit drei Jahren in ___ Stadt.",
     "options": [
       "die",
@@ -1881,7 +1881,7 @@ export const pruefungsFragen = [
     "id": "ar-20",
     "category": "artikel-pronomen",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das Auto gehört ___ Kollegen.",
     "options": [
       "mein",
@@ -1909,7 +1909,7 @@ export const pruefungsFragen = [
     "id": "ad-2",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie hat einen ___ Hund.",
     "options": [
       "klein",
@@ -1923,7 +1923,7 @@ export const pruefungsFragen = [
     "id": "ad-3",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich trinke gern ___ Kaffee.",
     "options": [
       "stark",
@@ -1937,7 +1937,7 @@ export const pruefungsFragen = [
     "id": "ad-4",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das ist die ___ Frau.",
     "options": [
       "nett",
@@ -1951,7 +1951,7 @@ export const pruefungsFragen = [
     "id": "ad-5",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich kenne den ___ Mann.",
     "options": [
       "alt",
@@ -1965,7 +1965,7 @@ export const pruefungsFragen = [
     "id": "ad-6",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir wohnen in einem ___ Haus.",
     "options": [
       "schön",
@@ -1979,7 +1979,7 @@ export const pruefungsFragen = [
     "id": "ad-7",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich trinke ___ Wasser.",
     "options": [
       "kalt",
@@ -1993,7 +1993,7 @@ export const pruefungsFragen = [
     "id": "ad-8",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Mit dem ___ Auto fahre ich nicht.",
     "options": [
       "alt",
@@ -2007,7 +2007,7 @@ export const pruefungsFragen = [
     "id": "ad-9",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie hat ___ Augen.",
     "options": [
       "blau",
@@ -2021,7 +2021,7 @@ export const pruefungsFragen = [
     "id": "ad-10",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Die ___ Bücher sind interessant.",
     "options": [
       "alten",
@@ -2035,7 +2035,7 @@ export const pruefungsFragen = [
     "id": "ad-11",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Er ist ein ___ Lehrer.",
     "options": [
       "gut",
@@ -2049,7 +2049,7 @@ export const pruefungsFragen = [
     "id": "ad-12",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich esse einen ___ Apfel.",
     "options": [
       "rot",
@@ -2063,7 +2063,7 @@ export const pruefungsFragen = [
     "id": "ad-13",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie ist eine ___ Studentin.",
     "options": [
       "fleißig",
@@ -2077,7 +2077,7 @@ export const pruefungsFragen = [
     "id": "ad-14",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Mit meiner ___ Freundin gehe ich aus.",
     "options": [
       "gut",
@@ -2091,7 +2091,7 @@ export const pruefungsFragen = [
     "id": "ad-15",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das ___ Wetter macht mich glücklich.",
     "options": [
       "schön",
@@ -2105,7 +2105,7 @@ export const pruefungsFragen = [
     "id": "ad-16",
     "category": "adjektiv",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Trotz des ___ Wetters spielen wir Fußball.",
     "options": [
       "schlecht",
@@ -2119,7 +2119,7 @@ export const pruefungsFragen = [
     "id": "ad-17",
     "category": "adjektiv",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Ich brauche ___ Hilfe.",
     "options": [
       "professionell",
@@ -2133,7 +2133,7 @@ export const pruefungsFragen = [
     "id": "ad-18",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Die Kinder spielen mit ___ Spielsachen.",
     "options": [
       "neu",
@@ -2147,7 +2147,7 @@ export const pruefungsFragen = [
     "id": "ad-19",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie wohnt in einer ___ Stadt.",
     "options": [
       "groß",
@@ -2161,7 +2161,7 @@ export const pruefungsFragen = [
     "id": "ad-20",
     "category": "adjektiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir haben ___ Probleme.",
     "options": [
       "groß",
@@ -2189,7 +2189,7 @@ export const pruefungsFragen = [
     "id": "rel-2",
     "category": "relativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Die Frau, ___ ich kenne, kommt heute.",
     "options": [
       "die",
@@ -2203,7 +2203,7 @@ export const pruefungsFragen = [
     "id": "rel-3",
     "category": "relativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das Kind, ___ ich helfe, ist krank.",
     "options": [
       "das",
@@ -2217,7 +2217,7 @@ export const pruefungsFragen = [
     "id": "rel-4",
     "category": "relativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Der Lehrer, ___ ich vertraue, ist nett.",
     "options": [
       "der",
@@ -2231,7 +2231,7 @@ export const pruefungsFragen = [
     "id": "rel-5",
     "category": "relativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Die Bücher, ___ ich gelesen habe, sind alt.",
     "options": [
       "die",
@@ -2245,7 +2245,7 @@ export const pruefungsFragen = [
     "id": "rel-6",
     "category": "relativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Die Freunde, mit ___ ich spreche, kommen aus Syrien.",
     "options": [
       "die",
@@ -2259,7 +2259,7 @@ export const pruefungsFragen = [
     "id": "rel-7",
     "category": "relativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das Auto, ___ Farbe rot ist, gehört mir.",
     "options": [
       "das",
@@ -2273,7 +2273,7 @@ export const pruefungsFragen = [
     "id": "rel-8",
     "category": "relativ",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Die Frau, ___ Mann krank ist, weint.",
     "options": [
       "die",
@@ -2287,7 +2287,7 @@ export const pruefungsFragen = [
     "id": "rel-9",
     "category": "relativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Der Tisch, ___ wir gekauft haben, ist groß.",
     "options": [
       "der",
@@ -2301,7 +2301,7 @@ export const pruefungsFragen = [
     "id": "rel-10",
     "category": "relativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das Haus, in ___ ich wohne, ist alt.",
     "options": [
       "das",
@@ -2315,7 +2315,7 @@ export const pruefungsFragen = [
     "id": "rel-11",
     "category": "relativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Der Film, ___ wir gestern gesehen haben, war gut.",
     "options": [
       "der",
@@ -2329,7 +2329,7 @@ export const pruefungsFragen = [
     "id": "rel-12",
     "category": "relativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Die Stadt, in ___ ich geboren bin, heißt Aleppo.",
     "options": [
       "die",
@@ -2343,7 +2343,7 @@ export const pruefungsFragen = [
     "id": "rel-13",
     "category": "relativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Der Mann, ___ Auto kaputt ist, ruft die Polizei.",
     "options": [
       "der",
@@ -2357,7 +2357,7 @@ export const pruefungsFragen = [
     "id": "rel-14",
     "category": "relativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Die Kinder, mit ___ wir spielen, sind unsere Nachbarn.",
     "options": [
       "denen",
@@ -2371,7 +2371,7 @@ export const pruefungsFragen = [
     "id": "rel-15",
     "category": "relativ",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Alles, ___ er sagt, ist wahr.",
     "options": [
       "das",
@@ -2399,7 +2399,7 @@ export const pruefungsFragen = [
     "id": "km-2",
     "category": "komparativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Er läuft so schnell ___ ich.",
     "options": [
       "als",
@@ -2413,7 +2413,7 @@ export const pruefungsFragen = [
     "id": "km-3",
     "category": "komparativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das ist die ___ Stadt Deutschlands.",
     "options": [
       "große",
@@ -2427,7 +2427,7 @@ export const pruefungsFragen = [
     "id": "km-4",
     "category": "komparativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Mein Bruder ist ___ als ich.",
     "options": [
       "älter",
@@ -2441,7 +2441,7 @@ export const pruefungsFragen = [
     "id": "km-5",
     "category": "komparativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie spielt ___ Klavier ___ ihr Bruder.",
     "options": [
       "besser / als",
@@ -2455,7 +2455,7 @@ export const pruefungsFragen = [
     "id": "km-6",
     "category": "komparativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Heute ist es ___ heiß als gestern.",
     "options": [
       "mehr",
@@ -2469,7 +2469,7 @@ export const pruefungsFragen = [
     "id": "km-7",
     "category": "komparativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das ist mein ___ Freund.",
     "options": [
       "gut",
@@ -2483,7 +2483,7 @@ export const pruefungsFragen = [
     "id": "km-8",
     "category": "komparativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Im Sommer ist es ___ als im Winter.",
     "options": [
       "warm",
@@ -2497,7 +2497,7 @@ export const pruefungsFragen = [
     "id": "km-9",
     "category": "komparativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Er fährt ___ als ich.",
     "options": [
       "langsamer",
@@ -2511,7 +2511,7 @@ export const pruefungsFragen = [
     "id": "km-10",
     "category": "komparativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Das ist die ___ Lösung.",
     "options": [
       "einfache",
@@ -2539,7 +2539,7 @@ export const pruefungsFragen = [
     "id": "vp-2",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich freue mich ___ das Geschenk.",
     "options": [
       "auf",
@@ -2553,7 +2553,7 @@ export const pruefungsFragen = [
     "id": "vp-3",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie denkt oft ___ ihre Familie.",
     "options": [
       "an",
@@ -2567,7 +2567,7 @@ export const pruefungsFragen = [
     "id": "vp-4",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir warten ___ den Bus.",
     "options": [
       "für",
@@ -2581,7 +2581,7 @@ export const pruefungsFragen = [
     "id": "vp-5",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Er interessiert sich ___ Politik.",
     "options": [
       "für",
@@ -2595,7 +2595,7 @@ export const pruefungsFragen = [
     "id": "vp-6",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir sprechen ___ das neue Projekt.",
     "options": [
       "über",
@@ -2609,7 +2609,7 @@ export const pruefungsFragen = [
     "id": "vp-7",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie achtet ___ ihre Gesundheit.",
     "options": [
       "für",
@@ -2623,7 +2623,7 @@ export const pruefungsFragen = [
     "id": "vp-8",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich erinnere mich gut ___ unseren Urlaub.",
     "options": [
       "für",
@@ -2637,7 +2637,7 @@ export const pruefungsFragen = [
     "id": "vp-9",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir gratulieren dir ___ deinem Erfolg.",
     "options": [
       "für",
@@ -2651,7 +2651,7 @@ export const pruefungsFragen = [
     "id": "vp-10",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich danke dir ___ deine Hilfe.",
     "options": [
       "über",
@@ -2665,7 +2665,7 @@ export const pruefungsFragen = [
     "id": "vp-11",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Er träumt ___ einem großen Haus.",
     "options": [
       "über",
@@ -2679,7 +2679,7 @@ export const pruefungsFragen = [
     "id": "vp-12",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie hängt ___ ihrem Vater.",
     "options": [
       "für",
@@ -2693,7 +2693,7 @@ export const pruefungsFragen = [
     "id": "vp-13",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich glaube ___ Gott.",
     "options": [
       "an",
@@ -2707,7 +2707,7 @@ export const pruefungsFragen = [
     "id": "vp-14",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie hofft ___ besseres Wetter.",
     "options": [
       "auf",
@@ -2721,7 +2721,7 @@ export const pruefungsFragen = [
     "id": "vp-15",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir bitten ___ Ihre Hilfe.",
     "options": [
       "für",
@@ -2735,7 +2735,7 @@ export const pruefungsFragen = [
     "id": "vp-16",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Er hat sich ___ den Job beworben.",
     "options": [
       "für",
@@ -2749,7 +2749,7 @@ export const pruefungsFragen = [
     "id": "vp-17",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich diskutiere ___ ihm ___ den Film.",
     "options": [
       "mit / über",
@@ -2763,7 +2763,7 @@ export const pruefungsFragen = [
     "id": "vp-18",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Er besteht ___ seinem Recht.",
     "options": [
       "auf",
@@ -2777,7 +2777,7 @@ export const pruefungsFragen = [
     "id": "vp-19",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wir entscheiden uns ___ den Kauf.",
     "options": [
       "für",
@@ -2791,7 +2791,7 @@ export const pruefungsFragen = [
     "id": "vp-20",
     "category": "verb-praep",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Sie ärgert sich ___ den Lärm.",
     "options": [
       "für",
@@ -2819,7 +2819,7 @@ export const pruefungsFragen = [
     "id": "kj-2",
     "category": "konjunktiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich ___ gerne ein Eis.",
     "options": [
       "hätte",
@@ -2833,7 +2833,7 @@ export const pruefungsFragen = [
     "id": "kj-3",
     "category": "konjunktiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ Sie mir helfen?",
     "options": [
       "Können",
@@ -2847,7 +2847,7 @@ export const pruefungsFragen = [
     "id": "kj-4",
     "category": "konjunktiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich ___ jetzt am Strand sein.",
     "options": [
       "will",
@@ -2861,7 +2861,7 @@ export const pruefungsFragen = [
     "id": "kj-5",
     "category": "konjunktiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Wenn ich Millionär ___ , würde ich reisen.",
     "options": [
       "wäre",
@@ -2875,7 +2875,7 @@ export const pruefungsFragen = [
     "id": "kj-6",
     "category": "konjunktiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "An deiner Stelle ___ ich anders entscheiden.",
     "options": [
       "würde",
@@ -2889,7 +2889,7 @@ export const pruefungsFragen = [
     "id": "kj-7",
     "category": "konjunktiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Du ___ besser auf dich aufpassen.",
     "options": [
       "solltest",
@@ -2903,7 +2903,7 @@ export const pruefungsFragen = [
     "id": "kj-8",
     "category": "konjunktiv",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Wenn er gewusst ___ , ___ er anders gehandelt.",
     "options": [
       "hätte / hätte",
@@ -2917,7 +2917,7 @@ export const pruefungsFragen = [
     "id": "kj-9",
     "category": "konjunktiv",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Wenn ich Vogel ___ , würde ich fliegen.",
     "options": [
       "wäre",
@@ -2931,7 +2931,7 @@ export const pruefungsFragen = [
     "id": "kj-10",
     "category": "konjunktiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "Ich ___ einen Kaffee, bitte.",
     "options": [
       "möchte",
@@ -2945,7 +2945,7 @@ export const pruefungsFragen = [
     "id": "kj-11",
     "category": "konjunktiv",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Es ___ schön, wenn du käm___ .",
     "options": [
       "wäre / -est",
@@ -2959,7 +2959,7 @@ export const pruefungsFragen = [
     "id": "kj-12",
     "category": "konjunktiv",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Wenn ich Geld hätte, ___ ich ein Auto kaufen.",
     "options": [
       "würde",
@@ -2973,7 +2973,7 @@ export const pruefungsFragen = [
     "id": "kj-13",
     "category": "konjunktiv",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ Sie mir bitte das Salz reichen?",
     "options": [
       "Würden",
@@ -2987,7 +2987,7 @@ export const pruefungsFragen = [
     "id": "kj-14",
     "category": "konjunktiv",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Wäre ich nicht müde, ___ ich noch arbeiten.",
     "options": [
       "würde",
@@ -3001,7 +3001,7 @@ export const pruefungsFragen = [
     "id": "kj-15",
     "category": "konjunktiv",
     "level": "B2",
-    "premium": true,
+    "premium": false,
     "context": "Hätte ich das gewusst, ___ ich nicht gekommen.",
     "options": [
       "wäre",
@@ -3043,7 +3043,7 @@ export const pruefungsFragen = [
     "id": "im-3",
     "category": "imperativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ mir, bitte!",
     "options": [
       "Hilfe",
@@ -3057,7 +3057,7 @@ export const pruefungsFragen = [
     "id": "im-4",
     "category": "imperativ",
     "level": "B1",
-    "premium": true,
+    "premium": false,
     "context": "___ den Brief jetzt!",
     "options": [
       "Schreib",
