@@ -115,7 +115,7 @@ export default function GrammarPage() {
                 <button
                   key={l.id}
                   onClick={() => setSelectedLesson(i)}
-                  className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-[#00b894]/20 hover:bg-gray-100 dark:bg-white/5 transition-all shadow-md flex items-center justify-between"
+                  className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-[#00b894]/20 hover:bg-gray-50 dark:hover:bg-white/5 transition-all shadow-md flex items-center justify-between"
                 >
                   <span className="text-[#00b894] text-xs font-bold bg-[#00b894]/10 border border-[#00b894]/20 px-3 py-1.5 rounded-full">
                     شرح + اختبار 📝
@@ -142,7 +142,7 @@ export default function GrammarPage() {
 
               {/* Lesson Details */}
               <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4">
-                <div className="border-b border-white/10 pb-2">
+                <div className="border-b border-gray-200 dark:border-white/10 pb-2">
                   <h2 className="text-lg font-bold text-[#00b894]" dir="ltr">{originalLessons[selectedLesson].title}</h2>
                   <p className="text-xs text-gray-500 dark:text-gray-400">{originalLessons[selectedLesson].titleAr}</p>
                 </div>
@@ -179,11 +179,11 @@ export default function GrammarPage() {
                           if (showLessonResults) {
                             if (oi === ex.correct) cls += 'border-[#00b894] bg-[#00b894]/20 text-[#00b894]'
                             else if (lessonAnswers[i] === oi) cls += 'border-red-500 bg-red-500/20 text-red-500 shadow-inner'
-                            else cls += 'border-white/5 bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-gray-400'
+                            else cls += 'border-gray-200 dark:border-white/5 bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-gray-400'
                           } else {
                             cls += lessonAnswers[i] === oi 
                               ? 'border-[#00b894] bg-[#00b894]/10 text-[#00b894]' 
-                              : 'border-white/10 bg-gray-50 dark:bg-white/5 text-gray-500 dark:text-gray-400 hover:border-[#00b894]'
+                              : 'border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-gray-500 dark:text-gray-400 hover:border-[#00b894]'
                           }
                           return (
                             <button
@@ -276,7 +276,7 @@ export default function GrammarPage() {
               return (
                 <div
                   key={mistake.id}
-                  className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 hover:border-white/10 transition-all shadow-md space-y-4"
+                  className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 hover:border-gray-200 dark:border-white/10 transition-all shadow-md space-y-4"
                 >
                   {/* Title & Level Badge */}
                   <div className="flex items-center justify-between border-b border-gray-200 dark:border-white/5 pb-2.5">
@@ -324,7 +324,7 @@ export default function GrammarPage() {
                         </div>
                         {/* Tip */}
                         {mistake.tipAr && (
-                          <div className="bg-gold/10 border border-gold/20 p-3 rounded-lg">
+                          <div className="bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-700/20 p-3 rounded-lg">
                             <h4 className="text-xs font-bold text-amber-600 dark:text-amber-400 mb-1">💡 نصيحة للحفظ والتركيز:</h4>
                             <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{mistake.tipAr}</p>
                           </div>
@@ -337,8 +337,8 @@ export default function GrammarPage() {
                               {mistake.examples.map((ex, idx) => (
                                 <div key={idx} className="bg-gray-100 dark:bg-white/5 p-2.5 rounded-lg flex items-center justify-between gap-2 text-left">
                                   <div className="text-xs">
-                                    <p className="text-red-400 line-through scale-90">{ex.wrong}</p>
-                                    <p className="text-green-400 font-semibold">{ex.right}</p>
+                                    <p className="text-red-500 line-through scale-90">{ex.wrong}</p>
+                                    <p className="text-emerald-600 dark:text-emerald-400 font-semibold">{ex.right}</p>
                                   </div>
                                   <p className="text-xs text-gray-500 dark:text-gray-400 text-right" dir="rtl">{ex.ar}</p>
                                 </div>
@@ -405,7 +405,7 @@ export default function GrammarPage() {
               return (
                 <div
                   key={key}
-                  className="glass p-4 rounded-xl border border-gray-200 dark:border-white/5 hover:border-white/10 transition-all shadow-md"
+                  className="glass p-4 rounded-xl border border-gray-200 dark:border-white/5 hover:border-gray-200 dark:border-white/10 transition-all shadow-md"
                 >
                   <div className="flex items-center justify-between gap-2 cursor-pointer" onClick={() => setExpandedVerbs(p => ({ ...p, [key]: !isExpanded }))}>
                     {/* Conjugation preview */}

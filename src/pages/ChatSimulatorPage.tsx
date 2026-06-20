@@ -246,7 +246,7 @@ export default function ChatSimulatorPage() {
                   <div className={`p-3.5 rounded-2xl text-xs space-y-1.5 shadow-sm border ${
                     isUser 
                       ? 'bg-[#00b894]/10 border-[#00b894]/25 text-gray-600 dark:text-gray-400 rounded-tr-none' 
-                      : 'bg-gray-50 dark:bg-white/5 border-white/5 text-gray-600 dark:text-gray-400 rounded-tl-none'
+                      : 'bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/5 text-gray-600 dark:text-gray-400 rounded-tl-none'
                   }`}>
                     
                     {/* German Text */}

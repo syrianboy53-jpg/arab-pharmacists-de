@@ -236,7 +236,7 @@ export default function HoerenPage() {
                 {/* Transcript Toggle + Individual Audio */}
                 <button
                   onClick={() => setShowTranscripts(prev => ({ ...prev, [pIdx]: !prev[pIdx] }))}
-                  className="bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
                 >
                   📝 {showTranscripts[pIdx] ? 'إخفاء النص (Transkript)' : 'عرض النص (Transkript)'}
                 </button>

@@ -174,7 +174,7 @@ export default function SchreibenPage() {
 
       {/* Task Content Card */}
       <div className="glass p-6 rounded-2xl border border-gray-200 dark:border-white/5 shadow-xl space-y-5">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-200 dark:border-white/10 pb-3">
           <div className="text-right">
             <h2 className="text-lg font-bold text-[#00b894]">{activeTask.typeAr}</h2>
             <p className="text-xs text-gray-500 dark:text-gray-400" dir="ltr">{activeTask.typeDe}</p>
@@ -245,7 +245,7 @@ export default function SchreibenPage() {
             isAnalyzing
               ? 'bg-gold/10 border-gold/20 text-amber-600 dark:text-amber-400/70 cursor-not-allowed'
               : typedText.trim().length < 10
-              ? 'bg-gray-100 dark:bg-white/5 border-white/10 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+              ? 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 cursor-not-allowed'
               : 'bg-gradient-to-r from-gold/20 to-amber-500/20 border-gold/40 text-amber-600 dark:text-amber-400 hover:from-gold/30 hover:to-amber-500/30 hover:border-gold/60 hover:shadow-gold/20 hover:shadow-xl active:scale-[0.99]'
           }`}
         >
@@ -276,7 +276,7 @@ export default function SchreibenPage() {
       {correctionResult && (
         <div className="glass p-6 rounded-2xl border border-gold/20 shadow-2xl space-y-5 animate-fade-in">
           {/* Header with score */}
-          <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+          <div className="flex items-center justify-between gap-4 border-b border-gray-200 dark:border-white/10 pb-4">
             <div>
               <h3 className="font-bold text-lg text-gray-900 dark:text-white">نتيجة التصحيح الذكي</h3>
               <p className="text-xs text-gray-500 dark:text-gray-400">تم التحليل بواسطة Google Gemini AI</p>

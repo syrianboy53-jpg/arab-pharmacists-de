@@ -145,7 +145,7 @@ export default function VocabularyPage() {
           {filteredData.map(cat => (
             <div key={cat.id} className="space-y-4">
               {/* Category Subheader */}
-              <div className="flex items-center gap-2 border-b border-white/10 pb-2">
+              <div className="flex items-center gap-2 border-b border-gray-200 dark:border-white/10 pb-2">
                 <span className="text-2xl">{categoryEmojis[cat.id] || '📚'}</span>
                 <div>
                   <h3 className="font-bold text-[#00b894]">{cat.titleAr}</h3>
@@ -195,7 +195,7 @@ export default function VocabularyPage() {
                             className={`text-xs px-3 py-1.5 rounded-lg border transition-all ${
                               showMeaning[key] 
                                 ? 'bg-[#00b894]/20 border-[#00b894]/30 text-[#00b894] font-medium' 
-                                : 'bg-gray-100 dark:bg-white/5 border-white/10 text-gray-500 dark:text-gray-400 hover:text-white'
+                                : 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-white'
                             }`}
                           >
                             {showMeaning[key] ? 'إخفاء' : 'معنى'}
