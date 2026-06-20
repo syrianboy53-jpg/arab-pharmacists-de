@@ -179,7 +179,7 @@ export default function LesenPage() {
                                 if (showResults) {
                                   if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/45 text-[#00b894] font-bold'
                                   else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/45 text-red-500 font-bold'
-                                  else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
+                                  else btnStyle = 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
                                 } else {
                                   if (isSelected) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
                                 }
@@ -242,7 +242,7 @@ export default function LesenPage() {
                               if (showResults) {
                                 if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/45 text-[#00b894] font-bold'
                                 else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/45 text-red-500 font-bold'
-                                else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
+                                else btnStyle = 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
                               } else {
                                 if (isSelected) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
                               }
@@ -326,7 +326,7 @@ export default function LesenPage() {
                                 if (showResults) {
                                   if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/45 text-[#00b894] font-bold'
                                   else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/45 text-red-500 font-bold'
-                                  else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
+                                  else btnStyle = 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
                                 } else {
                                   if (isSelected) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
                                 }
@@ -377,7 +377,7 @@ export default function LesenPage() {
                               if (showResults) {
                                 if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/45 text-[#00b894] font-bold'
                                 else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/45 text-red-500 font-bold'
-                                else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
+                                else btnStyle = 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
                               } else {
                                 if (isSelected) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
                               }
@@ -455,7 +455,7 @@ export default function LesenPage() {
                     if (showResults) {
                       if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/45 text-[#00b894] font-bold'
                       else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/45 text-red-500 font-bold'
-                      else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
+                      else btnStyle = 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
                     } else {
                       if (isSelected) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
                     }
@@ -513,7 +513,7 @@ export default function LesenPage() {
       {showResults && (
         <button 
           onClick={reset} 
-          className="w-full bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 text-white py-3.5 rounded-2xl font-bold hover:bg-white dark:bg-[#1a1a2e]/10 transition-all cursor-pointer shadow-lg"
+          className="w-full bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white py-3.5 rounded-2xl font-bold hover:bg-white dark:bg-[#1a1a2e]/10 transition-all cursor-pointer shadow-lg"
         >
           🔄 العودة واختيار نموذج آخر
         </button>

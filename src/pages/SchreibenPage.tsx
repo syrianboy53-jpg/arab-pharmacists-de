@@ -163,7 +163,7 @@ export default function SchreibenPage() {
               className={`flex-1 text-center py-2.5 rounded-xl text-xs font-bold transition-all border ${
                 selectedTaskIndex === idx
                   ? 'bg-[#00b894]/20 border-[#00b894]/40 text-[#00b894] shadow-inner'
-                  : 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 hover:text-white hover:bg-white dark:bg-[#1a1a2e]/10'
+                  : 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-white dark:bg-[#1a1a2e]/10'
               }`}
             >
               المهمة {task.taskNumber} ({task.typeDe.split(' ')[0]})

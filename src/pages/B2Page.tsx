@@ -97,7 +97,7 @@ export default function B2Page() {
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                 activeTab === tab
                   ? 'bg-[#00b894] text-white shadow-lg'
-                  : 'bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 hover:text-white hover:bg-white dark:bg-[#1a1a2e]/10'
+                  : 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-white dark:bg-[#1a1a2e]/10'
               }`}
             >
               {tab === 'lesen' && '📖 Lesen'}
@@ -158,7 +158,7 @@ export default function B2Page() {
                               } else if (isSelected) {
                                 optStyle = 'bg-red-500/10 border-red-500/40 text-red-500 font-medium'
                               } else {
-                                optStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 opacity-60'
+                                optStyle = 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 opacity-60'
                               }
                             }
 
@@ -246,7 +246,7 @@ export default function B2Page() {
                           } else if (isSelected) {
                             optStyle = 'bg-red-500/10 border-red-500/40 text-red-500 font-medium'
                           } else {
-                            optStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 opacity-60'
+                            optStyle = 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 opacity-60'
                           }
                         }
 
@@ -322,7 +322,7 @@ export default function B2Page() {
                           navigator.clipboard.writeText(phrase)
                           alert('تم نسخ الجملة بنجاح!')
                         }}
-                        className="text-left font-sans text-xs bg-white dark:bg-[#1a1a2e]/5 hover:bg-white dark:bg-[#1a1a2e]/10 border border-gray-200 dark:border-white/10 px-3 py-2 rounded-xl text-gray-600 dark:text-gray-400 truncate transition-all flex items-center justify-between gap-1 group cursor-pointer"
+                        className="text-left font-sans text-xs bg-white dark:bg-[#1a1a2e] hover:bg-gray-50 dark:hover:bg-white/5 border border-gray-200 dark:border-white/10 px-3 py-2 rounded-xl text-gray-600 dark:text-gray-400 truncate transition-all flex items-center justify-between gap-1 group cursor-pointer"
                         dir="ltr"
                         title="انقر لنسخ الجملة"
                       >

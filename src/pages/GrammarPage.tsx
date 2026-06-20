@@ -305,7 +305,7 @@ export default function GrammarPage() {
                   <div className="space-y-3">
                     <button
                       onClick={() => setRevealedMistakes(p => ({ ...p, [mistake.id]: !isRevealed }))}
-                      className="w-full bg-white dark:bg-[#1a1a2e]/5 hover:bg-white dark:bg-[#1a1a2e]/10 border border-gray-200 dark:border-white/5 py-2 rounded-xl text-xs font-bold transition-all text-center text-gray-500 dark:text-gray-400 hover:text-white cursor-pointer"
+                      className="w-full bg-white dark:bg-[#1a1a2e] hover:bg-gray-50 dark:hover:bg-white/5 border border-gray-200 dark:border-white/5 py-2 rounded-xl text-xs font-bold transition-all text-center text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer"
                     >
                       {isRevealed ? '🙈 إخفاء تفاصيل القاعدة' : '🔎 لماذا هذا الخطأ؟ وما هي القاعدة؟'}
                     </button>
@@ -369,7 +369,7 @@ export default function GrammarPage() {
               className={`flex-1 text-center py-2.5 rounded-xl text-xs font-bold transition-all ${
                 selectedVerbType === 'trennbar'
                   ? 'bg-[#00b894]/20 border border-[#00b894]/30 text-[#00b894] shadow-inner'
-                  : 'text-gray-500 dark:text-gray-400 hover:text-white'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
               }`}
             >
               🔄 الأفعال المنفصلة (Trennbare Verben)
@@ -382,7 +382,7 @@ export default function GrammarPage() {
               className={`flex-1 text-center py-2.5 rounded-xl text-xs font-bold transition-all ${
                 selectedVerbType === 'untrennbar'
                   ? 'bg-[#00b894]/20 border border-[#00b894]/30 text-[#00b894] shadow-inner'
-                  : 'text-gray-500 dark:text-gray-400 hover:text-white'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
               }`}
             >
               🔒 الأفعال غير المنفصلة (Untrennbare Verben)
@@ -412,7 +412,7 @@ export default function GrammarPage() {
                     <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400" dir="ltr">
                       <span>P2: <strong className="text-gray-900 dark:text-white">{verb.partizip2}</strong></span>
                       <span className="hidden md:inline">Prät: <strong className="text-gray-900 dark:text-white">{verb.praeteritum}</strong></span>
-                      <span className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 px-2 py-0.5 rounded text-white font-mono scale-90">
+                      <span className="bg-amber-100 dark:bg-amber-900/30 border border-amber-300 dark:border-amber-700/30 px-2 py-0.5 rounded text-amber-700 dark:text-amber-400 font-mono text-xs font-bold scale-90">
                         {verb.hilfsverb}
                       </span>
                     </div>

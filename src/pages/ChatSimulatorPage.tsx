@@ -164,7 +164,7 @@ export default function ChatSimulatorPage() {
                   className={`w-full text-right p-3 rounded-xl border transition-all text-xs flex items-center justify-between gap-2 cursor-pointer ${
                     isActive
                       ? 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
-                      : 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
+                      : 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -337,7 +337,7 @@ export default function ChatSimulatorPage() {
                   <button
                     key={idx}
                     onClick={() => handleSelectOption(opt)}
-                    className="w-full text-right bg-white dark:bg-[#1a1a2e]/5 hover:bg-white dark:bg-[#1a1a2e]/10 hover:border-[#00b894]/20 border border-gray-200 dark:border-white/10 p-3.5 rounded-xl text-xs transition-all flex flex-col gap-1.5 group cursor-pointer"
+                    className="w-full text-right bg-white dark:bg-[#1a1a2e] hover:bg-gray-50 dark:hover:bg-white/5 hover:border-[#00b894]/20 border border-gray-200 dark:border-white/10 p-3.5 rounded-xl text-xs transition-all flex flex-col gap-1.5 group cursor-pointer"
                   >
                     {/* German Option */}
                     <div className="flex items-center gap-2 w-full justify-between" dir="ltr">
