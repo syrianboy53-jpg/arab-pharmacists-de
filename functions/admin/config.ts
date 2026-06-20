@@ -25,6 +25,8 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       support_paypal_url: '',
       support_message: '',
       support_hide: '0',
+      maintenance_mode: '0',
+      maintenance_message: 'الموقع قيد الصيانة والتحديث — نعود قريباً ✨',
     }
 
     if (res.rows) {

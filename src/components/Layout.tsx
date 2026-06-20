@@ -13,6 +13,8 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [updateUrl, setUpdateUrl] = useState<string | null>(null)
   const [xp, setXp] = useState(0)
   const [streak, setStreak] = useState(0)
+  const [maintenance, setMaintenance] = useState(false)
+  const [maintenanceMsg, setMaintenanceMsg] = useState('')
 
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode))
@@ -34,21 +36,30 @@ export default function Layout({ children }: { children: ReactNode }) {
     } catch {}
   }, [location.pathname])
 
+  // Fetch config — check for updates + maintenance mode
   useEffect(() => {
-    const ua = navigator.userAgent
-    const match = ua.match(/B1DeutschAPK\/(\d+)/)
-    if (match) {
-      const localVersion = parseInt(match[1], 10)
-      fetch('/config?t=' + Date.now())
-        .then(res => res.json())
-        .then((config: any) => {
+    fetch('/config?t=' + Date.now())
+      .then(res => res.json())
+      .then((config: any) => {
+        // Maintenance check
+        if (config.maintenance_mode === '1') {
+          setMaintenance(true)
+          setMaintenanceMsg(config.maintenance_message || 'الموقع قيد الصيانة والتحديث — نعود قريباً ✨')
+        } else {
+          setMaintenance(false)
+        }
+        // APK update check
+        const ua = navigator.userAgent
+        const match = ua.match(/B1DeutschAPK\/(\d+)/)
+        if (match) {
+          const localVersion = parseInt(match[1], 10)
           const remoteVersion = parseInt(config.apk_version || '0', 10)
           if (localVersion < remoteVersion && config.apk_url) {
             setUpdateUrl(config.apk_url)
           }
-        })
-        .catch(err => console.error('Error checking for updates:', err))
-    }
+        }
+      })
+      .catch(err => console.error('Error fetching config:', err))
   }, [])
 
   useEffect(() => {
@@ -67,8 +78,81 @@ export default function Layout({ children }: { children: ReactNode }) {
     { path: '/leaderboard', label: 'المتصدّرين', icon: Trophy },
   ]
 
+  // Allow admin page even during maintenance
+  const isAdminPage = location.pathname === '/admin'
+
   return (
     <div className={darkMode ? 'dark' : ''}>
+      {/* ── Maintenance Mode Screen ── */}
+      {maintenance && !isAdminPage ? (
+        <div className="min-h-screen bg-gradient-to-br from-[#0f0f1a] via-[#1a1a2e] to-[#0f0f1a] flex items-center justify-center p-6">
+          <div className="max-w-lg w-full text-center space-y-8">
+            {/* Animated Gear */}
+            <div className="relative mx-auto w-32 h-32">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#00b894] to-[#0984e3] opacity-20 animate-ping" />
+              <div className="absolute inset-4 rounded-full bg-gradient-to-br from-[#00b894] to-[#0984e3] opacity-30 animate-pulse" />
+              <div className="absolute inset-0 flex items-center justify-center text-6xl" style={{ animation: 'spin 4s linear infinite' }}>
+                ⚙️
+              </div>
+            </div>
+
+            {/* Logo */}
+            <div className="flex items-center justify-center gap-2">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00b894] to-[#0984e3] flex items-center justify-center text-white text-sm font-black shadow-lg">B1</div>
+              <span className="font-black text-xl text-white">B1-Syrer.de</span>
+            </div>
+
+            {/* Message */}
+            <div className="space-y-4">
+              <h1 className="text-2xl md:text-3xl font-black text-white">
+                🛠 الموقع قيد الصيانة
+              </h1>
+              <p className="text-gray-400 text-base leading-relaxed max-w-md mx-auto">
+                {maintenanceMsg}
+              </p>
+            </div>
+
+            {/* Progress bar animation */}
+            <div className="max-w-xs mx-auto">
+              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-[#00b894] to-[#0984e3] rounded-full"
+                  style={{ animation: 'maintenance-progress 2.5s ease-in-out infinite', width: '0%' }}
+                />
+              </div>
+              <p className="text-xs text-gray-500 mt-2">جارٍ التحديث والتطوير...</p>
+            </div>
+
+            {/* Contact */}
+            <div className="pt-4 border-t border-white/5 space-y-2">
+              <p className="text-xs text-gray-500">للتواصل أثناء الصيانة:</p>
+              <div className="flex items-center justify-center gap-4">
+                <a href="https://t.me/b1syrer" target="_blank" rel="noopener noreferrer" className="text-sm text-[#00b894] hover:text-[#00cec9] transition-colors">
+                  📱 تليغرام
+                </a>
+                <a href="mailto:shami.fadi@gmx.de" className="text-sm text-[#00b894] hover:text-[#00cec9] transition-colors">
+                  ✉️ بريد
+                </a>
+              </div>
+            </div>
+
+            {/* Admin access hint */}
+            <a href="/app/#/admin" className="text-[10px] text-gray-700 hover:text-gray-500 transition-colors block">
+              🔐
+            </a>
+          </div>
+
+          {/* CSS animation for progress bar */}
+          <style>{`
+            @keyframes maintenance-progress {
+              0% { width: 0%; }
+              50% { width: 80%; }
+              100% { width: 0%; }
+            }
+          `}</style>
+        </div>
+      ) : (
+      <>
       {updateUrl && (
         <div className="bg-yellow-500 text-gray-900 px-4 py-2 text-center text-sm font-bold shadow-md flex items-center justify-center gap-2 z-50 border-b border-yellow-600 animate-pulse">
           <span>📢 تحديث جديد متوفر!</span>
@@ -250,6 +334,8 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
         </footer>
       </div>
+      </>
+      )}
     </div>
   )
 }

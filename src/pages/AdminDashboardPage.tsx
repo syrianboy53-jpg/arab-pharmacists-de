@@ -111,7 +111,9 @@ export default function AdminDashboardPage() {
     support_bmc_url: 'https://buymeacoffee.com/halawanyfav',
     support_paypal_url: '',
     support_message: '',
-    support_hide: '0'
+    support_hide: '0',
+    maintenance_mode: '0',
+    maintenance_message: 'الموقع قيد الصيانة والتحديث — نعود قريباً ✨'
   })
   const [isSavingConfig, setIsSavingConfig] = useState(false)
   const [configStatus, setConfigStatus] = useState('')
@@ -796,6 +798,61 @@ export default function AdminDashboardPage() {
           </div>
         </section>
       )}
+
+      {/* 🛠 Maintenance Mode */}
+      <section className={`rounded-xl p-5 border space-y-4 ${
+        config.maintenance_mode === '1' 
+          ? 'bg-red-50 dark:bg-red-900/10 border-red-300 dark:border-red-500/30 border-r-4 border-r-red-500' 
+          : 'bg-white dark:bg-[#1a1a2e] border-gray-200 dark:border-white/5 border-r-4 border-r-emerald-500'
+      }`}>
+        <div className="flex items-center justify-between">
+          <h2 className="text-base font-black text-gray-900 dark:text-white flex items-center gap-2">
+            🛠 وضع الصيانة
+            {config.maintenance_mode === '1' && (
+              <span className="text-xs bg-red-500 text-white px-2 py-0.5 rounded-full animate-pulse">مفعّل</span>
+            )}
+          </h2>
+          <button
+            onClick={async () => {
+              const newMode = config.maintenance_mode === '1' ? '0' : '1'
+              setConfig({ ...config, maintenance_mode: newMode })
+              // Auto-save immediately
+              try {
+                await fetch(`${API_BASE}/admin/config`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json', 'X-Admin-Token': adminToken },
+                  body: JSON.stringify({ maintenance_mode: newMode, maintenance_message: config.maintenance_message })
+                })
+                setConfigStatus(newMode === '1' ? '🛠 تم تفعيل وضع الصيانة' : '✅ تم إلغاء وضع الصيانة')
+              } catch { setConfigStatus('❌ فشل في حفظ الإعدادات') }
+            }}
+            className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer ${
+              config.maintenance_mode === '1'
+                ? 'bg-emerald-500 hover:bg-emerald-600 text-white'
+                : 'bg-red-500 hover:bg-red-600 text-white'
+            }`}
+          >
+            {config.maintenance_mode === '1' ? '✅ إلغاء الصيانة وإعادة الموقع' : '🛠 تفعيل وضع الصيانة'}
+          </button>
+        </div>
+
+        <div className="space-y-2">
+          <label className="block text-xs font-bold text-gray-600 dark:text-gray-400">رسالة الصيانة:</label>
+          <textarea
+            value={config.maintenance_message}
+            onChange={e => setConfig({ ...config, maintenance_message: e.target.value })}
+            rows={2}
+            placeholder="الموقع قيد الصيانة والتحديث — نعود قريباً ✨"
+            className="w-full border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 rounded-lg p-2 text-sm outline-none text-gray-800 dark:text-gray-200"
+          />
+        </div>
+
+        {config.maintenance_mode === '1' && (
+          <div className="bg-red-100 dark:bg-red-900/20 border border-red-200 dark:border-red-500/20 rounded-lg p-3 text-xs text-red-700 dark:text-red-400">
+            ⚠️ <strong>الموقع مغلق حالياً!</strong> كل الزوار يرون شاشة الصيانة. صفحة الأدمن تبقى متاحة لك.
+          </div>
+        )}
+      </section>
 
       {/* Broadcast Config */}
       <section className="bg-white dark:bg-[#1a1a2e] border-r-4 border-[#fdcb6e] rounded-xl p-5 border border-gray-200 dark:border-white/5 space-y-4">
