@@ -180,26 +180,26 @@ export default function HomePage() {
         <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #00b894 0%, transparent 50%), radial-gradient(circle at 80% 20%, #6c5ce7 0%, transparent 50%)' }} />
         <div className="relative z-10 p-6 sm:p-10">
           <div className="flex items-center gap-2 mb-4">
-            <span className="inline-flex items-center gap-1.5 bg-white dark:bg-[#1a1a2e]/10 backdrop-blur-sm text-white/90 text-xs font-medium px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10">
+            <span className="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white/90 text-xs font-medium px-3 py-1.5 rounded-full border border-white/10">
               <span className="w-2 h-2 rounded-full bg-[#00b894] animate-pulse" />
               مجّاني ومفتوح المصدر
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white mb-3 leading-tight">
+          <h1 className="text-3xl sm:text-4xl font-black text-white mb-3 leading-tight">
             تطبيق تحضير امتحان<br />
             <span className="bg-gradient-to-r from-[#00b894] to-[#00cec9] bg-clip-text text-transparent">B1 الألماني</span>
           </h1>
-          <p className="text-gray-900 dark:text-white/60 text-sm sm:text-base leading-relaxed max-w-lg mb-8">
+          <p className="text-white/70 text-sm sm:text-base leading-relaxed max-w-lg mb-8">
             50+ قسم تفاعلي — قواعد، مفردات، نماذج كاملة، ألعاب لغوية، محاكاة امتحان. مصمّم للعرب والسوريين 🇸🇾
           </p>
           <div className="flex flex-wrap gap-3">
             <Link to="/einstufung" className="inline-flex items-center gap-2 bg-[#00b894] hover:bg-[#00a884] text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-[#00b894]/25">
               🎯 حدّد مستواك
             </Link>
-            <Link to="/daily" className="inline-flex items-center gap-2 bg-white dark:bg-[#1a1a2e]/10 hover:bg-white dark:bg-[#1a1a2e]/15 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all backdrop-blur-sm border border-gray-200 dark:border-white/10">
+            <Link to="/daily" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all backdrop-blur-sm border border-white/10">
               📅 تحدّي اليوم
             </Link>
-            <button onClick={handleShareApp} className="inline-flex items-center gap-2 bg-white dark:bg-[#1a1a2e]/10 hover:bg-white dark:bg-[#1a1a2e]/15 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all backdrop-blur-sm border border-gray-200 dark:border-white/10 cursor-pointer">
+            <button onClick={handleShareApp} className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all backdrop-blur-sm border border-white/10 cursor-pointer">
               📢 شارك
             </button>
           </div>
@@ -252,7 +252,7 @@ export default function HomePage() {
             <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-[#1a1a2e] rounded-full" />
           </div>
           <div className="flex-1 min-w-0">
-            <p className="font-bold text-sm text-gray-900 dark:text-gray-900 dark:text-white">فادي — الدعم المباشر</p>
+            <p className="font-bold text-sm text-gray-900 dark:text-white">فادي — الدعم المباشر</p>
             <p className="text-xs text-green-500 flex items-center gap-1">● متاح</p>
           </div>
           <a href="https://t.me/b1syrer" target="_blank" rel="noopener noreferrer" className="shrink-0 bg-[#229ED9] hover:bg-[#1a8ac4] text-white px-3.5 py-2 rounded-xl text-xs font-bold transition-colors">
@@ -279,7 +279,7 @@ export default function HomePage() {
                 {section.emoji}
               </div>
               <div>
-                <h3 className="font-black text-sm text-gray-900 dark:text-gray-900 dark:text-white">{section.title}</h3>
+                <h3 className="font-black text-sm text-gray-900 dark:text-white">{section.title}</h3>
                 <p className="text-[11px] text-gray-400">{section.subtitle}</p>
               </div>
             </div>
@@ -304,7 +304,7 @@ export default function HomePage() {
                       </div>
                       <p className="text-[11px] text-gray-400 truncate">{item.count}</p>
                     </div>
-                    <svg className="w-4 h-4 text-gray-300 dark:text-gray-600 dark:text-gray-400 group-hover:text-[#00b894] transition-colors shrink-0 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                    <svg className="w-4 h-4 text-gray-300 dark:text-gray-500 group-hover:text-[#00b894] transition-colors shrink-0 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                   </Link>
                 </motion.div>
               ))}
