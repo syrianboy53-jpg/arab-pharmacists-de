@@ -112,7 +112,7 @@ export default function SprechenPage() {
           <span className="text-3xl">🗣️</span>
           <div>
             <h1 className="text-2xl font-bold">المحادثة — Sprechen</h1>
-            <p className="text-muted text-sm">تدرّب على أقسام المحادثة الثلاثة في الامتحان.</p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">تدرّب على أقسام المحادثة الثلاثة في الامتحان.</p>
           </div>
         </div>
         <div className="grid gap-3">
@@ -122,8 +122,8 @@ export default function SprechenPage() {
               onClick={() => setSelectedPart(i)}
               className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow border border-gray-200 dark:border-white/5 text-right"
             >
-              <h3 className="font-bold text-green">{p.title}</h3>
-              <p className="text-sm text-muted mt-1">{p.description}</p>
+              <h3 className="font-bold text-[#00b894]">{p.title}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{p.description}</p>
             </button>
           ))}
         </div>
@@ -133,26 +133,26 @@ export default function SprechenPage() {
 
   return (
     <div className="space-y-6">
-      <button onClick={() => { setSelectedPart(null); setShowSample(false); setShowPhrases(false) }} className="text-green font-bold text-sm">→ العودة</button>
+      <button onClick={() => { setSelectedPart(null); setShowSample(false); setShowPhrases(false) }} className="text-[#00b894] font-bold text-sm">→ العودة</button>
 
       <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm border border-gray-200 dark:border-white/5">
-        <h2 className="text-lg font-bold text-green mb-2">{part.title}</h2>
+        <h2 className="text-lg font-bold text-[#00b894] mb-2">{part.title}</h2>
         <p className="text-sm mb-3">{part.description}</p>
         <div className="flex flex-wrap gap-2">
           {part.topics.map((t, i) => (
-            <span key={i} className="bg-green/10 text-green text-xs px-3 py-1 rounded-full">{t}</span>
+            <span key={i} className="bg-[#00b894]/10 text-[#00b894] text-xs px-3 py-1 rounded-full">{t}</span>
           ))}
         </div>
       </div>
 
-      <div className="bg-green/5 rounded-xl p-4 border border-green/20">
+      <div className="bg-[#00b894]/5 rounded-xl p-4 border border-[#00b894]/20">
         <h3 className="font-bold text-sm mb-2">💡 نصائح:</h3>
         <ul className="text-sm space-y-1">
           {part.tips.map((tip, i) => <li key={i}>• {tip}</li>)}
         </ul>
       </div>
 
-      <button onClick={() => setShowPhrases(!showPhrases)} className="w-full bg-gold/20 text-gold border border-gold/30 py-3 rounded-xl font-bold">
+      <button onClick={() => setShowPhrases(!showPhrases)} className="w-full bg-gold/20 text-amber-600 dark:text-amber-400 border border-gold/30 py-3 rounded-xl font-bold">
         {showPhrases ? 'إخفاء' : '🌟'} العبارات الذهبية
       </button>
       {showPhrases && (
@@ -165,11 +165,11 @@ export default function SprechenPage() {
         </div>
       )}
 
-      <button onClick={() => setShowSample(!showSample)} className="w-full bg-green text-white py-3 rounded-xl font-bold">
+      <button onClick={() => setShowSample(!showSample)} className="w-full bg-[#00b894] text-white py-3 rounded-xl font-bold">
         {showSample ? 'إخفاء' : '👁️'} نموذج الإجابة
       </button>
       {showSample && (
-        <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm border border-green/30">
+        <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm border border-[#00b894]/30">
           <pre className="text-sm whitespace-pre-wrap leading-relaxed" dir="ltr">{part.sampleAnswer}</pre>
         </div>
       )}

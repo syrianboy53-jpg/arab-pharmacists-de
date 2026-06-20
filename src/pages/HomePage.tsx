@@ -180,7 +180,7 @@ export default function HomePage() {
         <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #00b894 0%, transparent 50%), radial-gradient(circle at 80% 20%, #6c5ce7 0%, transparent 50%)' }} />
         <div className="relative z-10 p-6 sm:p-10">
           <div className="flex items-center gap-2 mb-4">
-            <span className="inline-flex items-center gap-1.5 bg-white dark:bg-[#1a1a2e]/10 backdrop-blur-sm text-white/90 text-xs font-medium px-3 py-1.5 rounded-full border border-white/10">
+            <span className="inline-flex items-center gap-1.5 bg-white dark:bg-[#1a1a2e]/10 backdrop-blur-sm text-white/90 text-xs font-medium px-3 py-1.5 rounded-full border border-gray-200 dark:border-white/10">
               <span className="w-2 h-2 rounded-full bg-[#00b894] animate-pulse" />
               مجّاني ومفتوح المصدر
             </span>
@@ -196,10 +196,10 @@ export default function HomePage() {
             <Link to="/einstufung" className="inline-flex items-center gap-2 bg-[#00b894] hover:bg-[#00a884] text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-[#00b894]/25">
               🎯 حدّد مستواك
             </Link>
-            <Link to="/daily" className="inline-flex items-center gap-2 bg-white dark:bg-[#1a1a2e]/10 hover:bg-white dark:bg-[#1a1a2e]/15 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all backdrop-blur-sm border border-white/10">
+            <Link to="/daily" className="inline-flex items-center gap-2 bg-white dark:bg-[#1a1a2e]/10 hover:bg-white dark:bg-[#1a1a2e]/15 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all backdrop-blur-sm border border-gray-200 dark:border-white/10">
               📅 تحدّي اليوم
             </Link>
-            <button onClick={handleShareApp} className="inline-flex items-center gap-2 bg-white dark:bg-[#1a1a2e]/10 hover:bg-white dark:bg-[#1a1a2e]/15 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all backdrop-blur-sm border border-white/10 cursor-pointer">
+            <button onClick={handleShareApp} className="inline-flex items-center gap-2 bg-white dark:bg-[#1a1a2e]/10 hover:bg-white dark:bg-[#1a1a2e]/15 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all backdrop-blur-sm border border-gray-200 dark:border-white/10 cursor-pointer">
               📢 شارك
             </button>
           </div>

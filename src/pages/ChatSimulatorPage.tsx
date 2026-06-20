@@ -72,7 +72,7 @@ export default function ChatSimulatorPage() {
   if (!scenario || !scenario.steps) {
     return (
       <div className="glass p-10 text-center rounded-2xl border border-gray-200 dark:border-white/5">
-        <p className="text-muted text-sm">لا توجد محاكيات محادثة متاحة حالياً.</p>
+        <p className="text-gray-500 dark:text-gray-400 text-sm">لا توجد محاكيات محادثة متاحة حالياً.</p>
       </div>
     )
   }
@@ -141,9 +141,9 @@ export default function ChatSimulatorPage() {
   // Calculate user performance level
   const getPerformanceBadge = () => {
     const percent = maxScore > 0 ? (score / maxScore) * 100 : 0
-    if (percent >= 90) return { text: 'ألماني فصيح (Profi) 🌟', color: 'bg-green/10 text-green border-green/20' }
-    if (percent >= 70) return { text: 'متحدث جيد جداً (Gut) 👍', color: 'bg-gold/10 text-gold border-gold/20' }
-    return { text: 'مبتدئ يحتاج للتدريب (Übung) 📚', color: 'bg-red/10 text-red border-red/20' }
+    if (percent >= 90) return { text: 'ألماني فصيح (Profi) 🌟', color: 'bg-[#00b894]/10 text-[#00b894] border-[#00b894]/20' }
+    if (percent >= 70) return { text: 'متحدث جيد جداً (Gut) 👍', color: 'bg-gold/10 text-amber-600 dark:text-amber-400 border-gold/20' }
+    return { text: 'مبتدئ يحتاج للتدريب (Übung) 📚', color: 'bg-red-500/10 text-red-500 border-red-500/20' }
   }
 
   return (
@@ -163,8 +163,8 @@ export default function ChatSimulatorPage() {
                   onClick={() => setSelectedScenarioId(sc.id)}
                   className={`w-full text-right p-3 rounded-xl border transition-all text-xs flex items-center justify-between gap-2 cursor-pointer ${
                     isActive
-                      ? 'bg-green/10 border-green/30 text-green font-bold'
-                      : 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted hover:text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
+                      ? 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
+                      : 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -174,7 +174,7 @@ export default function ChatSimulatorPage() {
                       <span className="text-[10px] opacity-80" dir="ltr">{sc.difficulty}</span>
                     </div>
                   </div>
-                  {isActive && <span className="w-1.5 h-1.5 bg-green rounded-full shrink-0" />}
+                  {isActive && <span className="w-1.5 h-1.5 bg-[#00b894] rounded-full shrink-0" />}
                 </button>
               )
             })}
@@ -187,19 +187,19 @@ export default function ChatSimulatorPage() {
         {/* Chat Header */}
         <div className="glass p-4 rounded-2xl border border-gray-200 dark:border-white/5 flex items-center justify-between shadow-md shrink-0">
           <div className="flex items-center gap-3">
-            <span className="text-2xl w-10 h-10 rounded-xl bg-slate-900/60 border border-white/10 flex items-center justify-center">
+            <span className="text-2xl w-10 h-10 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center">
               {scenario.icon}
             </span>
             <div>
               <h3 className="font-bold text-gray-900 dark:text-white text-sm">{scenario.titleAr}</h3>
-              <p className="text-[10px] text-muted">{scenario.descriptionAr}</p>
+              <p className="text-[10px] text-gray-500 dark:text-gray-400">{scenario.descriptionAr}</p>
             </div>
           </div>
           <div className="flex items-center gap-2 text-xs">
-            <span className="bg-white dark:bg-[#1a1a2e]/5 border border-white/10 px-2 py-0.5 rounded text-muted font-mono" dir="ltr">
+            <span className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 px-2 py-0.5 rounded text-gray-500 dark:text-gray-400 font-mono" dir="ltr">
               Diff: {scenario.difficulty}
             </span>
-            <span className="bg-gold/10 border border-gold/20 px-2 py-0.5 rounded text-gold font-bold">
+            <span className="bg-gold/10 border border-gold/20 px-2 py-0.5 rounded text-amber-600 dark:text-amber-400 font-bold">
               النقاط: {score}
             </span>
           </div>
@@ -217,7 +217,7 @@ export default function ChatSimulatorPage() {
               return (
                 <div key={msg.id || index} className="flex justify-center my-2 animate-fadeIn">
                   <div className="bg-gold/5 border border-gold/20 text-gray-600 dark:text-gray-400 text-[11px] rounded-xl px-4 py-2 text-center max-w-[85%] leading-relaxed">
-                    <span className="font-bold text-gold">نقاط الاختيار: +{msg.points} 🌟</span>
+                    <span className="font-bold text-amber-600 dark:text-amber-400">نقاط الاختيار: +{msg.points} 🌟</span>
                     <p className="mt-0.5">{msg.feedback}</p>
                   </div>
                 </div>
@@ -235,8 +235,8 @@ export default function ChatSimulatorPage() {
                 {/* Avatar Icon */}
                 <div className={`w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold ${
                   isUser 
-                    ? 'bg-green/10 border border-green/20 text-green' 
-                    : 'bg-white dark:bg-[#1a1a2e]/5 border border-white/10 text-muted'
+                    ? 'bg-[#00b894]/10 border border-[#00b894]/20 text-[#00b894]' 
+                    : 'bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400'
                 }`}>
                   {isUser ? '👤' : scenario.icon}
                 </div>
@@ -245,8 +245,8 @@ export default function ChatSimulatorPage() {
                 <div className="space-y-1">
                   <div className={`p-3.5 rounded-2xl text-xs space-y-1.5 shadow-sm border ${
                     isUser 
-                      ? 'bg-green/10 border-green/25 text-gray-600 dark:text-gray-400 rounded-tr-none' 
-                      : 'bg-slate-900/60 border-white/5 text-gray-600 dark:text-gray-400 rounded-tl-none'
+                      ? 'bg-[#00b894]/10 border-[#00b894]/25 text-gray-600 dark:text-gray-400 rounded-tr-none' 
+                      : 'bg-gray-50 dark:bg-white/5 border-white/5 text-gray-600 dark:text-gray-400 rounded-tl-none'
                   }`}>
                     
                     {/* German Text */}
@@ -255,7 +255,7 @@ export default function ChatSimulatorPage() {
                       {isBot && (
                         <button
                           onClick={() => speak(msg.german || '')}
-                          className="text-[10px] text-muted hover:text-green shrink-0 cursor-pointer"
+                          className="text-[10px] text-gray-500 dark:text-gray-400 hover:text-[#00b894] shrink-0 cursor-pointer"
                           title="استمع للنطق"
                         >
                           🔊
@@ -265,7 +265,7 @@ export default function ChatSimulatorPage() {
 
                     {/* Phonetic Pronunciation Helper */}
                     {isBot && msg.phonetic && (
-                      <p className="text-[10px] text-muted border-t border-gray-200 dark:border-white/5 pt-1">
+                      <p className="text-[10px] text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-white/5 pt-1">
                         🗣️ <span className="font-serif">{msg.phonetic}</span>
                       </p>
                     )}
@@ -275,7 +275,7 @@ export default function ChatSimulatorPage() {
                       <div className="border-t border-gray-200 dark:border-white/5 pt-1.5 space-y-1">
                         <button
                           onClick={() => setShowTranslations(prev => ({ ...prev, [msg.id]: !prev[msg.id] }))}
-                          className="text-[9px] text-muted hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
+                          className="text-[9px] text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
                         >
                           {showTranslations[msg.id] ? '🙈 إخفاء الترجمة' : '👁️ عرض الترجمة'}
                         </button>
@@ -296,18 +296,18 @@ export default function ChatSimulatorPage() {
               <span className="text-3xl">🏆</span>
               <div>
                 <h4 className="text-base font-bold text-gray-900 dark:text-white">اكتملت المحاكاة بنجاح!</h4>
-                <p className="text-xs text-muted mt-1">لقد أكملت جميع الخطوات وسجلت النقاط التالية:</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">لقد أكملت جميع الخطوات وسجلت النقاط التالية:</p>
               </div>
 
               <div className="flex justify-center gap-3 items-center">
                 <div className="bg-slate-900 border border-white/15 px-4 py-2 rounded-xl text-center">
-                  <p className="text-[10px] text-muted">مجموع نقاطك</p>
-                  <p className="text-lg font-bold text-gold">{score}</p>
+                  <p className="text-[10px] text-gray-500 dark:text-gray-400">مجموع نقاطك</p>
+                  <p className="text-lg font-bold text-amber-600 dark:text-amber-400">{score}</p>
                 </div>
-                <span className="text-muted">من أصل</span>
+                <span className="text-gray-500 dark:text-gray-400">من أصل</span>
                 <div className="bg-slate-900 border border-white/15 px-4 py-2 rounded-xl text-center">
-                  <p className="text-[10px] text-muted">أعلى تقييم</p>
-                  <p className="text-lg font-bold text-muted">{maxScore}</p>
+                  <p className="text-[10px] text-gray-500 dark:text-gray-400">أعلى تقييم</p>
+                  <p className="text-lg font-bold text-gray-500 dark:text-gray-400">{maxScore}</p>
                 </div>
               </div>
 
@@ -317,7 +317,7 @@ export default function ChatSimulatorPage() {
 
               <button
                 onClick={startConversation}
-                className="w-full bg-green text-white font-bold text-xs py-2.5 rounded-xl hover:bg-green-dark transition-all cursor-pointer"
+                className="w-full bg-[#00b894] text-white font-bold text-xs py-2.5 rounded-xl hover:bg-[#094F28] transition-all cursor-pointer"
               >
                 🔄 إعادة المحاكاة والتدريب
               </button>
@@ -330,27 +330,27 @@ export default function ChatSimulatorPage() {
         <div className="shrink-0 animate-fadeIn">
           {isFinished ? null : currentStep ? (
             <div className="glass p-4 rounded-2xl border border-gray-200 dark:border-white/5 space-y-3 shadow-lg">
-              <p className="text-xs font-bold text-gold text-right">اختر ردك أو إجابتك المناسبة للتكملة:</p>
+              <p className="text-xs font-bold text-amber-600 dark:text-amber-400 text-right">اختر ردك أو إجابتك المناسبة للتكملة:</p>
               
               <div className="grid gap-2">
                 {currentStep.options.map((opt, idx) => (
                   <button
                     key={idx}
                     onClick={() => handleSelectOption(opt)}
-                    className="w-full text-right bg-white dark:bg-[#1a1a2e]/5 hover:bg-white dark:bg-[#1a1a2e]/10 hover:border-green/20 border border-white/10 p-3.5 rounded-xl text-xs transition-all flex flex-col gap-1.5 group cursor-pointer"
+                    className="w-full text-right bg-white dark:bg-[#1a1a2e]/5 hover:bg-white dark:bg-[#1a1a2e]/10 hover:border-[#00b894]/20 border border-gray-200 dark:border-white/10 p-3.5 rounded-xl text-xs transition-all flex flex-col gap-1.5 group cursor-pointer"
                   >
                     {/* German Option */}
                     <div className="flex items-center gap-2 w-full justify-between" dir="ltr">
-                      <span className="font-sans font-bold text-gray-900 dark:text-white text-left group-hover:text-green transition-colors leading-relaxed">
+                      <span className="font-sans font-bold text-gray-900 dark:text-white text-left group-hover:text-[#00b894] transition-colors leading-relaxed">
                         {opt.textDe}
                       </span>
-                      <span className="text-[10px] text-muted whitespace-nowrap opacity-60">
+                      <span className="text-[10px] text-gray-500 dark:text-gray-400 whitespace-nowrap opacity-60">
                         {opt.points} ن
                       </span>
                     </div>
 
                     {/* Arabic hint */}
-                    <span className="text-[10px] text-muted leading-relaxed select-none">
+                    <span className="text-[10px] text-gray-500 dark:text-gray-400 leading-relaxed select-none">
                       💡 {opt.textAr}
                     </span>
                   </button>
@@ -359,7 +359,7 @@ export default function ChatSimulatorPage() {
             </div>
           ) : (
             <div className="glass p-4 text-center rounded-2xl border border-gray-200 dark:border-white/5">
-              <p className="text-xs text-muted">جاري تحميل الخطوة...</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">جاري تحميل الخطوة...</p>
             </div>
           )}
         </div>

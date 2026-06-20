@@ -41,7 +41,7 @@ export default function HoerenPage() {
           <span className="text-3xl">🎧</span>
           <div>
             <h1 className="text-2xl font-bold grad-text">الاستماع — Hören B1</h1>
-            <p className="text-muted text-sm">تدرّب على فهم النصوص المسموعة الألمانية وحلّ أسئلتها. ({hoerenModels.length} نماذج كاملة)</p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">تدرّب على فهم النصوص المسموعة الألمانية وحلّ أسئلتها. ({hoerenModels.length} نماذج كاملة)</p>
           </div>
         </div>
         
@@ -56,15 +56,15 @@ export default function HoerenPage() {
                 setShowTranscripts({})
                 setShowExplanations({})
               }}
-              className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-green/20 transition-all flex flex-col justify-between shadow-md cursor-pointer group"
+              className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-[#00b894]/20 transition-all flex flex-col justify-between shadow-md cursor-pointer group"
             >
               <div>
-                <h3 className="font-bold text-gray-900 dark:text-white group-hover:text-green transition-colors">{m.title}</h3>
-                <p className="text-xs text-muted mt-2 leading-relaxed">{m.description}</p>
+                <h3 className="font-bold text-gray-900 dark:text-white group-hover:text-[#00b894] transition-colors">{m.title}</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 leading-relaxed">{m.description}</p>
               </div>
               <div className="mt-4 pt-3 border-t border-gray-200 dark:border-white/5 flex justify-between items-center w-full">
-                <span className="text-[10px] bg-green/10 text-green px-2 py-0.5 rounded-full">نموذج B1</span>
-                <span className="text-[10px] text-muted font-mono">{m.parts?.length || 0} أجزاء</span>
+                <span className="text-[10px] bg-[#00b894]/10 text-[#00b894] px-2 py-0.5 rounded-full">نموذج B1</span>
+                <span className="text-[10px] text-gray-500 dark:text-gray-400 font-mono">{m.parts?.length || 0} أجزاء</span>
               </div>
             </button>
           ))}
@@ -89,7 +89,7 @@ export default function HoerenPage() {
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
         <button 
           onClick={() => { setSelectedModelIndex(null); setAnswers({}); setShowResults(false) }} 
-          className="text-green font-bold text-sm hover:underline cursor-pointer"
+          className="text-[#00b894] font-bold text-sm hover:underline cursor-pointer"
         >
           → العودة للنماذج
         </button>
@@ -100,8 +100,8 @@ export default function HoerenPage() {
       {showResults && (
         <div className={`rounded-xl p-5 text-center font-bold text-base border animate-slideDown ${
           score >= allQuestions.length * 0.6
-            ? 'bg-green/10 text-green border-green/20'
-            : 'bg-red/10 text-red border-red/20'
+            ? 'bg-[#00b894]/10 text-[#00b894] border-[#00b894]/20'
+            : 'bg-red-500/10 text-red-500 border-red-500/20'
         }`}>
           النتيجة النهائية: {score} / {allQuestions.length} ({Math.round((score / allQuestions.length) * 100)}%)
           {score >= allQuestions.length * 0.6 ? ' — أحسنت! نجحت في الاختبار 🎉' : ' — تحتاج إلى مزيد من التدريب والأخطاء تعلّمك 💪'}
@@ -114,9 +114,9 @@ export default function HoerenPage() {
           <div key={pIdx} className="glass p-6 rounded-2xl border border-gray-200 dark:border-white/5 space-y-5 shadow-xl">
             {/* Title & Instructions */}
             <div className="border-b border-gray-200 dark:border-white/5 pb-3">
-              <span className="text-xs text-green font-bold uppercase tracking-wider">Teil {pIdx + 1}</span>
+              <span className="text-xs text-[#00b894] font-bold uppercase tracking-wider">Teil {pIdx + 1}</span>
               <h3 className="text-base font-bold text-gray-900 dark:text-white mt-0.5">{part.title}</h3>
-              <p className="text-xs text-muted mt-1 leading-relaxed">{part.instructionsAr}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">{part.instructionsAr}</p>
             </div>
 
             {/* Transcript Area */}
@@ -124,7 +124,7 @@ export default function HoerenPage() {
               <div className="space-y-2">
                 <button
                   onClick={() => setShowTranscripts(prev => ({ ...prev, [pIdx]: !prev[pIdx] }))}
-                  className="bg-white dark:bg-[#1a1a2e]/5 border border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
                 >
                   📝 {showTranscripts[pIdx] ? 'إخفاء النص المكتوب (Transkript)' : 'عرض النص المكتوب (Transkript)'}
                 </button>
@@ -133,7 +133,7 @@ export default function HoerenPage() {
                   <div className="bg-slate-950/40 border border-gray-200 dark:border-white/5 p-4 rounded-xl space-y-3">
                     {part.transcripts.map((t, tIdx) => (
                       <div key={t.id || tIdx} className="space-y-1 text-left" dir="ltr">
-                        {(t as any).speaker && <span className="text-[10px] text-gold font-bold">{(t as any).speaker}:</span>}
+                        {(t as any).speaker && <span className="text-[10px] text-amber-600 dark:text-amber-400 font-bold">{(t as any).speaker}:</span>}
                         <p className="text-xs text-gray-600 dark:text-gray-400 font-sans leading-relaxed whitespace-pre-wrap">{t.textDe}</p>
                       </div>
                     ))}
@@ -152,14 +152,14 @@ export default function HoerenPage() {
                 return (
                   <div key={q.id} className="border-t border-gray-200 dark:border-white/5 pt-4 space-y-3">
                     <div className="flex gap-2 items-start">
-                      <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                      <span className="bg-white dark:bg-[#1a1a2e]/5 text-gray-500 dark:text-gray-400 w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                         {qIdx + 1}
                       </span>
                       <div className="text-left font-sans" dir="ltr">
                         {isTF ? (
                           <>
                             <p className="text-sm font-semibold text-gray-900 dark:text-white">{q.statementDe}</p>
-                            {q.statementAr && <p className="text-xs text-muted mt-1 text-right" dir="rtl">💡 {q.statementAr}</p>}
+                            {q.statementAr && <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right" dir="rtl">💡 {q.statementAr}</p>}
                           </>
                         ) : (
                           <p className="text-sm font-semibold text-gray-900 dark:text-white">{q.promptDe}</p>
@@ -176,11 +176,11 @@ export default function HoerenPage() {
 
                           let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                           if (showResults) {
-                            if (isOptCorrect) btnStyle = 'bg-green/10 border-green/40 text-green font-bold'
-                            else if (isSelected) btnStyle = 'bg-red/10 border-red/40 text-red font-bold'
-                            else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-50'
+                            if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/40 text-[#00b894] font-bold'
+                            else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/40 text-red-500 font-bold'
+                            else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 opacity-50'
                           } else {
-                            if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
+                            if (isSelected) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
                           }
 
                           return (
@@ -208,11 +208,11 @@ export default function HoerenPage() {
 
                           let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                           if (showResults) {
-                            if (isOptCorrect) btnStyle = 'bg-green/10 border-green/40 text-green font-bold'
-                            else if (isSelected) btnStyle = 'bg-red/10 border-red/40 text-red font-bold'
-                            else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-50'
+                            if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/40 text-[#00b894] font-bold'
+                            else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/40 text-red-500 font-bold'
+                            else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 opacity-50'
                           } else {
-                            if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
+                            if (isSelected) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
                           }
 
                           return (
@@ -224,8 +224,8 @@ export default function HoerenPage() {
                               dir="ltr"
                             >
                               <span><span className="font-bold uppercase mr-1">{optionId})</span> {optionText}</span>
-                              {showResults && isOptCorrect && <span className="text-green text-sm">✓</span>}
-                              {showResults && isSelected && !isOptCorrect && <span className="text-red text-sm">✗</span>}
+                              {showResults && isOptCorrect && <span className="text-[#00b894] text-sm">✓</span>}
+                              {showResults && isSelected && !isOptCorrect && <span className="text-red-500 text-sm">✗</span>}
                             </button>
                           )
                         })}
@@ -237,7 +237,7 @@ export default function HoerenPage() {
                       <div className="mr-8 space-y-2">
                         <button
                           onClick={() => setShowExplanations(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
-                          className="text-[10px] text-muted hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
+                          className="text-[10px] text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
                         >
                           {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
                         </button>
@@ -262,7 +262,7 @@ export default function HoerenPage() {
       {!showResults && isAllAnswered && (
         <button 
           onClick={() => setShowResults(true)} 
-          className="w-full bg-green text-white py-3.5 rounded-2xl font-bold hover:bg-green-dark transition-all cursor-pointer shadow-lg"
+          className="w-full bg-[#00b894] text-white py-3.5 rounded-2xl font-bold hover:bg-[#094F28] transition-all cursor-pointer shadow-lg"
         >
           ✅ تحقّق من الإجابات ورؤية النتيجة
         </button>
@@ -272,7 +272,7 @@ export default function HoerenPage() {
       {showResults && (
         <button 
           onClick={() => { setAnswers({}); setShowResults(false); setShowExplanations({}) }} 
-          className="w-full bg-white dark:bg-[#1a1a2e]/5 border border-white/10 text-white py-3.5 rounded-2xl font-bold hover:bg-white dark:bg-[#1a1a2e]/10 transition-all cursor-pointer shadow-lg"
+          className="w-full bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 text-white py-3.5 rounded-2xl font-bold hover:bg-white dark:bg-[#1a1a2e]/10 transition-all cursor-pointer shadow-lg"
         >
           🔄 إعادة الاختبار والتدريب
         </button>

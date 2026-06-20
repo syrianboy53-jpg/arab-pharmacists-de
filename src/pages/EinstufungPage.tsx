@@ -269,17 +269,17 @@ export default function EinstufungPage() {
       <div className="max-w-2xl mx-auto p-4 md:p-8 relative">
         <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-50 w-full h-full" />
         <div className="bg-white dark:bg-[#1a1a2e] rounded-3xl p-6 md:p-10 text-center shadow-xl border border-gray-100 dark:border-white/5 animate-fadeIn">
-          <div className="inline-block p-4 bg-gold/10 text-gold rounded-full mb-6">
+          <div className="inline-block p-4 bg-gold/10 text-amber-600 dark:text-amber-400 rounded-full mb-6">
             <span className="text-5xl">🏆</span>
           </div>
           <h1 className="text-2xl md:text-3xl font-bold mb-4">اكتمل اختبار تحديد المستوى!</h1>
-          <p className="text-muted text-sm md:text-base mb-8">
-            أجبت بشكل صحيح على <span className="font-bold text-green">{score}</span> من أصل <span className="font-bold text-gray-800 dark:text-gray-200">{questions.length}</span> أسئلة.
+          <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base mb-8">
+            أجبت بشكل صحيح على <span className="font-bold text-[#00b894]">{score}</span> من أصل <span className="font-bold text-gray-800 dark:text-gray-200">{questions.length}</span> أسئلة.
           </p>
 
-          <div className="bg-green/5 dark:bg-green/10 border-2 border-green/30 rounded-2xl p-6 max-w-sm mx-auto mb-8">
-            <div className="text-xs text-muted font-bold mb-1">مستواك التقريبي هو:</div>
-            <div className="text-6xl font-black text-green leading-none">{finalLevel}</div>
+          <div className="bg-[#00b894]/5 dark:bg-[#00b894]/10 border-2 border-[#00b894]/30 rounded-2xl p-6 max-w-sm mx-auto mb-8">
+            <div className="text-xs text-gray-500 dark:text-gray-400 font-bold mb-1">مستواك التقريبي هو:</div>
+            <div className="text-6xl font-black text-[#00b894] leading-none">{finalLevel}</div>
           </div>
 
           <p className="text-sm md:text-base text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed mb-8 max-w-md mx-auto">
@@ -295,7 +295,7 @@ export default function EinstufungPage() {
             </button>
             <Link
               to="/"
-              className="bg-green hover:bg-green-dark text-white font-bold px-8 py-3 rounded-full transition-colors"
+              className="bg-[#00b894] hover:bg-[#094F28] text-white font-bold px-8 py-3 rounded-full transition-colors"
             >
               📚 بدء الدراسة الآن
             </Link>
@@ -309,7 +309,7 @@ export default function EinstufungPage() {
               setAnswered(false)
               setFinished(false)
             }}
-            className="text-muted hover:text-gray-900 dark:text-white text-sm font-bold mt-6 underline block mx-auto transition-colors"
+            className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white text-sm font-bold mt-6 underline block mx-auto transition-colors"
           >
             إعادة الاختبار 🔄
           </button>
@@ -325,16 +325,16 @@ export default function EinstufungPage() {
     <div className="max-w-2xl mx-auto p-4 animate-fadeIn">
       {/* Navigation & Header */}
       <div className="flex justify-between items-center mb-6">
-        <Link to="/" className="text-green hover:text-green-dark font-bold flex items-center gap-1">
+        <Link to="/" className="text-[#00b894] hover:text-[#094F28] font-bold flex items-center gap-1">
           <span>←</span> <span>الرئيسية</span>
         </Link>
-        <span className="text-muted text-sm font-bold">تحديد المستوى 📊</span>
+        <span className="text-gray-500 dark:text-gray-400 text-sm font-bold">تحديد المستوى 📊</span>
       </div>
 
       {/* Progress Card */}
       <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
         <div className="flex justify-between items-center mb-3">
-          <span className="text-sm text-muted font-semibold">
+          <span className="text-sm text-gray-500 dark:text-gray-400 font-semibold">
             سؤال {currentIdx + 1} من {questions.length}
           </span>
           <span className="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 text-xs font-bold px-2.5 py-1 rounded-md">
@@ -345,7 +345,7 @@ export default function EinstufungPage() {
         {/* Progress Bar */}
         <div className="w-full bg-gray-100 dark:bg-white/10 h-2.5 rounded-full overflow-hidden mb-6">
           <div
-            className="bg-green h-full transition-all duration-300"
+            className="bg-[#00b894] h-full transition-all duration-300"
             style={{ width: `${progress * 100}%` }}
           />
         </div>
@@ -366,14 +366,14 @@ export default function EinstufungPage() {
 
             if (answered) {
               if (isCorrect) {
-                btnClass += 'border-green bg-green/10 text-green-dark dark:text-green-300'
+                btnClass += 'border-[#00b894] bg-[#00b894]/10 text-[#094F28] dark:text-green-300'
               } else if (isSelected) {
-                btnClass += 'border-red bg-red/10 text-red dark:text-red-300'
+                btnClass += 'border-red-500 bg-red-500/10 text-red-500 dark:text-red-300'
               } else {
-                btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-white/5/50 dark:bg-[#1a1a2e]/50 opacity-60 text-muted'
+                btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-white/5/50 dark:bg-[#1a1a2e]/50 opacity-60 text-gray-500 dark:text-gray-400'
               }
             } else {
-              btnClass += 'border-gray-200 dark:border-white/5 hover:border-green hover:bg-green/5'
+              btnClass += 'border-gray-200 dark:border-white/5 hover:border-[#00b894] hover:bg-[#00b894]/5'
             }
 
             return (
@@ -385,8 +385,8 @@ export default function EinstufungPage() {
                 dir="ltr"
               >
                 <span>{opt}</span>
-                {answered && isCorrect && <span className="text-green text-xl">✓</span>}
-                {answered && isSelected && !isCorrect && <span className="text-red text-xl">✗</span>}
+                {answered && isCorrect && <span className="text-[#00b894] text-xl">✓</span>}
+                {answered && isSelected && !isCorrect && <span className="text-red-500 text-xl">✗</span>}
               </button>
             )
           })}
@@ -397,7 +397,7 @@ export default function EinstufungPage() {
           <div className="mt-6 p-4 bg-gold/5 dark:bg-gold/10 border border-gold/20 rounded-xl flex gap-3 animate-fadeIn">
             <span className="text-2xl">💡</span>
             <div>
-              <h4 className="font-bold text-gold text-sm mb-1">الشرح بالعربية:</h4>
+              <h4 className="font-bold text-amber-600 dark:text-amber-400 text-sm mb-1">الشرح بالعربية:</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed">{q.explain}</p>
             </div>
           </div>
@@ -407,7 +407,7 @@ export default function EinstufungPage() {
         {answered && (
           <button
             onClick={handleNext}
-            className="w-full mt-6 bg-green hover:bg-green-dark text-white font-bold py-4 rounded-xl text-center transition-colors shadow-md text-lg"
+            className="w-full mt-6 bg-[#00b894] hover:bg-[#094F28] text-white font-bold py-4 rounded-xl text-center transition-colors shadow-md text-lg"
           >
             {currentIdx < questions.length - 1 ? 'السؤال التالي ➡️' : 'عرض النتيجة 🏆'}
           </button>

@@ -130,12 +130,12 @@ export default function DrillPage() {
         <div className="bg-white dark:bg-[#1a1a2e] rounded-3xl p-8 text-center shadow-lg border border-gray-100 dark:border-white/5">
           <div className="text-6xl mb-4">{won ? '🎉' : '💔'}</div>
           <h1 className="text-2xl md:text-3xl font-bold mb-4">{won ? 'عمل رائع! لقد نجحت' : 'انتهت الفرص!'}</h1>
-          <p className="text-muted text-sm md:text-base mb-6">
-            لقد أجبت على <span className="font-bold text-green">{score}</span> من أصل <span className="font-bold text-gray-800 dark:text-gray-200">{roundDrills.length}</span> أسئلة بشكل صحيح.
+          <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base mb-6">
+            لقد أجبت على <span className="font-bold text-[#00b894]">{score}</span> من أصل <span className="font-bold text-gray-800 dark:text-gray-200">{roundDrills.length}</span> أسئلة بشكل صحيح.
           </p>
 
-          <div className="bg-green/5 dark:bg-green/10 border border-green/20 rounded-2xl p-4 mb-8">
-            <span className="text-sm text-gold font-bold">🎯 لقد كسبت: {score * 10} XP</span>
+          <div className="bg-[#00b894]/5 dark:bg-[#00b894]/10 border border-[#00b894]/20 rounded-2xl p-4 mb-8">
+            <span className="text-sm text-amber-600 dark:text-amber-400 font-bold">🎯 لقد كسبت: {score * 10} XP</span>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -147,7 +147,7 @@ export default function DrillPage() {
             </button>
             <button
               onClick={startNewGame}
-              className="bg-green hover:bg-green-dark text-white font-bold px-6 py-3 rounded-full transition-colors"
+              className="bg-[#00b894] hover:bg-[#094F28] text-white font-bold px-6 py-3 rounded-full transition-colors"
             >
               🔄 تدريب جديد
             </button>
@@ -155,7 +155,7 @@ export default function DrillPage() {
 
           <Link
             to="/"
-            className="text-muted hover:text-gray-900 dark:text-white text-sm font-semibold mt-6 block underline transition-colors"
+            className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white text-sm font-semibold mt-6 block underline transition-colors"
           >
             العودة للرئيسية
           </Link>
@@ -167,7 +167,7 @@ export default function DrillPage() {
   if (roundDrills.length === 0) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-green border-t dark:border-white/10-transparent"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#00b894] border-t dark:border-white/10-transparent"></div>
       </div>
     )
   }
@@ -179,7 +179,7 @@ export default function DrillPage() {
     <div className="max-w-2xl mx-auto p-4 animate-fadeIn">
       {/* Header Info */}
       <div className="flex justify-between items-center mb-6">
-        <Link to="/" className="text-green hover:text-green-dark font-bold flex items-center gap-1">
+        <Link to="/" className="text-[#00b894] hover:text-[#094F28] font-bold flex items-center gap-1">
           <span>←</span> <span>الرئيسية</span>
         </Link>
         <div className="flex items-center gap-4">
@@ -190,7 +190,7 @@ export default function DrillPage() {
               </span>
             ))}
           </div>
-          <span className="bg-gold/10 text-gold font-bold px-3 py-1 rounded-full text-sm">
+          <span className="bg-gold/10 text-amber-600 dark:text-amber-400 font-bold px-3 py-1 rounded-full text-sm">
             🏆 {score * 10} XP
           </span>
         </div>
@@ -200,7 +200,7 @@ export default function DrillPage() {
       <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-white/5 flex gap-4 items-center mb-6 animate-pulseOnce">
         <span className="text-4xl">🦉</span>
         <div className="flex-1">
-          <div className="text-xs text-muted font-bold mb-0.5">مدرّب B1-Syrer</div>
+          <div className="text-xs text-gray-500 dark:text-gray-400 font-bold mb-0.5">مدرّب B1-Syrer</div>
           <p className="text-sm font-bold text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed">{mascotPhrase}</p>
         </div>
       </div>
@@ -208,7 +208,7 @@ export default function DrillPage() {
       {/* Drill Question Card */}
       <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
         <div className="flex justify-between items-center mb-3">
-          <span className="text-xs text-muted font-bold">
+          <span className="text-xs text-gray-500 dark:text-gray-400 font-bold">
             سؤال {currentIdx + 1} من {roundDrills.length}
           </span>
           <div className="flex gap-2">
@@ -224,7 +224,7 @@ export default function DrillPage() {
         {/* Progress Bar */}
         <div className="w-full bg-gray-100 dark:bg-white/10 h-2.5 rounded-full overflow-hidden mb-6">
           <div
-            className="bg-green h-full transition-all duration-300"
+            className="bg-[#00b894] h-full transition-all duration-300"
             style={{ width: `${progress * 100}%` }}
           />
         </div>
@@ -245,14 +245,14 @@ export default function DrillPage() {
 
             if (answered) {
               if (isCorrect) {
-                btnClass += 'border-green bg-green/10 text-green-dark dark:text-green-300'
+                btnClass += 'border-[#00b894] bg-[#00b894]/10 text-[#094F28] dark:text-green-300'
               } else if (isSelected) {
-                btnClass += 'border-red bg-red/10 text-red dark:text-red-300'
+                btnClass += 'border-red-500 bg-red-500/10 text-red-500 dark:text-red-300'
               } else {
-                btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-white/5/50 dark:bg-[#1a1a2e]/50 opacity-60 text-muted'
+                btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-white/5/50 dark:bg-[#1a1a2e]/50 opacity-60 text-gray-500 dark:text-gray-400'
               }
             } else {
-              btnClass += 'border-gray-200 dark:border-white/5 hover:border-green hover:bg-green/5'
+              btnClass += 'border-gray-200 dark:border-white/5 hover:border-[#00b894] hover:bg-[#00b894]/5'
             }
 
             return (
@@ -264,8 +264,8 @@ export default function DrillPage() {
                 dir="ltr"
               >
                 <span>{opt}</span>
-                {answered && isCorrect && <span className="text-green text-xl font-bold">✓</span>}
-                {answered && isSelected && !isCorrect && <span className="text-red text-xl font-bold">✗</span>}
+                {answered && isCorrect && <span className="text-[#00b894] text-xl font-bold">✓</span>}
+                {answered && isSelected && !isCorrect && <span className="text-red-500 text-xl font-bold">✗</span>}
               </button>
             )
           })}
@@ -276,7 +276,7 @@ export default function DrillPage() {
           <div className="mt-6 p-4 bg-gold/5 dark:bg-gold/10 border border-gold/20 rounded-xl flex gap-3 animate-fadeIn">
             <span className="text-2xl">💡</span>
             <div>
-              <h4 className="font-bold text-gold text-sm mb-1">الشرح بالعربية:</h4>
+              <h4 className="font-bold text-amber-600 dark:text-amber-400 text-sm mb-1">الشرح بالعربية:</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed">{q.explanation}</p>
             </div>
           </div>
@@ -286,7 +286,7 @@ export default function DrillPage() {
         {answered && (
           <button
             onClick={handleNext}
-            className="w-full mt-6 bg-green hover:bg-green-dark text-white font-bold py-4 rounded-xl text-center transition-colors shadow-md text-lg"
+            className="w-full mt-6 bg-[#00b894] hover:bg-[#094F28] text-white font-bold py-4 rounded-xl text-center transition-colors shadow-md text-lg"
           >
             {currentIdx < roundDrills.length - 1 ? 'السؤال التالي ➡️' : 'عرض النتيجة النهائية 🏆'}
           </button>

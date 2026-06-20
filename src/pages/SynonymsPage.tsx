@@ -168,7 +168,7 @@ export default function SynonymsPage() {
   if (synonymsPool.length === 0) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-green border-t dark:border-white/10-transparent"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#00b894] border-t dark:border-white/10-transparent"></div>
       </div>
     )
   }
@@ -185,20 +185,20 @@ export default function SynonymsPage() {
               return false
             }
           }}
-          className="text-green hover:text-green-dark font-bold flex items-center gap-1"
+          className="text-[#00b894] hover:text-[#094F28] font-bold flex items-center gap-1"
         >
           <span>←</span> <span>الرئيسية</span>
         </Link>
-        <span className="text-muted text-sm font-bold">فخاخ المترادفات 🎮</span>
+        <span className="text-gray-500 dark:text-gray-400 text-sm font-bold">فخاخ المترادفات 🎮</span>
       </div>
 
       {/* MENU MODE */}
       {gameMode === 'menu' && (
         <div className="space-y-6 text-center">
-          <div className="bg-gradient-to-br from-green/20 to-gold/10 p-8 rounded-3xl border border-green/10">
+          <div className="bg-gradient-to-br from-green/20 to-gold/10 p-8 rounded-3xl border border-[#00b894]/10">
             <span className="text-6xl block mb-4 animate-bounce">🃏</span>
             <h1 className="text-2xl md:text-3xl font-bold mb-2">فخاخ المترادفات الألمانية</h1>
-            <p className="text-muted text-sm leading-relaxed max-w-sm mx-auto">
+            <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed max-w-sm mx-auto">
               أكثر من 90 زوجاً من المترادفات الهامة لامتحان B1. تدرّب عليها للتعبير بشكل متنوّع وتفادي التكرار في الرسائل والحديث.
             </p>
           </div>
@@ -206,20 +206,20 @@ export default function SynonymsPage() {
           <div className="grid md:grid-cols-2 gap-4">
             <button
               onClick={startQuiz}
-              className="bg-white dark:bg-[#1a1a2e] hover:bg-green/5 dark:bg-[#1a1a2e] p-6 rounded-2xl border-2 border-gray-100 dark:border-white/5 hover:border-green transition-all shadow-sm text-center flex flex-col items-center"
+              className="bg-white dark:bg-[#1a1a2e] hover:bg-[#00b894]/5 dark:bg-[#1a1a2e] p-6 rounded-2xl border-2 border-gray-100 dark:border-white/5 hover:border-[#00b894] transition-all shadow-sm text-center flex flex-col items-center"
             >
               <span className="text-4xl mb-3">📝</span>
               <h3 className="font-bold text-lg mb-1">كويز المترادفات</h3>
-              <p className="text-xs text-muted">اختبار اختيار من متعدد لـ 10 أسئلة عشوائية.</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">اختبار اختيار من متعدد لـ 10 أسئلة عشوائية.</p>
             </button>
 
             <button
               onClick={startMatchingGame}
-              className="bg-white dark:bg-[#1a1a2e] hover:bg-green/5 dark:bg-[#1a1a2e] p-6 rounded-2xl border-2 border-gray-100 dark:border-white/5 hover:border-green transition-all shadow-sm text-center flex flex-col items-center"
+              className="bg-white dark:bg-[#1a1a2e] hover:bg-[#00b894]/5 dark:bg-[#1a1a2e] p-6 rounded-2xl border-2 border-gray-100 dark:border-white/5 hover:border-[#00b894] transition-all shadow-sm text-center flex flex-col items-center"
             >
               <span className="text-4xl mb-3">🧩</span>
               <h3 className="font-bold text-lg mb-1">لعبة مطابقة البطاقات</h3>
-              <p className="text-xs text-muted">لعبة ذاكرة ممتعة لمطابقة 6 كلمات مع مرادفاتها.</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">لعبة ذاكرة ممتعة لمطابقة 6 كلمات مع مرادفاتها.</p>
             </button>
           </div>
         </div>
@@ -229,10 +229,10 @@ export default function SynonymsPage() {
       {gameMode === 'quiz' && quizRound.length > 0 && (
         <div className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-white/5">
           <div className="flex justify-between items-center mb-4">
-            <span className="text-xs text-muted font-bold">
+            <span className="text-xs text-gray-500 dark:text-gray-400 font-bold">
               سؤال {quizIdx + 1} من {quizRound.length}
             </span>
-            <span className="bg-gold/10 text-gold text-xs font-bold px-2 py-0.5 rounded-md">
+            <span className="bg-gold/10 text-amber-600 dark:text-amber-400 text-xs font-bold px-2 py-0.5 rounded-md">
               {quizRound[quizIdx].level}
             </span>
           </div>
@@ -240,18 +240,18 @@ export default function SynonymsPage() {
           {/* Progress Bar */}
           <div className="w-full bg-gray-100 dark:bg-white/10 h-2 rounded-full overflow-hidden mb-6">
             <div
-              className="bg-green h-full transition-all duration-300"
+              className="bg-[#00b894] h-full transition-all duration-300"
               style={{ width: `${((quizIdx + 1) / quizRound.length) * 100}%` }}
             />
           </div>
 
           {/* Question Word */}
           <div className="text-center py-6 border-b border-gray-50 dark:border-white/5">
-            <div className="text-xs text-muted font-bold mb-1">ما هو مرادف الكلمة التالية؟</div>
-            <h2 className="text-3xl font-black text-green" dir="ltr">
+            <div className="text-xs text-gray-500 dark:text-gray-400 font-bold mb-1">ما هو مرادف الكلمة التالية؟</div>
+            <h2 className="text-3xl font-black text-[#00b894]" dir="ltr">
               {quizRound[quizIdx].a}
             </h2>
-            <div className="text-xs text-muted mt-2">({quizRound[quizIdx].hintAr})</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400 mt-2">({quizRound[quizIdx].hintAr})</div>
           </div>
 
           {/* Options */}
@@ -264,14 +264,14 @@ export default function SynonymsPage() {
 
               if (quizAnswered) {
                 if (isCorrect) {
-                  btnClass += 'border-green bg-green/10 text-green-dark dark:text-green-300'
+                  btnClass += 'border-[#00b894] bg-[#00b894]/10 text-[#094F28] dark:text-green-300'
                 } else if (isSelected) {
-                  btnClass += 'border-red bg-red/10 text-red dark:text-red-300'
+                  btnClass += 'border-red-500 bg-red-500/10 text-red-500 dark:text-red-300'
                 } else {
-                  btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-white/5/50 dark:bg-[#1a1a2e]/50 opacity-60 text-muted'
+                  btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-white/5/50 dark:bg-[#1a1a2e]/50 opacity-60 text-gray-500 dark:text-gray-400'
                 }
               } else {
-                btnClass += 'border-gray-200 dark:border-white/5 hover:border-green hover:bg-green/5 text-gray-900 dark:text-white'
+                btnClass += 'border-gray-200 dark:border-white/5 hover:border-[#00b894] hover:bg-[#00b894]/5 text-gray-900 dark:text-white'
               }
 
               return (
@@ -292,11 +292,11 @@ export default function SynonymsPage() {
           {quizAnswered && (
             <div className="mt-6 p-4 bg-gold/5 dark:bg-gold/10 border border-gold/20 rounded-xl animate-fadeIn">
               <div className="text-sm font-semibold mb-2">
-                مرادف <span className="text-green font-bold" dir="ltr">{quizRound[quizIdx].a}</span> هو{' '}
-                <span className="text-green font-bold" dir="ltr">{quizRound[quizIdx].b}</span>.
+                مرادف <span className="text-[#00b894] font-bold" dir="ltr">{quizRound[quizIdx].a}</span> هو{' '}
+                <span className="text-[#00b894] font-bold" dir="ltr">{quizRound[quizIdx].b}</span>.
               </div>
               {quizRound[quizIdx].example && (
-                <p className="text-xs text-muted font-mono leading-relaxed" dir="ltr">
+                <p className="text-xs text-gray-500 dark:text-gray-400 font-mono leading-relaxed" dir="ltr">
                   مثال: {quizRound[quizIdx].example}
                 </p>
               )}
@@ -307,7 +307,7 @@ export default function SynonymsPage() {
           {quizAnswered && (
             <button
               onClick={handleQuizNext}
-              className="w-full mt-6 bg-green hover:bg-green-dark text-white font-bold py-4 rounded-xl transition-colors"
+              className="w-full mt-6 bg-[#00b894] hover:bg-[#094F28] text-white font-bold py-4 rounded-xl transition-colors"
             >
               {quizIdx < quizRound.length - 1 ? 'السؤال التالي ➡️' : 'إنهاء وعرض النتيجة 🏆'}
             </button>
@@ -319,8 +319,8 @@ export default function SynonymsPage() {
       {gameMode === 'match' && (
         <div className="space-y-6">
           <div className="flex justify-between items-center bg-white dark:bg-[#1a1a2e] p-4 rounded-xl border border-gray-100 dark:border-white/5">
-            <span className="text-sm font-bold text-muted">المحاولات: {matchAttempts}</span>
-            <span className="bg-gold/10 text-gold font-bold px-3 py-1 rounded-full text-xs">
+            <span className="text-sm font-bold text-gray-500 dark:text-gray-400">المحاولات: {matchAttempts}</span>
+            <span className="bg-gold/10 text-amber-600 dark:text-amber-400 font-bold px-3 py-1 rounded-full text-xs">
               🏆 {matchScore} XP
             </span>
           </div>
@@ -335,9 +335,9 @@ export default function SynonymsPage() {
                 'h-24 rounded-2xl flex items-center justify-center text-center p-2 font-bold transition-all duration-300 border-2 text-sm md:text-base '
 
               if (isMatched) {
-                cardClass += 'bg-green/10 border-green text-green cursor-default scale-95 opacity-80'
+                cardClass += 'bg-[#00b894]/10 border-[#00b894] text-[#00b894] cursor-default scale-95 opacity-80'
               } else if (isSelected) {
-                cardClass += 'bg-gold/10 border-gold text-gold scale-105 shadow-md'
+                cardClass += 'bg-gold/10 border-gold text-amber-600 dark:text-amber-400 scale-105 shadow-md'
               } else {
                 cardClass +=
                   'bg-white dark:bg-[#1a1a2e] border-gray-200 dark:border-white/5 hover:border-gold hover:shadow-sm'
@@ -358,10 +358,10 @@ export default function SynonymsPage() {
 
           {/* Win Dialog */}
           {matchWon && (
-            <div className="bg-white dark:bg-[#1a1a2e] border-2 border-green/30 rounded-3xl p-6 text-center shadow-lg animate-fadeIn">
+            <div className="bg-white dark:bg-[#1a1a2e] border-2 border-[#00b894]/30 rounded-3xl p-6 text-center shadow-lg animate-fadeIn">
               <span className="text-5xl block mb-2">🎉</span>
               <h2 className="text-xl font-bold mb-1 text-gray-800 dark:text-gray-200">فوز رائع!</h2>
-              <p className="text-muted text-xs mb-4">لقد طابقت كل الكلمات بنجاح في {matchAttempts} محاولة.</p>
+              <p className="text-gray-500 dark:text-gray-400 text-xs mb-4">لقد طابقت كل الكلمات بنجاح في {matchAttempts} محاولة.</p>
 
               <div className="flex gap-2 justify-center">
                 <button
@@ -372,7 +372,7 @@ export default function SynonymsPage() {
                 </button>
                 <button
                   onClick={startMatchingGame}
-                  className="bg-green hover:bg-green-dark text-white font-bold px-4 py-2 rounded-full text-xs transition-colors"
+                  className="bg-[#00b894] hover:bg-[#094F28] text-white font-bold px-4 py-2 rounded-full text-xs transition-colors"
                 >
                   🔄 لعب مجدداً
                 </button>

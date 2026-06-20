@@ -63,7 +63,7 @@ export default function FehlerPage() {
   if (mistakesPool.length === 0) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-green border-t dark:border-white/10-transparent"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#00b894] border-t dark:border-white/10-transparent"></div>
       </div>
     )
   }
@@ -74,23 +74,23 @@ export default function FehlerPage() {
     <div className="max-w-2xl mx-auto p-4 animate-fadeIn">
       {/* Navigation & Header */}
       <div className="flex justify-between items-center mb-6">
-        <Link to="/" className="text-green hover:text-green-dark font-bold flex items-center gap-1">
+        <Link to="/" className="text-[#00b894] hover:text-[#094F28] font-bold flex items-center gap-1">
           <span>←</span> <span>الرئيسية</span>
         </Link>
         <div className="flex gap-2">
           <button
             onClick={handleShare}
-            className="text-xs font-bold text-gold bg-gold/10 px-3 py-1 rounded-full hover:bg-gold/20 transition-colors"
+            className="text-xs font-bold text-amber-600 dark:text-amber-400 bg-gold/10 px-3 py-1 rounded-full hover:bg-gold/20 transition-colors"
           >
             📢 مشاركة البطاقة
           </button>
-          <span className="text-muted text-sm font-bold">أخطاء شائعة 📐</span>
+          <span className="text-gray-500 dark:text-gray-400 text-sm font-bold">أخطاء شائعة 📐</span>
         </div>
       </div>
 
       {/* Progress Info */}
       <div className="flex justify-between items-center mb-4">
-        <span className="text-xs text-muted font-bold">
+        <span className="text-xs text-gray-500 dark:text-gray-400 font-bold">
           البطاقة {currentIdx + 1} من {mistakesPool.length}
         </span>
         <div className="flex gap-2">
@@ -117,36 +117,36 @@ export default function FehlerPage() {
           <div className="absolute inset-0 w-full h-full rounded-3xl bg-white dark:bg-[#1a1a2e] backface-hidden p-6 md:p-8 flex flex-col justify-between">
             <div>
               <div className="text-center mb-6">
-                <span className="bg-red/10 text-red text-xs font-bold px-3 py-1 rounded-full">خطأ شائع احذره! ⚠️</span>
+                <span className="bg-red-500/10 text-red-500 text-xs font-bold px-3 py-1 rounded-full">خطأ شائع احذره! ⚠️</span>
               </div>
               <h3 className="text-lg md:text-xl font-bold text-gray-600 dark:text-gray-400 dark:text-gray-200 text-center leading-relaxed mb-8">
                 {item.titleAr}
               </h3>
 
               {/* Wrong Sentence Box */}
-              <div className="bg-red/5 border border-red/20 rounded-2xl p-4 mb-4 flex items-center gap-3">
-                <span className="text-2xl text-red">❌</span>
+              <div className="bg-red-500/5 border border-red-500/20 rounded-2xl p-4 mb-4 flex items-center gap-3">
+                <span className="text-2xl text-red-500">❌</span>
                 <div className="flex-1">
-                  <div className="text-xs text-red font-bold mb-0.5" dir="ltr">Falsch:</div>
-                  <p className="text-base font-bold text-red dark:text-red-400 font-mono" dir="ltr">
+                  <div className="text-xs text-red-500 font-bold mb-0.5" dir="ltr">Falsch:</div>
+                  <p className="text-base font-bold text-red-500 dark:text-red-400 font-mono" dir="ltr">
                     {item.wrong}
                   </p>
                 </div>
               </div>
 
               {/* Right Sentence Box */}
-              <div className="bg-green/5 border border-green/20 rounded-2xl p-4 flex items-center gap-3">
-                <span className="text-2xl text-green">✓</span>
+              <div className="bg-[#00b894]/5 border border-[#00b894]/20 rounded-2xl p-4 flex items-center gap-3">
+                <span className="text-2xl text-[#00b894]">✓</span>
                 <div className="flex-1">
-                  <div className="text-xs text-green font-bold mb-0.5" dir="ltr">Richtig:</div>
-                  <p className="text-base font-bold text-green-dark dark:text-green-400 font-mono" dir="ltr">
+                  <div className="text-xs text-[#00b894] font-bold mb-0.5" dir="ltr">Richtig:</div>
+                  <p className="text-base font-bold text-[#094F28] dark:text-green-400 font-mono" dir="ltr">
                     {item.right}
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="text-center text-xs text-muted font-bold mt-4 animate-pulse">
+            <div className="text-center text-xs text-gray-500 dark:text-gray-400 font-bold mt-4 animate-pulse">
               اضغط على البطاقة لعرض الشرح والقاعدة النحوية 🔄
             </div>
           </div>
@@ -154,26 +154,26 @@ export default function FehlerPage() {
           {/* CARD BACK */}
           <div className="absolute inset-0 w-full h-full rounded-3xl bg-gray-50 dark:bg-gray-750 backface-hidden rotate-y-180 p-6 md:p-8 flex flex-col justify-between overflow-y-auto">
             <div>
-              <h3 className="font-bold text-green mb-3 border-b border-gray-200 dark:border-white/5 pb-2">
+              <h3 className="font-bold text-[#00b894] mb-3 border-b border-gray-200 dark:border-white/5 pb-2">
                 لماذا حدث هذا الخطأ؟ 🧐
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed mb-4">
                 {item.whyAr}
               </p>
 
-              <h3 className="font-bold text-gold mb-2">القاعدة النحوية 📝</h3>
+              <h3 className="font-bold text-amber-600 dark:text-amber-400 mb-2">القاعدة النحوية 📝</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed mb-4">
                 {item.ruleAr}
               </p>
 
               {item.tipAr && (
-                <div className="p-3 bg-green/5 rounded-xl border border-green/10 text-xs text-green-dark dark:text-green-300 leading-relaxed">
+                <div className="p-3 bg-[#00b894]/5 rounded-xl border border-[#00b894]/10 text-xs text-[#094F28] dark:text-green-300 leading-relaxed">
                   💡 <strong>نصيحة للحفظ:</strong> {item.tipAr}
                 </div>
               )}
             </div>
 
-            <div className="text-center text-xs text-muted font-bold mt-4">
+            <div className="text-center text-xs text-gray-500 dark:text-gray-400 font-bold mt-4">
               اضغط للعودة إلى واجهة البطاقة 🔄
             </div>
           </div>
@@ -189,7 +189,7 @@ export default function FehlerPage() {
           <div className="space-y-4">
             {item.examples.map((ex, idx) => (
               <div key={idx} className="p-3 bg-gray-50 dark:bg-[#1a1a2e]/30 rounded-xl border border-gray-100 dark:border-gray-800">
-                <div className="flex justify-between items-center text-xs text-muted mb-1">
+                <div className="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 mb-1">
                   <span>مثال {idx + 1}</span>
                   <span className="font-bold text-gray-800 dark:text-gray-200">{ex.ar}</span>
                 </div>
@@ -211,7 +211,7 @@ export default function FehlerPage() {
           className={`px-6 py-3 rounded-xl font-bold transition-colors border-2 ${
             currentIdx === 0
               ? 'border-gray-200 dark:border-gray-750 text-gray-300 cursor-not-allowed'
-              : 'border-green text-green hover:bg-green hover:text-white'
+              : 'border-[#00b894] text-[#00b894] hover:bg-[#00b894] hover:text-white'
           }`}
         >
           ⬅️ السابق
@@ -223,7 +223,7 @@ export default function FehlerPage() {
           className={`px-6 py-3 rounded-xl font-bold transition-colors border-2 ${
             currentIdx === mistakesPool.length - 1
               ? 'border-gray-200 dark:border-gray-750 text-gray-300 cursor-not-allowed'
-              : 'border-green text-green hover:bg-green hover:text-white'
+              : 'border-[#00b894] text-[#00b894] hover:bg-[#00b894] hover:text-white'
           }`}
         >
           التالي ➡️

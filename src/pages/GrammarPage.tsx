@@ -68,18 +68,18 @@ export default function GrammarPage() {
         <span className="text-3xl">📐</span>
         <div>
           <h1 className="text-2xl font-bold grad-text">القواعد والحلول — Grammatik</h1>
-          <p className="text-muted text-sm">شرح تفاعلي لقواعد B1، الأخطاء اللغوية الشائعة، وقاعدة الأفعال المنفصلة.</p>
+          <p className="text-gray-500 dark:text-gray-400 text-sm">شرح تفاعلي لقواعد B1، الأخطاء اللغوية الشائعة، وقاعدة الأفعال المنفصلة.</p>
         </div>
       </div>
 
       {/* Main Tabs Segmented Control */}
-      <div className="flex bg-slate-950/60 p-1.5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-inner">
+      <div className="flex bg-gray-100 dark:bg-[#1a1a2e] p-1.5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-inner">
         <button
           onClick={() => setActiveTab('lessons')}
           className={`flex-1 text-center py-3 rounded-xl text-xs md:text-sm font-bold transition-all ${
             activeTab === 'lessons'
-              ? 'bg-green text-white shadow-lg'
-              : 'text-muted hover:text-white'
+              ? 'bg-[#00b894] text-white shadow-lg'
+              : 'text-gray-500 dark:text-gray-400 hover:text-white'
           }`}
         >
           📖 شرح القواعد والتمارين
@@ -88,8 +88,8 @@ export default function GrammarPage() {
           onClick={() => setActiveTab('mistakes')}
           className={`flex-1 text-center py-3 rounded-xl text-xs md:text-sm font-bold transition-all ${
             activeTab === 'mistakes'
-              ? 'bg-green text-white shadow-lg'
-              : 'text-muted hover:text-white'
+              ? 'bg-[#00b894] text-white shadow-lg'
+              : 'text-gray-500 dark:text-gray-400 hover:text-white'
           }`}
         >
           ❌ الأخطاء الشائعة ({commonMistakes.length})
@@ -98,8 +98,8 @@ export default function GrammarPage() {
           onClick={() => setActiveTab('verbs')}
           className={`flex-1 text-center py-3 rounded-xl text-xs md:text-sm font-bold transition-all ${
             activeTab === 'verbs'
-              ? 'bg-green text-white shadow-lg'
-              : 'text-muted hover:text-white'
+              ? 'bg-[#00b894] text-white shadow-lg'
+              : 'text-gray-500 dark:text-gray-400 hover:text-white'
           }`}
         >
           🧩 الأفعال المركبة
@@ -115,14 +115,14 @@ export default function GrammarPage() {
                 <button
                   key={l.id}
                   onClick={() => setSelectedLesson(i)}
-                  className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-green/20 hover:bg-white dark:bg-[#1a1a2e]/5 transition-all shadow-md flex items-center justify-between"
+                  className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-[#00b894]/20 hover:bg-white dark:bg-[#1a1a2e]/5 transition-all shadow-md flex items-center justify-between"
                 >
-                  <span className="text-green text-xs font-bold bg-green/10 border border-green/20 px-3 py-1.5 rounded-full">
+                  <span className="text-[#00b894] text-xs font-bold bg-[#00b894]/10 border border-[#00b894]/20 px-3 py-1.5 rounded-full">
                     شرح + اختبار 📝
                   </span>
                   <div>
                     <h3 className="font-bold text-gray-900 dark:text-white text-base" dir="ltr">{l.title}</h3>
-                    <p className="text-xs text-muted mt-1">{l.titleAr}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{l.titleAr}</p>
                   </div>
                 </button>
               ))}
@@ -135,7 +135,7 @@ export default function GrammarPage() {
                   setLessonAnswers({})
                   setShowLessonResults(false)
                 }}
-                className="text-green font-bold text-sm"
+                className="text-[#00b894] font-bold text-sm"
               >
                 → العودة لقائمة القواعد
               </button>
@@ -143,10 +143,10 @@ export default function GrammarPage() {
               {/* Lesson Details */}
               <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4">
                 <div className="border-b border-white/10 pb-2">
-                  <h2 className="text-lg font-bold text-green" dir="ltr">{originalLessons[selectedLesson].title}</h2>
-                  <p className="text-xs text-muted">{originalLessons[selectedLesson].titleAr}</p>
+                  <h2 className="text-lg font-bold text-[#00b894]" dir="ltr">{originalLessons[selectedLesson].title}</h2>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{originalLessons[selectedLesson].titleAr}</p>
                 </div>
-                <pre className="text-sm text-gray-900 dark:text-white whitespace-pre-wrap leading-relaxed bg-slate-950/80 rounded-xl p-5 border border-gray-200 dark:border-white/5 font-sans">
+                <pre className="text-sm text-gray-900 dark:text-white whitespace-pre-wrap leading-relaxed bg-gray-100 dark:bg-[#1a1a2e] rounded-xl p-5 border border-gray-200 dark:border-white/5 font-sans">
                   {originalLessons[selectedLesson].explanation}
                 </pre>
               </div>
@@ -156,9 +156,9 @@ export default function GrammarPage() {
                 <h3 className="font-bold text-gray-900 dark:text-white text-sm">💡 أمثلة توضيحية:</h3>
                 <div className="grid md:grid-cols-2 gap-3" dir="ltr">
                   {originalLessons[selectedLesson].examples.map((ex, idx) => (
-                    <div key={idx} className="bg-slate-900/60 p-4 rounded-xl border border-gray-200 dark:border-white/5 text-left">
+                    <div key={idx} className="bg-gray-50 dark:bg-white/5 p-4 rounded-xl border border-gray-200 dark:border-white/5 text-left">
                       <p className="text-sm font-semibold text-gray-900 dark:text-white">{ex.de}</p>
-                      <p className="text-xs text-muted mt-1 text-right" dir="rtl">{ex.ar}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right" dir="rtl">{ex.ar}</p>
                     </div>
                   ))}
                 </div>
@@ -177,13 +177,13 @@ export default function GrammarPage() {
                         {ex.options.map((opt, oi) => {
                           let cls = 'px-4 py-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer '
                           if (showLessonResults) {
-                            if (oi === ex.correct) cls += 'border-green bg-green/20 text-green'
-                            else if (lessonAnswers[i] === oi) cls += 'border-red bg-red/20 text-red shadow-inner'
-                            else cls += 'border-white/5 bg-white dark:bg-[#1a1a2e]/5 text-muted'
+                            if (oi === ex.correct) cls += 'border-[#00b894] bg-[#00b894]/20 text-[#00b894]'
+                            else if (lessonAnswers[i] === oi) cls += 'border-red-500 bg-red-500/20 text-red-500 shadow-inner'
+                            else cls += 'border-white/5 bg-white dark:bg-[#1a1a2e]/5 text-gray-500 dark:text-gray-400'
                           } else {
                             cls += lessonAnswers[i] === oi 
-                              ? 'border-green bg-green/10 text-green' 
-                              : 'border-white/10 bg-gray-50 dark:bg-white/5 text-muted hover:border-green'
+                              ? 'border-[#00b894] bg-[#00b894]/10 text-[#00b894]' 
+                              : 'border-white/10 bg-gray-50 dark:bg-white/5 text-gray-500 dark:text-gray-400 hover:border-[#00b894]'
                           }
                           return (
                             <button
@@ -220,7 +220,7 @@ export default function GrammarPage() {
                         playWrongSound()
                       }
                     }}
-                    className="mt-4 w-full bg-green text-white hover:bg-green-600 py-3 rounded-xl font-bold transition-all shadow-md cursor-pointer"
+                    className="mt-4 w-full bg-[#00b894] text-white hover:bg-[#00a884] py-3 rounded-xl font-bold transition-all shadow-md cursor-pointer"
                   >
                     تحقّق من الإجابات
                   </button>
@@ -239,11 +239,11 @@ export default function GrammarPage() {
             <div className="grid md:grid-cols-2 gap-4">
               {/* Category Filter */}
               <div className="space-y-1">
-                <label className="text-xs text-muted block">تصنيف الأخطاء:</label>
+                <label className="text-xs text-gray-500 dark:text-gray-400 block">تصنيف الأخطاء:</label>
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green text-gray-900 dark:text-white"
+                  className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#00b894] text-gray-900 dark:text-white"
                 >
                   <option value="all">📦 كل تصنيفات الأخطاء</option>
                   {mistakeCategories.filter(c => c !== 'all').map(cat => (
@@ -256,13 +256,13 @@ export default function GrammarPage() {
 
               {/* Search Bar */}
               <div className="space-y-1">
-                <label className="text-xs text-muted block">ابحث في الأخطاء والقواعد:</label>
+                <label className="text-xs text-gray-500 dark:text-gray-400 block">ابحث في الأخطاء والقواعد:</label>
                 <input
                   type="text"
                   value={searchMistakeQuery}
                   onChange={(e) => setSearchMistakeQuery(e.target.value)}
                   placeholder="ابحث عن كلمة، قاعدة، أو جملة..."
-                  className="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green text-gray-900 dark:text-white text-right"
+                  className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#00b894] text-gray-900 dark:text-white text-right"
                 />
               </div>
             </div>
@@ -280,7 +280,7 @@ export default function GrammarPage() {
                 >
                   {/* Title & Level Badge */}
                   <div className="flex items-center justify-between border-b border-gray-200 dark:border-white/5 pb-2.5">
-                    <span className="text-xs bg-red/10 border border-red/20 text-red px-2.5 py-1 rounded-full font-bold">
+                    <span className="text-xs bg-red-500/10 border border-red-500/20 text-red-500 px-2.5 py-1 rounded-full font-bold">
                       {mistake.level}
                     </span>
                     <h3 className="font-bold text-gray-900 dark:text-white text-base text-right">
@@ -305,28 +305,28 @@ export default function GrammarPage() {
                   <div className="space-y-3">
                     <button
                       onClick={() => setRevealedMistakes(p => ({ ...p, [mistake.id]: !isRevealed }))}
-                      className="w-full bg-white dark:bg-[#1a1a2e]/5 hover:bg-white dark:bg-[#1a1a2e]/10 border border-gray-200 dark:border-white/5 py-2 rounded-xl text-xs font-bold transition-all text-center text-muted hover:text-white cursor-pointer"
+                      className="w-full bg-white dark:bg-[#1a1a2e]/5 hover:bg-white dark:bg-[#1a1a2e]/10 border border-gray-200 dark:border-white/5 py-2 rounded-xl text-xs font-bold transition-all text-center text-gray-500 dark:text-gray-400 hover:text-white cursor-pointer"
                     >
                       {isRevealed ? '🙈 إخفاء تفاصيل القاعدة' : '🔎 لماذا هذا الخطأ؟ وما هي القاعدة؟'}
                     </button>
 
                     {isRevealed && (
-                      <div className="bg-slate-950/80 border border-gray-200 dark:border-white/5 rounded-xl p-4 text-right space-y-3.5 animate-fade-in">
+                      <div className="bg-gray-100 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 rounded-xl p-4 text-right space-y-3.5 animate-fade-in">
                         {/* Why */}
                         <div>
-                          <h4 className="text-xs font-bold text-red mb-1">🤔 سبب الوقوع في هذا الخطأ:</h4>
-                          <p className="text-xs text-muted leading-relaxed">{mistake.whyAr}</p>
+                          <h4 className="text-xs font-bold text-red-500 mb-1">🤔 سبب الوقوع في هذا الخطأ:</h4>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{mistake.whyAr}</p>
                         </div>
                         {/* Rule */}
                         <div>
-                          <h4 className="text-xs font-bold text-green mb-1">📖 القاعدة الصحيحة:</h4>
-                          <p className="text-xs text-muted leading-relaxed">{mistake.ruleAr}</p>
+                          <h4 className="text-xs font-bold text-[#00b894] mb-1">📖 القاعدة الصحيحة:</h4>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{mistake.ruleAr}</p>
                         </div>
                         {/* Tip */}
                         {mistake.tipAr && (
                           <div className="bg-gold/10 border border-gold/20 p-3 rounded-lg">
-                            <h4 className="text-xs font-bold text-gold mb-1">💡 نصيحة للحفظ والتركيز:</h4>
-                            <p className="text-xs text-muted leading-relaxed">{mistake.tipAr}</p>
+                            <h4 className="text-xs font-bold text-amber-600 dark:text-amber-400 mb-1">💡 نصيحة للحفظ والتركيز:</h4>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{mistake.tipAr}</p>
                           </div>
                         )}
                         {/* Extra Examples */}
@@ -340,7 +340,7 @@ export default function GrammarPage() {
                                     <p className="text-red-400 line-through scale-90">{ex.wrong}</p>
                                     <p className="text-green-400 font-semibold">{ex.right}</p>
                                   </div>
-                                  <p className="text-xs text-muted text-right" dir="rtl">{ex.ar}</p>
+                                  <p className="text-xs text-gray-500 dark:text-gray-400 text-right" dir="rtl">{ex.ar}</p>
                                 </div>
                               ))}
                             </div>
@@ -360,7 +360,7 @@ export default function GrammarPage() {
       {activeTab === 'verbs' && (
         <div className="space-y-6">
           {/* Verb Type Selector Switcher */}
-          <div className="flex bg-slate-950/60 p-1.5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-inner">
+          <div className="flex bg-gray-100 dark:bg-[#1a1a2e] p-1.5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-inner">
             <button
               onClick={() => {
                 setSelectedVerbType('trennbar')
@@ -368,8 +368,8 @@ export default function GrammarPage() {
               }}
               className={`flex-1 text-center py-2.5 rounded-xl text-xs font-bold transition-all ${
                 selectedVerbType === 'trennbar'
-                  ? 'bg-green/20 border border-green/30 text-green shadow-inner'
-                  : 'text-muted hover:text-white'
+                  ? 'bg-[#00b894]/20 border border-[#00b894]/30 text-[#00b894] shadow-inner'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-white'
               }`}
             >
               🔄 الأفعال المنفصلة (Trennbare Verben)
@@ -381,8 +381,8 @@ export default function GrammarPage() {
               }}
               className={`flex-1 text-center py-2.5 rounded-xl text-xs font-bold transition-all ${
                 selectedVerbType === 'untrennbar'
-                  ? 'bg-green/20 border border-green/30 text-green shadow-inner'
-                  : 'text-muted hover:text-white'
+                  ? 'bg-[#00b894]/20 border border-[#00b894]/30 text-[#00b894] shadow-inner'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-white'
               }`}
             >
               🔒 الأفعال غير المنفصلة (Untrennbare Verben)
@@ -391,7 +391,7 @@ export default function GrammarPage() {
 
           {/* Intro description */}
           <div className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/5 rounded-2xl p-4 text-right">
-            <p className="text-xs text-muted leading-relaxed">
+            <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
               {activeVerbGroup.intro}
             </p>
           </div>
@@ -409,21 +409,21 @@ export default function GrammarPage() {
                 >
                   <div className="flex items-center justify-between gap-2 cursor-pointer" onClick={() => setExpandedVerbs(p => ({ ...p, [key]: !isExpanded }))}>
                     {/* Conjugation preview */}
-                    <div className="flex items-center gap-3 text-xs text-muted" dir="ltr">
+                    <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400" dir="ltr">
                       <span>P2: <strong className="text-gray-900 dark:text-white">{verb.partizip2}</strong></span>
                       <span className="hidden md:inline">Prät: <strong className="text-gray-900 dark:text-white">{verb.praeteritum}</strong></span>
-                      <span className="bg-white dark:bg-[#1a1a2e]/5 border border-white/10 px-2 py-0.5 rounded text-white font-mono scale-90">
+                      <span className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 px-2 py-0.5 rounded text-white font-mono scale-90">
                         {verb.hilfsverb}
                       </span>
                     </div>
 
                     {/* German Infinitiv & Arabic Translation */}
                     <div className="flex items-center gap-3">
-                      <span className="text-xs text-muted font-medium bg-green/10 text-green px-2 py-0.5 rounded border border-green/20" dir="ltr">
+                      <span className="text-xs text-gray-500 dark:text-gray-400 font-medium bg-[#00b894]/10 text-[#00b894] px-2 py-0.5 rounded border border-[#00b894]/20" dir="ltr">
                         {verb.type}
                       </span>
-                      <span className="text-sm text-green font-medium mr-2">{verb.ar}</span>
-                      <h4 className="font-bold text-gray-900 dark:text-white text-base hover:text-green" dir="ltr">
+                      <span className="text-sm text-[#00b894] font-medium mr-2">{verb.ar}</span>
+                      <h4 className="font-bold text-gray-900 dark:text-white text-base hover:text-[#00b894]" dir="ltr">
                         {verb.infinitiv}
                       </h4>
                     </div>
@@ -432,15 +432,15 @@ export default function GrammarPage() {
                   {/* Examples details collapsible */}
                   {isExpanded && (
                     <div className="mt-4 pt-3 border-t border-gray-200 dark:border-white/5 space-y-3 animate-fade-in text-right">
-                      <h5 className="text-xs font-bold text-muted">أمثلة على الاستخدام في أزمنة مختلفة:</h5>
+                      <h5 className="text-xs font-bold text-gray-500 dark:text-gray-400">أمثلة على الاستخدام في أزمنة مختلفة:</h5>
                       <div className="space-y-2.5" dir="ltr">
                         {verb.examples.map((ex, exIdx) => (
-                          <div key={exIdx} className="bg-slate-950/60 p-3 rounded-xl border border-gray-200 dark:border-white/5 text-left space-y-1">
-                            <span className="text-[10px] bg-white dark:bg-[#1a1a2e]/5 border border-white/10 px-1.5 py-0.5 rounded text-muted font-bold">
+                          <div key={exIdx} className="bg-gray-100 dark:bg-[#1a1a2e] p-3 rounded-xl border border-gray-200 dark:border-white/5 text-left space-y-1">
+                            <span className="text-[10px] bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 px-1.5 py-0.5 rounded text-gray-500 dark:text-gray-400 font-bold">
                               {ex.context}
                             </span>
                             <p className="text-xs text-gray-900 dark:text-white font-medium leading-relaxed">{ex.de}</p>
-                            <p className="text-[11px] text-muted text-right" dir="rtl">{ex.ar}</p>
+                            <p className="text-[11px] text-gray-500 dark:text-gray-400 text-right" dir="rtl">{ex.ar}</p>
                           </div>
                         ))}
                       </div>

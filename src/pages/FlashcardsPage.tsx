@@ -61,7 +61,7 @@ export default function FlashcardsPage() {
           حفظت: <span className="text-green-500 font-bold">{knownWords}</span> | 
           تحتاج مراجعة: <span className="text-red-500 font-bold">{unknownWords}</span>
         </p>
-        <button onClick={() => window.location.reload()} className="mt-6 bg-green hover:bg-green-dark text-white px-6 py-2 rounded-xl transition-all">
+        <button onClick={() => window.location.reload()} className="mt-6 bg-[#00b894] hover:bg-[#094F28] text-white px-6 py-2 rounded-xl transition-all">
           إعادة المحاولة
         </button>
       </div>

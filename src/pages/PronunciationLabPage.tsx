@@ -156,7 +156,7 @@ export default function PronunciationLabPage() {
             className={`w-20 h-20 rounded-full flex items-center justify-center shadow-lg transition-all ${
               isRecording 
                 ? 'bg-red-500 animate-pulse scale-110' 
-                : 'bg-green hover:bg-green-dark'
+                : 'bg-[#00b894] hover:bg-[#094F28]'
             }`}
           >
             <span className="text-3xl text-gray-900 dark:text-white">{isRecording ? '⏹️' : '🎙️'}</span>

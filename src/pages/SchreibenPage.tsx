@@ -133,18 +133,18 @@ export default function SchreibenPage() {
         <span className="text-3xl">✍️</span>
         <div>
           <h1 className="text-2xl font-bold grad-text">الكتابة — Schreiben</h1>
-          <p className="text-muted text-sm">تدرّب على نماذج التعبير والرسائل الكتابية الرسمية وغير الرسمية لامتحان B1.</p>
+          <p className="text-gray-500 dark:text-gray-400 text-sm">تدرّب على نماذج التعبير والرسائل الكتابية الرسمية وغير الرسمية لامتحان B1.</p>
         </div>
       </div>
 
       {/* Model Selection Dropdown */}
       <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-xl space-y-4">
         <div className="space-y-1">
-          <label className="text-xs text-muted block">اختر نموذج الامتحان:</label>
+          <label className="text-xs text-gray-500 dark:text-gray-400 block">اختر نموذج الامتحان:</label>
           <select
             value={selectedModelId}
             onChange={(e) => handleModelChange(e.target.value)}
-            className="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green text-gray-900 dark:text-white"
+            className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#00b894] text-gray-900 dark:text-white"
           >
             {schreibenModels.map(model => (
               <option key={model.id} value={model.id}>
@@ -162,8 +162,8 @@ export default function SchreibenPage() {
               onClick={() => handleTaskChange(idx)}
               className={`flex-1 text-center py-2.5 rounded-xl text-xs font-bold transition-all border ${
                 selectedTaskIndex === idx
-                  ? 'bg-green/20 border-green/40 text-green shadow-inner'
-                  : 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted hover:text-white hover:bg-white dark:bg-[#1a1a2e]/10'
+                  ? 'bg-[#00b894]/20 border-[#00b894]/40 text-[#00b894] shadow-inner'
+                  : 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 hover:text-white hover:bg-white dark:bg-[#1a1a2e]/10'
               }`}
             >
               المهمة {task.taskNumber} ({task.typeDe.split(' ')[0]})
@@ -176,25 +176,25 @@ export default function SchreibenPage() {
       <div className="glass p-6 rounded-2xl border border-gray-200 dark:border-white/5 shadow-xl space-y-5">
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
           <div className="text-right">
-            <h2 className="text-lg font-bold text-green">{activeTask.typeAr}</h2>
-            <p className="text-xs text-muted" dir="ltr">{activeTask.typeDe}</p>
+            <h2 className="text-lg font-bold text-[#00b894]">{activeTask.typeAr}</h2>
+            <p className="text-xs text-gray-500 dark:text-gray-400" dir="ltr">{activeTask.typeDe}</p>
           </div>
-          <span className="text-xs bg-gold/20 text-gold border border-gold/30 px-3 py-1 rounded-full font-medium">
+          <span className="text-xs bg-gold/20 text-amber-600 dark:text-amber-400 border border-gold/30 px-3 py-1 rounded-full font-medium">
             📋 المتطلب: {activeTask.wordCount || 'حوالي 80 كلمة'}
           </span>
         </div>
 
         {/* Prompts Section */}
         <div className="space-y-4">
-          <div className="bg-slate-900/60 rounded-xl p-4 border border-gray-200 dark:border-white/5">
-            <p className="text-xs text-muted mb-1 text-right">نص السؤال (بالعربية):</p>
+          <div className="bg-gray-50 dark:bg-white/5 rounded-xl p-4 border border-gray-200 dark:border-white/5">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-1 text-right">نص السؤال (بالعربية):</p>
             <p className="text-sm leading-relaxed text-right text-gray-900 dark:text-white">
               {activeTask.promptAr}
             </p>
           </div>
 
-          <div className="bg-slate-900/60 rounded-xl p-4 border border-gray-200 dark:border-white/5" dir="ltr">
-            <p className="text-xs text-muted mb-1 text-left">Aufgabe (auf Deutsch):</p>
+          <div className="bg-gray-50 dark:bg-white/5 rounded-xl p-4 border border-gray-200 dark:border-white/5" dir="ltr">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-1 text-left">Aufgabe (auf Deutsch):</p>
             <p className="text-sm leading-relaxed text-left text-gray-900 dark:text-white font-medium">
               {activeTask.promptDe}
             </p>
@@ -222,8 +222,8 @@ export default function SchreibenPage() {
           <label className="text-sm font-bold text-gray-900 dark:text-white">لوحة الكتابة والتدريب:</label>
           <span className={`text-xs px-2.5 py-1 rounded-full ${
             wordCount >= 70 && wordCount <= 120 
-              ? 'bg-green/10 text-green border border-green/20' 
-              : 'bg-white dark:bg-[#1a1a2e]/5 text-muted'
+              ? 'bg-[#00b894]/10 text-[#00b894] border border-[#00b894]/20' 
+              : 'bg-white dark:bg-[#1a1a2e]/5 text-gray-500 dark:text-gray-400'
           }`}>
             عدد الكلمات: {wordCount}
           </span>
@@ -232,7 +232,7 @@ export default function SchreibenPage() {
         <textarea
           value={typedText}
           onChange={(e) => handleTextChange(e.target.value)}
-          className="w-full bg-slate-900/80 border border-white/10 rounded-xl p-4 min-h-[220px] text-sm focus:outline-none focus:border-green text-gray-900 dark:text-white leading-relaxed font-sans"
+          className="w-full bg-slate-900/80 border border-gray-200 dark:border-white/10 rounded-xl p-4 min-h-[220px] text-sm focus:outline-none focus:border-[#00b894] text-gray-900 dark:text-white leading-relaxed font-sans"
           dir="ltr"
           placeholder="Sehr geehrte Damen und Herren, / Lieber Lukas, ..."
         />
@@ -243,10 +243,10 @@ export default function SchreibenPage() {
           disabled={isAnalyzing || typedText.trim().length < 10}
           className={`w-full py-3.5 rounded-xl font-bold text-sm transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer border ${
             isAnalyzing
-              ? 'bg-gold/10 border-gold/20 text-gold/70 cursor-not-allowed'
+              ? 'bg-gold/10 border-gold/20 text-amber-600 dark:text-amber-400/70 cursor-not-allowed'
               : typedText.trim().length < 10
-              ? 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-muted cursor-not-allowed'
-              : 'bg-gradient-to-r from-gold/20 to-amber-500/20 border-gold/40 text-gold hover:from-gold/30 hover:to-amber-500/30 hover:border-gold/60 hover:shadow-gold/20 hover:shadow-xl active:scale-[0.99]'
+              ? 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+              : 'bg-gradient-to-r from-gold/20 to-amber-500/20 border-gold/40 text-amber-600 dark:text-amber-400 hover:from-gold/30 hover:to-amber-500/30 hover:border-gold/60 hover:shadow-gold/20 hover:shadow-xl active:scale-[0.99]'
           }`}
         >
           {isAnalyzing ? (
@@ -279,7 +279,7 @@ export default function SchreibenPage() {
           <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
             <div>
               <h3 className="font-bold text-lg text-gray-900 dark:text-white">نتيجة التصحيح الذكي</h3>
-              <p className="text-xs text-muted">تم التحليل بواسطة Google Gemini AI</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">تم التحليل بواسطة Google Gemini AI</p>
             </div>
             {/* Score Ring */}
             <div className="relative flex-shrink-0">
@@ -299,7 +299,7 @@ export default function SchreibenPage() {
                 <span className={`text-xl font-black ${(scoreColorMap[correctionResult.scoreColor] || '').split(' ')[0]}`}>
                   {correctionResult.score}
                 </span>
-                <span className="text-[9px] text-muted">/100</span>
+                <span className="text-[9px] text-gray-500 dark:text-gray-400">/100</span>
               </div>
             </div>
           </div>
@@ -321,7 +321,7 @@ export default function SchreibenPage() {
           </div>
 
           {correctionResult.taskFulfillmentNote && (
-            <p className="text-xs text-muted bg-white dark:bg-[#1a1a2e]/5 rounded-xl p-3 text-right">
+            <p className="text-xs text-gray-500 dark:text-gray-400 bg-white dark:bg-[#1a1a2e]/5 rounded-xl p-3 text-right">
               💬 {correctionResult.taskFulfillmentNote}
             </p>
           )}
@@ -350,10 +350,10 @@ export default function SchreibenPage() {
                   <div key={i} className="bg-red-500/5 border border-red-500/15 rounded-xl p-3 space-y-1">
                     <div className="flex flex-wrap items-center gap-2 justify-end" dir="ltr">
                       <span className="text-xs text-red-400 line-through bg-red-500/10 px-2 py-0.5 rounded-lg font-mono">{err.original}</span>
-                      <span className="text-muted text-xs">→</span>
+                      <span className="text-gray-500 dark:text-gray-400 text-xs">→</span>
                       <span className="text-xs text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-lg font-mono font-bold">{err.corrected}</span>
                     </div>
-                    <p className="text-xs text-muted text-right">{err.explanation}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 text-right">{err.explanation}</p>
                   </div>
                 ))}
               </div>
@@ -378,9 +378,9 @@ export default function SchreibenPage() {
           {/* Corrected Text */}
           {correctionResult.correctedText && (
             <div className="space-y-2">
-              <h4 className="text-xs font-bold text-gold">📄 النص بعد التصحيح الكامل:</h4>
+              <h4 className="text-xs font-bold text-amber-600 dark:text-amber-400">📄 النص بعد التصحيح الكامل:</h4>
               <pre
-                className="text-sm whitespace-pre-wrap leading-relaxed bg-slate-950/80 border border-gray-200 dark:border-white/5 rounded-xl p-5 text-gray-900 dark:text-white/90 text-left font-sans"
+                className="text-sm whitespace-pre-wrap leading-relaxed bg-gray-100 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 rounded-xl p-5 text-gray-900 dark:text-white/90 text-left font-sans"
                 dir="ltr"
               >
                 {correctionResult.correctedText}
@@ -393,7 +393,7 @@ export default function SchreibenPage() {
       {/* Useful Phrases */}
       {activeTask.usefulPhrases && activeTask.usefulPhrases.length > 0 && (
         <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-xl">
-          <h3 className="text-sm font-bold text-green mb-3">💡 عبارات مساعدة مفيدة (Useful Phrases):</h3>
+          <h3 className="text-sm font-bold text-[#00b894] mb-3">💡 عبارات مساعدة مفيدة (Useful Phrases):</h3>
           <div className="grid md:grid-cols-2 gap-3" dir="ltr">
             {activeTask.usefulPhrases.map((phrase, idx) => (
               <div 
@@ -401,7 +401,7 @@ export default function SchreibenPage() {
                 className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/5 p-3 rounded-xl flex flex-col gap-1 text-left hover:bg-white dark:bg-[#1a1a2e]/10 transition-colors"
               >
                 <span className="text-gray-900 dark:text-white font-medium text-xs">{phrase.de}</span>
-                <span className="text-muted text-xs text-right" dir="rtl">{phrase.ar}</span>
+                <span className="text-gray-500 dark:text-gray-400 text-xs text-right" dir="rtl">{phrase.ar}</span>
               </div>
             ))}
           </div>
@@ -412,26 +412,26 @@ export default function SchreibenPage() {
       <div className="space-y-4">
         <button
           onClick={() => setShowSample(!showSample)}
-          className="w-full bg-green text-white hover:bg-green-600 py-3.5 rounded-xl font-bold transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full bg-[#00b894] text-white hover:bg-[#00a884] py-3.5 rounded-xl font-bold transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer"
         >
           {showSample ? '🙈 إخفاء نموذج الإجابة' : '👁️ عرض نموذج الإجابة المقترح'}
         </button>
 
         {showSample && (
-          <div className="glass p-6 rounded-2xl border border-green/20 shadow-2xl space-y-4 animate-fade-in">
+          <div className="glass p-6 rounded-2xl border border-[#00b894]/20 shadow-2xl space-y-4 animate-fade-in">
             <div>
-              <h3 className="font-bold text-green mb-1">Musterantwort (نموذج الإجابة):</h3>
-              <p className="text-xs text-muted">يمكنك مقارنة إجابتك بهذا النموذج المقترح الحاصل على الدرجة الكاملة.</p>
+              <h3 className="font-bold text-[#00b894] mb-1">Musterantwort (نموذج الإجابة):</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400">يمكنك مقارنة إجابتك بهذا النموذج المقترح الحاصل على الدرجة الكاملة.</p>
             </div>
             
-            <pre className="text-sm whitespace-pre-wrap leading-relaxed bg-slate-950/80 border border-gray-200 dark:border-white/5 rounded-xl p-5 text-gray-900 dark:text-white text-left font-mono" dir="ltr">
+            <pre className="text-sm whitespace-pre-wrap leading-relaxed bg-gray-100 dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 rounded-xl p-5 text-gray-900 dark:text-white text-left font-mono" dir="ltr">
               {activeTask.sampleAnswer}
             </pre>
 
             {(activeTask as any).sampleAnswerNotes && (activeTask as any).sampleAnswerNotes.length > 0 && (
               <div className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/5 rounded-xl p-4 space-y-2">
-                <h4 className="text-xs font-bold text-gold">🔍 تحليل نموذج الإجابة وملاحظات هامة:</h4>
-                <ul className="text-xs space-y-1.5 list-disc list-inside text-muted">
+                <h4 className="text-xs font-bold text-amber-600 dark:text-amber-400">🔍 تحليل نموذج الإجابة وملاحظات هامة:</h4>
+                <ul className="text-xs space-y-1.5 list-disc list-inside text-gray-500 dark:text-gray-400">
                   {(activeTask as any).sampleAnswerNotes.map((note: any, i: number) => (
                     <li key={i} className="text-right">
                       {note}

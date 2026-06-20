@@ -568,14 +568,14 @@ export default function AdminDashboardPage() {
       <header className="bg-gradient-to-br from-[#1e3a5f] via-[#0f2940] to-[#0a1628] text-white rounded-2xl p-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #00b894 0%, transparent 50%), radial-gradient(circle at 80% 20%, #e84393 0%, transparent 50%)' }} />
         <div className="relative z-10">
-          <span className="inline-flex items-center gap-1.5 bg-white dark:bg-[#1a1a2e]/10 backdrop-blur-sm text-white/90 text-xs font-bold px-3 py-1 rounded-full border border-white/10">
+          <span className="inline-flex items-center gap-1.5 bg-white dark:bg-[#1a1a2e]/10 backdrop-blur-sm text-white/90 text-xs font-bold px-3 py-1 rounded-full border border-gray-200 dark:border-white/10">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
             👑 لوحة المصمّم
           </span>
           <h1 className="text-2xl font-black mt-3">مرحباً فادي 🇸🇾</h1>
           <p className="text-gray-900 dark:text-white/60 text-sm mt-1">تحكّم كامل بمحتوى التطبيق والإعلانات والبيانات.</p>
           <div className="flex flex-wrap gap-2 mt-4">
-            <button onClick={handleLogout} className="bg-white dark:bg-[#1a1a2e]/10 hover:bg-white dark:bg-[#1a1a2e]/20 text-white px-4 py-2 rounded-xl text-sm font-bold border border-white/10 transition-all cursor-pointer">
+            <button onClick={handleLogout} className="bg-white dark:bg-[#1a1a2e]/10 hover:bg-white dark:bg-[#1a1a2e]/20 text-white px-4 py-2 rounded-xl text-sm font-bold border border-gray-200 dark:border-white/10 transition-all cursor-pointer">
               🚪 خروج
             </button>
             <button onClick={fetchData} className="bg-[#00b894] hover:bg-[#00a884] text-white px-4 py-2 rounded-xl text-sm font-bold transition-all cursor-pointer">
@@ -961,7 +961,7 @@ export default function AdminDashboardPage() {
                   <p className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed whitespace-pre-wrap">{s.message}</p>
                   <div className="flex gap-2 mt-4 pt-3 border-t border-gray-100 dark:border-white/10 flex-wrap">
                     {isUnread && (
-                      <button onClick={() => updateSuggestionStatus(s.id, 'read')} className="bg-green/10 hover:bg-green/20 text-[#065F46] px-3.5 py-1.5 rounded-lg text-xs font-bold transition duration-200">
+                      <button onClick={() => updateSuggestionStatus(s.id, 'read')} className="bg-[#00b894]/10 hover:bg-[#00b894]/20 text-[#065F46] px-3.5 py-1.5 rounded-lg text-xs font-bold transition duration-200">
                         ✅ تعليم كمقروء
                       </button>
                     )}
@@ -1067,7 +1067,7 @@ export default function AdminDashboardPage() {
                 <div key={q.id} className="p-3 border rounded-lg bg-gray-50 dark:bg-white/5/30 flex justify-between items-start gap-2">
                   <div className="space-y-1">
                     <div className="font-bold text-gray-900 dark:text-gray-900 dark:text-white" dir="ltr">{q.question}</div>
-                    <div className="text-xs text-green font-bold" dir="ltr">✓ {q.answers[q.correct]}</div>
+                    <div className="text-xs text-[#00b894] font-bold" dir="ltr">✓ {q.answers[q.correct]}</div>
                   </div>
                   <button onClick={() => deleteLebenQuestion(q.id)} className="text-red-600 hover:text-red-800 text-xs font-bold">🗑️</button>
                 </div>

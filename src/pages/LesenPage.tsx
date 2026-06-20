@@ -72,7 +72,7 @@ export default function LesenPage() {
           <span className="text-3xl">📖</span>
           <div>
             <h1 className="text-2xl font-bold grad-text">القراءة — Lesen B1</h1>
-            <p className="text-muted text-sm">اختر نموذجاً للتدريب. تحاكي هذه النماذج الأقسام المختلفة لامتحان القراءة B1.</p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">اختر نموذجاً للتدريب. تحاكي هذه النماذج الأقسام المختلفة لامتحان القراءة B1.</p>
           </div>
         </div>
 
@@ -81,15 +81,15 @@ export default function LesenPage() {
             <button
               key={m.id}
               onClick={() => setSelectedModelIndex(i)}
-              className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-green/20 transition-all flex flex-col justify-between shadow-md cursor-pointer group"
+              className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-[#00b894]/20 transition-all flex flex-col justify-between shadow-md cursor-pointer group"
             >
               <div>
-                <h3 className="font-bold text-gray-900 dark:text-white group-hover:text-green transition-colors">{m.title}</h3>
-                <p className="text-xs text-muted mt-2 leading-relaxed">{m.description}</p>
+                <h3 className="font-bold text-gray-900 dark:text-white group-hover:text-[#00b894] transition-colors">{m.title}</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 leading-relaxed">{m.description}</p>
               </div>
               <div className="mt-4 pt-3 border-t border-gray-200 dark:border-white/5 flex justify-between items-center w-full">
-                <span className="text-[10px] bg-green/10 text-green px-2 py-0.5 rounded-full">B1 Niveau</span>
-                <span className="text-[10px] text-muted font-mono">
+                <span className="text-[10px] bg-[#00b894]/10 text-[#00b894] px-2 py-0.5 rounded-full">B1 Niveau</span>
+                <span className="text-[10px] text-gray-500 dark:text-gray-400 font-mono">
                   {(m as any).parts ? `${(m as any).parts.length} أجزاء` : `${(m as any).questions.length} أسئلة`}
                 </span>
               </div>
@@ -106,7 +106,7 @@ export default function LesenPage() {
     <div className="space-y-6">
       {/* Header Navigation */}
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
-        <button onClick={reset} className="text-green font-bold text-sm hover:underline cursor-pointer">
+        <button onClick={reset} className="text-[#00b894] font-bold text-sm hover:underline cursor-pointer">
           → العودة للنماذج
         </button>
         <h1 className="text-lg font-bold text-gray-900 dark:text-white">{model.title}</h1>
@@ -116,8 +116,8 @@ export default function LesenPage() {
       {showResults && (
         <div className={`rounded-xl p-5 text-center font-bold text-base border animate-slideDown ${
           score >= allQuestions.length * 0.6
-            ? 'bg-green/10 text-green border-green/20'
-            : 'bg-red/10 text-red border-red/20'
+            ? 'bg-[#00b894]/10 text-[#00b894] border-[#00b894]/20'
+            : 'bg-red-500/10 text-red-500 border-red-500/20'
         }`}>
           النتيجة النهائية: {score} / {allQuestions.length} ({Math.round((score / allQuestions.length) * 100)}%)
           {score >= allQuestions.length * 0.6 ? ' — ممتاز! تجاوزت اختبار القراءة بنجاح 🎉' : ' — حاول مرّة أخرى لتعزيز مهاراتك في الفهم 💪'}
@@ -132,9 +132,9 @@ export default function LesenPage() {
               <div key={pIdx} className="glass p-6 rounded-2xl border border-gray-200 dark:border-white/5 space-y-5 shadow-xl">
                 {/* Part Header */}
                 <div className="border-b border-gray-200 dark:border-white/5 pb-3">
-                  <span className="text-xs text-green font-bold uppercase tracking-wider">Teil {pIdx + 1}</span>
+                  <span className="text-xs text-[#00b894] font-bold uppercase tracking-wider">Teil {pIdx + 1}</span>
                   <h3 className="text-base font-bold text-gray-900 dark:text-white mt-0.5">{part.title}</h3>
-                  <p className="text-xs text-muted mt-1 leading-relaxed">{part.instructionsAr}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 leading-relaxed">{part.instructionsAr}</p>
                 </div>
 
                 {/* Blog Matching Block */}
@@ -144,7 +144,7 @@ export default function LesenPage() {
                     <div className="grid md:grid-cols-2 gap-3 bg-gray-100 dark:bg-white/5 p-4 rounded-xl border border-gray-200 dark:border-white/5">
                       {part.texts.map((item: any) => (
                         <div key={item.id} className="p-3 rounded-lg border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-white/5 text-left font-sans" dir="ltr">
-                          <span className="text-xs text-gold font-bold">{item.id}) {item.titleDe} ({item.titleAr}):</span>
+                          <span className="text-xs text-amber-600 dark:text-amber-400 font-bold">{item.id}) {item.titleDe} ({item.titleAr}):</span>
                           <p className="text-xs text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">{item.textDe}</p>
                         </div>
                       ))}
@@ -152,7 +152,7 @@ export default function LesenPage() {
 
                     {/* Statements to check */}
                     <div className="space-y-4 pt-2">
-                      <p className="text-xs font-bold text-gold">طابق العبارات بالكاتب المناسب (A-E):</p>
+                      <p className="text-xs font-bold text-amber-600 dark:text-amber-400">طابق العبارات بالكاتب المناسب (A-E):</p>
                       {part.statements.map((s: any, sIdx: number) => {
                         const selectedVal = answers[s.id]
                         
@@ -160,12 +160,12 @@ export default function LesenPage() {
                         return (
                           <div key={s.id} className="border-t border-gray-200 dark:border-white/5 pt-4 space-y-2">
                             <div className="flex gap-2.5 items-start">
-                              <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                              <span className="bg-white dark:bg-[#1a1a2e]/5 text-gray-500 dark:text-gray-400 w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                                 {sIdx + 1}
                               </span>
                               <div className="text-left font-sans text-sm text-gray-600 dark:text-gray-400 leading-normal" dir="ltr">
                                 <p className="font-medium text-gray-900 dark:text-white">{s.textDe}</p>
-                                {s.textAr && <p className="text-xs text-muted mt-1 text-right font-sans" dir="rtl">💡 {s.textAr}</p>}
+                                {s.textAr && <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right font-sans" dir="rtl">💡 {s.textAr}</p>}
                               </div>
                             </div>
 
@@ -177,11 +177,11 @@ export default function LesenPage() {
 
                                 let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                                 if (showResults) {
-                                  if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
-                                  else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
-                                  else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-40'
+                                  if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/45 text-[#00b894] font-bold'
+                                  else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/45 text-red-500 font-bold'
+                                  else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
                                 } else {
-                                  if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
+                                  if (isSelected) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
                                 }
 
                                 return (
@@ -222,12 +222,12 @@ export default function LesenPage() {
                       return (
                         <div key={q.id} className="border-t border-gray-200 dark:border-white/5 pt-4 space-y-3">
                           <div className="flex gap-2.5 items-start">
-                            <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                            <span className="bg-white dark:bg-[#1a1a2e]/5 text-gray-500 dark:text-gray-400 w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                               {qIdx + 1}
                             </span>
                             <div className="text-left font-sans text-sm text-gray-900 dark:text-white" dir="ltr">
                               <p className="font-semibold">{q.promptDe}</p>
-                              {q.promptAr && <p className="text-xs text-muted mt-1 text-right" dir="rtl">💡 {q.promptAr}</p>}
+                              {q.promptAr && <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right" dir="rtl">💡 {q.promptAr}</p>}
                             </div>
                           </div>
 
@@ -240,11 +240,11 @@ export default function LesenPage() {
 
                               let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                               if (showResults) {
-                                if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
-                                else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
-                                else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-40'
+                                if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/45 text-[#00b894] font-bold'
+                                else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/45 text-red-500 font-bold'
+                                else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
                               } else {
-                                if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
+                                if (isSelected) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
                               }
 
                               return (
@@ -256,8 +256,8 @@ export default function LesenPage() {
                                   dir="ltr"
                                 >
                                   <span><span className="font-bold uppercase mr-1">{optionId})</span> {optionText}</span>
-                                  {showResults && isOptCorrect && <span className="text-green text-sm">✓</span>}
-                                  {showResults && isSelected && !isOptCorrect && <span className="text-red text-sm">✗</span>}
+                                  {showResults && isOptCorrect && <span className="text-[#00b894] text-sm">✓</span>}
+                                  {showResults && isSelected && !isOptCorrect && <span className="text-red-500 text-sm">✗</span>}
                                 </button>
                               )
                             })}
@@ -267,7 +267,7 @@ export default function LesenPage() {
                             <div className="mr-8 space-y-2">
                               <button
                                 onClick={() => setShowExplanations(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
-                                className="text-[10px] text-muted hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
+                                className="text-[10px] text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
                               >
                                 {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
                               </button>
@@ -291,7 +291,7 @@ export default function LesenPage() {
                     <div className="grid sm:grid-cols-2 gap-3 bg-gray-100 dark:bg-white/5 p-4 rounded-xl border border-gray-200 dark:border-white/5 max-h-96 overflow-y-auto nav-scroll">
                       {part.ads.map((ad: any) => (
                         <div key={ad.id} className="p-3 rounded-lg border border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-white/5 text-left font-sans" dir="ltr">
-                          <span className="text-xs text-gold font-bold">إعلان ({ad.id}): {ad.titleDe}</span>
+                          <span className="text-xs text-amber-600 dark:text-amber-400 font-bold">إعلان ({ad.id}): {ad.titleDe}</span>
                           <p className="text-[11px] text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">{ad.textDe}</p>
                         </div>
                       ))}
@@ -299,7 +299,7 @@ export default function LesenPage() {
 
                     {/* Situations to solve */}
                     <div className="space-y-4 pt-2">
-                      <p className="text-xs font-bold text-gold">اختر الإعلان المناسب (a-h) لكل حالة من الحالات التالية:</p>
+                      <p className="text-xs font-bold text-amber-600 dark:text-amber-400">اختر الإعلان المناسب (a-h) لكل حالة من الحالات التالية:</p>
                       {part.situations.map((sit: any, sIdx: number) => {
                         const selectedVal = answers[sit.id]
                          
@@ -307,12 +307,12 @@ export default function LesenPage() {
                         return (
                           <div key={sit.id} className="border-t border-gray-200 dark:border-white/5 pt-4 space-y-2">
                             <div className="flex gap-2.5 items-start">
-                              <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                              <span className="bg-white dark:bg-[#1a1a2e]/5 text-gray-500 dark:text-gray-400 w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                                 {sIdx + 1}
                               </span>
                               <div className="text-left font-sans text-sm text-gray-900 dark:text-white" dir="ltr">
                                 <p className="font-medium text-gray-900 dark:text-white">{sit.textDe}</p>
-                                {sit.textAr && <p className="text-xs text-muted mt-1 text-right font-sans" dir="rtl">💡 {sit.textAr}</p>}
+                                {sit.textAr && <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right font-sans" dir="rtl">💡 {sit.textAr}</p>}
                               </div>
                             </div>
 
@@ -324,11 +324,11 @@ export default function LesenPage() {
 
                                 let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                                 if (showResults) {
-                                  if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
-                                  else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
-                                  else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-40'
+                                  if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/45 text-[#00b894] font-bold'
+                                  else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/45 text-red-500 font-bold'
+                                  else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
                                 } else {
-                                  if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
+                                  if (isSelected) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
                                 }
 
                                 return (
@@ -359,12 +359,12 @@ export default function LesenPage() {
                       return (
                         <div key={q.id} className="border-t border-gray-200 dark:border-white/5 pt-4 space-y-3">
                           <div className="flex gap-2.5 items-start">
-                            <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                            <span className="bg-white dark:bg-[#1a1a2e]/5 text-gray-500 dark:text-gray-400 w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                               {qIdx + 1}
                             </span>
                             <div className="text-left font-sans text-sm text-gray-900 dark:text-white" dir="ltr">
                               <p className="font-semibold">{q.statementDe}</p>
-                              {q.statementAr && <p className="text-xs text-muted mt-1 text-right" dir="rtl">💡 {q.statementAr}</p>}
+                              {q.statementAr && <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right" dir="rtl">💡 {q.statementAr}</p>}
                             </div>
                           </div>
 
@@ -375,11 +375,11 @@ export default function LesenPage() {
 
                               let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                               if (showResults) {
-                                if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
-                                else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
-                                else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-40'
+                                if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/45 text-[#00b894] font-bold'
+                                else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/45 text-red-500 font-bold'
+                                else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
                               } else {
-                                if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
+                                if (isSelected) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
                               }
 
                               return (
@@ -399,7 +399,7 @@ export default function LesenPage() {
                             <div className="mr-8 space-y-2">
                               <button
                                 onClick={() => setShowExplanations(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
-                                className="text-[10px] text-muted hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
+                                className="text-[10px] text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
                               >
                                 {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
                               </button>
@@ -439,7 +439,7 @@ export default function LesenPage() {
 
                 {/* Question Prompt */}
                 <div className="flex gap-2.5 items-start">
-                  <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                  <span className="bg-white dark:bg-[#1a1a2e]/5 text-gray-500 dark:text-gray-400 w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                     {qIdx + 1}
                   </span>
                   <p className="text-sm font-semibold text-gray-900 dark:text-white text-left font-sans" dir="ltr">{q.question}</p>
@@ -453,11 +453,11 @@ export default function LesenPage() {
 
                     let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-600 dark:text-gray-400 hover:bg-white dark:bg-[#1a1a2e]/10'
                     if (showResults) {
-                      if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
-                      else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
-                      else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-40'
+                      if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/45 text-[#00b894] font-bold'
+                      else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/45 text-red-500 font-bold'
+                      else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-gray-500 dark:text-gray-400 opacity-40'
                     } else {
-                      if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
+                      if (isSelected) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
                     }
 
                     return (
@@ -469,8 +469,8 @@ export default function LesenPage() {
                         dir="ltr"
                       >
                         <span><span className="font-bold uppercase mr-1.5">{String.fromCharCode(65 + oi)})</span> {opt}</span>
-                        {showResults && isOptCorrect && <span className="text-green text-sm">✓</span>}
-                        {showResults && isSelected && !isOptCorrect && <span className="text-red text-sm">✗</span>}
+                        {showResults && isOptCorrect && <span className="text-[#00b894] text-sm">✓</span>}
+                        {showResults && isSelected && !isOptCorrect && <span className="text-red-500 text-sm">✗</span>}
                       </button>
                     )
                   })}
@@ -481,7 +481,7 @@ export default function LesenPage() {
                   <div className="mr-8 space-y-2">
                     <button
                       onClick={() => setShowExplanations(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
-                      className="text-[10px] text-muted hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
+                      className="text-[10px] text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
                     >
                       {showEx ? '🙈 إخفاء الشرح والترجمة' : '💡 عرض الشرح والترجمة العربية'}
                     </button>
@@ -503,7 +503,7 @@ export default function LesenPage() {
       {!showResults && isAllAnswered && (
         <button 
           onClick={() => setShowResults(true)} 
-          className="w-full bg-green text-white py-3.5 rounded-2xl font-bold hover:bg-green-dark transition-all cursor-pointer shadow-lg"
+          className="w-full bg-[#00b894] text-white py-3.5 rounded-2xl font-bold hover:bg-[#094F28] transition-all cursor-pointer shadow-lg"
         >
           ✅ تحقّق من الإجابات ورؤية النتيجة
         </button>
@@ -513,7 +513,7 @@ export default function LesenPage() {
       {showResults && (
         <button 
           onClick={reset} 
-          className="w-full bg-white dark:bg-[#1a1a2e]/5 border border-white/10 text-white py-3.5 rounded-2xl font-bold hover:bg-white dark:bg-[#1a1a2e]/10 transition-all cursor-pointer shadow-lg"
+          className="w-full bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 text-white py-3.5 rounded-2xl font-bold hover:bg-white dark:bg-[#1a1a2e]/10 transition-all cursor-pointer shadow-lg"
         >
           🔄 العودة واختيار نموذج آخر
         </button>

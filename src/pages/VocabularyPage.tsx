@@ -90,7 +90,7 @@ export default function VocabularyPage() {
         <span className="text-3xl">📚</span>
         <div>
           <h1 className="text-2xl font-bold grad-text">المفردات والقاموس — Wortschatz</h1>
-          <p className="text-muted text-sm">أكثر من {totalWordsCount} كلمة مصنفة وقابلة للاستماع والبحث لتحضير امتحان B1.</p>
+          <p className="text-gray-500 dark:text-gray-400 text-sm">أكثر من {totalWordsCount} كلمة مصنفة وقابلة للاستماع والبحث لتحضير امتحان B1.</p>
         </div>
       </div>
 
@@ -99,14 +99,14 @@ export default function VocabularyPage() {
         <div className="grid md:grid-cols-2 gap-4">
           {/* Category Dropdown */}
           <div className="space-y-1">
-            <label className="text-xs text-muted block">تصنيف الكلمات:</label>
+            <label className="text-xs text-gray-500 dark:text-gray-400 block">تصنيف الكلمات:</label>
             <select
               value={selectedCatId}
               onChange={(e) => {
                 setSelectedCatId(e.target.value)
                 setShowMeaning({})
               }}
-              className="w-full bg-slate-900/60 border border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-green text-gray-900 dark:text-white"
+              className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#00b894] text-gray-900 dark:text-white"
             >
               <option value="all">📦 كل التصنيفات ({vocabCategories.length})</option>
               {vocabCategories.map(cat => (
@@ -119,17 +119,17 @@ export default function VocabularyPage() {
 
           {/* Search Input */}
           <div className="space-y-1">
-            <label className="text-xs text-muted block">بحث عن كلمة (بالألماني أو العربي):</label>
+            <label className="text-xs text-gray-500 dark:text-gray-400 block">بحث عن كلمة (بالألماني أو العربي):</label>
             <div className="relative">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="مثال: Arzt, ينهض, Miete..."
-                className="w-full bg-slate-900/60 border border-white/10 rounded-xl pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:border-green text-gray-900 dark:text-white text-left"
+                className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:border-[#00b894] text-gray-900 dark:text-white text-left"
                 dir="ltr"
               />
-              <span className="absolute right-3 top-3 text-muted text-xs">🔍</span>
+              <span className="absolute right-3 top-3 text-gray-500 dark:text-gray-400 text-xs">🔍</span>
             </div>
           </div>
         </div>
@@ -138,7 +138,7 @@ export default function VocabularyPage() {
       {/* Word Listings */}
       {filteredData.length === 0 ? (
         <div className="glass p-10 text-center rounded-2xl border border-gray-200 dark:border-white/5">
-          <p className="text-muted text-sm">لم يتم العثور على أي نتائج تطابق البحث.</p>
+          <p className="text-gray-500 dark:text-gray-400 text-sm">لم يتم العثور على أي نتائج تطابق البحث.</p>
         </div>
       ) : (
         <div className="space-y-8">
@@ -148,10 +148,10 @@ export default function VocabularyPage() {
               <div className="flex items-center gap-2 border-b border-white/10 pb-2">
                 <span className="text-2xl">{categoryEmojis[cat.id] || '📚'}</span>
                 <div>
-                  <h3 className="font-bold text-green">{cat.titleAr}</h3>
-                  <p className="text-xs text-muted" dir="ltr">{cat.titleDe}</p>
+                  <h3 className="font-bold text-[#00b894]">{cat.titleAr}</h3>
+                  <p className="text-xs text-gray-500 dark:text-gray-400" dir="ltr">{cat.titleDe}</p>
                 </div>
-                <span className="mr-auto text-xs bg-white dark:bg-[#1a1a2e]/5 border border-white/10 px-2 py-0.5 rounded-full text-muted">
+                <span className="mr-auto text-xs bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 px-2 py-0.5 rounded-full text-gray-500 dark:text-gray-400">
                   {cat.words.length} كلمة
                 </span>
               </div>
@@ -165,15 +165,15 @@ export default function VocabularyPage() {
                   return (
                     <div
                       key={key}
-                      className="glass p-4 rounded-xl border border-gray-200 dark:border-white/5 hover:border-green/20 transition-all flex flex-col justify-between gap-3 shadow-md group"
+                      className="glass p-4 rounded-xl border border-gray-200 dark:border-white/5 hover:border-[#00b894]/20 transition-all flex flex-col justify-between gap-3 shadow-md group"
                     >
                       <div className="flex items-start justify-between gap-2" dir="ltr">
                         <div className="text-left">
-                          <h4 className="font-bold text-gray-900 dark:text-white group-hover:text-green transition-colors text-base">
+                          <h4 className="font-bold text-gray-900 dark:text-white group-hover:text-[#00b894] transition-colors text-base">
                             {w.de}
                           </h4>
                           {showMeaning[key] && hasExample && (
-                            <p className="text-xs text-muted mt-1.5 italic leading-relaxed">
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1.5 italic leading-relaxed">
                               {(w as any).example}
                             </p>
                           )}
@@ -183,7 +183,7 @@ export default function VocabularyPage() {
                           {/* Audio play button */}
                           <button
                             onClick={() => speak(w.de)}
-                            className="bg-white dark:bg-[#1a1a2e]/5 border border-white/10 text-muted hover:text-green hover:bg-green/10 hover:border-green/20 p-2 rounded-lg text-xs transition-all"
+                            className="bg-white dark:bg-[#1a1a2e]/5 border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400 hover:text-[#00b894] hover:bg-[#00b894]/10 hover:border-[#00b894]/20 p-2 rounded-lg text-xs transition-all"
                             title="استمع للنطق"
                           >
                             🔊
@@ -194,8 +194,8 @@ export default function VocabularyPage() {
                             onClick={() => setShowMeaning(prev => ({ ...prev, [key]: !prev[key] }))}
                             className={`text-xs px-3 py-1.5 rounded-lg border transition-all ${
                               showMeaning[key] 
-                                ? 'bg-green/20 border-green/30 text-green font-medium' 
-                                : 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-muted hover:text-white'
+                                ? 'bg-[#00b894]/20 border-[#00b894]/30 text-[#00b894] font-medium' 
+                                : 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-gray-500 dark:text-gray-400 hover:text-white'
                             }`}
                           >
                             {showMeaning[key] ? 'إخفاء' : 'معنى'}
@@ -206,7 +206,7 @@ export default function VocabularyPage() {
                       {/* Display Arabic Translation if revealed */}
                       {showMeaning[key] && (
                         <div className="pt-2 border-t border-gray-200 dark:border-white/5 flex items-center justify-between text-right">
-                          <p className="text-green text-sm font-medium w-full">
+                          <p className="text-[#00b894] text-sm font-medium w-full">
                             {w.ar}
                           </p>
                         </div>

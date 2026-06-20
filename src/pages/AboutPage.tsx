@@ -16,7 +16,7 @@ export default function AboutPage() {
       <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-white/5">
         <h2 className="font-bold text-lg mb-3">👨‍💻 المؤسّس</h2>
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 bg-green rounded-full flex items-center justify-center text-white text-2xl font-bold">ف</div>
+          <div className="w-16 h-16 bg-[#00b894] rounded-full flex items-center justify-center text-white text-2xl font-bold">ف</div>
           <div>
             <h3 className="font-bold text-gray-800 dark:text-gray-200">فادي الحلواني</h3>
             <p className="text-sm text-muted">مدرّس B1 — من الحسكة، سوريا</p>
@@ -32,15 +32,15 @@ export default function AboutPage() {
         <h2 className="font-bold text-lg mb-3">📊 إحصائيات</h2>
         <div className="grid grid-cols-3 gap-4 text-center">
           <div>
-            <div className="text-2xl font-bold text-green">2,400+</div>
+            <div className="text-2xl font-bold text-[#00b894]">2,400+</div>
             <div className="text-xs text-muted">متعلّم</div>
           </div>
           <div>
-            <div className="text-2xl font-bold text-green">460+</div>
+            <div className="text-2xl font-bold text-[#00b894]">460+</div>
             <div className="text-xs text-muted">سؤال</div>
           </div>
           <div>
-            <div className="text-2xl font-bold text-green">92%</div>
+            <div className="text-2xl font-bold text-[#00b894]">92%</div>
             <div className="text-xs text-muted">نسبة النجاح</div>
           </div>
         </div>
@@ -49,8 +49,8 @@ export default function AboutPage() {
       <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-6 shadow-sm border border-gray-200 dark:border-white/5">
         <h2 className="font-bold text-lg mb-3">📬 تواصل معنا</h2>
         <div className="space-y-2 text-sm">
-          <p>📧 <a href="mailto:shami.fadi@gmx.de" className="text-green hover:underline">shami.fadi@gmx.de</a></p>
-          <p>📱 <a href="https://t.me/b1syrer" className="text-green hover:underline">@b1syrer</a> (تليغرام)</p>
+          <p>📧 <a href="mailto:shami.fadi@gmx.de" className="text-[#00b894] hover:underline">shami.fadi@gmx.de</a></p>
+          <p>📱 <a href="https://t.me/b1syrer" className="text-[#00b894] hover:underline">@b1syrer</a> (تليغرام)</p>
         </div>
       </div>
 
