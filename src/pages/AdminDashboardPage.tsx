@@ -567,21 +567,31 @@ export default function AdminDashboardPage() {
   return (
     <div className="space-y-5">
       {/* Page Header */}
-      <header className="bg-gradient-to-br from-[#1e3a5f] via-[#0f2940] to-[#0a1628] text-white rounded-2xl p-6 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #00b894 0%, transparent 50%), radial-gradient(circle at 80% 20%, #e84393 0%, transparent 50%)' }} />
-        <div className="relative z-10">
-          <span className="inline-flex items-center gap-1.5 bg-white dark:bg-[#1a1a2e]/10 backdrop-blur-sm text-white/90 text-xs font-bold px-3 py-1 rounded-full border border-gray-200 dark:border-white/10">
-            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-            👑 لوحة المصمّم
-          </span>
-          <h1 className="text-2xl font-black mt-3">مرحباً فادي 🇸🇾</h1>
-          <p className="text-gray-900 dark:text-white/60 text-sm mt-1">تحكّم كامل بمحتوى التطبيق والإعلانات والبيانات.</p>
-          <div className="flex flex-wrap gap-2 mt-4">
-            <button onClick={handleLogout} className="bg-white dark:bg-[#1a1a2e]/10 hover:bg-gray-50 dark:hover:bg-white/20 text-white px-4 py-2 rounded-xl text-sm font-bold border border-gray-200 dark:border-white/10 transition-all cursor-pointer">
+      <header className="bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white rounded-2xl p-6 relative overflow-hidden shadow-lg border border-slate-800">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #00b894 0%, transparent 50%), radial-gradient(circle at 80% 20%, #0984e3 0%, transparent 50%)' }} />
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full border border-white/20 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#00b894] animate-pulse shadow-[0_0_8px_#00b894]" />
+              👑 لوحة المصمّم
+            </span>
+            <h1 className="text-3xl md:text-4xl font-black mt-3 tracking-tight">مرحباً فادي 🇸🇾</h1>
+            <p className="text-slate-300 text-sm md:text-base mt-2 font-medium max-w-lg leading-relaxed">
+              تحكّم كامل بمحتوى التطبيق، إدارة المستخدمين، تعديل الإعلانات، وضبط البيانات والإعدادات بضغطة زر.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <button 
+              onClick={handleLogout} 
+              className="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-5 py-2.5 rounded-xl text-sm font-bold border border-white/20 transition-all cursor-pointer shadow-sm flex items-center gap-2"
+            >
               🚪 خروج
             </button>
-            <button onClick={fetchData} className="bg-[#00b894] hover:bg-[#00a884] text-white px-4 py-2 rounded-xl text-sm font-bold transition-all cursor-pointer">
-              🔄 تحديث الكل
+            <button 
+              onClick={fetchData} 
+              className="bg-gradient-to-r from-[#00b894] to-[#00cec9] hover:from-[#00a884] hover:to-[#00beb9] text-white px-5 py-2.5 rounded-xl text-sm font-bold border border-[#00b894]/50 transition-all cursor-pointer shadow-lg shadow-[#00b894]/20 flex items-center gap-2"
+            >
+              🔄 تحديث البيانات
             </button>
           </div>
         </div>
