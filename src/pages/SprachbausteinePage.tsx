@@ -96,9 +96,9 @@ export default function SprachbausteinePage() {
                 if (showResults) {
                   if (oi === gap.correct) cls += 'border-green bg-green/10 text-green font-bold'
                   else if (answers[gap.position] === oi) cls += 'border-red bg-red/10 text-red'
-                  else cls += 'border-gray-200'
+                  else cls += 'border-gray-200 dark:border-white/10'
                 } else {
-                  cls += answers[gap.position] === oi ? 'border-green bg-green/5 font-bold' : 'border-gray-200 hover:border-green'
+                  cls += answers[gap.position] === oi ? 'border-green bg-green/5 font-bold' : 'border-gray-200 dark:border-white/10 hover:border-green'
                 }
                 return <button key={oi} onClick={() => !showResults && setAnswers(p => ({...p, [gap.position]: oi}))} className={cls} dir="ltr">{opt}</button>
               })}

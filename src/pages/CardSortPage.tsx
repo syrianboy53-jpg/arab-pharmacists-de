@@ -42,7 +42,7 @@ export default function CardSortPage() {
         <h1 className="text-3xl font-black mb-2">النتيجة</h1>
         <p className="text-2xl font-bold">{score} / {nouns.length}</p>
         <p className="text-white/70 mt-2">صحيح: {score} | خطأ: {wrong}</p>
-        <button onClick={() => { setCurrent(0); setScore(0); setWrong(0) }} className="mt-4 bg-white/20 hover:bg-white/30 px-6 py-2 rounded-xl font-bold text-sm transition-colors cursor-pointer">أعد المحاولة</button>
+        <button onClick={() => { setCurrent(0); setScore(0); setWrong(0) }} className="mt-4 bg-white dark:bg-[#1a1a2e]/20 hover:bg-white dark:bg-[#1a1a2e]/30 px-6 py-2 rounded-xl font-bold text-sm transition-colors cursor-pointer">أعد المحاولة</button>
       </div>
     </div>
   )

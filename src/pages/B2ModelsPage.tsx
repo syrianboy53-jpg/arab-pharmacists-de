@@ -45,7 +45,7 @@ export default function B2ModelsPage() {
       <div className="space-y-3">
         {models.map((m, mi) => (
           <div key={mi} className="bg-white dark:bg-[#1a1a2e] rounded-xl border border-gray-200 dark:border-white/5 overflow-hidden">
-            <button onClick={() => setActiveModel(activeModel === mi ? null : mi)} className="w-full p-4 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors cursor-pointer text-right">
+            <button onClick={() => setActiveModel(activeModel === mi ? null : mi)} className="w-full p-4 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-white/5 dark:bg-white/5 dark:hover:bg-white dark:bg-[#1a1a2e]/5 transition-colors cursor-pointer text-right">
               <span className="text-3xl">{m.icon}</span>
               <div className="flex-1"><h3 className="font-bold text-sm text-gray-800 dark:text-gray-200">{m.theme}</h3><p className="text-xs text-gray-500 dark:text-gray-400">{m.questions.length} أسئلة</p></div>
               <span className="text-gray-400">{activeModel === mi ? '▼' : '◀'}</span>

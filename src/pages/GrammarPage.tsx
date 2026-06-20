@@ -115,7 +115,7 @@ export default function GrammarPage() {
                 <button
                   key={l.id}
                   onClick={() => setSelectedLesson(i)}
-                  className="glass p-5 rounded-2xl border border-white/5 text-right hover:border-green/20 hover:bg-white/5 transition-all shadow-md flex items-center justify-between"
+                  className="glass p-5 rounded-2xl border border-white/5 text-right hover:border-green/20 hover:bg-white dark:bg-[#1a1a2e]/5 transition-all shadow-md flex items-center justify-between"
                 >
                   <span className="text-green text-xs font-bold bg-green/10 border border-green/20 px-3 py-1.5 rounded-full">
                     شرح + اختبار 📝
@@ -169,7 +169,7 @@ export default function GrammarPage() {
                 <h3 className="font-bold text-white text-sm">✏️ تمارّين اختبار الفهم:</h3>
                 <div className="space-y-4">
                   {originalLessons[selectedLesson].exercises.map((ex, i) => (
-                    <div key={i} className="border-b border-white/5 pb-4 last:border-b-0 last:pb-0">
+                    <div key={i} className="border-b border-white/5 pb-4 last:border-b dark:border-white/10-0 last:pb-0">
                       <p className="text-sm text-white font-medium mb-3" dir="ltr">
                         {i + 1}. {ex.question}
                       </p>
@@ -179,7 +179,7 @@ export default function GrammarPage() {
                           if (showLessonResults) {
                             if (oi === ex.correct) cls += 'border-green bg-green/20 text-green'
                             else if (lessonAnswers[i] === oi) cls += 'border-red bg-red/20 text-red shadow-inner'
-                            else cls += 'border-white/5 bg-white/5 text-muted'
+                            else cls += 'border-white/5 bg-white dark:bg-[#1a1a2e]/5 text-muted'
                           } else {
                             cls += lessonAnswers[i] === oi 
                               ? 'border-green bg-green/10 text-green' 
@@ -305,7 +305,7 @@ export default function GrammarPage() {
                   <div className="space-y-3">
                     <button
                       onClick={() => setRevealedMistakes(p => ({ ...p, [mistake.id]: !isRevealed }))}
-                      className="w-full bg-white/5 hover:bg-white/10 border border-white/5 py-2 rounded-xl text-xs font-bold transition-all text-center text-muted hover:text-white cursor-pointer"
+                      className="w-full bg-white dark:bg-[#1a1a2e]/5 hover:bg-white dark:bg-[#1a1a2e]/10 border border-white/5 py-2 rounded-xl text-xs font-bold transition-all text-center text-muted hover:text-white cursor-pointer"
                     >
                       {isRevealed ? '🙈 إخفاء تفاصيل القاعدة' : '🔎 لماذا هذا الخطأ؟ وما هي القاعدة؟'}
                     </button>
@@ -335,7 +335,7 @@ export default function GrammarPage() {
                             <h4 className="text-xs font-bold text-white mb-2">📎 أمثلة إضافية صحيحة:</h4>
                             <div className="space-y-2" dir="ltr">
                               {mistake.examples.map((ex, idx) => (
-                                <div key={idx} className="bg-white/5 p-2.5 rounded-lg flex items-center justify-between gap-2 text-left">
+                                <div key={idx} className="bg-white dark:bg-[#1a1a2e]/5 p-2.5 rounded-lg flex items-center justify-between gap-2 text-left">
                                   <div className="text-xs">
                                     <p className="text-red-400 line-through scale-90">{ex.wrong}</p>
                                     <p className="text-green-400 font-semibold">{ex.right}</p>
@@ -412,7 +412,7 @@ export default function GrammarPage() {
                     <div className="flex items-center gap-3 text-xs text-muted" dir="ltr">
                       <span>P2: <strong className="text-white">{verb.partizip2}</strong></span>
                       <span className="hidden md:inline">Prät: <strong className="text-white">{verb.praeteritum}</strong></span>
-                      <span className="bg-white/5 border border-white/10 px-2 py-0.5 rounded text-white font-mono scale-90">
+                      <span className="bg-white dark:bg-[#1a1a2e]/5 border border-white/10 px-2 py-0.5 rounded text-white font-mono scale-90">
                         {verb.hilfsverb}
                       </span>
                     </div>
@@ -436,7 +436,7 @@ export default function GrammarPage() {
                       <div className="space-y-2.5" dir="ltr">
                         {verb.examples.map((ex, exIdx) => (
                           <div key={exIdx} className="bg-slate-950/60 p-3 rounded-xl border border-white/5 text-left space-y-1">
-                            <span className="text-[10px] bg-white/5 border border-white/10 px-1.5 py-0.5 rounded text-muted font-bold">
+                            <span className="text-[10px] bg-white dark:bg-[#1a1a2e]/5 border border-white/10 px-1.5 py-0.5 rounded text-muted font-bold">
                               {ex.context}
                             </span>
                             <p className="text-xs text-white font-medium leading-relaxed">{ex.de}</p>

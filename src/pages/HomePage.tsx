@@ -180,7 +180,7 @@ export default function HomePage() {
         <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #00b894 0%, transparent 50%), radial-gradient(circle at 80% 20%, #6c5ce7 0%, transparent 50%)' }} />
         <div className="relative z-10 p-6 sm:p-10">
           <div className="flex items-center gap-2 mb-4">
-            <span className="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white/90 text-xs font-medium px-3 py-1.5 rounded-full border border-white/10">
+            <span className="inline-flex items-center gap-1.5 bg-white dark:bg-[#1a1a2e]/10 backdrop-blur-sm text-white/90 text-xs font-medium px-3 py-1.5 rounded-full border border-white/10">
               <span className="w-2 h-2 rounded-full bg-[#00b894] animate-pulse" />
               مجّاني ومفتوح المصدر
             </span>
@@ -196,10 +196,10 @@ export default function HomePage() {
             <Link to="/einstufung" className="inline-flex items-center gap-2 bg-[#00b894] hover:bg-[#00a884] text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-[#00b894]/25">
               🎯 حدّد مستواك
             </Link>
-            <Link to="/daily" className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all backdrop-blur-sm border border-white/10">
+            <Link to="/daily" className="inline-flex items-center gap-2 bg-white dark:bg-[#1a1a2e]/10 hover:bg-white dark:bg-[#1a1a2e]/15 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all backdrop-blur-sm border border-white/10">
               📅 تحدّي اليوم
             </Link>
-            <button onClick={handleShareApp} className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all backdrop-blur-sm border border-white/10 cursor-pointer">
+            <button onClick={handleShareApp} className="inline-flex items-center gap-2 bg-white dark:bg-[#1a1a2e]/10 hover:bg-white dark:bg-[#1a1a2e]/15 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all backdrop-blur-sm border border-white/10 cursor-pointer">
               📢 شارك
             </button>
           </div>
@@ -214,7 +214,7 @@ export default function HomePage() {
           { value: `Lv.${level}`, label: 'مستوى', color: 'text-[#6c5ce7]', icon: '🏆' },
           { value: todayWord.word, label: todayWord.meaning, color: 'text-[#0984e3]', icon: '' },
         ].map((s, i) => (
-          <div key={i} className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-3 text-center border border-gray-100 dark:border-white/5 hover:border-gray-200 dark:hover:border-white/10 transition-colors">
+          <div key={i} className="bg-white dark:bg-[#1a1a2e] rounded-2xl p-3 text-center border border-gray-100 dark:border-white/5 hover:border-gray-200 dark:border-white/10 dark:hover:border-white/10 transition-colors">
             <div className={`text-lg sm:text-xl font-black ${s.color}`}>{s.icon} {s.value}</div>
             <div className="text-[10px] sm:text-xs text-gray-400 mt-0.5 truncate">{s.label}</div>
           </div>
@@ -304,7 +304,7 @@ export default function HomePage() {
                       </div>
                       <p className="text-[11px] text-gray-400 truncate">{item.count}</p>
                     </div>
-                    <svg className="w-4 h-4 text-gray-300 dark:text-gray-600 group-hover:text-[#00b894] transition-colors shrink-0 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                    <svg className="w-4 h-4 text-gray-300 dark:text-gray-600 dark:text-gray-400 group-hover:text-[#00b894] transition-colors shrink-0 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                   </Link>
                 </motion.div>
               ))}

@@ -164,7 +164,7 @@ export default function ChatSimulatorPage() {
                   className={`w-full text-right p-3 rounded-xl border transition-all text-xs flex items-center justify-between gap-2 cursor-pointer ${
                     isActive
                       ? 'bg-green/10 border-green/30 text-green font-bold'
-                      : 'bg-white/5 border-white/5 text-muted hover:text-ink-soft hover:bg-white/10'
+                      : 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted hover:text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
                   }`}
                 >
                   <div className="flex items-center gap-2">
@@ -196,7 +196,7 @@ export default function ChatSimulatorPage() {
             </div>
           </div>
           <div className="flex items-center gap-2 text-xs">
-            <span className="bg-white/5 border border-white/10 px-2 py-0.5 rounded text-muted font-mono" dir="ltr">
+            <span className="bg-white dark:bg-[#1a1a2e]/5 border border-white/10 px-2 py-0.5 rounded text-muted font-mono" dir="ltr">
               Diff: {scenario.difficulty}
             </span>
             <span className="bg-gold/10 border border-gold/20 px-2 py-0.5 rounded text-gold font-bold">
@@ -236,7 +236,7 @@ export default function ChatSimulatorPage() {
                 <div className={`w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold ${
                   isUser 
                     ? 'bg-green/10 border border-green/20 text-green' 
-                    : 'bg-white/5 border border-white/10 text-muted'
+                    : 'bg-white dark:bg-[#1a1a2e]/5 border border-white/10 text-muted'
                 }`}>
                   {isUser ? '👤' : scenario.icon}
                 </div>
@@ -337,7 +337,7 @@ export default function ChatSimulatorPage() {
                   <button
                     key={idx}
                     onClick={() => handleSelectOption(opt)}
-                    className="w-full text-right bg-white/5 hover:bg-white/10 hover:border-green/20 border border-white/10 p-3.5 rounded-xl text-xs transition-all flex flex-col gap-1.5 group cursor-pointer"
+                    className="w-full text-right bg-white dark:bg-[#1a1a2e]/5 hover:bg-white dark:bg-[#1a1a2e]/10 hover:border-green/20 border border-white/10 p-3.5 rounded-xl text-xs transition-all flex flex-col gap-1.5 group cursor-pointer"
                   >
                     {/* German Option */}
                     <div className="flex items-center gap-2 w-full justify-between" dir="ltr">

@@ -97,7 +97,7 @@ export default function B2Page() {
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                 activeTab === tab
                   ? 'bg-green text-white shadow-lg'
-                  : 'bg-white/5 border border-white/5 text-muted hover:text-white hover:bg-white/10'
+                  : 'bg-white dark:bg-[#1a1a2e]/5 border border-white/5 text-muted hover:text-white hover:bg-white dark:bg-[#1a1a2e]/10'
               }`}
             >
               {tab === 'lesen' && '📖 Lesen'}
@@ -139,7 +139,7 @@ export default function B2Page() {
                     return (
                       <div key={q.id} className="border-t border-white/5 pt-4 space-y-3">
                         <div className="flex gap-2.5 items-start">
-                          <span className="bg-white/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs mt-0.5 font-bold">
+                          <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs mt-0.5 font-bold">
                             {qIdx + 1}
                           </span>
                           <p className="text-sm font-semibold text-white text-left font-sans" dir="ltr">{q.promptDe}</p>
@@ -151,14 +151,14 @@ export default function B2Page() {
                             const isSelected = selectedOpt === opt.id
                             const isCorrect = opt.id === q.correct
                             
-                            let optStyle = 'bg-white/5 border-white/10 text-ink-soft hover:bg-white/10'
+                            let optStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
                             if (selectedOpt) {
                               if (isCorrect) {
                                 optStyle = 'bg-green/10 border-green/40 text-green font-medium'
                               } else if (isSelected) {
                                 optStyle = 'bg-red/10 border-red/40 text-red font-medium'
                               } else {
-                                optStyle = 'bg-white/5 border-white/5 text-muted opacity-60'
+                                optStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-60'
                               }
                             }
 
@@ -239,14 +239,14 @@ export default function B2Page() {
                         const isSelected = selectedOpt === opt.id
                         const isCorrect = opt.id === sb.correct
 
-                        let optStyle = 'bg-white/5 border-white/10 text-ink-soft hover:bg-white/10'
+                        let optStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
                         if (selectedOpt) {
                           if (isCorrect) {
                             optStyle = 'bg-green/10 border-green/40 text-green font-medium'
                           } else if (isSelected) {
                             optStyle = 'bg-red/10 border-red/40 text-red font-medium'
                           } else {
-                            optStyle = 'bg-white/5 border-white/5 text-muted opacity-60'
+                            optStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-60'
                           }
                         }
 
@@ -322,7 +322,7 @@ export default function B2Page() {
                           navigator.clipboard.writeText(phrase)
                           alert('تم نسخ الجملة بنجاح!')
                         }}
-                        className="text-left font-sans text-xs bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-2 rounded-xl text-ink-soft truncate transition-all flex items-center justify-between gap-1 group cursor-pointer"
+                        className="text-left font-sans text-xs bg-white dark:bg-[#1a1a2e]/5 hover:bg-white dark:bg-[#1a1a2e]/10 border border-white/10 px-3 py-2 rounded-xl text-ink-soft truncate transition-all flex items-center justify-between gap-1 group cursor-pointer"
                         dir="ltr"
                         title="انقر لنسخ الجملة"
                       >
@@ -430,7 +430,7 @@ export default function B2Page() {
                   </div>
                   <button
                     onClick={() => speak(part.sampleAnswerDe)}
-                    className="bg-white/5 border border-white/10 text-muted hover:text-green hover:bg-green/10 hover:border-green/20 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                    className="bg-white dark:bg-[#1a1a2e]/5 border border-white/10 text-muted hover:text-green hover:bg-green/10 hover:border-green/20 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
                   >
                     <span>🔊 استمع للإجابة النموذجية</span>
                   </button>
@@ -452,7 +452,7 @@ export default function B2Page() {
                           <div
                             key={pIdx}
                             onClick={() => navigator.clipboard.writeText(ph)}
-                            className="font-sans text-xs bg-white/5 border border-white/10 p-2 rounded-lg text-ink-soft hover:text-green transition-all cursor-pointer truncate text-left"
+                            className="font-sans text-xs bg-white dark:bg-[#1a1a2e]/5 border border-white/10 p-2 rounded-lg text-ink-soft hover:text-green transition-all cursor-pointer truncate text-left"
                             dir="ltr"
                             title="انقر للنسخ"
                           >

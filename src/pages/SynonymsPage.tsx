@@ -168,7 +168,7 @@ export default function SynonymsPage() {
   if (synonymsPool.length === 0) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-green border-t-transparent"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-green border-t dark:border-white/10-transparent"></div>
       </div>
     )
   }
@@ -206,7 +206,7 @@ export default function SynonymsPage() {
           <div className="grid md:grid-cols-2 gap-4">
             <button
               onClick={startQuiz}
-              className="bg-white hover:bg-green/5 dark:bg-[#1a1a2e] p-6 rounded-2xl border-2 border-gray-100 dark:border-white/5 hover:border-green transition-all shadow-sm text-center flex flex-col items-center"
+              className="bg-white dark:bg-[#1a1a2e] hover:bg-green/5 dark:bg-[#1a1a2e] p-6 rounded-2xl border-2 border-gray-100 dark:border-white/5 hover:border-green transition-all shadow-sm text-center flex flex-col items-center"
             >
               <span className="text-4xl mb-3">📝</span>
               <h3 className="font-bold text-lg mb-1">كويز المترادفات</h3>
@@ -215,7 +215,7 @@ export default function SynonymsPage() {
 
             <button
               onClick={startMatchingGame}
-              className="bg-white hover:bg-green/5 dark:bg-[#1a1a2e] p-6 rounded-2xl border-2 border-gray-100 dark:border-white/5 hover:border-green transition-all shadow-sm text-center flex flex-col items-center"
+              className="bg-white dark:bg-[#1a1a2e] hover:bg-green/5 dark:bg-[#1a1a2e] p-6 rounded-2xl border-2 border-gray-100 dark:border-white/5 hover:border-green transition-all shadow-sm text-center flex flex-col items-center"
             >
               <span className="text-4xl mb-3">🧩</span>
               <h3 className="font-bold text-lg mb-1">لعبة مطابقة البطاقات</h3>
@@ -268,7 +268,7 @@ export default function SynonymsPage() {
                 } else if (isSelected) {
                   btnClass += 'border-red bg-red/10 text-red dark:text-red-300'
                 } else {
-                  btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50/50 dark:bg-[#1a1a2e]/50 opacity-60 text-muted'
+                  btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-white/5/50 dark:bg-[#1a1a2e]/50 opacity-60 text-muted'
                 }
               } else {
                 btnClass += 'border-gray-200 dark:border-white/5 hover:border-green hover:bg-green/5 text-ink dark:text-white'

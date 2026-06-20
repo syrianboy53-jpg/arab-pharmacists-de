@@ -18,7 +18,7 @@ export default function AboutPage() {
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 bg-green rounded-full flex items-center justify-center text-white text-2xl font-bold">ف</div>
           <div>
-            <h3 className="font-bold">فادي الحلواني</h3>
+            <h3 className="font-bold text-gray-800 dark:text-gray-200">فادي الحلواني</h3>
             <p className="text-sm text-muted">مدرّس B1 — من الحسكة، سوريا</p>
             <p className="text-xs text-muted mt-1">Schnurstraße 29, 42289 Wuppertal</p>
           </div>

@@ -568,14 +568,14 @@ export default function AdminDashboardPage() {
       <header className="bg-gradient-to-br from-[#1e3a5f] via-[#0f2940] to-[#0a1628] text-white rounded-2xl p-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'radial-gradient(circle at 20% 50%, #00b894 0%, transparent 50%), radial-gradient(circle at 80% 20%, #e84393 0%, transparent 50%)' }} />
         <div className="relative z-10">
-          <span className="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm text-white/90 text-xs font-bold px-3 py-1 rounded-full border border-white/10">
+          <span className="inline-flex items-center gap-1.5 bg-white dark:bg-[#1a1a2e]/10 backdrop-blur-sm text-white/90 text-xs font-bold px-3 py-1 rounded-full border border-white/10">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
             👑 لوحة المصمّم
           </span>
           <h1 className="text-2xl font-black mt-3">مرحباً فادي 🇸🇾</h1>
           <p className="text-white/60 text-sm mt-1">تحكّم كامل بمحتوى التطبيق والإعلانات والبيانات.</p>
           <div className="flex flex-wrap gap-2 mt-4">
-            <button onClick={handleLogout} className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-xl text-sm font-bold border border-white/10 transition-all cursor-pointer">
+            <button onClick={handleLogout} className="bg-white dark:bg-[#1a1a2e]/10 hover:bg-white dark:bg-[#1a1a2e]/20 text-white px-4 py-2 rounded-xl text-sm font-bold border border-white/10 transition-all cursor-pointer">
               🚪 خروج
             </button>
             <button onClick={fetchData} className="bg-[#00b894] hover:bg-[#00a884] text-white px-4 py-2 rounded-xl text-sm font-bold transition-all cursor-pointer">
@@ -658,7 +658,7 @@ export default function AdminDashboardPage() {
           <button onClick={() => fetchUsers(userSearch)} disabled={isUsersLoading} className="bg-[#e84393] hover:bg-[#d63384] text-white px-5 py-2 rounded-lg text-sm font-bold transition-all cursor-pointer">
             {isUsersLoading ? '⏳ جاري...' : '🔄 تحديث'}
           </button>
-          <button onClick={exportUsersCSV} disabled={users.length === 0} className="bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 text-gray-800 dark:text-gray-200 px-5 py-2 rounded-lg text-sm font-bold transition-all border border-gray-200 dark:border-white/10 cursor-pointer">
+          <button onClick={exportUsersCSV} disabled={users.length === 0} className="bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white dark:bg-[#1a1a2e]/10 text-gray-800 dark:text-gray-200 px-5 py-2 rounded-lg text-sm font-bold transition-all border border-gray-200 dark:border-white/10 cursor-pointer">
             💾 تصدير CSV
           </button>
         </div>
@@ -699,7 +699,7 @@ export default function AdminDashboardPage() {
                 </thead>
                 <tbody>
                   {users.map(u => (
-                    <tr key={u.id} className="border-b border-gray-100 dark:border-white/5 hover:bg-gray-50/50 dark:hover:bg-white/5">
+                    <tr key={u.id} className="border-b border-gray-100 dark:border-white/5 hover:bg-gray-50 dark:hover:bg-white/5 dark:bg-white/5/50 dark:hover:bg-white dark:bg-[#1a1a2e]/5">
                       <td className="p-3 font-semibold text-gray-500 dark:text-gray-400">{u.id}</td>
                       <td className="p-3 font-mono text-gray-700 dark:text-gray-300">
                         {u.email}
@@ -773,7 +773,7 @@ export default function AdminDashboardPage() {
                     </thead>
                     <tbody>
                       {usersStats.latest_visitors.map((v, index) => (
-                        <tr key={v.id || index} className="border-b border-gray-100 dark:border-white/5 hover:bg-gray-50/50 dark:hover:bg-white/5">
+                        <tr key={v.id || index} className="border-b border-gray-100 dark:border-white/5 hover:bg-gray-50 dark:hover:bg-white/5 dark:bg-white/5/50 dark:hover:bg-white dark:bg-[#1a1a2e]/5">
                           <td className="p-2.5 text-gray-500 dark:text-gray-400 whitespace-nowrap">{new Date(v.created_at).toLocaleString('ar-EG')}</td>
                           <td className="p-2.5 font-mono text-gray-700 dark:text-gray-300">{v.ip_address}</td>
                           <td className="p-2.5 font-bold text-[#6c5ce7] flex items-center gap-1">
@@ -837,11 +837,11 @@ export default function AdminDashboardPage() {
               </div>
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-600">رابط تحميل APK:</label>
+              <label className="block text-xs font-bold text-gray-600 dark:text-gray-400">رابط تحميل APK:</label>
               <input type="text" value={config.apk_url} onChange={e => setConfig({ ...config, apk_url: e.target.value })} className="w-full border rounded p-2 text-sm outline-none" />
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-600">رسالة الدعم (Buy Me A Coffee):</label>
+              <label className="block text-xs font-bold text-gray-600 dark:text-gray-400">رسالة الدعم (Buy Me A Coffee):</label>
               <input type="text" value={config.support_message} onChange={e => setConfig({ ...config, support_message: e.target.value })} className="w-full border rounded p-2 text-sm outline-none" />
             </div>
           </div>
@@ -924,7 +924,7 @@ export default function AdminDashboardPage() {
             <button
               key={filter}
               onClick={() => setSuggestionsFilter(filter)}
-              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${suggestionsFilter === filter ? 'bg-[#e17055] text-white' : 'bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'}`}
+              className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${suggestionsFilter === filter ? 'bg-[#e17055] text-white' : 'bg-gray-100 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white dark:bg-[#1a1a2e]/10'}`}
             >
               {filter === 'all' && '📋 الكلّ'}
               {filter === 'unread' && `🔴 جديد (${unreadSuggestionsCount})`}
@@ -966,12 +966,12 @@ export default function AdminDashboardPage() {
                       </button>
                     )}
                     {s.status !== 'archived' && (
-                      <button onClick={() => updateSuggestionStatus(s.id, 'archived')} className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3.5 py-1.5 rounded-lg text-xs font-bold transition duration-200 border">
+                      <button onClick={() => updateSuggestionStatus(s.id, 'archived')} className="bg-gray-100 dark:bg-white/10 hover:bg-gray-200 text-gray-700 dark:text-gray-300 px-3.5 py-1.5 rounded-lg text-xs font-bold transition duration-200 border">
                         📦 أرشفة
                       </button>
                     )}
                     {s.status === 'archived' && (
-                      <button onClick={() => updateSuggestionStatus(s.id, 'read')} className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3.5 py-1.5 rounded-lg text-xs font-bold transition duration-200 border">
+                      <button onClick={() => updateSuggestionStatus(s.id, 'read')} className="bg-gray-100 dark:bg-white/10 hover:bg-gray-200 text-gray-700 dark:text-gray-300 px-3.5 py-1.5 rounded-lg text-xs font-bold transition duration-200 border">
                         ↩️ استعادة
                       </button>
                     )}
@@ -1023,16 +1023,16 @@ export default function AdminDashboardPage() {
             </button>
           </div>
           {templates.length > 0 && (
-            <div className="space-y-3 mt-4 border-t pt-3">
-              <h3 className="font-bold text-sm text-gray-700">📋 النماذج المُضافة ({templates.length})</h3>
+            <div className="space-y-3 mt-4 border-t dark:border-white/10 pt-3">
+              <h3 className="font-bold text-sm text-gray-700 dark:text-gray-300">📋 النماذج المُضافة ({templates.length})</h3>
               {templates.map(t => (
-                <div key={t.id} className="p-3 border rounded-lg bg-gray-50/30">
+                <div key={t.id} className="p-3 border rounded-lg bg-gray-50 dark:bg-white/5/30">
                   <div className="flex justify-between items-center gap-2 mb-2">
-                    <strong className="text-gray-900">{t.titleAr}</strong>
-                    <span className="text-xs text-gray-500" dir="ltr">{t.titleDe}</span>
+                    <strong className="text-gray-900 dark:text-white">{t.titleAr}</strong>
+                    <span className="text-xs text-gray-500 dark:text-gray-400" dir="ltr">{t.titleDe}</span>
                     <button onClick={() => deleteTemplate(t.id)} className="text-red-600 hover:text-red-800 text-xs font-bold">🗑️</button>
                   </div>
-                  <pre className="text-xs text-gray-700 whitespace-pre-wrap font-mono" dir="ltr">{t.bodyDe}</pre>
+                  <pre className="text-xs text-gray-700 dark:text-gray-300 whitespace-pre-wrap font-mono" dir="ltr">{t.bodyDe}</pre>
                 </div>
               ))}
             </div>
@@ -1047,7 +1047,7 @@ export default function AdminDashboardPage() {
             {questionAnswers.map((ans, idx) => (
               <div key={idx} className="flex items-center gap-2">
                 <input type="radio" checked={correctAnswerIndex === idx} onChange={() => setCorrectAnswerIndex(idx)} name="correctAnswer" />
-                <span className="font-bold">{String.fromCharCode(65 + idx)}.</span>
+                <span className="font-bold text-gray-800 dark:text-gray-200">{String.fromCharCode(65 + idx)}.</span>
                 <input placeholder={`الخيار ${idx + 1}`} value={ans} onChange={e => {
                   const arr = [...questionAnswers]
                   arr[idx] = e.target.value
@@ -1061,12 +1061,12 @@ export default function AdminDashboardPage() {
             </button>
           </div>
           {customQuestions.length > 0 && (
-            <div className="space-y-3 mt-4 border-t pt-3">
-              <h3 className="font-bold text-sm text-gray-700">📋 الأسئلة المُضافة ({customQuestions.length})</h3>
+            <div className="space-y-3 mt-4 border-t dark:border-white/10 pt-3">
+              <h3 className="font-bold text-sm text-gray-700 dark:text-gray-300">📋 الأسئلة المُضافة ({customQuestions.length})</h3>
               {customQuestions.map(q => (
-                <div key={q.id} className="p-3 border rounded-lg bg-gray-50/30 flex justify-between items-start gap-2">
+                <div key={q.id} className="p-3 border rounded-lg bg-gray-50 dark:bg-white/5/30 flex justify-between items-start gap-2">
                   <div className="space-y-1">
-                    <div className="font-bold text-gray-900" dir="ltr">{q.question}</div>
+                    <div className="font-bold text-gray-900 dark:text-white" dir="ltr">{q.question}</div>
                     <div className="text-xs text-green font-bold" dir="ltr">✓ {q.answers[q.correct]}</div>
                   </div>
                   <button onClick={() => deleteLebenQuestion(q.id)} className="text-red-600 hover:text-red-800 text-xs font-bold">🗑️</button>

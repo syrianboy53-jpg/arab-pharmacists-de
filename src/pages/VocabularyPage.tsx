@@ -151,7 +151,7 @@ export default function VocabularyPage() {
                   <h3 className="font-bold text-green">{cat.titleAr}</h3>
                   <p className="text-xs text-muted" dir="ltr">{cat.titleDe}</p>
                 </div>
-                <span className="mr-auto text-xs bg-white/5 border border-white/10 px-2 py-0.5 rounded-full text-muted">
+                <span className="mr-auto text-xs bg-white dark:bg-[#1a1a2e]/5 border border-white/10 px-2 py-0.5 rounded-full text-muted">
                   {cat.words.length} كلمة
                 </span>
               </div>
@@ -183,7 +183,7 @@ export default function VocabularyPage() {
                           {/* Audio play button */}
                           <button
                             onClick={() => speak(w.de)}
-                            className="bg-white/5 border border-white/10 text-muted hover:text-green hover:bg-green/10 hover:border-green/20 p-2 rounded-lg text-xs transition-all"
+                            className="bg-white dark:bg-[#1a1a2e]/5 border border-white/10 text-muted hover:text-green hover:bg-green/10 hover:border-green/20 p-2 rounded-lg text-xs transition-all"
                             title="استمع للنطق"
                           >
                             🔊
@@ -195,7 +195,7 @@ export default function VocabularyPage() {
                             className={`text-xs px-3 py-1.5 rounded-lg border transition-all ${
                               showMeaning[key] 
                                 ? 'bg-green/20 border-green/30 text-green font-medium' 
-                                : 'bg-white/5 border-white/10 text-muted hover:text-white'
+                                : 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-muted hover:text-white'
                             }`}
                           >
                             {showMeaning[key] ? 'إخفاء' : 'معنى'}

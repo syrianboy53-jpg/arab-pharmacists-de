@@ -124,7 +124,7 @@ export default function HoerenPage() {
               <div className="space-y-2">
                 <button
                   onClick={() => setShowTranscripts(prev => ({ ...prev, [pIdx]: !prev[pIdx] }))}
-                  className="bg-white/5 border border-white/10 text-ink-soft hover:bg-white/10 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
+                  className="bg-white dark:bg-[#1a1a2e]/5 border border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10 px-3.5 py-1.5 rounded-xl text-xs transition-all flex items-center gap-1.5 cursor-pointer"
                 >
                   📝 {showTranscripts[pIdx] ? 'إخفاء النص المكتوب (Transkript)' : 'عرض النص المكتوب (Transkript)'}
                 </button>
@@ -152,7 +152,7 @@ export default function HoerenPage() {
                 return (
                   <div key={q.id} className="border-t border-white/5 pt-4 space-y-3">
                     <div className="flex gap-2 items-start">
-                      <span className="bg-white/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                      <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                         {qIdx + 1}
                       </span>
                       <div className="text-left font-sans" dir="ltr">
@@ -174,11 +174,11 @@ export default function HoerenPage() {
                           const isSelected = selectedVal === val
                           const isOptCorrect = q.correct === val
 
-                          let btnStyle = 'bg-white/5 border-white/10 text-ink-soft hover:bg-white/10'
+                          let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
                           if (showResults) {
                             if (isOptCorrect) btnStyle = 'bg-green/10 border-green/40 text-green font-bold'
                             else if (isSelected) btnStyle = 'bg-red/10 border-red/40 text-red font-bold'
-                            else btnStyle = 'bg-white/5 border-white/5 text-muted opacity-50'
+                            else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-50'
                           } else {
                             if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
                           }
@@ -206,11 +206,11 @@ export default function HoerenPage() {
                           const isSelected = selectedVal === optionId
                           const isOptCorrect = q.correct === optionId
 
-                          let btnStyle = 'bg-white/5 border-white/10 text-ink-soft hover:bg-white/10'
+                          let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
                           if (showResults) {
                             if (isOptCorrect) btnStyle = 'bg-green/10 border-green/40 text-green font-bold'
                             else if (isSelected) btnStyle = 'bg-red/10 border-red/40 text-red font-bold'
-                            else btnStyle = 'bg-white/5 border-white/5 text-muted opacity-50'
+                            else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-50'
                           } else {
                             if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
                           }
@@ -272,7 +272,7 @@ export default function HoerenPage() {
       {showResults && (
         <button 
           onClick={() => { setAnswers({}); setShowResults(false); setShowExplanations({}) }} 
-          className="w-full bg-white/5 border border-white/10 text-white py-3.5 rounded-2xl font-bold hover:bg-white/10 transition-all cursor-pointer shadow-lg"
+          className="w-full bg-white dark:bg-[#1a1a2e]/5 border border-white/10 text-white py-3.5 rounded-2xl font-bold hover:bg-white dark:bg-[#1a1a2e]/10 transition-all cursor-pointer shadow-lg"
         >
           🔄 إعادة الاختبار والتدريب
         </button>

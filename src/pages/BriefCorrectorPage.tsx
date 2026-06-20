@@ -75,7 +75,7 @@ export default function BriefCorrectorPage() {
           >
             {isAnalyzing ? (
               <>
-                <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+                <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t dark:border-white/10-transparent"></div>
                 جاري التحليل...
               </>
             ) : (
@@ -113,7 +113,7 @@ export default function BriefCorrectorPage() {
               </div>
             </motion.div>
           ) : (
-            <div className="h-full flex items-center justify-center text-gray-400 dark:text-gray-600 border-2 border-dashed border-gray-200 dark:border-gray-800 rounded-2xl p-8 text-center">
+            <div className="h-full flex items-center justify-center text-gray-400 dark:text-gray-600 dark:text-gray-400 border-2 border-dashed border-gray-200 dark:border-gray-800 rounded-2xl p-8 text-center">
               <div>
                 <span className="text-4xl block mb-4">📝</span>
                 <p>اكتب رسالتك في المربع واضغط على فحص لعرض النتيجة هنا.</p>

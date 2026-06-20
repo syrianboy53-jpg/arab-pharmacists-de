@@ -34,7 +34,7 @@ export default function ConjugationPage() {
         {mode === 'table' ? (
           <div className="space-y-2">{pronouns.map(p => (
             <div key={p} className="flex items-center gap-3 p-2 bg-gray-50 dark:bg-white/5 rounded-lg">
-              <span className="w-16 text-xs font-bold text-gray-500" dir="ltr">{p}</span>
+              <span className="w-16 text-xs font-bold text-gray-500 dark:text-gray-400" dir="ltr">{p}</span>
               <span className="text-sm font-bold text-[#00b894]" dir="ltr">{(verb.conjugations as Record<string, string>)[p]}</span>
             </div>
           ))}</div>

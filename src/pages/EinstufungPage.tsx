@@ -274,7 +274,7 @@ export default function EinstufungPage() {
           </div>
           <h1 className="text-2xl md:text-3xl font-bold mb-4">اكتمل اختبار تحديد المستوى!</h1>
           <p className="text-muted text-sm md:text-base mb-8">
-            أجبت بشكل صحيح على <span className="font-bold text-green">{score}</span> من أصل <span className="font-bold">{questions.length}</span> أسئلة.
+            أجبت بشكل صحيح على <span className="font-bold text-green">{score}</span> من أصل <span className="font-bold text-gray-800 dark:text-gray-200">{questions.length}</span> أسئلة.
           </p>
 
           <div className="bg-green/5 dark:bg-green/10 border-2 border-green/30 rounded-2xl p-6 max-w-sm mx-auto mb-8">
@@ -370,7 +370,7 @@ export default function EinstufungPage() {
               } else if (isSelected) {
                 btnClass += 'border-red bg-red/10 text-red dark:text-red-300'
               } else {
-                btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50/50 dark:bg-[#1a1a2e]/50 opacity-60 text-muted'
+                btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-white/5/50 dark:bg-[#1a1a2e]/50 opacity-60 text-muted'
               }
             } else {
               btnClass += 'border-gray-200 dark:border-white/5 hover:border-green hover:bg-green/5'

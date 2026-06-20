@@ -160,7 +160,7 @@ export default function LesenPage() {
                         return (
                           <div key={s.id} className="border-t border-white/5 pt-4 space-y-2">
                             <div className="flex gap-2.5 items-start">
-                              <span className="bg-white/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                              <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                                 {sIdx + 1}
                               </span>
                               <div className="text-left font-sans text-sm text-ink-soft leading-normal" dir="ltr">
@@ -175,11 +175,11 @@ export default function LesenPage() {
                                 const isSelected = selectedVal === item.id
                                 const isOptCorrect = s.correctAd === item.id
 
-                                let btnStyle = 'bg-white/5 border-white/10 text-ink-soft hover:bg-white/10'
+                                let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
                                 if (showResults) {
                                   if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
                                   else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
-                                  else btnStyle = 'bg-white/5 border-white/5 text-muted opacity-40'
+                                  else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-40'
                                 } else {
                                   if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
                                 }
@@ -222,7 +222,7 @@ export default function LesenPage() {
                       return (
                         <div key={q.id} className="border-t border-white/5 pt-4 space-y-3">
                           <div className="flex gap-2.5 items-start">
-                            <span className="bg-white/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                            <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                               {qIdx + 1}
                             </span>
                             <div className="text-left font-sans text-sm text-white" dir="ltr">
@@ -238,11 +238,11 @@ export default function LesenPage() {
                               const isSelected = selectedVal === optionId
                               const isOptCorrect = q.correct === optionId
 
-                              let btnStyle = 'bg-white/5 border-white/10 text-ink-soft hover:bg-white/10'
+                              let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
                               if (showResults) {
                                 if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
                                 else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
-                                else btnStyle = 'bg-white/5 border-white/5 text-muted opacity-40'
+                                else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-40'
                               } else {
                                 if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
                               }
@@ -307,7 +307,7 @@ export default function LesenPage() {
                         return (
                           <div key={sit.id} className="border-t border-white/5 pt-4 space-y-2">
                             <div className="flex gap-2.5 items-start">
-                              <span className="bg-white/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                              <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                                 {sIdx + 1}
                               </span>
                               <div className="text-left font-sans text-sm text-white" dir="ltr">
@@ -322,11 +322,11 @@ export default function LesenPage() {
                                 const isSelected = selectedVal === ad.id
                                 const isOptCorrect = sit.correctAd === ad.id
 
-                                let btnStyle = 'bg-white/5 border-white/10 text-ink-soft hover:bg-white/10'
+                                let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
                                 if (showResults) {
                                   if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
                                   else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
-                                  else btnStyle = 'bg-white/5 border-white/5 text-muted opacity-40'
+                                  else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-40'
                                 } else {
                                   if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
                                 }
@@ -359,7 +359,7 @@ export default function LesenPage() {
                       return (
                         <div key={q.id} className="border-t border-white/5 pt-4 space-y-3">
                           <div className="flex gap-2.5 items-start">
-                            <span className="bg-white/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                            <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                               {qIdx + 1}
                             </span>
                             <div className="text-left font-sans text-sm text-white" dir="ltr">
@@ -373,11 +373,11 @@ export default function LesenPage() {
                               const isSelected = selectedVal === val
                               const isOptCorrect = q.correct === val
 
-                              let btnStyle = 'bg-white/5 border-white/10 text-ink-soft hover:bg-white/10'
+                              let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
                               if (showResults) {
                                 if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
                                 else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
-                                else btnStyle = 'bg-white/5 border-white/5 text-muted opacity-40'
+                                else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-40'
                               } else {
                                 if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
                               }
@@ -439,7 +439,7 @@ export default function LesenPage() {
 
                 {/* Question Prompt */}
                 <div className="flex gap-2.5 items-start">
-                  <span className="bg-white/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
+                  <span className="bg-white dark:bg-[#1a1a2e]/5 text-muted w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                     {qIdx + 1}
                   </span>
                   <p className="text-sm font-semibold text-white text-left font-sans" dir="ltr">{q.question}</p>
@@ -451,11 +451,11 @@ export default function LesenPage() {
                     const isSelected = selectedVal === oi
                     const isOptCorrect = q.correct === oi
 
-                    let btnStyle = 'bg-white/5 border-white/10 text-ink-soft hover:bg-white/10'
+                    let btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/10 text-ink-soft hover:bg-white dark:bg-[#1a1a2e]/10'
                     if (showResults) {
                       if (isOptCorrect) btnStyle = 'bg-green/10 border-green/45 text-green font-bold'
                       else if (isSelected) btnStyle = 'bg-red/10 border-red/45 text-red font-bold'
-                      else btnStyle = 'bg-white/5 border-white/5 text-muted opacity-40'
+                      else btnStyle = 'bg-white dark:bg-[#1a1a2e]/5 border-white/5 text-muted opacity-40'
                     } else {
                       if (isSelected) btnStyle = 'bg-green/10 border-green/30 text-green font-bold'
                     }
@@ -513,7 +513,7 @@ export default function LesenPage() {
       {showResults && (
         <button 
           onClick={reset} 
-          className="w-full bg-white/5 border border-white/10 text-white py-3.5 rounded-2xl font-bold hover:bg-white/10 transition-all cursor-pointer shadow-lg"
+          className="w-full bg-white dark:bg-[#1a1a2e]/5 border border-white/10 text-white py-3.5 rounded-2xl font-bold hover:bg-white dark:bg-[#1a1a2e]/10 transition-all cursor-pointer shadow-lg"
         >
           🔄 العودة واختيار نموذج آخر
         </button>

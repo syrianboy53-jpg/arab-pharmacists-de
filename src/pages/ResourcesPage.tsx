@@ -20,7 +20,7 @@ export default function ResourcesPage() {
             <div className="flex items-center gap-2"><h3 className="font-bold text-sm">{r.name}</h3><span className="text-[9px] bg-[#00b894]/10 text-[#00b894] px-1.5 py-0.5 rounded font-bold">{r.type}</span></div>
             <p className="text-xs text-gray-400 mt-0.5">{r.desc}</p>
           </div>
-          <span className="text-gray-300 dark:text-gray-600 shrink-0">🔗</span>
+          <span className="text-gray-300 dark:text-gray-600 dark:text-gray-400 shrink-0">🔗</span>
         </a>
       ))}</div>
     </div>

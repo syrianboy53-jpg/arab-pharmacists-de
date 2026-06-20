@@ -63,7 +63,7 @@ export default function FehlerPage() {
   if (mistakesPool.length === 0) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-green border-t-transparent"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-green border-t dark:border-white/10-transparent"></div>
       </div>
     )
   }
@@ -191,7 +191,7 @@ export default function FehlerPage() {
               <div key={idx} className="p-3 bg-gray-50 dark:bg-[#1a1a2e]/30 rounded-xl border border-gray-100 dark:border-gray-800">
                 <div className="flex justify-between items-center text-xs text-muted mb-1">
                   <span>مثال {idx + 1}</span>
-                  <span className="font-bold">{ex.ar}</span>
+                  <span className="font-bold text-gray-800 dark:text-gray-200">{ex.ar}</span>
                 </div>
                 <div className="flex flex-col gap-1 mt-1 font-mono text-xs md:text-sm" dir="ltr">
                   <div className="text-red-600 dark:text-red-400">❌ {ex.wrong}</div>

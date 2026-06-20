@@ -27,7 +27,7 @@ export default function LebenPage() {
           <button
             key={i}
             onClick={() => { setCurrentSet(i); setAnswers({}); setShowResults(false) }}
-            className={`px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap ${currentSet === i ? 'bg-green text-white' : 'bg-gray-100 text-gray-600'}`}
+            className={`px-4 py-2 rounded-full text-sm font-bold whitespace-nowrap ${currentSet === i ? 'bg-green text-white' : 'bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-400'}`}
           >
             المجموعة {i + 1}
           </button>
@@ -50,9 +50,9 @@ export default function LebenPage() {
               if (showResults) {
                 if (oi === q.correct) cls += 'border-green bg-green/10 text-green font-bold'
                 else if (answers[q.id] === oi) cls += 'border-red bg-red/10 text-red'
-                else cls += 'border-gray-200 text-gray-400'
+                else cls += 'border-gray-200 dark:border-white/10 text-gray-400'
               } else {
-                cls += answers[q.id] === oi ? 'border-green bg-green/5 font-bold' : 'border-gray-200 hover:border-green'
+                cls += answers[q.id] === oi ? 'border-green bg-green/5 font-bold' : 'border-gray-200 dark:border-white/10 hover:border-green'
               }
               return <button key={oi} onClick={() => !showResults && setAnswers(p => ({...p, [q.id]: oi}))} className={cls} dir="ltr">{opt}</button>
             })}

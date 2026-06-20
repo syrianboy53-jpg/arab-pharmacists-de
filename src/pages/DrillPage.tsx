@@ -131,7 +131,7 @@ export default function DrillPage() {
           <div className="text-6xl mb-4">{won ? '🎉' : '💔'}</div>
           <h1 className="text-2xl md:text-3xl font-bold mb-4">{won ? 'عمل رائع! لقد نجحت' : 'انتهت الفرص!'}</h1>
           <p className="text-muted text-sm md:text-base mb-6">
-            لقد أجبت على <span className="font-bold text-green">{score}</span> من أصل <span className="font-bold">{roundDrills.length}</span> أسئلة بشكل صحيح.
+            لقد أجبت على <span className="font-bold text-green">{score}</span> من أصل <span className="font-bold text-gray-800 dark:text-gray-200">{roundDrills.length}</span> أسئلة بشكل صحيح.
           </p>
 
           <div className="bg-green/5 dark:bg-green/10 border border-green/20 rounded-2xl p-4 mb-8">
@@ -167,7 +167,7 @@ export default function DrillPage() {
   if (roundDrills.length === 0) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-green border-t-transparent"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-green border-t dark:border-white/10-transparent"></div>
       </div>
     )
   }
@@ -249,7 +249,7 @@ export default function DrillPage() {
               } else if (isSelected) {
                 btnClass += 'border-red bg-red/10 text-red dark:text-red-300'
               } else {
-                btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50/50 dark:bg-[#1a1a2e]/50 opacity-60 text-muted'
+                btnClass += 'border-gray-100 dark:border-white/5 bg-gray-50 dark:bg-white/5/50 dark:bg-[#1a1a2e]/50 opacity-60 text-muted'
               }
             } else {
               btnClass += 'border-gray-200 dark:border-white/5 hover:border-green hover:bg-green/5'

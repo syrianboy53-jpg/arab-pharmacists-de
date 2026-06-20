@@ -201,7 +201,7 @@ export default function SatzbauPage() {
           <div className="text-6xl mb-4">{won ? '🎉' : '💔'}</div>
           <h1 className="text-2xl md:text-3xl font-bold mb-4">{won ? 'أحسنت! فوز ساحق' : 'انتهت المحاولات!'}</h1>
           <p className="text-muted text-sm md:text-base mb-6">
-            لقد أحرزت <span className="font-bold text-green">{score}</span> من أصل <span className="font-bold">{roundSentences.length}</span> جمل بشكل صحيح.
+            لقد أحرزت <span className="font-bold text-green">{score}</span> من أصل <span className="font-bold text-gray-800 dark:text-gray-200">{roundSentences.length}</span> جمل بشكل صحيح.
           </p>
 
           <div className="bg-green/5 dark:bg-green/10 border border-green/20 rounded-2xl p-4 mb-8">
@@ -237,7 +237,7 @@ export default function SatzbauPage() {
   if (roundSentences.length === 0) {
     return (
       <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-green border-t-transparent"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-green border-t dark:border-white/10-transparent"></div>
       </div>
     )
   }
@@ -293,7 +293,7 @@ export default function SatzbauPage() {
           </button>
         ))}
         {userWords.length === 0 && (
-          <span className="text-gray-400 dark:text-gray-600 text-sm">اضغط على الكلمات بالأسفل لترتيبها</span>
+          <span className="text-gray-400 dark:text-gray-600 dark:text-gray-400 text-sm">اضغط على الكلمات بالأسفل لترتيبها</span>
         )}
       </div>
 

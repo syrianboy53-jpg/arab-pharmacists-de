@@ -3,59 +3,77 @@ const path = require('path');
 const pagesDir = path.join(__dirname, '..', 'src', 'pages');
 
 const files = fs.readdirSync(pagesDir).filter(f => f.endsWith('.tsx'));
-
 let totalChanges = 0;
 
 for (const file of files) {
   const filePath = path.join(pagesDir, file);
-  let content = fs.readFileSync(filePath, 'utf-8');
-  const original = content;
+  let c = fs.readFileSync(filePath, 'utf-8');
+  const original = c;
 
-  // Fix dark backgrounds: gray-800 -> [#1a1a2e]
-  content = content.replace(/dark:bg-gray-800/g, 'dark:bg-[#1a1a2e]');
-  content = content.replace(/dark:bg-gray-900/g, 'dark:bg-[#0f0f1a]');
-  
-  // Fix dark borders: gray-700 -> white/5
-  content = content.replace(/dark:border-gray-700/g, 'dark:border-white/5');
-  content = content.replace(/dark:border-gray-600/g, 'dark:border-white/10');
-  
-  // Fix text colors that might be invisible
-  // h1 tags without dark mode text
-  content = content.replace(/className="text-2xl font-bold flex items-center gap-2"/g, 
-    'className="text-2xl font-black flex items-center gap-2 text-gray-900 dark:text-white"');
+  // ── bg-white without dark ──
+  // Match bg-white that is NOT already followed by dark:bg somewhere in the same className
+  c = c.replace(/\bbg-white\b(?![\s"]*dark:bg)/g, 'bg-white dark:bg-[#1a1a2e]');
 
-  // Fix bg-white without dark mode
-  content = content.replace(/bg-white rounded-2xl/g, 'bg-white dark:bg-[#1a1a2e] rounded-2xl');
-  content = content.replace(/bg-white rounded-xl/g, 'bg-white dark:bg-[#1a1a2e] rounded-xl');
-  
-  // Fix border-gray-100 without dark
-  content = content.replace(/border-gray-100(?! dark)/g, 'border-gray-200 dark:border-white/5');
+  // ── bg-gray-50 without dark ──
+  c = c.replace(/\bbg-gray-50\b(?![\s"]*dark:bg)/g, 'bg-gray-50 dark:bg-white/5');
 
-  // Fix font-bold without explicit text color on h2/h3
-  content = content.replace(/className="font-bold mb-3"/g, 'className="font-bold mb-3 text-gray-800 dark:text-gray-200"');
-  content = content.replace(/className="font-bold mb-2"/g, 'className="font-bold mb-2 text-gray-800 dark:text-gray-200"');
-  content = content.replace(/className="text-xl font-bold mb-2"/g, 'className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-200"');
-  content = content.replace(/className="text-xl font-bold mb-1"/g, 'className="text-xl font-bold mb-1 text-gray-800 dark:text-gray-200"');
+  // ── border-gray-200 without dark ──
+  c = c.replace(/\bborder-gray-200\b(?![\s"]*dark:border)/g, 'border-gray-200 dark:border-white/10');
 
-  // Fix plain "text-sm text-gray-500" without dark variant
-  content = content.replace(/text-gray-500(?!" )/g, (match, offset) => {
-    const after = content.substring(offset + match.length, offset + match.length + 20);
-    if (after.includes('dark:') || after.includes('text-gray-4')) return match;
-    return 'text-gray-500 dark:text-gray-400';
-  });
-  
-  // Fix bg-gray-100 without dark
-  content = content.replace(/bg-gray-100 dark:bg-gray-700/g, 'bg-gray-100 dark:bg-white/10');
+  // ── border-gray-100 without dark ──
+  c = c.replace(/\bborder-gray-100\b(?![\s"]*dark:border)/g, 'border-gray-100 dark:border-white/5');
 
-  // Remove duplicate dark: entries
-  content = content.replace(/dark:bg-\[#1a1a2e\] dark:bg-\[#1a1a2e\]/g, 'dark:bg-[#1a1a2e]');
-  content = content.replace(/dark:border-white\/5 dark:border-white\/5/g, 'dark:border-white/5');
-  content = content.replace(/dark:text-gray-400 dark:text-gray-400/g, 'dark:text-gray-400');
+  // ── text-gray-700 without dark ──
+  c = c.replace(/\btext-gray-700\b(?![\s"]*dark:text)/g, 'text-gray-700 dark:text-gray-300');
 
-  if (content !== original) {
-    fs.writeFileSync(filePath, content);
-    const changes = content.split('\n').length - original.split('\n').length;
-    console.log(`✅ Fixed: ${file}`);
+  // ── text-gray-800 without dark ──
+  c = c.replace(/\btext-gray-800\b(?![\s"]*dark:text)/g, 'text-gray-800 dark:text-gray-200');
+
+  // ── text-gray-900 without dark ──
+  c = c.replace(/\btext-gray-900\b(?![\s"]*dark:text)/g, 'text-gray-900 dark:text-white');
+
+  // ── text-gray-600 without dark ──
+  c = c.replace(/\btext-gray-600\b(?![\s"]*dark:text)/g, 'text-gray-600 dark:text-gray-400');
+
+  // ── text-gray-500 without dark ──
+  c = c.replace(/\btext-gray-500\b(?![\s"]*dark:text)/g, 'text-gray-500 dark:text-gray-400');
+
+  // ── standalone className="font-bold" → add text color ──
+  c = c.replace(/className="font-bold(?! text)"/g, 'className="font-bold text-gray-800 dark:text-gray-200"');
+
+  // ── hover:bg-gray-50 without dark ──
+  c = c.replace(/\bhover:bg-gray-50\b(?![\s"]*dark:hover)/g, 'hover:bg-gray-50 dark:hover:bg-white/5');
+
+  // ── hover:bg-gray-100 without dark ──
+  c = c.replace(/\bhover:bg-gray-100\b(?![\s"]*dark:hover)/g, 'hover:bg-gray-100 dark:hover:bg-white/10');
+
+  // ── border-b without dark ──
+  c = c.replace(/\bborder-b\b(?![\s"]*dark:border| border)/g, 'border-b dark:border-white/10');
+
+  // ── border-t without dark ──
+  c = c.replace(/\bborder-t\b(?![\s"]*dark:border| border)/g, 'border-t dark:border-white/10');
+
+  // ── bg-gray-100 without dark ──
+  c = c.replace(/\bbg-gray-100\b(?![\s"]*dark:bg)/g, 'bg-gray-100 dark:bg-white/10');
+
+  // ── Clean up duplicate dark entries (run multiple times) ──
+  for (let i = 0; i < 3; i++) {
+    c = c.replace(/dark:bg-\[#1a1a2e\]\s+dark:bg-\[#1a1a2e\]/g, 'dark:bg-[#1a1a2e]');
+    c = c.replace(/dark:bg-white\/5\s+dark:bg-white\/5/g, 'dark:bg-white/5');
+    c = c.replace(/dark:bg-white\/10\s+dark:bg-white\/10/g, 'dark:bg-white/10');
+    c = c.replace(/dark:border-white\/5\s+dark:border-white\/5/g, 'dark:border-white/5');
+    c = c.replace(/dark:border-white\/10\s+dark:border-white\/10/g, 'dark:border-white/10');
+    c = c.replace(/dark:text-gray-300\s+dark:text-gray-300/g, 'dark:text-gray-300');
+    c = c.replace(/dark:text-gray-200\s+dark:text-gray-200/g, 'dark:text-gray-200');
+    c = c.replace(/dark:text-gray-400\s+dark:text-gray-400/g, 'dark:text-gray-400');
+    c = c.replace(/dark:text-white\s+dark:text-white/g, 'dark:text-white');
+    c = c.replace(/dark:hover:bg-white\/5\s+dark:hover:bg-white\/5/g, 'dark:hover:bg-white/5');
+    c = c.replace(/dark:hover:bg-white\/10\s+dark:hover:bg-white\/10/g, 'dark:hover:bg-white/10');
+  }
+
+  if (c !== original) {
+    fs.writeFileSync(filePath, c);
+    console.log(`✅ ${file}`);
     totalChanges++;
   }
 }
