@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { type ReactNode, useState, useEffect } from 'react'
-import { Home, ClipboardList, Tag, GraduationCap, Award, BookOpen, ScrollText, Mail, LayoutDashboard, Moon, Sun, ArrowRight, Zap } from 'lucide-react'
+import { Home, GraduationCap, Award, BookOpen, ScrollText, Mail, LayoutDashboard, Moon, Sun, ArrowRight, Zap, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -72,12 +72,17 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
-    { path: '/b1-models', label: 'Mock Tests', icon: ClipboardList },
-    { path: '#', label: 'Pricing', icon: Tag },
-    { path: '/b1', label: 'GOETHE', icon: GraduationCap },
-    { path: '/b2-hub', label: 'TELC', icon: Award },
-    { path: '/dtz', label: 'DTZ', icon: BookOpen },
-    { path: '/c1', label: 'TestDaF', icon: ScrollText },
+    { 
+      path: '#exams',
+      label: 'Exams', 
+      icon: GraduationCap,
+      children: [
+        { path: '/b1', label: 'GOETHE', icon: GraduationCap },
+        { path: '/b2-hub', label: 'TELC', icon: Award },
+        { path: '/dtz', label: 'DTZ', icon: BookOpen },
+        { path: '/c1', label: 'TestDaF', icon: ScrollText },
+      ]
+    },
     { path: '#', label: 'Contact', icon: Mail },
     { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   ]
@@ -203,19 +208,51 @@ export default function Layout({ children }: { children: ReactNode }) {
             </a>
 
             {/* Center: Desktop Nav Links */}
-            <nav className="hidden lg:flex items-center gap-0.5">
-              {navItems.map((item) => {
-                const active = isActive(item.path)
+            <nav className="hidden md:flex items-center gap-2">
+              {navItems.map((item, idx) => {
+                if (item.children) {
+                  return (
+                    <div key={idx} className="relative group">
+                      <button className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 cursor-pointer">
+                        <item.icon size={15} strokeWidth={1.5} />
+                        {item.label}
+                        <ChevronDown size={14} className="group-hover:rotate-180 transition-transform" />
+                      </button>
+                      <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                        <div className="bg-white dark:bg-[#1a1a2e] rounded-xl shadow-xl border border-gray-100 dark:border-white/5 py-2 w-48 flex flex-col">
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.path}
+                              to={child.path}
+                              className={`flex items-center gap-2 px-4 py-2 text-xs font-bold transition-colors ${
+                                isActive(child.path)
+                                  ? 'bg-[#00b894]/10 text-[#00b894]'
+                                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'
+                              }`}
+                            >
+                              <child.icon size={14} strokeWidth={isActive(child.path) ? 2.5 : 1.5} />
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                }
+
+                const active = isActive(item.path!)
+                const Icon = item.icon
                 return (
                   <Link
                     key={item.path}
-                    to={item.path}
-                    className={`px-2.5 py-1.5 rounded-lg text-[11px] xl:text-xs font-bold transition-all whitespace-nowrap ${
+                    to={item.path!}
+                    className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
                       active
                         ? 'bg-[#00b894]/10 text-[#00b894]'
                         : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5'
                     }`}
                   >
+                    <Icon size={15} strokeWidth={active ? 2.5 : 1.5} />
                     {item.label}
                   </Link>
                 )

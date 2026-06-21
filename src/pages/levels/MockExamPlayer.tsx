@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle, XCircle, Award } from 'lucide-react'
 import { useXP } from '../../hooks/useXP'
 
@@ -16,7 +16,7 @@ export default function MockExamPlayer() {
   const navigate = useNavigate()
   const { addXP } = useXP()
 
-  const [exam, setExam] = useState(allExams.find(e => e.id === examId))
+  const [exam] = useState(allExams.find(e => e.id === examId))
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null)
   const [writtenAnswer, setWrittenAnswer] = useState('')
