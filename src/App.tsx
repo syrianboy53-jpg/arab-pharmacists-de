@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import Layout from './components/Layout'
 
@@ -28,6 +28,7 @@ const ExamSimulationPage = lazy(() => import('./pages/ExamSimulationPage'))
 const FlashcardsPage = lazy(() => import('./pages/FlashcardsPage'))
 const PronunciationLabPage = lazy(() => import('./pages/PronunciationLabPage'))
 const BriefCorrectorPage = lazy(() => import('./pages/BriefCorrectorPage'))
+const DTZPage = lazy(() => import('./pages/DTZPage'))
 
 // New pages — Phase 3: Interactive
 const DailyChallengePage = lazy(() => import('./pages/DailyChallengePage'))
