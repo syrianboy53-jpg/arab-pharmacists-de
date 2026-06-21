@@ -9,6 +9,7 @@ const HoerenPage = lazy(() => import('./pages/HoerenPage'))
 const SchreibenPage = lazy(() => import('./pages/SchreibenPage'))
 const SprechenPage = lazy(() => import('./pages/SprechenPage'))
 const GrammarPage = lazy(() => import('./pages/GrammarPage'))
+const GrammarLessonPage = lazy(() => import('./pages/GrammarLessonPage'))
 const VocabularyPage = lazy(() => import('./pages/VocabularyPage'))
 const VocabLessonPage = lazy(() => import('./pages/VocabLessonPage'))
 const LebenPage = lazy(() => import('./pages/LebenPage'))
@@ -83,6 +84,7 @@ export default function App() {
 
           {/* Basics */}
           <Route path="/grammar" element={<GrammarPage />} />
+          <Route path="/grammar/lesson/:lessonId" element={<GrammarLessonPage />} />
           <Route path="/vocabulary" element={<VocabularyPage />} />
           <Route path="/vocabulary/lesson/:catId" element={<VocabLessonPage />} />
           <Route path="/lesen" element={<LesenPage />} />

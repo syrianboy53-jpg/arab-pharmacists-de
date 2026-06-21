@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 const sprechenParts = [
   {
@@ -103,6 +103,81 @@ export default function SprechenPage() {
   const [showSample, setShowSample] = useState(false)
   const [showPhrases, setShowPhrases] = useState(false)
 
+  // Voice Recognition State
+  const [isRecording, setIsRecording] = useState(false)
+  const [transcript, setTranscript] = useState('')
+  const [score, setScore] = useState<number | null>(null)
+  
+  const recognitionRef = useRef<any>(null)
+
+  useEffect(() => {
+    // Initialize Web Speech API
+    if (typeof window !== 'undefined') {
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
+      if (SpeechRecognition) {
+        recognitionRef.current = new SpeechRecognition()
+        recognitionRef.current.continuous = true
+        recognitionRef.current.interimResults = true
+        recognitionRef.current.lang = 'de-DE'
+
+        recognitionRef.current.onresult = (event: any) => {
+          let currentTranscript = ''
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            currentTranscript += event.results[i][0].transcript
+          }
+          setTranscript(prev => prev + ' ' + currentTranscript)
+        }
+
+        recognitionRef.current.onerror = (event: any) => {
+          console.error('Speech recognition error', event.error)
+          setIsRecording(false)
+        }
+
+        recognitionRef.current.onend = () => {
+          setIsRecording(false)
+        }
+      }
+    }
+    
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop()
+      }
+    }
+  }, [])
+
+  const toggleRecording = () => {
+    if (isRecording) {
+      recognitionRef.current?.stop()
+      setIsRecording(false)
+      evaluatePronunciation()
+    } else {
+      setTranscript('')
+      setScore(null)
+      try {
+        recognitionRef.current?.start()
+        setIsRecording(true)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+  }
+
+  const evaluatePronunciation = () => {
+    if (!part || !transcript) return
+    
+    const sampleWords = part.sampleAnswer.toLowerCase().replace(/[.,!?:;]/g, '').split(/\s+/).filter(w => w.length > 2)
+    const spokenWords = transcript.toLowerCase().replace(/[.,!?:;]/g, '').split(/\s+/)
+    
+    let matches = 0
+    sampleWords.forEach(word => {
+      if (spokenWords.includes(word)) matches++
+    })
+    
+    const finalScore = Math.min(100, Math.round((matches / sampleWords.length) * 100 * 1.2)) // 1.2 multiplier to be forgiving
+    setScore(finalScore)
+  }
+
   const part = selectedPart !== null ? sprechenParts[selectedPart] : null
 
   if (!part) {
@@ -132,8 +207,15 @@ export default function SprechenPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <button onClick={() => { setSelectedPart(null); setShowSample(false); setShowPhrases(false) }} className="text-[#00b894] font-bold text-sm">→ العودة</button>
+    <div className="space-y-6 pb-20">
+      <button onClick={() => { 
+        setSelectedPart(null); 
+        setShowSample(false); 
+        setShowPhrases(false);
+        setTranscript('');
+        setScore(null);
+        if(isRecording) toggleRecording();
+      }} className="text-[#00b894] font-bold text-sm">→ العودة</button>
 
       <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm border border-gray-200 dark:border-white/5">
         <h2 className="text-lg font-bold text-[#00b894] mb-2">{part.title}</h2>
@@ -166,11 +248,53 @@ export default function SprechenPage() {
       )}
 
       <button onClick={() => setShowSample(!showSample)} className="w-full bg-[#00b894] text-white py-3 rounded-xl font-bold">
-        {showSample ? 'إخفاء' : '👁️'} نموذج الإجابة
+        {showSample ? 'إخفاء' : '👁️'} نموذج الإجابة وتدريب النطق
       </button>
       {showSample && (
-        <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm border border-[#00b894]/30">
-          <pre className="text-sm whitespace-pre-wrap leading-relaxed" dir="ltr">{part.sampleAnswer}</pre>
+        <div className="space-y-4">
+          <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-5 shadow-sm border border-[#00b894]/30">
+            <h4 className="text-[#00b894] font-bold text-sm mb-3">اقرأ هذا النص بصوت واضح:</h4>
+            <pre className="text-sm font-sans whitespace-pre-wrap leading-loose" dir="ltr">{part.sampleAnswer}</pre>
+          </div>
+
+          {/* Voice Engine UI */}
+          <div className="bg-gray-50 dark:bg-black/20 rounded-2xl p-6 border border-gray-200 dark:border-white/5 text-center space-y-4">
+            <h3 className="font-bold text-gray-900 dark:text-white">🎙️ تدريب النطق الذكي</h3>
+            <p className="text-xs text-gray-500">اضغط على المايكروفون، اقرأ النص الألماني، وسنقوم بتقييم نطقك!</p>
+            
+            <button 
+              onClick={toggleRecording}
+              className={`w-20 h-20 rounded-full flex items-center justify-center text-3xl shadow-xl transition-all mx-auto ${
+                isRecording 
+                ? 'bg-red-500 text-white animate-pulse shadow-red-500/40' 
+                : 'bg-[#0984e3] hover:bg-blue-600 text-white shadow-blue-500/30'
+              }`}
+            >
+              {isRecording ? '⏹️' : '🎤'}
+            </button>
+            <div className="text-xs font-bold text-gray-500">
+              {isRecording ? 'جاري الاستماع... اضغط للإيقاف' : 'اضغط للبدء'}
+            </div>
+
+            {transcript && (
+              <div className="mt-4 p-4 bg-white dark:bg-[#1a1a2e] rounded-xl border border-gray-200 dark:border-white/10 text-left" dir="ltr">
+                <span className="text-xs text-gray-400 block mb-1">ما سمعناه:</span>
+                <p className="text-sm font-medium text-gray-800 dark:text-gray-200">{transcript}</p>
+              </div>
+            )}
+
+            {score !== null && (
+              <div className="mt-4 animate-fade-in">
+                <div className="inline-block px-6 py-3 rounded-2xl border-2 border-[#00b894] bg-[#00b894]/10">
+                  <span className="block text-xs font-bold text-[#00b894] mb-1">نتيجة النطق</span>
+                  <span className="text-3xl font-black text-[#00b894]">{score}%</span>
+                </div>
+                <p className="text-sm mt-3 font-bold text-gray-600 dark:text-gray-400">
+                  {score >= 80 ? 'رائع! نطقك ممتاز جداً 🌟' : score >= 50 ? 'جيد جداً، واصل التدريب 💪' : 'تحتاج للمزيد من التدريب على مخارج الحروف 🔁'}
+                </p>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>

@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import { commonMistakes, trennbareVerben } from '../data/grammar'
-import { playCorrectSound, playWrongSound, playTadaSound, triggerConfetti } from '../utils/gamification'
-
 interface LessonTopic {
   id: number
   title: string
@@ -18,11 +17,6 @@ const originalLessons = originalLessonsJson as LessonTopic[]
 export default function GrammarPage() {
   const [activeTab, setActiveTab] = useState<'lessons' | 'mistakes' | 'verbs'>('lessons')
   
-  // Lessons State
-  const [selectedLesson, setSelectedLesson] = useState<number | null>(null)
-  const [lessonAnswers, setLessonAnswers] = useState<Record<number, number>>({})
-  const [showLessonResults, setShowLessonResults] = useState(false)
-
   // Mistakes State
   const [searchMistakeQuery, setSearchMistakeQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
@@ -109,125 +103,27 @@ export default function GrammarPage() {
       {/* TAB 1: LESSONS */}
       {activeTab === 'lessons' && (
         <div className="space-y-6">
-          {selectedLesson === null ? (
-            <div className="grid gap-3">
-              {originalLessons.map((l, i) => (
-                <button
-                  key={l.id}
-                  onClick={() => setSelectedLesson(i)}
-                  className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-[#00b894]/20 hover:bg-gray-50 dark:hover:bg-white/5 transition-all shadow-md flex items-center justify-between"
-                >
-                  <span className="text-[#00b894] text-xs font-bold bg-[#00b894]/10 border border-[#00b894]/20 px-3 py-1.5 rounded-full">
-                    شرح + اختبار 📝
-                  </span>
-                  <div>
-                    <h3 className="font-bold text-gray-900 dark:text-white text-base" dir="ltr">{l.title}</h3>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{l.titleAr}</p>
-                  </div>
-                </button>
-              ))}
-            </div>
-          ) : (
-            <div className="space-y-6 animate-fade-in">
-              <button
-                onClick={() => {
-                  setSelectedLesson(null)
-                  setLessonAnswers({})
-                  setShowLessonResults(false)
-                }}
-                className="text-[#00b894] font-bold text-sm"
+          <div className="grid gap-3">
+            {originalLessons.map((l) => (
+              <div
+                key={l.id}
+                className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-[#00b894]/20 transition-all shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
               >
-                → العودة لقائمة القواعد
-              </button>
-
-              {/* Lesson Details */}
-              <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4">
-                <div className="border-b border-gray-200 dark:border-white/10 pb-2">
-                  <h2 className="text-lg font-bold text-[#00b894]" dir="ltr">{originalLessons[selectedLesson].title}</h2>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{originalLessons[selectedLesson].titleAr}</p>
+                <div>
+                  <h3 className="font-bold text-gray-900 dark:text-white text-base" dir="ltr">{l.title}</h3>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{l.titleAr}</p>
                 </div>
-                <pre className="text-sm text-gray-900 dark:text-white whitespace-pre-wrap leading-relaxed bg-gray-100 dark:bg-[#1a1a2e] rounded-xl p-5 border border-gray-200 dark:border-white/5 font-sans">
-                  {originalLessons[selectedLesson].explanation}
-                </pre>
-              </div>
-
-              {/* Examples */}
-              <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-3">
-                <h3 className="font-bold text-gray-900 dark:text-white text-sm">💡 أمثلة توضيحية:</h3>
-                <div className="grid md:grid-cols-2 gap-3" dir="ltr">
-                  {originalLessons[selectedLesson].examples.map((ex, idx) => (
-                    <div key={idx} className="bg-gray-50 dark:bg-white/5 p-4 rounded-xl border border-gray-200 dark:border-white/5 text-left">
-                      <p className="text-sm font-semibold text-gray-900 dark:text-white">{ex.de}</p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right" dir="rtl">{ex.ar}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Quizzes */}
-              <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4">
-                <h3 className="font-bold text-gray-900 dark:text-white text-sm">✏️ تمارّين اختبار الفهم:</h3>
-                <div className="space-y-4">
-                  {originalLessons[selectedLesson].exercises.map((ex, i) => (
-                    <div key={i} className="border-b border-gray-200 dark:border-white/5 pb-4 last:border-b dark:border-white/10-0 last:pb-0">
-                      <p className="text-sm text-gray-900 dark:text-white font-medium mb-3" dir="ltr">
-                        {i + 1}. {ex.question}
-                      </p>
-                      <div className="flex gap-2.5">
-                        {ex.options.map((opt, oi) => {
-                          let cls = 'px-4 py-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer '
-                          if (showLessonResults) {
-                            if (oi === ex.correct) cls += 'border-[#00b894] bg-[#00b894]/20 text-[#00b894]'
-                            else if (lessonAnswers[i] === oi) cls += 'border-red-500 bg-red-500/20 text-red-500 shadow-inner'
-                            else cls += 'border-gray-200 dark:border-white/5 bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-gray-400'
-                          } else {
-                            cls += lessonAnswers[i] === oi 
-                              ? 'border-[#00b894] bg-[#00b894]/10 text-[#00b894]' 
-                              : 'border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-gray-500 dark:text-gray-400 hover:border-[#00b894]'
-                          }
-                          return (
-                            <button
-                              key={oi}
-                              disabled={showLessonResults}
-                              onClick={() => setLessonAnswers(p => ({ ...p, [i]: oi }))}
-                              className={cls}
-                              dir="ltr"
-                            >
-                              {opt}
-                            </button>
-                          )
-                        })}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                {!showLessonResults && Object.keys(lessonAnswers).length > 0 && (
-                  <button
-                    onClick={() => {
-                      setShowLessonResults(true)
-                      const lesson = originalLessons[selectedLesson]
-                      const total = lesson.exercises.length
-                      let correctCount = 0
-                      for (let i = 0; i < total; i++) {
-                        if (lessonAnswers[i] === lesson.exercises[i].correct) correctCount++
-                      }
-                      if (correctCount === total && total > 0) {
-                        playTadaSound()
-                        triggerConfetti()
-                      } else if (correctCount >= total / 2) {
-                        playCorrectSound()
-                      } else {
-                        playWrongSound()
-                      }
-                    }}
-                    className="mt-4 w-full bg-[#00b894] text-white hover:bg-[#00a884] py-3 rounded-xl font-bold transition-all shadow-md cursor-pointer"
+                <div className="w-full sm:w-auto">
+                  <Link 
+                    to={`/grammar/lesson/${l.id}`}
+                    className="block w-full text-center px-6 py-2.5 bg-[#0984e3] hover:bg-blue-600 text-white font-black rounded-xl transition-all shadow-lg shadow-blue-500/20"
                   >
-                    تحقّق من الإجابات
-                  </button>
-                )}
+                    🚀 ابدأ الدرس التفاعلي
+                  </Link>
+                </div>
               </div>
-            </div>
-          )}
+            ))}
+          </div>
         </div>
       )}
 
