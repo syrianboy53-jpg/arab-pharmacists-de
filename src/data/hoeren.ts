@@ -1900,6 +1900,359 @@ export const hoerenModels = [
         ]
       }
     ]
+  },
+  {
+    "id": "hoeren-9",
+    "title": "نموذج Hören رقم 9 (Einkaufen)",
+    "description": "استماع — مواقف في التسوق والمتاجر.",
+    "parts": [
+      {
+        "type": "tf-mc",
+        "title": "Teil 1 – إعلانات ورسائل",
+        "instructionsAr": "استمع إلى الإعلانات والرسائل وأجب عن الأسئلة.",
+        "transcripts": [
+          {
+            "id": "h9-1",
+            "speaker": "Kaufhaus-Durchsage",
+            "textDe": "Liebe Kunden, wir haben heute ein besonderes Angebot für Sie: In der Lebensmittelabteilung im Untergeschoss bekommen Sie heute 30% Rabatt auf alle frischen Früchte und Gemüse. Besuchen Sie uns auch im 3. Stock, wo Sie unsere neuen Winterjacken finden."
+          },
+          {
+            "id": "h9-2",
+            "speaker": "Nachricht von der Buchhandlung",
+            "textDe": "Guten Tag Herr Schmidt, hier ist die Buchhandlung am Markt. Das Buch, das Sie letzte Woche bestellt haben, ist leider noch nicht angekommen. Es gab ein Problem beim Verlag. Wir erwarten es nun am kommenden Dienstag. Wir melden uns dann wieder."
+          }
+        ],
+        "questions": [
+          {
+            "id": "hoeren-9-1-1",
+            "statementDe": "Das Angebot gilt für Kleidung im Untergeschoss.",
+            "correct": false,
+            "explanation": "العرض في الطابق السفلي للفواكه والخضار، وليس للملابس."
+          },
+          {
+            "id": "hoeren-9-1-2",
+            "promptDe": "Wo findet man die Winterjacken?",
+            "options": [
+              { "id": "a", "de": "Im Untergeschoss." },
+              { "id": "b", "de": "Im 3. Stock." },
+              { "id": "c", "de": "Im Erdgeschoss." }
+            ],
+            "correct": "b"
+          },
+          {
+            "id": "hoeren-9-1-3",
+            "statementDe": "Herr Schmidt kann sein Buch heute abholen.",
+            "correct": false
+          },
+          {
+            "id": "hoeren-9-1-4",
+            "promptDe": "Wann kommt das Buch wahrscheinlich an?",
+            "options": [
+              { "id": "a", "de": "Morgen." },
+              { "id": "b", "de": "Nächste Woche Dienstag." },
+              { "id": "c", "de": "Gar nicht." }
+            ],
+            "correct": "b"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hoeren-10",
+    "title": "نموذج Hören رقم 10 (Arbeitsplatz)",
+    "description": "استماع — مواقف في مكان العمل.",
+    "parts": [
+      {
+        "type": "tf-mc",
+        "title": "Teil 1 – رسائل العمل",
+        "instructionsAr": "استمع إلى الرسائل الصوتية وأجب.",
+        "transcripts": [
+          {
+            "id": "h10-1",
+            "speaker": "Kollegin auf dem Anrufbeantworter",
+            "textDe": "Hallo Sarah, hier ist Julia. Der Chef hat gerade angerufen. Das Meeting morgen findet nicht um 9 Uhr statt, sondern erst um 11 Uhr. Du musst den Raum 204 noch reservieren. Bitte ruf mich an, wenn du das gemacht hast."
+          },
+          {
+            "id": "h10-2",
+            "speaker": "IT-Support",
+            "textDe": "Guten Morgen. Wir haben heute ab 13 Uhr Wartungsarbeiten am Server. Bitte speichern Sie alle wichtigen Dokumente auf Ihrem lokalen Rechner. Das Intranet wird bis ca. 15 Uhr nicht verfügbar sein."
+          }
+        ],
+        "questions": [
+          {
+            "id": "hoeren-10-1-1",
+            "statementDe": "Das Meeting beginnt um 9 Uhr.",
+            "correct": false
+          },
+          {
+            "id": "hoeren-10-1-2",
+            "promptDe": "Was soll Sarah tun?",
+            "options": [
+              { "id": "a", "de": "Den Chef anrufen." },
+              { "id": "b", "de": "Einen Raum reservieren." },
+              { "id": "c", "de": "Das Meeting absagen." }
+            ],
+            "correct": "b"
+          },
+          {
+            "id": "hoeren-10-1-3",
+            "statementDe": "Die Mitarbeiter können das Intranet am Nachmittag nicht nutzen.",
+            "correct": true
+          },
+          {
+            "id": "hoeren-10-1-4",
+            "promptDe": "Was sollen die Mitarbeiter tun?",
+            "options": [
+              { "id": "a", "de": "Früher nach Hause gehen." },
+              { "id": "b", "de": "Dokumente lokal speichern." },
+              { "id": "c", "de": "Den Server reparieren." }
+            ],
+            "correct": "b"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hoeren-11",
+    "title": "نموذج Hören رقم 11 (Im Hotel)",
+    "description": "استماع — مواقف في الفندق والمطعم.",
+    "parts": [
+      {
+        "type": "match-speakers",
+        "title": "Teil 4 – نقاش في الفندق",
+        "instructionsAr": "من يقول ماذا؟ اختر الشخص المناسب.",
+        "transcripts": [
+          {
+            "id": "h11-4",
+            "speaker": "Diskussion",
+            "textDe": "Moderator: Herzlich willkommen in unserer Sendung. Heute sprechen wir über Urlaub in Deutschland. Gäste sind Herr Weber, ein Hotelbesitzer, und Frau Müller von einer Reiseagentur.\nHerr Weber: Immer mehr Deutsche machen Urlaub im eigenen Land. Das freut uns Hoteliers natürlich. Die Leute wollen nicht mehr weit fliegen.\nFrau Müller: Das stimmt teilweise. Viele buchen Kurztrips in Deutschland, aber für den großen Sommerurlaub fliegen die meisten immer noch lieber ans Mittelmeer. Dort ist das Wetter einfach sicherer.\nHerr Weber: Aber Deutschland hat so viel zu bieten! Berge, Seen, Kultur. Wir haben letztes Jahr sehr viel in unseren Wellnessbereich investiert, um auch bei schlechtem Wetter attraktiv zu sein.\nFrau Müller: Das ist ein guter Punkt. Wellness-Hotels sind sehr beliebt, besonders im Herbst und Winter."
+          }
+        ],
+        "statements": [
+          {
+            "id": "h11-s1",
+            "textDe": "Die Menschen machen den großen Sommerurlaub meistens in Südeuropa.",
+            "correctAd": "Frau Müller"
+          },
+          {
+            "id": "h11-s2",
+            "textDe": "Urlaub im eigenen Land wird immer beliebter.",
+            "correctAd": "Herr Weber"
+          },
+          {
+            "id": "h11-s3",
+            "textDe": "Hotels müssen auch bei Regen Angebote haben.",
+            "correctAd": "Herr Weber"
+          },
+          {
+            "id": "h11-s4",
+            "textDe": "Kurze Reisen innerhalb Deutschlands werden oft gebucht.",
+            "correctAd": "Frau Müller"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hoeren-12",
+    "title": "نموذج Hören رقم 12 (Reisen & Verkehr)",
+    "description": "استماع — إعلانات في محطة القطار والمطار.",
+    "parts": [
+      {
+        "type": "tf-mc",
+        "title": "Teil 1 – إعلانات محطة القطار",
+        "instructionsAr": "استمع إلى الإعلانات وأجب.",
+        "transcripts": [
+          {
+            "id": "h12-1",
+            "speaker": "Bahnhofsdurchsage 1",
+            "textDe": "Achtung an Gleis 5: Der Intercity Express 732 nach Hamburg Altona, Abfahrt ursprünglich 14:15 Uhr, hat voraussichtlich 40 Minuten Verspätung. Grund dafür ist ein technischer Defekt an der Lok. Wir bitten um Entschuldigung."
+          },
+          {
+            "id": "h12-2",
+            "speaker": "Bahnhofsdurchsage 2",
+            "textDe": "Gleiswechsel! Der Regionalexpress nach Stuttgart fährt heute ausnahmsweise von Gleis 12 und nicht von Gleis 3. Die Abfahrtszeit bleibt bei 16:30 Uhr."
+          }
+        ],
+        "questions": [
+          {
+            "id": "hoeren-12-1-1",
+            "statementDe": "Der Zug nach Hamburg fällt heute aus.",
+            "correct": false
+          },
+          {
+            "id": "hoeren-12-1-2",
+            "promptDe": "Warum ist der ICE verspätet?",
+            "options": [
+              { "id": "a", "de": "Wegen schlechtem Wetter." },
+              { "id": "b", "de": "Wegen eines technischen Problems." },
+              { "id": "c", "de": "Wegen Bauarbeiten." }
+            ],
+            "correct": "b"
+          },
+          {
+            "id": "hoeren-12-1-3",
+            "statementDe": "Der Zug nach Stuttgart fährt später ab.",
+            "correct": false
+          },
+          {
+            "id": "hoeren-12-1-4",
+            "promptDe": "Was hat sich beim Zug nach Stuttgart geändert?",
+            "options": [
+              { "id": "a", "de": "Die Uhrzeit." },
+              { "id": "b", "de": "Das Ziel." },
+              { "id": "c", "de": "Das Gleis." }
+            ],
+            "correct": "c"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hoeren-13",
+    "title": "نموذج Hören رقم 13 (Schule & Bildung)",
+    "description": "استماع — مواقف في المدرسة ودورات اللغة.",
+    "parts": [
+      {
+        "type": "tf",
+        "title": "Teil 2 – عرض تقديمي: دورة الكمبيوتر",
+        "instructionsAr": "استمع إلى العرض التقديمي وحدد ما إذا كانت الجمل صحيحة أم خاطئة.",
+        "transcripts": [
+          {
+            "id": "h13-2",
+            "speaker": "Lehrer",
+            "textDe": "Guten Abend zusammen und willkommen zum Computerkurs für Anfänger. Mein Name ist Herr Krause. Wir werden uns in den nächsten 8 Wochen jeden Dienstagabend hier treffen. Bitte bringen Sie immer Ihren eigenen Laptop mit. Wenn Sie keinen haben, können Sie für 2 Euro pro Abend einen von der Schule leihen. Nächste Woche fangen wir mit dem Thema 'Sicherheit im Internet' an. Bitte lesen Sie dazu das erste Kapitel in Ihrem Buch."
+          }
+        ],
+        "statements": [
+          {
+            "id": "h13-2-1",
+            "statementDe": "Der Kurs findet zweimal pro Woche statt.",
+            "correct": false
+          },
+          {
+            "id": "h13-2-2",
+            "statementDe": "Die Teilnehmer müssen einen eigenen Computer mitbringen oder einen mieten.",
+            "correct": true
+          },
+          {
+            "id": "h13-2-3",
+            "statementDe": "Die Computer der Schule sind kostenlos.",
+            "correct": false
+          },
+          {
+            "id": "h13-2-4",
+            "statementDe": "Das erste Thema ist das Internet.",
+            "correct": true
+          },
+          {
+            "id": "h13-2-5",
+            "statementDe": "Die Teilnehmer müssen für nächste Woche einen Text lesen.",
+            "correct": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hoeren-14",
+    "title": "نموذج Hören رقم 14 (Umwelt)",
+    "description": "استماع — مواضيع حول البيئة وإعادة التدوير.",
+    "parts": [
+      {
+        "type": "match-speakers",
+        "title": "Teil 4 – نقاش حول حظر البلاستيك",
+        "instructionsAr": "استمع للنقاش واختر من قال الجملة.",
+        "transcripts": [
+          {
+            "id": "h14-4",
+            "speaker": "Radio-Diskussion",
+            "textDe": "Moderator: Unser Thema heute: Sollten Plastiktüten im Supermarkt komplett verboten werden? Frau Schmidt vom Umweltschutzverein und Herr Bauer vom Supermarkt-Verband sind hier.\nFrau Schmidt: Ein Verbot ist der einzige Weg. Wir produzieren viel zu viel Müll. Jeder Deutsche verbraucht im Jahr über 70 Plastiktüten. Diese Tüten verschmutzen unsere Meere.\nHerr Bauer: Ein Verbot ist der falsche Weg. Wir bieten bereits Stofftaschen an. Die Kunden müssen selbst entscheiden. Wenn wir Plastiktüten verbieten, werden die Leute Papiertüten kaufen, und deren Produktion braucht sehr viel Energie.\nFrau Schmidt: Papiertüten sind auch keine Lösung, das stimmt. Die Lösung ist, dass jeder Kunde immer einen eigenen Rucksack oder eine eigene Tasche von zu Hause mitbringt."
+          }
+        ],
+        "statements": [
+          {
+            "id": "h14-s1",
+            "textDe": "Ein Verbot von Plastik ist die einzige Lösung.",
+            "correctAd": "Frau Schmidt"
+          },
+          {
+            "id": "h14-s2",
+            "textDe": "Kunden sollen frei wählen können.",
+            "correctAd": "Herr Bauer"
+          },
+          {
+            "id": "h14-s3",
+            "textDe": "Papiertüten sind schlecht für die Umwelt.",
+            "correctAd": "Herr Bauer"
+          },
+          {
+            "id": "h14-s4",
+            "textDe": "Man sollte Einkaufstaschen von zu Hause mitnehmen.",
+            "correctAd": "Frau Schmidt"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hoeren-15",
+    "title": "نموذج Hören رقم 15 (Wohnen)",
+    "description": "استماع — البحث عن شقة، إعلانات السكن.",
+    "parts": [
+      {
+        "type": "tf-mc",
+        "title": "Teil 1 – رسائل هاتفية",
+        "instructionsAr": "استمع إلى الرسائل وأجب.",
+        "transcripts": [
+          {
+            "id": "h15-1",
+            "speaker": "Vermieter",
+            "textDe": "Guten Tag Frau Lehmann, hier ist Herr Meyer, der Vermieter von der Wohnung in der Goethestraße. Sie haben sich die Wohnung gestern angesehen. Ich wollte Ihnen sagen, dass Sie die Wohnung haben können. Die Miete beträgt 800 Euro warm. Bitte rufen Sie mich an, damit wir den Mietvertrag unterschreiben können."
+          },
+          {
+            "id": "h15-2",
+            "speaker": "Nachbar",
+            "textDe": "Hallo, hier ist Stefan von nebenan. Du, wegen meiner Party am Samstag... Es wird wahrscheinlich etwas lauter. Ich hoffe, das ist okay für dich. Wenn es zu laut wird, sag mir einfach Bescheid oder komm einfach rüber und feiere mit uns!"
+          }
+        ],
+        "questions": [
+          {
+            "id": "hoeren-15-1-1",
+            "statementDe": "Frau Lehmann bekommt die Wohnung nicht.",
+            "correct": false
+          },
+          {
+            "id": "hoeren-15-1-2",
+            "promptDe": "Warum ruft Herr Meyer an?",
+            "options": [
+              { "id": "a", "de": "Um den Termin abzusagen." },
+              { "id": "b", "de": "Um sich für die Wohnung zu bewerben." },
+              { "id": "c", "de": "Um wegen des Vertrags zu sprechen." }
+            ],
+            "correct": "c"
+          },
+          {
+            "id": "hoeren-15-1-3",
+            "statementDe": "Stefan entschuldigt sich für die laute Musik von gestern.",
+            "correct": false
+          },
+          {
+            "id": "hoeren-15-1-4",
+            "promptDe": "Was schlägt Stefan dem Nachbarn vor?",
+            "options": [
+              { "id": "a", "de": "Die Polizei zu rufen." },
+              { "id": "b", "de": "Auf die Party zu kommen." },
+              { "id": "c", "de": "Ohrstöpsel zu kaufen." }
+            ],
+            "correct": "b"
+          }
+        ]
+      }
+    ]
   }
 ];
 
