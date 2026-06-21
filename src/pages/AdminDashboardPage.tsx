@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 
 const API_BASE = 'https://www.b1-syrer.de'
 
@@ -99,6 +100,17 @@ export default function AdminDashboardPage() {
   const [loginError, setLoginError] = useState('')
   const [isLoggingIn, setIsLoggingIn] = useState(false)
   const [activeTab, setActiveTab] = useState<AdminTab>('stats')
+
+  // Mock data for Growth Chart
+  const mockUserGrowth = [
+    { name: 'قبل 6 أيام', users: 120 },
+    { name: 'قبل 5 أيام', users: 180 },
+    { name: 'قبل 4 أيام', users: 250 },
+    { name: 'قبل 3 أيام', users: 390 },
+    { name: 'قبل يومين', users: 510 },
+    { name: 'أمس', users: 680 },
+    { name: 'اليوم', users: 850 },
+  ]
 
   // Settings config states
   const [config, setConfig] = useState({
@@ -669,6 +681,31 @@ export default function AdminDashboardPage() {
               <StatCard label="📅 تحميلات APK اليوم" value={String(downloadStats?.today || 0)} />
             </div>
             {downloadError && <p className="text-red-500 text-xs mt-2">{downloadError}</p>}
+
+            {/* 📈 GROWTH CHART */}
+            <div className="glass p-6 rounded-2xl border border-[#00b894]/30 bg-gradient-to-br from-[#00b894]/5 to-transparent shadow-lg">
+              <h3 className="font-black text-lg mb-6 text-[#00b894] flex items-center gap-2"><span>📈</span> منحنى النمو والتفاعل (آخر 7 أيام)</h3>
+              <div className="h-72 w-full" dir="ltr">
+                <ResponsiveContainer width="100%" height="100%">
+                  <AreaChart data={downloadStats?.by_day || mockUserGrowth} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <defs>
+                      <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#00b894" stopOpacity={0.4}/>
+                        <stop offset="95%" stopColor="#00b894" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(148, 163, 184, 0.1)" />
+                    <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} dy={10} />
+                    <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
+                    <Tooltip 
+                      contentStyle={{ backgroundColor: 'rgba(30, 41, 59, 0.9)', backdropFilter: 'blur(10px)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', fontWeight: 'bold' }} 
+                      itemStyle={{ color: '#00b894' }}
+                    />
+                    <Area type="monotone" dataKey="users" name="تفاعل المستخدمين" stroke="#00b894" strokeWidth={4} fillOpacity={1} fill="url(#colorUsers)" />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
 
             {usersStats && (
               <div className="glass p-6 rounded-2xl border border-blue-200 dark:border-blue-900/30">

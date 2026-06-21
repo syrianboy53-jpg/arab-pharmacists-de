@@ -61,6 +61,7 @@ const PrintPage = lazy(() => import('./pages/PrintPage'))
 const WordWebPage = lazy(() => import('./pages/WordWebPage'))
 const TopicsPage = lazy(() => import('./pages/TopicsPage'))
 const TipsPage = lazy(() => import('./pages/TipsPage'))
+const ProfilePage = lazy(() => import('./pages/ProfilePage'))
 
 function Loading() {
   return (
@@ -138,6 +139,7 @@ export default function App() {
           {/* Misc */}
           <Route path="/slang" element={<SlangPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/admin/*" element={<AdminDashboardPage />} />
         </Routes>
       </Suspense>

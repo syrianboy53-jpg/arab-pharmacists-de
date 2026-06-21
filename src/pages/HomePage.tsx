@@ -173,9 +173,11 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* XP Bar */}
-            <div className="bg-gray-50 dark:bg-[#1a1a2e] p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-inner">
-              <div className="flex justify-between items-end mb-3">
+            {/* Interactive XP & Profile Bar */}
+            <Link to="/profile" className="block bg-gray-50 dark:bg-[#1a1a2e] p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-inner hover:shadow-lg transition-all group relative overflow-hidden cursor-pointer hover:-translate-y-1">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] dark:via-white/5"></div>
+              
+              <div className="flex justify-between items-end mb-3 relative z-10">
                 <div className="flex gap-6">
                   <div className="font-black text-[#00b894] text-3xl flex items-center gap-2">
                     <span className="text-xl">🌟</span> {xp} <span className="text-sm text-gray-500 uppercase tracking-widest">XP</span>
@@ -184,11 +186,12 @@ export default function HomePage() {
                     <span className="text-xl">🔥</span> {streak}
                   </div>
                 </div>
-                <div className="text-sm font-bold text-gray-500">
-                  {nextLevelXP === Infinity ? 'الحد الأقصى' : `${nextLevelXP} للترقية`}
+                <div className="text-sm font-black text-[#0984e3] flex items-center gap-1 group-hover:translate-x-2 transition-transform duration-300">
+                  ملفي وغرفة الجوائز <span>←</span>
                 </div>
               </div>
-              <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+              
+              <div className="h-4 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden relative z-10">
                 <motion.div 
                   initial={{ width: 0 }}
                   animate={{ width: `${Math.min(xpProgress, 100)}%` }}
@@ -196,7 +199,7 @@ export default function HomePage() {
                   className="h-full bg-gradient-to-r from-[#00b894] to-[#55efc4] rounded-full shadow-[0_0_10px_rgba(0,184,148,0.5)]"
                 ></motion.div>
               </div>
-            </div>
+            </Link>
           </div>
         </motion.div>
 
