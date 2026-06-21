@@ -19,7 +19,6 @@ export default function FlashcardsPage() {
 
   // Motion values for swipe
   const x = useMotionValue(0)
-  const opacity = useTransform(x, [-150, 0, 150], [0, 1, 0])
   const rotateZ = useTransform(x, [-150, 150], [-15, 15])
   const backgroundColor = useTransform(
     x,

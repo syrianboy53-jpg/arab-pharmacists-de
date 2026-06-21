@@ -2,7 +2,16 @@ import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { useXP } from '../hooks/useXP'
 
-const mockUsers = [
+interface LeaderboardUser {
+  id: string;
+  name: string;
+  xp: number;
+  streak: number;
+  avatar: string;
+  isCurrentUser?: boolean;
+}
+
+const mockUsers: LeaderboardUser[] = [
   { id: 'u1', name: 'أحمد م.', xp: 4520, streak: 23, avatar: '👨🏻‍🎓' },
   { id: 'u2', name: 'سارة ع.', xp: 3890, streak: 18, avatar: '👩🏻‍🎓' },
   { id: 'u3', name: 'محمد ح.', xp: 3450, streak: 15, avatar: '👨🏽‍💻' },
