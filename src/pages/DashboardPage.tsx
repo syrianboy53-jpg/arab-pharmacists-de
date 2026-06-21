@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
+import ProfileSettings from '../components/ProfileSettings'
 
 export default function DashboardPage() {
+  const [activeTab, setActiveTab] = useState<'stats' | 'settings'>('stats')
   const [xp, setXp] = useState(0)
   const [streak, setStreak] = useState(0)
   const [level, setLevel] = useState(1)
@@ -25,9 +27,28 @@ export default function DashboardPage() {
   const weekActivity = [30, 45, 0, 60, 80, 20, 0]
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-black flex items-center gap-2">📊 لوحتي الشخصيّة</h1>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <div className="space-y-6 animate-fade-in">
+      <div className="flex items-center justify-between mb-2 border-b border-gray-100 dark:border-white/5 pb-4">
+        <h1 className="text-2xl font-black flex items-center gap-2">📊 لوحتي الشخصيّة</h1>
+        <div className="flex bg-gray-100 dark:bg-[#1a1a2e] p-1 rounded-xl">
+          <button 
+            onClick={() => setActiveTab('stats')}
+            className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${activeTab === 'stats' ? 'bg-white dark:bg-[#0f0f1a] shadow-sm text-[#0984e3]' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}
+          >
+            الإحصائيات
+          </button>
+          <button 
+            onClick={() => setActiveTab('settings')}
+            className={`px-4 py-2 rounded-lg text-sm font-bold transition-colors ${activeTab === 'settings' ? 'bg-white dark:bg-[#0f0f1a] shadow-sm text-[#0984e3]' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}
+          >
+            ملف المتعلم
+          </button>
+        </div>
+      </div>
+
+      {activeTab === 'stats' ? (
+        <>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-4 text-center border border-gray-100 dark:border-white/5">
           <div className="text-2xl font-black text-[#00b894]">{xp}</div>
           <div className="text-[10px] text-gray-400">⚡ نقاط XP</div>
@@ -63,6 +84,10 @@ export default function DashboardPage() {
           ))}
         </div>
       </div>
+        </>
+      ) : (
+        <ProfileSettings />
+      )}
     </div>
   )
 }

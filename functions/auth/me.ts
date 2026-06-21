@@ -10,7 +10,14 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
   }
 
   try {
-    const res = await query(env, 'SELECT id, email, display_name, created_at FROM "user" WHERE id = $1', [userId])
+    // Ensure column exists
+    try {
+      await query(env, `ALTER TABLE "user" ADD COLUMN IF NOT EXISTS contact_info TEXT;`)
+    } catch (e) {
+      // ignore
+    }
+
+    const res = await query(env, 'SELECT id, email, display_name, created_at, contact_info FROM "user" WHERE id = $1', [userId])
     if (!res.rows || res.rows.length === 0) {
       return new Response(JSON.stringify({ error: 'User not found' }), { status: 404 })
     }
@@ -20,7 +27,8 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       id: user.id,
       email: user.email,
       display_name: user.display_name,
-      created_at: user.created_at
+      created_at: user.created_at,
+      contact_info: user.contact_info || ''
     }), { headers: { 'Content-Type': 'application/json' } })
   } catch (e: any) {
     return new Response(JSON.stringify({ error: e.message }), { status: 500 })
