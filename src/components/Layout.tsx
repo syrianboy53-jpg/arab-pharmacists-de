@@ -221,6 +221,43 @@ export default function Layout({ children }: { children: ReactNode }) {
               >
                 {darkMode ? <Sun size={16} className="text-yellow-400" /> : <Moon size={16} className="text-gray-500" />}
               </button>
+
+              {/* Auth Button */}
+              {(() => {
+                const user = (() => {
+                  try {
+                    return JSON.parse(localStorage.getItem('b1-current-user') || 'null')
+                  } catch { return null }
+                })();
+
+                if (user) {
+                  return (
+                    <div className="flex items-center gap-2 pr-2 border-r border-gray-200 dark:border-white/10">
+                      <Link to="/profile" className="text-xs font-bold text-gray-700 dark:text-gray-300 hover:text-[#00b894] transition-colors truncate max-w-[80px]" title={user.name}>
+                        👤 {user.name.split(' ')[0]}
+                      </Link>
+                      <button 
+                        onClick={() => {
+                          localStorage.removeItem('b1-current-user')
+                          window.location.reload()
+                        }}
+                        className="text-[10px] bg-red-50 text-red-500 px-2 py-1 rounded-lg hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/40 transition-colors"
+                      >
+                        خروج
+                      </button>
+                    </div>
+                  )
+                }
+
+                return (
+                  <Link 
+                    to="/register" 
+                    className="hidden sm:flex items-center gap-1 bg-[#0984e3] hover:bg-[#0874c3] text-white px-3 py-1.5 rounded-xl text-xs font-bold transition-all shadow-md mr-1"
+                  >
+                    🚀 تسجيل مجاني
+                  </Link>
+                )
+              })()}
             </div>
           </div>
         </header>

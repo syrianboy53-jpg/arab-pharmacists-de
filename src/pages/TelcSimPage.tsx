@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useXP } from '../hooks/useXP'
+import { lesenModels } from '../data/lesen'
+import { hoerenModels } from '../data/hoeren'
+import { schreibenModels } from '../data/schreiben'
 
 type ExamStage = 'intro' | 'lesen' | 'hoeren' | 'schreiben' | 'sprechen' | 'result'
 
@@ -17,6 +20,16 @@ export default function TelcSimPage() {
   const [timeLeft, setTimeLeft] = useState(0)
   const [isRunning, setIsRunning] = useState(false)
   
+  // Data selection
+  const currentLesenModel = lesenModels[0]
+  const currentHoerenModel = hoerenModels[0]
+  const currentSchreibenTask = schreibenModels[0].tasks[0]
+
+  // Answers State
+  const [lesenAnswers, setLesenAnswers] = useState<Record<string, string>>({})
+  const [hoerenAnswers, setHoerenAnswers] = useState<Record<string, string | boolean>>({})
+  const [schreibenText, setSchreibenText] = useState('')
+
   // Timer Logic
   useEffect(() => {
     if (!isRunning || timeLeft <= 0) {
@@ -39,10 +52,12 @@ export default function TelcSimPage() {
     setStage(newStage)
     setTimeLeft(EXAM_DURATIONS[newStage])
     setIsRunning(true)
+    window.scrollTo(0, 0)
   }
 
   const finishCurrentStage = () => {
     setIsRunning(false)
+    window.scrollTo(0, 0)
     
     if (stage === 'lesen') startStage('hoeren')
     else if (stage === 'hoeren') startStage('schreiben')
@@ -70,6 +85,25 @@ export default function TelcSimPage() {
     return () => window.removeEventListener('beforeunload', handleBeforeUnload)
   }, [stage])
 
+  // Calculation for result
+  let totalLesenQuestions = 0
+  let correctLesen = 0
+  if (stage === 'result') {
+    currentLesenModel.parts.forEach((part: any) => {
+      if (part.type === 'match-blog' && part.statements) {
+        part.statements.forEach((st: any) => {
+          totalLesenQuestions++
+          if (lesenAnswers[st.id] === st.correctAd) correctLesen++
+        })
+      } else if (part.type === 'mc-article' && part.questions) {
+        part.questions.forEach((q: any) => {
+          totalLesenQuestions++
+          if (lesenAnswers[q.id] === q.correctOptionId) correctLesen++
+        })
+      }
+    })
+  }
+
   return (
     <div className="space-y-8 max-w-5xl mx-auto pb-10">
       
@@ -95,13 +129,13 @@ export default function TelcSimPage() {
             
             <button 
               onClick={() => {
-                if(window.confirm('هل أنت متأكد أنك تريد إنهاء هذا القسم قبل انتهاء الوقت؟')) {
+                if(window.confirm('هل أنت متأكد أنك تريد تسليم هذا القسم قبل انتهاء الوقت؟')) {
                   finishCurrentStage()
                 }
               }}
               className="px-4 py-2 bg-red-100 text-red-600 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-400 dark:hover:bg-red-900/50 rounded-xl text-sm font-bold transition-colors"
             >
-              تسليم القسم
+              تسليم القسم للانتقال
             </button>
           </motion.div>
         )}
@@ -153,7 +187,7 @@ export default function TelcSimPage() {
 
               <div className="bg-amber-50 dark:bg-amber-900/20 p-4 rounded-xl border border-amber-200 dark:border-amber-800/30">
                 <p className="text-sm font-bold text-amber-700 dark:text-amber-400">
-                  ⚠️ تنبيه: تأكد من جلوسك في مكان هادئ وتخصيص 3 ساعات تقريباً. إغلاق الصفحة سيؤدي لفقدان تقدمك.
+                  ⚠️ تنبيه: تأكد من جلوسك في مكان هادئ وتخصيص ساعتين و 45 دقيقة تقريباً. إغلاق الصفحة سيؤدي لفقدان تقدمك.
                 </p>
               </div>
 
@@ -171,22 +205,91 @@ export default function TelcSimPage() {
             <motion.div key="lesen" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
               <div className="border-b border-gray-200 dark:border-white/10 pb-4">
                 <h2 className="text-3xl font-black text-gray-900 dark:text-white flex items-center gap-3">
-                  <span className="text-4xl">📖</span> القسم الأول: القراءة واللغة
+                  <span className="text-4xl">📖</span> القسم الأول: القراءة (Leseverstehen)
                 </h2>
+                <p className="text-gray-500 mt-2">Teil 1 & Teil 2 - {currentLesenModel.title}</p>
               </div>
-              <div className="prose dark:prose-invert max-w-none">
-                <h3>التعليمات (Hinweise):</h3>
-                <p>لديك 90 دقيقة لحل جزئي القراءة (Leseverstehen) والهياكل اللغوية (Sprachbausteine).</p>
-                <ul>
-                  <li>Teil 1: Globalverstehen (5 Punkte)</li>
-                  <li>Teil 2: Detailverstehen (25 Punkte)</li>
-                  <li>Teil 3: Selektives Lesen (10 Punkte)</li>
-                  <li>Teil 4: Sprachbausteine (30 Punkte)</li>
-                </ul>
-                <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-2xl mt-8 text-center border border-blue-200 dark:border-blue-800/30">
-                  <p className="font-bold text-blue-800 dark:text-blue-300 mb-4">في هذه المحاكاة، قم بحل النماذج الورقية المتوفرة لديك أو استخدم نماذج القراءة في التطبيق.</p>
-                  <p className="text-sm text-blue-600 dark:text-blue-400">عندما تنتهي من حله على الورق، اضغط على "تسليم القسم" في الأعلى للانتقال للقسم التالي.</p>
-                </div>
+              
+              <div className="space-y-10">
+                {currentLesenModel.parts.slice(0, 2).map((part: any, pIndex: number) => (
+                  <div key={pIndex} className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-200 dark:border-white/10">
+                    <h3 className="text-xl font-black mb-2">{part.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-6 font-bold">{part.instructionsAr}</p>
+                    
+                    {part.type === 'match-blog' && part.texts && (
+                      <div className="grid md:grid-cols-2 gap-8">
+                        <div className="space-y-4">
+                          <h4 className="font-bold border-b pb-2">Texte:</h4>
+                          {part.texts.map((t: any) => (
+                            <div key={t.id} className="p-3 bg-white dark:bg-black/20 rounded-xl border border-gray-100 dark:border-white/5">
+                              <span className="font-black text-blue-600 mr-2">{t.id}. {t.titleDe}</span>
+                              <span className="text-sm" dir="ltr">{t.textDe}</span>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="space-y-4">
+                          <h4 className="font-bold border-b pb-2">Fragen (اختر الشخص المناسب):</h4>
+                          {part.statements?.map((q: any) => (
+                            <div key={q.id} className="p-3 bg-white dark:bg-black/20 rounded-xl border border-gray-100 dark:border-white/5 space-y-3">
+                              <p className="font-bold text-sm" dir="ltr">{q.textDe}</p>
+                              <div className="flex gap-2 flex-wrap" dir="ltr">
+                                {part.texts.map((t: any) => (
+                                  <label key={t.id} className="flex items-center gap-1 cursor-pointer">
+                                    <input 
+                                      type="radio" 
+                                      name={q.id} 
+                                      value={t.id}
+                                      checked={lesenAnswers[q.id] === t.id}
+                                      onChange={() => setLesenAnswers(prev => ({...prev, [q.id]: t.id}))}
+                                      className="w-4 h-4 text-blue-600"
+                                    />
+                                    <span className="font-bold">{t.id}</span>
+                                  </label>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {part.type === 'mc-article' && part.textDe && (
+                      <div className="space-y-6">
+                        <div className="bg-white dark:bg-black/20 p-5 rounded-xl border border-gray-100 dark:border-white/5 whitespace-pre-wrap text-lg leading-relaxed" dir="ltr">
+                          {part.textDe}
+                        </div>
+                        <div className="space-y-4">
+                          {part.questions?.map((q: any) => (
+                            <div key={q.id} className="p-4 bg-white dark:bg-black/20 rounded-xl border border-gray-100 dark:border-white/5 space-y-3">
+                              <p className="font-bold text-lg" dir="ltr">{q.promptDe}</p>
+                              <div className="space-y-2" dir="ltr">
+                                {q.options?.map((opt: any) => (
+                                  <label key={opt.id} className="flex items-center gap-3 cursor-pointer p-2 hover:bg-gray-50 dark:hover:bg-white/5 rounded-lg border border-transparent hover:border-gray-200 dark:hover:border-white/10 transition-colors">
+                                    <input 
+                                      type="radio" 
+                                      name={q.id} 
+                                      value={opt.id}
+                                      checked={lesenAnswers[q.id] === opt.id}
+                                      onChange={() => setLesenAnswers(prev => ({...prev, [q.id]: opt.id}))}
+                                      className="w-5 h-5 text-blue-600"
+                                    />
+                                    <span>{opt.id}) {opt.de}</span>
+                                  </label>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              
+              <div className="text-center mt-8">
+                <button onClick={finishCurrentStage} className="px-8 py-3 bg-[#00b894] hover:bg-[#00a884] text-white rounded-xl font-bold transition-colors">
+                  إنهاء قسم القراءة والانتقال للاستماع
+                </button>
               </div>
             </motion.div>
           )}
@@ -196,19 +299,64 @@ export default function TelcSimPage() {
             <motion.div key="hoeren" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
               <div className="border-b border-gray-200 dark:border-white/10 pb-4">
                 <h2 className="text-3xl font-black text-gray-900 dark:text-white flex items-center gap-3">
-                  <span className="text-4xl">🎧</span> القسم الثاني: الاستماع
+                  <span className="text-4xl">🎧</span> القسم الثاني: الاستماع (Hörverstehen)
                 </h2>
+                <p className="text-gray-500 mt-2">التسجيلات غير متوفرة حالياً، يمكنك قراءة النصوص (Transcripts) وحل الأسئلة كتدريب.</p>
               </div>
-              <div className="prose dark:prose-invert max-w-none">
-                <h3>التعليمات (Hinweise):</h3>
-                <p>لديك 30 دقيقة تقريباً لإنهاء هذا القسم.</p>
-                <div className="bg-gray-100 dark:bg-white/5 p-6 rounded-2xl my-6 flex flex-col items-center justify-center border border-gray-200 dark:border-white/10">
-                  <div className="w-16 h-16 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-2xl shadow-md mb-4 cursor-pointer hover:scale-110 transition-transform">
-                    ▶️
+              
+              <div className="space-y-10">
+                {currentHoerenModel.parts.slice(0, 1).map((part: any, pIndex: number) => (
+                  <div key={pIndex} className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-200 dark:border-white/10">
+                    <h3 className="text-xl font-black mb-2">{part.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-6 font-bold">{part.instructionsAr}</p>
+                    
+                    <div className="space-y-6">
+                      {part.transcripts?.map((tr: any) => (
+                        <div key={tr.id} className="p-4 bg-white dark:bg-black/20 rounded-xl border border-gray-200 dark:border-white/5">
+                          <p className="text-sm text-blue-600 font-bold mb-2">النص الصوتي: {tr.speaker}</p>
+                          <p className="italic text-gray-600 dark:text-gray-300 mb-4" dir="ltr">"{tr.textDe}"</p>
+                          
+                          <div className="space-y-4">
+                            {part.statements?.filter((st: any) => st.transcriptId === tr.id).map((st: any) => (
+                              <div key={st.id} className="bg-gray-50 dark:bg-black/40 p-3 rounded-lg">
+                                <p className="font-bold text-sm mb-2" dir="ltr">{st.textDe} (Richtig / Falsch?)</p>
+                                <div className="flex gap-4" dir="ltr">
+                                  <label className="flex items-center gap-1 cursor-pointer">
+                                    <input type="radio" name={st.id} checked={hoerenAnswers[st.id] === true} onChange={() => setHoerenAnswers(prev => ({...prev, [st.id]: true}))} />
+                                    <span>Richtig</span>
+                                  </label>
+                                  <label className="flex items-center gap-1 cursor-pointer">
+                                    <input type="radio" name={st.id} checked={hoerenAnswers[st.id] === false} onChange={() => setHoerenAnswers(prev => ({...prev, [st.id]: false}))} />
+                                    <span>Falsch</span>
+                                  </label>
+                                </div>
+                              </div>
+                            ))}
+                            {part.questions?.filter((q: any) => q.transcriptId === tr.id).map((q: any) => (
+                              <div key={q.id} className="bg-gray-50 dark:bg-black/40 p-3 rounded-lg">
+                                <p className="font-bold text-sm mb-2" dir="ltr">{q.promptDe}</p>
+                                <div className="space-y-2" dir="ltr">
+                                  {q.options?.map((opt: any) => (
+                                    <label key={opt.id} className="flex items-center gap-2 cursor-pointer">
+                                      <input type="radio" name={q.id} checked={hoerenAnswers[q.id] === opt.id} onChange={() => setHoerenAnswers(prev => ({...prev, [q.id]: opt.id}))} />
+                                      <span>{opt.id}) {opt.de}</span>
+                                    </label>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <p className="text-gray-500 font-bold">ملف الصوت التجريبي للامتحان (Mock)</p>
-                </div>
-                <p>لا تتوقف عند السؤال الذي لا تعرف إجابته، استمر مع المقطع الصوتي.</p>
+                ))}
+              </div>
+
+              <div className="text-center mt-8">
+                <button onClick={finishCurrentStage} className="px-8 py-3 bg-[#00b894] hover:bg-[#00a884] text-white rounded-xl font-bold transition-colors">
+                  إنهاء قسم الاستماع والانتقال للكتابة
+                </button>
               </div>
             </motion.div>
           )}
@@ -218,21 +366,34 @@ export default function TelcSimPage() {
             <motion.div key="schreiben" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6 flex flex-col h-full">
               <div className="border-b border-gray-200 dark:border-white/10 pb-4">
                 <h2 className="text-3xl font-black text-gray-900 dark:text-white flex items-center gap-3">
-                  <span className="text-4xl">✍️</span> القسم الثالث: الكتابة
+                  <span className="text-4xl">✍️</span> القسم الثالث: الكتابة (Schriftlicher Ausdruck)
                 </h2>
               </div>
               <div className="prose dark:prose-invert max-w-none flex-shrink-0">
-                <p>لديك 30 دقيقة لكتابة رسالة (E-Mail / Brief).</p>
-                <div className="bg-gray-50 dark:bg-white/5 p-5 rounded-xl border-l-4 border-emerald-500 mb-4">
-                  <h4 className="mt-0 text-emerald-700 dark:text-emerald-400">Thema:</h4>
-                  <p className="mb-0 text-sm">Sie haben sich für einen Deutschkurs angemeldet, aber Sie sind krank geworden. Schreiben Sie eine E-Mail an die Sprachschule. (Entschuldigung, Grund, neuer Termin, Hausaufgaben).</p>
+                <p>لديك 30 دقيقة لكتابة رسالة (E-Mail / Brief) حول هذا الموضوع المتكرر في الامتحانات.</p>
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-2xl border-l-4 border-blue-500 mb-4 shadow-sm">
+                  <h4 className="mt-0 text-blue-800 dark:text-blue-300 font-black">{currentSchreibenTask.typeDe} - {currentSchreibenTask.typeAr}</h4>
+                  <p className="text-lg font-bold my-4" dir="ltr">{currentSchreibenTask.promptDe}</p>
+                  <p className="text-sm text-gray-600 mb-2 font-bold">نقاط يجب تغطيتها (Punkte):</p>
+                  <ul className="list-disc list-inside space-y-1 text-gray-800 dark:text-gray-200">
+                    {currentSchreibenTask.requirements.map((req: string, i: number) => (
+                      <li key={i} dir="rtl">{req}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
               <textarea 
-                className="flex-1 w-full p-4 bg-white dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl resize-none focus:outline-none focus:border-emerald-500 text-gray-900 dark:text-white min-h-[200px]"
+                className="flex-1 w-full p-5 bg-white dark:bg-black/20 border-2 border-gray-200 dark:border-white/10 rounded-2xl resize-y focus:outline-none focus:border-blue-500 text-gray-900 dark:text-white min-h-[300px] text-lg leading-relaxed shadow-inner"
                 placeholder="Schreiben Sie Ihre E-Mail hier..."
                 dir="ltr"
+                value={schreibenText}
+                onChange={e => setSchreibenText(e.target.value)}
               ></textarea>
+              <div className="text-center mt-4">
+                <button onClick={finishCurrentStage} className="px-8 py-3 bg-[#00b894] hover:bg-[#00a884] text-white rounded-xl font-bold transition-colors">
+                  إنهاء قسم الكتابة والانتقال للمحادثة
+                </button>
+              </div>
             </motion.div>
           )}
 
@@ -241,27 +402,33 @@ export default function TelcSimPage() {
             <motion.div key="sprechen" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
               <div className="border-b border-gray-200 dark:border-white/10 pb-4">
                 <h2 className="text-3xl font-black text-gray-900 dark:text-white flex items-center gap-3">
-                  <span className="text-4xl">🗣️</span> القسم الرابع: المحادثة
+                  <span className="text-4xl">🗣️</span> القسم الرابع: المحادثة (Mündlicher Ausdruck)
                 </h2>
+                <p className="text-gray-500 mt-2">تحدث مع نفسك أو مع شريك لمدة 15 دقيقة في هذه الأقسام.</p>
               </div>
               <div className="prose dark:prose-invert max-w-none">
-                <p>لديك 15 دقيقة مع شريكك (Partner) أو الفاحص.</p>
-                <div className="grid md:grid-cols-3 gap-4 mt-6">
-                  <div className="bg-rose-50 dark:bg-rose-900/10 p-4 rounded-xl border border-rose-200 dark:border-rose-900/30">
-                    <h4 className="text-rose-700 dark:text-rose-400 mt-0">Teil 1</h4>
-                    <p className="text-sm">Kontaktaufnahme (التعارف والتحدث عن النفس وموضوع مشترك).</p>
+                <div className="grid gap-6 mt-6">
+                  <div className="bg-rose-50 dark:bg-rose-900/10 p-5 rounded-2xl border border-rose-200 dark:border-rose-900/30">
+                    <h4 className="text-rose-700 dark:text-rose-400 mt-0 font-black text-xl">Teil 1: Kontaktaufnahme</h4>
+                    <p className="font-bold">تعرف على شريكك، تحدث عن اسمك، عائلتك، لماذا تتعلم الألمانية، وكيف تقضي وقت فراغك.</p>
                   </div>
-                  <div className="bg-blue-50 dark:bg-blue-900/10 p-4 rounded-xl border border-blue-200 dark:border-blue-900/30">
-                    <h4 className="text-blue-700 dark:text-blue-400 mt-0">Teil 2</h4>
-                    <p className="text-sm">Bildbeschreibung (وصف صورة ومناقشة الموضوع الذي تطرحه).</p>
+                  <div className="bg-blue-50 dark:bg-blue-900/10 p-5 rounded-2xl border border-blue-200 dark:border-blue-900/30">
+                    <h4 className="text-blue-700 dark:text-blue-400 mt-0 font-black text-xl">Teil 2: Thema diskutieren</h4>
+                    <p className="font-bold mb-2">موضوع النقاش: "Handys für Kinder – Pro oder Contra?"</p>
+                    <p className="text-sm">عبّر عن رأيك في إعطاء الهواتف المحمولة للأطفال، واذكر تجربتك الشخصية وناقش رأي شريكك.</p>
                   </div>
-                  <div className="bg-emerald-50 dark:bg-emerald-900/10 p-4 rounded-xl border border-emerald-200 dark:border-emerald-900/30">
-                    <h4 className="text-emerald-700 dark:text-emerald-400 mt-0">Teil 3</h4>
-                    <p className="text-sm">Gemeinsam etwas planen (التخطيط لحدث أو رحلة معاً).</p>
+                  <div className="bg-emerald-50 dark:bg-emerald-900/10 p-5 rounded-2xl border border-emerald-200 dark:border-emerald-900/30">
+                    <h4 className="text-emerald-700 dark:text-emerald-400 mt-0 font-black text-xl">Teil 3: Gemeinsam etwas planen</h4>
+                    <p className="font-bold mb-2">التخطيط: صديقكم في الدورة مريض في المشفى. خططوا لزيارته.</p>
+                    <ul className="text-sm space-y-1">
+                      <li>Wann? (Tag, Uhrzeit)</li>
+                      <li>Was mitbringen? (Geschenk, Blumen)</li>
+                      <li>Wie hinkommen? (Auto, Bus)</li>
+                    </ul>
                   </div>
                 </div>
                 <div className="text-center mt-10">
-                  <button onClick={finishCurrentStage} className="px-8 py-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold">
+                  <button onClick={finishCurrentStage} className="px-10 py-4 bg-[#00b894] hover:bg-[#00a884] text-white rounded-xl font-black text-xl shadow-xl transition-transform hover:-translate-y-1">
                     إنهاء الامتحان بالكامل 🎉
                   </button>
                 </div>
@@ -275,31 +442,46 @@ export default function TelcSimPage() {
               key="result"
               initial={{ scale: 0.9, opacity: 0 }} 
               animate={{ scale: 1, opacity: 1 }} 
-              className="text-center max-w-xl mx-auto space-y-8 py-10"
+              className="text-center max-w-2xl mx-auto space-y-8 py-10"
             >
               <div className="w-32 h-32 mx-auto bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center text-6xl shadow-inner border-4 border-yellow-400">
                 🏆
               </div>
               <div>
                 <h1 className="text-4xl font-black text-gray-900 dark:text-white mb-2">امتحان بطولي!</h1>
-                <p className="text-gray-500 text-lg">لقد صمدت حتى النهاية في المحاكاة.</p>
+                <p className="text-gray-500 text-lg">لقد صمدت حتى النهاية وأكملت محاكاة امتحان Telc B1.</p>
               </div>
               
-              <div className="bg-gradient-to-r from-emerald-500 to-teal-400 p-6 rounded-2xl shadow-lg text-white">
-                <p className="text-sm font-bold opacity-80 mb-1">مكافأة الصمود</p>
-                <div className="text-5xl font-black">+500 XP</div>
-                <p className="text-sm mt-3">تمت إضافتها إلى رصيدك!</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-200 dark:border-white/10 text-center">
+                  <h3 className="font-bold mb-2">نقاط הקריאה (Lesen)</h3>
+                  <div className="text-3xl font-black text-blue-600">
+                    {correctLesen} / {totalLesenQuestions}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-2">التصحيح المبدئي للقسم 1 و 2</p>
+                </div>
+                <div className="bg-gradient-to-r from-emerald-500 to-teal-400 p-6 rounded-2xl shadow-lg text-white">
+                  <p className="text-sm font-bold opacity-80 mb-1">مكافأة الصمود والمثابرة</p>
+                  <div className="text-4xl font-black">+500 XP</div>
+                  <p className="text-sm mt-2">تمت إضافتها إلى رصيدك!</p>
+                </div>
               </div>
 
-              <p className="text-gray-600 dark:text-gray-400">
-                بما أن هذا محاكي للوقت والضغط، قم بمراجعة إجاباتك الورقية وتصحيحها من نماذج الحلول المرفقة في قسم الأساسيات.
-              </p>
+              {schreibenText && (
+                <div className="text-right bg-white dark:bg-black/20 p-6 rounded-2xl border border-gray-200 dark:border-white/10">
+                  <h3 className="font-black text-lg mb-4 text-[#00b894]">رسالتك (Schreiben):</h3>
+                  <div className="bg-gray-50 dark:bg-black/40 p-4 rounded-xl text-gray-800 dark:text-gray-300 font-mono whitespace-pre-wrap text-left text-sm" dir="ltr">
+                    {schreibenText}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-4">يمكنك نسخ رسالتك وتصحيحها باستخدام أداة المصحح الذكي (AI Corrector) المتاحة في التطبيق للحصول على التقييم الدقيق.</p>
+                </div>
+              )}
 
               <button 
                 onClick={() => window.location.reload()}
-                className="px-8 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-bold hover:shadow-lg transition-all"
+                className="px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-black hover:shadow-lg transition-all"
               >
-                إعادة المحاكاة
+                العودة للصفحة الرئيسية
               </button>
             </motion.div>
           )}

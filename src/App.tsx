@@ -62,6 +62,8 @@ const WordWebPage = lazy(() => import('./pages/WordWebPage'))
 const TopicsPage = lazy(() => import('./pages/TopicsPage'))
 const TipsPage = lazy(() => import('./pages/TipsPage'))
 const ProfilePage = lazy(() => import('./pages/ProfilePage'))
+const LoginPage = lazy(() => import('./pages/LoginPage'))
+const RegisterPage = lazy(() => import('./pages/RegisterPage'))
 
 function Loading() {
   return (
@@ -140,6 +142,8 @@ export default function App() {
           <Route path="/slang" element={<SlangPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/admin/*" element={<AdminDashboardPage />} />
         </Routes>
       </Suspense>
