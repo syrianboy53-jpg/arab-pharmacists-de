@@ -1,5 +1,6 @@
-import { useState, useEffect, useMemo } from 'react'
-import { getDailyChallengeQuestions, DailyQuestion } from '../data/dailyChallenge'
+import { useState, useEffect } from 'react'
+import { getDailyChallengeQuestions } from '../data/dailyChallenge'
+import type { DailyQuestion } from '../data/dailyChallenge'
 import { useXP } from '../hooks/useXP'
 
 export default function DailyChallengePage() {
@@ -12,8 +13,7 @@ export default function DailyChallengePage() {
   const [done, setDone] = useState(false)
   const [alreadyDoneToday, setAlreadyDoneToday] = useState(false)
   
-  // Confetti effect trigger
-  const [showConfetti, setShowConfetti] = useState(false)
+  // Remove showConfetti state since we use static SVG in the done block
 
   useEffect(() => {
     // Check if challenge is already done today
@@ -47,7 +47,6 @@ export default function DailyChallengePage() {
       setAnswered(null)
     } else {
       setDone(true)
-      setShowConfetti(true)
       
       // Calculate XP
       const xpEarned = score * 20 + 50 // Base 50 + 20 per correct answer
