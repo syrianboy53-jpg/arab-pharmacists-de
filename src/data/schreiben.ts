@@ -2389,7 +2389,7 @@ export const schreibenModels = [
           { "de": "… zum nächstmöglichen Termin.", "ar": "... في أقرب موعد ممكن." },
           { "de": "Bitte bestätigen Sie die Kündigung schriftlich.", "ar": "أرجو تأكيد الإنهاء كتابياً." }
         ],
-        "sampleAnswer": "Sehr geehrte Damen und Herren,\n\nhiermit kündige ich meinen Vertrag im Fitnessstudio „FitLife" zum nächstmöglichen Termin. Meine Mitgliedsnummer lautet: FL-20258.\n\nDer Grund für die Kündigung ist, dass ich umziehe und das Studio für mich nicht mehr erreichbar ist.\n\nBitte senden Sie mir eine schriftliche Bestätigung der Kündigung.\n\nMit freundlichen Grüßen\nKhaled Mansour"
+        "sampleAnswer": "Sehr geehrte Damen und Herren,\n\nhiermit kündige ich meinen Vertrag im Fitnessstudio 'FitLife' zum nächstmöglichen Termin. Meine Mitgliedsnummer lautet: FL-20258.\n\nDer Grund für die Kündigung ist, dass ich umziehe und das Studio für mich nicht mehr erreichbar ist.\n\nBitte senden Sie mir eine schriftliche Bestätigung der Kündigung.\n\nMit freundlichen Grüßen\nKhaled Mansour"
       },
       {
         "id": "schreiben-21-2",
