@@ -10,7 +10,7 @@ export default function AdminDashboardPage() {
   const [activeTab, setActiveTab] = useState<AdminTab>('overview')
 
   // Content Generator State
-  const [genType, setGenType] = useState<'vocabulary' | 'grammar'>('vocabulary')
+  const [genType] = useState<'vocabulary' | 'grammar'>('vocabulary')
   const [vocabWord, setVocabWord] = useState('')
   const [vocabMeaning, setVocabMeaning] = useState('')
   const [vocabExample, setVocabExample] = useState('')
