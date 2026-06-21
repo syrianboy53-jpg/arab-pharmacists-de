@@ -75,8 +75,9 @@ const sections: Section[] = [
     gradient: 'from-[#0984e3] to-[#74b9ff]',
     iconBg: 'bg-[#0984e3]/10 text-[#0984e3]',
     items: [
+      { label: 'بوابة امتحان DTZ', path: '/dtz', icon: '🇩🇪', count: 'تدريب شامل', isNew: true, highlight: true },
       { label: 'محاكي Telc B1', path: '/telc-sim', icon: '⏱️', count: 'امتحان كامل بمؤقت' },
-      { label: 'المصحح الذكي', path: '/ai-corrector', icon: '🤖', count: 'تصحيح الرسائل بـ AI', isNew: true, highlight: true },
+      { label: 'المصحح الذكي', path: '/ai-corrector', icon: '🤖', count: 'تصحيح الرسائل بـ AI' },
       { label: 'امتحان (مبسّط)', path: '/exam-simulation', icon: '🎯', count: 'نسخة سريعة' },
       { label: 'تحديد المستوى', path: '/einstufung', icon: '📊', count: 'A1 → B2' },
       { label: 'محاكي المحادثة', path: '/chat-simulator', icon: '💬', count: 'حوارات تفاعليّة' },

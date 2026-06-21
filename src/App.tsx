@@ -103,17 +103,22 @@ export default function App() {
           <Route path="/reviews" element={<ReviewsPage />} />
           <Route path="/emergency" element={<EmergencyPage />} />
           <Route path="/synonyms" element={<SynonymsPage />} />
-          <Route path="/card-sort" element={<CardSortPage />} />
           <Route path="/courses" element={<CoursesPage />} />
           <Route path="/fehler" element={<FehlerPage />} />
-          <Route path="/drill" element={<DrillPage />} />
           <Route path="/b1-models" element={<B1ModelsPage />} />
           <Route path="/resources" element={<ResourcesPage />} />
-          <Route path="/srs-review" element={<SrsReviewPage />} />
           <Route path="/conjugation" element={<ConjugationPage />} />
           <Route path="/flashcards" element={<FlashcardsPage />} />
           <Route path="/pronunciation" element={<PronunciationLabPage />} />
           <Route path="/brief-corrector" element={<BriefCorrectorPage />} />
+
+          {/* Games & Drill */}
+          <Route path="/card-sort" element={<CardSortPage />} />
+          <Route path="/srs-review" element={<SrsReviewPage />} />
+          <Route path="/drill" element={<DrillPage />} />
+            
+          {/* DTZ Hub */}
+          <Route path="/dtz" element={<DTZPage />} />
 
           {/* Exam Simulation */}
           <Route path="/telc-sim" element={<TelcSimPage />} />
@@ -149,6 +154,9 @@ export default function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/admin/*" element={<AdminDashboardPage />} />
+          
+          {/* Default */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
     </Layout>
