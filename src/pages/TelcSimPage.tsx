@@ -23,7 +23,7 @@ export default function TelcSimPage() {
   // Data selection
   const currentLesenModel = lesenModels[0]
   const currentHoerenModel = hoerenModels[0]
-  const currentSchreibenTask = schreibenModels[0].tasks[0]
+  const currentSchreibenTask = schreibenModels[0].tasks![0]
 
   // Answers State
   const [lesenAnswers, setLesenAnswers] = useState<Record<string, string>>({})
