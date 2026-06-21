@@ -614,8 +614,8 @@ export default function AdminDashboardPage() {
           </div>
         </div>
         <div className="flex items-center gap-3 relative z-10">
-          <button onClick={fetchData} className="px-5 py-2.5 bg-white dark:bg-white/5 text-gray-600 dark:text-gray-300 rounded-xl font-bold hover:bg-gray-50 dark:hover:bg-white/10 transition-colors border border-gray-200 dark:border-white/10 shadow-sm flex items-center gap-2">
-            🔄 تحديث
+          <button onClick={fetchData} disabled={isUsersLoading} className="px-5 py-2.5 bg-white dark:bg-white/5 text-gray-600 dark:text-gray-300 rounded-xl font-bold hover:bg-gray-50 dark:hover:bg-white/10 transition-colors border border-gray-200 dark:border-white/10 shadow-sm flex items-center gap-2">
+            {isUsersLoading ? '⏳ جاري...' : '🔄 تحديث'}
           </button>
           <button onClick={handleLogout} className="px-5 py-2.5 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl font-bold hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors border border-red-100 dark:border-red-900/30">
             تسجيل الخروج 🚪
@@ -668,6 +668,7 @@ export default function AdminDashboardPage() {
               <StatCard label="📦 إجمالي تحميلات APK" value={String(downloadStats?.total || 0)} />
               <StatCard label="📅 تحميلات APK اليوم" value={String(downloadStats?.today || 0)} />
             </div>
+            {downloadError && <p className="text-red-500 text-xs mt-2">{downloadError}</p>}
 
             {usersStats && (
               <div className="glass p-6 rounded-2xl border border-blue-200 dark:border-blue-900/30">
@@ -731,6 +732,7 @@ export default function AdminDashboardPage() {
             </div>
 
             {usersError && <p className="text-red-500 font-bold">{usersError}</p>}
+            {isUsersLoading && <p className="text-gray-500 text-sm">⏳ جاري التحميل...</p>}
             
             <div className="overflow-x-auto glass rounded-2xl border border-gray-200 dark:border-white/10">
               <table className="w-full text-right text-sm">
@@ -788,8 +790,13 @@ export default function AdminDashboardPage() {
             {/* SUGGESTIONS */}
             <div className="glass p-6 rounded-2xl border border-[#e17055]/30 flex flex-col h-[500px]">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-black text-gray-900 dark:text-white">📬 الاقتراحات ({suggestions.length})</h2>
-                <button onClick={fetchSuggestions} className="bg-[#e17055] text-white px-3 py-1 rounded text-xs font-bold">تحديث</button>
+                <h2 className="text-xl font-black text-gray-900 dark:text-white flex items-center gap-2">
+                  📬 الاقتراحات ({suggestions.length})
+                  {unreadSuggestionsCount > 0 && <span className="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">{unreadSuggestionsCount} جديد</span>}
+                </h2>
+                <button onClick={fetchSuggestions} disabled={isSuggestionsLoading} className="bg-[#e17055] text-white px-3 py-1 rounded text-xs font-bold">
+                  {isSuggestionsLoading ? '⏳' : 'تحديث'}
+                </button>
               </div>
               <div className="flex gap-2 mb-4">
                 <button onClick={() => setSuggestionsFilter('unread')} className={`px-3 py-1 rounded text-xs font-bold ${suggestionsFilter==='unread'?'bg-[#e17055] text-white':'bg-gray-100 text-gray-600'}`}>جديد</button>
@@ -846,7 +853,9 @@ export default function AdminDashboardPage() {
                   </div>
                 </div>
               </div>
-              <button onClick={saveConfig} className="bg-[#00b894] text-white px-6 py-2.5 rounded-xl font-bold">💾 حفظ إعدادات السيرفر</button>
+              <button onClick={saveConfig} disabled={isSavingConfig} className="bg-[#00b894] text-white px-6 py-2.5 rounded-xl font-bold">
+                {isSavingConfig ? '⏳ جاري الحفظ...' : '💾 حفظ إعدادات السيرفر'}
+              </button>
               {configStatus && <span className="mx-3 text-sm font-bold">{configStatus}</span>}
             </div>
 
@@ -854,7 +863,9 @@ export default function AdminDashboardPage() {
               <h2 className="text-lg font-black mb-4">تغيير كلمة مرور الأدمن</h2>
               <input type="password" placeholder="الحالية" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} className="w-full mb-2 p-2 rounded border outline-none dark:bg-black/20" />
               <input type="password" placeholder="الجديدة" value={newPassword} onChange={e => setNewPassword(e.target.value)} className="w-full mb-4 p-2 rounded border outline-none dark:bg-black/20" />
-              <button onClick={changePassword} className="bg-gray-800 text-white px-4 py-2 rounded-xl w-full font-bold">تغيير</button>
+              <button onClick={changePassword} disabled={isChangingPassword} className="bg-gray-800 text-white px-4 py-2 rounded-xl w-full font-bold">
+                {isChangingPassword ? '⏳...' : 'تغيير'}
+              </button>
               {passwordStatus && <p className="mt-2 text-xs font-bold">{passwordStatus}</p>}
             </div>
 
