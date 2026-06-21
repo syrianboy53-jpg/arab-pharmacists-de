@@ -41,6 +41,18 @@ export default function SchreibenPage() {
   const [selectedTaskIndex, setSelectedTaskIndex] = useState<number>(0)
   const [userTextMap, setUserTextMap] = useState<Record<string, string>>({})
   const [showSample, setShowSample] = useState(false)
+  const [filterTeil, setFilterTeil] = useState<'all'|'teil1'|'teil2'|'teil3'>('all')
+
+  const filteredModels = useMemo(() => {
+    if (filterTeil === 'all') return schreibenModels;
+    return schreibenModels.filter(m => {
+      const tasks = m.tasks || (m as any).parts || [];
+      if (filterTeil === 'teil1') return tasks.some((t: any) => t.taskNumber === 1 || t.typeDe.includes('Informelle') || t.typeDe.includes('Entschuldigung'));
+      if (filterTeil === 'teil2') return tasks.some((t: any) => t.taskNumber === 2 || t.typeDe.includes('Forum'));
+      if (filterTeil === 'teil3') return tasks.some((t: any) => t.taskNumber === 3 || t.typeDe.includes('Formelle') || t.typeDe.includes('Beschwerde') || t.typeDe.includes('Anfrage'));
+      return true;
+    });
+  }, [filterTeil])
 
   // AI Correction state
   const [isAnalyzing, setIsAnalyzing] = useState(false)
@@ -140,6 +152,35 @@ export default function SchreibenPage() {
 
       {/* Model Selection Dropdown */}
       <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-xl space-y-4">
+        
+        {/* Category Filters */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          <button 
+            onClick={() => { setFilterTeil('all'); setSelectedTaskIndex(0); setSelectedModelId(schreibenModels[0].id); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${filterTeil === 'all' ? 'bg-[#00b894] text-white shadow-md' : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'}`}
+          >
+            الكل
+          </button>
+          <button 
+            onClick={() => { setFilterTeil('teil1'); setSelectedTaskIndex(0); const first = schreibenModels.find(m => (m.tasks||(m as any).parts||[]).some((t:any) => t.taskNumber === 1 || t.typeDe.includes('Informelle') || t.typeDe.includes('Entschuldigung'))); if(first) setSelectedModelId(first.id); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${filterTeil === 'teil1' ? 'bg-emerald-500 text-white shadow-md' : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'}`}
+          >
+            👋 رسالة غير رسمية (Teil 1)
+          </button>
+          <button 
+            onClick={() => { setFilterTeil('teil2'); setSelectedTaskIndex(0); const first = schreibenModels.find(m => (m.tasks||(m as any).parts||[]).some((t:any) => t.taskNumber === 2 || t.typeDe.includes('Forum'))); if(first) setSelectedModelId(first.id); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${filterTeil === 'teil2' ? 'bg-blue-500 text-white shadow-md' : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'}`}
+          >
+            💬 منتدى (Teil 2)
+          </button>
+          <button 
+            onClick={() => { setFilterTeil('teil3'); setSelectedTaskIndex(0); const first = schreibenModels.find(m => (m.tasks||(m as any).parts||[]).some((t:any) => t.taskNumber === 3 || t.typeDe.includes('Formelle') || t.typeDe.includes('Beschwerde') || t.typeDe.includes('Anfrage'))); if(first) setSelectedModelId(first.id); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${filterTeil === 'teil3' ? 'bg-red-500 text-white shadow-md' : 'bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/10'}`}
+          >
+            🏢 رسالة رسمية (Teil 3)
+          </button>
+        </div>
+
         <div className="space-y-1">
           <label className="text-xs text-gray-500 dark:text-gray-400 block">اختر نموذج الامتحان:</label>
           <select
@@ -147,7 +188,7 @@ export default function SchreibenPage() {
             onChange={(e) => handleModelChange(e.target.value)}
             className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#00b894] text-gray-900 dark:text-white"
           >
-            {schreibenModels.map(model => (
+            {filteredModels.map(model => (
               <option key={model.id} value={model.id}>
                 {model.title} - ({model.description.substring(0, 45)}...)
               </option>
