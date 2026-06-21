@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useXP } from '../hooks/useXP'
 import { getLevelTitle, getXPForLevel, getProgressToNextLevel } from '../lib/gamification'
@@ -18,6 +19,68 @@ export default function ProfilePage() {
     { id: 'xp_1000', name: '1000 نقطة', icon: '🏆', desc: 'جمعت 1000 XP' },
     { id: 'xp_5000', name: 'الأسطورة', icon: '👑', desc: 'جمعت 5000 XP' },
   ]
+
+  // User State
+  const [currentUser, setCurrentUser] = useState<any>(null)
+  
+  // Form State
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [contactInfo, setContactInfo] = useState('')
+  
+  const [isSaving, setIsSaving] = useState(false)
+  const [saveMessage, setSaveMessage] = useState({ type: '', text: '' })
+
+  useEffect(() => {
+    try {
+      const userStr = localStorage.getItem('b1-current-user')
+      if (userStr) {
+        const user = JSON.parse(userStr)
+        setCurrentUser(user)
+        setName(user.display_name || user.name || '')
+        setEmail(user.email || '')
+        setPassword(user.password || '')
+        setContactInfo(user.contactInfo || '')
+      }
+    } catch (e) {}
+  }, [])
+
+  const handleSaveProfile = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSaving(true)
+    setSaveMessage({ type: '', text: '' })
+
+    try {
+      // 1. Update LocalStorage DB
+      const updatedUser = { ...currentUser, display_name: name, email, password, contactInfo }
+      localStorage.setItem('b1-current-user', JSON.stringify(updatedUser))
+      
+      const usersStr = localStorage.getItem('b1-users-db')
+      if (usersStr) {
+        let users = JSON.parse(usersStr)
+        users = users.map((u: any) => u.email === currentUser?.email ? updatedUser : u)
+        localStorage.setItem('b1-users-db', JSON.stringify(users))
+      }
+
+      // 2. Send Email Notification via API
+      try {
+        await fetch('/api/send-profile-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, name, contactInfo })
+        })
+      } catch (err) {
+        console.warn('Failed to send email:', err)
+      }
+
+      setSaveMessage({ type: 'success', text: 'تم حفظ البيانات بنجاح، وتم إرسال رسالة تأكيد لبريدك! ✅' })
+    } catch (err) {
+      setSaveMessage({ type: 'error', text: 'حدث خطأ أثناء الحفظ.' })
+    } finally {
+      setIsSaving(false)
+    }
+  }
 
   return (
     <div className="max-w-4xl mx-auto space-y-8 pb-12">
@@ -44,8 +107,8 @@ export default function ProfilePage() {
 
           {/* معلومات المستوى */}
           <div className="flex-1 text-center md:text-right">
-            <h1 className="text-3xl font-black text-gray-900 dark:text-white mb-2">{levelTitle}</h1>
-            <p className="text-gray-500 dark:text-gray-400 font-bold mb-6">استمر في التقدم لفتح مستويات جديدة!</p>
+            <h1 className="text-3xl font-black text-gray-900 dark:text-white mb-2">{name || levelTitle}</h1>
+            <p className="text-gray-500 dark:text-gray-400 font-bold mb-6">مرحباً بك! استمر في التقدم لفتح مستويات جديدة.</p>
             
             <div className="bg-gray-50 dark:bg-black/20 p-4 rounded-2xl">
               <div className="flex justify-between items-end mb-2">
@@ -143,6 +206,84 @@ export default function ProfilePage() {
             )
           })}
         </div>
+      </motion.div>
+
+      {/* إعدادات الحساب - Account Settings */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+        className="bg-white dark:bg-[#1a1a2e] rounded-3xl p-8 shadow-xl border border-gray-100 dark:border-white/5"
+      >
+        <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-6 flex items-center gap-3">
+          <span>⚙️</span> إعدادات الحساب (Account Settings)
+        </h2>
+
+        <form onSubmit={handleSaveProfile} className="space-y-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="space-y-1">
+              <label className="text-sm font-bold text-gray-500">الاسم الشخصي</label>
+              <input 
+                type="text" 
+                value={name} 
+                onChange={e => setName(e.target.value)} 
+                placeholder="أدخل اسمك"
+                className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-[#0984e3] transition-colors text-gray-900 dark:text-white"
+              />
+            </div>
+            
+            <div className="space-y-1">
+              <label className="text-sm font-bold text-gray-500">البريد الإلكتروني</label>
+              <input 
+                type="email" 
+                value={email} 
+                onChange={e => setEmail(e.target.value)} 
+                placeholder="email@example.com"
+                className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-[#0984e3] transition-colors text-gray-900 dark:text-white text-left"
+                dir="ltr"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-sm font-bold text-gray-500">كلمة المرور الجديدة</label>
+              <input 
+                type="password" 
+                value={password} 
+                onChange={e => setPassword(e.target.value)} 
+                placeholder="********"
+                className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-[#0984e3] transition-colors text-gray-900 dark:text-white text-left"
+                dir="ltr"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-sm font-bold text-gray-500">معلومات التواصل (اختياري)</label>
+              <input 
+                type="text" 
+                value={contactInfo} 
+                onChange={e => setContactInfo(e.target.value)} 
+                placeholder="رقم الهاتف أو إنستغرام"
+                className="w-full bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-[#0984e3] transition-colors text-gray-900 dark:text-white"
+              />
+            </div>
+          </div>
+
+          {saveMessage.text && (
+            <div className={`p-4 rounded-xl font-bold text-sm ${saveMessage.type === 'success' ? 'bg-green-50 text-green-700 dark:bg-green-900/20' : 'bg-red-50 text-red-700 dark:bg-red-900/20'}`}>
+              {saveMessage.text}
+            </div>
+          )}
+
+          <div className="pt-4 flex justify-end">
+            <button 
+              type="submit" 
+              disabled={isSaving}
+              className="bg-[#0984e3] hover:bg-blue-600 text-white font-black px-8 py-3.5 rounded-xl shadow-lg shadow-blue-500/20 transition-all flex items-center gap-2 disabled:opacity-50"
+            >
+              {isSaving ? 'جاري الحفظ...' : 'حفظ التعديلات 💾'}
+            </button>
+          </div>
+        </form>
       </motion.div>
     </div>
   )
