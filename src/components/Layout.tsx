@@ -85,69 +85,88 @@ export default function Layout({ children }: { children: ReactNode }) {
     <div className={darkMode ? 'dark' : ''}>
       {/* ── Maintenance Mode Screen ── */}
       {maintenance && !isAdminPage ? (
-        <div className="min-h-screen bg-gradient-to-br from-[#0f0f1a] via-[#1a1a2e] to-[#0f0f1a] flex items-center justify-center p-6">
-          <div className="max-w-lg w-full text-center space-y-8">
-            {/* Animated Gear */}
-            <div className="relative mx-auto w-32 h-32">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#00b894] to-[#0984e3] opacity-20 animate-ping" />
-              <div className="absolute inset-4 rounded-full bg-gradient-to-br from-[#00b894] to-[#0984e3] opacity-30 animate-pulse" />
-              <div className="absolute inset-0 flex items-center justify-center text-6xl" style={{ animation: 'spin 4s linear infinite' }}>
-                ⚙️
+        <div className="min-h-screen bg-[#0f172a] relative overflow-hidden flex items-center justify-center p-6 font-cairo" dir="rtl">
+          {/* Background Ambient Lights */}
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/20 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/20 rounded-full blur-[120px] pointer-events-none" />
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="max-w-md w-full relative z-10"
+          >
+            {/* Glassmorphic Card */}
+            <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-3xl p-8 sm:p-10 shadow-2xl relative overflow-hidden">
+              
+              {/* Animated Top Border */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-blue-500 to-emerald-500 animate-gradient-x" style={{ backgroundSize: '200% 100%' }} />
+
+              {/* Icon / Avatar */}
+              <div className="flex justify-center mb-8">
+                <motion.div 
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                  className="w-24 h-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center relative"
+                >
+                  <div className="absolute inset-0 rounded-full border border-emerald-500/30 animate-ping" style={{ animationDuration: '3s' }} />
+                  <span className="text-4xl filter drop-shadow-[0_0_10px_rgba(52,211,153,0.8)]">⚙️</span>
+                </motion.div>
               </div>
-            </div>
 
-            {/* Logo */}
-            <div className="flex items-center justify-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00b894] to-[#0984e3] flex items-center justify-center text-white text-sm font-black shadow-lg">B1</div>
-              <span className="font-black text-xl text-white">B1-Syrer.de</span>
-            </div>
+              {/* Title & Message */}
+              <div className="text-center space-y-4 mb-8">
+                <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-blue-400">
+                  تحديثات وتطوير
+                </h1>
+                <p className="text-gray-300 text-[15px] leading-relaxed font-medium">
+                  {maintenanceMsg}
+                </p>
+              </div>
 
-            {/* Message */}
-            <div className="space-y-4">
-              <h1 className="text-2xl md:text-3xl font-black text-white">
-                🛠 الموقع قيد الصيانة
-              </h1>
-              <p className="text-gray-400 text-base leading-relaxed max-w-md mx-auto">
-                {maintenanceMsg}
-              </p>
-            </div>
-
-            {/* Progress bar animation */}
-            <div className="max-w-xs mx-auto">
-              <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-[#00b894] to-[#0984e3] rounded-full"
-                  style={{ animation: 'maintenance-progress 2.5s ease-in-out infinite', width: '0%' }}
+              {/* Loading Bar */}
+              <div className="bg-black/40 rounded-full h-2 mb-8 overflow-hidden relative">
+                <motion.div 
+                  initial={{ width: "0%" }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute top-0 bottom-0 left-0 bg-gradient-to-r from-emerald-400 to-blue-500 shadow-[0_0_10px_rgba(52,211,153,0.5)]"
                 />
               </div>
-              <p className="text-xs text-gray-500 mt-2">جارٍ التحديث والتطوير...</p>
-            </div>
 
-            {/* Contact */}
-            <div className="pt-4 border-t border-white/5 space-y-2">
-              <p className="text-xs text-gray-500">للتواصل أثناء الصيانة:</p>
-              <div className="flex items-center justify-center gap-4">
-                <a href="https://t.me/b1syrer" target="_blank" rel="noopener noreferrer" className="text-sm text-[#00b894] hover:text-[#00cec9] transition-colors">
-                  📱 تليغرام
-                </a>
-                <a href="mailto:shami.fadi@gmx.de" className="text-sm text-[#00b894] hover:text-[#00cec9] transition-colors">
-                  ✉️ بريد
+              {/* Contact Info */}
+              <div className="pt-6 border-t border-white/10 flex flex-col items-center gap-3">
+                <span className="text-xs font-bold text-gray-500 tracking-wider">هل تواجه مشكلة طارئة؟</span>
+                <div className="flex gap-4">
+                  <a href="https://t.me/b1syrer" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all text-sm font-bold text-gray-300 hover:text-white group">
+                    <span className="group-hover:scale-110 transition-transform">✈️</span>
+                    <span>تليغرام</span>
+                  </a>
+                  <a href="mailto:shami.fadi@gmx.de" className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all text-sm font-bold text-gray-300 hover:text-white group">
+                    <span className="group-hover:scale-110 transition-transform">📬</span>
+                    <span>بريد إلكتروني</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Secret Admin Door */}
+              <div className="absolute top-4 left-4">
+                <a href="/app/#/admin" className="opacity-10 hover:opacity-100 transition-opacity text-[10px] grayscale hover:grayscale-0">
+                  🔐
                 </a>
               </div>
             </div>
+          </motion.div>
 
-            {/* Admin access hint */}
-            <a href="/app/#/admin" className="text-[10px] text-gray-700 hover:text-gray-500 transition-colors block">
-              🔐
-            </a>
-          </div>
-
-          {/* CSS animation for progress bar */}
+          {/* CSS animation for gradient */}
           <style>{`
-            @keyframes maintenance-progress {
-              0% { width: 0%; }
-              50% { width: 80%; }
-              100% { width: 0%; }
+            @keyframes gradient-x {
+              0% { background-position: 0% 50%; }
+              50% { background-position: 100% 50%; }
+              100% { background-position: 0% 50%; }
+            }
+            .animate-gradient-x {
+              animation: gradient-x 3s ease infinite;
             }
           `}</style>
         </div>
