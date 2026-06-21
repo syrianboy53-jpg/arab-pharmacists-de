@@ -359,7 +359,7 @@ function generateGrammatikPage() {
       
       <main class="container">
         <div class="cta-container">
-          <a href="../app/#/grammatik" class="app-cta-btn">🌐 جرب اختبارات القواعد التفاعلية في التطبيق الآن</a>
+          <a href="../app/#/grammar" class="app-cta-btn">🌐 جرب اختبارات القواعد التفاعلية في التطبيق الآن</a>
         </div>
         
         <div class="content-grid">
@@ -367,7 +367,7 @@ function generateGrammatikPage() {
         </div>
         
         <div class="cta-container">
-          <a href="../app/#/grammatik" class="app-cta-btn">🎮 ابدأ حل تمارين القواعد (مثل دولينجو)</a>
+          <a href="../app/#/grammar" class="app-cta-btn">🎮 ابدأ حل تمارين القواعد (مثل دولينجو)</a>
         </div>
       </main>
       
