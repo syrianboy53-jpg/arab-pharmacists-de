@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { speakingColloquialData } from '../data/speakingColloquial'
-import { addXP } from '../lib/gamification'
+import { useXP } from '../hooks/useXP'
 
 interface MessageItem {
   id: string
@@ -19,6 +19,7 @@ function getFormattedTime() {
 }
 
 export default function ChatSimulatorPage() {
+  const { addXP } = useXP()
   const [selectedScenarioId, setSelectedScenarioId] = useState<string>(speakingColloquialData.chatScenarios[0]?.id || '')
   
   // Active scenario state
