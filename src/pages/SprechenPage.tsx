@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
+import { useXP } from '../hooks/useXP'
+import { playCorrectSound, playTadaSound, triggerConfetti } from '../utils/gamification'
 
 const sprechenParts = [
   {
@@ -99,6 +101,7 @@ A: Perfekt, so machen wir das!`,
 ]
 
 export default function SprechenPage() {
+  const { addXP } = useXP()
   const [selectedPart, setSelectedPart] = useState<number | null>(null)
   const [showSample, setShowSample] = useState(false)
   const [showPhrases, setShowPhrases] = useState(false)
@@ -176,6 +179,16 @@ export default function SprechenPage() {
     
     const finalScore = Math.min(100, Math.round((matches / sampleWords.length) * 100 * 1.2)) // 1.2 multiplier to be forgiving
     setScore(finalScore)
+
+    // Gamification hook
+    if (finalScore >= 80) {
+      playTadaSound()
+      triggerConfetti()
+      addXP(15) // +15 XP for excellent pronunciation
+    } else if (finalScore >= 50) {
+      playCorrectSound()
+      addXP(10) // +10 XP for passing
+    }
   }
 
   const part = selectedPart !== null ? sprechenParts[selectedPart] : null

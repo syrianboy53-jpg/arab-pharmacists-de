@@ -5,10 +5,12 @@ import { vocabCategories } from '../data/vocabulary'
 import { generateLesson } from '../utils/lessonGenerator'
 import type { LessonQuestion } from '../utils/lessonGenerator'
 import { playCorrectSound, playWrongSound, playTadaSound, triggerConfetti } from '../utils/gamification'
+import { useXP } from '../hooks/useXP'
 
 export default function VocabLessonPage() {
   const { catId } = useParams()
   const navigate = useNavigate()
+  const { addXP } = useXP()
   
   const [questions, setQuestions] = useState<LessonQuestion[]>([])
   const [currentIdx, setCurrentIdx] = useState(0)
@@ -111,6 +113,7 @@ export default function VocabLessonPage() {
         playTadaSound()
         triggerConfetti()
         setIsGameWon(true)
+        addXP(20) // Add 20 XP for completing a vocab lesson
         
         // Save progress to local storage
         try {

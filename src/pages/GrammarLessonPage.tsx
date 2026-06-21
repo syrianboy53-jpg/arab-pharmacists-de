@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { playCorrectSound, playWrongSound, playTadaSound, triggerConfetti } from '../utils/gamification'
+import { useXP } from '../hooks/useXP'
 import originalLessonsJson from '../data/grammarLessons.json'
 
 interface LessonTopic {
@@ -18,6 +19,7 @@ const lessons = originalLessonsJson as LessonTopic[]
 export default function GrammarLessonPage() {
   const { lessonId } = useParams()
   const navigate = useNavigate()
+  const { addXP } = useXP()
   
   const [lesson, setLesson] = useState<LessonTopic | null>(null)
   const [questions, setQuestions] = useState<any[]>([])
@@ -160,6 +162,7 @@ export default function GrammarLessonPage() {
         playTadaSound()
         triggerConfetti()
         setIsGameWon(true)
+        addXP(20) // Add 20 XP for Grammar lesson
       }
     }
   }

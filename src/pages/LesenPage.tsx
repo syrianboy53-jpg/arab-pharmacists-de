@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { lesenModels as baseModels } from '../data/lesen'
 import { lesenModelsExtra } from '../data/lesen-extra'
 
@@ -9,6 +9,10 @@ export default function LesenPage() {
   const [answers, setAnswers] = useState<Record<string, any>>({}) // maps questionId to choice
   const [showResults, setShowResults] = useState(false)
   const [showExplanations, setShowExplanations] = useState<Record<string, boolean>>({})
+  
+  // Speed Challenge State
+  const [isChallengeMode, setIsChallengeMode] = useState(false)
+  const [timeLeft, setTimeLeft] = useState<number | null>(null)
 
   const model = selectedModelIndex !== null ? lesenModels[selectedModelIndex] : null
 
@@ -58,11 +62,40 @@ export default function LesenPage() {
     }))
   }
 
+  // Timer Logic
+  useEffect(() => {
+    if (selectedModelIndex !== null && isChallengeMode && !showResults && timeLeft !== null && timeLeft > 0) {
+      const timer = setInterval(() => {
+        setTimeLeft(prev => (prev && prev > 0 ? prev - 1 : 0))
+      }, 1000)
+      return () => clearInterval(timer)
+    } else if (timeLeft === 0 && !showResults) {
+      setShowResults(true)
+    }
+  }, [selectedModelIndex, isChallengeMode, showResults, timeLeft])
+
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60)
+    const s = seconds % 60
+    return `${m}:${s < 10 ? '0' : ''}${s}`
+  }
+
+  const startModel = (index: number) => {
+    setSelectedModelIndex(index)
+    if (isChallengeMode) {
+      // Set timer to 10 minutes (600 seconds) for standard B1 reading parts
+      setTimeLeft(600)
+    } else {
+      setTimeLeft(null)
+    }
+  }
+
   const reset = () => {
     setAnswers({})
     setShowResults(false)
     setSelectedModelIndex(null)
     setShowExplanations({})
+    setTimeLeft(null)
   }
 
   if (!model) {
@@ -76,11 +109,30 @@ export default function LesenPage() {
           </div>
         </div>
 
+        {/* Challenge Mode Toggle */}
+        <div className="glass p-4 rounded-xl border border-gray-200 dark:border-white/5 flex items-center justify-between shadow-sm max-w-sm mb-6">
+          <div>
+            <h3 className="font-bold text-gray-900 dark:text-white flex items-center gap-2">
+              ⏱️ وضع التحدي 
+            </h3>
+            <p className="text-xs text-gray-500">10 دقائق للنموذج (محاكاة للامتحان)</p>
+          </div>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input 
+              type="checkbox" 
+              className="sr-only peer"
+              checked={isChallengeMode}
+              onChange={(e) => setIsChallengeMode(e.target.checked)}
+            />
+            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#00b894]/30 dark:peer-focus:ring-[#00b894]/20 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#00b894]"></div>
+          </label>
+        </div>
+
         <div className="grid md:grid-cols-2 gap-4">
           {lesenModels.map((m, i) => (
             <button
               key={m.id}
-              onClick={() => setSelectedModelIndex(i)}
+              onClick={() => startModel(i)}
               className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-[#00b894]/20 transition-all flex flex-col justify-between shadow-md cursor-pointer group"
             >
               <div>
@@ -105,11 +157,20 @@ export default function LesenPage() {
   return (
     <div className="space-y-6">
       {/* Header Navigation */}
-      <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
-        <button onClick={reset} className="text-[#00b894] font-bold text-sm hover:underline cursor-pointer">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4 sticky top-0 bg-white/90 dark:bg-[#0f0f1a]/90 backdrop-blur-md p-4 rounded-xl z-10 border border-gray-100 dark:border-white/5 shadow-sm">
+        <button onClick={reset} className="text-[#00b894] font-bold text-sm hover:underline cursor-pointer flex-shrink-0">
           → العودة للنماذج
         </button>
-        <h1 className="text-lg font-bold text-gray-900 dark:text-white">{model.title}</h1>
+        <h1 className="text-lg font-bold text-gray-900 dark:text-white flex-1 text-center truncate px-2">{model.title}</h1>
+        
+        {isChallengeMode && timeLeft !== null && !showResults && (
+          <div className={`font-black text-xl flex-shrink-0 px-4 py-1.5 rounded-lg border-2 shadow-inner ${
+            timeLeft < 60 ? 'text-red-500 border-red-500 bg-red-50 animate-pulse dark:bg-red-900/20' : 
+            'text-[#0984e3] border-[#0984e3] bg-blue-50 dark:bg-blue-900/20'
+          }`}>
+            ⏱️ {formatTime(timeLeft)}
+          </div>
+        )}
       </div>
 
       {/* Results Header */}
