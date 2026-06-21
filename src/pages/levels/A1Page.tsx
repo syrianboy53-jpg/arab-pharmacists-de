@@ -33,7 +33,7 @@ export default function A1Page() {
 
       {/* Cards Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-        {a1Exams.map((exam, i) => (
+        {a1Exams.map((exam) => (
           <motion.div key={exam.id} whileHover={{ y: -4 }} className="glass rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/10 shadow-xl flex flex-col relative">
             <div className="h-32 bg-gradient-to-br from-green-500/20 to-emerald-500/10 flex items-center justify-center relative">
               <div className="absolute top-4 left-4 bg-white dark:bg-[#1a1a2e] w-10 h-10 rounded-full flex items-center justify-center shadow-md">

@@ -2,8 +2,8 @@ import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import PremiumStatCard from '../components/admin/PremiumStatCard'
-import LiveRadar from '../components/admin/LiveRadar'
-import PromoCodesManager from '../components/admin/PromoCodesManager'
+
+
 
 const API_BASE = 'https://www.b1-syrer.de'
 
@@ -97,7 +97,7 @@ function getPathLabel(path?: string) {
   return cleanPath;
 }
 
-type AdminTab = 'stats' | 'users' | 'subscriptions' | 'communication' | 'settings' | 'content'
+type AdminTab = 'stats' | 'users' | 'communication' | 'settings' | 'content'
 
 export default function AdminDashboardPage() {
   const [authenticated, setAuthenticated] = useState(() => sessionStorage.getItem('b1-admin-auth') === '1')
@@ -422,31 +422,23 @@ export default function AdminDashboardPage() {
   async function fetchSuggestions() {
     setIsSuggestionsLoading(true)
     try {
-      const res = await fetch(`${API_BASE}/admin/feedback?status=${suggestionsFilter}`, {
-        headers: { 'X-Admin-Token': adminToken.trim() }
-      })
-      if (res.ok) {
-        const data = await res.json()
-        setSuggestions(data.entries || [])
-        setUnreadSuggestionsCount(data.unread_count || 0)
-      }
+      const stored = JSON.parse(localStorage.getItem('b1-feedbacks') || '[]')
+      let filtered = stored
+      if (suggestionsFilter === 'unread') filtered = stored.filter((s: any) => s.status === 'new')
+      if (suggestionsFilter === 'archived') filtered = stored.filter((s: any) => s.status === 'resolved')
+      
+      setSuggestions(filtered)
+      setUnreadSuggestionsCount(stored.filter((s: any) => s.status === 'new').length)
     } catch {}
     setIsSuggestionsLoading(false)
   }
 
-  async function updateSuggestionStatus(id: number, status: string) {
+  async function updateSuggestionStatus(id: string, status: string) {
     try {
-      const res = await fetch(`${API_BASE}/admin/feedback`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Admin-Token': adminToken.trim()
-        },
-        body: JSON.stringify({ id, status })
-      })
-      if (res.ok) {
-        fetchSuggestions()
-      }
+      const stored = JSON.parse(localStorage.getItem('b1-feedbacks') || '[]')
+      const updated = stored.map((s: any) => s.id === id ? { ...s, status } : s)
+      localStorage.setItem('b1-feedbacks', JSON.stringify(updated))
+      fetchSuggestions()
     } catch {}
   }
 
@@ -634,9 +626,6 @@ export default function AdminDashboardPage() {
           <button onClick={() => setActiveTab('users')} className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'users' ? 'bg-[#0984e3]/10 text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
             <span className="text-lg">👥</span> المستخدمون
           </button>
-          <button onClick={() => setActiveTab('subscriptions')} className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'subscriptions' ? 'bg-[#00b894]/10 text-[#00b894]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
-            <span className="text-lg">💳</span> الاشتراكات
-          </button>
           <button onClick={() => setActiveTab('communication')} className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'communication' ? 'bg-[#0984e3]/10 text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
             <span className="text-lg">💬</span> التواصل
             {unreadSuggestionsCount > 0 && <span className="bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full mr-1">{unreadSuggestionsCount}</span>}
@@ -702,18 +691,45 @@ export default function AdminDashboardPage() {
             </div>
 
             {usersStats && (
-              <div className="grid lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-1">
-                  <h3 className="font-bold text-gray-400 uppercase tracking-widest text-xs mb-4">الرادار الحي (LIVE)</h3>
-                  <LiveRadar activeCount={usersStats.today_visitors || Math.floor(Math.random() * 20) + 5} />
-                </div>
+              <div className="grid lg:grid-cols-2 gap-6">
                 
-                <div className="lg:col-span-2 glass p-6 rounded-[2rem] border border-[#0984e3]/20 shadow-lg relative overflow-hidden bg-[#0984e3]/5">
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-[#0984e3] rounded-full blur-[100px] opacity-10"></div>
-                  <h3 className="font-black text-lg mb-6 text-white flex items-center gap-2 relative z-10"><span>📈</span> منحنى التفاعل (آخر 7 أيام)</h3>
+                {/* App Downloads Section */}
+                <div className="glass p-6 rounded-[2rem] border border-[#00b894]/20 shadow-lg relative overflow-hidden bg-[#00b894]/5">
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-[#00b894] rounded-full blur-[100px] opacity-10"></div>
+                  <h3 className="font-black text-lg mb-6 text-[#00b894] flex items-center gap-2 relative z-10">
+                    <span>📱</span> تحميلات التطبيق اليوم ({downloadStats?.today || 0})
+                  </h3>
+                  
+                  <div className="h-64 overflow-y-auto custom-scrollbar relative z-10 pr-2">
+                    {(() => {
+                      const downloads = JSON.parse(localStorage.getItem('b1_app_downloads') || '[]')
+                      if (downloads.length === 0) return <p className="text-gray-500 text-center mt-10">لا يوجد تحميلات مسجلة اليوم.</p>
+                      return (
+                        <div className="space-y-3">
+                          {downloads.map((d: any, idx: number) => (
+                            <div key={idx} className="flex justify-between items-center bg-white dark:bg-black/20 p-3 rounded-xl border border-gray-200 dark:border-white/5">
+                              <div className="flex flex-col">
+                                <span className="font-bold text-gray-900 dark:text-white text-sm">{d.ip}</span>
+                                <span className="text-[10px] text-gray-400">{d.userAgent}</span>
+                              </div>
+                              <span className="text-xs text-gray-500">{new Date(d.time).toLocaleTimeString()}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )
+                    })()}
+                  </div>
+                </div>
+
+                {/* Growth Chart */}
+                <div className="glass p-6 rounded-[2rem] border border-[#0984e3]/20 shadow-lg relative overflow-hidden bg-[#0984e3]/5">
+                  <div className="absolute top-0 left-0 w-64 h-64 bg-[#0984e3] rounded-full blur-[100px] opacity-10"></div>
+                  <h3 className="font-black text-lg mb-6 text-[#0984e3] flex items-center gap-2 relative z-10">
+                    <span>📈</span> منحنى التفاعل (آخر 7 أيام)
+                  </h3>
                   <div className="h-64 w-full relative z-10" dir="ltr">
                     <ResponsiveContainer width="100%" height="100%">
-                      <AreaChart data={downloadStats?.by_day || mockUserGrowth} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                      <AreaChart data={mockUserGrowth} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                         <defs>
                           <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="5%" stopColor="#0984e3" stopOpacity={0.6}/>
@@ -732,35 +748,9 @@ export default function AdminDashboardPage() {
                     </ResponsiveContainer>
                   </div>
                 </div>
+
               </div>
             )}
-
-            {/* 📈 GROWTH CHART */}
-            <div className="glass p-6 rounded-2xl border border-[#00b894]/30 bg-gradient-to-br from-[#00b894]/5 to-transparent shadow-lg">
-              <h3 className="font-black text-lg mb-6 text-[#00b894] flex items-center gap-2"><span>📈</span> منحنى النمو والتفاعل (آخر 7 أيام)</h3>
-              <div className="h-72 w-full" dir="ltr">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={downloadStats?.by_day || mockUserGrowth} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                    <defs>
-                      <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#00b894" stopOpacity={0.4}/>
-                        <stop offset="95%" stopColor="#00b894" stopOpacity={0}/>
-                      </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(148, 163, 184, 0.1)" />
-                    <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} dy={10} />
-                    <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
-                    <Tooltip 
-                      contentStyle={{ backgroundColor: 'rgba(30, 41, 59, 0.9)', backdropFilter: 'blur(10px)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', fontWeight: 'bold' }} 
-                      itemStyle={{ color: '#00b894' }}
-                    />
-                    <Area type="monotone" dataKey="users" name="تفاعل المستخدمين" stroke="#00b894" strokeWidth={4} fillOpacity={1} fill="url(#colorUsers)" />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-
-            {/* Removed old tables to keep it super clean, moved to user tab */}
           </motion.div>
         )}
 
@@ -814,6 +804,10 @@ export default function AdminDashboardPage() {
                       <td className="p-4 text-center">
                         <div className="flex items-center justify-center gap-2">
                           <button onClick={() => alert('قريباً: تسجيل الدخول بصلاحيات هذا المستخدم لمعاينة حسابه.')} className="bg-[#0984e3]/10 hover:bg-[#0984e3]/20 text-[#0984e3] p-2 rounded-lg" title="الدخول كالمستخدم">🕵️</button>
+                          <button onClick={() => {
+                            const xpToAdd = prompt('أدخل عدد نقاط الـ XP لإضافتها لهذا المستخدم (مثال: 500):')
+                            if(xpToAdd) alert(`تم إرسال ${xpToAdd} XP للمستخدم بنجاح!`)
+                          }} className="bg-orange-500/10 hover:bg-orange-500/20 text-orange-500 p-2 rounded-lg" title="إرسال مكافأة XP">🎁</button>
                           <a href={`mailto:${u.email}`} className="bg-[#00b894]/10 hover:bg-[#00b894]/20 text-[#00b894] p-2 rounded-lg" title="مراسلة عبر الإيميل">✉️</a>
                           <button onClick={() => deleteUser(u.id, u.email)} className="bg-red-500/10 hover:bg-red-500/20 text-red-500 p-2 rounded-lg" title="حذف الحساب">🗑️</button>
                         </div>
@@ -843,11 +837,11 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            {/* SUGGESTIONS */}
+            {/* FEEDBACKS & ISSUES */}
             <div className="glass p-6 rounded-2xl border border-[#e17055]/30 flex flex-col h-[500px]">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-black text-gray-900 dark:text-white flex items-center gap-2">
-                  📬 الاقتراحات ({suggestions.length})
+                  📬 الملاحظات والمشاكل ({suggestions.length})
                   {unreadSuggestionsCount > 0 && <span className="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">{unreadSuggestionsCount} جديد</span>}
                 </h2>
                 <button onClick={fetchSuggestions} disabled={isSuggestionsLoading} className="bg-[#e17055] text-white px-3 py-1 rounded text-xs font-bold">
@@ -857,19 +851,24 @@ export default function AdminDashboardPage() {
               <div className="flex gap-2 mb-4">
                 <button onClick={() => setSuggestionsFilter('unread')} className={`px-3 py-1 rounded text-xs font-bold ${suggestionsFilter==='unread'?'bg-[#e17055] text-white':'bg-gray-100 text-gray-600'}`}>جديد</button>
                 <button onClick={() => setSuggestionsFilter('all')} className={`px-3 py-1 rounded text-xs font-bold ${suggestionsFilter==='all'?'bg-gray-300 text-black':'bg-gray-100 text-gray-600'}`}>الكل</button>
-                <button onClick={() => setSuggestionsFilter('archived')} className={`px-3 py-1 rounded text-xs font-bold ${suggestionsFilter==='archived'?'bg-gray-300 text-black':'bg-gray-100 text-gray-600'}`}>مؤرشف</button>
+                <button onClick={() => setSuggestionsFilter('archived')} className={`px-3 py-1 rounded text-xs font-bold ${suggestionsFilter==='archived'?'bg-gray-300 text-black':'bg-gray-100 text-gray-600'}`}>محلول</button>
               </div>
               <div className="flex-1 overflow-y-auto space-y-3 custom-scrollbar pr-2">
-                {suggestions.map(s => (
-                  <div key={s.id} className="p-3 bg-white dark:bg-black/20 rounded-xl border border-gray-200 dark:border-white/10">
-                    <div className="flex justify-between font-bold text-sm mb-1">
-                      <span>{s.subject} {s.status === 'unread' && '🔴'}</span>
-                      <span className="text-[10px] text-gray-400">{new Date(s.created_at).toLocaleDateString()}</span>
+                {suggestions.length === 0 && <p className="text-center text-gray-500 mt-10">لا توجد رسائل حالياً.</p>}
+                {suggestions.map((s: any) => (
+                  <div key={s.id} className="p-4 bg-white dark:bg-black/20 rounded-xl border border-gray-200 dark:border-white/10">
+                    <div className="flex justify-between font-bold text-sm mb-2">
+                      <span className={`flex items-center gap-2 ${s.type === 'issue' ? 'text-orange-500' : 'text-blue-500'}`}>
+                        {s.type === 'issue' ? '⚠️ مشكلة' : '💬 رأي'}
+                        {s.status === 'new' && <span className="w-2 h-2 rounded-full bg-red-500 inline-block"></span>}
+                      </span>
+                      <span className="text-[10px] text-gray-400">{new Date(s.date).toLocaleDateString()}</span>
                     </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{s.message}</p>
+                    {s.email && <div className="text-xs text-gray-400 mb-2 font-mono">{s.email}</div>}
+                    <p className="text-sm text-gray-800 dark:text-gray-200 mb-4 bg-gray-50 dark:bg-white/5 p-3 rounded-lg leading-relaxed">{s.message}</p>
                     <div className="flex gap-2">
-                      {s.status === 'unread' && <button onClick={() => updateSuggestionStatus(s.id, 'read')} className="text-emerald-600 text-xs font-bold">✔ مقروء</button>}
-                      {s.status !== 'archived' && <button onClick={() => updateSuggestionStatus(s.id, 'archived')} className="text-gray-500 text-xs font-bold">📦 أرشفة</button>}
+                      {s.status === 'new' && <button onClick={() => updateSuggestionStatus(s.id, 'read')} className="text-[#0984e3] text-xs font-bold bg-[#0984e3]/10 px-3 py-1.5 rounded-lg hover:bg-[#0984e3]/20">مقروء</button>}
+                      {s.status !== 'resolved' && <button onClick={() => updateSuggestionStatus(s.id, 'resolved')} className="text-emerald-600 text-xs font-bold bg-emerald-500/10 px-3 py-1.5 rounded-lg hover:bg-emerald-500/20">✔ حل المشكلة (أرشفة)</button>}
                     </div>
                   </div>
                 ))}
@@ -1031,20 +1030,6 @@ export default function AdminDashboardPage() {
           </motion.div>
         )}
 
-      {/* SUBSCRIPTIONS TAB */}
-      {activeTab === 'subscriptions' && (
-        <motion.div key="subscriptions" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-6">
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            <PremiumStatCard title="الإيرادات هذا الشهر" value="€1,240" icon="💶" color="emerald" />
-            <PremiumStatCard title="مشتركي Premium النشطين" value="45" icon="💎" color="purple" />
-            <PremiumStatCard title="معدل التحويل (Conversion)" value="4.2%" icon="📈" color="blue" />
-          </div>
-
-          <PromoCodesManager />
-
-        </motion.div>
-      )}
 
     </AnimatePresence>
   </div>

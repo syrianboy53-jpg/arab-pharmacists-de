@@ -31,8 +31,8 @@ export default function DTZPage() {
       </div>
 
       {/* Cards Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 px-4">
-        {dtzExams.map((exam, i) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+        {dtzExams.map((exam) => (
           <motion.div key={exam.id} whileHover={{ y: -4 }} className="glass rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/10 shadow-xl flex flex-col relative">
             <div className="h-32 bg-gradient-to-br from-[#00b894]/20 to-[#00cec9]/10 flex items-center justify-center relative">
               <div className="absolute top-4 left-4 bg-white dark:bg-[#1a1a2e] w-10 h-10 rounded-full flex items-center justify-center shadow-md">

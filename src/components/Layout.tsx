@@ -1,7 +1,8 @@
 import { Link, useLocation } from 'react-router-dom'
 import { type ReactNode, useState, useEffect } from 'react'
-import { Home, GraduationCap, Award, BookOpen, ScrollText, Mail, LayoutDashboard, Moon, Sun, ArrowRight, Zap, ChevronDown } from 'lucide-react'
+import { Home, GraduationCap, Award, BookOpen, Mail, LayoutDashboard, Moon, Sun, ArrowRight, Zap } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import FeedbackModal from './FeedbackModal'
 
 export default function Layout({ children }: { children: ReactNode }) {
   const location = useLocation()
@@ -14,7 +15,9 @@ export default function Layout({ children }: { children: ReactNode }) {
   const [xp, setXp] = useState(0)
   const [streak, setStreak] = useState(0)
   const [maintenance, setMaintenance] = useState(false)
+
   const [maintenanceMsg, setMaintenanceMsg] = useState('')
+  const [feedbackType, setFeedbackType] = useState<'issue' | 'feedback' | null>(null)
 
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode))
@@ -71,20 +74,12 @@ export default function Layout({ children }: { children: ReactNode }) {
   const isActive = (path: string) => location.pathname === path
 
   const navItems = [
-    { path: '/', label: 'Home', icon: Home },
-    { 
-      path: '/exams',
-      label: 'Exams', 
-      icon: GraduationCap,
-      children: [
-        { path: '/b1', label: 'GOETHE', icon: GraduationCap },
-        { path: '/b2-hub', label: 'TELC', icon: Award },
-        { path: '/dtz', label: 'DTZ', icon: BookOpen },
-        { path: '/c1', label: 'TestDaF', icon: ScrollText },
-      ]
-    },
-    { path: '#', label: 'Contact', icon: Mail },
-    { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { path: '/', label: 'الرئيسية', icon: Home },
+    { path: '/b1', label: 'GOETHE', icon: GraduationCap },
+    { path: '/b2-hub', label: 'TELC', icon: Award },
+    { path: '/dtz', label: 'DTZ', icon: BookOpen },
+    { path: '#', label: 'تواصل معنا', icon: Mail },
+    { path: '/dashboard', label: 'لوحة التحكم', icon: LayoutDashboard },
   ]
 
   // Allow admin page even during maintenance
@@ -209,36 +204,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
             {/* Center: Desktop Nav Links */}
             <nav className="hidden md:flex items-center gap-2">
-              {navItems.map((item, idx) => {
-                if (item.children) {
-                  return (
-                    <div key={idx} className="relative group">
-                      <button className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5 cursor-pointer">
-                        <item.icon size={15} strokeWidth={1.5} />
-                        {item.label}
-                        <ChevronDown size={14} className="group-hover:rotate-180 transition-transform" />
-                      </button>
-                      <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                        <div className="bg-white dark:bg-[#1a1a2e] rounded-xl shadow-xl border border-gray-100 dark:border-white/5 py-2 w-48 flex flex-col">
-                          {item.children.map((child) => (
-                            <Link
-                              key={child.path}
-                              to={child.path}
-                              className={`flex items-center gap-2 px-4 py-2 text-xs font-bold transition-colors ${
-                                isActive(child.path)
-                                  ? 'bg-[#00b894]/10 text-[#00b894]'
-                                  : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'
-                              }`}
-                            >
-                              <child.icon size={14} strokeWidth={isActive(child.path) ? 2.5 : 1.5} />
-                              {child.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )
-                }
+              {navItems.map((item) => {
 
                 const active = isActive(item.path!)
                 const Icon = item.icon
@@ -301,7 +267,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                         }}
                         className="text-[10px] bg-red-50 text-red-500 px-2 py-1 rounded-lg hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/40 transition-colors font-bold"
                       >
-                        Logout
+                        خروج
                       </button>
                     </div>
                   )
@@ -312,7 +278,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                     to="/register" 
                     className="hidden sm:flex items-center gap-1 bg-[#0984e3] hover:bg-[#0874c3] text-white px-3 py-1.5 rounded-xl text-xs font-bold transition-all shadow-md mr-1"
                   >
-                    🚀 Sign up Free
+                    🚀 حساب مجاني
                   </Link>
                 )
               })()}
@@ -445,6 +411,28 @@ export default function Layout({ children }: { children: ReactNode }) {
                   <li><Link to="/emergency" className="hover:text-[#00b894] transition-colors">أرقام الطوارئ والمساعدة</Link></li>
                 </ul>
               </div>
+
+              {/* Column 6: Feedback & Support */}
+              <div>
+                <h4 className="text-lg font-bold mb-4 text-[#00b894]">دعم وإبلاغ</h4>
+                <ul className="space-y-3 text-sm text-gray-400">
+                  <li>
+                    <button onClick={() => setFeedbackType('issue')} className="hover:text-white transition-colors flex items-center gap-2 group">
+                      <span className="group-hover:text-orange-400 transition-colors">⚑</span> Report an Issue
+                    </button>
+                  </li>
+                  <li>
+                    <button onClick={() => setFeedbackType('feedback')} className="hover:text-white transition-colors flex items-center gap-2 group">
+                      <span className="group-hover:text-blue-400 transition-colors">💬</span> Share Feedback
+                    </button>
+                  </li>
+                  <li className="pt-2 mt-2 border-t border-white/10">
+                    <a href="mailto:support@b1-syrer.de" className="hover:text-white transition-colors flex items-center gap-2">
+                      📧 support@b1-syrer.de
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             {/* Bottom bar */}
@@ -456,9 +444,6 @@ export default function Layout({ children }: { children: ReactNode }) {
               </div>
               
               <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-4 md:mt-0 font-medium">
-                <a href="mailto:shami.fadi@gmx.de?subject=Report%20Issue" className="flex items-center gap-1 hover:text-[#00b894] transition-colors">⚑ إبلاغ عن مشكلة (Report Issue)</a>
-                <a href="mailto:shami.fadi@gmx.de?subject=Feedback" className="flex items-center gap-1 hover:text-[#00b894] transition-colors">💬 شاركنا رأيك (Feedback)</a>
-                <span className="text-white/20 hidden sm:inline">|</span>
                 <a href="/impressum" className="hover:text-white transition-colors">Impressum</a>
                 <a href="/privacy" className="hover:text-white transition-colors">سياسة الخصوصية (Privacy Policy)</a>
                 <a href="/agb" className="hover:text-white transition-colors">شروط الخدمة (Terms of Service)</a>
@@ -469,6 +454,12 @@ export default function Layout({ children }: { children: ReactNode }) {
       </div>
       </>
       )}
+
+      <FeedbackModal 
+        isOpen={feedbackType !== null} 
+        onClose={() => setFeedbackType(null)} 
+        type={feedbackType || 'feedback'} 
+      />
     </div>
   )
 }

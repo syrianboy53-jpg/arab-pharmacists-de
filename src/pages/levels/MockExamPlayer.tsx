@@ -8,8 +8,10 @@ import { a1Exams } from '../../data/a1Data'
 import { a2Exams } from '../../data/a2Data'
 import { c1Exams } from '../../data/c1Data'
 import { dtzExams } from '../../data/dtzData'
+import { goetheB1Exams } from '../../data/goetheB1Data'
+import { telcB2Exams } from '../../data/telcB2Data'
 
-const allExams = [...a1Exams, ...a2Exams, ...c1Exams, ...dtzExams]
+const allExams = [...a1Exams, ...a2Exams, ...c1Exams, ...dtzExams, ...goetheB1Exams, ...telcB2Exams]
 
 export default function MockExamPlayer() {
   const { examId } = useParams()
