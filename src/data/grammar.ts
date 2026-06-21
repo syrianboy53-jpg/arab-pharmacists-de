@@ -2774,6 +2774,386 @@ export const grammarLessons = [
         "correct": 0
       }
     ]
+  },
+  {
+    "id": 15,
+    "title": "Konjunktiv II (würde + Infinitiv)",
+    "titleAr": "صيغة الشرط — würde + مصدر",
+    "explanation": "الـ Konjunktiv II يُستخدم للتعبير عن:\n• أمنيات (Wünsche): Ich würde gern reisen.\n• طلبات مهذبة (höfliche Bitten): Würden Sie mir helfen?\n• مواقف غير واقعية (irreale Situationen): Wenn ich reich wäre, würde ich ein Haus kaufen.\n\nالصيغة: würde + Infinitiv (في آخر الجملة)\n\nتصريف würde:\nich würde | du würdest | er/sie würde\nwir würden | ihr würdet | sie/Sie würden\n\nمتى نستخدم würde ومتى الشكل الخاص؟\n• würde + Infinitiv = لمعظم الأفعال\n• الأفعال المهمة لها شكل خاص: wäre, hätte, könnte, müsste, dürfte",
+    "examples": [
+      { "de": "Ich würde gern nach Berlin fahren.", "ar": "أرغب بالسفر إلى برلين." },
+      { "de": "Würden Sie bitte das Fenster öffnen?", "ar": "هل تتكرم بفتح النافذة؟" },
+      { "de": "An deiner Stelle würde ich zum Arzt gehen.", "ar": "لو كنت مكانك لذهبت للطبيب." },
+      { "de": "Was würdest du machen, wenn du im Lotto gewinnst?", "ar": "ماذا ستفعل لو ربحت اللوتو؟" },
+      { "de": "Wir würden uns freuen, wenn Sie kommen.", "ar": "سنسعد لو تأتون." }
+    ],
+    "exercises": [
+      { "question": "Ich ___ gern ein neues Auto kaufen.", "options": ["würde", "werde", "wurde"], "correct": 0 },
+      { "question": "___ Sie mir bitte den Weg zeigen?", "options": ["Werden", "Würden", "Wurden"], "correct": 1 },
+      { "question": "An seiner Stelle ___ ich mehr lernen.", "options": ["werde", "würde", "wurde"], "correct": 1 },
+      { "question": "Was ___ du tun, wenn du viel Geld hättest?", "options": ["wirst", "würdest", "wurdest"], "correct": 1 }
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Konjunktiv II (wäre, hätte, könnte)",
+    "titleAr": "صيغة الشرط — الأشكال الخاصة",
+    "explanation": "بعض الأفعال لها شكل Konjunktiv II خاص (بدون würde):\n\n• sein → wäre (لو كنت)\n• haben → hätte (لو عندي)\n• können → könnte (لو أستطيع)\n• müssen → müsste (لو يجب)\n• dürfen → dürfte (لو يُسمح)\n• sollen → sollte (يجب أن — نصيحة)\n• wissen → wüsste (لو أعرف)\n\nتصريف wäre:\nich wäre | du wär(e)st | er/sie wäre\nwir wären | ihr wär(e)t | sie/Sie wären\n\nتصريف hätte:\nich hätte | du hättest | er/sie hätte\nwir hätten | ihr hättet | sie/Sie hätten\n\nهذه الأشكال أهم من würde — تُستخدم دائماً بدلاً من würde sein / würde haben!",
+    "examples": [
+      { "de": "Wenn ich reich wäre, würde ich ein Haus kaufen.", "ar": "لو كنت غنياً لاشتريت بيتاً." },
+      { "de": "Hätten Sie einen Moment Zeit?", "ar": "هل عندك لحظة؟ (مهذب)" },
+      { "de": "Könntest du mir bitte helfen?", "ar": "هل بإمكانك مساعدتي؟" },
+      { "de": "Ich wäre froh, wenn du kommst.", "ar": "سأكون سعيداً لو تأتي." },
+      { "de": "Das dürfte kein Problem sein.", "ar": "هذا لن يكون مشكلة (على الأرجح)." }
+    ],
+    "exercises": [
+      { "question": "Wenn ich mehr Zeit ___, würde ich Sport machen.", "options": ["hätte", "habe", "hatte"], "correct": 0 },
+      { "question": "Ich ___ gern in Deutschland.", "options": ["bin", "wäre", "war"], "correct": 1 },
+      { "question": "___ du mir bitte das Salz geben?", "options": ["Kannst", "Könntest", "Konntest"], "correct": 1 },
+      { "question": "Wenn er hier ___, würde er sich freuen.", "options": ["ist", "war", "wäre"], "correct": 2 }
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Passiv Präsens",
+    "titleAr": "المبني للمجهول — المضارع",
+    "explanation": "المبني للمجهول (Passiv) يُستخدم عندما يكون الفعل أهم من الفاعل.\n\nالصيغة: werden + Partizip II\n\nتصريف werden في المضارع:\nich werde | du wirst | er/sie wird\nwir werden | ihr werdet | sie/Sie werden\n\nتحويل من Aktiv إلى Passiv:\n• Aktiv: Man repariert das Auto.\n• Passiv: Das Auto wird repariert.\n\n• Aktiv: Der Arzt untersucht den Patienten.\n• Passiv: Der Patient wird (vom Arzt) untersucht.\n\nالفاعل في المبني للمجهول يُضاف بـ von + Dativ:\nDas Buch wird von dem Autor geschrieben.",
+    "examples": [
+      { "de": "Die Tür wird um 8 Uhr geöffnet.", "ar": "الباب يُفتح الساعة 8." },
+      { "de": "Hier wird Deutsch gesprochen.", "ar": "هنا تُتحدَّث الألمانية." },
+      { "de": "Das Essen wird von meiner Mutter gekocht.", "ar": "الأكل يُطبخ من أمي." },
+      { "de": "Die Briefe werden jeden Tag geschickt.", "ar": "الرسائل تُرسَل كل يوم." },
+      { "de": "Das Problem wird schnell gelöst.", "ar": "المشكلة تُحَل بسرعة." }
+    ],
+    "exercises": [
+      { "question": "Das Auto ___ in der Werkstatt repariert.", "options": ["wird", "hat", "ist"], "correct": 0 },
+      { "question": "Die Kinder ___ von der Lehrerin unterrichtet.", "options": ["sind", "werden", "haben"], "correct": 1 },
+      { "question": "Hier ___ nicht geraucht.", "options": ["wird", "ist", "hat"], "correct": 0 },
+      { "question": "Die E-Mails ___ jeden Morgen gelesen.", "options": ["sind", "haben", "werden"], "correct": 2 }
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Passiv Präteritum",
+    "titleAr": "المبني للمجهول — الماضي",
+    "explanation": "المبني للمجهول في الماضي البسيط (Präteritum):\n\nالصيغة: wurde + Partizip II\n\nتصريف wurde:\nich wurde | du wurdest | er/sie wurde\nwir wurden | ihr wurdet | sie/Sie wurden\n\nأمثلة:\n• Aktiv: Man baute das Haus 1990.\n• Passiv: Das Haus wurde 1990 gebaut.\n\n• Aktiv: Die Polizei fand den Dieb.\n• Passiv: Der Dieb wurde (von der Polizei) gefunden.\n\nمقارنة الأزمنة:\n• Präsens: Das Auto wird repariert. (يُرمَّم الآن)\n• Präteritum: Das Auto wurde repariert. (رُمِّم)\n• Perfekt: Das Auto ist repariert worden. (قد رُمِّم)",
+    "examples": [
+      { "de": "Das Haus wurde 1985 gebaut.", "ar": "البيت بُني عام 1985." },
+      { "de": "Der Brief wurde gestern geschickt.", "ar": "الرسالة أُرسِلت البارحة." },
+      { "de": "Die Gäste wurden herzlich empfangen.", "ar": "الضيوف اُستقبِلوا بحرارة." },
+      { "de": "Das Spiel wurde wegen Regen abgesagt.", "ar": "المباراة أُلغيت بسبب المطر." },
+      { "de": "Ich wurde vom Chef gelobt.", "ar": "مُدحت من المدير." }
+    ],
+    "exercises": [
+      { "question": "Das Museum ___ im Jahr 2000 eröffnet.", "options": ["wurde", "wird", "worden"], "correct": 0 },
+      { "question": "Die Straße ___ letzten Monat repariert.", "options": ["wird", "wurde", "worden"], "correct": 1 },
+      { "question": "Wann ___ die E-Mail geschickt?", "options": ["wird", "wurde", "ist"], "correct": 1 },
+      { "question": "Die Kinder ___ in die Schule gebracht.", "options": ["wurden", "werden", "worden"], "correct": 0 }
+    ]
+  },
+  {
+    "id": 19,
+    "title": "Relativsätze (Nominativ & Akkusativ)",
+    "titleAr": "جمل الوصل — حالتا الرفع والنصب",
+    "explanation": "جملة الوصل (Relativsatz) تصف اسماً في الجملة الرئيسية.\n\nضمائر الوصل (Relativpronomen):\n\nNominativ (الفاعل في جملة الوصل):\n• der Mann, der ... (الرجل الذي...)\n• die Frau, die ... (المرأة التي...)\n• das Kind, das ... (الطفل الذي...)\n• die Kinder, die ... (الأطفال الذين...)\n\nAkkusativ (المفعول به في جملة الوصل):\n• der Mann, den ... (الرجل الذي...)\n• die Frau, die ... (المرأة التي...)\n• das Kind, das ... (الطفل الذي...)\n• die Kinder, die ... (الأطفال الذين...)\n\nهام: الفعل في جملة الوصل يذهب للنهاية!",
+    "examples": [
+      { "de": "Der Mann, der dort steht, ist mein Bruder.", "ar": "الرجل الذي يقف هناك هو أخي. (Nom)" },
+      { "de": "Die Frau, die ich kenne, arbeitet als Ärztin.", "ar": "المرأة التي أعرفها تعمل طبيبة. (Akk)" },
+      { "de": "Das Buch, das auf dem Tisch liegt, gehört mir.", "ar": "الكتاب الذي على الطاولة يخصّني. (Nom)" },
+      { "de": "Den Film, den wir gesehen haben, war toll.", "ar": "الفيلم الذي شاهدناه كان رائعاً. (Akk)" },
+      { "de": "Die Kinder, die im Garten spielen, sind laut.", "ar": "الأطفال الذين يلعبون في الحديقة صاخبون. (Nom)" }
+    ],
+    "exercises": [
+      { "question": "Der Lehrer, ___ Deutsch unterrichtet, ist nett.", "options": ["der (Nom)", "den (Akk)", "dem (Dat)"], "correct": 0 },
+      { "question": "Die Tasche, ___ ich gekauft habe, ist schön.", "options": ["die (Nom)", "die (Akk)", "der (Dat)"], "correct": 1 },
+      { "question": "Das Kind, ___ im Park spielt, ist meine Tochter.", "options": ["den", "das (Nom)", "dem"], "correct": 1 },
+      { "question": "Den Kuchen, ___ meine Mutter gebacken hat, mag ich.", "options": ["der", "den (Akk)", "dem"], "correct": 1 }
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Relativsätze (Dativ & mit Präposition)",
+    "titleAr": "جمل الوصل — المجرور ومع حروف الجر",
+    "explanation": "ضمائر الوصل في حالة Dativ:\n• der Mann, dem ... (الرجل الذي له...)\n• die Frau, der ... (المرأة التي لها...)\n• das Kind, dem ... (الطفل الذي له...)\n• die Leute, denen ... (الناس الذين لهم...)\n\nمع حروف الجر:\nحرف الجر يأتي قبل ضمير الوصل:\n• Der Mann, mit dem ich spreche, ... (الرجل الذي أتحدث معه)\n• Die Stadt, in der ich wohne, ... (المدينة التي أسكن فيها)\n• Das Thema, über das wir reden, ... (الموضوع الذي نتحدث عنه)\n\nتذكّر: حرف الجر يحدد الحالة (Akk أو Dat)!",
+    "examples": [
+      { "de": "Der Mann, dem ich geholfen habe, war dankbar.", "ar": "الرجل الذي ساعدته كان ممتناً. (Dat)" },
+      { "de": "Die Frau, mit der ich arbeite, ist sehr nett.", "ar": "المرأة التي أعمل معها لطيفة جداً." },
+      { "de": "Das Land, in dem ich geboren bin, ist Syrien.", "ar": "البلد الذي وُلدت فيه هو سوريا." },
+      { "de": "Die Freunde, denen ich geschrieben habe, haben geantwortet.", "ar": "الأصدقاء الذين كتبت لهم ردّوا." },
+      { "de": "Das Thema, über das wir gesprochen haben, war interessant.", "ar": "الموضوع الذي تحدثنا عنه كان مثيراً." }
+    ],
+    "exercises": [
+      { "question": "Die Kollegin, ___ ich das Buch gegeben habe, heißt Anna.", "options": ["die", "der (Dat)", "den"], "correct": 1 },
+      { "question": "Der Freund, mit ___ ich telefoniert habe, wohnt in Berlin.", "options": ["der", "dem (Dat)", "den"], "correct": 1 },
+      { "question": "Die Stadt, in ___ ich studiert habe, ist München.", "options": ["die", "der (Dat)", "dem"], "correct": 1 },
+      { "question": "Die Leute, ___ ich geholfen habe, waren freundlich.", "options": ["die", "den", "denen (Dat)"], "correct": 2 }
+    ]
+  },
+  {
+    "id": 21,
+    "title": "Infinitivsätze (zu + Infinitiv)",
+    "titleAr": "جمل المصدر — zu + فعل",
+    "explanation": "جمل المصدر تبدأ غالباً بعد أفعال أو تعبيرات معينة.\n\nالصيغة: zu + Infinitiv (في آخر الجملة)\n\nأفعال شائعة مع zu + Infinitiv:\n• anfangen (يبدأ): Ich fange an, Deutsch zu lernen.\n• aufhören (يتوقف): Er hat aufgehört zu rauchen.\n• versuchen (يحاول): Sie versucht, pünktlich zu kommen.\n• vergessen (ينسى): Vergiss nicht, die Tür zu schließen!\n• hoffen (يأمل): Wir hoffen, Sie bald zu sehen.\n• planen (يخطط): Ich plane, nach Berlin zu fahren.\n\nمع أفعال منفصلة: zu تأتي بين الجزأين:\n• anfangen → anzufangen\n• aufmachen → aufzumachen\n• einzukaufen, mitzubringen...\n\nبدون zu: مع Modalverben (können, müssen...) وأفعال الحركة والحواس.",
+    "examples": [
+      { "de": "Ich versuche, jeden Tag zu lernen.", "ar": "أحاول أن أتعلم كل يوم." },
+      { "de": "Es ist wichtig, pünktlich zu sein.", "ar": "من المهم أن تكون دقيقاً في المواعيد." },
+      { "de": "Er hat vergessen, seine Mutter anzurufen.", "ar": "نسي أن يتصل بأمه." },
+      { "de": "Wir planen, nächstes Jahr umzuziehen.", "ar": "نخطط للانتقال السنة القادمة." },
+      { "de": "Ich habe keine Lust, heute zu kochen.", "ar": "ليس عندي رغبة بالطبخ اليوم." }
+    ],
+    "exercises": [
+      { "question": "Er versucht, mehr Sport ___ treiben.", "options": ["zu", "um", "für"], "correct": 0 },
+      { "question": "Vergiss nicht, das Licht ___.", "options": ["auszumachen", "ausmachen zu", "zu ausmachen"], "correct": 0 },
+      { "question": "Es ist schwer, eine Wohnung in München ___ finden.", "options": ["für", "zu", "um"], "correct": 1 },
+      { "question": "Ich hoffe, dich bald wieder ___ sehen.", "options": ["zu", "um", "damit"], "correct": 0 }
+    ]
+  },
+  {
+    "id": 22,
+    "title": "Finalsätze (um...zu, damit)",
+    "titleAr": "جمل الغرض — من أجل أن",
+    "explanation": "للتعبير عن الهدف أو الغرض:\n\n1. um ... zu + Infinitiv (نفس الفاعل):\nIch lerne Deutsch, um in Deutschland zu arbeiten.\n(أتعلم الألمانية من أجل أن أعمل في ألمانيا.)\n\n2. damit + Nebensatz (فاعل مختلف أو نفسه):\nIch erkläre es langsam, damit du es verstehst.\n(أشرحه ببطء حتى تفهمه.)\n\nمتى نستخدم أيّهما؟\n• نفس الفاعل → um...zu أو damit\n• فاعل مختلف → فقط damit\n\nمثال بفاعل مختلف:\n❌ Ich spare Geld, um mein Sohn zu studieren.\n✅ Ich spare Geld, damit mein Sohn studieren kann.",
+    "examples": [
+      { "de": "Ich lerne Deutsch, um eine gute Arbeit zu finden.", "ar": "أتعلم الألمانية لأجد عملاً جيداً." },
+      { "de": "Er fährt mit dem Bus, um Geld zu sparen.", "ar": "يركب الباص ليوفّر المال." },
+      { "de": "Ich spreche langsam, damit du mich verstehst.", "ar": "أتكلم ببطء حتى تفهمني." },
+      { "de": "Sie arbeitet viel, damit ihre Kinder alles haben.", "ar": "تعمل كثيراً ليكون عند أولادها كل شيء." },
+      { "de": "Wir sind früh aufgestanden, um den Zug zu erreichen.", "ar": "استيقظنا باكراً لنلحق القطار." }
+    ],
+    "exercises": [
+      { "question": "Ich lerne viel, ___ die Prüfung zu bestehen.", "options": ["um", "damit", "weil"], "correct": 0 },
+      { "question": "Er erklärt es nochmal, ___ alle es verstehen.", "options": ["um", "damit", "weil"], "correct": 1 },
+      { "question": "Sie spart Geld, ___ ein Auto ___ kaufen.", "options": ["um ... zu", "damit ... zu", "weil ... zu"], "correct": 0 },
+      { "question": "Ich schreibe dir, ___ du Bescheid weißt.", "options": ["um", "damit", "um...zu"], "correct": 1 }
+    ]
+  },
+  {
+    "id": 23,
+    "title": "Kausalsätze (weil, da, denn)",
+    "titleAr": "جمل السبب — لأنّ",
+    "explanation": "للتعبير عن السبب:\n\n1. weil + Nebensatz (الفعل في النهاية):\nIch bleibe zu Hause, weil ich krank bin.\n\n2. da + Nebensatz (الفعل في النهاية):\nDa ich krank bin, bleibe ich zu Hause.\n(da = أكثر رسمية، وغالباً في بداية الجملة)\n\n3. denn + Hauptsatz (ترتيب عادي):\nIch bleibe zu Hause, denn ich bin krank.\n\nالفرق المهم:\n• weil/da = Nebensatz → الفعل آخر الجملة\n• denn = Hauptsatz → ترتيب عادي (الفعل في المكان الثاني)\n\nملاحظة:\n• deshalb/deswegen/darum = لذلك (نتيجة، ليس سبب)\nIch bin krank. Deshalb bleibe ich zu Hause.",
+    "examples": [
+      { "de": "Ich kann nicht kommen, weil ich arbeiten muss.", "ar": "لا أستطيع المجيء لأنني يجب أن أعمل." },
+      { "de": "Da es regnet, nehme ich einen Regenschirm mit.", "ar": "بما أنه يمطر، آخذ مظلة." },
+      { "de": "Er ist müde, denn er hat schlecht geschlafen.", "ar": "هو متعب، لأنه نام بشكل سيئ." },
+      { "de": "Wir bleiben zu Hause, weil das Wetter schlecht ist.", "ar": "نبقى في البيت لأن الطقس سيئ." },
+      { "de": "Ich bin glücklich, weil ich die Prüfung bestanden habe.", "ar": "أنا سعيد لأنني نجحت في الامتحان." }
+    ],
+    "exercises": [
+      { "question": "Ich gehe zum Arzt, ___ ich Kopfschmerzen habe.", "options": ["weil", "denn", "deshalb"], "correct": 0 },
+      { "question": "Er kommt nicht, ___ er ist krank.", "options": ["weil", "denn", "da"], "correct": 1 },
+      { "question": "___ es kalt ist, ziehe ich eine Jacke an.", "options": ["Weil", "Denn", "Da"], "correct": 2 },
+      { "question": "Sie hat die Prüfung bestanden. ___ ist sie glücklich.", "options": ["Weil", "Denn", "Deshalb"], "correct": 2 }
+    ]
+  },
+  {
+    "id": 24,
+    "title": "Konzessivsätze (obwohl, trotzdem)",
+    "titleAr": "جمل التناقض — بالرغم من",
+    "explanation": "للتعبير عن التناقض أو المفاجأة:\n\n1. obwohl + Nebensatz (الفعل في النهاية):\nIch gehe spazieren, obwohl es regnet.\n(أذهب للتمشّي بالرغم من أنه يمطر.)\n\n2. trotzdem + Hauptsatz (الفعل في المكان الثاني):\nEs regnet. Trotzdem gehe ich spazieren.\n(إنه يمطر. بالرغم من ذلك أذهب للتمشّي.)\n\nالفرق:\n• obwohl = رابط ثانوي → الفعل آخر الجملة\n• trotzdem = ظرف → الفعل في المكان الثاني\n\nمقارنة:\n• weil = لأنّ (سبب منطقي)\n• obwohl = بالرغم من (تناقض)\n\nIch bleibe zu Hause, weil es regnet. (منطقي ✅)\nIch gehe raus, obwohl es regnet. (غير متوقع! ⚡)",
+    "examples": [
+      { "de": "Obwohl er müde ist, geht er zur Arbeit.", "ar": "بالرغم من أنه متعب، يذهب للعمل." },
+      { "de": "Sie hat die Prüfung bestanden, obwohl sie nicht viel gelernt hat.", "ar": "نجحت في الامتحان رغم أنها لم تدرس كثيراً." },
+      { "de": "Es ist kalt. Trotzdem gehe ich ohne Jacke.", "ar": "الجو بارد. رغم ذلك أذهب بدون جاكيت." },
+      { "de": "Obwohl das Essen teuer war, hat es nicht gut geschmeckt.", "ar": "رغم أن الأكل كان غالياً، لم يكن لذيذاً." },
+      { "de": "Er hat kein Geld. Trotzdem kauft er teure Kleidung.", "ar": "ليس عنده مال. رغم ذلك يشتري ملابس غالية." }
+    ],
+    "exercises": [
+      { "question": "___ es regnet, gehe ich spazieren.", "options": ["Weil", "Obwohl", "Trotzdem"], "correct": 1 },
+      { "question": "Er ist krank. ___ geht er zur Arbeit.", "options": ["Obwohl", "Weil", "Trotzdem"], "correct": 2 },
+      { "question": "Sie lernt Deutsch, ___ es schwer ist.", "options": ["weil", "obwohl", "trotzdem"], "correct": 1 },
+      { "question": "Das Hotel war teuer. ___ war es nicht sauber.", "options": ["Obwohl", "Trotzdem", "Weil"], "correct": 1 }
+    ]
+  },
+  {
+    "id": 25,
+    "title": "Temporalsätze (als, wenn, nachdem, bevor)",
+    "titleAr": "جمل الزمن — عندما، بعد أن، قبل أن",
+    "explanation": "للتعبير عن العلاقة الزمنية بين حدثين:\n\n• als = عندما (مرة واحدة في الماضي)\nAls ich Kind war, lebte ich in Syrien.\n\n• wenn = عندما/كلما (متكرر أو مستقبل)\nWenn ich Zeit habe, lese ich ein Buch.\nImmer wenn es regnete, blieben wir zu Hause.\n\n• nachdem = بعد أن (حدث 1 قبل حدث 2)\nNachdem ich gegessen hatte, ging ich spazieren.\nملاحظة: nachdem يتطلب زمنين مختلفين!\n\n• bevor = قبل أن\nBevor ich schlafe, lese ich immer.\n\n• während = بينما (حدثان متزامنان)\nWährend ich koche, hört mein Mann Musik.\n\n• seitdem = منذ أن\nSeitdem ich in Deutschland bin, lerne ich Deutsch.",
+    "examples": [
+      { "de": "Als ich nach Deutschland kam, konnte ich kein Wort Deutsch.", "ar": "عندما أتيت لألمانيا، لم أكن أعرف كلمة ألماني." },
+      { "de": "Wenn ich müde bin, trinke ich einen Kaffee.", "ar": "عندما أكون متعباً أشرب قهوة." },
+      { "de": "Nachdem er die Prüfung bestanden hatte, feierte er.", "ar": "بعد أن نجح في الامتحان، احتفل." },
+      { "de": "Bevor du gehst, ruf mich bitte an.", "ar": "قبل أن تذهب، اتصل بي من فضلك." },
+      { "de": "Seitdem ich Sport mache, fühle ich mich besser.", "ar": "منذ أن بدأت بالرياضة، أشعر بتحسن." }
+    ],
+    "exercises": [
+      { "question": "___ ich klein war, spielte ich gern Fußball.", "options": ["Wenn", "Als", "Nachdem"], "correct": 1 },
+      { "question": "___ es regnet, nehme ich immer einen Schirm mit.", "options": ["Als", "Wenn", "Bevor"], "correct": 1 },
+      { "question": "___ ich gegessen hatte, ging ich zur Arbeit.", "options": ["Bevor", "Als", "Nachdem"], "correct": 2 },
+      { "question": "___ du das Haus verlässt, mach bitte das Licht aus.", "options": ["Nachdem", "Bevor", "Als"], "correct": 1 }
+    ]
+  },
+  {
+    "id": 26,
+    "title": "Indirekte Fragen (ob, W-Wort)",
+    "titleAr": "الأسئلة غير المباشرة",
+    "explanation": "الأسئلة غير المباشرة تبدأ بتعبير مثل:\nIch möchte wissen, ... / Können Sie mir sagen, ... / Ich frage mich, ...\n\nالقاعدة: الفعل يذهب للنهاية!\n\n1. أسئلة نعم/لا → ob:\nDirekt: Kommt er morgen?\nIndirekt: Ich weiß nicht, ob er morgen kommt.\n\n2. أسئلة بـ W-Wort → نفس الكلمة:\nDirekt: Wo wohnst du?\nIndirekt: Ich möchte wissen, wo du wohnst.\n\nDirekt: Wann fängt der Kurs an?\nIndirekt: Können Sie mir sagen, wann der Kurs anfängt?\n\nهام جداً في الامتحان! — الأسئلة غير المباشرة أكثر أدباً.",
+    "examples": [
+      { "de": "Können Sie mir sagen, wo der Bahnhof ist?", "ar": "هل يمكنك إخباري أين المحطة؟" },
+      { "de": "Ich weiß nicht, ob er heute kommt.", "ar": "لا أعرف إن كان سيأتي اليوم." },
+      { "de": "Ich möchte wissen, wann der Kurs beginnt.", "ar": "أريد أن أعرف متى يبدأ الكورس." },
+      { "de": "Weißt du, wie viel das kostet?", "ar": "هل تعرف كم يكلف هذا؟" },
+      { "de": "Ich frage mich, warum er nicht geantwortet hat.", "ar": "أتساءل لماذا لم يجب." }
+    ],
+    "exercises": [
+      { "question": "Können Sie mir sagen, ___ der Zug abfährt?", "options": ["wann", "ob", "dass"], "correct": 0 },
+      { "question": "Ich weiß nicht, ___ er morgen kommt.", "options": ["wann", "ob", "was"], "correct": 1 },
+      { "question": "Weißt du, ___ das Restaurant ___?", "options": ["wo ... ist", "ob ... ist", "wann ... ist"], "correct": 0 },
+      { "question": "Ich möchte wissen, wie viel das Zimmer ___.", "options": ["kostet", "kosten", "kostet es"], "correct": 0 }
+    ]
+  },
+  {
+    "id": 27,
+    "title": "Verben mit Präpositionen",
+    "titleAr": "أفعال مع حروف جر ثابتة",
+    "explanation": "كثير من الأفعال الألمانية مرتبطة بحرف جر ثابت:\n\n• warten auf + Akk (ينتظر): Ich warte auf den Bus.\n• sich freuen auf + Akk (يتطلع): Ich freue mich auf den Urlaub.\n• sich freuen über + Akk (يُسعد بـ): Ich freue mich über das Geschenk.\n• sich interessieren für + Akk (يهتم بـ): Er interessiert sich für Sport.\n• Angst haben vor + Dat (يخاف من): Sie hat Angst vor Hunden.\n• träumen von + Dat (يحلم بـ): Ich träume von einer Reise.\n• sich beschweren über + Akk (يشتكي من): Er beschwert sich über den Lärm.\n• denken an + Akk (يفكر بـ): Ich denke an dich.\n• sprechen über + Akk (يتحدث عن): Wir sprechen über das Problem.\n• teilnehmen an + Dat (يشارك في): Er nimmt am Kurs teil.\n\nهام: يجب حفظ الفعل + حرف الجر + الحالة معاً!",
+    "examples": [
+      { "de": "Ich warte auf den Bus.", "ar": "أنتظر الباص. (auf + Akk)" },
+      { "de": "Sie interessiert sich für Kunst.", "ar": "تهتم بالفن. (für + Akk)" },
+      { "de": "Er hat Angst vor der Prüfung.", "ar": "يخاف من الامتحان. (vor + Dat)" },
+      { "de": "Wir freuen uns auf die Ferien.", "ar": "نتطلع للعطلة. (auf + Akk)" },
+      { "de": "Ich denke oft an meine Familie.", "ar": "أفكر كثيراً بعائلتي. (an + Akk)" }
+    ],
+    "exercises": [
+      { "question": "Ich warte ___ meine Freundin.", "options": ["auf", "für", "an"], "correct": 0 },
+      { "question": "Er interessiert sich ___ Fußball.", "options": ["an", "über", "für"], "correct": 2 },
+      { "question": "Sie hat Angst ___ Spinnen.", "options": ["über", "vor", "auf"], "correct": 1 },
+      { "question": "Ich freue mich ___ das Wochenende.", "options": ["für", "über", "auf"], "correct": 2 }
+    ]
+  },
+  {
+    "id": 28,
+    "title": "Adjektivdeklination (bestimmter Artikel)",
+    "titleAr": "تصريف الصفة — مع أداة التعريف",
+    "explanation": "مع أدوات التعريف (der, die, das):\n\nالقاعدة: معظم النهايات -en، ما عدا Nominativ (m/f/n) + Akkusativ (f/n)!\n\nNominativ:\n• der große Mann | die große Frau | das große Kind\n• die großen Kinder\n\nAkkusativ:\n• den großen Mann | die große Frau | das große Kind\n• die großen Kinder\n\nDativ:\n• dem großen Mann | der großen Frau | dem großen Kind\n• den großen Kindern\n\nخلاصة مبسّطة:\n• Nom m/f/n: -e\n• Akk f/n: -e | Akk m: -en\n• Dat: كلها -en\n• Plural: كلها -en",
+    "examples": [
+      { "de": "Der neue Lehrer ist nett.", "ar": "المعلم الجديد لطيف. (Nom m)" },
+      { "de": "Ich kaufe das rote Kleid.", "ar": "أشتري الفستان الأحمر. (Akk n)" },
+      { "de": "Er hilft der alten Frau.", "ar": "يساعد المرأة المسنّة. (Dat f)" },
+      { "de": "Die kleinen Kinder spielen draußen.", "ar": "الأطفال الصغار يلعبون بالخارج. (Nom pl)" },
+      { "de": "Ich mag den kalten Kaffee nicht.", "ar": "لا أحب القهوة الباردة. (Akk m)" }
+    ],
+    "exercises": [
+      { "question": "Der neu___ Kollege ist sehr freundlich.", "options": ["-e", "-en", "-er"], "correct": 0 },
+      { "question": "Ich habe das groß___ Zimmer genommen.", "options": ["-e", "-en", "-es"], "correct": 0 },
+      { "question": "Er wohnt in der klein___ Wohnung.", "options": ["-e", "-en", "-er"], "correct": 1 },
+      { "question": "Die nett___ Nachbarn haben mir geholfen.", "options": ["-e", "-en", "-er"], "correct": 1 }
+    ]
+  },
+  {
+    "id": 29,
+    "title": "Adjektivdeklination (unbestimmter Artikel)",
+    "titleAr": "تصريف الصفة — مع أداة النكرة",
+    "explanation": "مع أدوات النكرة (ein, eine, ein, kein, mein...):\n\nالفرق عن أداة التعريف: في Nominativ m + n والـ Akkusativ n الصفة تأخذ نهاية الأداة المفقودة!\n\nNominativ:\n• ein großer Mann (← der fehlt → -er)\n• eine große Frau\n• ein großes Kind (← das fehlt → -es)\n\nAkkusativ:\n• einen großen Mann\n• eine große Frau\n• ein großes Kind (← das fehlt → -es)\n\nDativ:\n• einem großen Mann | einer großen Frau | einem großen Kind\n(كلها -en — نفس القاعدة)\n\nبدون أداة (Plural):\n• große Kinder (Nom/Akk)\n• großen Kindern (Dat)",
+    "examples": [
+      { "de": "Ein junger Mann wartet draußen.", "ar": "شاب ينتظر بالخارج. (Nom m)" },
+      { "de": "Sie hat ein neues Handy gekauft.", "ar": "اشترت هاتفاً جديداً. (Akk n)" },
+      { "de": "Ich wohne in einer kleinen Stadt.", "ar": "أسكن في مدينة صغيرة. (Dat f)" },
+      { "de": "Er sucht einen guten Job.", "ar": "يبحث عن عمل جيد. (Akk m)" },
+      { "de": "Wir haben keine großen Probleme.", "ar": "ليس عندنا مشاكل كبيرة. (Akk pl)" }
+    ],
+    "exercises": [
+      { "question": "Ein klein___ Kind spielt im Garten.", "options": ["-er", "-es", "-e"], "correct": 1 },
+      { "question": "Sie sucht eine günstig___ Wohnung.", "options": ["-en", "-e", "-es"], "correct": 1 },
+      { "question": "Ich habe einen interessant___ Film gesehen.", "options": ["-er", "-en", "-es"], "correct": 1 },
+      { "question": "Er hat mit einem alt___ Freund gesprochen.", "options": ["-er", "-en", "-em"], "correct": 1 }
+    ]
+  },
+  {
+    "id": 30,
+    "title": "Komparativ und Superlativ",
+    "titleAr": "صيغة المقارنة والتفضيل",
+    "explanation": "المقارنة (Komparativ): Adjektiv + -er + als\nschön → schöner als\nIch bin größer als mein Bruder.\n\nالتفضيل (Superlativ): am + Adjektiv + -sten\nschön → am schönsten\nSie ist am schönsten.\nأو مع أداة: der/die/das schönste ...\n\nأشكال غير منتظمة (مهمة جداً!):\n• gut → besser → am besten\n• viel → mehr → am meisten\n• gern → lieber → am liebsten\n• hoch → höher → am höchsten\n• nah → näher → am nächsten\n• groß → größer → am größten\n\nمع Umlaut (a→ä, o→ö, u→ü) في الكلمات القصيرة:\nalt → älter, jung → jünger, kalt → kälter, warm → wärmer\n\nالمساواة: genauso/so + Adj + wie\nEr ist so groß wie ich.",
+    "examples": [
+      { "de": "Berlin ist größer als München.", "ar": "برلين أكبر من ميونخ." },
+      { "de": "Das ist das beste Restaurant in der Stadt.", "ar": "هذا أفضل مطعم في المدينة." },
+      { "de": "Ich lerne lieber Deutsch als Englisch.", "ar": "أفضل تعلم الألمانية على الإنجليزية." },
+      { "de": "Mein Bruder ist genauso alt wie ich.", "ar": "أخي بنفس عمري." },
+      { "de": "Im Sommer ist es am wärmsten.", "ar": "في الصيف الجو أدفأ ما يكون." }
+    ],
+    "exercises": [
+      { "question": "Berlin ist ___ als Hamburg.", "options": ["groß", "größer", "am größten"], "correct": 1 },
+      { "question": "Das war der ___ Tag meines Lebens.", "options": ["schönere", "schönste", "schöner"], "correct": 1 },
+      { "question": "Ich trinke ___ Tee als Kaffee.", "options": ["gern", "am liebsten", "lieber"], "correct": 2 },
+      { "question": "Dieses Auto ist genauso teuer ___ das andere.", "options": ["als", "wie", "mehr"], "correct": 1 }
+    ]
+  },
+  {
+    "id": 31,
+    "title": "Genitiv",
+    "titleAr": "حالة المضاف إليه — Genitiv",
+    "explanation": "الـ Genitiv يُعبّر عن الملكية أو الانتماء.\n\nأدوات الـ Genitiv:\n• m: des Mannes | f: der Frau | n: des Kindes | pl: der Kinder\n\nالأسماء المذكرة والمحايدة تأخذ -(e)s:\n• der Vater → des Vaters\n• das Kind → des Kindes\n• der Tag → des Tages\n\nحروف جر مع Genitiv (مهمة للامتحان!):\n• wegen = بسبب: Wegen des Regens ...\n• trotz = بالرغم من: Trotz des Wetters ...\n• während = خلال: Während der Ferien ...\n• innerhalb = داخل: Innerhalb einer Woche ...\n• außerhalb = خارج: Außerhalb der Stadt ...\n• statt = بدلاً من: Statt eines Autos ...\n\nفي الكلام اليومي: يُستبدل Genitiv غالباً بـ von + Dativ:\nDas Haus des Vaters = Das Haus von meinem Vater",
+    "examples": [
+      { "de": "Das ist das Auto meines Vaters.", "ar": "هذه سيارة أبي." },
+      { "de": "Wegen des schlechten Wetters bleiben wir zu Hause.", "ar": "بسبب الطقس السيء نبقى في البيت." },
+      { "de": "Trotz der Kälte geht er ohne Jacke.", "ar": "بالرغم من البرد يذهب بدون جاكيت." },
+      { "de": "Während des Unterrichts darf man nicht telefonieren.", "ar": "خلال الدرس لا يُسمح بالهاتف." },
+      { "de": "Die Meinung der Mehrheit ist wichtig.", "ar": "رأي الأغلبية مهم." }
+    ],
+    "exercises": [
+      { "question": "Wegen ___ Regens fällt das Spiel aus.", "options": ["des (Gen)", "dem (Dat)", "den (Akk)"], "correct": 0 },
+      { "question": "Das ist das Büro ___ Chefs.", "options": ["des (Gen)", "dem", "den"], "correct": 0 },
+      { "question": "Trotz ___ Problems hat er weitergemacht.", "options": ["dem", "des (Gen)", "das"], "correct": 1 },
+      { "question": "Während ___ Ferien war ich in der Türkei.", "options": ["den", "der (Gen)", "die"], "correct": 1 }
+    ]
+  },
+  {
+    "id": 32,
+    "title": "n-Deklination",
+    "titleAr": "الأسماء المذكرة الضعيفة",
+    "explanation": "بعض الأسماء المذكرة تأخذ -(e)n في كل الحالات ما عدا Nominativ:\n\nNom: der Junge | Akk: den Jungen | Dat: dem Jungen | Gen: des Jungen\n\nكلمات مهمة بـ n-Deklination:\n• der Junge (الولد)\n• der Kunde (الزبون)\n• der Kollege (الزميل)\n• der Nachbar (الجار)\n• der Mensch (الإنسان)\n• der Student (الطالب)\n• der Patient (المريض)\n• der Herr (السيد) → Herrn\n• der Name (الاسم) → des Namens\n• der Gedanke (الفكرة) → des Gedankens\n\nكيف تعرف الكلمة؟\n1. كلمات مذكرة تنتهي بـ -e: Junge, Kollege, Kunde\n2. كلمات أجنبية بـ -ent, -ant, -ist, -at: Student, Patient\n3. بعض الجنسيات والحيوانات: der Franzose, der Affe",
+    "examples": [
+      { "de": "Ich kenne den Jungen nicht.", "ar": "لا أعرف الولد. (Akk)" },
+      { "de": "Der Kunde hat sich beschwert.", "ar": "الزبون اشتكى. (Nom)" },
+      { "de": "Ich habe dem Kollegen geholfen.", "ar": "ساعدت الزميل. (Dat)" },
+      { "de": "Das ist die Tasche des Studenten.", "ar": "هذه حقيبة الطالب. (Gen)" },
+      { "de": "Können Sie Herrn Müller eine Nachricht geben?", "ar": "هل يمكنك إعطاء السيد مولر رسالة؟" }
+    ],
+    "exercises": [
+      { "question": "Ich habe ___ Kollegen angerufen.", "options": ["den (n-Dekl)", "der", "dem"], "correct": 0 },
+      { "question": "Kannst du ___ Jungen helfen?", "options": ["der", "den", "dem (n-Dekl)"], "correct": 2 },
+      { "question": "Das ist die Adresse des ___.", "options": ["Patient", "Patienten (n-Dekl)", "Patients"], "correct": 1 },
+      { "question": "Ich kenne ___ nicht.", "options": ["den Nachbar", "den Nachbarn (n-Dekl)", "der Nachbar"], "correct": 1 }
+    ]
+  },
+  {
+    "id": 33,
+    "title": "Plusquamperfekt",
+    "titleAr": "الماضي التام — ما قبل الماضي",
+    "explanation": "الـ Plusquamperfekt يُعبّر عن حدث وقع قبل حدث آخر في الماضي.\n\nالصيغة: hatte/war + Partizip II\n\nمتى نستخدمه؟ مع nachdem غالباً:\nNachdem ich gegessen hatte, ging ich spazieren.\n(بعد أن أكلت، ذهبت للتمشّي.)\n\nالحدث الأول: Plusquamperfekt (hatte gegessen)\nالحدث الثاني: Präteritum (ging)\n\nأمثلة:\n• hatte + P2: Er hatte geschlafen, bevor er zur Arbeit ging.\n• war + P2: Sie war angekommen, als ich anrief.\n\nتصريف hatte:\nich hatte | du hattest | er/sie hatte\nwir hatten | ihr hattet | sie/Sie hatten\n\nwar نفس تصريف الماضي البسيط لـ sein.",
+    "examples": [
+      { "de": "Nachdem ich aufgestanden war, habe ich gefrühstückt.", "ar": "بعد أن استيقظت، فطرت." },
+      { "de": "Er hatte schon gegessen, als ich ankam.", "ar": "كان قد أكل عندما وصلت." },
+      { "de": "Nachdem sie die Prüfung bestanden hatte, feierte sie.", "ar": "بعد أن نجحت في الامتحان، احتفلت." },
+      { "de": "Wir hatten das Hotel schon gebucht, bevor die Preise stiegen.", "ar": "كنا قد حجزنا الفندق قبل أن ترتفع الأسعار." },
+      { "de": "Nachdem der Regen aufgehört hatte, gingen wir spazieren.", "ar": "بعد أن توقف المطر، ذهبنا للتمشّي." }
+    ],
+    "exercises": [
+      { "question": "Nachdem ich ___ hatte, ging ich ins Bett.", "options": ["gelernt", "lerne", "lernen"], "correct": 0 },
+      { "question": "Er ___ schon nach Hause gegangen, als ich anrief.", "options": ["hat", "war", "ist"], "correct": 1 },
+      { "question": "Nachdem sie das Buch gelesen ___, gab sie es mir.", "options": ["hat", "hatte", "war"], "correct": 1 },
+      { "question": "Wir ___ den Film schon gesehen, bevor er ins Kino kam.", "options": ["haben", "hatten", "waren"], "correct": 1 }
+    ]
+  },
+  {
+    "id": 34,
+    "title": "Futur I (werden + Infinitiv)",
+    "titleAr": "المستقبل — werden + مصدر",
+    "explanation": "الـ Futur I يُعبّر عن:\n1. المستقبل: Ich werde morgen kommen.\n2. التخمين: Es wird wohl regnen.\n3. الوعد: Ich werde dir helfen!\n\nالصيغة: werden + Infinitiv (في آخر الجملة)\n\nتصريف werden:\nich werde | du wirst | er/sie wird\nwir werden | ihr werdet | sie/Sie werden\n\nملاحظة مهمة:\nفي الكلام اليومي، المستقبل غالباً يُعبَّر عنه بالمضارع + ظرف زمان:\nIch komme morgen. = Ich werde morgen kommen.\n\nالفرق بين werden:\n• Futur: Ich werde kommen. (سأأتي)\n• Passiv: Es wird gemacht. (يُعمل)\n• werden = يصبح: Er wird Arzt. (يصبح طبيباً)",
+    "examples": [
+      { "de": "Ich werde nächstes Jahr nach Syrien fliegen.", "ar": "سأسافر لسوريا السنة القادمة." },
+      { "de": "Es wird morgen regnen.", "ar": "سيمطر غداً." },
+      { "de": "Wir werden die Prüfung schaffen!", "ar": "سننجح في الامتحان!" },
+      { "de": "Er wird wohl zu Hause sein.", "ar": "على الأرجح هو في البيت." },
+      { "de": "Ich werde dir das Geld zurückgeben.", "ar": "سأعيد لك المال." }
+    ],
+    "exercises": [
+      { "question": "Ich ___ morgen früh aufstehen.", "options": ["werde", "wurde", "würde"], "correct": 0 },
+      { "question": "Es ___ heute Abend kalt ___.", "options": ["wird ... werden", "wird ... sein", "wurde ... sein"], "correct": 1 },
+      { "question": "___ du mir helfen?", "options": ["Wirst", "Wurdest", "Würdest"], "correct": 0 },
+      { "question": "Wir ___ nächste Woche umziehen.", "options": ["wurden", "werden", "würden"], "correct": 1 }
+    ]
   }
 ];
 
