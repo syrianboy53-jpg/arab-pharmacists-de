@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useXP } from '../hooks/useXP'
+import { getLevelFromXP, getLevelTitle, getXPForLevel, getProgressToNextLevel } from '../lib/gamification'
 
 const dailyWords = [
   { word: 'das Formular', meaning: 'الاستمارة', example: 'Füllen Sie bitte das Formular aus.' },
@@ -100,11 +101,12 @@ const sections: Section[] = [
 ]
 
 export default function HomePage() {
-  const { xp, getLevel } = useXP()
+  const { xp } = useXP()
   const [dailyWordIdx, setDailyWordIdx] = useState(0)
-  const currentLevel = getLevel(xp)
-  const nextLevelXP = currentLevel.xpRequired
-  const xpProgress = nextLevelXP === Infinity ? 100 : ((xp) / nextLevelXP) * 100
+  const currentLevelNum = getLevelFromXP(xp)
+  const levelTitle = getLevelTitle(currentLevelNum)
+  const nextLevelXP = getXPForLevel(currentLevelNum + 1)
+  const xpProgress = getProgressToNextLevel(xp)
 
   useEffect(() => {
     // Change word every day based on date
@@ -134,9 +136,9 @@ export default function HomePage() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <span className="px-4 py-1.5 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full text-sm font-black shadow-lg">
-                  المستوى {currentLevel.level}
+                  المستوى {currentLevelNum}
                 </span>
-                <span className="text-gray-500 font-bold">{currentLevel.title}</span>
+                <span className="text-gray-500 font-bold">{levelTitle}</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-3">
                 مرحباً بك في <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00b894] to-[#0984e3]">B1 Syrer</span> 🚀
