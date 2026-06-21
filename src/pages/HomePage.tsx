@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useXP } from '../hooks/useXP'
 import { usePWA } from '../hooks/usePWA'
-import { getLevelFromXP, getLevelTitle, getXPForLevel, getProgressToNextLevel } from '../lib/gamification'
+import { getLevelFromXP, getLevelTitle, getProgressToNextLevel } from '../lib/gamification'
 
 const dailyWords = [
   { word: 'das Formular', meaning: 'الاستمارة', example: 'Füllen Sie bitte das Formular aus.' },
