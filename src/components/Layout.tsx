@@ -330,61 +330,93 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
         </nav>
 
-        {/* ── Footer ── */}
-        <footer className="bg-[#0f2940] text-white mt-12 pb-20 sm:pb-0">
-          <div className="max-w-5xl mx-auto px-4 py-10">
-            <div className="grid sm:grid-cols-3 gap-8">
-              {/* Brand */}
-              <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00b894] to-[#00cec9] flex items-center justify-center text-white text-xs font-black">B1</div>
-                  <span className="font-black text-base">B1-Syrer.de</span>
+        {/* ── Mega Footer ── */}
+        <footer className="bg-[#0f2940] text-white mt-12 pb-20 sm:pb-0 border-t-4 border-[#00b894]">
+          <div className="max-w-7xl mx-auto px-4 py-12">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+              
+              {/* Column 1: Brand & Info */}
+              <div className="col-span-2 md:col-span-3 lg:col-span-1">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00b894] to-[#00cec9] flex items-center justify-center text-white text-sm font-black shadow-lg">B1</div>
+                  <span className="font-black text-xl tracking-tight">B1-Syrer.de</span>
                 </div>
-                <p className="text-white/50 text-xs leading-relaxed">
-                  تطبيق سوري مجاني لتحضير امتحان B1 الألماني. مفتوح المصدر ومصنوع بحب من الحسكة 🇸🇾
+                <p className="text-white/60 text-sm leading-relaxed mb-6">
+                  تدرب على امتحانات اللغة الألمانية مع مواد أصلية واستعد للحصول على شهادتك. منصتك الشاملة للاندماج واللغة.
                 </p>
-              </div>
-
-              {/* Quick Links */}
-              <div>
-                <h4 className="font-bold text-sm mb-3 text-[#00b894]">روابط سريعة</h4>
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <Link to="/grammar" className="text-white/50 hover:text-white transition-colors">القواعد</Link>
-                  <Link to="/vocabulary" className="text-white/50 hover:text-white transition-colors">المفردات</Link>
-                  <Link to="/lesen" className="text-white/50 hover:text-white transition-colors">القراءة</Link>
-                  <Link to="/hoeren" className="text-white/50 hover:text-white transition-colors">الاستماع</Link>
-                  <Link to="/schreiben" className="text-white/50 hover:text-white transition-colors">الكتابة</Link>
-                  <Link to="/sprechen" className="text-white/50 hover:text-white transition-colors">المحادثة</Link>
-                  <Link to="/daily" className="text-white/50 hover:text-white transition-colors">تحدّي اليوم</Link>
-                  <Link to="/leben" className="text-white/50 hover:text-white transition-colors">الجنسية</Link>
+                <div className="flex gap-3">
+                  {/* Social Icons Placeholders */}
+                  <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#00b894] transition-colors">📱</a>
+                  <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#00b894] transition-colors">📺</a>
+                  <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#00b894] transition-colors">💬</a>
                 </div>
               </div>
 
-              {/* Contact */}
+              {/* Column 2: Quick Links */}
               <div>
-                <h4 className="font-bold text-sm mb-3 text-[#00b894]">تواصل معنا</h4>
-                <div className="space-y-2 text-xs">
-                  <a href="https://t.me/b1syrer" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white/50 hover:text-white transition-colors">
-                    <span>📱</span> تليغرام @b1syrer
-                  </a>
-                  <a href="mailto:shami.fadi@gmx.de" className="flex items-center gap-2 text-white/50 hover:text-white transition-colors">
-                    <span>✉️</span> shami.fadi@gmx.de
-                  </a>
-                  <a href="https://buymeacoffee.com/halawanyfav" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white/50 hover:text-white transition-colors">
-                    <span>☕</span> ادعمنا بقهوة
-                  </a>
-                </div>
+                <h4 className="font-bold text-lg mb-4 text-white">روابط سريعة</h4>
+                <ul className="space-y-2.5 text-sm text-white/60">
+                  <li><Link to="/" className="hover:text-[#00b894] transition-colors">الرئيسية (Home)</Link></li>
+                  <li><Link to="/about" className="hover:text-[#00b894] transition-colors">من نحن</Link></li>
+                  <li><Link to="/dashboard" className="hover:text-[#00b894] transition-colors">لوحة التحكم</Link></li>
+                  <li><Link to="/einstufung" className="hover:text-[#00b894] transition-colors">تحديد المستوى</Link></li>
+                  <li><Link to="/resources" className="hover:text-[#00b894] transition-colors">المصادر</Link></li>
+                  <li><Link to="/contact" className="hover:text-[#00b894] transition-colors">اتصل بنا</Link></li>
+                </ul>
+              </div>
+
+              {/* Column 3: المستويات (Goethe & TELC) */}
+              <div>
+                <h4 className="font-bold text-lg mb-4 text-white">المستويات للامتحانات</h4>
+                <ul className="space-y-2.5 text-sm text-white/60">
+                  <li><Link to="/a1" className="hover:text-[#00b894] transition-colors">مستوى A1</Link></li>
+                  <li><Link to="/a2" className="hover:text-[#00b894] transition-colors">مستوى A2</Link></li>
+                  <li><Link to="/b1" className="hover:text-[#00b894] transition-colors">مستوى B1</Link></li>
+                  <li><Link to="/b2-hub" className="hover:text-[#00b894] transition-colors">مستوى B2</Link></li>
+                  <li><Link to="/c1" className="hover:text-[#00b894] transition-colors">مستوى C1</Link></li>
+                </ul>
+              </div>
+
+              {/* Column 4: DTZ A2-B1 */}
+              <div>
+                <h4 className="font-bold text-lg mb-4 text-white">امتحان الاندماج (DTZ)</h4>
+                <ul className="space-y-2.5 text-sm text-white/60">
+                  <li><Link to="/dtz" className="hover:text-[#00b894] transition-colors font-bold text-white/90">بوابة DTZ الشاملة</Link></li>
+                  <li><Link to="/lesen" className="hover:text-[#00b894] transition-colors">القراءة (Lesen)</Link></li>
+                  <li><Link to="/hoeren" className="hover:text-[#00b894] transition-colors">الاستماع (Hören)</Link></li>
+                  <li><Link to="/schreiben" className="hover:text-[#00b894] transition-colors">الكتابة (Schreiben)</Link></li>
+                  <li><Link to="/sprechen" className="hover:text-[#00b894] transition-colors">المحادثة (Sprechen)</Link></li>
+                </ul>
+              </div>
+
+              {/* Column 5: Leben in Deutschland */}
+              <div>
+                <h4 className="font-bold text-lg mb-4 text-white">الحياة في ألمانيا</h4>
+                <ul className="space-y-2.5 text-sm text-white/60">
+                  <li><Link to="/leben" className="hover:text-[#00b894] transition-colors font-bold text-white/90">بوابة Leben in Deutschland</Link></li>
+                  <li><Link to="/leben" className="hover:text-[#00b894] transition-colors">جميع الأسئلة الـ 300</Link></li>
+                  <li><Link to="/leben" className="hover:text-[#00b894] transition-colors">أسئلة المقاطعات</Link></li>
+                  <li><Link to="/einbuergerung" className="hover:text-[#00b894] transition-colors">اختبار الجنسية التجريبي</Link></li>
+                  <li><Link to="/emergency" className="hover:text-[#00b894] transition-colors">أرقام الطوارئ والمساعدة</Link></li>
+                </ul>
               </div>
             </div>
 
             {/* Bottom bar */}
-            <div className="border-t border-white/10 mt-8 pt-4 flex flex-wrap justify-between items-center gap-3">
-              <p className="text-[11px] text-white/30">© 2026 B1-Syrer.de — Made with ❤️ in Germany 🇸🇾🇩🇪</p>
-              <div className="flex gap-3 text-[11px]">
-                <a href="/impressum/" className="text-white/30 hover:text-white/60 transition-colors">Impressum</a>
-                <a href="/datenschutz/" className="text-white/30 hover:text-white/60 transition-colors">Datenschutz</a>
-                <a href="/agb/" className="text-white/30 hover:text-white/60 transition-colors">AGB</a>
-                <a href="/privacy/" className="text-white/30 hover:text-white/60 transition-colors">Privacy</a>
+            <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/50">
+              <div className="flex flex-col md:flex-row items-center gap-2 text-center md:text-left">
+                <p>© 2026 B1-Syrer. All rights reserved.</p>
+                <span className="hidden md:inline">•</span>
+                <p>Independent exam prep — not affiliated with or endorsed by any examination body.</p>
+              </div>
+              
+              <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-4 md:mt-0 font-medium">
+                <a href="#" className="flex items-center gap-1 hover:text-[#00b894] transition-colors">⚑ Report an Issue</a>
+                <a href="#" className="flex items-center gap-1 hover:text-[#00b894] transition-colors">💬 Share Feedback</a>
+                <span className="text-white/20 hidden sm:inline">|</span>
+                <a href="/impressum" className="hover:text-white transition-colors">Impressum</a>
+                <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="/agb" className="hover:text-white transition-colors">Terms of Service</a>
               </div>
             </div>
           </div>
