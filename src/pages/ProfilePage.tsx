@@ -1,4 +1,3 @@
-import React from 'react'
 import { motion } from 'framer-motion'
 import { useXP } from '../hooks/useXP'
 import { getLevelTitle, getXPForLevel, getProgressToNextLevel } from '../lib/gamification'
@@ -8,7 +7,7 @@ export default function ProfilePage() {
   
   const levelTitle = getLevelTitle(level)
   const nextLevelXP = getXPForLevel(level + 1)
-  const progress = getProgressToNextLevel(xp, level)
+  const progress = getProgressToNextLevel(xp)
 
   // قائمة جميع الأوسمة المتاحة في النظام لكي نعرض المقفل منها
   const ALL_BADGES = [
@@ -112,7 +111,7 @@ export default function ProfilePage() {
         </h2>
         
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {ALL_BADGES.map((badgeDef, i) => {
+          {ALL_BADGES.map((badgeDef) => {
             const isUnlocked = badges.some(b => b.id === badgeDef.id)
             return (
               <div 

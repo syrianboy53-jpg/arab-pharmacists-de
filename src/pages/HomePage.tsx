@@ -107,7 +107,6 @@ export default function HomePage() {
   const [dailyWordIdx, setDailyWordIdx] = useState(0)
   const currentLevelNum = getLevelFromXP(xp)
   const levelTitle = getLevelTitle(currentLevelNum)
-  const nextLevelXP = getXPForLevel(currentLevelNum + 1)
   const xpProgress = getProgressToNextLevel(xp)
 
   useEffect(() => {
