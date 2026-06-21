@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { speakingColloquialData } from '../data/speakingColloquial'
+import { addXP } from '../lib/gamification'
 
 interface MessageItem {
   id: string
@@ -9,6 +10,12 @@ interface MessageItem {
   phonetic?: string
   feedback?: string
   points?: number
+  timestamp?: string
+}
+
+function getFormattedTime() {
+  const d = new Date()
+  return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })
 }
 
 export default function ChatSimulatorPage() {
@@ -24,6 +31,9 @@ export default function ChatSimulatorPage() {
   const [maxScore, setMaxScore] = useState<number>(0)
   const [isFinished, setIsFinished] = useState<boolean>(false)
   const [showTranslations, setShowTranslations] = useState<Record<string, boolean>>({})
+  
+  // Realism States
+  const [isTyping, setIsTyping] = useState<boolean>(false)
 
   const chatEndRef = useRef<HTMLDivElement>(null)
 
@@ -34,7 +44,7 @@ export default function ChatSimulatorPage() {
     const firstStep = scenario.steps.find(s => s.id === 1)
     if (!firstStep) return
 
-    // Calculate max potential score for the scenario
+    // Calculate max potential score
     let calculatedMax = 0
     scenario.steps.forEach(step => {
       const stepMax = Math.max(...step.options.map(o => o.points || 0))
@@ -46,28 +56,34 @@ export default function ChatSimulatorPage() {
     setScore(0)
     setIsFinished(false)
     setShowTranslations({})
+    setIsTyping(false)
 
-    // Initialize with first bot message
-    setChatHistory([
-      {
-        id: `bot-1`,
-        speaker: 'bot',
-        german: firstStep.german,
-        arabic: firstStep.arabic,
-        phonetic: firstStep.phonetic
-      }
-    ])
+    // Delay first message for realism
+    setChatHistory([])
+    setIsTyping(true)
+    setTimeout(() => {
+      setChatHistory([
+        {
+          id: `bot-1`,
+          speaker: 'bot',
+          german: firstStep.german,
+          arabic: firstStep.arabic,
+          phonetic: firstStep.phonetic,
+          timestamp: getFormattedTime()
+        }
+      ])
+      setIsTyping(false)
+      speak(firstStep.german || '')
+    }, 1500)
   }
 
-  // Restart when scenario changes
   useEffect(() => {
     startConversation()
   }, [selectedScenarioId])
 
-  // Scroll to bottom
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [chatHistory])
+  }, [chatHistory, isTyping])
 
   if (!scenario || !scenario.steps) {
     return (
@@ -92,16 +108,15 @@ export default function ChatSimulatorPage() {
 
   // Handle Option Select
   const handleSelectOption = (option: any) => {
-    // 1. Add user message
     const userMsgId = `user-${Date.now()}`
     const userMsg: MessageItem = {
       id: userMsgId,
       speaker: 'user',
       german: option.textDe,
-      arabic: option.textAr
+      arabic: option.textAr,
+      timestamp: getFormattedTime()
     }
 
-    // 2. Add system feedback message
     const feedbackMsgId = `feedback-${Date.now()}`
     const feedbackMsg: MessageItem = {
       id: feedbackMsgId,
@@ -110,35 +125,44 @@ export default function ChatSimulatorPage() {
       points: option.points
     }
 
-    // Update score
     setScore(prev => prev + (option.points || 0))
+    setChatHistory(prev => [...prev, userMsg, feedbackMsg])
 
-    // 3. Check next step
+    // Typing effect for next message
     if (option.nextStep === null) {
-      // Finished
-      setChatHistory(prev => [...prev, userMsg, feedbackMsg])
-      setIsFinished(true)
-    } else {
-      const nextStep = scenario.steps.find(s => s.id === option.nextStep)
-      if (nextStep) {
-        const nextBotMsg: MessageItem = {
-          id: `bot-${nextStep.id}-${Date.now()}`,
-          speaker: 'bot',
-          german: nextStep.german,
-          arabic: nextStep.arabic,
-          phonetic: nextStep.phonetic
-        }
-        setCurrentStepId(option.nextStep)
-        setChatHistory(prev => [...prev, userMsg, feedbackMsg, nextBotMsg])
-      } else {
-        // Fallback if step not found
-        setChatHistory(prev => [...prev, userMsg, feedbackMsg])
+      setTimeout(() => {
         setIsFinished(true)
-      }
+        addXP((option.points || 0) + 100) // Give big bonus XP at the end
+      }, 500)
+    } else {
+      setIsTyping(true)
+      const nextStep = scenario.steps.find(s => s.id === option.nextStep)
+      
+      // Calculate realistic typing time based on string length (min 1.5s, max 4s)
+      const typingDuration = nextStep ? Math.min(Math.max((nextStep.german.length * 50), 1500), 4000) : 1000
+
+      setTimeout(() => {
+        if (nextStep) {
+          const nextBotMsg: MessageItem = {
+            id: `bot-${nextStep.id}-${Date.now()}`,
+            speaker: 'bot',
+            german: nextStep.german,
+            arabic: nextStep.arabic,
+            phonetic: nextStep.phonetic,
+            timestamp: getFormattedTime()
+          }
+          setCurrentStepId(option.nextStep)
+          setChatHistory(prev => [...prev, nextBotMsg])
+          speak(nextStep.german || '')
+        } else {
+          setIsFinished(true)
+          addXP((option.points || 0) + 100)
+        }
+        setIsTyping(false)
+      }, typingDuration)
     }
   }
 
-  // Calculate user performance level
   const getPerformanceBadge = () => {
     const percent = maxScore > 0 ? (score / maxScore) * 100 : 0
     if (percent >= 90) return { text: 'ألماني فصيح (Profi) 🌟', color: 'bg-[#00b894]/10 text-[#00b894] border-[#00b894]/20' }
@@ -146,13 +170,21 @@ export default function ChatSimulatorPage() {
     return { text: 'مبتدئ يحتاج للتدريب (Übung) 📚', color: 'bg-red-500/10 text-red-500 border-red-500/20' }
   }
 
+  // Chat Wallpaper CSS
+  const chatBackground = {
+    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.83-26.626 26.626-26.627-26.626.83-.83 25.797 25.797 25.796-25.797zm0 59.17l.83-.83-26.626-26.627-26.627 26.627.83.83 25.797-25.797 25.796 25.797zm-53.797-28.34l.83.83-26.626 26.626-26.627-26.626.83-.83 25.797 25.797 25.796-25.797z' fill='%239C92AC' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E")`
+  }
+
   return (
-    <div className="grid md:grid-cols-4 gap-6">
+    <div className="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto pb-10">
       
       {/* Sidebar: List of Scenarios */}
       <div className="md:col-span-1 space-y-4">
-        <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 space-y-4 shadow-xl">
-          <h2 className="text-base font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-white/5 pb-2">📂 محاكيات المحادثة</h2>
+        <div className="glass p-5 rounded-3xl border border-gray-200 dark:border-white/5 space-y-4 shadow-sm">
+          <h2 className="text-base font-black text-gray-900 dark:text-white border-b border-gray-100 dark:border-white/5 pb-3 flex items-center gap-2">
+            <span>💬</span> 
+            قائمة المحادثات
+          </h2>
           
           <div className="flex flex-col gap-2">
             {speakingColloquialData.chatScenarios.map(sc => {
@@ -161,20 +193,21 @@ export default function ChatSimulatorPage() {
                 <button
                   key={sc.id}
                   onClick={() => setSelectedScenarioId(sc.id)}
-                  className={`w-full text-right p-3 rounded-xl border transition-all text-xs flex items-center justify-between gap-2 cursor-pointer ${
+                  className={`w-full text-right p-3 rounded-2xl border transition-all flex items-center justify-between gap-3 cursor-pointer group ${
                     isActive
-                      ? 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
-                      : 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/10'
+                      ? 'bg-[#00b894] border-[#00b894] text-white shadow-md'
+                      : 'bg-gray-50 dark:bg-white/5 border-transparent text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10'
                   }`}
                 >
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">{sc.icon}</span>
+                  <div className="flex items-center gap-3">
+                    <span className={`text-2xl w-10 h-10 rounded-xl flex items-center justify-center ${isActive ? 'bg-white/20' : 'bg-white dark:bg-black/20 shadow-sm'}`}>
+                      {sc.icon}
+                    </span>
                     <div className="text-right">
-                      <p className="font-semibold">{sc.titleAr}</p>
-                      <span className="text-[10px] opacity-80" dir="ltr">{sc.difficulty}</span>
+                      <p className="font-bold text-sm leading-tight">{sc.titleAr}</p>
+                      <span className={`text-[10px] ${isActive ? 'text-white/80' : 'text-gray-400'}`} dir="ltr">{sc.difficulty}</span>
                     </div>
                   </div>
-                  {isActive && <span className="w-1.5 h-1.5 bg-[#00b894] rounded-full shrink-0" />}
                 </button>
               )
             })}
@@ -183,30 +216,34 @@ export default function ChatSimulatorPage() {
       </div>
 
       {/* Main Chat Interface */}
-      <div className="md:col-span-3 space-y-4 flex flex-col h-[calc(100vh-170px)] min-h-[500px]">
+      <div className="md:col-span-3 flex flex-col h-[75vh] min-h-[600px] bg-gray-100 dark:bg-[#0f172a] rounded-[2rem] shadow-2xl border-4 border-white dark:border-gray-800 overflow-hidden relative">
+        
         {/* Chat Header */}
-        <div className="glass p-4 rounded-2xl border border-gray-200 dark:border-white/5 flex items-center justify-between shadow-md shrink-0">
+        <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md p-4 border-b border-gray-200 dark:border-white/10 flex items-center justify-between z-10">
           <div className="flex items-center gap-3">
-            <span className="text-2xl w-10 h-10 rounded-xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center">
-              {scenario.icon}
-            </span>
+            <div className="relative">
+              <span className="text-2xl w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center shadow-inner">
+                {scenario.icon}
+              </span>
+              <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-white dark:border-gray-900 rounded-full"></span>
+            </div>
             <div>
-              <h3 className="font-bold text-gray-900 dark:text-white text-sm">{scenario.titleAr}</h3>
-              <p className="text-[10px] text-gray-500 dark:text-gray-400">{scenario.descriptionAr}</p>
+              <h3 className="font-black text-gray-900 dark:text-white">{scenario.titleAr}</h3>
+              <p className="text-xs text-[#00b894] font-bold">
+                {isTyping ? 'يكتب الآن...' : 'متصل'}
+              </p>
             </div>
           </div>
-          <div className="flex items-center gap-2 text-xs">
-            <span className="bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 px-2 py-0.5 rounded text-gray-500 dark:text-gray-400 font-mono" dir="ltr">
-              Diff: {scenario.difficulty}
-            </span>
-            <span className="bg-amber-100 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-700/20 px-2 py-0.5 rounded text-amber-600 dark:text-amber-400 font-bold">
-              النقاط: {score}
-            </span>
+          <div className="bg-amber-100 dark:bg-amber-900/30 px-3 py-1.5 rounded-full text-amber-600 dark:text-amber-400 font-black text-sm flex items-center gap-1 shadow-sm">
+            <span>🏆</span> {score}
           </div>
         </div>
 
-        {/* Conversation Message Screen */}
-        <div className="flex-1 glass border border-gray-200 dark:border-white/5 rounded-2xl p-5 overflow-y-auto space-y-4 shadow-inner relative min-h-[250px]">
+        {/* Conversation Screen (WhatsApp style) */}
+        <div 
+          className="flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar" 
+          style={chatBackground}
+        >
           {chatHistory.map((msg, index) => {
             const isBot = msg.speaker === 'bot'
             const isUser = msg.speaker === 'user'
@@ -215,10 +252,10 @@ export default function ChatSimulatorPage() {
             // System feedback block
             if (isSystem) {
               return (
-                <div key={msg.id || index} className="flex justify-center my-2 animate-fadeIn">
-                  <div className="bg-amber-100 dark:bg-amber-900/5 border border-amber-200 dark:border-amber-700/20 text-gray-600 dark:text-gray-400 text-[11px] rounded-xl px-4 py-2 text-center max-w-[85%] leading-relaxed">
-                    <span className="font-bold text-amber-600 dark:text-amber-400">نقاط الاختيار: +{msg.points} 🌟</span>
-                    <p className="mt-0.5">{msg.feedback}</p>
+                <div key={msg.id || index} className="flex justify-center my-4 animate-fadeIn">
+                  <div className="bg-amber-50 dark:bg-amber-900/40 border border-amber-200 dark:border-amber-500/20 text-gray-700 dark:text-gray-300 text-xs rounded-2xl px-5 py-2.5 text-center max-w-[85%] shadow-sm">
+                    <span className="font-black text-amber-600 dark:text-amber-400 block mb-1">نقاط الاختيار: +{msg.points} 🌟</span>
+                    <p className="leading-relaxed">{msg.feedback}</p>
                   </div>
                 </div>
               )
@@ -228,129 +265,139 @@ export default function ChatSimulatorPage() {
             return (
               <div
                 key={msg.id || index}
-                className={`flex gap-2.5 max-w-[80%] items-start animate-fadeIn ${
-                  isUser ? 'mr-auto flex-row-reverse' : 'ml-auto'
-                }`}
+                className={`flex w-full animate-fadeIn ${isUser ? 'justify-end' : 'justify-start'}`}
               >
-                {/* Avatar Icon */}
-                <div className={`w-8 h-8 rounded-full shrink-0 flex items-center justify-center text-xs font-bold ${
+                <div className={`relative max-w-[85%] md:max-w-[70%] p-3.5 shadow-sm text-[13px] sm:text-sm ${
                   isUser 
-                    ? 'bg-[#00b894]/10 border border-[#00b894]/20 text-[#00b894]' 
-                    : 'bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-500 dark:text-gray-400'
+                    ? 'bg-[#dcf8c6] dark:bg-[#005c4b] text-gray-900 dark:text-white rounded-[20px] rounded-br-none' 
+                    : 'bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 text-gray-900 dark:text-white rounded-[20px] rounded-tl-none'
                 }`}>
-                  {isUser ? '👤' : scenario.icon}
-                </div>
+                  
+                  {/* German Text */}
+                  <div className="font-semibold leading-relaxed" dir="ltr">
+                    {msg.german}
+                  </div>
 
-                {/* Message Body */}
-                <div className="space-y-1">
-                  <div className={`p-3.5 rounded-2xl text-xs space-y-1.5 shadow-sm border ${
-                    isUser 
-                      ? 'bg-[#00b894]/10 border-[#00b894]/25 text-gray-600 dark:text-gray-400 rounded-tr-none' 
-                      : 'bg-gray-50 dark:bg-white/5 border-gray-200 dark:border-white/5 text-gray-600 dark:text-gray-400 rounded-tl-none'
-                  }`}>
-                    
-                    {/* German Text */}
-                    <div className="flex items-center justify-between gap-4" dir="ltr">
-                      <p className="font-semibold text-gray-900 dark:text-white font-sans text-left">{msg.german}</p>
-                      {isBot && (
-                        <button
-                          onClick={() => speak(msg.german || '')}
-                          className="text-[10px] text-gray-500 dark:text-gray-400 hover:text-[#00b894] shrink-0 cursor-pointer"
-                          title="استمع للنطق"
-                        >
-                          🔊
-                        </button>
+                  {/* Audio Button for Bot */}
+                  {isBot && (
+                    <div className="mt-2 pt-2 border-t border-gray-100 dark:border-gray-700 flex items-center justify-between gap-4">
+                       <button
+                        onClick={() => speak(msg.german || '')}
+                        className="bg-gray-100 dark:bg-gray-700 hover:bg-[#00b894] hover:text-white text-gray-600 dark:text-gray-300 w-8 h-8 rounded-full flex items-center justify-center transition-colors shadow-inner"
+                        title="استمع"
+                      >
+                        ▶️
+                      </button>
+                      
+                      {msg.phonetic && (
+                        <span className="text-[10px] text-gray-400 dark:text-gray-500 font-serif flex-1">
+                          {msg.phonetic}
+                        </span>
                       )}
                     </div>
+                  )}
 
-                    {/* Phonetic Pronunciation Helper */}
-                    {isBot && msg.phonetic && (
-                      <p className="text-[10px] text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-white/5 pt-1">
-                        🗣️ <span className="font-serif">{msg.phonetic}</span>
-                      </p>
-                    )}
+                  {/* Arabic Translation Toggle */}
+                  {msg.arabic && (
+                    <div className="mt-2 pt-2 border-t border-gray-100 dark:border-gray-700/50">
+                      <button
+                        onClick={() => setShowTranslations(prev => ({ ...prev, [msg.id]: !prev[msg.id] }))}
+                        className="text-[10px] font-bold text-blue-500 hover:text-blue-700 transition-colors"
+                      >
+                        {showTranslations[msg.id] ? 'إخفاء الترجمة' : 'عرض الترجمة'}
+                      </button>
+                      {showTranslations[msg.id] && (
+                        <p className="text-[11px] text-gray-600 dark:text-gray-300 mt-1 leading-relaxed">{msg.arabic}</p>
+                      )}
+                    </div>
+                  )}
 
-                    {/* Arabic Toggle translation */}
-                    {msg.arabic && (
-                      <div className="border-t border-gray-200 dark:border-white/5 pt-1.5 space-y-1">
-                        <button
-                          onClick={() => setShowTranslations(prev => ({ ...prev, [msg.id]: !prev[msg.id] }))}
-                          className="text-[9px] text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:text-white transition-colors cursor-pointer"
-                        >
-                          {showTranslations[msg.id] ? '🙈 إخفاء الترجمة' : '👁️ عرض الترجمة'}
-                        </button>
-                        {showTranslations[msg.id] && (
-                          <p className="text-[10px] text-gray-600 dark:text-gray-400 leading-normal">{msg.arabic}</p>
-                        )}
-                      </div>
-                    )}
+                  {/* Meta: Time and Ticks */}
+                  <div className="flex items-center justify-end gap-1 mt-1 opacity-70">
+                    <span className="text-[9px] font-mono">{msg.timestamp}</span>
+                    {isUser && <span className="text-[10px] text-blue-500">✔✔</span>}
                   </div>
+
+                  {/* Tail triangle */}
+                  <svg viewBox="0 0 8 13" width="8" height="13" className={`absolute top-0 ${isUser ? '-right-[8px] text-[#dcf8c6] dark:text-[#005c4b]' : '-left-[8px] text-white dark:text-gray-800'} fill-current`}>
+                    {isUser 
+                      ? <path d="M5.188 1H0v11.156l5.188-5.188c1.378-1.378 2.375-3.181 2.812-5.156L8 1H5.188z"/> 
+                      : <path d="M1.533 3.153C.388 4.319 0 5.86 0 7.424V14h7.525V1.261L2.813 1.26a4.116 4.116 0 00-1.28.193z"/>
+                    }
+                  </svg>
                 </div>
               </div>
             )
           })}
           
+          {/* Typing Indicator */}
+          {isTyping && (
+             <div className="flex w-full justify-start animate-fadeIn">
+              <div className="bg-white dark:bg-gray-800 rounded-[20px] rounded-tl-none p-4 shadow-sm relative text-gray-500 dark:text-gray-400">
+                <div className="flex gap-1">
+                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                </div>
+                <svg viewBox="0 0 8 13" width="8" height="13" className="absolute top-0 -left-[8px] fill-current text-white dark:text-gray-800">
+                  <path d="M1.533 3.153C.388 4.319 0 5.86 0 7.424V14h7.525V1.261L2.813 1.26a4.116 4.116 0 00-1.28.193z"/>
+                </svg>
+              </div>
+            </div>
+          )}
+
           {/* Completion summary */}
           {isFinished && (
-            <div className="glass p-5 border border-amber-200 dark:border-amber-700/30 rounded-2xl max-w-md mx-auto text-center space-y-4 animate-slideDown shadow-xl mt-6">
-              <span className="text-3xl">🏆</span>
+            <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md p-6 border border-[#00b894]/30 rounded-3xl max-w-sm mx-auto text-center space-y-4 shadow-2xl mt-8">
+              <div className="w-16 h-16 bg-[#00b894]/10 text-[#00b894] rounded-full flex items-center justify-center text-3xl mx-auto shadow-inner">
+                🏆
+              </div>
               <div>
-                <h4 className="text-base font-bold text-gray-900 dark:text-white">اكتملت المحاكاة بنجاح!</h4>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">لقد أكملت جميع الخطوات وسجلت النقاط التالية:</p>
+                <h4 className="text-xl font-black text-gray-900 dark:text-white">المحادثة انتهت!</h4>
+                <p className="text-xs text-gray-500 mt-1">لقد تم إضافة نقاط الخبرة <strong className="text-[#00b894]">XP</strong> لحسابك بنجاح.</p>
               </div>
 
-              <div className="flex justify-center gap-3 items-center">
-                <div className="bg-slate-900 border border-gray-200 dark:border-white/15 px-4 py-2 rounded-xl text-center">
-                  <p className="text-[10px] text-gray-500 dark:text-gray-400">مجموع نقاطك</p>
-                  <p className="text-lg font-bold text-amber-600 dark:text-amber-400">{score}</p>
-                </div>
-                <span className="text-gray-500 dark:text-gray-400">من أصل</span>
-                <div className="bg-slate-900 border border-gray-200 dark:border-white/15 px-4 py-2 rounded-xl text-center">
-                  <p className="text-[10px] text-gray-500 dark:text-gray-400">أعلى تقييم</p>
-                  <p className="text-lg font-bold text-gray-500 dark:text-gray-400">{maxScore}</p>
-                </div>
-              </div>
-
-              <div className={`px-4 py-2 rounded-xl border text-xs font-bold ${getPerformanceBadge().color}`}>
-                التقييم المستحق: {getPerformanceBadge().text}
+              <div className={`px-4 py-3 rounded-xl border text-sm font-black ${getPerformanceBadge().color}`}>
+                التقييم: {getPerformanceBadge().text}
               </div>
 
               <button
                 onClick={startConversation}
-                className="w-full bg-[#00b894] text-white font-bold text-xs py-2.5 rounded-xl hover:bg-[#094F28] transition-all cursor-pointer"
+                className="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold text-sm py-3.5 rounded-xl hover:scale-[1.02] transition-transform cursor-pointer shadow-lg"
               >
-                🔄 إعادة المحاكاة والتدريب
+                🔄 محادثة جديدة
               </button>
             </div>
           )}
-          <div ref={chatEndRef} />
+          <div ref={chatEndRef} className="h-4" />
         </div>
 
-        {/* Input/Options Options Drawer */}
-        <div className="shrink-0 animate-fadeIn">
-          {isFinished ? null : currentStep ? (
-            <div className="glass p-4 rounded-2xl border border-gray-200 dark:border-white/5 space-y-3 shadow-lg">
-              <p className="text-xs font-bold text-amber-600 dark:text-amber-400 text-right">اختر ردك أو إجابتك المناسبة للتكملة:</p>
+        {/* Input Drawer */}
+        <div className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-white/10 p-4 shrink-0 z-10 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] dark:shadow-[0_-10px_40px_rgba(0,0,0,0.3)]">
+          {isFinished ? (
+            <p className="text-center text-xs font-bold text-emerald-500 py-2">المحادثة مغلقة. يمكنك إعادة تقييم نفسك.</p>
+          ) : isTyping ? (
+            <p className="text-center text-xs font-bold text-gray-400 py-2 animate-pulse">جاري الرد...</p>
+          ) : currentStep ? (
+            <div className="space-y-3">
+              <p className="text-xs font-bold text-[#00b894] text-center mb-3">💬 اختر الرد المناسب للاستمرار:</p>
               
               <div className="grid gap-2">
                 {currentStep.options.map((opt, idx) => (
                   <button
                     key={idx}
                     onClick={() => handleSelectOption(opt)}
-                    className="w-full text-right bg-white dark:bg-[#1a1a2e] hover:bg-gray-50 dark:hover:bg-white/5 hover:border-[#00b894]/20 border border-gray-200 dark:border-white/10 p-3.5 rounded-xl text-xs transition-all flex flex-col gap-1.5 group cursor-pointer"
+                    className="w-full text-right bg-gray-50 dark:bg-[#1a1a2e] hover:bg-emerald-50 dark:hover:bg-[#00b894]/10 hover:border-emerald-200 dark:hover:border-[#00b894]/30 border border-gray-200 dark:border-white/5 p-4 rounded-2xl transition-all flex flex-col gap-1.5 group cursor-pointer shadow-sm"
                   >
-                    {/* German Option */}
                     <div className="flex items-center gap-2 w-full justify-between" dir="ltr">
-                      <span className="font-sans font-bold text-gray-900 dark:text-white text-left group-hover:text-[#00b894] transition-colors leading-relaxed">
+                      <span className="font-bold text-gray-800 dark:text-gray-200 text-left group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                         {opt.textDe}
                       </span>
-                      <span className="text-[10px] text-gray-500 dark:text-gray-400 whitespace-nowrap opacity-60">
-                        {opt.points} ن
+                      <span className="text-[10px] font-black text-amber-500 bg-amber-50 dark:bg-amber-900/30 px-2 py-0.5 rounded-full">
+                        +{opt.points}
                       </span>
                     </div>
-
-                    {/* Arabic hint */}
-                    <span className="text-[10px] text-gray-500 dark:text-gray-400 leading-relaxed select-none">
+                    <span className="text-[11px] text-gray-500 dark:text-gray-400">
                       💡 {opt.textAr}
                     </span>
                   </button>
@@ -358,8 +405,8 @@ export default function ChatSimulatorPage() {
               </div>
             </div>
           ) : (
-            <div className="glass p-4 text-center rounded-2xl border border-gray-200 dark:border-white/5">
-              <p className="text-xs text-gray-500 dark:text-gray-400">جاري تحميل الخطوة...</p>
+            <div className="p-4 text-center">
+              <p className="text-xs text-gray-500">جاري تحميل الخطوة...</p>
             </div>
           )}
         </div>
