@@ -350,10 +350,15 @@ export default function Layout({ children }: { children: ReactNode }) {
                 </p>
                 <div className="mb-3 font-bold text-sm text-white/80">تابعنا على (Follow us on):</div>
                 <div className="flex gap-3">
-                  {/* Social Icons Placeholders */}
-                  <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#00b894] transition-colors">📱</a>
-                  <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#00b894] transition-colors">📺</a>
-                  <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#00b894] transition-colors">💬</a>
+                  <a href="https://t.me/b1syrer" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#0088cc] flex items-center justify-center hover:scale-110 transition-transform shadow-lg" title="Telegram">
+                    <span className="text-white text-sm">📱</span>
+                  </a>
+                  <a href="mailto:shami.fadi@gmx.de" className="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center hover:scale-110 transition-transform shadow-lg" title="Email">
+                    <span className="text-white text-sm">✉️</span>
+                  </a>
+                  <a href="https://buymeacoffee.com/halawanyfav" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full bg-[#FFDD00] flex items-center justify-center hover:scale-110 transition-transform shadow-lg" title="Buy me a coffee">
+                    <span className="text-black text-sm">☕</span>
+                  </a>
                 </div>
               </div>
 
@@ -416,12 +421,12 @@ export default function Layout({ children }: { children: ReactNode }) {
               </div>
               
               <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mt-4 md:mt-0 font-medium">
-                <a href="#" className="flex items-center gap-1 hover:text-[#00b894] transition-colors">⚑ Report an Issue</a>
-                <a href="#" className="flex items-center gap-1 hover:text-[#00b894] transition-colors">💬 Share Feedback</a>
+                <a href="mailto:shami.fadi@gmx.de?subject=Report%20Issue" className="flex items-center gap-1 hover:text-[#00b894] transition-colors">⚑ إبلاغ عن مشكلة (Report Issue)</a>
+                <a href="mailto:shami.fadi@gmx.de?subject=Feedback" className="flex items-center gap-1 hover:text-[#00b894] transition-colors">💬 شاركنا رأيك (Feedback)</a>
                 <span className="text-white/20 hidden sm:inline">|</span>
                 <a href="/impressum" className="hover:text-white transition-colors">Impressum</a>
-                <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
-                <a href="/agb" className="hover:text-white transition-colors">Terms of Service</a>
+                <a href="/privacy" className="hover:text-white transition-colors">سياسة الخصوصية (Privacy Policy)</a>
+                <a href="/agb" className="hover:text-white transition-colors">شروط الخدمة (Terms of Service)</a>
               </div>
             </div>
           </div>
