@@ -92,7 +92,7 @@ function getPathLabel(path?: string) {
   return cleanPath;
 }
 
-type AdminTab = 'stats' | 'users' | 'communication' | 'settings' | 'content'
+type AdminTab = 'stats' | 'users' | 'subscriptions' | 'communication' | 'settings' | 'content'
 
 export default function AdminDashboardPage() {
   const [authenticated, setAuthenticated] = useState(() => sessionStorage.getItem('b1-admin-auth') === '1')
@@ -611,62 +611,78 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto pb-10 space-y-6">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 dark:bg-[#0f0f1a] -mx-4 sm:-mx-0 -mt-6 sm:mt-0">
       
-      {/* Modern Header */}
-      <div className="glass p-6 rounded-[2rem] border border-gray-200 dark:border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-sm relative overflow-hidden">
-        <div className="absolute right-0 top-0 w-64 h-64 bg-gradient-to-br from-[#0984e3]/10 to-transparent blur-3xl pointer-events-none"></div>
-        <div className="flex items-center gap-4 relative z-10">
-          <div className="w-14 h-14 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-2xl flex items-center justify-center text-2xl shadow-md">
-            👑
-          </div>
+      {/* SIDEBAR */}
+      <div className="w-full md:w-72 bg-white dark:bg-[#1a1a2e] border-b md:border-b-0 md:border-l border-gray-200 dark:border-white/5 p-6 flex flex-col gap-8 shrink-0 shadow-[0_0_40px_rgba(0,0,0,0.03)] z-10">
+        <div className="flex items-center gap-4 px-2">
+          <div className="w-12 h-12 bg-gradient-to-br from-[#0984e3] to-[#00b894] rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg shadow-[#00b894]/20">👑</div>
           <div>
-            <h1 className="text-2xl font-black text-gray-900 dark:text-white">مرحباً فادي 👋</h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400">تحكم كامل بالإحصائيات والمحتوى والسيرفر.</p>
+            <h1 className="font-black text-xl text-gray-900 dark:text-white leading-tight">الإدارة</h1>
+            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">B1-SYRER V2</p>
           </div>
         </div>
-        <div className="flex items-center gap-3 relative z-10">
-          <button onClick={fetchData} disabled={isUsersLoading} className="px-5 py-2.5 bg-white dark:bg-white/5 text-gray-600 dark:text-gray-300 rounded-xl font-bold hover:bg-gray-50 dark:hover:bg-white/10 transition-colors border border-gray-200 dark:border-white/10 shadow-sm flex items-center gap-2">
-            {isUsersLoading ? '⏳ جاري...' : '🔄 تحديث'}
+        
+        <div className="flex flex-col gap-2">
+          <p className="text-xs font-bold text-gray-400 mb-2 px-4 uppercase tracking-widest">القائمة الرئيسية</p>
+          <button onClick={() => setActiveTab('stats')} className={`text-right px-5 py-3.5 rounded-xl font-bold transition-all flex items-center gap-3 ${activeTab === 'stats' ? 'bg-[#0984e3]/10 text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
+            <span className="text-xl">📊</span> الإحصائيات
           </button>
-          <button onClick={handleLogout} className="px-5 py-2.5 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl font-bold hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors border border-red-100 dark:border-red-900/30">
-            تسجيل الخروج 🚪
+          <button onClick={() => setActiveTab('users')} className={`text-right px-5 py-3.5 rounded-xl font-bold transition-all flex items-center gap-3 ${activeTab === 'users' ? 'bg-[#0984e3]/10 text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
+            <span className="text-xl">👥</span> المستخدمون
+          </button>
+          <button onClick={() => setActiveTab('subscriptions')} className={`text-right px-5 py-3.5 rounded-xl font-bold transition-all flex items-center gap-3 ${activeTab === 'subscriptions' ? 'bg-[#00b894]/10 text-[#00b894]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
+            <span className="text-xl">💳</span> الاشتراكات <span className="mr-auto bg-[#00b894] text-white text-[9px] px-2 py-0.5 rounded-full animate-pulse">جديد</span>
+          </button>
+          <button onClick={() => setActiveTab('communication')} className={`text-right px-5 py-3.5 rounded-xl font-bold transition-all flex items-center gap-3 ${activeTab === 'communication' ? 'bg-[#0984e3]/10 text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
+            <span className="text-xl">💬</span> التواصل والرسائل
+            {unreadSuggestionsCount > 0 && <span className="mr-auto bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full">{unreadSuggestionsCount}</span>}
+          </button>
+          
+          <div className="h-px bg-gray-100 dark:bg-white/5 my-2"></div>
+          
+          <button onClick={() => setActiveTab('content')} className={`text-right px-5 py-3.5 rounded-xl font-bold transition-all flex items-center gap-3 ${activeTab === 'content' ? 'bg-gradient-to-r from-[#e84393]/20 to-transparent text-[#e84393]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
+            <span className="text-xl">✨</span> استوديو المحتوى
+          </button>
+          <button onClick={() => setActiveTab('settings')} className={`text-right px-5 py-3.5 rounded-xl font-bold transition-all flex items-center gap-3 ${activeTab === 'settings' ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 shadow-xl' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
+            <span className="text-xl">⚙️</span> إعدادات النظام
+          </button>
+        </div>
+
+        <div className="mt-auto pt-6 border-t border-gray-100 dark:border-white/5 flex flex-col gap-3">
+          <button onClick={fetchData} disabled={isUsersLoading} className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors">
+            {isUsersLoading ? '⏳ جاري...' : '🔄 تحديث البيانات'}
+          </button>
+          <button onClick={handleLogout} className="w-full px-4 py-3.5 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 text-red-600 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors">
+             تسجيل الخروج 🚪
           </button>
         </div>
       </div>
 
-      {/* Admin Token Bar */}
-      <div className="bg-white dark:bg-[#1a1a2e] rounded-xl p-4 border border-gray-200 dark:border-white/5 flex flex-wrap gap-4 items-center">
-        <div className="flex items-center gap-2 text-gray-900 dark:text-white font-bold">
-          🔑 رمز اتصال السيرفر:
+      {/* MAIN CONTENT AREA */}
+      <div className="flex-1 w-full max-w-6xl mx-auto p-4 sm:p-8 space-y-8 h-screen overflow-y-auto custom-scrollbar">
+        
+        {/* Welcome Header */}
+        <div className="glass p-8 rounded-[2rem] border border-gray-200 dark:border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6 shadow-sm relative overflow-hidden bg-white/50 dark:bg-[#1a1a2e]/50 backdrop-blur-xl">
+          <div className="absolute right-0 top-0 w-96 h-96 bg-gradient-to-br from-[#0984e3]/10 via-[#00b894]/5 to-transparent blur-3xl pointer-events-none rounded-full"></div>
+          <div className="relative z-10 text-center sm:text-right">
+            <h2 className="text-3xl font-black text-gray-900 dark:text-white mb-2">مرحباً فادي 👋</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 font-bold">هنا يمكنك إدارة المنصة بالكامل (مستخدمين، إيرادات، تواصل، محتوى).</p>
+          </div>
+          
+          <div className="w-full sm:w-auto relative z-10 flex-shrink-0">
+            <div className="bg-white dark:bg-[#0f0f1a] rounded-xl p-2 border border-gray-200 dark:border-white/5 flex gap-3 items-center shadow-sm w-full sm:min-w-[300px]">
+              <div className="text-lg px-2">🔑</div>
+              <input
+                type="password"
+                value={adminToken}
+                onChange={e => handleTokenChange(e.target.value)}
+                placeholder="رمز API Token..."
+                className="flex-1 bg-transparent font-mono text-sm outline-none text-gray-800 dark:text-gray-200 w-full"
+              />
+            </div>
+          </div>
         </div>
-        <input
-          type="password"
-          value={adminToken}
-          onChange={e => handleTokenChange(e.target.value)}
-          placeholder="أدخل رمز API Token هنا للاتصال بالسيرفر..."
-          className="flex-1 min-w-[240px] border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 rounded-lg p-2 font-mono text-sm outline-none focus:border-[#00b894] text-gray-800 dark:text-gray-200"
-        />
-      </div>
-
-      {/* Tabs */}
-      <div className="flex flex-wrap gap-2 bg-gray-100 dark:bg-white/5 p-1.5 rounded-2xl border border-gray-200 dark:border-white/10 w-fit mx-auto sm:mx-0">
-        <button onClick={() => setActiveTab('stats')} className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'stats' ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}>
-          📊 الإحصائيات
-        </button>
-        <button onClick={() => setActiveTab('users')} className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'users' ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}>
-          👥 المستخدمون
-        </button>
-        <button onClick={() => setActiveTab('communication')} className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'communication' ? 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}>
-          💬 التواصل والرسائل
-        </button>
-        <button onClick={() => setActiveTab('content')} className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'content' ? 'bg-[#00b894] text-white shadow-sm' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}>
-          ✨ استوديو المحتوى
-        </button>
-        <button onClick={() => setActiveTab('settings')} className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'settings' ? 'bg-gray-800 text-white shadow-sm' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}>
-          ⚙️ إعدادات النظام
-        </button>
-      </div>
 
       <AnimatePresence mode="wait">
         {/* STATS TAB */}
@@ -1009,12 +1025,23 @@ export default function AdminDashboardPage() {
                 </div>
               </div>
             </div>
-
           </motion.div>
         )}
 
-      </AnimatePresence>
+      {/* SUBSCRIPTIONS TAB */}
+      {activeTab === 'subscriptions' && (
+        <motion.div key="subscriptions" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-6">
+          <h2 className="text-xl font-black text-gray-900 dark:text-white mb-6">الاشتراكات والإيرادات 💳</h2>
+          <div className="glass p-12 text-center rounded-3xl border border-[#00b894]/20 bg-gradient-to-br from-[#00b894]/5 to-transparent">
+            <div className="text-6xl mb-6">📈</div>
+            <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2">جاري العمل على لوحة الإيرادات!</h3>
+            <p className="text-gray-500">سيتم تفعيل هذه اللوحة قريباً لتتبع مبيعات باقات B1 وعدد المشتركين النشطين (Premium).</p>
+          </div>
+        </motion.div>
+      )}
 
-    </div>
+    </AnimatePresence>
+  </div>
+</div>
   )
 }
