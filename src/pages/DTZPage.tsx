@@ -31,25 +31,6 @@ export default function DTZPage() {
       </div>
 
       {/* Cards Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-        
-        {/* Hören Card */}
-        <motion.div 
-          whileHover={{ y: -4 }}
-          className="glass rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/10 shadow-xl group cursor-pointer flex flex-col"
-        >
-          <div className="h-32 bg-gradient-to-br from-[#2f6df6]/10 to-[#2f6df6]/5 flex items-center justify-center relative">
-            <div className="absolute top-4 left-4 bg-white dark:bg-[#1a1a2e] w-10 h-10 rounded-full flex items-center justify-center shadow-md">
-              <span className="text-xl">🎧</span>
-            </div>
-          </div>
-          <div className="p-6 flex-1 flex flex-col justify-between">
-            <div>
-              <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-2">الاستماع (Hören)</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">
-                تدرب على فهم الإعلانات الهاتفية، المعلومات الإعلامية، والمحادثات اليومية والآراء المختلفة.
-              </p>
-              {/* DTZ Mock Exams Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 px-4">
         {dtzExams.map((exam, i) => (
           <motion.div key={exam.id} whileHover={{ y: -4 }} className="glass rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/10 shadow-xl flex flex-col relative">
