@@ -198,26 +198,24 @@ export default function Layout({ children }: { children: ReactNode }) {
               </div>
               <div className="hidden sm:block">
                 <span className="font-black text-base text-gray-900 dark:text-white leading-none block">B1-Syrer</span>
-                <span className="text-[10px] text-gray-400 dark:text-gray-500 leading-none">.de — مجّاني 100%</span>
+                <span className="text-[10px] text-gray-400 dark:text-gray-500 leading-none">.de — 100% Free</span>
               </div>
             </a>
 
             {/* Center: Desktop Nav Links */}
-            <nav className="hidden md:flex items-center gap-1">
+            <nav className="hidden lg:flex items-center gap-0.5">
               {navItems.map((item) => {
-                const Icon = item.icon
                 const active = isActive(item.path)
                 return (
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                    className={`px-2.5 py-1.5 rounded-lg text-[11px] xl:text-xs font-bold transition-all whitespace-nowrap ${
                       active
                         ? 'bg-[#00b894]/10 text-[#00b894]'
                         : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/5'
                     }`}
                   >
-                    <Icon size={14} strokeWidth={active ? 2.5 : 1.5} />
                     {item.label}
                   </Link>
                 )
@@ -264,9 +262,9 @@ export default function Layout({ children }: { children: ReactNode }) {
                           localStorage.removeItem('b1-current-user')
                           window.location.reload()
                         }}
-                        className="text-[10px] bg-red-50 text-red-500 px-2 py-1 rounded-lg hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/40 transition-colors"
+                        className="text-[10px] bg-red-50 text-red-500 px-2 py-1 rounded-lg hover:bg-red-100 dark:bg-red-900/20 dark:hover:bg-red-900/40 transition-colors font-bold"
                       >
-                        خروج
+                        Logout
                       </button>
                     </div>
                   )
@@ -277,7 +275,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                     to="/register" 
                     className="hidden sm:flex items-center gap-1 bg-[#0984e3] hover:bg-[#0874c3] text-white px-3 py-1.5 rounded-xl text-xs font-bold transition-all shadow-md mr-1"
                   >
-                    🚀 تسجيل مجاني
+                    🚀 Sign up Free
                   </Link>
                 )
               })()}
