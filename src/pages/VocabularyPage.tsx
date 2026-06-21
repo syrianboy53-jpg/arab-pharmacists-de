@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { vocabCategories } from '../data/vocabulary'
 
 const categoryEmojis: Record<string, string> = {
@@ -33,6 +34,14 @@ export default function VocabularyPage() {
   const [selectedCatId, setSelectedCatId] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [showMeaning, setShowMeaning] = useState<Record<string, boolean>>({})
+  const [progressData, setProgressData] = useState<Record<string, number>>({})
+
+  useEffect(() => {
+    try {
+      const data = JSON.parse(localStorage.getItem('b1-vocab-progress') || '{}')
+      setProgressData(data)
+    } catch (e) {}
+  }, [])
 
   // Text-To-Speech function
   const speak = (text: string) => {
@@ -145,15 +154,31 @@ export default function VocabularyPage() {
           {filteredData.map(cat => (
             <div key={cat.id} className="space-y-4">
               {/* Category Subheader */}
-              <div className="flex items-center gap-2 border-b border-gray-200 dark:border-white/10 pb-2">
-                <span className="text-2xl">{categoryEmojis[cat.id] || '📚'}</span>
-                <div>
-                  <h3 className="font-bold text-[#00b894]">{cat.titleAr}</h3>
-                  <p className="text-xs text-gray-500 dark:text-gray-400" dir="ltr">{cat.titleDe}</p>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 dark:border-white/10 pb-4">
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl">{categoryEmojis[cat.id] || '📚'}</span>
+                  <div>
+                    <h3 className="font-bold text-xl text-[#00b894]">{cat.titleAr}</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 font-bold" dir="ltr">{cat.titleDe}</p>
+                  </div>
+                  <span className="text-xs bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 px-2 py-0.5 rounded-full text-gray-500 dark:text-gray-400">
+                    {cat.words.length} كلمة
+                  </span>
                 </div>
-                <span className="mr-auto text-xs bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 px-2 py-0.5 rounded-full text-gray-500 dark:text-gray-400">
-                  {cat.words.length} كلمة
-                </span>
+                
+                <div className="flex items-center gap-3 w-full sm:w-auto">
+                  {progressData[cat.id] ? (
+                    <div className="flex items-center gap-2 text-green-500 font-bold text-sm bg-green-50 dark:bg-green-900/20 px-3 py-2 rounded-xl">
+                      <span>✅ مكتمل ({progressData[cat.id]}%)</span>
+                    </div>
+                  ) : null}
+                  <Link 
+                    to={`/vocabulary/lesson/${cat.id}`}
+                    className="flex-1 sm:flex-none px-6 py-2.5 bg-[#0984e3] hover:bg-blue-600 text-white font-black rounded-xl text-center transition-all shadow-lg shadow-blue-500/20"
+                  >
+                    🚀 ابدأ الدرس التفاعلي
+                  </Link>
+                </div>
               </div>
 
               {/* Cards Grid */}
