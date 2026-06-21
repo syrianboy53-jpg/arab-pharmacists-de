@@ -265,6 +265,39 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Level Selector Hub */}
+      <div className="pt-6">
+        <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+          <span>🌍</span> اختر مستواك (Wähle dein Niveau)
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <Link to="/a1" className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center justify-center text-center bg-gradient-to-b hover:from-green-50 hover:to-white dark:hover:from-green-900/20 dark:hover:to-[#0f0f1a]">
+            <span className="text-sm font-bold text-green-600 dark:text-green-400 mb-1">المبتدئون</span>
+            <span className="text-4xl font-black text-gray-900 dark:text-white group-hover:text-green-500 transition-colors">A1</span>
+          </Link>
+          <Link to="/a2" className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center justify-center text-center bg-gradient-to-b hover:from-yellow-50 hover:to-white dark:hover:from-yellow-900/20 dark:hover:to-[#0f0f1a]">
+            <span className="text-sm font-bold text-yellow-600 dark:text-yellow-400 mb-1">الأساسيات</span>
+            <span className="text-4xl font-black text-gray-900 dark:text-white group-hover:text-yellow-500 transition-colors">A2</span>
+          </Link>
+          <Link to="/b1" className="glass p-5 rounded-2xl border border-[#0984e3]/30 shadow-lg hover:-translate-y-1 transition-all group flex flex-col items-center justify-center text-center bg-gradient-to-b from-[#0984e3]/10 to-transparent">
+            <span className="absolute top-2 right-2 flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0984e3] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-[#0984e3]"></span>
+            </span>
+            <span className="text-sm font-bold text-[#0984e3] mb-1">المتوسط</span>
+            <span className="text-4xl font-black text-gray-900 dark:text-white group-hover:text-[#0984e3] transition-colors">B1</span>
+          </Link>
+          <Link to="/b2-hub" className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center justify-center text-center bg-gradient-to-b hover:from-orange-50 hover:to-white dark:hover:from-orange-900/20 dark:hover:to-[#0f0f1a]">
+            <span className="text-sm font-bold text-orange-600 dark:text-orange-400 mb-1">متقدم</span>
+            <span className="text-4xl font-black text-gray-900 dark:text-white group-hover:text-orange-500 transition-colors">B2</span>
+          </Link>
+          <Link to="/c1" className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-md hover:-translate-y-1 transition-all group flex flex-col items-center justify-center text-center bg-gradient-to-b hover:from-red-50 hover:to-white dark:hover:from-red-900/20 dark:hover:to-[#0f0f1a] col-span-2 md:col-span-1">
+            <span className="text-sm font-bold text-red-600 dark:text-red-400 mb-1">الاحتراف</span>
+            <span className="text-4xl font-black text-gray-900 dark:text-white group-hover:text-red-500 transition-colors">C1</span>
+          </Link>
+        </div>
+      </div>
+
       {/* Main Grid Modules */}
       <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
         {sections.map((section, sIdx) => (

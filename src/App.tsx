@@ -30,6 +30,13 @@ const PronunciationLabPage = lazy(() => import('./pages/PronunciationLabPage'))
 const BriefCorrectorPage = lazy(() => import('./pages/BriefCorrectorPage'))
 const DTZPage = lazy(() => import('./pages/DTZPage'))
 
+// Levels Hubs
+const A1Page = lazy(() => import('./pages/levels/A1Page'))
+const A2Page = lazy(() => import('./pages/levels/A2Page'))
+const B1HubPage = lazy(() => import('./pages/levels/B1HubPage'))
+const B2HubPage = lazy(() => import('./pages/levels/B2HubPage'))
+const C1Page = lazy(() => import('./pages/levels/C1Page'))
+
 // New pages — Phase 3: Interactive
 const DailyChallengePage = lazy(() => import('./pages/DailyChallengePage'))
 const LeaderboardPage = lazy(() => import('./pages/LeaderboardPage'))
@@ -120,6 +127,13 @@ export default function App() {
             
           {/* DTZ Hub */}
           <Route path="/dtz" element={<DTZPage />} />
+
+          {/* Levels Hubs */}
+          <Route path="/a1" element={<A1Page />} />
+          <Route path="/a2" element={<A2Page />} />
+          <Route path="/b1" element={<B1HubPage />} />
+          <Route path="/b2-hub" element={<B2HubPage />} />
+          <Route path="/c1" element={<C1Page />} />
 
           {/* Exam Simulation */}
           <Route path="/telc-sim" element={<TelcSimPage />} />
