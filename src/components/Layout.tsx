@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { type ReactNode, useState, useEffect } from 'react'
-import { Home, BookOpen, Gamepad2, BarChart3, Moon, Sun, ArrowRight, Trophy, Zap } from 'lucide-react'
+import { Home, ClipboardList, Tag, GraduationCap, Award, BookOpen, ScrollText, Mail, LayoutDashboard, Moon, Sun, ArrowRight, Zap } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -71,11 +71,15 @@ export default function Layout({ children }: { children: ReactNode }) {
   const isActive = (path: string) => location.pathname === path
 
   const navItems = [
-    { path: '/', label: 'الرئيسية', icon: Home },
-    { path: '/grammar', label: 'القواعد', icon: BookOpen },
-    { path: '/daily', label: 'تحدّي', icon: Gamepad2 },
-    { path: '/dashboard', label: 'تقدّمي', icon: BarChart3 },
-    { path: '/leaderboard', label: 'المتصدّرين', icon: Trophy },
+    { path: '/', label: 'Home', icon: Home },
+    { path: '/b1-models', label: 'Mock Tests', icon: ClipboardList },
+    { path: '#', label: 'Pricing', icon: Tag },
+    { path: '/b1', label: 'GOETHE', icon: GraduationCap },
+    { path: '/b2-hub', label: 'TELC', icon: Award },
+    { path: '/dtz', label: 'DTZ', icon: BookOpen },
+    { path: '/c1', label: 'TestDaF', icon: ScrollText },
+    { path: '#', label: 'Contact', icon: Mail },
+    { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   ]
 
   // Allow admin page even during maintenance
