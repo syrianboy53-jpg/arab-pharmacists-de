@@ -2457,7 +2457,7 @@ export const schreibenModels = [
   {
     "id": "schreiben-23",
     "title": "نموذج Schreiben رقم 23",
-    "description": "كتابة رسالة — الاعتذار عن الحضور (Teil 1 أو Teil 3).",
+    "description": "كتابة رسالة — اعتذار (Entschuldigung).",
     "parts": [
       {
         "id": "schreiben-23-1",

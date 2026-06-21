@@ -299,7 +299,7 @@ const commonFooterHTML = `
       <a href="../datenschutz/">خصوصية البيانات (Datenschutz)</a> | 
       <a href="../agb/">الشروط والأحكام (AGB)</a>
     </p>
-    <p style="margin-top:15px; font-size:12px; color:rgba(255,255,255,0.4);">© 2026 صنع بحب من فادي الحلواني من الحسكة.</p>
+    <p style="margin-top:15px; font-size:13px; font-weight:800; color:var(--text-muted);">© 2026 صنع بحب من فادي الحلواني من الحسكة.</p>
   </footer>
 `;
 
@@ -463,10 +463,40 @@ function generateSchreibenPage() {
   const dir = path.join(landingDir, 'schreiben');
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
-  let writingHTML = '';
+  let teil1Tasks = [];
+  let teil2Tasks = [];
+  let teil3Tasks = [];
+  
   schreibenData.forEach(model => {
-    let tasksHTML = '';
     (model.tasks || model.parts || []).forEach(t => {
+      // Create a unified object
+      const taskObj = {
+        modelTitle: model.title,
+        modelDesc: model.description,
+        ...t
+      };
+      if (t.taskNumber === 1 || (t.typeDe && t.typeDe.includes('Informelle'))) {
+        teil1Tasks.push(taskObj);
+      } else if (t.taskNumber === 2 || (t.typeDe && t.typeDe.includes('Forum'))) {
+        teil2Tasks.push(taskObj);
+      } else if (t.taskNumber === 3 || (t.typeDe && t.typeDe.includes('Formelle'))) {
+        teil3Tasks.push(taskObj);
+      } else {
+        teil1Tasks.push(taskObj); // fallback
+      }
+    });
+  });
+
+  const renderTasks = (tasksList, categoryTitle, icon, color) => {
+    if (tasksList.length === 0) return '';
+    let categoryHTML = `
+      <div style="margin-bottom: 40px;">
+        <h2 style="font-size: 26px; font-weight: 900; color: var(--${color}); margin-bottom: 20px; border-bottom: 3px solid var(--${color}); padding-bottom: 10px;">
+          ${icon} ${categoryTitle}
+        </h2>
+    `;
+    
+    tasksList.forEach(t => {
       let phrasesHTML = '';
       if (t.usefulPhrases) {
         phrasesHTML += '<div style="margin-top: 15px; font-weight:900; color:var(--blue); font-size:18px;">💡 عبارات مفيدة (Nützliche Sätze):</div>';
@@ -480,10 +510,10 @@ function generateSchreibenPage() {
         });
       }
 
-      tasksHTML += `
-        <div style="border:2px solid var(--border-color); border-radius:20px; padding: 24px; margin-top:24px; background:#ffffff;">
-          <h3 style="color:var(--red); font-size:20px; font-weight:900; margin-bottom:12px;">المهمة ${t.taskNumber || 1}: ${t.typeAr} (${t.typeDe})</h3>
-          <div class="arabic-block" style="color:var(--text-main);"><strong>الموضوع المطلوب:</strong> ${t.promptAr}</div>
+      categoryHTML += `
+        <div class="card" style="margin-bottom: 24px;">
+          <h3 class="card-title">${t.modelTitle} — ${t.typeAr}</h3>
+          <div class="arabic-block" style="color:var(--text-main); margin-bottom: 12px;"><strong>الموضوع المطلوب:</strong> ${t.promptAr}</div>
           <div class="german-block" style="color:var(--text-muted); background:transparent; border-color:transparent; padding:0; margin-bottom:16px;"><em>Aufgabe: ${t.promptDe}</em></div>
           
           <div style="margin-top: 20px;">
@@ -494,15 +524,15 @@ function generateSchreibenPage() {
         </div>
       `;
     });
+    
+    categoryHTML += `</div>`;
+    return categoryHTML;
+  };
 
-    writingHTML += `
-      <div class="card" style="margin-bottom: 30px;">
-        <h2 class="card-title">${model.title}</h2>
-        <p class="arabic-block" style="font-size:18px; color:var(--text-main);">${model.description}</p>
-        ${tasksHTML}
-      </div>
-    `;
-  });
+  let writingHTML = '';
+  writingHTML += renderTasks(teil1Tasks, 'Teil 1: رسالة غير رسمية (Informelle E-Mail)', '👋', 'green');
+  writingHTML += renderTasks(teil2Tasks, 'Teil 2: مشاركة في منتدى (Forumbeitrag)', '💬', 'blue');
+  writingHTML += renderTasks(teil3Tasks, 'Teil 3: رسالة رسمية (Formelle E-Mail)', '🏢', 'red');
 
   const fullHTML = `
     <!DOCTYPE html>
