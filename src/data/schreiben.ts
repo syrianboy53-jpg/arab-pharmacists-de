@@ -2239,5 +2239,219 @@ export const schreibenModels = [
         sampleAnswer: "Sehr geehrter Herr Direktor,\n\nhiermit möchte ich Ihnen mitteilen, dass meine Tochter Sara (Klasse 5b) leider krank ist und von Montag bis voraussichtlich Mittwoch nicht zur Schule kommen kann.\n\nDas ärztliche Attest werde ich Ihnen am Donnerstag mitgeben.\n\nVielen Dank für Ihr Verständnis.\n\nMit freundlichen Grüßen,\nYara Hassan",
       }
     ]
+  },
+  {
+    "id": "schreiben-18",
+    "title": "نموذج Schreiben رقم 18",
+    "description": "تقديم على تدريب مهني — Bewerbung für ein Praktikum",
+    "tasks": [
+      {
+        "id": "schreiben-18-1",
+        "taskNumber": 1,
+        "typeAr": "رسالة رسمية — تقديم على تدريب",
+        "typeDe": "Formelle Bewerbung",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "رأيتَ إعلاناً عن فرصة تدريب (Praktikum) في مستشفى. اكتب رسالة تقديم.",
+        "promptDe": "Sie haben eine Anzeige für ein Praktikum in einem Krankenhaus gelesen. Schreiben Sie eine Bewerbung.",
+        "requirements": [
+          "اذكر أين رأيت الإعلان.",
+          "قدّم نفسك (اسمك، عمرك، مستوى لغتك).",
+          "اذكر خبرتك أو مؤهلاتك.",
+          "اسأل عن موعد البدء."
+        ],
+        "usefulPhrases": [
+          { "de": "Sehr geehrte Damen und Herren,", "ar": "السيدات والسادة الأعزاء،" },
+          { "de": "Ich bewerbe mich um das Praktikum als …", "ar": "أتقدم بطلب للتدريب في مجال..." },
+          { "de": "Ich habe Ihre Anzeige auf … gelesen.", "ar": "قرأت إعلانكم على..." },
+          { "de": "Zurzeit besuche ich einen B1-Deutschkurs.", "ar": "حالياً أحضر كورس ألماني مستوى B1." },
+          { "de": "Ich habe Erfahrung in/als …", "ar": "لديّ خبرة في/كـ..." },
+          { "de": "Wann könnte ich anfangen?", "ar": "متى يمكنني البدء؟" },
+          { "de": "Mit freundlichen Grüßen", "ar": "مع أطيب التحيات" }
+        ],
+        "sampleAnswer": "Sehr geehrte Damen und Herren,\n\nmit großem Interesse habe ich Ihre Anzeige auf der Webseite des Krankenhauses gelesen. Ich bewerbe mich hiermit um das Praktikum in der Pflege.\n\nMein Name ist Ahmad Al-Masri, ich bin 28 Jahre alt und lerne seit einem Jahr Deutsch. Zurzeit besuche ich einen B1-Deutschkurs an der VHS. In Syrien habe ich als Krankenpfleger gearbeitet und bringe daher Erfahrung in der Patientenbetreuung mit.\n\nKönnten Sie mir bitte mitteilen, wann das Praktikum beginnt und welche Unterlagen Sie benötigen?\n\nÜber eine positive Antwort würde ich mich sehr freuen.\n\nMit freundlichen Grüßen\nAhmad Al-Masri"
+      },
+      {
+        "id": "schreiben-18-2",
+        "taskNumber": 2,
+        "typeAr": "رد على رسالة صديق — الحياة المهنية",
+        "typeDe": "Informeller Brief — Beruf",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "صديقك يسألك عن خططك المهنية في ألمانيا. اكتب له.",
+        "promptDe": "Ihr Freund fragt nach Ihren beruflichen Plänen in Deutschland.",
+        "requirements": [
+          "اذكر ماذا تريد أن تعمل.",
+          "اشرح لماذا اخترت هذا المجال.",
+          "اذكر ما تفعله حالياً للتحضير.",
+          "اسأله عن عمله."
+        ],
+        "sampleAnswer": "Hallo Omar,\n\nschön, dass du fragst! Ich möchte gern als Krankenpfleger in Deutschland arbeiten. Diesen Beruf habe ich in Syrien schon gemacht und er gefällt mir sehr.\n\nJetzt lerne ich Deutsch und mache bald ein Praktikum in einem Krankenhaus. Danach möchte ich die Anerkennung meines Abschlusses beantragen.\n\nUnd du? Arbeitest du schon oder suchst du noch?\n\nLiebe Grüße\nAhmad"
+      }
+    ]
+  },
+  {
+    "id": "schreiben-19",
+    "title": "نموذج Schreiben رقم 19",
+    "description": "شكوى عن طلبية — Beschwerde über eine Bestellung",
+    "tasks": [
+      {
+        "id": "schreiben-19-1",
+        "taskNumber": 1,
+        "typeAr": "رسالة شكوى رسمية",
+        "typeDe": "Formelle Beschwerde",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "طلبتَ جهاز كمبيوتر من الإنترنت لكنه وصل مكسوراً. اكتب رسالة شكوى.",
+        "promptDe": "Sie haben einen Laptop online bestellt, aber er kam kaputt an. Schreiben Sie eine Beschwerde.",
+        "requirements": [
+          "اذكر ماذا طلبت ومتى.",
+          "اشرح المشكلة بالتفصيل.",
+          "اذكر ماذا تريد (استرداد المال أو استبدال).",
+          "حدد موعداً للرد."
+        ],
+        "usefulPhrases": [
+          { "de": "Ich möchte mich über … beschweren.", "ar": "أريد أن أشتكي عن..." },
+          { "de": "Am … habe ich … bestellt.", "ar": "في ... طلبت ..." },
+          { "de": "Leider ist … kaputt/beschädigt angekommen.", "ar": "للأسف وصل ... مكسوراً/تالفاً." },
+          { "de": "Ich bitte Sie, mir … zu erstatten/umzutauschen.", "ar": "أطلب منكم استرداد المبلغ/الاستبدال." },
+          { "de": "Ich erwarte Ihre Antwort bis zum …", "ar": "أنتظر ردكم حتى تاريخ..." }
+        ],
+        "sampleAnswer": "Sehr geehrte Damen und Herren,\n\nam 10. Juni habe ich über Ihren Online-Shop einen Laptop bestellt (Bestellnummer: 456789). Leider habe ich festgestellt, dass der Bildschirm einen Riss hat und der Laptop nicht funktioniert.\n\nIch bitte Sie, mir entweder ein neues Gerät zu schicken oder den Kaufpreis in Höhe von 599 Euro zurückzuerstatten.\n\nBitte antworten Sie mir bis zum 25. Juni. Im Anhang finden Sie Fotos des Schadens.\n\nMit freundlichen Grüßen\nFadi Halawani"
+      },
+      {
+        "id": "schreiben-19-2",
+        "taskNumber": 2,
+        "typeAr": "بريد لصديق — تجربة سيئة في التسوق",
+        "typeDe": "E-Mail an einen Freund — Einkaufserlebnis",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "اكتب لصديقك عن تجربتك السيئة مع الطلبية واسأله عن نصيحته.",
+        "promptDe": "Schreiben Sie Ihrem Freund über Ihre schlechte Erfahrung mit der Bestellung.",
+        "requirements": [
+          "اشرح ماذا حصل.",
+          "اذكر شعورك.",
+          "اسأله إن كان عنده تجربة مشابهة.",
+          "اطلب نصيحته."
+        ],
+        "sampleAnswer": "Hallo Mustafa,\n\nstell dir vor, was passiert ist! Ich habe einen neuen Laptop online bestellt, und als er ankam, war der Bildschirm kaputt! Ich war so wütend!\n\nIch habe sofort eine Beschwerde geschrieben und hoffe, dass sie mir das Geld zurückgeben.\n\nHast du schon mal so etwas erlebt? Was würdest du an meiner Stelle tun?\n\nSchreib mir bald!\n\nLiebe Grüße\nFadi"
+      }
+    ]
+  },
+  {
+    "id": "schreiben-20",
+    "title": "نموذج Schreiben رقم 20",
+    "description": "استفسار عن كورس ألماني — Anfrage für einen Deutschkurs",
+    "tasks": [
+      {
+        "id": "schreiben-20-1",
+        "taskNumber": 1,
+        "typeAr": "رسالة استفسار رسمية",
+        "typeDe": "Formelle Anfrage",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "تريد التسجيل في كورس ألماني مستوى B2 في مدرسة لغات. اكتب رسالة استفسار.",
+        "promptDe": "Sie möchten sich für einen B2-Deutschkurs an einer Sprachschule anmelden. Schreiben Sie eine Anfrage.",
+        "requirements": [
+          "اسأل عن مواعيد الكورس.",
+          "اسأل عن الأسعار.",
+          "اذكر مستواك الحالي.",
+          "اسأل عن امتحان تحديد المستوى."
+        ],
+        "usefulPhrases": [
+          { "de": "Ich interessiere mich für einen Deutschkurs.", "ar": "أنا مهتم بكورس ألماني." },
+          { "de": "Wann beginnt der nächste Kurs?", "ar": "متى يبدأ الكورس القادم؟" },
+          { "de": "Was kostet der Kurs pro Monat?", "ar": "كم يكلف الكورس شهرياً؟" },
+          { "de": "Muss ich einen Einstufungstest machen?", "ar": "هل يجب أن أعمل اختبار تحديد مستوى؟" },
+          { "de": "Ich habe bereits die B1-Prüfung bestanden.", "ar": "لقد اجتزت امتحان B1." }
+        ],
+        "sampleAnswer": "Sehr geehrte Damen und Herren,\n\nich interessiere mich für einen B2-Deutschkurs an Ihrer Sprachschule. Ich habe vor zwei Monaten die B1-Prüfung bei telc bestanden und möchte mein Deutsch weiter verbessern.\n\nKönnten Sie mir bitte folgende Informationen geben:\n- Wann beginnt der nächste B2-Kurs?\n- Wie viel kostet der Kurs?\n- An welchen Tagen findet der Unterricht statt?\n- Muss ich vorher einen Einstufungstest machen?\n\nÜber eine baldige Antwort würde ich mich freuen.\n\nMit freundlichen Grüßen\nSarah Ahmed"
+      }
+    ]
+  },
+  {
+    "id": "schreiben-21",
+    "title": "نموذج Schreiben رقم 21",
+    "description": "إنهاء عقد — Kündigung eines Vertrags",
+    "tasks": [
+      {
+        "id": "schreiben-21-1",
+        "taskNumber": 1,
+        "typeAr": "رسالة إنهاء عقد نادي رياضي",
+        "typeDe": "Kündigung Fitnessstudio",
+        "wordCount": "حوالي 60 كلمة",
+        "promptAr": "تريد إنهاء عقدك مع نادٍ رياضي. اكتب رسالة رسمية.",
+        "promptDe": "Sie möchten Ihren Vertrag im Fitnessstudio kündigen.",
+        "requirements": [
+          "اذكر رقم عقدك أو عضويتك.",
+          "حدد تاريخ الإنهاء المطلوب.",
+          "اذكر السبب (اختياري).",
+          "اطلب تأكيداً كتابياً."
+        ],
+        "usefulPhrases": [
+          { "de": "Hiermit kündige ich meinen Vertrag …", "ar": "بموجب هذا أنهي عقدي..." },
+          { "de": "Meine Mitgliedsnummer lautet: …", "ar": "رقم عضويتي هو: ..." },
+          { "de": "… zum nächstmöglichen Termin.", "ar": "... في أقرب موعد ممكن." },
+          { "de": "Bitte bestätigen Sie die Kündigung schriftlich.", "ar": "أرجو تأكيد الإنهاء كتابياً." }
+        ],
+        "sampleAnswer": "Sehr geehrte Damen und Herren,\n\nhiermit kündige ich meinen Vertrag im Fitnessstudio „FitLife" zum nächstmöglichen Termin. Meine Mitgliedsnummer lautet: FL-20258.\n\nDer Grund für die Kündigung ist, dass ich umziehe und das Studio für mich nicht mehr erreichbar ist.\n\nBitte senden Sie mir eine schriftliche Bestätigung der Kündigung.\n\nMit freundlichen Grüßen\nKhaled Mansour"
+      },
+      {
+        "id": "schreiben-21-2",
+        "taskNumber": 2,
+        "typeAr": "بريد لصديق — الرياضة والصحة",
+        "typeDe": "E-Mail — Sport und Gesundheit",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "اكتب لصديقك عن سبب تركك للنادي وماذا تخطط بدلاً منه.",
+        "promptDe": "Schreiben Sie Ihrem Freund, warum Sie das Fitnessstudio verlassen und was Sie stattdessen planen.",
+        "requirements": [
+          "اشرح لماذا تركت النادي.",
+          "اذكر بديلاً رياضياً.",
+          "اسأل صديقك عن اقتراحات.",
+          "اقترح ممارسة الرياضة معاً."
+        ],
+        "sampleAnswer": "Hallo Rami,\n\nwie geht's dir? Ich wollte dir erzählen, dass ich mein Fitnessstudio gekündigt habe, weil ich nächsten Monat umziehe und das Studio zu weit weg ist.\n\nAber ich möchte natürlich weiter Sport machen! Ich überlege, im Park zu joggen oder Fahrrad zu fahren. Hast du vielleicht andere Ideen?\n\nWollen wir zusammen laufen gehen? Das wäre super!\n\nBis bald\nKhaled"
+      }
+    ]
+  },
+  {
+    "id": "schreiben-22",
+    "title": "نموذج Schreiben رقم 22",
+    "description": "دعوة لعيد ميلاد — Einladung zum Geburtstag",
+    "tasks": [
+      {
+        "id": "schreiben-22-1",
+        "taskNumber": 1,
+        "typeAr": "بريد غير رسمي — دعوة لحفلة",
+        "typeDe": "Informelle Einladung",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "ستحتفل بعيد ميلادك وتريد دعوة صديقك الألماني. اكتب له.",
+        "promptDe": "Sie feiern Ihren Geburtstag und möchten Ihren deutschen Freund einladen.",
+        "requirements": [
+          "أخبره بالمناسبة.",
+          "حدد التاريخ والوقت والمكان.",
+          "اذكر ما الذي يمكنه إحضاره.",
+          "اطلب منه الرد."
+        ],
+        "usefulPhrases": [
+          { "de": "Ich möchte dich herzlich zu … einladen.", "ar": "أريد أن أدعوك بحرارة لـ..." },
+          { "de": "Die Feier findet am … um … Uhr statt.", "ar": "الحفلة ستكون يوم ... الساعة ..." },
+          { "de": "Du brauchst nur gute Laune mitzubringen!", "ar": "تحتاج فقط أن تحضر مزاجاً جيداً!" },
+          { "de": "Sag mir bitte Bescheid, ob du kommen kannst.", "ar": "أخبرني من فضلك إن كنت ستأتي." }
+        ],
+        "sampleAnswer": "Liebe Nada,\n\nich werde am Samstag, den 15. Juli, 30 Jahre alt und möchte das mit Freunden feiern! Deshalb lade ich dich herzlich zu meiner Geburtstagsparty ein.\n\nDie Feier findet bei mir zu Hause statt, ab 18 Uhr. Ich werde syrisches Essen kochen und Musik machen. Du brauchst nichts mitzubringen, nur gute Laune! 😊\n\nKannst du kommen? Sag mir bitte bis Mittwoch Bescheid.\n\nIch freue mich auf dich!\n\nLiebe Grüße\nLina"
+      },
+      {
+        "id": "schreiben-22-2",
+        "taskNumber": 2,
+        "typeAr": "مشاركة في منتدى — الاحتفالات",
+        "typeDe": "Forumbeitrag — Feste feiern",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "في منتدى: \"كيف تحتفلون بأعياد الميلاد في بلدكم؟\" اكتب رأيك.",
+        "promptDe": "Im Forum: „Wie feiern Sie Geburtstage in Ihrem Land?\"",
+        "requirements": [
+          "اشرح كيف يُحتفل بأعياد الميلاد في بلدك.",
+          "قارن مع ألمانيا.",
+          "اذكر رأيك الشخصي.",
+          "اسأل الآخرين عن تجاربهم."
+        ],
+        "sampleAnswer": "Hallo zusammen,\n\ndas Thema finde ich sehr interessant! In Syrien feiert man Geburtstage meistens im Familienkreis. Man macht ein großes Essen und es gibt eine Torte. Die ganze Familie kommt zusammen.\n\nIn Deutschland ist es etwas anders: Hier feiert man oft mit Freunden, nicht nur mit der Familie. Das finde ich auch schön, weil man so verschiedene Leute kennenlernt.\n\nAm wichtigsten finde ich, dass man den Tag mit lieben Menschen verbringt. Wie feiert ihr in euren Ländern?\n\nViele Grüße\nLina"
+      }
+    ]
   }
 ];
