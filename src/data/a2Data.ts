@@ -1,4 +1,4 @@
-import { ExamSection } from './a1Data'
+import type { ExamSection } from './a1Data'
 
 export const a2Exams: ExamSection[] = [
   {
