@@ -279,33 +279,71 @@ export default function ExamSimulationPage() {
           <span className="bg-gray-100 dark:bg-white/10 px-3 py-1 rounded-full text-sm font-bold text-gray-600 dark:text-gray-300">4 / 4</span>
         </div>
         
-
-  // Result Page
-  return (
-    <div className="p-4 max-w-2xl mx-auto mb-20 animate-fade-in text-center">
-      <div className="bg-white dark:bg-[#1a1a2e] p-8 rounded-3xl shadow-lg border border-gray-100 dark:border-white/5">
-        <div className="w-24 h-24 bg-gradient-to-tr from-emerald-600 to-emerald-400 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
-          <CheckCircle size={48} className="text-gray-900 dark:text-white" />
-        </div>
-        <h2 className="text-3xl font-bold dark:text-gray-900 dark:text-white mb-2">تهانينا! 🎉</h2>
-        <p className="text-gray-500 dark:text-gray-400 mb-8 text-lg">لقد أتممت محاكاة الامتحان بنجاح.</p>
-        
-        <div className="bg-gray-50 dark:bg-[#0f0f1a] rounded-2xl p-6 mb-8 border border-gray-100 dark:border-white/5">
-          <p className="text-sm font-bold text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wider">النتيجة التقديرية</p>
-          <p className="text-5xl font-black text-emerald-600">{score} <span className="text-2xl text-gray-400">/ 100</span></p>
+        <div className="space-y-6">
+          {exam.sprechen.map((part, idx) => (
+            <div key={idx} className="bg-white dark:bg-[#1a1a2e] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-white/5">
+              <h3 className="font-bold text-lg mb-2 dark:text-gray-900 dark:text-white">{part.title}</h3>
+              <p className="text-gray-500 mb-4">{part.description}</p>
+              
+              <ul className="list-disc pl-6 space-y-2 text-left" dir="ltr">
+                {part.prompts.map((p, i) => (
+                  <li key={i} className="text-gray-800 dark:text-gray-200 font-medium font-sans">{p}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
         
         <button 
           onClick={() => {
-            setScore(0);
-            setCurrentSection('intro');
-            setExamStarted(false);
+            // Calculate Score based on multiple choice & true-false
+            let finalScore = 0;
+            exam.hoeren.forEach(s => s.questions.forEach(q => {
+              if (answers[q.id] === q.correctAnswer) finalScore += 5;
+            }));
+            exam.lesen.forEach(s => s.questions.forEach(q => {
+              if (answers[q.id] === q.correctAnswer) finalScore += 5;
+            }));
+            setScore(finalScore);
+            completeSection('result');
           }}
-          className="bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-900 dark:text-white font-bold px-8 py-4 rounded-xl transition-colors w-full"
+          className="mt-6 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg px-8 py-4 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2"
         >
-          إعادة الامتحان
+          إنهاء الامتحان وعرض النتيجة <Award size={20} />
         </button>
       </div>
-    </div>
-  );
+    );
+  }
+
+  if (currentSection === 'result') {
+    return (
+      <div className="p-4 max-w-2xl mx-auto mb-20 text-center animate-fade-in font-cairo">
+        <div className="bg-white dark:bg-[#1a1a2e] p-10 rounded-3xl shadow-xl border border-gray-100 dark:border-white/5">
+          <Award size={80} className="mx-auto mb-6 text-yellow-500 animate-bounce" />
+          <h2 className="text-3xl font-black mb-2 dark:text-white">انتهى الامتحان!</h2>
+          <p className="text-gray-500 mb-8">عمل رائع! لقد أنهيت جميع أقسام محاكاة B1.</p>
+          
+          <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-blue-500 mb-8">
+            {score} <span className="text-2xl text-gray-400">نقطة</span>
+          </div>
+
+          <div className="text-left bg-gray-50 dark:bg-[#0f0f1a] p-6 rounded-2xl mb-8 border border-gray-200 dark:border-white/5" dir="ltr">
+            <h3 className="font-bold mb-4 border-b border-gray-200 dark:border-white/10 pb-2 dark:text-white">Musterbrief (نموذج الإجابة لرسالتك):</h3>
+            <pre className="font-sans whitespace-pre-wrap text-sm text-gray-700 dark:text-gray-300">
+              {exam.schreiben.sampleAnswer}
+            </pre>
+          </div>
+          
+          <button 
+            onClick={() => window.location.reload()}
+            className="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold text-lg px-8 py-4 rounded-xl shadow-md hover:scale-105 transition-transform"
+          >
+            إعادة الامتحان
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
 }
