@@ -1,4 +1,4 @@
-﻿export const schreibenModels = [
+export const schreibenModels = [
   {
     "id": "schreiben-1",
     "title": "نموذج Schreiben رقم 1",
@@ -2451,6 +2451,116 @@
           "اسأ� ا�آخرين عن تجاربهم."
         ],
         "sampleAnswer": "Hallo zusammen,\n\ndas Thema finde ich sehr interessant! In Syrien feiert man Geburtstage meistens im Familienkreis. Man macht ein großes Essen und es gibt eine Torte. Die ganze Familie kommt zusammen.\n\nIn Deutschland ist es etwas anders: Hier feiert man oft mit Freunden, nicht nur mit der Familie. Das finde ich auch schön, weil man so verschiedene Leute kennenlernt.\n\nAm wichtigsten finde ich, dass man den Tag mit lieben Menschen verbringt. Wie feiert ihr in euren Ländern?\n\nViele Grüße\nLina"
+      }
+    ]
+  },
+  {
+    "id": "schreiben-23",
+    "title": "نموذج Schreiben رقم 23",
+    "description": "كتابة رسالة — الاعتذار عن الحضور (Teil 1 أو Teil 3).",
+    "parts": [
+      {
+        "id": "schreiben-23-1",
+        "taskNumber": 1,
+        "typeAr": "رسالة غير رسمية — اعتذار عن حفلة",
+        "typeDe": "Informelle E-Mail — Entschuldigung für eine Party",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "صديقك دعاك لحفلة عيد ميلاده يوم السبت، لكنك لا تستطيع الحضور لأنك مريض.\nاكتب رسالة إلى صديقك:\n- اعتذر عن عدم الحضور.\n- اشرح لماذا (أنت مريض).\n- اقترح موعداً آخر للقاء.",
+        "promptDe": "Ein Freund hat Sie zu seiner Geburtstagsparty am Samstag eingeladen. Sie können aber nicht kommen, weil Sie krank sind. Schreiben Sie eine E-Mail:\n- Entschuldigen Sie sich.\n- Erklären Sie, warum (Sie sind krank).\n- Schlagen Sie einen anderen Termin vor.",
+        "requirements": [
+          "اعتذار",
+          "السبب (المرض)",
+          "اقتراح موعد جديد"
+        ],
+        "sampleAnswer": "Lieber Markus,\n\nvielen Dank für die Einladung zu deiner Geburtstagsparty. Ich habe mich sehr darüber gefreut!\n\nLeider kann ich am Samstag nicht kommen, weil ich krank bin. Ich habe Fieber und Husten und muss im Bett bleiben. Der Arzt hat gesagt, dass ich mich ausruhen soll.\n\nEs tut mir wirklich sehr leid! Ich hoffe, ihr habt eine tolle Feier.\n\nKönnen wir uns nächste Woche vielleicht auf einen Kaffee treffen, wenn ich wieder gesund bin? Dann bringe ich dir auch dein Geschenk mit.\n\nLiebe Grüße\nDein Freund"
+      }
+    ]
+  },
+  {
+    "id": "schreiben-24",
+    "title": "نموذج Schreiben رقم 24",
+    "description": "كتابة رسالة — طلب معلومات (Teil 1 أو Teil 3).",
+    "parts": [
+      {
+        "id": "schreiben-24-3",
+        "taskNumber": 3,
+        "typeAr": "رسالة رسمية — طلب معلومات عن كورس",
+        "typeDe": "Formelle E-Mail — Bitte um Informationen",
+        "wordCount": "حوالي 40 كلمة",
+        "promptAr": "رأيت إعلاناً عن دورة لغة ألمانية وتريد التسجيل. اكتب رسالة إلى مدرسة اللغات (Sprachschule):\n- اسأل عن مواعيد الدورة.\n- اسأل عن السعر.\n- اطلب إرسال برنامج الدورة.",
+        "promptDe": "Sie haben eine Anzeige für einen Deutschkurs gesehen und möchten sich anmelden. Schreiben Sie an die Sprachschule:\n- Fragen Sie nach den Terminen.\n- Fragen Sie nach dem Preis.\n- Bitten Sie um das Programm.",
+        "requirements": [
+          "مواعيد الدورة",
+          "السعر",
+          "برنامج الدورة"
+        ],
+        "sampleAnswer": "Sehr geehrte Damen und Herren,\n\nich habe Ihre Anzeige für den Deutschkurs gelesen und habe großes Interesse daran.\n\nKönnen Sie mir bitte sagen, wann der nächste Kurs beginnt und an welchen Tagen er stattfindet? Außerdem wüsste ich gern, wie viel der Kurs kostet.\n\nKönnten Sie mir bitte auch das Kursprogramm per E-Mail zuschicken?\n\nVielen Dank im Voraus für Ihre Hilfe.\n\nMit freundlichen Grüßen\nAhmad Ali"
+      }
+    ]
+  },
+  {
+    "id": "schreiben-25",
+    "title": "نموذج Schreiben رقم 25",
+    "description": "مشاركة في منتدى — العيش في الريف أو المدينة (Teil 2).",
+    "parts": [
+      {
+        "id": "schreiben-25-2",
+        "taskNumber": 2,
+        "typeAr": "مشاركة في منتدى — الريف أم المدينة",
+        "typeDe": "Forumbeitrag — Leben auf dem Land oder in der Stadt",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "في منتدى: \"أين تفضل العيش، في الريف أم في المدينة؟\" اكتب رأيك.",
+        "promptDe": "Im Forum: „Wo leben Sie lieber, auf dem Land oder in der Stadt?\"",
+        "requirements": [
+          "رأيك الشخصي",
+          "أسباب تفضيلك",
+          "ذكر ميزة للمكان الآخر"
+        ],
+        "sampleAnswer": "Hallo zusammen,\n\nich lebe viel lieber in der Stadt als auf dem Land. Der größte Vorteil ist für mich, dass man hier kein Auto braucht. Die öffentlichen Verkehrsmittel sind super und Geschäfte oder Ärzte sind in der Nähe.\n\nNatürlich ist das Leben auf dem Land ruhiger und die Luft ist sauberer. Das ist besonders für Kinder schön. Aber mir persönlich wäre es dort zu langweilig.\n\nIn der Stadt gibt es Kinos, Restaurants und immer etwas zu erleben. Deshalb möchte ich hier bleiben.\n\nViele Grüße\nHassan"
+      }
+    ]
+  },
+  {
+    "id": "schreiben-26",
+    "title": "نموذج Schreiben رقم 26",
+    "description": "كتابة رسالة — شكوى (Reklamation).",
+    "parts": [
+      {
+        "id": "schreiben-26-3",
+        "taskNumber": 3,
+        "typeAr": "رسالة رسمية — شكوى بخصوص هاتف",
+        "typeDe": "Formelle E-Mail — Reklamation Smartphone",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "اشتريت هاتفاً عبر الإنترنت قبل أسبوعين، لكنه تعطل (الشاشة لا تعمل). اكتب رسالة للشركة:\n- اشرح المشكلة.\n- اذكر متى اشتريت الهاتف ورقم الطلب.\n- اطلب تبديل الهاتف أو تصليحه.",
+        "promptDe": "Sie haben vor zwei Wochen ein Smartphone online gekauft, aber es ist kaputt (das Display funktioniert nicht). Schreiben Sie an die Firma:\n- Erklären Sie das Problem.\n- Nennen Sie Kaufdatum und Bestellnummer.\n- Bitten Sie um Umtausch oder Reparatur.",
+        "requirements": [
+          "شرح المشكلة",
+          "تاريخ الشراء ورقم الطلب",
+          "طلب التصليح أو التبديل"
+        ],
+        "sampleAnswer": "Sehr geehrte Damen und Herren,\n\nich habe vor zwei Wochen, am 10. Mai, ein Smartphone (Modell X20) in Ihrem Online-Shop gekauft. Meine Bestellnummer ist 123456.\n\nLeider ist das Gerät schon defekt. Das Display funktioniert seit gestern nicht mehr und bleibt komplett schwarz, obwohl der Akku voll ist. Das Handy ist mir nicht heruntergefallen.\n\nDa ich das Gerät dringend brauche, bitte ich Sie, das Handy so schnell wie möglich zu reparieren oder mir ein neues Gerät zu schicken.\n\nIch warte auf Ihre schnelle Antwort.\n\nMit freundlichen Grüßen\nFatima Hasan"
+      }
+    ]
+  },
+  {
+    "id": "schreiben-27",
+    "title": "نموذج Schreiben رقم 27",
+    "description": "كتابة رسالة — تحديد موعد (Terminvereinbarung).",
+    "parts": [
+      {
+        "id": "schreiben-27-1",
+        "taskNumber": 1,
+        "typeAr": "رسالة غير رسمية — الاتفاق على رحلة",
+        "typeDe": "Informelle E-Mail — Ausflug planen",
+        "wordCount": "حوالي 80 كلمة",
+        "promptAr": "تريد القيام برحلة في نهاية الأسبوع القادم مع صديقك. اكتب رسالة:\n- اقترح وجهة للرحلة.\n- حدد متى وأين ستلتقيان.\n- اقترح ماذا يمكن أن تأخذا معكما.",
+        "promptDe": "Sie möchten nächstes Wochenende mit einem Freund einen Ausflug machen. Schreiben Sie:\n- Schlagen Sie ein Ziel vor.\n- Sagen Sie, wann und wo Sie sich treffen wollen.\n- Schlagen Sie vor, was Sie mitnehmen sollten.",
+        "requirements": [
+          "اقتراح المكان",
+          "مكان وزمان اللقاء",
+          "اقتراح الأشياء التي ستأخذانها"
+        ],
+        "sampleAnswer": "Hallo Ali,\n\nwie geht es dir? Hast du nächstes Wochenende Zeit? Ich würde gern einen Ausflug machen.\n\nWir könnten zum Beispiel an den See fahren und dort grillen oder schwimmen gehen. Das Wetter soll ja sehr schön werden!\n\nLass uns am Samstag um 10 Uhr am Bahnhof treffen. Von dort können wir mit dem Bus fahren. Ich kann etwas Fleisch zum Grillen kaufen und du könntest vielleicht einen Salat oder Getränke mitbringen.\n\nWas hältst du davon? Schreib mir bald zurück!\n\nViele Grüße\nDein Freund"
       }
     ]
   }

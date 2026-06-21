@@ -87,8 +87,10 @@ export default function HoerenPage() {
     if (!model) return []
     const list: any[] = []
     model.parts.forEach(part => {
-      if (part.questions) {
+      if ('questions' in part && part.questions) {
         list.push(...part.questions)
+      } else if ('statements' in part && part.statements) {
+        list.push(...part.statements)
       }
     })
     return list
@@ -277,10 +279,11 @@ export default function HoerenPage() {
               </div>
             )}
 
-            {/* Questions list */}
+            {/* Questions/Statements list */}
             <div className="space-y-6 pt-2">
-              {part.questions.map((q: any, qIdx: number) => {
-                const isTF = q.statementDe !== undefined
+              {('questions' in part && part.questions ? part.questions : ('statements' in part && part.statements ? part.statements : [])).map((q: any, qIdx: number) => {
+                const isTF = q.statementDe !== undefined && q.correct !== undefined // Only for tf-mc or tf
+                const isMatch = q.correctAd !== undefined // For match-speakers
                 const selectedVal = answers[q.id]
                 const showEx = showExplanations[q.id]
 
@@ -290,11 +293,11 @@ export default function HoerenPage() {
                       <span className="bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-gray-400 w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-xs font-bold font-sans mt-0.5">
                         {qIdx + 1}
                       </span>
-                      <div className="text-left font-sans" dir="ltr">
-                        {isTF ? (
+                      <div className="text-left font-sans flex-1" dir="ltr">
+                        {isTF || isMatch ? (
                           <>
-                            <p className="text-sm font-semibold text-gray-900 dark:text-white">{q.statementDe}</p>
-                            {q.statementAr && <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right" dir="rtl">💡 {q.statementAr}</p>}
+                            <p className="text-sm font-semibold text-gray-900 dark:text-white">{q.statementDe || q.textDe}</p>
+                            {(q.statementAr || q.textAr) && <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-right" dir="rtl">💡 {q.statementAr || q.textAr}</p>}
                           </>
                         ) : (
                           <p className="text-sm font-semibold text-gray-900 dark:text-white">{q.promptDe}</p>
@@ -367,8 +370,39 @@ export default function HoerenPage() {
                       </div>
                     )}
 
+                    {/* Match options */}
+                    {isMatch && (
+                      <div className="grid sm:grid-cols-2 gap-2 mr-8">
+                        {part.transcripts?.map((tr: any) => {
+                          const optId = tr.speaker
+                          const isSelected = selectedVal === optId
+                          const isOptCorrect = q.correctAd === optId
+
+                          let btnStyle = 'bg-gray-100 dark:bg-white/5 border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/10'
+                          if (showResults) {
+                            if (isOptCorrect) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/40 text-[#00b894] font-bold'
+                            else if (isSelected) btnStyle = 'bg-red-500/10 border-red-500/40 text-red-500 font-bold'
+                            else btnStyle = 'bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/5 text-gray-500 dark:text-gray-400 opacity-50'
+                          } else {
+                            if (isSelected) btnStyle = 'bg-[#00b894]/10 border-[#00b894]/30 text-[#00b894] font-bold'
+                          }
+
+                          return (
+                            <button
+                              key={optId}
+                              disabled={showResults}
+                              onClick={() => handleSelectAnswer(q.id, optId)}
+                              className={`p-3 rounded-xl border text-left text-sm transition-all cursor-pointer ${btnStyle}`}
+                            >
+                              <div className="font-bold">{optId}</div>
+                            </button>
+                          )
+                        })}
+                      </div>
+                    )}
+
                     {/* Explanation toggle */}
-                    {showResults && q.explanation && (
+                    {showResults && (q.explanation || q.explanationAr) && (
                       <div className="mr-8 space-y-2">
                         <button
                           onClick={() => setShowExplanations(prev => ({ ...prev, [q.id]: !prev[q.id] }))}
