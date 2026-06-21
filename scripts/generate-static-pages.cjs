@@ -444,7 +444,7 @@ function generateSchreibenPage() {
   let writingHTML = '';
   schreibenData.forEach(model => {
     let tasksHTML = '';
-    model.tasks.forEach(t => {
+    (model.tasks || model.parts || []).forEach(t => {
       let phrasesHTML = '';
       if (t.usefulPhrases) {
         phrasesHTML += '<div style="margin-top: 15px; font-weight:700;">عبارات مفيدة (Nützliche Sätze):</div>';
