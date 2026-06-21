@@ -12,6 +12,8 @@ const GrammarPage = lazy(() => import('./pages/GrammarPage'))
 const GrammarLessonPage = lazy(() => import('./pages/GrammarLessonPage'))
 const VocabularyPage = lazy(() => import('./pages/VocabularyPage'))
 const VocabLessonPage = lazy(() => import('./pages/VocabLessonPage'))
+const DTZPage = lazy(() => import('./pages/DTZPage'))
+const MockExamPlayer = lazy(() => import('./pages/levels/MockExamPlayer'))
 const LebenPage = lazy(() => import('./pages/LebenPage'))
 const B2Page = lazy(() => import('./pages/B2Page'))
 const AdminDashboardPage = lazy(() => import('./pages/AdminDashboardPage'))
@@ -28,7 +30,6 @@ const ExamSimulationPage = lazy(() => import('./pages/ExamSimulationPage'))
 const FlashcardsPage = lazy(() => import('./pages/FlashcardsPage'))
 const PronunciationLabPage = lazy(() => import('./pages/PronunciationLabPage'))
 const BriefCorrectorPage = lazy(() => import('./pages/BriefCorrectorPage'))
-const DTZPage = lazy(() => import('./pages/DTZPage'))
 
 // Levels Hubs
 const A1Page = lazy(() => import('./pages/levels/A1Page'))
@@ -127,6 +128,7 @@ export default function App() {
             
           {/* DTZ Hub */}
           <Route path="/dtz" element={<DTZPage />} />
+          <Route path="/mock-exam/:examId" element={<MockExamPlayer />} />
 
           {/* Levels Hubs */}
           <Route path="/a1" element={<A1Page />} />

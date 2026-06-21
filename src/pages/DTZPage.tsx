@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { dtzExams } from '../data/dtzData'
 
 export default function DTZPage() {
   return (
@@ -48,98 +49,28 @@ export default function DTZPage() {
               <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">
                 تدرب على فهم الإعلانات الهاتفية، المعلومات الإعلامية، والمحادثات اليومية والآراء المختلفة.
               </p>
-              <div className="flex gap-2 mb-6">
-                <span className="text-xs font-bold bg-gray-100 dark:bg-white/5 px-3 py-1 rounded-full text-gray-600 dark:text-gray-300">4 أجزاء</span>
-                <span className="text-xs font-bold bg-[#2f6df6]/10 text-[#2f6df6] px-3 py-1 rounded-full">25 دقيقة</span>
+              {/* DTZ Mock Exams Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 px-4">
+        {dtzExams.map((exam, i) => (
+          <motion.div key={exam.id} whileHover={{ y: -4 }} className="glass rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/10 shadow-xl flex flex-col relative">
+            <div className="h-32 bg-gradient-to-br from-[#00b894]/20 to-[#00cec9]/10 flex items-center justify-center relative">
+              <div className="absolute top-4 left-4 bg-white dark:bg-[#1a1a2e] w-10 h-10 rounded-full flex items-center justify-center shadow-md">
+                <span className="text-xl">
+                  {exam.type === 'lesen' ? '📖' : exam.type === 'hoeren' ? '🎧' : exam.type === 'schreiben' ? '✍️' : '🗣️'}
+                </span>
               </div>
             </div>
-            <Link to="/hoeren" className="w-full text-center py-3 rounded-full bg-[#2f6df6] hover:bg-[#1d4ed8] text-white font-bold text-sm transition-all shadow-lg hover:shadow-blue-500/30">
-              ابدأ التدريب ←
-            </Link>
-          </div>
-        </motion.div>
-
-        {/* Lesen Card */}
-        <motion.div 
-          whileHover={{ y: -4 }}
-          className="glass rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/10 shadow-xl group cursor-pointer flex flex-col"
-        >
-          <div className="h-32 bg-gradient-to-br from-[#d19200]/10 to-[#d19200]/5 flex items-center justify-center relative">
-            <div className="absolute top-4 left-4 bg-white dark:bg-[#1a1a2e] w-10 h-10 rounded-full flex items-center justify-center shadow-md">
-              <span className="text-xl">📖</span>
-            </div>
-          </div>
-          <div className="p-6 flex-1 flex flex-col justify-between">
-            <div>
-              <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-2">القراءة (Lesen)</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">
-                اقرأ الفهارس، الإعلانات، المقالات، الإيميلات وأكمل الفراغات بشكل صحيح.
-              </p>
-              <div className="flex gap-2 mb-6">
-                <span className="text-xs font-bold bg-gray-100 dark:bg-white/5 px-3 py-1 rounded-full text-gray-600 dark:text-gray-300">5 أجزاء</span>
-                <span className="text-xs font-bold bg-[#d19200]/10 text-[#d19200] px-3 py-1 rounded-full">45 دقيقة</span>
+            <div className="p-6 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-2">{exam.title}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">{exam.description}</p>
               </div>
+              <Link to={`/mock-exam/${exam.id}`} className="w-full text-center py-3 rounded-full bg-[#00b894] hover:bg-[#00a884] text-white font-bold text-sm transition-colors shadow-md">
+                ابدأ التدريب ({exam.questions.length} أسئلة)
+              </Link>
             </div>
-            <Link to="/lesen" className="w-full text-center py-3 rounded-full bg-[#d19200] hover:bg-[#b37d00] text-white font-bold text-sm transition-all shadow-lg hover:shadow-yellow-600/30">
-              ابدأ التدريب ←
-            </Link>
-          </div>
-        </motion.div>
-
-        {/* Schreiben Card */}
-        <motion.div 
-          whileHover={{ y: -4 }}
-          className="glass rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/10 shadow-xl group cursor-pointer flex flex-col"
-        >
-          <div className="h-32 bg-gradient-to-br from-[#16a34a]/10 to-[#16a34a]/5 flex items-center justify-center relative">
-            <div className="absolute top-4 left-4 bg-white dark:bg-[#1a1a2e] w-10 h-10 rounded-full flex items-center justify-center shadow-md">
-              <span className="text-xl">✍️</span>
-            </div>
-          </div>
-          <div className="p-6 flex-1 flex flex-col justify-between">
-            <div>
-              <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-2">الكتابة (Schreiben)</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">
-                اكتب رسائل رسمية أو غير رسمية لمواقف التواصل اليومية وقم بتصحيحها عبر المصحح الآلي.
-              </p>
-              <div className="flex gap-2 mb-6">
-                <span className="text-xs font-bold bg-gray-100 dark:bg-white/5 px-3 py-1 rounded-full text-gray-600 dark:text-gray-300">موضوع واحد</span>
-                <span className="text-xs font-bold bg-[#16a34a]/10 text-[#16a34a] px-3 py-1 rounded-full">30 دقيقة</span>
-              </div>
-            </div>
-            <Link to="/schreiben" className="w-full text-center py-3 rounded-full bg-[#16a34a] hover:bg-[#15803d] text-white font-bold text-sm transition-all shadow-lg hover:shadow-green-500/30">
-              ابدأ التدريب ←
-            </Link>
-          </div>
-        </motion.div>
-
-        {/* Sprechen Card */}
-        <motion.div 
-          whileHover={{ y: -4 }}
-          className="glass rounded-[2rem] overflow-hidden border border-gray-200 dark:border-white/10 shadow-xl group cursor-pointer flex flex-col"
-        >
-          <div className="h-32 bg-gradient-to-br from-[#8b3bdf]/10 to-[#8b3bdf]/5 flex items-center justify-center relative">
-            <div className="absolute top-4 left-4 bg-white dark:bg-[#1a1a2e] w-10 h-10 rounded-full flex items-center justify-center shadow-md">
-              <span className="text-xl">🗣️</span>
-            </div>
-          </div>
-          <div className="p-6 flex-1 flex flex-col justify-between">
-            <div>
-              <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white mb-2">المحادثة (Sprechen)</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">
-                عرّف عن نفسك، تحدث عن تجربة، وخطط لنشاط بالاشتراك مع شريكك.
-              </p>
-              <div className="flex gap-2 mb-6">
-                <span className="text-xs font-bold bg-gray-100 dark:bg-white/5 px-3 py-1 rounded-full text-gray-600 dark:text-gray-300">3 أجزاء</span>
-                <span className="text-xs font-bold bg-[#8b3bdf]/10 text-[#8b3bdf] px-3 py-1 rounded-full">16 دقيقة (زوجي)</span>
-              </div>
-            </div>
-            <Link to="/sprechen" className="w-full text-center py-3 rounded-full bg-[#8b3bdf] hover:bg-[#7e22ce] text-white font-bold text-sm transition-all shadow-lg hover:shadow-purple-500/30">
-              ابدأ التدريب ←
-            </Link>
-          </div>
-        </motion.div>
-
+          </motion.div>
+        ))}
       </div>
 
       {/* Info Sections */}
