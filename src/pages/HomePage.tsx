@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useXP } from '../hooks/useXP'
+import { usePWA } from '../hooks/usePWA'
 import { getLevelFromXP, getLevelTitle, getXPForLevel, getProgressToNextLevel } from '../lib/gamification'
 
 const dailyWords = [
@@ -101,7 +102,8 @@ const sections: Section[] = [
 ]
 
 export default function HomePage() {
-  const { xp } = useXP()
+  const { xp, streak, todayCompleted } = useXP()
+  const { isInstallable, promptInstall } = usePWA()
   const [dailyWordIdx, setDailyWordIdx] = useState(0)
   const currentLevelNum = getLevelFromXP(xp)
   const levelTitle = getLevelTitle(currentLevelNum)
@@ -119,6 +121,29 @@ export default function HomePage() {
   return (
     <div className="space-y-10 max-w-7xl mx-auto pb-10">
       
+      {/* PWA Install Banner */}
+      {isInstallable && (
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-gradient-to-r from-[#0984e3] to-[#74b9ff] text-white p-4 sm:p-6 rounded-[2rem] shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4"
+        >
+          <div className="flex items-center gap-4">
+            <div className="text-4xl bg-white/20 p-3 rounded-2xl shadow-inner">📲</div>
+            <div>
+              <h3 className="text-lg sm:text-xl font-black">حمّل التطبيق على هاتفك الآن!</h3>
+              <p className="text-sm text-white/80 mt-1 font-semibold">احصل على تجربة أسرع بدون إنترنت وأيقونة على الشاشة الرئيسية.</p>
+            </div>
+          </div>
+          <button 
+            onClick={promptInstall}
+            className="w-full sm:w-auto bg-white text-[#0984e3] px-6 py-3 rounded-xl font-black shadow-md hover:scale-105 transition-transform"
+          >
+            تثبيت التطبيق 📥
+          </button>
+        </motion.div>
+      )}
+
       {/* Hero Dashboard Section */}
       <div className="grid lg:grid-cols-3 gap-6 relative">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#00b894]/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
@@ -151,8 +176,13 @@ export default function HomePage() {
             {/* XP Bar */}
             <div className="bg-gray-50 dark:bg-[#1a1a2e] p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-inner">
               <div className="flex justify-between items-end mb-3">
-                <div className="font-black text-[#00b894] text-3xl flex items-center gap-2">
-                  <span className="text-xl">🌟</span> {xp} <span className="text-sm text-gray-500 uppercase tracking-widest">XP</span>
+                <div className="flex gap-6">
+                  <div className="font-black text-[#00b894] text-3xl flex items-center gap-2">
+                    <span className="text-xl">🌟</span> {xp} <span className="text-sm text-gray-500 uppercase tracking-widest">XP</span>
+                  </div>
+                  <div className="font-black text-amber-500 text-3xl flex items-center gap-2" title="أيام الدراسة المتتالية">
+                    <span className="text-xl">🔥</span> {streak}
+                  </div>
                 </div>
                 <div className="text-sm font-bold text-gray-500">
                   {nextLevelXP === Infinity ? 'الحد الأقصى' : `${nextLevelXP} للترقية`}
@@ -206,7 +236,7 @@ export default function HomePage() {
         <h2 className="text-xl font-black mb-4 text-gray-900 dark:text-white px-2">⚡ وصول سريع</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { title: 'تحدي اليوم', icon: '🎯', path: '/daily', color: 'from-orange-400 to-rose-400' },
+            { title: 'تحدي اليوم', icon: todayCompleted ? '✅' : '🎯', path: '/daily', color: todayCompleted ? 'from-emerald-400 to-green-500' : 'from-orange-400 to-rose-400', badge: todayCompleted ? 'مكتمل' : undefined },
             { title: 'المصحح الذكي', icon: '🤖', path: '/ai-corrector', color: 'from-blue-400 to-indigo-500' },
             { title: 'محاكي Telc', icon: '⏱️', path: '/telc-sim', color: 'from-emerald-400 to-teal-500' },
             { title: 'تصريف الأفعال', icon: '🔁', path: '/conjugation', color: 'from-purple-400 to-pink-500' },
@@ -218,6 +248,11 @@ export default function HomePage() {
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-90 group-hover:opacity-100 transition-opacity`}></div>
               <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
+              {item.badge && (
+                <div className="absolute top-2 left-2 bg-white/20 px-2 py-0.5 rounded text-[10px] font-bold text-white shadow-sm backdrop-blur-sm">
+                  {item.badge}
+                </div>
+              )}
               <div className="relative z-10 flex items-center justify-between w-full">
                 <span className="font-black text-white text-base sm:text-lg drop-shadow-md">{item.title}</span>
                 <span className="text-3xl sm:text-4xl filter drop-shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-all">{item.icon}</span>
