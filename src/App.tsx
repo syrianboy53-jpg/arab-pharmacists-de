@@ -27,6 +27,7 @@ const DrillPage = lazy(() => import('./pages/DrillPage'))
 const SynonymsPage = lazy(() => import('./pages/SynonymsPage'))
 const FehlerPage = lazy(() => import('./pages/FehlerPage'))
 const ExamSimulationPage = lazy(() => import('./pages/ExamSimulationPage'))
+const ExamsPage = lazy(() => import('./pages/ExamsPage'))
 const FlashcardsPage = lazy(() => import('./pages/FlashcardsPage'))
 const PronunciationLabPage = lazy(() => import('./pages/PronunciationLabPage'))
 const BriefCorrectorPage = lazy(() => import('./pages/BriefCorrectorPage'))
@@ -90,8 +91,10 @@ export default function App() {
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/a2" element={<A2Page />} />
+          <Route path="/exams" element={<ExamsPage />} />
 
-          {/* Basics */}
+          {/* TestDaF Hub */}
           <Route path="/grammar" element={<GrammarPage />} />
           <Route path="/grammar/lesson/:lessonId" element={<GrammarLessonPage />} />
           <Route path="/vocabulary" element={<VocabularyPage />} />

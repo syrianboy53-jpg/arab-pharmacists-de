@@ -73,7 +73,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
     { 
-      path: '#exams',
+      path: '/exams',
       label: 'Exams', 
       icon: GraduationCap,
       children: [
