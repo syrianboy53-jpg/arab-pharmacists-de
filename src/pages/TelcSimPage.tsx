@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useXP } from '../hooks/useXP'
 import { lesenModels } from '../data/lesen'
@@ -29,6 +29,7 @@ export default function TelcSimPage() {
   const [lesenAnswers, setLesenAnswers] = useState<Record<string, string>>({})
   const [hoerenAnswers, setHoerenAnswers] = useState<Record<string, string | boolean>>({})
   const [schreibenText, setSchreibenText] = useState('')
+  const [isRecording, setIsRecording] = useState(false)
 
   // Timer Logic
   useEffect(() => {
@@ -52,11 +53,13 @@ export default function TelcSimPage() {
     setStage(newStage)
     setTimeLeft(EXAM_DURATIONS[newStage])
     setIsRunning(true)
+    stopSpeaking() // Stop any playing audio
     window.scrollTo(0, 0)
   }
 
   const finishCurrentStage = () => {
     setIsRunning(false)
+    stopSpeaking()
     window.scrollTo(0, 0)
     
     if (stage === 'lesen') startStage('hoeren')
@@ -85,9 +88,51 @@ export default function TelcSimPage() {
     return () => window.removeEventListener('beforeunload', handleBeforeUnload)
   }, [stage])
 
+  // ===================== TTS (TEXT-TO-SPEECH) LOGIC =====================
+  const [playingId, setPlayingId] = useState<string | null>(null)
+  const synthRef = useRef(window.speechSynthesis)
+
+  useEffect(() => {
+    return () => { synthRef.current.cancel() }
+  }, [])
+
+  const stopSpeaking = useCallback(() => {
+    synthRef.current.cancel()
+    setPlayingId(null)
+  }, [])
+
+  const speakText = useCallback((text: string, id: string) => {
+    const synth = synthRef.current
+    if (playingId === id) {
+      synth.cancel()
+      setPlayingId(null)
+      return
+    }
+    synth.cancel()
+    
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.lang = 'de-DE'
+    utterance.rate = 0.9 // slightly slower for exam clarity
+    utterance.pitch = 1.0
+
+    const voices = synth.getVoices()
+    const deVoice = voices.find(v => v.lang.startsWith('de')) || voices.find(v => v.lang.includes('DE'))
+    if (deVoice) utterance.voice = deVoice
+
+    utterance.onstart = () => setPlayingId(id)
+    utterance.onend = () => setPlayingId(null)
+    utterance.onerror = () => setPlayingId(null)
+
+    synth.speak(utterance)
+  }, [playingId])
+  // ======================================================================
+
   // Calculation for result
   let totalLesenQuestions = 0
   let correctLesen = 0
+  let totalHoerenQuestions = 0
+  let correctHoeren = 0
+
   if (stage === 'result') {
     currentLesenModel.parts.forEach((part: any) => {
       if (part.type === 'match-blog' && part.statements) {
@@ -99,6 +144,21 @@ export default function TelcSimPage() {
         part.questions.forEach((q: any) => {
           totalLesenQuestions++
           if (lesenAnswers[q.id] === q.correctOptionId) correctLesen++
+        })
+      }
+    })
+
+    currentHoerenModel.parts.forEach((part: any) => {
+      if (part.statements) {
+        part.statements.forEach((st: any) => {
+          totalHoerenQuestions++
+          if (hoerenAnswers[st.id] === st.isTrue) correctHoeren++
+        })
+      }
+      if (part.questions) {
+        part.questions.forEach((q: any) => {
+          totalHoerenQuestions++
+          if (hoerenAnswers[q.id] === q.correctOptionId) correctHoeren++
         })
       }
     })
@@ -171,7 +231,7 @@ export default function TelcSimPage() {
                 <div className="bg-gray-50 dark:bg-white/5 p-4 rounded-2xl border border-gray-100 dark:border-white/5">
                   <div className="text-2xl mb-2">🎧</div>
                   <h3 className="font-bold text-gray-900 dark:text-white">Hören</h3>
-                  <p className="text-sm text-gray-500">30 دقيقة</p>
+                  <p className="text-sm text-gray-500">30 دقيقة (صوت حقيقي)</p>
                 </div>
                 <div className="bg-gray-50 dark:bg-white/5 p-4 rounded-2xl border border-gray-100 dark:border-white/5">
                   <div className="text-2xl mb-2">✍️</div>
@@ -181,7 +241,7 @@ export default function TelcSimPage() {
                 <div className="bg-gray-50 dark:bg-white/5 p-4 rounded-2xl border border-gray-100 dark:border-white/5">
                   <div className="text-2xl mb-2">🗣️</div>
                   <h3 className="font-bold text-gray-900 dark:text-white">Sprechen</h3>
-                  <p className="text-sm text-gray-500">15 دقيقة</p>
+                  <p className="text-sm text-gray-500">15 دقيقة (تفاعل صوتي)</p>
                 </div>
               </div>
 
@@ -207,11 +267,11 @@ export default function TelcSimPage() {
                 <h2 className="text-3xl font-black text-gray-900 dark:text-white flex items-center gap-3">
                   <span className="text-4xl">📖</span> القسم الأول: القراءة (Leseverstehen)
                 </h2>
-                <p className="text-gray-500 mt-2">Teil 1 & Teil 2 - {currentLesenModel.title}</p>
+                <p className="text-gray-500 mt-2">جميع أقسام القراءة - {currentLesenModel.title}</p>
               </div>
               
               <div className="space-y-10">
-                {currentLesenModel.parts.slice(0, 2).map((part: any, pIndex: number) => (
+                {currentLesenModel.parts.map((part: any, pIndex: number) => (
                   <div key={pIndex} className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-200 dark:border-white/10">
                     <h3 className="text-xl font-black mb-2">{part.title}</h3>
                     <p className="text-gray-600 dark:text-gray-400 mb-6 font-bold">{part.instructionsAr}</p>
@@ -282,12 +342,44 @@ export default function TelcSimPage() {
                         </div>
                       </div>
                     )}
+
+                    {part.type === 'match-ads' && part.ads && (
+                      <div className="space-y-6">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                          {part.ads.map((ad: any) => (
+                            <div key={ad.id} className="p-3 bg-white dark:bg-black/20 rounded-xl border border-gray-100 dark:border-white/5 text-sm" dir="ltr">
+                              <span className="font-black text-blue-600 block mb-1">Anzeige {ad.id}</span>
+                              {ad.textDe}
+                            </div>
+                          ))}
+                        </div>
+                        <div className="space-y-4 mt-6">
+                          {part.situations?.map((q: any) => (
+                            <div key={q.id} className="p-3 bg-white dark:bg-black/20 rounded-xl border border-gray-100 dark:border-white/5 space-y-3">
+                              <p className="font-bold text-sm" dir="ltr">{q.textDe}</p>
+                              <div className="flex gap-2 flex-wrap" dir="ltr">
+                                {part.ads.map((ad: any) => (
+                                  <label key={ad.id} className="flex items-center gap-1 cursor-pointer">
+                                    <input type="radio" name={q.id} value={ad.id} checked={lesenAnswers[q.id] === ad.id} onChange={() => setLesenAnswers(prev => ({...prev, [q.id]: ad.id}))} className="w-4 h-4" />
+                                    <span className="font-bold">{ad.id}</span>
+                                  </label>
+                                ))}
+                                <label className="flex items-center gap-1 cursor-pointer text-red-500">
+                                  <input type="radio" name={q.id} value="0" checked={lesenAnswers[q.id] === "0"} onChange={() => setLesenAnswers(prev => ({...prev, [q.id]: "0"}))} className="w-4 h-4" />
+                                  <span className="font-bold">Keine Lösung (0)</span>
+                                </label>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
               
               <div className="text-center mt-8">
-                <button onClick={finishCurrentStage} className="px-8 py-3 bg-[#00b894] hover:bg-[#00a884] text-white rounded-xl font-bold transition-colors">
+                <button onClick={finishCurrentStage} className="px-8 py-3 bg-[#00b894] hover:bg-[#00a884] text-white rounded-xl font-bold transition-colors shadow-lg">
                   إنهاء قسم القراءة والانتقال للاستماع
                 </button>
               </div>
@@ -301,45 +393,66 @@ export default function TelcSimPage() {
                 <h2 className="text-3xl font-black text-gray-900 dark:text-white flex items-center gap-3">
                   <span className="text-4xl">🎧</span> القسم الثاني: الاستماع (Hörverstehen)
                 </h2>
-                <p className="text-gray-500 mt-2">التسجيلات غير متوفرة حالياً، يمكنك قراءة النصوص (Transcripts) وحل الأسئلة كتدريب.</p>
+                <p className="text-gray-500 mt-2">اضغط على زر (▶️ تشغيل الصوت) لسماع المحادثة الخاصة بكل قسم. ركز جيداً!</p>
               </div>
               
               <div className="space-y-10">
-                {currentHoerenModel.parts.slice(0, 1).map((part: any, pIndex: number) => (
+                {currentHoerenModel.parts.map((part: any, pIndex: number) => (
                   <div key={pIndex} className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-200 dark:border-white/10">
                     <h3 className="text-xl font-black mb-2">{part.title}</h3>
                     <p className="text-gray-600 dark:text-gray-400 mb-6 font-bold">{part.instructionsAr}</p>
                     
-                    <div className="space-y-6">
+                    <div className="space-y-8">
                       {part.transcripts?.map((tr: any) => (
-                        <div key={tr.id} className="p-4 bg-white dark:bg-black/20 rounded-xl border border-gray-200 dark:border-white/5">
-                          <p className="text-sm text-blue-600 font-bold mb-2">النص الصوتي: {tr.speaker}</p>
-                          <p className="italic text-gray-600 dark:text-gray-300 mb-4" dir="ltr">"{tr.textDe}"</p>
+                        <div key={tr.id} className="p-5 bg-white dark:bg-black/20 rounded-2xl border border-blue-100 dark:border-blue-900/30 shadow-sm relative overflow-hidden">
                           
+                          {/* Audio Player UI */}
+                          <div className="flex items-center justify-between mb-4 bg-blue-50 dark:bg-blue-900/20 p-3 rounded-xl">
+                            <div className="flex items-center gap-3">
+                              <button 
+                                onClick={() => speakText(tr.textDe, tr.id)}
+                                className={`w-12 h-12 rounded-full flex items-center justify-center text-xl transition-all shadow-md ${
+                                  playingId === tr.id ? 'bg-red-500 text-white animate-pulse' : 'bg-blue-600 text-white hover:bg-blue-700'
+                                }`}
+                              >
+                                {playingId === tr.id ? '⏹' : '▶️'}
+                              </button>
+                              <div>
+                                <p className="font-bold text-gray-900 dark:text-white">المسار الصوتي: {tr.speaker}</p>
+                                <p className="text-xs text-gray-500">{playingId === tr.id ? 'جاري التشغيل...' : 'متوقف'}</p>
+                              </div>
+                            </div>
+                            <div className="hidden sm:flex gap-1">
+                              {[1,2,3,4,5].map(bar => (
+                                <div key={bar} className={`w-1.5 bg-blue-400 dark:bg-blue-500 rounded-full ${playingId === tr.id ? 'animate-bounce' : 'h-2'}`} style={{ height: playingId === tr.id ? `${Math.random() * 20 + 10}px` : '8px', animationDelay: `${bar * 0.1}s` }}></div>
+                              ))}
+                            </div>
+                          </div>
+
                           <div className="space-y-4">
-                            {part.statements?.filter((st: any) => st.transcriptId === tr.id).map((st: any) => (
-                              <div key={st.id} className="bg-gray-50 dark:bg-black/40 p-3 rounded-lg">
-                                <p className="font-bold text-sm mb-2" dir="ltr">{st.textDe} (Richtig / Falsch?)</p>
+                            {part.statements?.filter((st: any) => st.transcriptId === tr.id || !st.transcriptId).map((st: any) => (
+                              <div key={st.id} className="bg-gray-50 dark:bg-black/40 p-4 rounded-xl border border-gray-100 dark:border-white/5">
+                                <p className="font-bold text-base mb-3" dir="ltr">{st.id}. {st.textDe} (Richtig / Falsch?)</p>
                                 <div className="flex gap-4" dir="ltr">
-                                  <label className="flex items-center gap-1 cursor-pointer">
-                                    <input type="radio" name={st.id} checked={hoerenAnswers[st.id] === true} onChange={() => setHoerenAnswers(prev => ({...prev, [st.id]: true}))} />
-                                    <span>Richtig</span>
+                                  <label className="flex items-center gap-2 cursor-pointer bg-white dark:bg-white/5 px-4 py-2 rounded-lg border border-gray-200 dark:border-white/10 hover:border-blue-500 transition-colors">
+                                    <input type="radio" name={st.id} checked={hoerenAnswers[st.id] === true} onChange={() => setHoerenAnswers(prev => ({...prev, [st.id]: true}))} className="w-5 h-5 text-blue-600" />
+                                    <span className="font-bold">Richtig</span>
                                   </label>
-                                  <label className="flex items-center gap-1 cursor-pointer">
-                                    <input type="radio" name={st.id} checked={hoerenAnswers[st.id] === false} onChange={() => setHoerenAnswers(prev => ({...prev, [st.id]: false}))} />
-                                    <span>Falsch</span>
+                                  <label className="flex items-center gap-2 cursor-pointer bg-white dark:bg-white/5 px-4 py-2 rounded-lg border border-gray-200 dark:border-white/10 hover:border-red-500 transition-colors">
+                                    <input type="radio" name={st.id} checked={hoerenAnswers[st.id] === false} onChange={() => setHoerenAnswers(prev => ({...prev, [st.id]: false}))} className="w-5 h-5 text-red-600" />
+                                    <span className="font-bold">Falsch</span>
                                   </label>
                                 </div>
                               </div>
                             ))}
-                            {part.questions?.filter((q: any) => q.transcriptId === tr.id).map((q: any) => (
-                              <div key={q.id} className="bg-gray-50 dark:bg-black/40 p-3 rounded-lg">
-                                <p className="font-bold text-sm mb-2" dir="ltr">{q.promptDe}</p>
+                            {part.questions?.filter((q: any) => q.transcriptId === tr.id || !q.transcriptId).map((q: any) => (
+                              <div key={q.id} className="bg-gray-50 dark:bg-black/40 p-4 rounded-xl border border-gray-100 dark:border-white/5">
+                                <p className="font-bold text-base mb-3" dir="ltr">{q.id}. {q.promptDe}</p>
                                 <div className="space-y-2" dir="ltr">
                                   {q.options?.map((opt: any) => (
-                                    <label key={opt.id} className="flex items-center gap-2 cursor-pointer">
-                                      <input type="radio" name={q.id} checked={hoerenAnswers[q.id] === opt.id} onChange={() => setHoerenAnswers(prev => ({...prev, [q.id]: opt.id}))} />
-                                      <span>{opt.id}) {opt.de}</span>
+                                    <label key={opt.id} className="flex items-center gap-3 cursor-pointer bg-white dark:bg-white/5 p-3 rounded-lg border border-gray-200 dark:border-white/10 hover:border-blue-500 transition-colors">
+                                      <input type="radio" name={q.id} checked={hoerenAnswers[q.id] === opt.id} onChange={() => setHoerenAnswers(prev => ({...prev, [q.id]: opt.id}))} className="w-5 h-5 text-blue-600" />
+                                      <span className="font-medium">{opt.id}) {opt.de}</span>
                                     </label>
                                   ))}
                                 </div>
@@ -348,13 +461,34 @@ export default function TelcSimPage() {
                           </div>
                         </div>
                       ))}
+
+                      {/* If part doesn't use transcripts directly mapping, render questions anyway */}
+                      {(!part.transcripts || part.transcripts.length === 0) && (
+                        <div className="space-y-4">
+                            {part.statements?.map((st: any) => (
+                              <div key={st.id} className="bg-gray-50 dark:bg-black/40 p-4 rounded-xl border border-gray-100 dark:border-white/5">
+                                <p className="font-bold text-base mb-3" dir="ltr">{st.id}. {st.textDe} (Richtig / Falsch?)</p>
+                                <div className="flex gap-4" dir="ltr">
+                                  <label className="flex items-center gap-2 cursor-pointer bg-white dark:bg-white/5 px-4 py-2 rounded-lg border border-gray-200 dark:border-white/10 hover:border-blue-500 transition-colors">
+                                    <input type="radio" name={st.id} checked={hoerenAnswers[st.id] === true} onChange={() => setHoerenAnswers(prev => ({...prev, [st.id]: true}))} className="w-5 h-5 text-blue-600" />
+                                    <span className="font-bold">Richtig</span>
+                                  </label>
+                                  <label className="flex items-center gap-2 cursor-pointer bg-white dark:bg-white/5 px-4 py-2 rounded-lg border border-gray-200 dark:border-white/10 hover:border-red-500 transition-colors">
+                                    <input type="radio" name={st.id} checked={hoerenAnswers[st.id] === false} onChange={() => setHoerenAnswers(prev => ({...prev, [st.id]: false}))} className="w-5 h-5 text-red-600" />
+                                    <span className="font-bold">Falsch</span>
+                                  </label>
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
               </div>
 
               <div className="text-center mt-8">
-                <button onClick={finishCurrentStage} className="px-8 py-3 bg-[#00b894] hover:bg-[#00a884] text-white rounded-xl font-bold transition-colors">
+                <button onClick={finishCurrentStage} className="px-8 py-3 bg-[#00b894] hover:bg-[#00a884] text-white rounded-xl font-bold transition-colors shadow-lg">
                   إنهاء قسم الاستماع والانتقال للكتابة
                 </button>
               </div>
@@ -390,7 +524,7 @@ export default function TelcSimPage() {
                 onChange={e => setSchreibenText(e.target.value)}
               ></textarea>
               <div className="text-center mt-4">
-                <button onClick={finishCurrentStage} className="px-8 py-3 bg-[#00b894] hover:bg-[#00a884] text-white rounded-xl font-bold transition-colors">
+                <button onClick={finishCurrentStage} className="px-8 py-3 bg-[#00b894] hover:bg-[#00a884] text-white rounded-xl font-bold transition-colors shadow-lg">
                   إنهاء قسم الكتابة والانتقال للمحادثة
                 </button>
               </div>
@@ -404,34 +538,50 @@ export default function TelcSimPage() {
                 <h2 className="text-3xl font-black text-gray-900 dark:text-white flex items-center gap-3">
                   <span className="text-4xl">🗣️</span> القسم الرابع: المحادثة (Mündlicher Ausdruck)
                 </h2>
-                <p className="text-gray-500 mt-2">تحدث مع نفسك أو مع شريك لمدة 15 دقيقة في هذه الأقسام.</p>
+                <p className="text-gray-500 mt-2">يمكنك الآن التحدث بصوتك. استمع للموضوعات، اضغط زر التسجيل، وتمرّن كأنك أمام الممتحنين.</p>
               </div>
-              <div className="prose dark:prose-invert max-w-none">
-                <div className="grid gap-6 mt-6">
-                  <div className="bg-rose-50 dark:bg-rose-900/10 p-5 rounded-2xl border border-rose-200 dark:border-rose-900/30">
-                    <h4 className="text-rose-700 dark:text-rose-400 mt-0 font-black text-xl">Teil 1: Kontaktaufnahme</h4>
-                    <p className="font-bold">تعرف على شريكك، تحدث عن اسمك، عائلتك، لماذا تتعلم الألمانية، وكيف تقضي وقت فراغك.</p>
+              
+              <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-2xl border-2 border-red-200 dark:border-red-900/50 flex flex-col items-center justify-center text-center mb-8">
+                <button 
+                  onClick={() => setIsRecording(!isRecording)}
+                  className={`w-20 h-20 rounded-full flex items-center justify-center text-3xl transition-all shadow-xl mb-4 ${
+                    isRecording ? 'bg-red-500 text-white animate-pulse scale-110' : 'bg-gray-100 dark:bg-white/10 text-gray-900 dark:text-white hover:bg-red-100 hover:text-red-500'
+                  }`}
+                >
+                  🎤
+                </button>
+                <h3 className="font-black text-xl text-red-600 dark:text-red-400">
+                  {isRecording ? '🔴 جاري التسجيل (التحدث)...' : 'اضغط للتحدث والممارسة المفتوحة'}
+                </h3>
+                <p className="text-sm text-gray-500 mt-2">لا يتم حفظ صوتك، هذه الميزة لمحاكات شعور الرهبة في الامتحان فقط.</p>
+              </div>
+
+              <div className="grid gap-6">
+                {[
+                  { id: 'sp1', title: 'Teil 1: Kontaktaufnahme', de: "Stellen Sie sich vor. Wie heißen Sie? Woher kommen Sie? Warum lernen Sie Deutsch?", ar: "تعرف على شريكك. تحدث عن اسمك، عائلتك، لماذا تتعلم الألمانية.", color: 'rose' },
+                  { id: 'sp2', title: 'Teil 2: Thema diskutieren', de: "Diskutieren Sie das Thema: Handys für Kinder – Pro oder Contra? Was ist Ihre Meinung?", ar: "موضوع النقاش: الهواتف للأطفال. عبّر عن رأيك واذكر تجربتك الشخصية.", color: 'blue' },
+                  { id: 'sp3', title: 'Teil 3: Gemeinsam etwas planen', de: "Ein Freund aus dem Kurs liegt im Krankenhaus. Planen Sie einen Besuch. Wann? Was mitbringen? Wie hinkommen?", ar: "التخطيط: صديقكم في الدورة مريض في المشفى. خططوا لزيارته.", color: 'emerald' }
+                ].map(sp => (
+                  <div key={sp.id} className={`bg-${sp.color}-50 dark:bg-${sp.color}-900/10 p-5 rounded-2xl border border-${sp.color}-200 dark:border-${sp.color}-900/30 flex gap-4`}>
+                    <button 
+                      onClick={() => speakText(sp.de, sp.id)}
+                      className={`w-12 h-12 flex-shrink-0 rounded-full flex items-center justify-center text-xl transition-all shadow-sm bg-white dark:bg-black/20 hover:bg-gray-100 dark:hover:bg-white/10 border border-${sp.color}-200 dark:border-${sp.color}-900/50 ${playingId === sp.id ? 'text-red-500 animate-pulse' : 'text-gray-700 dark:text-gray-300'}`}
+                    >
+                      {playingId === sp.id ? '🔊' : '▶️'}
+                    </button>
+                    <div>
+                      <h4 className={`text-${sp.color}-700 dark:text-${sp.color}-400 mt-0 font-black text-xl mb-1`}>{sp.title}</h4>
+                      <p className="font-bold text-gray-900 dark:text-white" dir="ltr">{sp.de}</p>
+                      <p className="text-sm text-gray-500 mt-2">{sp.ar}</p>
+                    </div>
                   </div>
-                  <div className="bg-blue-50 dark:bg-blue-900/10 p-5 rounded-2xl border border-blue-200 dark:border-blue-900/30">
-                    <h4 className="text-blue-700 dark:text-blue-400 mt-0 font-black text-xl">Teil 2: Thema diskutieren</h4>
-                    <p className="font-bold mb-2">موضوع النقاش: "Handys für Kinder – Pro oder Contra?"</p>
-                    <p className="text-sm">عبّر عن رأيك في إعطاء الهواتف المحمولة للأطفال، واذكر تجربتك الشخصية وناقش رأي شريكك.</p>
-                  </div>
-                  <div className="bg-emerald-50 dark:bg-emerald-900/10 p-5 rounded-2xl border border-emerald-200 dark:border-emerald-900/30">
-                    <h4 className="text-emerald-700 dark:text-emerald-400 mt-0 font-black text-xl">Teil 3: Gemeinsam etwas planen</h4>
-                    <p className="font-bold mb-2">التخطيط: صديقكم في الدورة مريض في المشفى. خططوا لزيارته.</p>
-                    <ul className="text-sm space-y-1">
-                      <li>Wann? (Tag, Uhrzeit)</li>
-                      <li>Was mitbringen? (Geschenk, Blumen)</li>
-                      <li>Wie hinkommen? (Auto, Bus)</li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="text-center mt-10">
-                  <button onClick={finishCurrentStage} className="px-10 py-4 bg-[#00b894] hover:bg-[#00a884] text-white rounded-xl font-black text-xl shadow-xl transition-transform hover:-translate-y-1">
-                    إنهاء الامتحان بالكامل 🎉
-                  </button>
-                </div>
+                ))}
+              </div>
+
+              <div className="text-center mt-10">
+                <button onClick={finishCurrentStage} className="px-10 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-xl font-black text-xl shadow-xl transition-transform hover:-translate-y-1">
+                  إنهاء الامتحان بالكامل 🎉
+                </button>
               </div>
             </motion.div>
           )}
@@ -452,18 +602,22 @@ export default function TelcSimPage() {
                 <p className="text-gray-500 text-lg">لقد صمدت حتى النهاية وأكملت محاكاة امتحان Telc B1.</p>
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 <div className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-200 dark:border-white/10 text-center">
-                  <h3 className="font-bold mb-2">نقاط הקריאה (Lesen)</h3>
+                  <h3 className="font-bold mb-2">القراءة (Lesen)</h3>
                   <div className="text-3xl font-black text-blue-600">
                     {correctLesen} / {totalLesenQuestions}
                   </div>
-                  <p className="text-xs text-gray-500 mt-2">التصحيح المبدئي للقسم 1 و 2</p>
                 </div>
-                <div className="bg-gradient-to-r from-emerald-500 to-teal-400 p-6 rounded-2xl shadow-lg text-white">
-                  <p className="text-sm font-bold opacity-80 mb-1">مكافأة الصمود والمثابرة</p>
+                <div className="bg-gray-50 dark:bg-white/5 p-6 rounded-2xl border border-gray-200 dark:border-white/10 text-center">
+                  <h3 className="font-bold mb-2">الاستماع (Hören)</h3>
+                  <div className="text-3xl font-black text-purple-600">
+                    {correctHoeren} / {totalHoerenQuestions}
+                  </div>
+                </div>
+                <div className="col-span-2 sm:col-span-1 bg-gradient-to-r from-emerald-500 to-teal-400 p-6 rounded-2xl shadow-lg text-white flex flex-col justify-center items-center">
+                  <p className="text-sm font-bold opacity-80 mb-1">مكافأة المثابرة</p>
                   <div className="text-4xl font-black">+500 XP</div>
-                  <p className="text-sm mt-2">تمت إضافتها إلى رصيدك!</p>
                 </div>
               </div>
 
@@ -473,7 +627,7 @@ export default function TelcSimPage() {
                   <div className="bg-gray-50 dark:bg-black/40 p-4 rounded-xl text-gray-800 dark:text-gray-300 font-mono whitespace-pre-wrap text-left text-sm" dir="ltr">
                     {schreibenText}
                   </div>
-                  <p className="text-xs text-gray-500 mt-4">يمكنك نسخ رسالتك وتصحيحها باستخدام أداة المصحح الذكي (AI Corrector) المتاحة في التطبيق للحصول على التقييم الدقيق.</p>
+                  <p className="text-xs text-gray-500 mt-4">قم بنسخ رسالتك وانتقل لأداة المصحح الذكي (AI Corrector) لمعرفة الأخطاء.</p>
                 </div>
               )}
 
