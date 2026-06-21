@@ -2876,6 +2876,386 @@ export const lesenModels = [
         ]
       }
     ]
+  },
+  {
+    "id": "lesen-12",
+    "title": "نموذج Lesen رقم 12 (Arbeitswelt)",
+    "description": "امتحان قراءة — موضوع عالم العمل والتوظيف.",
+    "parts": [
+      {
+        "type": "match-blog",
+        "title": "Teil 1 – منتدى: هل الشهادة الجامعية ضرورية؟",
+        "instructionsAr": "اقرأ الآراء ثم اختر الجملة المطابقة لكل شخص.",
+        "texts": [
+          { "id": "A", "titleDe": "Michael", "titleAr": "ميشائيل", "textDe": "Ich habe nicht studiert, sondern eine Ausbildung als Elektriker gemacht. Heute habe ich meine eigene Firma und verdiene gutes Geld. Praktische Erfahrung ist oft wichtiger als ein Universitätsabschluss." },
+          { "id": "B", "titleDe": "Sara", "titleAr": "سارة", "textDe": "Für meinen Beruf als Ärztin war das Studium natürlich Pflicht. Aber es war eine harte Zeit mit wenig Geld. Man muss wirklich dafür brennen, sonst schafft man die vielen Prüfungen nicht." },
+          { "id": "C", "titleDe": "Tom", "titleAr": "توم", "textDe": "Ich habe studiert, arbeite jetzt aber in einem ganz anderen Bereich. Das Studium hat mir geholfen, analytisch zu denken. Das ist in jedem Beruf nützlich." },
+          { "id": "D", "titleDe": "Jana", "titleAr": "يانا", "textDe": "Viele Firmen schauen leider nur auf das Papier. Ich habe 10 Jahre Erfahrung in der IT, aber manche Stellen bekomme ich nicht, weil mir der Master fehlt. Das finde ich ungerecht." },
+          { "id": "E", "titleDe": "Ali", "titleAr": "علي", "textDe": "Ich mache gerade ein duales Studium. Das ist perfekt: Ich lerne die Theorie an der Hochschule und arbeite gleichzeitig in einer Firma. So bekomme ich auch schon ein kleines Gehalt." }
+        ],
+        "statements": [
+          { "id": "l12-1-1", "textDe": "Diese Person findet, dass die praktische Arbeit mehr zählt als ein Zeugnis.", "textAr": "يرى هذا الشخص أن العمل العملي أهم من الشهادة.", "correctAd": "A" },
+          { "id": "l12-1-2", "textDe": "Diese Person wird wegen fehlender Zeugnisse manchmal abgelehnt.", "textAr": "يُرفض هذا الشخص أحياناً بسبب نقص الشهادات.", "correctAd": "D" },
+          { "id": "l12-1-3", "textDe": "Diese Person kombiniert Arbeiten und Studieren.", "textAr": "هذا الشخص يجمع بين العمل والدراسة.", "correctAd": "E" },
+          { "id": "l12-1-4", "textDe": "Diese Person sagt, das Studium war anstrengend.", "textAr": "يقول هذا الشخص إن الدراسة كانت متعبة.", "correctAd": "B" },
+          { "id": "l12-1-5", "textDe": "Diese Person nutzt im Job die Denkweise aus dem Studium.", "textAr": "يستخدم هذا الشخص في عمله طريقة التفكير التي تعلمها في الجامعة.", "correctAd": "C" }
+        ]
+      },
+      {
+        "type": "mc-article",
+        "title": "Teil 2 – مقال: العمل من المنزل (Homeoffice)",
+        "instructionsAr": "اقرأ المقال وأجب عن الأسئلة.",
+        "textDe": "Seit den letzten Jahren ist das Homeoffice für viele Menschen zur Normalität geworden. Laut einer Umfrage des Instituts für Arbeitsmarkt wünschen sich 60 Prozent der Arbeitnehmer, auch in Zukunft mindestens zwei Tage pro Woche von zu Hause aus zu arbeiten.\nDie Vorteile sind klar: Man spart Zeit, weil der Weg zur Arbeit wegfällt, und viele Menschen sagen, dass sie zu Hause konzentrierter arbeiten können. Außerdem ist es leichter, Beruf und Familie zu verbinden.\nAber es gibt auch Nachteile. Wer von zu Hause arbeitet, bewegt sich oft weniger. Auch der Austausch mit den Kollegen in der Kaffeepause fehlt. Psychologen warnen zudem davor, dass die Grenze zwischen Freizeit und Arbeit verschwimmt. Wenn der Computer immer auf dem Tisch steht, ist es schwer, abends wirklich abzuschalten.",
+        "questions": [
+          {
+            "id": "l12-2-1",
+            "promptDe": "Was wünschen sich die meisten Arbeitnehmer?",
+            "promptAr": "ماذا يتمنى معظم الموظفين؟",
+            "options": [
+              { "id": "a", "de": "Nie wieder ins Büro zu gehen." },
+              { "id": "b", "de": "Teilweise von zu Hause zu arbeiten." },
+              { "id": "c", "de": "Jeden Tag im Büro zu sein." }
+            ],
+            "correctOptionId": "b",
+            "explanationAr": "النص يقول إنهم يتمنون العمل يومين على الأقل من المنزل."
+          },
+          {
+            "id": "l12-2-2",
+            "promptDe": "Ein Vorteil des Homeoffice ist, ...",
+            "promptAr": "إحدى ميزات العمل من المنزل هي...",
+            "options": [
+              { "id": "a", "de": "dass man keine Fahrtzeit mehr hat." },
+              { "id": "b", "de": "dass man mehr Sport macht." },
+              { "id": "c", "de": "dass man öfter Kaffee mit Kollegen trinkt." }
+            ],
+            "correctOptionId": "a",
+            "explanationAr": "النص يقول إن المرء يوفر وقت الطريق للعمل."
+          },
+          {
+            "id": "l12-2-3",
+            "promptDe": "Vor welchem Problem warnen Psychologen?",
+            "promptAr": "من أي مشكلة يحذر علماء النفس؟",
+            "options": [
+              { "id": "a", "de": "Der Computer geht schneller kaputt." },
+              { "id": "b", "de": "Man arbeitet zu konzentriert." },
+              { "id": "c", "de": "Man kann nach der Arbeit schwer entspannen." }
+            ],
+            "correctOptionId": "c",
+            "explanationAr": "يحذرون من صعوبة فصل العمل عن وقت الفراغ (abschalten)."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesen-13",
+    "title": "نموذج Lesen رقم 13 (Gesundheit)",
+    "description": "امتحان قراءة — موضوع الصحة والغذاء.",
+    "parts": [
+      {
+        "type": "match-blog",
+        "title": "Teil 1 – منتدى: كيف تحافظ على صحتك؟",
+        "instructionsAr": "اقرأ الآراء ثم اختر الجملة المطابقة.",
+        "texts": [
+          { "id": "A", "titleDe": "Nora", "titleAr": "نورا", "textDe": "Ich versuche, jeden Tag mindestens 10.000 Schritte zu gehen. Ich fahre nicht mehr mit dem Aufzug, sondern nehme immer die Treppe. Das ist gratis und hält fit." },
+          { "id": "B", "titleDe": "Lukas", "titleAr": "لوكاس", "textDe": "Für mich ist Schlaf das Wichtigste. Wenn ich weniger als 8 Stunden schlafe, bin ich am nächsten Tag krank. Außerdem trinke ich keinen Kaffee mehr nach 15 Uhr." },
+          { "id": "C", "titleDe": "Elena", "titleAr": "إيلينا", "textDe": "Ich ernähre mich seit einem Jahr komplett vegan. Am Anfang war es schwer, aber jetzt fühle ich mich viel besser. Meine Blutwerte sind auch super geworden." },
+          { "id": "D", "titleDe": "Mark", "titleAr": "مارك", "textDe": "Stress ist Gift für den Körper. Ich meditiere jeden Morgen für 15 Minuten, bevor ich zur Arbeit gehe. Das hilft mir, ruhig zu bleiben, auch wenn der Chef nervt." },
+          { "id": "E", "titleDe": "Sophie", "titleAr": "صوفي", "textDe": "Ich gehe dreimal pro Woche ins Fitnessstudio und hebe Gewichte. Frauen haben oft Angst vor Muskeln, aber Krafttraining ist so wichtig für den Rücken und die Haltung." }
+        ],
+        "statements": [
+          { "id": "l13-1-1", "textDe": "Diese Person isst keine tierischen Produkte.", "textAr": "هذا الشخص لا يأكل المنتجات الحيوانية.", "correctAd": "C" },
+          { "id": "l13-1-2", "textDe": "Diese Person baut Bewegung in den Alltag ein.", "textAr": "هذا الشخص يدمج الحركة في حياته اليومية.", "correctAd": "A" },
+          { "id": "l13-1-3", "textDe": "Diese Person entspannt sich vor der Arbeit.", "textAr": "هذا الشخص يسترخي قبل العمل.", "correctAd": "D" },
+          { "id": "l13-1-4", "textDe": "Diese Person braucht viel Nachtruhe.", "textAr": "هذا الشخص يحتاج إلى راحة ليلية كافية.", "correctAd": "B" },
+          { "id": "l13-1-5", "textDe": "Diese Person macht regelmäßig Krafttraining.", "textAr": "هذا الشخص يمارس تمارين القوة بانتظام.", "correctAd": "E" }
+        ]
+      },
+      {
+        "type": "mc-article",
+        "title": "Teil 2 – مقال: السكر في طعامنا",
+        "instructionsAr": "اقرأ المقال وأجب عن الأسئلة.",
+        "textDe": "Zucker ist süß, lecker und leider oft sehr ungesund. Die Weltgesundheitsorganisation (WHO) empfiehlt Erwachsenen, höchstens 50 Gramm Zucker pro Tag zu essen. Das entspricht etwa zehn Teelöffeln. Viele Menschen in Deutschland konsumieren jedoch fast das Doppelte.\nDas Problem ist nicht nur die Schokolade oder der Kuchen. Viel Zucker versteckt sich in Lebensmitteln, bei denen wir es gar nicht erwarten. In einem Becher Fruchtjoghurt können bis zu acht Teelöffel Zucker stecken, und auch Fertigpizzen oder Ketchup enthalten viel davon.\nÄrzte fordern deshalb eine Lebensmittel-Ampel auf den Verpackungen. Grün bedeutet: gesund. Rot bedeutet: viel Zucker oder Fett. So können Käufer im Supermarkt schneller sehen, was sie wirklich essen. Die Lebensmittelindustrie ist jedoch oft gegen diese Ampel.",
+        "questions": [
+          {
+            "id": "l13-2-1",
+            "promptDe": "Wie viel Zucker isst man in Deutschland durchschnittlich?",
+            "promptAr": "كم كمية السكر التي تُستهلك في ألمانيا في المتوسط؟",
+            "options": [
+              { "id": "a", "de": "Genau 50 Gramm." },
+              { "id": "b", "de": "Fast 100 Gramm." },
+              { "id": "c", "de": "Weniger als die WHO empfiehlt." }
+            ],
+            "correctOptionId": "b",
+            "explanationAr": "النص يقول إن الاستهلاك يصل لضعف الكمية الموصى بها (50 غرام)."
+          },
+          {
+            "id": "l13-2-2",
+            "promptDe": "Was ist das Hauptproblem mit Zucker?",
+            "promptAr": "ما هي المشكلة الرئيسية مع السكر؟",
+            "options": [
+              { "id": "a", "de": "Er ist nur in Süßigkeiten." },
+              { "id": "b", "de": "Er versteckt sich in vielen normalen Lebensmitteln." },
+              { "id": "c", "de": "Er macht den Kuchen nicht süß genug." }
+            ],
+            "correctOptionId": "b",
+            "explanationAr": "المشكلة أن السكر يختبئ في أطعمة لا نتوقعها كالكاتشب."
+          },
+          {
+            "id": "l13-2-3",
+            "promptDe": "Was soll die Lebensmittel-Ampel machen?",
+            "promptAr": "ما هو دور إشارة مرور الأغذية؟",
+            "options": [
+              { "id": "a", "de": "Den Menschen zeigen, ob ein Produkt gesund ist." },
+              { "id": "b", "de": "Die Preise im Supermarkt regulieren." },
+              { "id": "c", "de": "Ketchup im Supermarkt verbieten." }
+            ],
+            "correctOptionId": "a",
+            "explanationAr": "تُظهر للمشترين ما إذا كان المنتج صحياً أم لا."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesen-14",
+    "title": "نموذج Lesen رقم 14 (Technologie)",
+    "description": "امتحان قراءة — التكنولوجيا في حياتنا.",
+    "parts": [
+      {
+        "type": "tf-article",
+        "title": "Teil 3 – إعلان: ساعة ذكية",
+        "instructionsAr": "اقرأ الإعلان وحدد ما إذا كانت الجمل صحيحة (Richtig) أم خاطئة (Falsch).",
+        "textDe": "Die neue Smartwatch 'FitPro X' ist endlich da!\nMit der FitPro X haben Sie Ihre Gesundheit immer im Blick. Die Uhr misst nicht nur Ihren Puls und Ihre Schritte, sondern überwacht auch Ihren Schlaf. Das große OLED-Display ist auch bei starker Sonne gut lesbar.\nEin großer Vorteil: Der Akku hält jetzt bis zu 7 Tage ohne Aufladen. Die Uhr ist wasserdicht bis 50 Meter, Sie können also problemlos damit schwimmen gehen.\nWenn Sie die Uhr mit Ihrem Smartphone verbinden (Bluetooth erforderlich), erhalten Sie alle Nachrichten direkt auf das Handgelenk. Telefonieren können Sie über das eingebaute Mikrofon.\nBestellen Sie bis zum 30. Mai und erhalten Sie 20% Rabatt!",
+        "questions": [
+          { "id": "l14-3-1", "statementDe": "Man kann die Uhr auch beim Schwimmen tragen.", "correct": true },
+          { "id": "l14-3-2", "statementDe": "Man muss die Uhr jeden Tag aufladen.", "correct": false },
+          { "id": "l14-3-3", "statementDe": "Das Display funktioniert nur im Dunkeln gut.", "correct": false },
+          { "id": "l14-3-4", "statementDe": "Nach dem 30. Mai bezahlt man den normalen Preis.", "correct": true },
+          { "id": "l14-3-5", "statementDe": "Die Uhr hat ein Mikrofon für Telefonate.", "correct": true }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesen-15",
+    "title": "نموذج Lesen رقم 15 (Wohnen)",
+    "description": "امتحان قراءة — موضوع السكن.",
+    "parts": [
+      {
+        "type": "match-blog",
+        "title": "Teil 1 – منتدى: المدينة أم الريف؟",
+        "instructionsAr": "اقرأ الآراء ثم اختر الجملة المطابقة.",
+        "texts": [
+          { "id": "A", "titleDe": "Klaus", "titleAr": "كلاوس", "textDe": "Ich lebe seit 20 Jahren auf dem Dorf. Hier kennt jeder jeden. Manchmal ist das anstrengend, aber meistens ist es schön. Wenn man Hilfe braucht, ist sofort ein Nachbar da." },
+          { "id": "B", "titleDe": "Petra", "titleAr": "بيترا", "textDe": "Ich brauche das Chaos und die Kultur der Stadt. Theater, Kinos und Restaurants direkt vor der Tür! Das Landleben wäre mir viel zu langweilig." },
+          { "id": "C", "titleDe": "Hasan", "titleAr": "حسن", "textDe": "Für meine Kinder ist das Dorf perfekt. Sie können auf der Straße spielen und die Natur erleben. Allerdings ist der Weg zur Schule ziemlich lang." },
+          { "id": "D", "titleDe": "Maria", "titleAr": "ماريا", "textDe": "Ich bin in die Stadt gezogen, weil ich dort arbeite. Ohne Auto war das auf dem Land sehr schwierig. Hier in der Stadt brauche ich kein Auto mehr, die U-Bahn fährt alle 5 Minuten." },
+          { "id": "E", "titleDe": "Jörg", "titleAr": "يورغ", "textDe": "Ich habe einen Kompromiss gefunden. Ich lebe am Stadtrand. Ich habe einen eigenen Garten und Ruhe, bin aber mit dem Zug in 20 Minuten im Zentrum." }
+        ],
+        "statements": [
+          { "id": "l15-1-1", "textDe": "Diese Person mag das kulturelle Angebot.", "textAr": "هذا الشخص يحب العروض الثقافية.", "correctAd": "B" },
+          { "id": "l15-1-2", "textDe": "Diese Person ist wegen der Arbeit umgezogen.", "textAr": "هذا الشخص انتقل بسبب العمل.", "correctAd": "D" },
+          { "id": "l15-1-3", "textDe": "Diese Person schätzt die gegenseitige Hilfe.", "textAr": "هذا الشخص يقدّر المساعدة المتبادلة.", "correctAd": "A" },
+          { "id": "l15-1-4", "textDe": "Diese Person findet, das Dorf ist gut für den Nachwuchs.", "textAr": "يرى هذا الشخص أن القرية جيدة للأطفال.", "correctAd": "C" },
+          { "id": "l15-1-5", "textDe": "Diese Person lebt nicht direkt im Zentrum, aber auch nicht weit weg.", "textAr": "هذا الشخص لا يسكن في المركز، لكن ليس بعيداً عنه.", "correctAd": "E" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesen-16",
+    "title": "نموذج Lesen رقم 16 (Umwelt)",
+    "description": "امتحان قراءة — موضوع حماية البيئة.",
+    "parts": [
+      {
+        "type": "mc-article",
+        "title": "Teil 2 – مقال: هل التسوق الإلكتروني سيء للبيئة؟",
+        "instructionsAr": "اقرأ المقال وأجب عن الأسئلة.",
+        "textDe": "Online-Shopping ist praktisch: Ein Klick, und das Paket ist am nächsten Tag an der Haustür. Doch viele Umweltschützer kritisieren den zunehmenden Paketverkehr. Millionen von Paketen werden täglich durch Deutschland gefahren. Das verursacht Lärm und viele Abgase.\nAber ist der Kauf im Geschäft wirklich immer besser? Experten sagen: Es kommt darauf an. Wenn man mit dem Auto in die Stadt fährt, um ein T-Shirt zu kaufen, verbraucht man oft mehr CO2, als wenn der Paketbote auf seiner Route 50 Pakete gleichzeitig ausliefert.\nDas größte Problem beim Online-Shopping sind die Retouren. In Deutschland wird fast jedes vierte Paket zurückgeschickt. Das bedeutet doppelten Transportweg. Um die Umwelt zu schonen, sollte man also nur das bestellen, was man wirklich behalten will, und nicht drei Größen zur Auswahl bestellen.",
+        "questions": [
+          {
+            "id": "l16-2-1",
+            "promptDe": "Was kritisieren Umweltschützer am Online-Shopping?",
+            "promptAr": "ماذا ينتقد دعاة حماية البيئة في التسوق الإلكتروني؟",
+            "options": [
+              { "id": "a", "de": "Dass die Pakete zu teuer sind." },
+              { "id": "b", "de": "Den Verkehr und die Abgase durch die Lieferwagen." },
+              { "id": "c", "de": "Dass die Geschäfte in der Stadt schließen müssen." }
+            ],
+            "correctOptionId": "b",
+            "explanationAr": "ينتقدون زحمة المرور والغازات المنبعثة من سيارات التوصيل."
+          },
+          {
+            "id": "l16-2-2",
+            "promptDe": "Wann kann Online-Shopping besser für die Umwelt sein?",
+            "promptAr": "متى يمكن أن يكون التسوق الإلكتروني أفضل للبيئة؟",
+            "options": [
+              { "id": "a", "de": "Wenn man statt mit dem eigenen Auto zu fahren, sich etwas liefern lässt." },
+              { "id": "b", "de": "Wenn man viele Dinge gleichzeitig bestellt und zurückschickt." },
+              { "id": "c", "de": "Wenn man Kleidung in verschiedenen Größen bestellt." }
+            ],
+            "correctOptionId": "a",
+            "explanationAr": "إذا طُلب التوصيل بدلاً من قيادة السيارة الخاصة للمتجر، لأن المندوب يوصل 50 طرداً في رحلة واحدة."
+          },
+          {
+            "id": "l16-2-3",
+            "promptDe": "Was ist das Hauptproblem laut Text?",
+            "promptAr": "ما هي المشكلة الرئيسية بحسب النص؟",
+            "options": [
+              { "id": "a", "de": "Die Menschen kaufen zu viele T-Shirts." },
+              { "id": "b", "de": "Viele Pakete werden wieder zurückgeschickt." },
+              { "id": "c", "de": "Die Lieferanten sind nicht freundlich." }
+            ],
+            "correctOptionId": "b",
+            "explanationAr": "المشكلة الكبرى هي المرتجعات (Retouren) التي تضاعف المسافة."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesen-17",
+    "title": "نموذج Lesen رقم 17 (Bildung)",
+    "description": "امتحان قراءة — موضوع التعليم والمدارس.",
+    "parts": [
+      {
+        "type": "tf-article",
+        "title": "Teil 3 – إعلان: مدرسة لغات صيفية",
+        "instructionsAr": "اقرأ الإعلان وحدد ما إذا كانت الجمل صحيحة (Richtig) أم خاطئة (Falsch).",
+        "textDe": "Willkommen in der Sommersprachschule 'Lingua'! Möchten Sie diesen Sommer nicht nur am Strand liegen, sondern auch etwas für Ihre Karriere tun? Dann sind Sie bei uns richtig.\nWir bieten Intensivkurse in Englisch, Spanisch und Französisch an. Der Unterricht findet vormittags von 9 bis 13 Uhr statt. Nachmittags organisieren wir Ausflüge in die Umgebung oder sportliche Aktivitäten, die im Preis inbegriffen sind.\nUnsere Lehrer sind alle Muttersprachler und haben viel Erfahrung. Die Kurse dauern zwei Wochen. Wenn Sie sich bis zum 15. April anmelden, bekommen Sie die Bücher kostenlos dazu.\nBitte beachten Sie: Wir bieten keine Unterkunft an. Wir können Ihnen aber eine Liste mit günstigen Hotels und Gastfamilien in der Nähe schicken.",
+        "questions": [
+          { "id": "l17-3-1", "statementDe": "Der Unterricht ist den ganzen Tag.", "correct": false },
+          { "id": "l17-3-2", "statementDe": "Man muss für die Ausflüge am Nachmittag extra bezahlen.", "correct": false },
+          { "id": "l17-3-3", "statementDe": "Alle Lehrer kommen aus den Ländern, deren Sprache sie unterrichten.", "correct": true },
+          { "id": "l17-3-4", "statementDe": "Man muss die Bücher selbst bezahlen, wenn man sich im Mai anmeldet.", "correct": true },
+          { "id": "l17-3-5", "statementDe": "Die Sprachschule hat eigene Zimmer für die Schüler.", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesen-18",
+    "title": "نموذج Lesen رقم 18 (Verkehr)",
+    "description": "امتحان قراءة — وسائل النقل والمواصلات.",
+    "parts": [
+      {
+        "type": "match-blog",
+        "title": "Teil 1 – منتدى: هل نحتاج إلى سيارة خاصة؟",
+        "instructionsAr": "اقرأ الآراء ثم اختر الجملة المطابقة لكل شخص.",
+        "texts": [
+          { "id": "A", "titleDe": "Stefan", "titleAr": "شتيفان", "textDe": "Ich habe mein Auto vor einem Jahr verkauft. Ich fahre jetzt mit dem Fahrrad zur Arbeit. Wenn es stark regnet, nehme ich den Bus. Ich spare viel Geld für Benzin und Reparaturen." },
+          { "id": "B", "titleDe": "Lisa", "titleAr": "ليزا", "textDe": "Ohne Auto? Unmöglich! Ich arbeite im Schichtdienst als Krankenschwester. Wenn ich um 4 Uhr morgens anfange, fährt noch keine Straßenbahn. Da bin ich auf mein Auto angewiesen." },
+          { "id": "C", "titleDe": "Omar", "titleAr": "عمر", "textDe": "Ich nutze Carsharing. Ich brauche ein Auto nur, um am Wochenende große Einkäufe zu machen oder einen Ausflug zu machen. Ein eigenes Auto in der Stadt zu haben, ist wegen der Parkplatzsuche ein Albtraum." },
+          { "id": "D", "titleDe": "Tina", "titleAr": "تينا", "textDe": "Ich wohne auf dem Land und arbeite in der nächsten Stadt. Die Zugverbindung ist schrecklich, der Zug fährt nur alle zwei Stunden. Deshalb fahre ich mit dem Auto, auch wenn der Stau morgens nervt." },
+          { "id": "E", "titleDe": "Paul", "titleAr": "باول", "textDe": "Ich habe mir ein Elektroauto gekauft. Es ist teuer, aber ich tue etwas für die Umwelt. Ich lade es an der Arbeit auf, das ist für Mitarbeiter kostenlos." }
+        ],
+        "statements": [
+          { "id": "l18-1-1", "textDe": "Diese Person hat kein eigenes Auto, mietet aber manchmal eins.", "textAr": "هذا الشخص ليس لديه سيارة خاصة، لكنه يستأجر واحدة أحياناً.", "correctAd": "C" },
+          { "id": "l18-1-2", "textDe": "Diese Person fährt wegen der schlechten öffentlichen Verkehrsmittel Auto.", "textAr": "يقود هذا الشخص سيارته بسبب سوء المواصلات العامة.", "correctAd": "D" },
+          { "id": "l18-1-3", "textDe": "Diese Person fährt Auto, weil sie zu ungewöhnlichen Zeiten arbeitet.", "textAr": "تقود سيارتها لأنها تعمل في أوقات غير معتادة.", "correctAd": "B" },
+          { "id": "l18-1-4", "textDe": "Diese Person fährt mit dem Rad und spart dadurch Geld.", "textAr": "هذا الشخص يركب الدراجة ويوفر المال بذلك.", "correctAd": "A" },
+          { "id": "l18-1-5", "textDe": "Diese Person zahlt nichts für den 'Treibstoff' ihres Autos.", "textAr": "لا يدفع هذا الشخص شيئاً مقابل 'وقود' سيارته.", "correctAd": "E" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesen-19",
+    "title": "نموذج Lesen رقم 19 (Medien)",
+    "description": "امتحان قراءة — موضوع وسائل الإعلام والإنترنت.",
+    "parts": [
+      {
+        "type": "mc-article",
+        "title": "Teil 2 – مقال: الأطفال والهواتف الذكية",
+        "instructionsAr": "اقرأ المقال وأجب عن الأسئلة.",
+        "textDe": "Immer früher bekommen Kinder ihr erstes Smartphone. Laut einer neuen Studie haben in Deutschland schon 70% der Zehnjährigen ein eigenes Handy. Für die Eltern ist das praktisch: Sie können ihre Kinder jederzeit erreichen.\nPädagogen sehen diese Entwicklung jedoch kritisch. „Ein Smartphone ist kein Spielzeug\", sagt Kinderarzt Dr. Müller. Viele Kinder verbringen täglich mehr als drei Stunden mit Spielen oder sozialen Netzwerken. Dadurch bewegen sie sich weniger und haben oft Probleme, sich in der Schule zu konzentrieren. Zudem lauern im Internet Gefahren wie Cybermobbing oder ungeeignete Inhalte.\nExperten raten Eltern nicht zu einem kompletten Verbot. Besser ist es, feste Regeln zu vereinbaren. Zum Beispiel: Keine Handys beim Essen und das Gerät abends vor dem Schlafen abgeben. Wichtig ist auch, dass Eltern mit ihren Kindern über die Gefahren im Netz sprechen.",
+        "questions": [
+          {
+            "id": "l19-2-1",
+            "promptDe": "Warum finden viele Eltern Smartphones für Kinder gut?",
+            "promptAr": "لماذا يجد الكثير من الآباء الهواتف الذكية جيدة للأطفال؟",
+            "options": [
+              { "id": "a", "de": "Weil die Kinder dann leise sind." },
+              { "id": "b", "de": "Weil sie so immer Kontakt zu den Kindern haben können." },
+              { "id": "c", "de": "Weil die Kinder damit für die Schule lernen." }
+            ],
+            "correctOptionId": "b",
+            "explanationAr": "الآباء يجدون أنه من العملي أن يتمكنوا من الوصول لأطفالهم في أي وقت."
+          },
+          {
+            "id": "l19-2-2",
+            "promptDe": "Welches Problem beschreibt Dr. Müller?",
+            "promptAr": "ما هي المشكلة التي يصفها د. مولر؟",
+            "options": [
+              { "id": "a", "de": "Die Handys sind zu teuer für Familien." },
+              { "id": "b", "de": "Die Kinder treiben weniger Sport und lernen schlechter." },
+              { "id": "c", "de": "Die Schulen verbieten Smartphones im Unterricht." }
+            ],
+            "correctOptionId": "b",
+            "explanationAr": "يقول إن الأطفال يتحركون أقل ولديهم مشاكل في التركيز بالمدرسة."
+          },
+          {
+            "id": "l19-2-3",
+            "promptDe": "Was empfehlen Experten den Eltern?",
+            "promptAr": "بماذا ينصح الخبراء الآباء؟",
+            "options": [
+              { "id": "a", "de": "Sie sollen Handys komplett verbieten." },
+              { "id": "b", "de": "Sie sollen das Handy nachts im Kinderzimmer lassen." },
+              { "id": "c", "de": "Sie sollen Regeln aufstellen und mit den Kindern reden." }
+            ],
+            "correctOptionId": "c",
+            "explanationAr": "ينصحون بعدم المنع التام، بل بوضع قواعد واضحة والتحدث عن المخاطر."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesen-20",
+    "title": "نموذج Lesen رقم 20 (Ernährung)",
+    "description": "امتحان قراءة — موضوع التغذية والطبخ.",
+    "parts": [
+      {
+        "type": "tf-article",
+        "title": "Teil 3 – رسالة: تغيير النظام الغذائي",
+        "instructionsAr": "اقرأ رسالة ماركوس وحدد ما إذا كانت الجمل صحيحة (Richtig) أم خاطئة (Falsch).",
+        "textDe": "Hallo Julia,\n\nich wollte dir erzählen, dass ich seit vier Wochen meine Ernährung komplett umgestellt habe! Mein Arzt hat mir gesagt, dass ich zu viel Fastfood esse und mein Blutdruck zu hoch ist.\nJetzt koche ich jeden Abend frisch. Ich habe ein tolles Kochbuch für vegetarische Gerichte gekauft. Ich esse jetzt viel mehr Gemüse und habe Fleisch auf zweimal pro Woche reduziert. Morgens gibt es kein Nutellabrot mehr, sondern Haferflocken mit frischem Obst.\nAm Anfang war es wirklich hart, besonders der Verzicht auf Süßigkeiten am Abend. Aber jetzt fühle ich mich viel fitter und habe sogar schon drei Kilo abgenommen.\nWir sollten uns bald mal wieder zum Essen treffen. Ich koche gern für dich! Sag Bescheid, wann du Zeit hast.\n\nLiebe Grüße,\nMarkus",
+        "questions": [
+          { "id": "l20-3-1", "statementDe": "Markus isst gar kein Fleisch mehr.", "correct": false },
+          { "id": "l20-3-2", "statementDe": "Der Arzt hat Markus empfohlen, gesünder zu essen.", "correct": true },
+          { "id": "l20-3-3", "statementDe": "Markus frühstückt jetzt gesünder als früher.", "correct": true },
+          { "id": "l20-3-4", "statementDe": "Es war von Anfang an sehr einfach für Markus, keine Süßigkeiten zu essen.", "correct": false },
+          { "id": "l20-3-5", "statementDe": "Markus lädt Julia in ein Restaurant ein.", "correct": false }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lesen-21",
+    "title": "نموذج Lesen رقم 21 (Ehrenamt)",
+    "description": "امتحان قراءة — العمل التطوعي في ألمانيا.",
+    "parts": [
+      {
+        "type": "match-blog",
+        "title": "Teil 1 – منتدى: العمل التطوعي (Ehrenamt)",
+        "instructionsAr": "اقرأ الآراء ثم اختر الجملة المطابقة.",
+        "texts": [
+          { "id": "A", "titleDe": "Silvia", "titleAr": "سيلفيا", "textDe": "Ich lese jeden Mittwochnachmittag im Kindergarten Geschichten vor. Die Kinder freuen sich immer sehr auf mich. Ich habe selbst keine Enkelkinder, deshalb ist das für mich eine große Freude." },
+          { "id": "B", "titleDe": "Tarik", "titleAr": "طارق", "textDe": "Ich bin bei der Freiwilligen Feuerwehr. Das ist manchmal gefährlich und kostet viel Zeit am Wochenende, aber es ist ein tolles Gefühl, anderen Menschen in Not zu helfen. Die Gemeinschaft dort ist super." },
+          { "id": "C", "titleDe": "Lea", "titleAr": "ليا", "textDe": "Ich engagiere mich im Tierheim. Ich gehe zweimal pro Woche mit den Hunden spazieren, weil die Mitarbeiter dafür keine Zeit haben. Ich liebe Tiere, darf aber in meiner Wohnung keinen Hund halten." },
+          { "id": "D", "titleDe": "Florian", "titleAr": "فلوريان", "textDe": "Ich helfe in einem Café für Senioren. Wir trinken Kaffee, essen Kuchen und reden viel. Manche alte Menschen sind sehr einsam. Es ist schön zu sehen, wie sie aufblühen, wenn man ihnen einfach nur zuhört." },
+          { "id": "E", "titleDe": "Nadia", "titleAr": "ناديا", "textDe": "Ich organisiere Sprachpatenschaften. Das heißt, ich treffe mich mit Leuten, die neu in Deutschland sind, und wir sprechen Deutsch. Ich helfe ihnen auch manchmal bei Briefen von Ämtern." }
+        ],
+        "statements": [
+          { "id": "l21-1-1", "textDe": "Diese Person unterstützt Menschen, die die Sprache noch lernen.", "textAr": "هذا الشخص يدعم الناس الذين لا يزالون يتعلمون اللغة.", "correctAd": "E" },
+          { "id": "l21-1-2", "textDe": "Diese Person kümmert sich um Tiere, die kein Zuhause haben.", "textAr": "هذا الشخص يعتني بالحيوانات التي ليس لها منزل.", "correctAd": "C" },
+          { "id": "l21-1-3", "textDe": "Diese Person verbringt Zeit mit kleinen Kindern.", "textAr": "يقضي هذا الشخص وقتاً مع الأطفال الصغار.", "correctAd": "A" },
+          { "id": "l21-1-4", "textDe": "Diese Person arbeitet bei Rettungseinsätzen mit.", "textAr": "يشارك هذا الشخص في عمليات الإنقاذ.", "correctAd": "B" },
+          { "id": "l21-1-5", "textDe": "Diese Person leistet alten Menschen Gesellschaft.", "textAr": "هذا الشخص يؤنس كبار السن ويجالسهم.", "correctAd": "D" }
+        ]
+      }
+    ]
   }
 ];
 
