@@ -344,6 +344,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 <p className="text-white/60 text-sm leading-relaxed mb-6">
                   تدرب على امتحانات اللغة الألمانية مع مواد أصلية واستعد للحصول على شهادتك. منصتك الشاملة للاندماج واللغة.
                 </p>
+                <div className="mb-3 font-bold text-sm text-white/80">تابعنا على (Follow us on):</div>
                 <div className="flex gap-3">
                   {/* Social Icons Placeholders */}
                   <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#00b894] transition-colors">📱</a>
