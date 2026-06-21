@@ -55,21 +55,22 @@ const commonHead = (title, description, canonicalUrl) => `
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1874998894873805" crossorigin="anonymous"></script>
   <style>
     :root {
-      --green: #0F7B3E;
-      --green-dark: #094F28;
-      --green-deep: #062719;
-      --red: #CE1126;
-      --red-dark: #8A0C19;
-      --gold: #C9A96E;
-      --bg-light: #f4f7f4;
+      --green: #58cc02;
+      --green-dark: #46a302;
+      --blue: #1cb0f6;
+      --blue-dark: #1899d6;
+      --red: #ff4b4b;
+      --red-dark: #ea2b2b;
+      --gold: #ffc800;
+      --bg-light: #ffffff;
       --card-bg: #ffffff;
-      --text-main: #111827;
-      --text-muted: #4B5563;
-      --border-color: #E5E7EB;
+      --text-main: #3c3c3c;
+      --text-muted: #777777;
+      --border-color: #e5e5e5;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, sans-serif;
       background: var(--bg-light);
       color: var(--text-main);
       line-height: 1.8;
@@ -78,16 +79,14 @@ const commonHead = (title, description, canonicalUrl) => `
     a { color: inherit; text-decoration: none; }
     .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
     
-    /* Sticky Navigation */
+    /* Navigation */
     .nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(11, 30, 18, 0.94);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      color: white;
+      background: #ffffff;
+      border-bottom: 2px solid var(--border-color);
+      color: var(--text-main);
     }
     .nav-inner {
       display: flex;
@@ -102,12 +101,13 @@ const commonHead = (title, description, canonicalUrl) => `
       align-items: center;
       gap: 10px;
       font-weight: 900;
-      font-size: 19px;
+      font-size: 20px;
+      color: var(--green);
     }
     .brand img {
       width: 36px;
       height: 36px;
-      border-radius: 8px;
+      border-radius: 12px;
     }
     .nav-links {
       display: flex;
@@ -115,39 +115,43 @@ const commonHead = (title, description, canonicalUrl) => `
       align-items: center;
     }
     .nav-links a {
-      font-size: 13.5px;
+      font-size: 15px;
       font-weight: 700;
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--text-muted);
       transition: color 0.2s;
     }
     .nav-links a:hover {
-      color: var(--gold);
+      color: var(--blue);
     }
     .nav-cta {
-      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      background: var(--blue);
       color: white !important;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 13px !important;
-      box-shadow: 0 4px 10px rgba(206, 17, 38, 0.3);
+      padding: 10px 16px;
+      border-radius: 12px;
+      border-bottom: 3px solid var(--blue-dark);
+      font-size: 14px !important;
+      font-weight: 800;
     }
+    .nav-cta:hover { transform: translateY(2px); border-bottom-width: 1px; margin-top: 2px; }
     
-    /* Hero/Header Section */
+    /* Hero Section */
     .hero-sec {
-      background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-dark) 100%);
-      color: white;
+      background: var(--bg-light);
+      color: var(--text-main);
       padding: 50px 0;
       text-align: center;
-      border-bottom: 4px solid var(--gold);
+      border-bottom: 2px solid var(--border-color);
     }
     .hero-sec h1 {
-      font-size: clamp(26px, 4.5vw, 36px);
+      font-size: clamp(28px, 5vw, 42px);
       font-weight: 900;
       margin-bottom: 12px;
+      color: var(--blue);
     }
     .hero-sec p {
-      font-size: 16px;
-      color: rgba(255, 255, 255, 0.85);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-muted);
       max-width: 700px;
       margin: 0 auto;
     }
@@ -161,18 +165,19 @@ const commonHead = (title, description, canonicalUrl) => `
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      background: var(--green);
       color: white;
       font-weight: 900;
-      font-size: 18px;
-      padding: 16px 36px;
-      border-radius: 14px;
-      box-shadow: 0 8px 24px rgba(15, 123, 62, 0.3);
-      transition: transform 0.2s, box-shadow 0.2s;
+      font-size: 20px;
+      padding: 18px 40px;
+      border-radius: 20px;
+      border-bottom: 4px solid var(--green-dark);
+      transition: transform 0.1s;
     }
-    .app-cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(15, 123, 62, 0.45);
+    .app-cta-btn:active {
+      transform: translateY(4px);
+      border-bottom-width: 0px;
+      margin-top: 4px;
     }
     
     /* Layout grid */
@@ -183,64 +188,76 @@ const commonHead = (title, description, canonicalUrl) => `
       margin: 40px 0;
     }
     
-    /* Content Cards */
+    /* Content Cards (Duolingo Style) */
     .card {
       background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
+      border: 2px solid var(--border-color);
+      border-bottom-width: 4px;
+      border-radius: 20px;
       padding: 24px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-2px);
     }
     .card-title {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--green-dark);
-      margin-bottom: 12px;
-      border-bottom: 2px solid var(--bg-light);
-      padding-bottom: 8px;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 12px;
     }
+
+    /* German / Arabic strict layout */
     .german-block {
-      background: #F9FAFB;
-      border-right: 4px solid var(--green);
+      background: #f7f7f7;
+      border: 2px solid var(--border-color);
       padding: 16px;
-      border-radius: 8px;
+      border-radius: 16px;
       font-family: 'Inter', system-ui;
-      font-size: 15px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
       text-align: left;
       direction: ltr;
       margin: 12px 0;
     }
     .arabic-block {
-      font-size: 15px;
+      font-size: 16px;
+      font-weight: 600;
       color: var(--text-muted);
       margin: 8px 0;
+      text-align: right;
+      direction: rtl;
     }
     
     /* Sidebar / Navigation block */
     .sidebar-card {
-      background: linear-gradient(135deg, #FFF 0%, var(--bg-light) 100%);
-      border: 1px dashed var(--green);
-      border-radius: 16px;
+      background: #f7f7f7;
+      border: 2px solid var(--border-color);
+      border-radius: 20px;
       padding: 24px;
       margin-bottom: 24px;
     }
     .sidebar-card h3 {
-      color: var(--green-dark);
-      margin-bottom: 10px;
+      color: var(--blue);
+      margin-bottom: 12px;
+      font-weight: 900;
     }
     
     /* Footer */
     .footer {
-      background: #0B1E12;
-      color: rgba(255, 255, 255, 0.6);
+      background: var(--border-color);
+      color: var(--text-muted);
       padding: 40px 0;
       text-align: center;
-      font-size: 14px;
+      font-size: 15px;
+      font-weight: 700;
       margin-top: 60px;
-      border-top: 4px solid var(--green);
     }
     .footer a {
-      color: var(--gold);
+      color: var(--blue);
       margin: 0 10px;
     }
     .footer a:hover {
@@ -297,19 +314,24 @@ function generateGrammatikPage() {
   grammarLessons.forEach(l => {
     let examplesHTML = '';
     if (l.examples && l.examples.length > 0) {
-      examplesHTML += '<div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>';
+      examplesHTML += '<div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>';
       l.examples.forEach(ex => {
         examplesHTML += `
-          <div class="german-block">${ex.de || ex.wrong}</div>
-          <div class="arabic-block">👈 ${ex.ar}</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">${ex.de || ex.wrong}</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">${ex.ar}</div>
+          </div>
         `;
       });
     }
 
     lessonsHTML += `
       <article class="card">
-        <h2 class="card-title" dir="ltr">${l.title} — ${l.titleAr}</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">${l.explanation}</div>
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">${l.title}</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">${l.titleAr}</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">${l.explanation}</div>
         ${examplesHTML}
       </article>
     `;
@@ -447,26 +469,26 @@ function generateSchreibenPage() {
     (model.tasks || model.parts || []).forEach(t => {
       let phrasesHTML = '';
       if (t.usefulPhrases) {
-        phrasesHTML += '<div style="margin-top: 15px; font-weight:700;">عبارات مفيدة (Nützliche Sätze):</div>';
+        phrasesHTML += '<div style="margin-top: 15px; font-weight:900; color:var(--blue); font-size:18px;">💡 عبارات مفيدة (Nützliche Sätze):</div>';
         t.usefulPhrases.slice(0, 5).forEach(ph => {
           phrasesHTML += `
-            <div style="display:flex; justify-content:space-between; border-bottom:1px solid #F3F4F6; padding: 6px 0; font-size:13.5px;">
-              <span style="font-family:'Inter';" dir="ltr">${ph.de}</span>
-              <span style="color:var(--text-muted);">${ph.ar}</span>
+            <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 12px; margin-top:10px;">
+              <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">${ph.de}</div>
+              <div style="font-weight:600; color:var(--text-muted); text-align:right;" dir="rtl">${ph.ar}</div>
             </div>
           `;
         });
       }
 
       tasksHTML += `
-        <div style="border:1px solid var(--border-color); border-radius:12px; padding: 20px; margin-top:20px; background:#fafafa;">
-          <h3 style="color:var(--red); font-size:17px; margin-bottom:8px;">المهمة ${t.taskNumber || 1}: ${t.typeAr} (${t.typeDe})</h3>
-          <p><strong>الموضوع المطلوب:</strong> ${t.promptAr}</p>
-          <p style="font-family:'Inter'; font-size:13.5px; color:var(--text-muted); margin-bottom:12px;" dir="ltr"><em>Aufgabe: ${t.promptDe}</em></p>
+        <div style="border:2px solid var(--border-color); border-radius:20px; padding: 24px; margin-top:24px; background:#ffffff;">
+          <h3 style="color:var(--red); font-size:20px; font-weight:900; margin-bottom:12px;">المهمة ${t.taskNumber || 1}: ${t.typeAr} (${t.typeDe})</h3>
+          <div class="arabic-block" style="color:var(--text-main);"><strong>الموضوع المطلوب:</strong> ${t.promptAr}</div>
+          <div class="german-block" style="color:var(--text-muted); background:transparent; border-color:transparent; padding:0; margin-bottom:16px;"><em>Aufgabe: ${t.promptDe}</em></div>
           
-          <div style="margin-top: 15px;">
-            <div style="font-weight:700; color:var(--green-dark);">نموذج رسالة جاهز (Musterbrief):</div>
-            <pre style="white-space: pre-wrap; font-family:'Inter', sans-serif; font-size:14.5px; background:white; border:1px solid #E5E7EB; border-radius:8px; padding:15px; margin-top:8px; text-align:left;" dir="ltr">${t.sampleAnswer}</pre>
+          <div style="margin-top: 20px;">
+            <div style="font-weight:900; color:var(--green); font-size:18px; margin-bottom:8px;">✅ نموذج رسالة جاهز (Musterbrief):</div>
+            <pre class="german-block" style="white-space: pre-wrap;">${t.sampleAnswer}</pre>
           </div>
           ${phrasesHTML}
         </div>
@@ -476,7 +498,7 @@ function generateSchreibenPage() {
     writingHTML += `
       <div class="card" style="margin-bottom: 30px;">
         <h2 class="card-title">${model.title}</h2>
-        <p>${model.description}</p>
+        <p class="arabic-block" style="font-size:18px; color:var(--text-main);">${model.description}</p>
         ${tasksHTML}
       </div>
     `;

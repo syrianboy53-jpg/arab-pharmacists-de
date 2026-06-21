@@ -24,21 +24,22 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1874998894873805" crossorigin="anonymous"></script>
   <style>
     :root {
-      --green: #0F7B3E;
-      --green-dark: #094F28;
-      --green-deep: #062719;
-      --red: #CE1126;
-      --red-dark: #8A0C19;
-      --gold: #C9A96E;
-      --bg-light: #f4f7f4;
+      --green: #58cc02;
+      --green-dark: #46a302;
+      --blue: #1cb0f6;
+      --blue-dark: #1899d6;
+      --red: #ff4b4b;
+      --red-dark: #ea2b2b;
+      --gold: #ffc800;
+      --bg-light: #ffffff;
       --card-bg: #ffffff;
-      --text-main: #111827;
-      --text-muted: #4B5563;
-      --border-color: #E5E7EB;
+      --text-main: #3c3c3c;
+      --text-muted: #777777;
+      --border-color: #e5e5e5;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, sans-serif;
       background: var(--bg-light);
       color: var(--text-main);
       line-height: 1.8;
@@ -47,16 +48,14 @@
     a { color: inherit; text-decoration: none; }
     .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
     
-    /* Sticky Navigation */
+    /* Navigation */
     .nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(11, 30, 18, 0.94);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      color: white;
+      background: #ffffff;
+      border-bottom: 2px solid var(--border-color);
+      color: var(--text-main);
     }
     .nav-inner {
       display: flex;
@@ -71,12 +70,13 @@
       align-items: center;
       gap: 10px;
       font-weight: 900;
-      font-size: 19px;
+      font-size: 20px;
+      color: var(--green);
     }
     .brand img {
       width: 36px;
       height: 36px;
-      border-radius: 8px;
+      border-radius: 12px;
     }
     .nav-links {
       display: flex;
@@ -84,39 +84,43 @@
       align-items: center;
     }
     .nav-links a {
-      font-size: 13.5px;
+      font-size: 15px;
       font-weight: 700;
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--text-muted);
       transition: color 0.2s;
     }
     .nav-links a:hover {
-      color: var(--gold);
+      color: var(--blue);
     }
     .nav-cta {
-      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      background: var(--blue);
       color: white !important;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 13px !important;
-      box-shadow: 0 4px 10px rgba(206, 17, 38, 0.3);
+      padding: 10px 16px;
+      border-radius: 12px;
+      border-bottom: 3px solid var(--blue-dark);
+      font-size: 14px !important;
+      font-weight: 800;
     }
+    .nav-cta:hover { transform: translateY(2px); border-bottom-width: 1px; margin-top: 2px; }
     
-    /* Hero/Header Section */
+    /* Hero Section */
     .hero-sec {
-      background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-dark) 100%);
-      color: white;
+      background: var(--bg-light);
+      color: var(--text-main);
       padding: 50px 0;
       text-align: center;
-      border-bottom: 4px solid var(--gold);
+      border-bottom: 2px solid var(--border-color);
     }
     .hero-sec h1 {
-      font-size: clamp(26px, 4.5vw, 36px);
+      font-size: clamp(28px, 5vw, 42px);
       font-weight: 900;
       margin-bottom: 12px;
+      color: var(--blue);
     }
     .hero-sec p {
-      font-size: 16px;
-      color: rgba(255, 255, 255, 0.85);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-muted);
       max-width: 700px;
       margin: 0 auto;
     }
@@ -130,18 +134,19 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      background: var(--green);
       color: white;
       font-weight: 900;
-      font-size: 18px;
-      padding: 16px 36px;
-      border-radius: 14px;
-      box-shadow: 0 8px 24px rgba(15, 123, 62, 0.3);
-      transition: transform 0.2s, box-shadow 0.2s;
+      font-size: 20px;
+      padding: 18px 40px;
+      border-radius: 20px;
+      border-bottom: 4px solid var(--green-dark);
+      transition: transform 0.1s;
     }
-    .app-cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(15, 123, 62, 0.45);
+    .app-cta-btn:active {
+      transform: translateY(4px);
+      border-bottom-width: 0px;
+      margin-top: 4px;
     }
     
     /* Layout grid */
@@ -152,64 +157,76 @@
       margin: 40px 0;
     }
     
-    /* Content Cards */
+    /* Content Cards (Duolingo Style) */
     .card {
       background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
+      border: 2px solid var(--border-color);
+      border-bottom-width: 4px;
+      border-radius: 20px;
       padding: 24px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-2px);
     }
     .card-title {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--green-dark);
-      margin-bottom: 12px;
-      border-bottom: 2px solid var(--bg-light);
-      padding-bottom: 8px;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 12px;
     }
+
+    /* German / Arabic strict layout */
     .german-block {
-      background: #F9FAFB;
-      border-right: 4px solid var(--green);
+      background: #f7f7f7;
+      border: 2px solid var(--border-color);
       padding: 16px;
-      border-radius: 8px;
+      border-radius: 16px;
       font-family: 'Inter', system-ui;
-      font-size: 15px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
       text-align: left;
       direction: ltr;
       margin: 12px 0;
     }
     .arabic-block {
-      font-size: 15px;
+      font-size: 16px;
+      font-weight: 600;
       color: var(--text-muted);
       margin: 8px 0;
+      text-align: right;
+      direction: rtl;
     }
     
     /* Sidebar / Navigation block */
     .sidebar-card {
-      background: linear-gradient(135deg, #FFF 0%, var(--bg-light) 100%);
-      border: 1px dashed var(--green);
-      border-radius: 16px;
+      background: #f7f7f7;
+      border: 2px solid var(--border-color);
+      border-radius: 20px;
       padding: 24px;
       margin-bottom: 24px;
     }
     .sidebar-card h3 {
-      color: var(--green-dark);
-      margin-bottom: 10px;
+      color: var(--blue);
+      margin-bottom: 12px;
+      font-weight: 900;
     }
     
     /* Footer */
     .footer {
-      background: #0B1E12;
-      color: rgba(255, 255, 255, 0.6);
+      background: var(--border-color);
+      color: var(--text-muted);
       padding: 40px 0;
       text-align: center;
-      font-size: 14px;
+      font-size: 15px;
+      font-weight: 700;
       margin-top: 60px;
-      border-top: 4px solid var(--green);
     }
     .footer a {
-      color: var(--gold);
+      color: var(--blue);
       margin: 0 10px;
     }
     .footer a:hover {
@@ -259,8 +276,11 @@
         <div class="content-grid">
           
       <article class="card">
-        <h2 class="card-title" dir="ltr">Akkusativ vs. Dativ — المفعول به مقابل المجرور</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">الـAkkusativ يُجيب عن: wen? was? (مَن؟ ماذا؟) — المفعول به المباشر.
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">Akkusativ vs. Dativ</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">المفعول به مقابل المجرور</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">الـAkkusativ يُجيب عن: wen? was? (مَن؟ ماذا؟) — المفعول به المباشر.
 الـDativ يُجيب عن: wem? (لمَن؟) — المفعول به غير المباشر.
 
 أدوات التعريف:
@@ -269,24 +289,35 @@
 
 أفعال مع Akkusativ: haben, brauchen, sehen, finden, kaufen
 أفعال مع Dativ: helfen, danken, gehören, gefallen, folgen</div>
-        <div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>
-          <div class="german-block">Ich sehe den Mann. (Akkusativ)</div>
-          <div class="arabic-block">👈 أرى الرجل — مفعول به مباشر</div>
+        <div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich sehe den Mann. (Akkusativ)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">أرى الرجل — مفعول به مباشر</div>
+          </div>
         
-          <div class="german-block">Ich helfe dem Mann. (Dativ)</div>
-          <div class="arabic-block">👈 أساعد الرجل — مفعول به غير مباشر</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich helfe dem Mann. (Dativ)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">أساعد الرجل — مفعول به غير مباشر</div>
+          </div>
         
-          <div class="german-block">Sie kauft einen Laptop.</div>
-          <div class="arabic-block">👈 هي تشتري لابتوب (Akk)</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Sie kauft einen Laptop.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">هي تشتري لابتوب (Akk)</div>
+          </div>
         
-          <div class="german-block">Das Buch gehört dem Kind.</div>
-          <div class="arabic-block">👈 الكتاب يخصّ الطفل (Dat)</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Das Buch gehört dem Kind.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">الكتاب يخصّ الطفل (Dat)</div>
+          </div>
         
       </article>
     
       <article class="card">
-        <h2 class="card-title" dir="ltr">Nebensätze mit weil, dass, obwohl — الجمل الثانوية</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">في الجمل الثانوية (Nebensatz) الفعل يذهب للنهاية!
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">Nebensätze mit weil, dass, obwohl</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">الجمل الثانوية</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">في الجمل الثانوية (Nebensatz) الفعل يذهب للنهاية!
 
 • weil = لأنّ (سبب)
 • dass = أنّ (محتوى)
@@ -295,24 +326,35 @@
 • als = عندما (ماضي مرّة واحدة)
 
 الهيكل: Hauptsatz + Konnektor + ... + VERB</div>
-        <div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>
-          <div class="german-block">Ich bleibe zu Hause, weil ich krank bin.</div>
-          <div class="arabic-block">👈 أبقى في البيت لأنّي مريض.</div>
+        <div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich bleibe zu Hause, weil ich krank bin.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">أبقى في البيت لأنّي مريض.</div>
+          </div>
         
-          <div class="german-block">Ich glaube, dass er recht hat.</div>
-          <div class="arabic-block">👈 أعتقد أنّه محقّ.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich glaube, dass er recht hat.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">أعتقد أنّه محقّ.</div>
+          </div>
         
-          <div class="german-block">Obwohl es regnet, gehe ich spazieren.</div>
-          <div class="arabic-block">👈 بالرغم من المطر، أمشي.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Obwohl es regnet, gehe ich spazieren.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">بالرغم من المطر، أمشي.</div>
+          </div>
         
-          <div class="german-block">Wenn ich Zeit habe, lese ich ein Buch.</div>
-          <div class="arabic-block">👈 لو عندي وقت، أقرأ كتاب.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Wenn ich Zeit habe, lese ich ein Buch.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">لو عندي وقت، أقرأ كتاب.</div>
+          </div>
         
       </article>
     
       <article class="card">
-        <h2 class="card-title" dir="ltr">Perfekt (Partizip II) — الماضي التام</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">الـPerfekt هو الزمن الأكثر استخداماً للماضي في المحادثة.
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">Perfekt (Partizip II)</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">الماضي التام</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">الـPerfekt هو الزمن الأكثر استخداماً للماضي في المحادثة.
 
 الهيكل: haben/sein + Partizip II
 
@@ -322,24 +364,35 @@
 
 sein مع أفعال الحركة والتغيير:
 gehen → ist gegangen, fahren → ist gefahren, kommen → ist gekommen</div>
-        <div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>
-          <div class="german-block">Ich habe gestern viel gearbeitet.</div>
-          <div class="arabic-block">👈 عملت كثيراً البارحة.</div>
+        <div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich habe gestern viel gearbeitet.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">عملت كثيراً البارحة.</div>
+          </div>
         
-          <div class="german-block">Wir sind nach Berlin gefahren.</div>
-          <div class="arabic-block">👈 سافرنا إلى برلين.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Wir sind nach Berlin gefahren.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">سافرنا إلى برلين.</div>
+          </div>
         
-          <div class="german-block">Er hat ein Buch gelesen.</div>
-          <div class="arabic-block">👈 قرأ كتاباً.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Er hat ein Buch gelesen.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">قرأ كتاباً.</div>
+          </div>
         
-          <div class="german-block">Sie ist um 7 Uhr aufgestanden.</div>
-          <div class="arabic-block">👈 استيقظت الساعة 7.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Sie ist um 7 Uhr aufgestanden.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">استيقظت الساعة 7.</div>
+          </div>
         
       </article>
     
       <article class="card">
-        <h2 class="card-title" dir="ltr">Modalverben im Präteritum — الأفعال الناقصة في الماضي البسيط</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">الماضي البسيط للأفعال الناقصة (Präteritum der Modalverben) يُستخدم بكثرة في الحديث والكتابة لتسهيل صياغة الماضي مقارنة بالـ Perfekt.
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">Modalverben im Präteritum</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">الأفعال الناقصة في الماضي البسيط</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">الماضي البسيط للأفعال الناقصة (Präteritum der Modalverben) يُستخدم بكثرة في الحديث والكتابة لتسهيل صياغة الماضي مقارنة بالـ Perfekt.
 
 تصريف الأفعال في الماضي البسيط:
 • müssen → musste (وجب)
@@ -350,24 +403,35 @@ gehen → ist gegangen, fahren → ist gefahren, kommen → ist gekommen</div>
 • mögen → mochte (أحبّ)
 
 تنبيه: صيغة المفرد للغائب والمتكلم متشابهة تماماً: ich musste / er musste / sie musste.</div>
-        <div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>
-          <div class="german-block">Gestern musste ich sehr lange arbeiten.</div>
-          <div class="arabic-block">👈 البارحة وجب عليّ العمل لوقت طويل جداً.</div>
+        <div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Gestern musste ich sehr lange arbeiten.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">البارحة وجب عليّ العمل لوقت طويل جداً.</div>
+          </div>
         
-          <div class="german-block">Als Kind konnte ich nicht gut schwimmen.</div>
-          <div class="arabic-block">👈 عندما كنت طفلاً لم أكن أستطيع السباحة بشكل جيد.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Als Kind konnte ich nicht gut schwimmen.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">عندما كنت طفلاً لم أكن أستطيع السباحة بشكل جيد.</div>
+          </div>
         
-          <div class="german-block">Wir wollten ins Kino gehen, aber es gab keine Tickets.</div>
-          <div class="arabic-block">👈 أردنا الذهاب إلى السينما، لكن لم تكن هناك تذاكر.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Wir wollten ins Kino gehen, aber es gab keine Tickets.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">أردنا الذهاب إلى السينما، لكن لم تكن هناك تذاكر.</div>
+          </div>
         
-          <div class="german-block">Du solltest deinen Arzt anrufen.</div>
-          <div class="arabic-block">👈 كان ينبغي عليك الاتصال بطبيبك.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Du solltest deinen Arzt anrufen.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">كان ينبغي عليك الاتصال بطبيبك.</div>
+          </div>
         
       </article>
     
       <article class="card">
-        <h2 class="card-title" dir="ltr">Passiv im Präsens und Präteritum — المبني للمجهول</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">يُركز المبني للمجهول (Passiv) على الحدث أو المفعول به بدلاً من الفاعل (من قام بالحدث).
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">Passiv im Präsens und Präteritum</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">المبني للمجهول</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">يُركز المبني للمجهول (Passiv) على الحدث أو المفعول به بدلاً من الفاعل (من قام بالحدث).
 
 الهيكل في الحاضر (Präsens Passiv):
 • werden + Partizip II
@@ -379,24 +443,35 @@ gehen → ist gegangen, fahren → ist gefahren, kommen → ist gekommen</div>
 
 إذا أردنا ذكر الفاعل الذي قام بالحدث، نستخدم حرف الجر von + Dativ:
 • Das Auto wird von dem Mechaniker repariert.</div>
-        <div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>
-          <div class="german-block">Das Essen wird frisch gekocht.</div>
-          <div class="arabic-block">👈 الطعام يتم طهيه طازجاً.</div>
+        <div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Das Essen wird frisch gekocht.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">الطعام يتم طهيه طازجاً.</div>
+          </div>
         
-          <div class="german-block">Die Hausaufgabe wurde gestern geschrieben.</div>
-          <div class="arabic-block">👈 الواجب كُتب البارحة.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Die Hausaufgabe wurde gestern geschrieben.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">الواجب كُتب البارحة.</div>
+          </div>
         
-          <div class="german-block">Hier wird viel Deutsch gesprochen.</div>
-          <div class="arabic-block">👈 هنا يُتحدث الكثير من الألمانية.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Hier wird viel Deutsch gesprochen.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">هنا يُتحدث الكثير من الألمانية.</div>
+          </div>
         
-          <div class="german-block">Das Haus wurde im Jahr 2020 gebaut.</div>
-          <div class="arabic-block">👈 البيت بُني في عام 2020.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Das Haus wurde im Jahr 2020 gebaut.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">البيت بُني في عام 2020.</div>
+          </div>
         
       </article>
     
       <article class="card">
-        <h2 class="card-title" dir="ltr">Relativsätze im Nominativ, Akkusativ und Dativ — الجمل الموصولة</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">تُستخدم الجمل الموصولة (Relativsätze) لوصف اسم معين بدقة وتفصيل دون تكراره، وهي جمل فرعية يذهب الفعل المصرّف فيها للنهاية.
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">Relativsätze im Nominativ, Akkusativ und Dativ</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">الجمل الموصولة</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">تُستخدم الجمل الموصولة (Relativsätze) لوصف اسم معين بدقة وتفصيل دون تكراره، وهي جمل فرعية يذهب الفعل المصرّف فيها للنهاية.
 
 تعتمد أداة الوصل (Relativpronomen) على جنس الكلمة الموصوفة وحالتها الإعرابية:
 • Nominativ (فاعل الوصل): der (m), die (f), das (n), die (pl)
@@ -407,24 +482,35 @@ gehen → ist gegangen, fahren → ist gefahren, kommen → ist gekommen</div>
 • der Mann, der hier wohnt (الرجل الذي يسكن هنا)
 • der Mann, den ich kenne (الرجل الذي أعرفه)
 • der Mann, dem ich helfe (الرجل الذي أساعده)</div>
-        <div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>
-          <div class="german-block">Das ist die Frau, die neben mir wohnt.</div>
-          <div class="arabic-block">👈 هذه هي المرأة التي تسكن بجانبي.</div>
+        <div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Das ist die Frau, die neben mir wohnt.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">هذه هي المرأة التي تسكن بجانبي.</div>
+          </div>
         
-          <div class="german-block">Das Buch, das ich gekauft habe, ist sehr gut.</div>
-          <div class="arabic-block">👈 الكتاب الذي اشتريته جيد جداً.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Das Buch, das ich gekauft habe, ist sehr gut.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">الكتاب الذي اشتريته جيد جداً.</div>
+          </div>
         
-          <div class="german-block">Das sind die Kinder, denen ich geholfen habe.</div>
-          <div class="arabic-block">👈 هؤلاء هم الأطفال الذين ساعدتهم.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Das sind die Kinder, denen ich geholfen habe.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">هؤلاء هم الأطفال الذين ساعدتهم.</div>
+          </div>
         
-          <div class="german-block">Der Kollege, den ich gestern angerufen habe, kommt heute.</div>
-          <div class="arabic-block">👈 الزميل الذي اتصلت به البارحة يأتي اليوم.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Der Kollege, den ich gestern angerufen habe, kommt heute.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">الزميل الذي اتصلت به البارحة يأتي اليوم.</div>
+          </div>
         
       </article>
     
       <article class="card">
-        <h2 class="card-title" dir="ltr">Konjunktiv II (Wunsch, Bitte, Hypothese) — صيغة التمني والطلب المهذب والافتراض</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">تُستخدم صيغة Konjunktiv II للتعبير عن الأشياء غير الحقيقية، التمنيات، الفرضيات، أو لصياغة طلب مهذب جداً.
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">Konjunktiv II (Wunsch, Bitte, Hypothese)</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">صيغة التمني والطلب المهذب والافتراض</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">تُستخدم صيغة Konjunktiv II للتعبير عن الأشياء غير الحقيقية، التمنيات، الفرضيات، أو لصياغة طلب مهذب جداً.
 
 التركيب الأكثر شيوعاً للأفعال العادية:
 • würde + Infinitiv (في نهاية الجملة)
@@ -434,47 +520,69 @@ gehen → ist gegangen, fahren → ist gefahren, kommen → ist gekommen</div>
 • haben → hätte (لو كان عندي)
 • sein → wäre (لو كنت)
 • können → könnte (لو كان بإمكاني)</div>
-        <div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>
-          <div class="german-block">Wenn ich Zeit hätte, würde ich Deutsch lernen.</div>
-          <div class="arabic-block">👈 لو كان لديّ وقت، لكنت تعلّمت الألمانية.</div>
+        <div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Wenn ich Zeit hätte, würde ich Deutsch lernen.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">لو كان لديّ وقت، لكنت تعلّمت الألمانية.</div>
+          </div>
         
-          <div class="german-block">Wenn ich reich wäre, würde ich ein neues Auto kaufen.</div>
-          <div class="arabic-block">👈 لو كنت غنياً، لكنت اشتريت سيارة جديدة.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Wenn ich reich wäre, würde ich ein neues Auto kaufen.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">لو كنت غنياً، لكنت اشتريت سيارة جديدة.</div>
+          </div>
         
-          <div class="german-block">Könnten Sie mir bitte helfen?</div>
-          <div class="arabic-block">👈 هل كان بإمكانكم مساعدتي من فضلكم؟ (طلب مهذب)</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Könnten Sie mir bitte helfen?</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">هل كان بإمكانكم مساعدتي من فضلكم؟ (طلب مهذب)</div>
+          </div>
         
-          <div class="german-block">Ich hätte gern eine Tasse Kaffee.</div>
-          <div class="arabic-block">👈 أرغب بفنجان من القهوة من فضلك.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich hätte gern eine Tasse Kaffee.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">أرغب بفنجان من القهوة من فضلك.</div>
+          </div>
         
       </article>
     
       <article class="card">
-        <h2 class="card-title" dir="ltr">Präpositionen mit Akkusativ und Dativ — حروف الجر مع النصب والمجرور</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">تنقسم حروف الجر في اللغة الألمانية إلى ثلاثة أقسام رئيسية:
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">Präpositionen mit Akkusativ und Dativ</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">حروف الجر مع النصب والمجرور</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">تنقسم حروف الجر في اللغة الألمانية إلى ثلاثة أقسام رئيسية:
 
 1. حروف جر مع Akkusativ دائماً: für, gegen, ohne, durch, um, bis.
 2. حروف جر مع Dativ دائماً: mit, nach, von, zu, aus, bei, seit, gegenüber.
 3. حروف الجر المشتركة (Wechselpräpositionen) التي تأخذ Dativ عند السكون (Wo?) و Akkusativ عند الحركة (Wohin?):
 • in, an, auf, unter, über, vor, hinter, neben, zwischen.</div>
-        <div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>
-          <div class="german-block">Ich fahre mit dem Auto. (Dativ)</div>
-          <div class="arabic-block">👈 أنا أسافر بالسيارة.</div>
+        <div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich fahre mit dem Auto. (Dativ)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">أنا أسافر بالسيارة.</div>
+          </div>
         
-          <div class="german-block">Das Geschenk ist für meinen Freund. (Akkusativ)</div>
-          <div class="arabic-block">👈 الهدية من أجل صديقي.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Das Geschenk ist für meinen Freund. (Akkusativ)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">الهدية من أجل صديقي.</div>
+          </div>
         
-          <div class="german-block">Ich lege das Buch auf den Tisch. (Wohin? -> Akkusativ)</div>
-          <div class="arabic-block">👈 أنا أضع الكتاب على الطاولة (حركة).</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich lege das Buch auf den Tisch. (Wohin? -> Akkusativ)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">أنا أضع الكتاب على الطاولة (حركة).</div>
+          </div>
         
-          <div class="german-block">Das Buch liegt auf dem Tisch. (Wo? -> Dativ)</div>
-          <div class="arabic-block">👈 الكتاب يقع على الطاولة (سكون).</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Das Buch liegt auf dem Tisch. (Wo? -> Dativ)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">الكتاب يقع على الطاولة (سكون).</div>
+          </div>
         
       </article>
     
       <article class="card">
-        <h2 class="card-title" dir="ltr">Verben mit Präpositionen — الأفعال مع حروف الجر</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">في اللغة الألمانية، ترتبط العديد من الأفعال بحروف جر معينة، وتأتي بعدها إما حالة النصب (Akkusativ) أو المجرور (Dativ). من المهم جداً حفظ الفعل مع حرف الجر والحالة الإعرابية الخاصة به.
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">Verben mit Präpositionen</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">الأفعال مع حروف الجر</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">في اللغة الألمانية، ترتبط العديد من الأفعال بحروف جر معينة، وتأتي بعدها إما حالة النصب (Akkusativ) أو المجرور (Dativ). من المهم جداً حفظ الفعل مع حرف الجر والحالة الإعرابية الخاصة به.
 
 أشهر الأفعال وحروف الجر:
 • warten auf + Akkusativ (ينتظر)
@@ -483,46 +591,68 @@ gehen → ist gegangen, fahren → ist gefahren, kommen → ist gekommen</div>
 • denken an + Akkusativ (يفكر في)
 • sprechen mit + Dativ / über + Akkusativ (يتحدث مع / عن)
 • träumen von + Dativ (يحلم بـ)</div>
-        <div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>
-          <div class="german-block">Ich warte auf den Bus. (Akkusativ)</div>
-          <div class="arabic-block">👈 أنا أنتظر الباص.</div>
+        <div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich warte auf den Bus. (Akkusativ)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">أنا أنتظر الباص.</div>
+          </div>
         
-          <div class="german-block">Ich freue mich auf die Ferien. (Akkusativ)</div>
-          <div class="arabic-block">👈 أنا أتطلع بشوق إلى العطلة.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich freue mich auf die Ferien. (Akkusativ)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">أنا أتطلع بشوق إلى العطلة.</div>
+          </div>
         
-          <div class="german-block">Wir sprechen mit dem Lehrer. (Dativ)</div>
-          <div class="arabic-block">👈 نحن نتحدث مع المعلم.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Wir sprechen mit dem Lehrer. (Dativ)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">نحن نتحدث مع المعلم.</div>
+          </div>
         
-          <div class="german-block">Er träumt von einem großen Haus. (Dativ)</div>
-          <div class="arabic-block">👈 هو يحلم ببيت كبير.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Er träumt von einem großen Haus. (Dativ)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">هو يحلم ببيت كبير.</div>
+          </div>
         
       </article>
     
       <article class="card">
-        <h2 class="card-title" dir="ltr">Infinitiv mit zu — المصدر مع zu</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">تُستخدم صيغة المصدر مع zu عندما تعتمد الجملة الثانية على فعل أو صفة أو اسم في الجملة الأولى. يأتي تركيب zu + Infinitiv دائماً في نهاية الجملة.
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">Infinitiv mit zu</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">المصدر مع zu</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">تُستخدم صيغة المصدر مع zu عندما تعتمد الجملة الثانية على فعل أو صفة أو اسم في الجملة الأولى. يأتي تركيب zu + Infinitiv دائماً في نهاية الجملة.
 
 ملاحظات هامة:
 • إذا كان الفعل منفصلاً، تدخل zu بين البادئة والجذر: aufstehen → aufzustehen.
 • أفعال لا تأخذ zu أبداً: الأفعال الناقصة (Modalverben)، الفعل bleiben، gehen، sehen، hören.</div>
-        <div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>
-          <div class="german-block">Es ist wichtig, jeden Tag Deutsch zu lernen.</div>
-          <div class="arabic-block">👈 من المهم تعلم الألمانية كل يوم.</div>
+        <div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Es ist wichtig, jeden Tag Deutsch zu lernen.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">من المهم تعلم الألمانية كل يوم.</div>
+          </div>
         
-          <div class="german-block">Ich habe keine Lust, heute einkaufen zu gehen.</div>
-          <div class="arabic-block">👈 ليس لدي رغبة في الذهاب للتسوق اليوم.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich habe keine Lust, heute einkaufen zu gehen.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">ليس لدي رغبة في الذهاب للتسوق اليوم.</div>
+          </div>
         
-          <div class="german-block">Er versucht, heute früher aufzustehen.</div>
-          <div class="arabic-block">👈 هو يحاول الاستيقاظ باكراً اليوم.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Er versucht, heute früher aufzustehen.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">هو يحاول الاستيقاظ باكراً اليوم.</div>
+          </div>
         
-          <div class="german-block">Ich muss heute viel arbeiten. (بدون zu لأن muss فعل ناقص)</div>
-          <div class="arabic-block">👈 يجب أن أعمل كثيراً اليوم.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich muss heute viel arbeiten. (بدون zu لأن muss فعل ناقص)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">يجب أن أعمل كثيراً اليوم.</div>
+          </div>
         
       </article>
     
       <article class="card">
-        <h2 class="card-title" dir="ltr">Adjektivdeklination — تصريف الصفات قبل الأسماء</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">عندما تأتي الصفة قبل الاسم مباشرة، يجب تصريف نهايتها لتطابق جنس الاسم (مذكر، مؤنث، محايد، جمع) وحالته الإعرابية ونوع الأداة المسبوقة.
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">Adjektivdeklination</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">تصريف الصفات قبل الأسماء</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">عندما تأتي الصفة قبل الاسم مباشرة، يجب تصريف نهايتها لتطابق جنس الاسم (مذكر، مؤنث، محايد، جمع) وحالته الإعرابية ونوع الأداة المسبوقة.
 
 القاعدة بعد أداة التنكير (ein/kein/mein) في حالة الرفع (Nominativ):
 • المذكر: -er (ein guter Mann)
@@ -530,48 +660,70 @@ gehen → ist gegangen, fahren → ist gefahren, kommen → ist gekommen</div>
 • المحايد: -es (ein schönes Kind)
 
 تنبيه: في حالة المجرور (Dativ) وحالة النصب للمذكر (Akkusativ)، تنتهي الصفة دائماً بـ -en.</div>
-        <div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>
-          <div class="german-block">Das ist ein schöner Tag. (Nominativ Masculine)</div>
-          <div class="arabic-block">👈 هذا يوم جميل.</div>
+        <div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Das ist ein schöner Tag. (Nominativ Masculine)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">هذا يوم جميل.</div>
+          </div>
         
-          <div class="german-block">Ich habe eine nette Nachbarin. (Nominativ Feminine)</div>
-          <div class="arabic-block">👈 لدي جارة لطيفة.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich habe eine nette Nachbarin. (Nominativ Feminine)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">لدي جارة لطيفة.</div>
+          </div>
         
-          <div class="german-block">Wir wohnen in einem kleinen Haus. (Dativ)</div>
-          <div class="arabic-block">👈 نحن نسكن في بيت صغير.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Wir wohnen in einem kleinen Haus. (Dativ)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">نحن نسكن في بيت صغير.</div>
+          </div>
         
-          <div class="german-block">Er tr一杯 einen heißen Kaffee. (Akkusativ Masculine)</div>
-          <div class="arabic-block">👈 هو يشرب قهوة ساخنة.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Er tr一杯 einen heißen Kaffee. (Akkusativ Masculine)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">هو يشرب قهوة ساخنة.</div>
+          </div>
         
       </article>
     
       <article class="card">
-        <h2 class="card-title" dir="ltr">Zweiteilige Konjunktionen — حروف العطف المزدوجة</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">تُستخدم روابط العطف المزدوجة لربط الأفكار والجمل بطريقة متطورة:
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">Zweiteilige Konjunktionen</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">حروف العطف المزدوجة</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">تُستخدم روابط العطف المزدوجة لربط الأفكار والجمل بطريقة متطورة:
 
 • nicht nur ... sondern auch: ليس فقط ... بل وأيضاً (للجمع بين أمرين إيجابيين).
 • entweder ... oder: إما ... أو (للاختيار بين أمرين).
 • sowohl ... als auch: كلاهما معاً (الجمع التام).
 • weder ... noch: لا هذا ولا ذاك (النفي المزدوج).
 • einerseits ... andererseits: من ناحية ... ومن ناحية أخرى (المقارنة والتناقض).</div>
-        <div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>
-          <div class="german-block">Er spricht nicht nur Deutsch, sondern auch Englisch.</div>
-          <div class="arabic-block">👈 هو لا يتحدث الألمانية فقط، بل والإنجليزية أيضاً.</div>
+        <div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Er spricht nicht nur Deutsch, sondern auch Englisch.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">هو لا يتحدث الألمانية فقط، بل والإنجليزية أيضاً.</div>
+          </div>
         
-          <div class="german-block">Entweder wir gehen ins Kino oder wir bleiben zu Hause.</div>
-          <div class="arabic-block">👈 إما أن نذهب إلى السينما أو نبقى في البيت.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Entweder wir gehen ins Kino oder wir bleiben zu Hause.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">إما أن نذهب إلى السينما أو نبقى في البيت.</div>
+          </div>
         
-          <div class="german-block">Das Kleid ist weder schön noch billig.</div>
-          <div class="arabic-block">👈 الفستان ليس جميلاً ولا رخيصاً.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Das Kleid ist weder schön noch billig.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">الفستان ليس جميلاً ولا رخيصاً.</div>
+          </div>
         
-          <div class="german-block">Ich trinke sowohl Tee als auch Kaffee.</div>
-          <div class="arabic-block">👈 أنا أشرب الشاي والقهوة كلاهما.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich trinke sowohl Tee als auch Kaffee.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">أنا أشرب الشاي والقهوة كلاهما.</div>
+          </div>
         
       </article>
     
       <article class="card">
-        <h2 class="card-title" dir="ltr">n-Deklination — تصريف الأسماء المذكرة بـ n</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">هناك مجموعة خاصة من الأسماء المذكرة (ومعظمها ينتهي بـ -e أو يدل على أشخاص/مهن) تأخذ نهاية -n أو -en في جميع الحالات الإعرابية (Akkusativ, Dativ, Genitiv) ما عدا حالة الرفع (Nominativ).
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">n-Deklination</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">تصريف الأسماء المذكرة بـ n</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">هناك مجموعة خاصة من الأسماء المذكرة (ومعظمها ينتهي بـ -e أو يدل على أشخاص/مهن) تأخذ نهاية -n أو -en في جميع الحالات الإعرابية (Akkusativ, Dativ, Genitiv) ما عدا حالة الرفع (Nominativ).
 
 أمثلة على هذه الأسماء:
 • der Name (الاسم) → des Namens
@@ -579,39 +731,56 @@ gehen → ist gegangen, fahren → ist gefahren, kommen → ist gekommen</div>
 • der Kunde (الزبون) → dem Kunden
 • der Junge (الولد) → den Jungen
 • der Mensch (الإنسان) → dem Menschen</div>
-        <div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>
-          <div class="german-block">Der Kollege kommt heute. (Nominativ)</div>
-          <div class="arabic-block">👈 الزميل يأتي اليوم.</div>
+        <div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Der Kollege kommt heute. (Nominativ)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">الزميل يأتي اليوم.</div>
+          </div>
         
-          <div class="german-block">Ich rufe den Kollegen an. (Akkusativ)</div>
-          <div class="arabic-block">👈 أنا أتصل بالزميل.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich rufe den Kollegen an. (Akkusativ)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">أنا أتصل بالزميل.</div>
+          </div>
         
-          <div class="german-block">Ich helfe dem Jungen. (Dativ)</div>
-          <div class="arabic-block">👈 أنا أساعد الولد.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich helfe dem Jungen. (Dativ)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">أنا أساعد الولد.</div>
+          </div>
         
-          <div class="german-block">Das هو اسم الرجل: der Name des Menschen. (Genitiv)</div>
-          <div class="arabic-block">👈 هذا هو اسم الشخص.</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Das هو اسم الرجل: der Name des Menschen. (Genitiv)</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">هذا هو اسم الشخص.</div>
+          </div>
         
       </article>
     
       <article class="card">
-        <h2 class="card-title" dir="ltr">Futur I — زمن المستقبل البسيط</h2>
-        <div style="white-space: pre-wrap; font-size: 15.5px; margin: 15px 0;">يُستخدم زمن المستقبل البسيط (Futur I) للتعبير عن أحداث ستقع في المستقبل، أو للتعبير عن وعود (Versprechen)، أو توقعات (Vermutung).
+        <h2 class="card-title" style="display:flex; flex-direction:column; gap:4px; border-bottom:2px solid var(--border-color); padding-bottom:12px;">
+          <span dir="ltr" style="color:var(--green); font-family:'Inter', sans-serif;">Futur I</span>
+          <span dir="rtl" style="color:var(--text-main); font-size:20px;">زمن المستقبل البسيط</span>
+        </h2>
+        <div class="arabic-block" style="white-space: pre-wrap; font-size: 16px; margin: 15px 0; color:var(--text-main); line-height: 2;">يُستخدم زمن المستقبل البسيط (Futur I) للتعبير عن أحداث ستقع في المستقبل، أو للتعبير عن وعود (Versprechen)، أو توقعات (Vermutung).
 
 صياغة الزمن:
 • werden (مصرّف في الموقع الثاني) + Infinitiv (فعل المصدر في نهاية الجملة).
 
 تصريف werden:
 • ich werde / du wirst / er wird / wir werden / ihr werdet / sie werden.</div>
-        <div style="margin-top: 15px; font-weight:700;">أمثلة توضيحية (Beispiele):</div>
-          <div class="german-block">Nächstes Jahr werde ich nach Deutschland reisen.</div>
-          <div class="arabic-block">👈 السنة القادمة سأسافر إلى ألمانيا.</div>
+        <div style="margin-top: 20px; font-weight:900; color:var(--blue); font-size:18px;">💡 أمثلة توضيحية (Beispiele):</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Nächstes Jahr werde ich nach Deutschland reisen.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">السنة القادمة سأسافر إلى ألمانيا.</div>
+          </div>
         
-          <div class="german-block">Morgen wird es regnen.</div>
-          <div class="arabic-block">👈 غداً سوف تمطر (توقع).</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Morgen wird es regnen.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">غداً سوف تمطر (توقع).</div>
+          </div>
         
-          <div class="german-block">Ich werde dir bei den Hausaufgaben helfen.</div>
-          <div class="arabic-block">👈 سأساعدك في الواجبات المنزلية (وعد).</div>
+          <div style="display:flex; flex-direction:column; background:#f7f7f7; border:2px solid var(--border-color); border-radius:16px; padding: 16px; margin-top:12px;">
+            <div style="font-family:'Inter', sans-serif; font-weight:700; font-size:16px; color:var(--text-main);" dir="ltr">Ich werde dir bei den Hausaufgaben helfen.</div>
+            <div style="font-weight:600; color:var(--text-muted); text-align:right; margin-top:4px;" dir="rtl">سأساعدك في الواجبات المنزلية (وعد).</div>
+          </div>
         
       </article>
     
