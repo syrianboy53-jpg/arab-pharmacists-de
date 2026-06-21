@@ -972,6 +972,31 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
+            {/* LESEN GENERATOR (NEW) */}
+            <div className="grid md:grid-cols-2 gap-6 mt-6">
+              <div className="glass p-6 rounded-[2rem] border border-[#0984e3]/30 shadow-lg bg-[#0984e3]/5">
+                <h2 className="text-xl font-black text-gray-900 dark:text-white mb-4 flex items-center gap-2"><span>📝</span> توليد نص قراءة (Lesen)</h2>
+                <div className="space-y-3">
+                  <input type="text" value={vocabWord} onChange={e => setVocabWord(e.target.value)} className="w-full p-3 rounded-xl border border-gray-200 dark:border-white/10 dark:bg-black/20" placeholder="عنوان النص (Einladung zur Party)" dir="ltr" />
+                  <textarea value={vocabMeaning} onChange={e => setVocabMeaning(e.target.value)} rows={3} className="w-full p-3 rounded-xl border border-gray-200 dark:border-white/10 dark:bg-black/20" placeholder="النص الألماني كاملاً..." dir="ltr" />
+                  <textarea value={vocabExample} onChange={e => setVocabExample(e.target.value)} rows={3} className="w-full p-3 rounded-xl border border-gray-200 dark:border-white/10 dark:bg-black/20" placeholder="سؤال 1: الخيارات مفصولة بفاصلة (السؤال, الخيار1, الخيار2, الخيار الصحيح)" dir="ltr" />
+                  <button onClick={() => {
+                    const code = `{
+  type: 'mc-article',
+  title: '${vocabWord}',
+  instructionsAr: 'اقرأ النص ثم أجب عن الأسئلة:',
+  textDe: '${vocabMeaning.replace(/\n/g, "\\n")}',
+  questions: [
+    // Add your questions parsed from the textarea here...
+  ]
+}`
+                    setGeneratedCode(code)
+                    setCopied(false)
+                  }} className="w-full py-3 bg-[#0984e3] hover:bg-[#076bb8] text-white rounded-xl font-black">توليد كود القراءة ⚡</button>
+                </div>
+              </div>
+            </div>
+
           </motion.div>
         )}
 
