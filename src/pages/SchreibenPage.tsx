@@ -54,7 +54,8 @@ export default function SchreibenPage() {
 
   // Find currently selected task in the active model
   const activeTask = useMemo(() => {
-    return activeModel.tasks[selectedTaskIndex] || activeModel.tasks[0]
+    const tasks = activeModel.tasks || (activeModel as any).parts || []
+    return tasks[selectedTaskIndex] || tasks[0]
   }, [activeModel, selectedTaskIndex])
 
   // Get current typed text for this task
@@ -156,7 +157,7 @@ export default function SchreibenPage() {
 
         {/* Task Tabs (1, 2, 3) */}
         <div className="flex gap-2">
-          {activeModel.tasks.map((task, idx) => (
+          {(activeModel.tasks || (activeModel as any).parts || []).map((task: any, idx: number) => (
             <button
               key={task.id}
               onClick={() => handleTaskChange(idx)}
@@ -206,7 +207,7 @@ export default function SchreibenPage() {
           <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4">
             <h3 className="text-xs font-bold text-yellow-500 mb-2">📝 نقاط يجب أن تغطيها في موضوعك:</h3>
             <ul className="text-xs space-y-1.5 list-disc list-inside">
-              {activeTask.requirements.map((req, i) => (
+              {activeTask.requirements.map((req: string, i: number) => (
                 <li key={i} className="text-gray-900 dark:text-white/90 text-right">
                   {req}
                 </li>
@@ -331,7 +332,7 @@ export default function SchreibenPage() {
             <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-4 space-y-2">
               <h4 className="text-xs font-bold text-emerald-400">✅ نقاط إيجابية في كتابتك:</h4>
               <ul className="space-y-1">
-                {correctionResult.positives.map((pos, i) => (
+                {correctionResult.positives.map((pos: string, i: number) => (
                   <li key={i} className="text-xs text-gray-900 dark:text-white/80 text-right flex gap-2 items-start justify-end">
                     <span>{pos}</span>
                     <span className="text-emerald-400 mt-0.5 flex-shrink-0">◀</span>
@@ -346,7 +347,7 @@ export default function SchreibenPage() {
             <div className="space-y-3">
               <h4 className="text-xs font-bold text-red-400">🔴 الأخطاء والتصحيحات:</h4>
               <div className="space-y-2">
-                {correctionResult.errors.map((err, i) => (
+                {correctionResult.errors.map((err: CorrectionError, i: number) => (
                   <div key={i} className="bg-red-500/5 border border-red-500/15 rounded-xl p-3 space-y-1">
                     <div className="flex flex-wrap items-center gap-2 justify-end" dir="ltr">
                       <span className="text-xs text-red-400 line-through bg-red-500/10 px-2 py-0.5 rounded-lg font-mono">{err.original}</span>
@@ -365,7 +366,7 @@ export default function SchreibenPage() {
             <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4 space-y-2">
               <h4 className="text-xs font-bold text-blue-400">💡 اقتراحات لتحسين أسلوبك:</h4>
               <ul className="space-y-1.5">
-                {correctionResult.improvements.map((imp, i) => (
+                {correctionResult.improvements.map((imp: string, i: number) => (
                   <li key={i} className="text-xs text-gray-900 dark:text-white/80 text-right flex gap-2 items-start justify-end">
                     <span>{imp}</span>
                     <span className="text-blue-400 mt-0.5 flex-shrink-0">◀</span>
@@ -395,7 +396,7 @@ export default function SchreibenPage() {
         <div className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 shadow-xl">
           <h3 className="text-sm font-bold text-[#00b894] mb-3">💡 عبارات مساعدة مفيدة (Useful Phrases):</h3>
           <div className="grid md:grid-cols-2 gap-3" dir="ltr">
-            {activeTask.usefulPhrases.map((phrase, idx) => (
+            {activeTask.usefulPhrases.map((phrase: { de: string, ar: string }, idx: number) => (
               <div 
                 key={idx} 
                 className="bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/5 p-3 rounded-xl flex flex-col gap-1 text-left hover:bg-gray-50 dark:hover:bg-white/10 transition-colors"
