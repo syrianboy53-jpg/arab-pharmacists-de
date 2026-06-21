@@ -616,56 +616,51 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gray-50 dark:bg-[#0f0f1a] -mx-4 sm:-mx-0 -mt-6 sm:mt-0">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#0f0f1a] -mx-4 sm:-mx-0 -mt-6 sm:mt-0">
       
-      {/* SIDEBAR */}
-      <div className="w-full md:w-72 bg-white dark:bg-[#1a1a2e] border-b md:border-b-0 md:border-l border-gray-200 dark:border-white/5 p-6 flex flex-col gap-8 shrink-0 shadow-[0_0_40px_rgba(0,0,0,0.03)] z-10">
-        <div className="flex items-center gap-4 px-2">
-          <div className="w-12 h-12 bg-gradient-to-br from-[#0984e3] to-[#00b894] rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg shadow-[#00b894]/20">👑</div>
-          <div>
-            <h1 className="font-black text-xl text-gray-900 dark:text-white leading-tight">الإدارة</h1>
-            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">B1-SYRER V2</p>
+      {/* TOP NAVBAR */}
+      <div className="w-full bg-white dark:bg-[#1a1a2e] border-b border-gray-200 dark:border-white/5 px-6 py-4 flex flex-col md:flex-row items-center justify-between shadow-[0_0_40px_rgba(0,0,0,0.03)] z-40 sticky top-0 gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-gradient-to-br from-[#0984e3] to-[#00b894] rounded-xl flex items-center justify-center text-white text-lg shadow-lg shadow-[#00b894]/20">👑</div>
+          <div className="hidden lg:block">
+            <h1 className="font-black text-lg text-gray-900 dark:text-white leading-tight">الإدارة V2</h1>
           </div>
         </div>
         
-        <div className="flex flex-col gap-2">
-          <p className="text-xs font-bold text-gray-400 mb-2 px-4 uppercase tracking-widest">القائمة الرئيسية</p>
-          <button onClick={() => setActiveTab('stats')} className={`text-right px-5 py-3.5 rounded-xl font-bold transition-all flex items-center gap-3 ${activeTab === 'stats' ? 'bg-[#0984e3]/10 text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
-            <span className="text-xl">📊</span> الإحصائيات
+        <div className="flex items-center gap-1 overflow-x-auto custom-scrollbar w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
+          <button onClick={() => setActiveTab('stats')} className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'stats' ? 'bg-[#0984e3]/10 text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
+            <span className="text-lg">📊</span> الإحصائيات
           </button>
-          <button onClick={() => setActiveTab('users')} className={`text-right px-5 py-3.5 rounded-xl font-bold transition-all flex items-center gap-3 ${activeTab === 'users' ? 'bg-[#0984e3]/10 text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
-            <span className="text-xl">👥</span> المستخدمون
+          <button onClick={() => setActiveTab('users')} className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'users' ? 'bg-[#0984e3]/10 text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
+            <span className="text-lg">👥</span> المستخدمون
           </button>
-          <button onClick={() => setActiveTab('subscriptions')} className={`text-right px-5 py-3.5 rounded-xl font-bold transition-all flex items-center gap-3 ${activeTab === 'subscriptions' ? 'bg-[#00b894]/10 text-[#00b894]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
-            <span className="text-xl">💳</span> الاشتراكات <span className="mr-auto bg-[#00b894] text-white text-[9px] px-2 py-0.5 rounded-full animate-pulse">جديد</span>
+          <button onClick={() => setActiveTab('subscriptions')} className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'subscriptions' ? 'bg-[#00b894]/10 text-[#00b894]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
+            <span className="text-lg">💳</span> الاشتراكات
           </button>
-          <button onClick={() => setActiveTab('communication')} className={`text-right px-5 py-3.5 rounded-xl font-bold transition-all flex items-center gap-3 ${activeTab === 'communication' ? 'bg-[#0984e3]/10 text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
-            <span className="text-xl">💬</span> التواصل والرسائل
-            {unreadSuggestionsCount > 0 && <span className="mr-auto bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full">{unreadSuggestionsCount}</span>}
+          <button onClick={() => setActiveTab('communication')} className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'communication' ? 'bg-[#0984e3]/10 text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
+            <span className="text-lg">💬</span> التواصل
+            {unreadSuggestionsCount > 0 && <span className="bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full mr-1">{unreadSuggestionsCount}</span>}
           </button>
-          
-          <div className="h-px bg-gray-100 dark:bg-white/5 my-2"></div>
-          
-          <button onClick={() => setActiveTab('content')} className={`text-right px-5 py-3.5 rounded-xl font-bold transition-all flex items-center gap-3 ${activeTab === 'content' ? 'bg-gradient-to-r from-[#e84393]/20 to-transparent text-[#e84393]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
-            <span className="text-xl">✨</span> استوديو المحتوى
+          <button onClick={() => setActiveTab('content')} className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'content' ? 'bg-gradient-to-r from-[#e84393]/20 to-transparent text-[#e84393]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
+            <span className="text-lg">✨</span> استوديو المحتوى
           </button>
-          <button onClick={() => setActiveTab('settings')} className={`text-right px-5 py-3.5 rounded-xl font-bold transition-all flex items-center gap-3 ${activeTab === 'settings' ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 shadow-xl' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
-            <span className="text-xl">⚙️</span> إعدادات النظام
+          <button onClick={() => setActiveTab('settings')} className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'settings' ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 shadow-xl' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
+            <span className="text-lg">⚙️</span> النظام
           </button>
         </div>
 
-        <div className="mt-auto pt-6 border-t border-gray-100 dark:border-white/5 flex flex-col gap-3">
-          <button onClick={fetchData} disabled={isUsersLoading} className="w-full px-4 py-3.5 bg-gray-50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors">
-            {isUsersLoading ? '⏳ جاري...' : '🔄 تحديث البيانات'}
+        <div className="flex items-center gap-2 shrink-0">
+          <button onClick={fetchData} disabled={isUsersLoading} className="px-3 py-2.5 bg-gray-50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 rounded-xl font-bold flex items-center justify-center transition-colors" title="تحديث البيانات">
+            🔄
           </button>
-          <button onClick={handleLogout} className="w-full px-4 py-3.5 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 text-red-600 rounded-xl font-bold flex items-center justify-center gap-2 transition-colors">
-             تسجيل الخروج 🚪
+          <button onClick={handleLogout} className="px-3 py-2.5 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 text-red-600 rounded-xl font-bold flex items-center justify-center transition-colors" title="تسجيل خروج">
+            🚪
           </button>
         </div>
       </div>
 
       {/* MAIN CONTENT AREA */}
-      <div className="flex-1 w-full max-w-6xl mx-auto p-4 sm:p-8 space-y-8 h-screen overflow-y-auto custom-scrollbar">
+      <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 space-y-8 pb-20">
         
         {/* Welcome Header */}
         <div className="glass p-8 rounded-[2rem] border border-gray-200 dark:border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6 shadow-sm relative overflow-hidden bg-white/50 dark:bg-[#1a1a2e]/50 backdrop-blur-xl">
