@@ -866,8 +866,21 @@ export default function AdminDashboardPage() {
             <div className={`p-6 rounded-2xl border-2 transition-colors ${config.maintenance_mode === '1' ? 'bg-orange-50 dark:bg-orange-900/20 border-orange-400' : 'glass border-gray-200 dark:border-white/10'}`}>
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-black flex items-center gap-2">🚧 وضع الصيانة</h2>
-                <button onClick={() => setConfig({...config, maintenance_mode: config.maintenance_mode === '1' ? '0' : '1'})} className={`px-6 py-2 rounded-xl text-white font-bold ${config.maintenance_mode === '1' ? 'bg-emerald-500' : 'bg-orange-500'}`}>
-                  {config.maintenance_mode === '1' ? '✅ إيقاف الصيانة' : 'تفعيل'}
+                <button onClick={async () => {
+                  const newMode = config.maintenance_mode === '1' ? '0' : '1'
+                  const newConfig = { ...config, maintenance_mode: newMode }
+                  setConfig(newConfig)
+                  if (!adminToken.trim()) return
+                  try {
+                    const res = await fetch(`${API_BASE}/admin/config`, {
+                      method: 'PUT',
+                      headers: { 'Content-Type': 'application/json', 'X-Admin-Token': adminToken.trim() },
+                      body: JSON.stringify(newConfig)
+                    })
+                    if (res.ok) setConfigStatus('✅ تم تحديث وضع الصيانة بنجاح.')
+                  } catch (e) {}
+                }} className={`px-6 py-2 rounded-xl text-white font-bold transition-all active:scale-95 ${config.maintenance_mode === '1' ? 'bg-emerald-500 hover:bg-emerald-600' : 'bg-orange-500 hover:bg-orange-600 shadow-[0_0_15px_rgba(249,115,22,0.4)]'}`}>
+                  {config.maintenance_mode === '1' ? '✅ إيقاف الصيانة' : '⚠️ تفعيل الصيانة الآن'}
                 </button>
               </div>
               <input value={config.maintenance_message} onChange={e => setConfig({...config, maintenance_message: e.target.value})} className="w-full p-3 rounded-xl border border-gray-200 outline-none dark:bg-black/20" placeholder="رسالة الصيانة للزوار..." />
