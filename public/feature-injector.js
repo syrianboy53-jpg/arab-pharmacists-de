@@ -168,7 +168,7 @@
 
   function injectExamButton() {
     const btn = document.createElement('a');
-    btn.href = '/app/new-features.html#/exam-simulation'; // Routes to the new mini-app
+    btn.href = '/app/#/exam-simulation'; // Routes to the new mini-app
     btn.style.position = 'fixed';
     btn.style.bottom = '80px'; // Above the bottom nav
     btn.style.left = currentLang === 'ar' ? '16px' : 'auto';
