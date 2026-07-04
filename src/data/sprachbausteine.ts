@@ -3081,5 +3081,16 @@ export const pruefungsFragen = [
     "correct": 1,
     "explanation": "ihr-Imperativ من sein = seid!"
   }
+,
+  {"id": "sb-9-1", "question": "Sehr ____ Herr Schmidt,", "options": ["geehrte", "geehrter", "geehrten"], "correct": 1, "explanation": "Herr مذكر في حالة النصب/الجر، ولأنها رسالة رسمية نستخدم Sehr geehrter Herr"},
+  {"id": "sb-9-2", "question": "ich schreibe Ihnen, ____ ich mich für die Weiterbildung anmelden möchte.", "options": ["weil", "denn", "obwohl"], "correct": 0, "explanation": "weil لأن الفعل möchte جاء في نهاية الجملة."},
+  {"id": "sb-9-3", "question": "Der Kurs findet ____ 15. Oktober statt.", "options": ["in", "am", "im"], "correct": 1, "explanation": "مع التواريخ والأيام نستخدم am."},
+  {"id": "sb-9-4", "question": "Bitte schicken Sie ____ die Anmeldeformulare.", "options": ["mich", "mir", "mein"], "correct": 1, "explanation": "schicken يتطلب حالة Dativ للشخص (mir)."},
+  {"id": "sb-9-5", "question": "Ich freue mich ____ Ihre Antwort.", "options": ["auf", "über", "für"], "correct": 0, "explanation": "sich freuen auf للمستقبل (أتطلع لردكم)."},
+  {"id": "sb-10-1", "question": "Ich habe ____ Brief vom Jobcenter erhalten.", "options": ["ein", "einen", "einem"], "correct": 1, "explanation": "Der Brief مفعول به (Akkusativ) فيأخذ einen."},
+  {"id": "sb-10-2", "question": "Ich muss den Vertrag ____ unterschreiben.", "options": ["schnell", "schneller", "am schnellsten"], "correct": 0, "explanation": "الصفة في الحالة العادية schnell."},
+  {"id": "sb-10-3", "question": "Können Sie mir bitte sagen, ____ ich den Antrag abgeben muss?", "options": ["dass", "wo", "wenn"], "correct": 1, "explanation": "سؤال غير مباشر: أين يجب تسليم الطلب (wo)."},
+  {"id": "sb-10-4", "question": "Ich warte ____ eine Antwort.", "options": ["auf", "für", "an"], "correct": 0, "explanation": "warten auf ينتظر."},
+  {"id": "sb-10-5", "question": "Mit ____ Grüßen", "options": ["freundliche", "freundlichen", "freundlicher"], "correct": 1, "explanation": "Mit (Dativ Plural) -> freundlichen Grüßen."}
 ];
 

@@ -16,10 +16,11 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       announcement_color: '#CE1126',
       web_version: '20',
       web_changelog: '',
-      apk_version: '91',
-      apk_changelog: 'تحديث ضخم: إضافة لوحة صدارة عالمية، محادثات الذكاء الاصطناعي مع الصوت، تحديات يومية، وبطاقات ذاكرة!',
-      apk_url: 'https://b1-syrer.de',
+      apk_version: '2',
+      apk_changelog: 'تطبيق جديد كلياً v2.0! تصميم حديث، شاشة بداية، دعم offline، تحديث تلقائي.',
+      apk_url: 'https://b1-syrer.pages.dev/B1Syrer-v2.0.0.apk',
       min_apk_version: '1',
+      force_update: '0',
       support_bmc_url: 'https://buymeacoffee.com/halawanyfav',
       support_paypal_url: '',
       support_message: '',
@@ -34,9 +35,10 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       }
     }
 
-    // Force override for V91 update
-    config.apk_version = '91'
-    config.apk_changelog = 'تحديث ضخم: إضافة لوحة صدارة عالمية، محادثات الذكاء الاصطناعي مع الصوت، تحديات يومية، وبطاقات ذاكرة!'
+    // Force APK v93 update
+    config.apk_version = '93'
+    config.apk_url = 'https://b1-syrer.pages.dev/B1Deutsch-v2.3.0.apk'
+    config.apk_changelog = 'v2.3.0 — محتوى جديد! 60 عبارة يومية ألمانية مع ترجمة عربية، شاشة عبارات يومية جديدة مع TTS، وتصميم ألوان محدّث.'
 
     return new Response(JSON.stringify(config), {
       headers: {

@@ -51,6 +51,12 @@ export async function onRequest(context: any) {
     })
   }
   
+  // Prevent Cloudflare CDN from caching HTML (index.html) so users always get the latest app
+  const isHTML = (newHeaders.get('content-type') || '').includes('text/html')
+  if (isHTML) {
+    newHeaders.set('Cache-Control', 'public, max-age=0, must-revalidate')
+  }
+
   return new Response(response.body, {
     status: response.status,
     headers: newHeaders,

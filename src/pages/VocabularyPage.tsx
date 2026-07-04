@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { vocabCategories } from '../data/vocabulary'
 
 const categoryEmojis: Record<string, string> = {
@@ -31,6 +31,9 @@ const categoryEmojis: Record<string, string> = {
 }
 
 export default function VocabularyPage() {
+  const [searchParams] = useSearchParams()
+  const levelParam = searchParams.get('level')?.toLowerCase() || ''
+
   const [selectedCatId, setSelectedCatId] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [showMeaning, setShowMeaning] = useState<Record<string, boolean>>({})
@@ -54,10 +57,15 @@ export default function VocabularyPage() {
     }
   }
 
-  // Get total word count
-  const totalWordsCount = useMemo(() => {
-    return vocabCategories.reduce((sum, cat) => sum + (cat.words?.length || 0), 0)
-  }, [])
+  // Level filtered categories
+  const levelCategories = useMemo(() => {
+    if (!levelParam) return vocabCategories
+    return vocabCategories.filter(c => 
+      c.id.toLowerCase().startsWith(levelParam + '-') || 
+      (c.titleDe && c.titleDe.toLowerCase().includes(levelParam)) ||
+      (c.titleAr && c.titleAr.toLowerCase().includes(levelParam))
+    )
+  }, [levelParam])
 
   // Filtered categories and words based on selection & search query
   const filteredData = useMemo(() => {
@@ -65,12 +73,12 @@ export default function VocabularyPage() {
     
     // If no search query and a specific category is selected
     if (!q && selectedCatId !== 'all') {
-      const cat = vocabCategories.find(c => c.id === selectedCatId)
+      const cat = levelCategories.find(c => c.id === selectedCatId)
       return cat ? [cat] : []
     }
 
     // If search query is active
-    return vocabCategories.map(cat => {
+    return levelCategories.map(cat => {
       // If we are filtering by category and this isn't it, skip
       if (selectedCatId !== 'all' && cat.id !== selectedCatId) {
         return null
@@ -98,8 +106,10 @@ export default function VocabularyPage() {
       <div className="flex items-center gap-3 mb-4">
         <span className="text-3xl">📚</span>
         <div>
-          <h1 className="text-2xl font-bold grad-text">المفردات والقاموس — Wortschatz</h1>
-          <p className="text-gray-500 dark:text-gray-400 text-sm">أكثر من {totalWordsCount} كلمة مصنفة وقابلة للاستماع والبحث لتحضير امتحان B1.</p>
+          <h1 className="text-2xl font-black text-gray-900 dark:text-white">
+            المفردات الشاملة {levelParam && <span className="text-[#00b894] uppercase">- {levelParam}</span>}
+          </h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">تصفح وتعلم أهم الكلمات الألمانية</p>
         </div>
       </div>
 
@@ -108,7 +118,7 @@ export default function VocabularyPage() {
         <div className="grid md:grid-cols-2 gap-4">
           {/* Category Dropdown */}
           <div className="space-y-1">
-            <label className="text-xs text-gray-500 dark:text-gray-400 block">تصنيف الكلمات:</label>
+            <label className="text-xs text-gray-500 dark:text-gray-400 block">اختر القسم:</label>
             <select
               value={selectedCatId}
               onChange={(e) => {
@@ -117,10 +127,10 @@ export default function VocabularyPage() {
               }}
               className="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#00b894] text-gray-900 dark:text-white"
             >
-              <option value="all">📦 كل التصنيفات ({vocabCategories.length})</option>
-              {vocabCategories.map(cat => (
+              <option value="all">جميع الأقسام ({levelCategories.length})</option>
+              {levelCategories.map(cat => (
                 <option key={cat.id} value={cat.id}>
-                  {categoryEmojis[cat.id] || '📚'} {cat.titleAr} - {cat.titleDe} ({cat.words?.length || 0} كلمة)
+                  {categoryEmojis[cat.id] || '📁'} {cat.titleAr} - {cat.titleDe} ({cat.words?.length || 0} كلمة)
                 </option>
               ))}
             </select>

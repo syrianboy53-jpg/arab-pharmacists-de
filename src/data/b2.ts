@@ -415,7 +415,93 @@ export const telcB2Models = [
         "explanationAr": "**genug Schlaf bekommen** = يحصل على ما يكفي من النوم — تعبير ثابت. (haben/erhalten نادراً ما تُستخدم مع Schlaf، kriegen عاميّة)."
       }
     ],
-    "schreiben": {
+  "hoeren": [
+    {
+        "id": "hoeren-1-1",
+        "partAr": "الجزء 1 — الاستماع",
+        "partDe": "Teil 1: Globalverstehen",
+        "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        "questions": [
+            {
+                "id": "q1",
+                "promptDe": "Der Sprecher spricht hauptsächlich über ...",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "seine Arbeit im Büro."
+                    },
+                    {
+                        "id": "b",
+                        "de": "Probleme mit dem Computer."
+                    },
+                    {
+                        "id": "c",
+                        "de": "den neuen Kollegen."
+                    }
+                ],
+                "correct": "a"
+            },
+            {
+                "id": "q2",
+                "promptDe": "Das Problem wurde am Ende gelöst.",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "Richtig"
+                    },
+                    {
+                        "id": "b",
+                        "de": "Falsch"
+                    }
+                ],
+                "correct": "a"
+            }
+        ]
+    },
+    {
+        "id": "hoeren-1-2",
+        "partAr": "الجزء 2 — التفاصيل",
+        "partDe": "Teil 2: Detailverstehen",
+        "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "questions": [
+            {
+                "id": "q3",
+                "promptDe": "Was kostet das Ticket normalerweise?",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "10 Euro"
+                    },
+                    {
+                        "id": "b",
+                        "de": "15 Euro"
+                    },
+                    {
+                        "id": "c",
+                        "de": "20 Euro"
+                    }
+                ],
+                "correct": "b"
+            },
+            {
+                "id": "q4",
+                "promptDe": "Die Veranstaltung beginnt um 20 Uhr.",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "Richtig"
+                    },
+                    {
+                        "id": "b",
+                        "de": "Falsch"
+                    }
+                ],
+                "correct": "b"
+            }
+        ]
+    }
+],
+  "schreiben": {
       "id": "schreiben-1",
       "topicAr": "كتابة منشور رأي حول العمل من المنزل",
       "topicDe": "Forumsbeitrag: Homeoffice — pro oder contra?",
@@ -902,7 +988,93 @@ export const telcB2Models = [
         "explanationAr": "**unter + Dativ** للدلالة على ظرف/شرط عام (\"تحت / وسط\"). \"unter großem Interesse\" = وسط اهتمام كبير. تعبير ثابت مع Interesse/Aufsicht/Druck."
       }
     ],
-    "schreiben": {
+  "hoeren": [
+    {
+        "id": "hoeren-1-1",
+        "partAr": "الجزء 1 — الاستماع",
+        "partDe": "Teil 1: Globalverstehen",
+        "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        "questions": [
+            {
+                "id": "q1",
+                "promptDe": "Der Sprecher spricht hauptsächlich über ...",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "seine Arbeit im Büro."
+                    },
+                    {
+                        "id": "b",
+                        "de": "Probleme mit dem Computer."
+                    },
+                    {
+                        "id": "c",
+                        "de": "den neuen Kollegen."
+                    }
+                ],
+                "correct": "a"
+            },
+            {
+                "id": "q2",
+                "promptDe": "Das Problem wurde am Ende gelöst.",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "Richtig"
+                    },
+                    {
+                        "id": "b",
+                        "de": "Falsch"
+                    }
+                ],
+                "correct": "a"
+            }
+        ]
+    },
+    {
+        "id": "hoeren-1-2",
+        "partAr": "الجزء 2 — التفاصيل",
+        "partDe": "Teil 2: Detailverstehen",
+        "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "questions": [
+            {
+                "id": "q3",
+                "promptDe": "Was kostet das Ticket normalerweise?",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "10 Euro"
+                    },
+                    {
+                        "id": "b",
+                        "de": "15 Euro"
+                    },
+                    {
+                        "id": "c",
+                        "de": "20 Euro"
+                    }
+                ],
+                "correct": "b"
+            },
+            {
+                "id": "q4",
+                "promptDe": "Die Veranstaltung beginnt um 20 Uhr.",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "Richtig"
+                    },
+                    {
+                        "id": "b",
+                        "de": "Falsch"
+                    }
+                ],
+                "correct": "b"
+            }
+        ]
+    }
+],
+  "schreiben": {
       "id": "schreiben-2",
       "topicAr": "كتابة خطاب للصحيفة حول السياسة البيئية",
       "topicDe": "Leserbrief: Sollten Kurzstreckenflüge verboten werden?",
@@ -1388,7 +1560,93 @@ export const telcB2Models = [
         "explanationAr": "**raten zu + Dativ** = ينصح بـ. حرف جرّ ثابت مع الفعل \"raten\". (قارن: empfehlen بدون حرف جرّ!)."
       }
     ],
-    "schreiben": {
+  "hoeren": [
+    {
+        "id": "hoeren-1-1",
+        "partAr": "الجزء 1 — الاستماع",
+        "partDe": "Teil 1: Globalverstehen",
+        "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        "questions": [
+            {
+                "id": "q1",
+                "promptDe": "Der Sprecher spricht hauptsächlich über ...",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "seine Arbeit im Büro."
+                    },
+                    {
+                        "id": "b",
+                        "de": "Probleme mit dem Computer."
+                    },
+                    {
+                        "id": "c",
+                        "de": "den neuen Kollegen."
+                    }
+                ],
+                "correct": "a"
+            },
+            {
+                "id": "q2",
+                "promptDe": "Das Problem wurde am Ende gelöst.",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "Richtig"
+                    },
+                    {
+                        "id": "b",
+                        "de": "Falsch"
+                    }
+                ],
+                "correct": "a"
+            }
+        ]
+    },
+    {
+        "id": "hoeren-1-2",
+        "partAr": "الجزء 2 — التفاصيل",
+        "partDe": "Teil 2: Detailverstehen",
+        "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "questions": [
+            {
+                "id": "q3",
+                "promptDe": "Was kostet das Ticket normalerweise?",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "10 Euro"
+                    },
+                    {
+                        "id": "b",
+                        "de": "15 Euro"
+                    },
+                    {
+                        "id": "c",
+                        "de": "20 Euro"
+                    }
+                ],
+                "correct": "b"
+            },
+            {
+                "id": "q4",
+                "promptDe": "Die Veranstaltung beginnt um 20 Uhr.",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "Richtig"
+                    },
+                    {
+                        "id": "b",
+                        "de": "Falsch"
+                    }
+                ],
+                "correct": "b"
+            }
+        ]
+    }
+],
+  "schreiben": {
       "id": "schreiben-3",
       "topicAr": "كتابة بريد إلكتروني لصديق حول صحّته",
       "topicDe": "E-Mail: Ratschläge für einen gestressten Freund",
@@ -1697,7 +1955,93 @@ export const telcB2Models = [
         "explanationAr": "**Partizip II: durchgeführt** (بدون -et). الفعل \"durchführen\" هو فعل قابل للفصل، لكن في Partizip II نضع -ge- بين durch- و -führt."
       }
     ],
-    "schreiben": {
+  "hoeren": [
+    {
+        "id": "hoeren-1-1",
+        "partAr": "الجزء 1 — الاستماع",
+        "partDe": "Teil 1: Globalverstehen",
+        "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        "questions": [
+            {
+                "id": "q1",
+                "promptDe": "Der Sprecher spricht hauptsächlich über ...",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "seine Arbeit im Büro."
+                    },
+                    {
+                        "id": "b",
+                        "de": "Probleme mit dem Computer."
+                    },
+                    {
+                        "id": "c",
+                        "de": "den neuen Kollegen."
+                    }
+                ],
+                "correct": "a"
+            },
+            {
+                "id": "q2",
+                "promptDe": "Das Problem wurde am Ende gelöst.",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "Richtig"
+                    },
+                    {
+                        "id": "b",
+                        "de": "Falsch"
+                    }
+                ],
+                "correct": "a"
+            }
+        ]
+    },
+    {
+        "id": "hoeren-1-2",
+        "partAr": "الجزء 2 — التفاصيل",
+        "partDe": "Teil 2: Detailverstehen",
+        "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "questions": [
+            {
+                "id": "q3",
+                "promptDe": "Was kostet das Ticket normalerweise?",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "10 Euro"
+                    },
+                    {
+                        "id": "b",
+                        "de": "15 Euro"
+                    },
+                    {
+                        "id": "c",
+                        "de": "20 Euro"
+                    }
+                ],
+                "correct": "b"
+            },
+            {
+                "id": "q4",
+                "promptDe": "Die Veranstaltung beginnt um 20 Uhr.",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "Richtig"
+                    },
+                    {
+                        "id": "b",
+                        "de": "Falsch"
+                    }
+                ],
+                "correct": "b"
+            }
+        ]
+    }
+],
+  "schreiben": {
       "id": "schreiben-1",
       "topicAr": "كتابة رأي حول الرقمنة في المدارس",
       "topicDe": "Forumsbeitrag: Tablets im Unterricht — sinnvoll oder schädlich?",
@@ -1987,7 +2331,93 @@ export const telcB2Models = [
         "explanationAr": "**speziell + um … zu** = خصّيصاً لـ. تعبير شائع للهدف المحدّد. (besonders = بشكل خاصّ، صفة، eigentlich = في الحقيقة، allerdings = ومع ذلك)."
       }
     ],
-    "schreiben": {
+  "hoeren": [
+    {
+        "id": "hoeren-1-1",
+        "partAr": "الجزء 1 — الاستماع",
+        "partDe": "Teil 1: Globalverstehen",
+        "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        "questions": [
+            {
+                "id": "q1",
+                "promptDe": "Der Sprecher spricht hauptsächlich über ...",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "seine Arbeit im Büro."
+                    },
+                    {
+                        "id": "b",
+                        "de": "Probleme mit dem Computer."
+                    },
+                    {
+                        "id": "c",
+                        "de": "den neuen Kollegen."
+                    }
+                ],
+                "correct": "a"
+            },
+            {
+                "id": "q2",
+                "promptDe": "Das Problem wurde am Ende gelöst.",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "Richtig"
+                    },
+                    {
+                        "id": "b",
+                        "de": "Falsch"
+                    }
+                ],
+                "correct": "a"
+            }
+        ]
+    },
+    {
+        "id": "hoeren-1-2",
+        "partAr": "الجزء 2 — التفاصيل",
+        "partDe": "Teil 2: Detailverstehen",
+        "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "questions": [
+            {
+                "id": "q3",
+                "promptDe": "Was kostet das Ticket normalerweise?",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "10 Euro"
+                    },
+                    {
+                        "id": "b",
+                        "de": "15 Euro"
+                    },
+                    {
+                        "id": "c",
+                        "de": "20 Euro"
+                    }
+                ],
+                "correct": "b"
+            },
+            {
+                "id": "q4",
+                "promptDe": "Die Veranstaltung beginnt um 20 Uhr.",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "Richtig"
+                    },
+                    {
+                        "id": "b",
+                        "de": "Falsch"
+                    }
+                ],
+                "correct": "b"
+            }
+        ]
+    }
+],
+  "schreiben": {
       "id": "schreiben-1",
       "topicAr": "كتابة منشور رأي حول الذكاء الاصطناعي",
       "topicDe": "Forumsbeitrag: Sollte KI im Beruf reguliert werden?",
@@ -2040,5 +2470,529 @@ export const telcB2Models = [
       }
     ]
   }
+,
+{
+  "id": "telc-b2-2",
+  "titleAr": "نموذج 2 — البيئة والصحة",
+  "titleDe": "Modelltest 2 — Umwelt & Gesundheit",
+  "level": "B2",
+  "durationMin": 165,
+  "readingPassages": [
+    {
+      "id": "lesen-2-1",
+      "titleDe": "Teil 1: Die Zukunft der Ernährung",
+      "textDe": "In den letzten Jahren hat sich das Bewusstsein für gesunde und nachhaltige Ernährung stark gewandelt. Immer mehr Menschen verzichten auf Fleisch und suchen nach pflanzlichen Alternativen. Forscher betonen, dass eine Reduzierung des Fleischkonsums nicht nur gesundheitliche Vorteile bietet, sondern auch entscheidend für den Klimaschutz ist. Die Massentierhaltung ist für einen großen Teil der weltweiten Treibhausgasemissionen verantwortlich. \n\nZudem wird an neuen Technologien wie 'Laborfleisch' gearbeitet, das ohne Tierleid produziert wird. Kritiker bemängeln jedoch, dass diese Alternativen noch zu teuer und hochgradig verarbeitet sind. Trotzdem gehen Experten davon aus, dass unsere Teller in zwanzig Jahren völlig anders aussehen werden als heute. Regionale Produkte und pflanzenbasierte Kost werden den Markt dominieren.",
+      "questions": [
+        {
+          "id": "q1",
+          "promptDe": "Was ist laut dem Text ein Hauptgrund für den Wandel in der Ernährung?",
+          "options": [
+            {
+              "id": "a",
+              "de": "Fleisch ist zu teuer geworden."
+            },
+            {
+              "id": "b",
+              "de": "Das gestiegene Bewusstsein für Gesundheit und Nachhaltigkeit."
+            },
+            {
+              "id": "c",
+              "de": "Es gibt nicht mehr genug Fleisch auf dem Markt."
+            },
+            {
+              "id": "d",
+              "de": "Die Regierung hat den Fleischkonsum verboten."
+            }
+          ],
+          "correct": "b"
+        },
+        {
+          "id": "q2",
+          "promptDe": "Welchen positiven Effekt hat ein geringerer Fleischkonsum laut Forschern?",
+          "options": [
+            {
+              "id": "a",
+              "de": "Er hilft nur bei der Gewichtsabnahme."
+            },
+            {
+              "id": "b",
+              "de": "Er ist gut für die Gesundheit und den Klimaschutz."
+            },
+            {
+              "id": "c",
+              "de": "Er fördert die Massentierhaltung."
+            },
+            {
+              "id": "d",
+              "de": "Er senkt die Kosten für Laborfleisch."
+            }
+          ],
+          "correct": "b"
+        },
+        {
+          "id": "q3",
+          "promptDe": "Was kritisieren einige Menschen an 'Laborfleisch'?",
+          "options": [
+            {
+              "id": "a",
+              "de": "Dass es zu günstig ist."
+            },
+            {
+              "id": "b",
+              "de": "Dass es Tiere leiden lässt."
+            },
+            {
+              "id": "c",
+              "de": "Dass es teuer und stark verarbeitet ist."
+            },
+            {
+              "id": "d",
+              "de": "Dass es nur in der Region verkauft wird."
+            }
+          ],
+          "correct": "c"
+        }
+      ]
+    }
+  ],
+  "sprachbausteine": [
+    {
+      "id": "sb2-1",
+      "contextDe": "Die Experten warnen ___, dass der Klimawandel schnelle Maßnahmen erfordert.",
+      "blank": "Präposition",
+      "options": [
+        {
+          "id": "a",
+          "de": "davor"
+        },
+        {
+          "id": "b",
+          "de": "darauf"
+        },
+        {
+          "id": "c",
+          "de": "darüber"
+        },
+        {
+          "id": "d",
+          "de": "daran"
+        }
+      ],
+      "correct": "a",
+      "explanationAr": "warnen vor + Dativ = يُحذّر من. وعند الإشارة إلى جملة (dass)، نستخدم davor."
+    },
+    {
+      "id": "sb2-2",
+      "contextDe": "___ es heute regnet, gehe ich trotzdem im Park spazieren.",
+      "blank": "Konnektor",
+      "options": [
+        {
+          "id": "a",
+          "de": "Weil"
+        },
+        {
+          "id": "b",
+          "de": "Obwohl"
+        },
+        {
+          "id": "c",
+          "de": "Wenn"
+        },
+        {
+          "id": "d",
+          "de": "Damit"
+        }
+      ],
+      "correct": "b",
+      "explanationAr": "Obwohl = بالرغم من (جملة تناقضية)، لأنه سيذهب للتنزه رغم المطر."
+    }
+  ],
+  "hoeren": [
+    {
+        "id": "hoeren-1-1",
+        "partAr": "الجزء 1 — الاستماع",
+        "partDe": "Teil 1: Globalverstehen",
+        "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        "questions": [
+            {
+                "id": "q1",
+                "promptDe": "Der Sprecher spricht hauptsächlich über ...",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "seine Arbeit im Büro."
+                    },
+                    {
+                        "id": "b",
+                        "de": "Probleme mit dem Computer."
+                    },
+                    {
+                        "id": "c",
+                        "de": "den neuen Kollegen."
+                    }
+                ],
+                "correct": "a"
+            },
+            {
+                "id": "q2",
+                "promptDe": "Das Problem wurde am Ende gelöst.",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "Richtig"
+                    },
+                    {
+                        "id": "b",
+                        "de": "Falsch"
+                    }
+                ],
+                "correct": "a"
+            }
+        ]
+    },
+    {
+        "id": "hoeren-1-2",
+        "partAr": "الجزء 2 — التفاصيل",
+        "partDe": "Teil 2: Detailverstehen",
+        "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "questions": [
+            {
+                "id": "q3",
+                "promptDe": "Was kostet das Ticket normalerweise?",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "10 Euro"
+                    },
+                    {
+                        "id": "b",
+                        "de": "15 Euro"
+                    },
+                    {
+                        "id": "c",
+                        "de": "20 Euro"
+                    }
+                ],
+                "correct": "b"
+            },
+            {
+                "id": "q4",
+                "promptDe": "Die Veranstaltung beginnt um 20 Uhr.",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "Richtig"
+                    },
+                    {
+                        "id": "b",
+                        "de": "Falsch"
+                    }
+                ],
+                "correct": "b"
+            }
+        ]
+    }
+],
+  "schreiben": {
+    "id": "schreiben-2",
+    "topicAr": "كتابة رسالة شكوى حول خدمة رديئة",
+    "topicDe": "Beschwerdebrief: Schlechter Service im Fitnessstudio",
+    "contextDe": "Sie haben sich vor zwei Monaten in einem neuen Fitnessstudio angemeldet. Leider sind die Geräte oft defekt und die Kurse fallen häufig aus. Schreiben Sie eine formelle Beschwerde an die Geschäftsführung (ca. 150 Wörter).",
+    "bulletPoints": [
+      "Grund für Ihr Schreiben.",
+      "Beispiele für die Mängel (Geräte, Kurse).",
+      "Auswirkungen auf Ihr Training.",
+      "Forderung nach einer Lösung oder Entschädigung."
+    ],
+    "redemittel": [
+      "Sehr geehrte Damen und Herren,",
+      "hiermit möchte ich mich über ... beschweren.",
+      "Zu meinem Bedauern musste ich feststellen, dass ...",
+      "Dies hat zur Folge, dass ...",
+      "Ich erwarte von Ihnen, dass ...",
+      "Mit freundlichen Grüßen"
+    ],
+    "sampleEssayDe": "Sehr geehrte Damen und Herren,\n\nhiermit möchte ich mich über die aktuellen Zustände in Ihrem Fitnessstudio beschweren. Als ich mich vor zwei Monaten anmeldete, wurde mir ein hochwertiger Service versprochen, der leider nicht eingehalten wird.\n\nZu meinem Bedauern musste ich feststellen, dass viele Geräte, insbesondere die Laufbänder, seit Wochen defekt sind. Zudem fallen die angebotenen Kurse, wie etwa der Yogakurs am Dienstagabend, sehr häufig und meist ohne vorherige Ankündigung aus.\n\nDies hat zur Folge, dass ich mein geplantes Training nicht durchführen kann und viel Zeit verliere. Für einen monatlichen Beitrag von 60 Euro erwarte ich funktionierende Geräte und zuverlässige Kurse.\n\nIch fordere Sie daher auf, die Mängel umgehend zu beheben. Alternativ erwarte ich eine Reduzierung meines monatlichen Beitrags. Sollte sich die Situation nicht verbessern, sehe ich mich gezwungen, meinen Vertrag außerordentlich zu kündigen.\n\nIch bitte um eine schnelle Rückmeldung.\n\nMit freundlichen Grüßen\n[Ihr Name]",
+    "sampleEssayAr": "رسالة شكوى إلى صالة رياضية بسبب تعطل الأجهزة وإلغاء الدورات. يتضمن المطالبة بإصلاح الأعطال أو تخفيض الاشتراك، والتهديد بإلغاء العقد."
+  },
+  "sprechen": [
+    {
+      "id": "sp2-1",
+      "partAr": "الجزء 1 — النقاش وتبادل الآراء",
+      "partDe": "Teil 1: Erfahrungsaustausch",
+      "topicAr": "العمل من المنزل (Homeoffice) أم في المكتب؟",
+      "topicDe": "Homeoffice oder Büropräsenz?",
+      "redemittel": [
+        "Meiner Erfahrung nach ...",
+        "Ein großer Vorteil ist, dass ...",
+        "Dem stimme ich nur teilweise zu, denn ...",
+        "Wie siehst du das?"
+      ],
+      "sampleAnswerDe": "A: Meiner Erfahrung nach bietet das Homeoffice viele Vorteile, besonders die Zeitersparnis, weil der Arbeitsweg wegfällt. Wie siehst du das?\nB: Da stimme ich dir zu. Ein großer Vorteil ist auch die Flexibilität. Allerdings fehlt mir oft der direkte Austausch mit den Kollegen.\nA: Das stimmt. Vielleicht wäre ein hybrides Modell die beste Lösung: drei Tage im Büro und zwei Tage zu Hause."
+    }
+  ]
+}
+,
+{
+  "id": "telc-b2-2",
+  "titleAr": "نموذج 2 — البيئة والصحة",
+  "titleDe": "Modelltest 2 — Umwelt & Gesundheit",
+  "level": "B2",
+  "durationMin": 165,
+  "readingPassages": [
+    {
+      "id": "lesen-2-1",
+      "titleDe": "Teil 1: Die Zukunft der Ernährung",
+      "textDe": "In den letzten Jahren hat sich das Bewusstsein für gesunde und nachhaltige Ernährung stark gewandelt. Immer mehr Menschen verzichten auf Fleisch und suchen nach pflanzlichen Alternativen. Forscher betonen, dass eine Reduzierung des Fleischkonsums nicht nur gesundheitliche Vorteile bietet, sondern auch entscheidend für den Klimaschutz ist. Die Massentierhaltung ist für einen großen Teil der weltweiten Treibhausgasemissionen verantwortlich. \n\nZudem wird an neuen Technologien wie 'Laborfleisch' gearbeitet, das ohne Tierleid produziert wird. Kritiker bemängeln jedoch, dass diese Alternativen noch zu teuer und hochgradig verarbeitet sind. Trotzdem gehen Experten davon aus, dass unsere Teller in zwanzig Jahren völlig anders aussehen werden als heute. Regionale Produkte und pflanzenbasierte Kost werden den Markt dominieren.",
+      "questions": [
+        {
+          "id": "q1",
+          "promptDe": "Was ist laut dem Text ein Hauptgrund für den Wandel in der Ernährung?",
+          "options": [
+            {
+              "id": "a",
+              "de": "Fleisch ist zu teuer geworden."
+            },
+            {
+              "id": "b",
+              "de": "Das gestiegene Bewusstsein für Gesundheit und Nachhaltigkeit."
+            },
+            {
+              "id": "c",
+              "de": "Es gibt nicht mehr genug Fleisch auf dem Markt."
+            },
+            {
+              "id": "d",
+              "de": "Die Regierung hat den Fleischkonsum verboten."
+            }
+          ],
+          "correct": "b"
+        },
+        {
+          "id": "q2",
+          "promptDe": "Welchen positiven Effekt hat ein geringerer Fleischkonsum laut Forschern?",
+          "options": [
+            {
+              "id": "a",
+              "de": "Er hilft nur bei der Gewichtsabnahme."
+            },
+            {
+              "id": "b",
+              "de": "Er ist gut für die Gesundheit und den Klimaschutz."
+            },
+            {
+              "id": "c",
+              "de": "Er fördert die Massentierhaltung."
+            },
+            {
+              "id": "d",
+              "de": "Er senkt die Kosten für Laborfleisch."
+            }
+          ],
+          "correct": "b"
+        },
+        {
+          "id": "q3",
+          "promptDe": "Was kritisieren einige Menschen an 'Laborfleisch'?",
+          "options": [
+            {
+              "id": "a",
+              "de": "Dass es zu günstig ist."
+            },
+            {
+              "id": "b",
+              "de": "Dass es Tiere leiden lässt."
+            },
+            {
+              "id": "c",
+              "de": "Dass es teuer und stark verarbeitet ist."
+            },
+            {
+              "id": "d",
+              "de": "Dass es nur in der Region verkauft wird."
+            }
+          ],
+          "correct": "c"
+        }
+      ]
+    }
+  ],
+  "sprachbausteine": [
+    {
+      "id": "sb2-1",
+      "contextDe": "Die Experten warnen ___, dass der Klimawandel schnelle Maßnahmen erfordert.",
+      "blank": "Präposition",
+      "options": [
+        {
+          "id": "a",
+          "de": "davor"
+        },
+        {
+          "id": "b",
+          "de": "darauf"
+        },
+        {
+          "id": "c",
+          "de": "darüber"
+        },
+        {
+          "id": "d",
+          "de": "daran"
+        }
+      ],
+      "correct": "a",
+      "explanationAr": "warnen vor + Dativ = يُحذّر من. وعند الإشارة إلى جملة (dass)، نستخدم davor."
+    },
+    {
+      "id": "sb2-2",
+      "contextDe": "___ es heute regnet, gehe ich trotzdem im Park spazieren.",
+      "blank": "Konnektor",
+      "options": [
+        {
+          "id": "a",
+          "de": "Weil"
+        },
+        {
+          "id": "b",
+          "de": "Obwohl"
+        },
+        {
+          "id": "c",
+          "de": "Wenn"
+        },
+        {
+          "id": "d",
+          "de": "Damit"
+        }
+      ],
+      "correct": "b",
+      "explanationAr": "Obwohl = بالرغم من (جملة تناقضية)، لأنه سيذهب للتنزه رغم المطر."
+    }
+  ],
+  "hoeren": [
+    {
+        "id": "hoeren-1-1",
+        "partAr": "الجزء 1 — الاستماع",
+        "partDe": "Teil 1: Globalverstehen",
+        "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        "questions": [
+            {
+                "id": "q1",
+                "promptDe": "Der Sprecher spricht hauptsächlich über ...",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "seine Arbeit im Büro."
+                    },
+                    {
+                        "id": "b",
+                        "de": "Probleme mit dem Computer."
+                    },
+                    {
+                        "id": "c",
+                        "de": "den neuen Kollegen."
+                    }
+                ],
+                "correct": "a"
+            },
+            {
+                "id": "q2",
+                "promptDe": "Das Problem wurde am Ende gelöst.",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "Richtig"
+                    },
+                    {
+                        "id": "b",
+                        "de": "Falsch"
+                    }
+                ],
+                "correct": "a"
+            }
+        ]
+    },
+    {
+        "id": "hoeren-1-2",
+        "partAr": "الجزء 2 — التفاصيل",
+        "partDe": "Teil 2: Detailverstehen",
+        "audioUrl": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        "questions": [
+            {
+                "id": "q3",
+                "promptDe": "Was kostet das Ticket normalerweise?",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "10 Euro"
+                    },
+                    {
+                        "id": "b",
+                        "de": "15 Euro"
+                    },
+                    {
+                        "id": "c",
+                        "de": "20 Euro"
+                    }
+                ],
+                "correct": "b"
+            },
+            {
+                "id": "q4",
+                "promptDe": "Die Veranstaltung beginnt um 20 Uhr.",
+                "options": [
+                    {
+                        "id": "a",
+                        "de": "Richtig"
+                    },
+                    {
+                        "id": "b",
+                        "de": "Falsch"
+                    }
+                ],
+                "correct": "b"
+            }
+        ]
+    }
+],
+  "schreiben": {
+    "id": "schreiben-2",
+    "topicAr": "كتابة رسالة شكوى حول خدمة رديئة",
+    "topicDe": "Beschwerdebrief: Schlechter Service im Fitnessstudio",
+    "contextDe": "Sie haben sich vor zwei Monaten in einem neuen Fitnessstudio angemeldet. Leider sind die Geräte oft defekt und die Kurse fallen häufig aus. Schreiben Sie eine formelle Beschwerde an die Geschäftsführung (ca. 150 Wörter).",
+    "bulletPoints": [
+      "Grund für Ihr Schreiben.",
+      "Beispiele für die Mängel (Geräte, Kurse).",
+      "Auswirkungen auf Ihr Training.",
+      "Forderung nach einer Lösung oder Entschädigung."
+    ],
+    "redemittel": [
+      "Sehr geehrte Damen und Herren,",
+      "hiermit möchte ich mich über ... beschweren.",
+      "Zu meinem Bedauern musste ich feststellen, dass ...",
+      "Dies hat zur Folge, dass ...",
+      "Ich erwarte von Ihnen, dass ...",
+      "Mit freundlichen Grüßen"
+    ],
+    "sampleEssayDe": "Sehr geehrte Damen und Herren,\n\nhiermit möchte ich mich über die aktuellen Zustände in Ihrem Fitnessstudio beschweren. Als ich mich vor zwei Monaten anmeldete, wurde mir ein hochwertiger Service versprochen, der leider nicht eingehalten wird.\n\nZu meinem Bedauern musste ich feststellen, dass viele Geräte, insbesondere die Laufbänder, seit Wochen defekt sind. Zudem fallen die angebotenen Kurse, wie etwa der Yogakurs am Dienstagabend, sehr häufig und meist ohne vorherige Ankündigung aus.\n\nDies hat zur Folge, dass ich mein geplantes Training nicht durchführen kann und viel Zeit verliere. Für einen monatlichen Beitrag von 60 Euro erwarte ich funktionierende Geräte und zuverlässige Kurse.\n\nIch fordere Sie daher auf, die Mängel umgehend zu beheben. Alternativ erwarte ich eine Reduzierung meines monatlichen Beitrags. Sollte sich die Situation nicht verbessern, sehe ich mich gezwungen, meinen Vertrag außerordentlich zu kündigen.\n\nIch bitte um eine schnelle Rückmeldung.\n\nMit freundlichen Grüßen\n[Ihr Name]",
+    "sampleEssayAr": "رسالة شكوى إلى صالة رياضية بسبب تعطل الأجهزة وإلغاء الدورات. يتضمن المطالبة بإصلاح الأعطال أو تخفيض الاشتراك، والتهديد بإلغاء العقد."
+  },
+  "sprechen": [
+    {
+      "id": "sp2-1",
+      "partAr": "الجزء 1 — النقاش وتبادل الآراء",
+      "partDe": "Teil 1: Erfahrungsaustausch",
+      "topicAr": "العمل من المنزل (Homeoffice) أم في المكتب؟",
+      "topicDe": "Homeoffice oder Büropräsenz?",
+      "redemittel": [
+        "Meiner Erfahrung nach ...",
+        "Ein großer Vorteil ist, dass ...",
+        "Dem stimme ich nur teilweise zu, denn ...",
+        "Wie siehst du das?"
+      ],
+      "sampleAnswerDe": "A: Meiner Erfahrung nach bietet das Homeoffice viele Vorteile, besonders die Zeitersparnis, weil der Arbeitsweg wegfällt. Wie siehst du das?\nB: Da stimme ich dir zu. Ein großer Vorteil ist auch die Flexibilität. Allerdings fehlt mir oft der direkte Austausch mit den Kollegen.\nA: Das stimmt. Vielleicht wäre ein hybrides Modell die beste Lösung: drei Tage im Büro und zwei Tage zu Hause."
+    }
+  ]
+}
 ];
 

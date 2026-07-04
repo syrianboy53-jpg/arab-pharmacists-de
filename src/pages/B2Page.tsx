@@ -190,7 +190,7 @@ export default function B2Page() {
 
                             {showEx && (
                               <div className="bg-amber-100 dark:bg-amber-900/5 border border-amber-200 dark:border-amber-700/20 p-3.5 rounded-xl text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-                                {q.explanationAr}
+                                {(q as any).explanationAr}
                               </div>
                             )}
                           </div>

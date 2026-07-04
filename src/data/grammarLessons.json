@@ -1,739 +1,595 @@
 [
   {
     "id": 1,
+    "level": "A2",
     "title": "Akkusativ vs. Dativ",
-    "titleAr": "المفعول به مقابل المجرور",
-    "explanation": "الـAkkusativ يُجيب عن: wen? was? (مَن؟ ماذا؟) — المفعول به المباشر.\nالـDativ يُجيب عن: wem? (لمَن؟) — المفعول به غير المباشر.\n\nأدوات التعريف:\n• Akkusativ: den (m), die (f), das (n), die (pl)\n• Dativ: dem (m), der (f), dem (n), den+n (pl)\n\nأفعال مع Akkusativ: haben, brauchen, sehen, finden, kaufen\nأفعال مع Dativ: helfen, danken, gehören, gefallen, folgen",
+    "titleAr": "\u0627\u0644\u0645\u0641\u0639\u0648\u0644 \u0628\u0647 \u0645\u0642\u0627\u0628\u0644 \u0627\u0644\u0645\u062c\u0631\u0648\u0631",
+    "tip": "\u0633\u0647\u0644 \u0644\u0644\u062d\u0641\u0638: Akkusativ \u064a\u064f\u062c\u064a\u0628 \u0639\u0646 '\u0645\u0627\u0630\u0627\u061f' (\u0627\u0644\u0634\u064a\u0621 \u0627\u0644\u0645\u0628\u0627\u0634\u0631) \u2014 Dativ \u064a\u064f\u062c\u064a\u0628 \u0639\u0646 '\u0644\u0645\u064e\u0646\u061f'",
+    "table": {
+      "headers": ["\u0627\u0644\u062d\u0627\u0644\u0629", "\u0627\u0644\u0645\u0630\u0643\u0631 (m)", "\u0627\u0644\u0645\u0624\u0646\u062b (f)", "\u0627\u0644\u0645\u062d\u0627\u064a\u062f (n)", "\u0627\u0644\u062c\u0645\u0639 (pl)"],
+      "rows": [
+        ["Nominativ", "der", "die", "das", "die"],
+        ["Akkusativ", "den \u2746", "die", "das", "die"],
+        ["Dativ", "dem \u2746", "der \u2746", "dem \u2746", "den+n \u2746"]
+      ]
+    },
+    "explanation": "\u0627\u0644\u0640Akkusativ \u064a\u064f\u062c\u064a\u0628 \u0639\u0646: wen? was? (\u0645\u064e\u0646\u061f \u0645\u0627\u0630\u0627\u061f) \u2014 \u0627\u0644\u0645\u0641\u0639\u0648\u0644 \u0628\u0647 \u0627\u0644\u0645\u0628\u0627\u0634\u0631.\n\u0627\u0644\u0640Dativ \u064a\u064f\u062c\u064a\u0628 \u0639\u0646: wem? (\u0644\u0645\u064e\u0646\u061f) \u2014 \u0627\u0644\u0645\u0641\u0639\u0648\u0644 \u0628\u0647 \u063a\u064a\u0631 \u0627\u0644\u0645\u0628\u0627\u0634\u0631.\n\n\u0623\u0641\u0639\u0627\u0644 \u0645\u0639 Akkusativ: haben, brauchen, sehen, finden, kaufen\n\u0623\u0641\u0639\u0627\u0644 \u0645\u0639 Dativ: helfen, danken, geh\u00f6ren, gefallen, folgen",
     "examples": [
-      {
-        "de": "Ich sehe den Mann. (Akkusativ)",
-        "ar": "أرى الرجل — مفعول به مباشر"
-      },
-      {
-        "de": "Ich helfe dem Mann. (Dativ)",
-        "ar": "أساعد الرجل — مفعول به غير مباشر"
-      },
-      {
-        "de": "Sie kauft einen Laptop.",
-        "ar": "هي تشتري لابتوب (Akk)"
-      },
-      {
-        "de": "Das Buch gehört dem Kind.",
-        "ar": "الكتاب يخصّ الطفل (Dat)"
-      }
+      { "de": "Ich sehe den Mann. (Akkusativ)", "ar": "\u0623\u0631\u0649 \u0627\u0644\u0631\u062c\u0644 \u2014 \u0645\u0641\u0639\u0648\u0644 \u0628\u0647 \u0645\u0628\u0627\u0634\u0631" },
+      { "de": "Ich helfe dem Mann. (Dativ)", "ar": "\u0623\u0633\u0627\u0639\u062f \u0627\u0644\u0631\u062c\u0644 \u2014 \u0645\u0641\u0639\u0648\u0644 \u0628\u0647 \u063a\u064a\u0631 \u0645\u0628\u0627\u0634\u0631" },
+      { "de": "Sie kauft einen Laptop.", "ar": "\u0647\u064a \u062a\u0634\u062a\u0631\u064a \u0644\u0627\u0628\u062a\u0648\u0628 (Akk)" },
+      { "de": "Das Buch geh\u00f6rt dem Kind.", "ar": "\u0627\u0644\u0643\u062a\u0627\u0628 \u064a\u062e\u0635\u0651 \u0627\u0644\u0637\u0641\u0644 (Dat)" }
     ],
     "exercises": [
-      {
-        "question": "Ich brauche ___ neuen Computer.",
-        "options": [
-          "einen (Akk)",
-          "einem (Dat)"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Kannst du ___ Frau helfen?",
-        "options": [
-          "die (Akk)",
-          "der (Dat)"
-        ],
-        "correct": 1
-      },
-      {
-        "question": "Ich schenke ___ Kind ein Buch.",
-        "options": [
-          "das (Akk)",
-          "dem (Dat)"
-        ],
-        "correct": 1
-      },
-      {
-        "question": "Hast du ___ Schlüssel gefunden?",
-        "options": [
-          "den (Akk)",
-          "dem (Dat)"
-        ],
-        "correct": 0
-      }
+      { "type": "multiple-choice", "question": "Ich brauche ___ neuen Computer.", "options": ["einen (Akk)", "einem (Dat)"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Kannst du ___ Frau helfen?", "options": ["die (Akk)", "der (Dat)"], "correct": 1 },
+      { "type": "fill-blank", "question": "Ich schenke ___ Kind ein Buch. (das Kind - Dativ)", "answer": "dem", "hint": "Dativ f\u00fcr 'das Kind'" },
+      { "type": "fill-blank", "question": "Hast du ___ Schl\u00fcssel gefunden? (der Schl\u00fcssel - Akkusativ)", "answer": "den", "hint": "Akkusativ f\u00fcr 'der Schl\u00fcssel'" }
     ]
   },
   {
     "id": 2,
-    "title": "Nebensätze mit weil, dass, obwohl",
-    "titleAr": "الجمل الثانوية",
-    "explanation": "في الجمل الثانوية (Nebensatz) الفعل يذهب للنهاية!\n\n• weil = لأنّ (سبب)\n• dass = أنّ (محتوى)\n• obwohl = بالرغم من (تناقض)\n• wenn = لو/عندما (شرط/زمن)\n• als = عندما (ماضي مرّة واحدة)\n\nالهيكل: Hauptsatz + Konnektor + ... + VERB",
+    "level": "A2",
+    "title": "Neb\u00e4tze mit weil, dass, obwohl",
+    "titleAr": "\u0627\u0644\u062c\u0645\u0644 \u0627\u0644\u062b\u0627\u0646\u0648\u064a\u0629",
+    "tip": "\u0627\u0644\u0642\u0627\u0639\u062f\u0629 \u0627\u0644\u0630\u0647\u0628\u064a\u0629: \u0641\u064a \u0627\u0644\u062c\u0645\u0644\u0629 \u0627\u0644\u062b\u0627\u0646\u0648\u064a\u0629 (Nebensatz) \u0627\u0644\u0641\u0639\u0644 \u0627\u0644\u0645\u0635\u0631\u0651\u0641 \u064a\u0630\u0647\u0628 \u062f\u0627\u0626\u0645\u0627\u064b \u0644\u0644\u0646\u0647\u0627\u064a\u0629!",
+    "explanation": "\u0641\u064a \u0627\u0644\u062c\u0645\u0644 \u0627\u0644\u062b\u0627\u0646\u0648\u064a\u0629 (Nebensatz) \u0627\u0644\u0641\u0639\u0644 \u064a\u0630\u0647\u0628 \u0644\u0644\u0646\u0647\u0627\u064a\u0629!\n\n\u2022 weil = \u0644\u0623\u0646\u0651 (\u0633\u0628\u0628)\n\u2022 dass = \u0623\u0646\u0651 (\u0645\u062d\u062a\u0648\u0649)\n\u2022 obwohl = \u0628\u0627\u0644\u0631\u063a\u0645 \u0645\u0646 (\u062a\u0646\u0627\u0642\u0636)\n\u2022 wenn = \u0644\u0648/\u0639\u0646\u062f\u0645\u0627 (\u0634\u0631\u0637/\u0632\u0645\u0646)\n\u2022 als = \u0639\u0646\u062f\u0645\u0627 (\u0645\u0627\u0636\u064a \u0645\u0631\u0629 \u0648\u0627\u062d\u062f\u0629)\n\n\u0627\u0644\u0647\u064a\u0643\u0644: Hauptsatz + Konnektor + ... + VERB",
     "examples": [
-      {
-        "de": "Ich bleibe zu Hause, weil ich krank bin.",
-        "ar": "أبقى في البيت لأنّي مريض."
-      },
-      {
-        "de": "Ich glaube, dass er recht hat.",
-        "ar": "أعتقد أنّه محقّ."
-      },
-      {
-        "de": "Obwohl es regnet, gehe ich spazieren.",
-        "ar": "بالرغم من المطر، أمشي."
-      },
-      {
-        "de": "Wenn ich Zeit habe, lese ich ein Buch.",
-        "ar": "لو عندي وقت، أقرأ كتاب."
-      }
+      { "de": "Ich bleibe zu Hause, weil ich krank bin.", "ar": "\u0623\u0628\u0642\u0649 \u0641\u064a \u0627\u0644\u0628\u064a\u062a \u0644\u0623\u0646\u0651\u064a \u0645\u0631\u064a\u0636." },
+      { "de": "Ich glaube, dass er recht hat.", "ar": "\u0623\u0639\u062a\u0642\u062f \u0623\u0646\u0651\u0647 \u0645\u062d\u0642\u0651." },
+      { "de": "Obwohl es regnet, gehe ich spazieren.", "ar": "\u0628\u0627\u0644\u0631\u063a\u0645 \u0645\u0646 \u0627\u0644\u0645\u0637\u0631\u060c \u0623\u0645\u0634\u064a." },
+      { "de": "Wenn ich Zeit habe, lese ich ein Buch.", "ar": "\u0644\u0648 \u0639\u0646\u062f\u064a \u0648\u0642\u062a\u060c \u0623\u0642\u0631\u0623 \u0643\u062a\u0627\u0628." }
     ],
     "exercises": [
-      {
-        "question": "Ich lerne Deutsch, weil ich in Deutschland ___.",
-        "options": [
-          "lebe",
-          "leben"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Er sagt, dass er morgen ___.",
-        "options": [
-          "kommt",
-          "kommt er"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Obwohl sie müde ___, geht sie arbeiten.",
-        "options": [
-          "ist",
-          "ist sie"
-        ],
-        "correct": 0
-      }
+      { "type": "multiple-choice", "question": "Ich lerne Deutsch, weil ich in Deutschland ___.", "options": ["lebe", "leben"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Er sagt, dass er morgen ___.", "options": ["kommt", "kommt er"], "correct": 0 },
+      { "type": "word-order", "question": "\u0631\u062a\u0651\u0628 \u0627\u0644\u0643\u0644\u0645\u0627\u062a \u0644\u062a\u0643\u0648\u064a\u0646 \u062c\u0645\u0644\u0629 \u0635\u062d\u064a\u062d\u0629:", "words": ["weil", "bin", "Ich", "zu", "Hause,", "ich", "bleibe", "m\u00fcde"], "answer": "Ich bleibe zu Hause, weil ich m\u00fcde bin" },
+      { "type": "fill-blank", "question": "Obwohl sie m\u00fcde ___, geht sie arbeiten. (sein)", "answer": "ist", "hint": "\u0627\u0644\u0641\u0639\u0644 \u0641\u064a \u0646\u0647\u0627\u064a\u0629 \u0627\u0644\u062c\u0645\u0644\u0629 \u0627\u0644\u062b\u0627\u0646\u0648\u064a\u0629" }
     ]
   },
   {
     "id": 3,
+    "level": "A2",
     "title": "Perfekt (Partizip II)",
-    "titleAr": "الماضي التام",
-    "explanation": "الـPerfekt هو الزمن الأكثر استخداماً للماضي في المحادثة.\n\nالهيكل: haben/sein + Partizip II\n\n• ge...t (أفعال منتظمة): machen → gemacht, kaufen → gekauft\n• ge...en (أفعال شاذّة): fahren → gefahren, schreiben → geschrieben\n• بدون ge-: أفعال بـbe-, er-, ver-, ent-: besuchen → besucht\n\nsein مع أفعال الحركة والتغيير:\ngehen → ist gegangen, fahren → ist gefahren, kommen → ist gekommen",
+    "titleAr": "\u0627\u0644\u0645\u0627\u0636\u064a \u0627\u0644\u062a\u0627\u0645",
+    "tip": "\u0623\u0641\u0639\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629 \u0648\u0627\u0644\u062a\u063a\u064a\u064a\u0631 \u062a\u0623\u062e\u0630 'sein': gehen, fahren, kommen, bleiben, werden \u2014 \u0643\u0644 \u0627\u0644\u0628\u0627\u0642\u064a \u064a\u0623\u062e\u0630 'haben'.",
+    "explanation": "\u0627\u0644\u0640Perfekt \u0647\u0648 \u0627\u0644\u0632\u0645\u0646 \u0627\u0644\u0623\u0643\u062b\u0631 \u0627\u0633\u062a\u062e\u062f\u0627\u0645\u0627\u064b \u0644\u0644\u0645\u0627\u0636\u064a \u0641\u064a \u0627\u0644\u0645\u062d\u0627\u062f\u062b\u0629.\n\n\u0627\u0644\u0647\u064a\u0643\u0644: haben/sein + Partizip II\n\n\u2022 ge...t (\u0623\u0641\u0639\u0627\u0644 \u0645\u0646\u062a\u0638\u0645\u0629): machen \u2192 gemacht\n\u2022 ge...en (\u0623\u0641\u0639\u0627\u0644 \u0634\u0627\u0630\u0651\u0629): fahren \u2192 gefahren\n\u2022 \u0628\u062f\u0648\u0646 ge-: \u0628\u0640be-, er-, ver-: besuchen \u2192 besucht\n\nsein \u0645\u0639 \u0623\u0641\u0639\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629:\ngehen \u2192 ist gegangen, fahren \u2192 ist gefahren",
     "examples": [
-      {
-        "de": "Ich habe gestern viel gearbeitet.",
-        "ar": "عملت كثيراً البارحة."
-      },
-      {
-        "de": "Wir sind nach Berlin gefahren.",
-        "ar": "سافرنا إلى برلين."
-      },
-      {
-        "de": "Er hat ein Buch gelesen.",
-        "ar": "قرأ كتاباً."
-      },
-      {
-        "de": "Sie ist um 7 Uhr aufgestanden.",
-        "ar": "استيقظت الساعة 7."
-      }
+      { "de": "Ich habe gestern viel gearbeitet.", "ar": "\u0639\u0645\u0644\u062a \u0643\u062b\u064a\u0631\u0627\u064b \u0627\u0644\u0628\u0627\u0631\u062d\u0629." },
+      { "de": "Wir sind nach Berlin gefahren.", "ar": "\u0633\u0627\u0641\u0631\u0646\u0627 \u0625\u0644\u0649 \u0628\u0631\u0644\u064a\u0646." },
+      { "de": "Er hat ein Buch gelesen.", "ar": "\u0642\u0631\u0623 \u0643\u062a\u0627\u0628\u0627\u064b." },
+      { "de": "Sie ist um 7 Uhr aufgestanden.", "ar": "\u0627\u0633\u062a\u064a\u0642\u0638\u062a \u0627\u0644\u0633\u0627\u0639\u0629 7." }
     ],
     "exercises": [
-      {
-        "question": "Ich ___ gestern ins Kino gegangen.",
-        "options": [
-          "habe",
-          "bin"
-        ],
-        "correct": 1
-      },
-      {
-        "question": "Er ___ einen Brief geschrieben.",
-        "options": [
-          "hat",
-          "ist"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Wir ___ Pizza bestellt. (bestellen → bestellt)",
-        "options": [
-          "haben",
-          "sind"
-        ],
-        "correct": 0
-      }
+      { "type": "multiple-choice", "question": "Ich ___ gestern ins Kino gegangen.", "options": ["habe", "bin"], "correct": 1 },
+      { "type": "multiple-choice", "question": "Er ___ einen Brief geschrieben.", "options": ["hat", "ist"], "correct": 0 },
+      { "type": "fill-blank", "question": "Wir ___ Pizza bestellt. (bestellen \u2192 Perfekt mit haben)", "answer": "haben", "hint": "bestellen ben\u00f6tigt 'haben'" },
+      { "type": "fill-blank", "question": "machen \u2192 Partizip II = ge___t", "answer": "mach", "hint": "regelm\u00e4\u00dfiges Verb: ge + Stamm + t" }
     ]
   },
   {
     "id": 4,
-    "title": "Modalverben im Präteritum",
-    "titleAr": "الأفعال الناقصة في الماضي البسيط",
-    "explanation": "الماضي البسيط للأفعال الناقصة (Präteritum der Modalverben) يُستخدم بكثرة في الحديث والكتابة لتسهيل صياغة الماضي مقارنة بالـ Perfekt.\n\nتصريف الأفعال في الماضي البسيط:\n• müssen → musste (وجب)\n• können → konnte (استطاع)\n• wollen → wollte (أراد)\n• sollen → sollte (ينبغي)\n• dürfen → durfte (سُمح له)\n• mögen → mochte (أحبّ)\n\nتنبيه: صيغة المفرد للغائب والمتكلم متشابهة تماماً: ich musste / er musste / sie musste.",
+    "level": "B1",
+    "title": "Modalverben im Pr\u00e4teritum",
+    "titleAr": "\u0627\u0644\u0623\u0641\u0639\u0627\u0644 \u0627\u0644\u0646\u0627\u0642\u0635\u0629 \u0641\u064a \u0627\u0644\u0645\u0627\u0636\u064a \u0627\u0644\u0628\u0633\u064a\u0637",
+    "tip": "\u062a\u0630\u0643\u0651\u0631: musste / konnte / wollte / durfte / sollte \u2014 \u0643\u0644\u0647\u0627 \u0628\u062f\u0648\u0646 Umlaut \u0641\u064a \u0627\u0644\u0645\u0627\u0636\u064a!",
+    "explanation": "\u0627\u0644\u0645\u0627\u0636\u064a \u0627\u0644\u0628\u0633\u064a\u0637 \u0644\u0644\u0623\u0641\u0639\u0627\u0644 \u0627\u0644\u0646\u0627\u0642\u0635\u0629 \u064a\u064f\u0633\u062a\u062e\u062f\u0645 \u0628\u0643\u062b\u0631\u0629 \u0641\u064a \u0627\u0644\u062d\u062f\u064a\u062b \u0648\u0627\u0644\u0643\u062a\u0627\u0628\u0629.\n\n\u2022 m\u00fcssen \u2192 musste\n\u2022 k\u00f6nnen \u2192 konnte\n\u2022 wollen \u2192 wollte\n\u2022 sollen \u2192 sollte\n\u2022 d\u00fcrfen \u2192 durfte\n\u2022 m\u00f6gen \u2192 mochte\n\n\u062a\u0646\u0628\u064a\u0647: \u0635\u064a\u063a\u0629 ich/er/sie/es \u0645\u062a\u0634\u0627\u0628\u0647\u0629 \u062a\u0645\u0627\u0645\u0627\u064b.",
     "examples": [
-      {
-        "de": "Gestern musste ich sehr lange arbeiten.",
-        "ar": "البارحة وجب عليّ العمل لوقت طويل جداً."
-      },
-      {
-        "de": "Als Kind konnte ich nicht gut schwimmen.",
-        "ar": "عندما كنت طفلاً لم أكن أستطيع السباحة بشكل جيد."
-      },
-      {
-        "de": "Wir wollten ins Kino gehen, aber es gab keine Tickets.",
-        "ar": "أردنا الذهاب إلى السينما، لكن لم تكن هناك تذاكر."
-      },
-      {
-        "de": "Du solltest deinen Arzt anrufen.",
-        "ar": "كان ينبغي عليك الاتصال بطبيبك."
-      }
+      { "de": "Gestern musste ich sehr lange arbeiten.", "ar": "\u0627\u0644\u0628\u0627\u0631\u062d\u0629 \u0648\u062c\u0628 \u0639\u0644\u064a\u0651 \u0627\u0644\u0639\u0645\u0644 \u0637\u0648\u064a\u0644\u0627\u064b." },
+      { "de": "Als Kind konnte ich nicht gut schwimmen.", "ar": "\u0643\u0637\u0641\u0644 \u0644\u0645 \u0623\u0643\u0646 \u0623\u0633\u062a\u0637\u064a\u0639 \u0627\u0644\u0633\u0628\u0627\u062d\u0629." },
+      { "de": "Wir wollten ins Kino gehen, aber es gab keine Tickets.", "ar": "\u0623\u0631\u062f\u0646\u0627 \u0627\u0644\u0630\u0647\u0627\u0628 \u0644\u0644\u0633\u064a\u0646\u0645\u0627 \u0644\u0643\u0646 \u0644\u0645 \u062a\u0643\u0646 \u0647\u0646\u0627\u0643 \u062a\u0630\u0627\u0643\u0631." },
+      { "de": "Du solltest deinen Arzt anrufen.", "ar": "\u0643\u0627\u0646 \u064a\u0646\u0628\u063a\u064a \u0639\u0644\u064a\u0643 \u0627\u0644\u0627\u062a\u0635\u0627\u0644 \u0628\u0637\u0628\u064a\u0628\u0643." }
     ],
     "exercises": [
-      {
-        "question": "Gestern ___ ich zum Arzt gehen, weil ich krank war.",
-        "options": [
-          "musste",
-          "kannst",
-          "wollte"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Als wir Kinder waren, ___ wir hier nicht spielen.",
-        "options": [
-          "durften",
-          "sollen",
-          "konnte"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "___ du gestern das Auto reparieren?",
-        "options": [
-          "Konntest",
-          "Konnte",
-          "Wolltest"
-        ],
-        "correct": 0
-      }
+      { "type": "multiple-choice", "question": "Gestern ___ ich zum Arzt gehen, weil ich krank war.", "options": ["musste", "kannst", "wollte"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Als wir Kinder waren, ___ wir hier nicht spielen.", "options": ["durften", "sollen", "konnte"], "correct": 0 },
+      { "type": "fill-blank", "question": "k\u00f6nnen \u2192 Pr\u00e4teritum (ich) = ich ___", "answer": "konnte", "hint": "\u0628\u062f\u0648\u0646 Umlaut \u00f6\u2192o" },
+      { "type": "fill-blank", "question": "wollen \u2192 Pr\u00e4teritum (wir) = wir ___", "answer": "wollten", "hint": "wollte + n \u0644\u0644\u062c\u0645\u0639" }
     ]
   },
   {
     "id": 5,
-    "title": "Passiv im Präsens und Präteritum",
-    "titleAr": "المبني للمجهول",
-    "explanation": "يُركز المبني للمجهول (Passiv) على الحدث أو المفعول به بدلاً من الفاعل (من قام بالحدث).\n\nالهيكل في الحاضر (Präsens Passiv):\n• werden + Partizip II\nمثال: Das Auto wird repariert. (يتم إصلاح السيارة)\n\nالهيكل في الماضي البسيط (Präteritum Passiv):\n• wurden + Partizip II\nمثال: Das Auto wurde repariert. (تم إصلاح السيارة)\n\nإذا أردنا ذكر الفاعل الذي قام بالحدث، نستخدم حرف الجر von + Dativ:\n• Das Auto wird von dem Mechaniker repariert.",
+    "level": "B1",
+    "title": "Passiv im Pr\u00e4sens und Pr\u00e4teritum",
+    "titleAr": "\u0627\u0644\u0645\u0628\u0646\u064a \u0644\u0644\u0645\u062c\u0647\u0648\u0644",
+    "tip": "\u0627\u0644\u0633\u0624\u0627\u0644 \u0627\u0644\u0633\u062d\u0631\u064a: \u0647\u0644 \u0627\u0644\u062c\u0645\u0644\u0629 \u062a\u0631\u0643\u0651\u0632 \u0639\u0644\u0649 \u0627\u0644\u0641\u0639\u0644 \u0646\u0641\u0633\u0647 \u0623\u0645 \u0627\u0644\u0641\u0627\u0639\u0644\u061f \u0625\u0630\u0627 \u0643\u0627\u0646 \u0627\u0644\u0641\u0639\u0644 \u0647\u0648 \u0627\u0644\u0623\u0647\u0645 \u2192 Passiv!",
+    "table": {
+      "headers": ["\u0627\u0644\u0632\u0645\u0646", "\u0627\u0644\u0647\u064a\u0643\u0644", "\u0645\u062b\u0627\u0644"],
+      "rows": [
+        ["Pr\u00e4sens", "werden + Partizip II", "Das Auto wird repariert."],
+        ["Pr\u00e4teritum", "wurde + Partizip II", "Das Auto wurde repariert."],
+        ["Perfekt", "ist + Partizip II + worden", "Das Auto ist repariert worden."]
+      ]
+    },
+    "explanation": "\u064a\u064f\u0631\u0643\u0651\u0632 \u0627\u0644\u0645\u0628\u0646\u064a \u0644\u0644\u0645\u062c\u0647\u0648\u0644 \u0639\u0644\u0649 \u0627\u0644\u062d\u062f\u062b \u0628\u062f\u0644\u0627\u064b \u0645\u0646 \u0627\u0644\u0641\u0627\u0639\u0644.\n\n\u2022 Pr\u00e4sens: werden + P.II \u2192 Das Auto wird repariert.\n\u2022 Pr\u00e4teritum: wurden + P.II \u2192 Das Auto wurde repariert.\n\u2022 \u0627\u0644\u0641\u0627\u0639\u0644 \u064a\u064f\u0630\u0643\u0631 \u0627\u062e\u062a\u064a\u0627\u0631\u064a\u0627\u064b \u0628\u0640: von + Dativ",
     "examples": [
-      {
-        "de": "Das Essen wird frisch gekocht.",
-        "ar": "الطعام يتم طهيه طازجاً."
-      },
-      {
-        "de": "Die Hausaufgabe wurde gestern geschrieben.",
-        "ar": "الواجب كُتب البارحة."
-      },
-      {
-        "de": "Hier wird viel Deutsch gesprochen.",
-        "ar": "هنا يُتحدث الكثير من الألمانية."
-      },
-      {
-        "de": "Das Haus wurde im Jahr 2020 gebaut.",
-        "ar": "البيت بُني في عام 2020."
-      }
+      { "de": "Das Essen wird frisch gekocht.", "ar": "\u0627\u0644\u0637\u0639\u0627\u0645 \u064a\u062a\u0645 \u0637\u0647\u064a\u0647 \u0637\u0627\u0632\u062c\u0627\u064b." },
+      { "de": "Die Hausaufgabe wurde gestern geschrieben.", "ar": "\u0627\u0644\u0648\u0627\u062c\u0628 \u0643\u064f\u062a\u0628 \u0627\u0644\u0628\u0627\u0631\u062d\u0629." },
+      { "de": "Hier wird viel Deutsch gesprochen.", "ar": "\u0647\u0646\u0627 \u064a\u064f\u062a\u062d\u062f\u062b \u0627\u0644\u0643\u062b\u064a\u0631 \u0645\u0646 \u0627\u0644\u0623\u0644\u0645\u0627\u0646\u064a\u0629." },
+      { "de": "Das Haus wurde im Jahr 2020 gebaut.", "ar": "\u0627\u0644\u0628\u064a\u062a \u0628\u064f\u0646\u064a \u0641\u064a \u0639\u0627\u0645 2020." }
     ],
     "exercises": [
-      {
-        "question": "Das Fahrrad ___ heute repariert.",
-        "options": [
-          "wird",
-          "ist",
-          "wurde"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Die Briefe ___ gestern geschickt.",
-        "options": [
-          "wurden",
-          "werden",
-          "war"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Der Kuchen wird ___ meiner Mutter gebacken.",
-        "options": [
-          "von",
-          "durch",
-          "mit"
-        ],
-        "correct": 0
-      }
+      { "type": "multiple-choice", "question": "Das Fahrrad ___ heute repariert.", "options": ["wird", "ist", "wurde"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Die Briefe ___ gestern geschickt.", "options": ["wurden", "werden", "war"], "correct": 0 },
+      { "type": "fill-blank", "question": "Das Fenster ___ morgen geputzt. (Pr\u00e4sens Passiv)", "answer": "wird", "hint": "Pr\u00e4sens: werden + P.II" },
+      { "type": "fill-blank", "question": "Die T\u00fcr ___ von ihm ge\u00f6ffnet. (Pr\u00e4teritum Passiv)", "answer": "wurde", "hint": "Pr\u00e4teritum: wurde + P.II" }
     ]
   },
   {
     "id": 6,
-    "title": "Relativsätze im Nominativ, Akkusativ und Dativ",
-    "titleAr": "الجمل الموصولة",
-    "explanation": "تُستخدم الجمل الموصولة (Relativsätze) لوصف اسم معين بدقة وتفصيل دون تكراره، وهي جمل فرعية يذهب الفعل المصرّف فيها للنهاية.\n\nتعتمد أداة الوصل (Relativpronomen) على جنس الكلمة الموصوفة وحالتها الإعرابية:\n• Nominativ (فاعل الوصل): der (m), die (f), das (n), die (pl)\n• Akkusativ (مفعول الوصل): den (m), die (f), das (n), die (pl)\n• Dativ (مجرور الوصل): dem (m), der (f), dem (n), denen (pl)\n\nأمثلة:\n• der Mann, der hier wohnt (الرجل الذي يسكن هنا)\n• der Mann, den ich kenne (الرجل الذي أعرفه)\n• der Mann, dem ich helfe (الرجل الذي أساعده)",
+    "level": "B1",
+    "title": "Relativs\u00e4tze im Nominativ, Akkusativ und Dativ",
+    "titleAr": "\u0627\u0644\u062c\u0645\u0644 \u0627\u0644\u0645\u0648\u0635\u0648\u0644\u0629",
+    "tip": "\u0623\u062f\u0627\u0629 \u0627\u0644\u0648\u0635\u0644 \u062a\u0639\u062a\u0645\u062f \u0639\u0644\u0649 \u062c\u0646\u0633 \u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0630\u064a \u0646\u0635\u0641\u0647\u060c \u0648\u062d\u0627\u0644\u0629 \u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0645\u0648\u0635\u0648\u0644 \u062f\u0627\u062e\u0644 \u0627\u0644\u062c\u0645\u0644\u0629 \u0627\u0644\u062b\u0627\u0646\u0648\u064a\u0629.",
+    "table": {
+      "headers": ["\u0627\u0644\u062d\u0627\u0644\u0629", "m", "f", "n", "pl"],
+      "rows": [
+        ["Nominativ (\u0641\u0627\u0639\u0644)", "der", "die", "das", "die"],
+        ["Akkusativ (\u0645\u0641\u0639\u0648\u0644)", "den", "die", "das", "die"],
+        ["Dativ (\u0645\u062c\u0631\u0648\u0631)", "dem", "der", "dem", "denen"]
+      ]
+    },
+    "explanation": "\u062a\u064f\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u062c\u0645\u0644 \u0627\u0644\u0645\u0648\u0635\u0648\u0644\u0629 \u0644\u0648\u0635\u0641 \u0627\u0633\u0645 \u0645\u0639\u064a\u0646 \u0628\u062f\u0642\u0629. \u0627\u0644\u0641\u0639\u0644 \u064a\u0630\u0647\u0628 \u0644\u0644\u0646\u0647\u0627\u064a\u0629.\n\n\u2022 Nominativ: der Mann, der hier wohnt\n\u2022 Akkusativ: der Mann, den ich kenne\n\u2022 Dativ: der Mann, dem ich helfe",
     "examples": [
-      {
-        "de": "Das ist die Frau, die neben mir wohnt.",
-        "ar": "هذه هي المرأة التي تسكن بجانبي."
-      },
-      {
-        "de": "Das Buch, das ich gekauft habe, ist sehr gut.",
-        "ar": "الكتاب الذي اشتريته جيد جداً."
-      },
-      {
-        "de": "Das sind die Kinder, denen ich geholfen habe.",
-        "ar": "هؤلاء هم الأطفال الذين ساعدتهم."
-      },
-      {
-        "de": "Der Kollege, den ich gestern angerufen habe, kommt heute.",
-        "ar": "الزميل الذي اتصلت به البارحة يأتي اليوم."
-      }
+      { "de": "Das ist die Frau, die neben mir wohnt.", "ar": "\u0647\u0630\u0647 \u0647\u064a \u0627\u0644\u0645\u0631\u0623\u0629 \u0627\u0644\u062a\u064a \u062a\u0633\u0643\u0646 \u0628\u062c\u0627\u0646\u0628\u064a." },
+      { "de": "Das Buch, das ich gekauft habe, ist sehr gut.", "ar": "\u0627\u0644\u0643\u062a\u0627\u0628 \u0627\u0644\u0630\u064a \u0627\u0634\u062a\u0631\u064a\u062a\u0647 \u062c\u064a\u062f \u062c\u062f\u0627\u064b." },
+      { "de": "Das sind die Kinder, denen ich geholfen habe.", "ar": "\u0647\u0624\u0644\u0627\u0621 \u0647\u0645 \u0627\u0644\u0623\u0637\u0641\u0627\u0644 \u0627\u0644\u0630\u064a\u0646 \u0633\u0627\u0639\u062f\u062a\u0647\u0645." },
+      { "de": "Der Kollege, den ich gestern angerufen habe, kommt heute.", "ar": "\u0627\u0644\u0632\u0645\u064a\u0644 \u0627\u0644\u0630\u064a \u0627\u062a\u0635\u0644\u062a \u0628\u0647 \u0627\u0644\u0628\u0627\u0631\u062d\u0629 \u064a\u0623\u062a\u064a \u0627\u0644\u064a\u0648\u0645." }
     ],
     "exercises": [
-      {
-        "question": "Die Frau, ___ dort steht, ist meine Lehrerin.",
-        "options": [
-          "die",
-          "der",
-          "den"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Das Auto, ___ ich fahre, ist sehr schnell.",
-        "options": [
-          "das",
-          "dem",
-          "den"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Der Freund, ___ ich geholfen habe, wohnt in Berlin.",
-        "options": [
-          "dem",
-          "den",
-          "der"
-        ],
-        "correct": 0
-      }
+      { "type": "multiple-choice", "question": "Die Frau, ___ dort steht, ist meine Lehrerin.", "options": ["die", "der", "den"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Das Auto, ___ ich fahre, ist sehr schnell.", "options": ["das", "dem", "den"], "correct": 0 },
+      { "type": "fill-blank", "question": "Der Freund, ___ ich geholfen habe, wohnt in Berlin. (helfen + Dativ)", "answer": "dem", "hint": "helfen nimmt Dativ" },
+      { "type": "fill-blank", "question": "Die Kinder, ___ ich kenne, sind sehr nett. (pl. Akkusativ)", "answer": "die", "hint": "Plural Akkusativ = die" }
     ]
   },
   {
     "id": 7,
+    "level": "B1",
     "title": "Konjunktiv II (Wunsch, Bitte, Hypothese)",
-    "titleAr": "صيغة التمني والطلب المهذب والافتراض",
-    "explanation": "تُستخدم صيغة Konjunktiv II للتعبير عن الأشياء غير الحقيقية، التمنيات، الفرضيات، أو لصياغة طلب مهذب جداً.\n\nالتركيب الأكثر شيوعاً للأفعال العادية:\n• würde + Infinitiv (في نهاية الجملة)\nمثال: Ich würde reisen. (كنت سأسافر)\n\nالأفعال haben و sein والأفعال الناقصة لها أشكالها الخاصة:\n• haben → hätte (لو كان عندي)\n• sein → wäre (لو كنت)\n• können → könnte (لو كان بإمكاني)",
+    "titleAr": "\u0635\u064a\u063a\u0629 \u0627\u0644\u062a\u0645\u0646\u064a \u0648\u0627\u0644\u0637\u0644\u0628 \u0627\u0644\u0645\u0647\u0630\u0651\u0628 \u0648\u0627\u0644\u0627\u0641\u062a\u0631\u0627\u0636",
+    "tip": "\u0644\u0644\u0637\u0644\u0628 \u0627\u0644\u0645\u0647\u0630\u0651\u0628 \u0627\u0633\u062a\u062e\u062f\u0645: K\u00f6nnten Sie... / W\u00fcrden Sie... / H\u00e4tten Sie... \u2014 \u0647\u0630\u0647 \u0623\u0631\u0642\u0649 \u0645\u0646 kann/will.",
+    "table": {
+      "headers": ["\u0627\u0644\u0641\u0639\u0644", "\u0627\u0644\u0623\u0635\u0644", "Konjunktiv II"],
+      "rows": [
+        ["sein", "ist", "w\u00e4re"],
+        ["haben", "hat", "h\u00e4tte"],
+        ["k\u00f6nnen", "kann", "k\u00f6nnte"],
+        ["m\u00fcssen", "muss", "m\u00fcsste"],
+        ["\u0628\u0627\u0642\u064a \u0627\u0644\u0623\u0641\u0639\u0627\u0644", "\u2014", "w\u00fcrde + Infinitiv"]
+      ]
+    },
+    "explanation": "\u062a\u064f\u0633\u062a\u062e\u062f\u0645 Konjunktiv II \u0644\u0644\u062a\u0639\u0628\u064a\u0631 \u0639\u0646 \u0627\u0644\u062a\u0645\u0646\u064a\u0627\u062a\u060c \u0627\u0644\u0641\u0631\u0636\u064a\u0627\u062a\u060c \u0648\u0627\u0644\u0637\u0644\u0628\u0627\u062a \u0627\u0644\u0645\u0647\u0630\u0651\u0628\u0629.\n\n\u2022 w\u00fcrde + Infinitiv: Ich w\u00fcrde reisen.\n\u2022 h\u00e4tte: Wenn ich Zeit h\u00e4tte...\n\u2022 w\u00e4re: Wenn ich reich w\u00e4re...",
     "examples": [
-      {
-        "de": "Wenn ich Zeit hätte, würde ich Deutsch lernen.",
-        "ar": "لو كان لديّ وقت، لكنت تعلّمت الألمانية."
-      },
-      {
-        "de": "Wenn ich reich wäre, würde ich ein neues Auto kaufen.",
-        "ar": "لو كنت غنياً، لكنت اشتريت سيارة جديدة."
-      },
-      {
-        "de": "Könnten Sie mir bitte helfen?",
-        "ar": "هل كان بإمكانكم مساعدتي من فضلكم؟ (طلب مهذب)"
-      },
-      {
-        "de": "Ich hätte gern eine Tasse Kaffee.",
-        "ar": "أرغب بفنجان من القهوة من فضلك."
-      }
+      { "de": "Wenn ich Zeit h\u00e4tte, w\u00fcrde ich Deutsch lernen.", "ar": "\u0644\u0648 \u0643\u0627\u0646 \u0644\u062f\u064a\u0651 \u0648\u0642\u062a\u060c \u0644\u0643\u0646\u062a \u062a\u0639\u0644\u0651\u0645\u062a \u0627\u0644\u0623\u0644\u0645\u0627\u0646\u064a\u0629." },
+      { "de": "Wenn ich reich w\u00e4re, w\u00fcrde ich ein Auto kaufen.", "ar": "\u0644\u0648 \u0643\u0646\u062a \u063a\u0646\u064a\u0627\u064b\u060c \u0644\u0627\u0634\u062a\u0631\u064a\u062a \u0633\u064a\u0627\u0631\u0629." },
+      { "de": "K\u00f6nnten Sie mir bitte helfen?", "ar": "\u0647\u0644 \u0643\u0627\u0646 \u0628\u0625\u0645\u0643\u0627\u0646\u0643\u0645 \u0645\u0633\u0627\u0639\u062f\u062a\u064a\u061f (\u0637\u0644\u0628 \u0645\u0647\u0630\u0651\u0628)" },
+      { "de": "Ich h\u00e4tte gern eine Tasse Kaffee.", "ar": "\u0623\u0631\u063a\u0628 \u0628\u0641\u0646\u062c\u0627\u0646 \u0642\u0647\u0648\u0629 \u0645\u0646 \u0641\u0636\u0644\u0643." }
     ],
     "exercises": [
-      {
-        "question": "Wenn ich mehr Geld ___ , würde ich ein Haus kaufen.",
-        "options": [
-          "hätte",
-          "wäre",
-          "habe"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "___ du mir bitte das Salz geben?",
-        "options": [
-          "Würdest",
-          "Hättest",
-          "Wäre"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Ich ___ gern einen Apfelsaft.",
-        "options": [
-          "hätte",
-          "wäre",
-          "würde"
-        ],
-        "correct": 0
-      }
+      { "type": "multiple-choice", "question": "Wenn ich mehr Geld ___ , w\u00fcrde ich ein Haus kaufen.", "options": ["h\u00e4tte", "w\u00e4re", "habe"], "correct": 0 },
+      { "type": "multiple-choice", "question": "___ du mir bitte das Salz geben?", "options": ["W\u00fcrdest", "H\u00e4ttest", "W\u00e4re"], "correct": 0 },
+      { "type": "fill-blank", "question": "Ich ___ gern einen Apfelsaft. (m\u00f6chten - h\u00f6flich)", "answer": "h\u00e4tte", "hint": "h\u00e4tte gern = \u0623\u0631\u063a\u0628 \u0628\u0640 (\u0645\u0624\u062f\u0651\u0628)" },
+      { "type": "fill-blank", "question": "Wenn es nicht regnete, ___ ich spazieren gehen.", "answer": "w\u00fcrde", "hint": "w\u00fcrde + Infinitiv \u0644\u0644\u0623\u0641\u0639\u0627\u0644 \u0627\u0644\u0639\u0627\u062f\u064a\u0629" }
     ]
   },
   {
     "id": 8,
-    "title": "Präpositionen mit Akkusativ und Dativ",
-    "titleAr": "حروف الجر مع النصب والمجرور",
-    "explanation": "تنقسم حروف الجر في اللغة الألمانية إلى ثلاثة أقسام رئيسية:\n\n1. حروف جر مع Akkusativ دائماً: für, gegen, ohne, durch, um, bis.\n2. حروف جر مع Dativ دائماً: mit, nach, von, zu, aus, bei, seit, gegenüber.\n3. حروف الجر المشتركة (Wechselpräpositionen) التي تأخذ Dativ عند السكون (Wo?) و Akkusativ عند الحركة (Wohin?):\n• in, an, auf, unter, über, vor, hinter, neben, zwischen.",
+    "level": "A2",
+    "title": "Pr\u00e4positionen mit Akkusativ und Dativ",
+    "titleAr": "\u062d\u0631\u0648\u0641 \u0627\u0644\u062c\u0631 \u0645\u0639 \u0627\u0644\u0646\u0635\u0628 \u0648\u0627\u0644\u0645\u062c\u0631\u0648\u0631",
+    "tip": "\u062e\u062f\u0639\u0629 \u0644\u0644\u062d\u0641\u0638: \u0623\u0641\u0639\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629 (Wohin?) = Akkusativ\u060c \u0623\u0641\u0639\u0627\u0644 \u0627\u0644\u0633\u0643\u0648\u0646 (Wo?) = Dativ!",
+    "table": {
+      "headers": ["\u0627\u0644\u0646\u0648\u0639", "\u062d\u0631\u0648\u0641 \u0627\u0644\u062c\u0631", "\u0627\u0644\u062d\u0627\u0644\u0629"],
+      "rows": [
+        ["\u062f\u0627\u0626\u0645\u0627\u064b \u0645\u0639 Akkusativ", "f\u00fcr, gegen, ohne, durch, um, bis", "Akkusativ"],
+        ["\u062f\u0627\u0626\u0645\u0627\u064b \u0645\u0639 Dativ", "mit, nach, von, zu, aus, bei, seit, gegen\u00fcber", "Dativ"],
+        ["\u062d\u0633\u0628 \u0627\u0644\u0633\u064a\u0627\u0642 (Wechsel)", "in, an, auf, unter, \u00fcber, vor, hinter, neben, zwischen", "Wo?=Dat / Wohin?=Akk"]
+      ]
+    },
+    "explanation": "\u062d\u0631\u0648\u0641 \u0627\u0644\u062c\u0631 \u0627\u0644\u0645\u0634\u062a\u0631\u0643\u0629:\n\u2022 Dativ: Wo? (\u0623\u064a\u0646 \u0627\u0644\u0633\u0643\u0648\u0646\u061f) \u2192 Das Buch liegt auf dem Tisch.\n\u2022 Akkusativ: Wohin? (\u0625\u0644\u0649 \u0623\u064a\u0646 \u0627\u0644\u062d\u0631\u0643\u0629\u061f) \u2192 Ich lege das Buch auf den Tisch.",
     "examples": [
-      {
-        "de": "Ich fahre mit dem Auto. (Dativ)",
-        "ar": "أنا أسافر بالسيارة."
-      },
-      {
-        "de": "Das Geschenk ist für meinen Freund. (Akkusativ)",
-        "ar": "الهدية من أجل صديقي."
-      },
-      {
-        "de": "Ich lege das Buch auf den Tisch. (Wohin? -> Akkusativ)",
-        "ar": "أنا أضع الكتاب على الطاولة (حركة)."
-      },
-      {
-        "de": "Das Buch liegt auf dem Tisch. (Wo? -> Dativ)",
-        "ar": "الكتاب يقع على الطاولة (سكون)."
-      }
+      { "de": "Ich fahre mit dem Auto. (Dativ)", "ar": "\u0623\u0646\u0627 \u0623\u0633\u0627\u0641\u0631 \u0628\u0627\u0644\u0633\u064a\u0627\u0631\u0629." },
+      { "de": "Das Geschenk ist f\u00fcr meinen Freund. (Akkusativ)", "ar": "\u0627\u0644\u0647\u062f\u064a\u0629 \u0645\u0646 \u0623\u062c\u0644 \u0635\u062f\u064a\u0642\u064a." },
+      { "de": "Ich lege das Buch auf den Tisch. (Wohin? \u2192 Akkusativ)", "ar": "\u0623\u0646\u0627 \u0623\u0636\u0639 \u0627\u0644\u0643\u062a\u0627\u0628 \u0639\u0644\u0649 \u0627\u0644\u0637\u0627\u0648\u0644\u0629 (\u062d\u0631\u0643\u0629)." },
+      { "de": "Das Buch liegt auf dem Tisch. (Wo? \u2192 Dativ)", "ar": "\u0627\u0644\u0643\u062a\u0627\u0628 \u064a\u0642\u0639 \u0639\u0644\u0649 \u0627\u0644\u0637\u0627\u0648\u0644\u0629 (\u0633\u0643\u0648\u0646)." }
     ],
     "exercises": [
-      {
-        "question": "Ich gehe ohne ___ Freund ins Kino.",
-        "options": [
-          "meinen (Akk)",
-          "meinem (Dat)",
-          "mein (Nom)"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Er sitzt an ___ Tisch. (der Tisch - Wo?)",
-        "options": [
-          "dem",
-          "den",
-          "das"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Wir fahren nach ___ Schule nach Hause.",
-        "options": [
-          "der",
-          "die",
-          "den"
-        ],
-        "correct": 0
-      }
+      { "type": "multiple-choice", "question": "Ich gehe ohne ___ Freund ins Kino.", "options": ["meinen (Akk)", "meinem (Dat)", "mein (Nom)"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Er sitzt an ___ Tisch. (der Tisch - Wo?)", "options": ["dem", "den", "das"], "correct": 0 },
+      { "type": "fill-blank", "question": "Das Kind geht in ___ Schule. (die Schule - Wohin?)", "answer": "die", "hint": "Wohin? = Akkusativ. f bleibt 'die' im Akk." },
+      { "type": "fill-blank", "question": "Das Kind ist in ___ Schule. (die Schule - Wo?)", "answer": "der", "hint": "Wo? = Dativ. f \u2192 der im Dativ" }
     ]
   },
   {
     "id": 9,
-    "title": "Verben mit Präpositionen",
-    "titleAr": "الأفعال مع حروف الجر",
-    "explanation": "في اللغة الألمانية، ترتبط العديد من الأفعال بحروف جر معينة، وتأتي بعدها إما حالة النصب (Akkusativ) أو المجرور (Dativ). من المهم جداً حفظ الفعل مع حرف الجر والحالة الإعرابية الخاصة به.\n\nأشهر الأفعال وحروف الجر:\n• warten auf + Akkusativ (ينتظر)\n• sich freuen auf + Akkusativ (يتطلع بشوق لشيء في المستقبل)\n• sich freuen über + Akkusativ (يسعد بشيء حدث في الحاضر/الماضي)\n• denken an + Akkusativ (يفكر في)\n• sprechen mit + Dativ / über + Akkusativ (يتحدث مع / عن)\n• träumen von + Dativ (يحلم بـ)",
+    "level": "B1",
+    "title": "Verben mit Pr\u00e4positionen",
+    "titleAr": "\u0627\u0644\u0623\u0641\u0639\u0627\u0644 \u0645\u0639 \u062d\u0631\u0648\u0641 \u0627\u0644\u062c\u0631",
+    "tip": "\u062d\u0641\u0638\u0647\u0645 \u0643\u0648\u062d\u062f\u0629 \u0648\u0627\u062d\u062f\u0629 \u0623\u0641\u0636\u0644: 'warten auf + Akk' \u0648\u0644\u064a\u0633 'warten' + 'auf' \u0645\u0646\u0641\u0635\u0644\u064e\u064a\u0646.",
+    "explanation": "\u0623\u0634\u0647\u0631 \u0627\u0644\u0623\u0641\u0639\u0627\u0644 \u0645\u0639 \u062d\u0631\u0648\u0641 \u0627\u0644\u062c\u0631:\n\u2022 warten auf + Akkusativ\n\u2022 sich freuen auf + Akkusativ (\u0645\u0633\u062a\u0642\u0628\u0644)\n\u2022 sich freuen \u00fcber + Akkusativ (\u0645\u0627\u0636\u064a/\u062d\u0627\u0636\u0631)\n\u2022 denken an + Akkusativ\n\u2022 sprechen mit + Dativ / \u00fcber + Akkusativ\n\u2022 tr\u00e4umen von + Dativ\n\u2022 sich interessieren f\u00fcr + Akkusativ",
     "examples": [
-      {
-        "de": "Ich warte auf den Bus. (Akkusativ)",
-        "ar": "أنا أنتظر الباص."
-      },
-      {
-        "de": "Ich freue mich auf die Ferien. (Akkusativ)",
-        "ar": "أنا أتطلع بشوق إلى العطلة."
-      },
-      {
-        "de": "Wir sprechen mit dem Lehrer. (Dativ)",
-        "ar": "نحن نتحدث مع المعلم."
-      },
-      {
-        "de": "Er träumt von einem großen Haus. (Dativ)",
-        "ar": "هو يحلم ببيت كبير."
-      }
+      { "de": "Ich warte auf den Bus. (Akkusativ)", "ar": "\u0623\u0646\u0627 \u0623\u0646\u062a\u0638\u0631 \u0627\u0644\u0628\u0627\u0635." },
+      { "de": "Ich freue mich auf die Ferien. (Akkusativ)", "ar": "\u0623\u0646\u0627 \u0623\u062a\u0637\u0644\u0639 \u0628\u0634\u0648\u0642 \u0625\u0644\u0649 \u0627\u0644\u0639\u0637\u0644\u0629." },
+      { "de": "Wir sprechen mit dem Lehrer. (Dativ)", "ar": "\u0646\u062d\u0646 \u0646\u062a\u062d\u062f\u062b \u0645\u0639 \u0627\u0644\u0645\u0639\u0644\u0645." },
+      { "de": "Er tr\u00e4umt von einem gro\u00dfen Haus. (Dativ)", "ar": "\u0647\u0648 \u064a\u062d\u0644\u0645 \u0628\u0628\u064a\u062a \u0643\u0628\u064a\u0631." }
     ],
     "exercises": [
-      {
-        "question": "Ich freue mich ___ das Geschenk. (das Geschenk - Akk)",
-        "options": [
-          "über",
-          "von",
-          "an"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Träumst du ___ einem neuen Auto? (Dativ)",
-        "options": [
-          "von",
-          "auf",
-          "über"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Denkst du an ___ Vater? (der Vater - Akk)",
-        "options": [
-          "deinen",
-          "deinem",
-          "dein"
-        ],
-        "correct": 0
-      }
+      { "type": "multiple-choice", "question": "Ich freue mich ___ das Geschenk. (\u062d\u0627\u0636\u0631/\u0645\u0627\u0636\u064a)", "options": ["\u00fcber", "von", "an"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Tr\u00e4umst du ___ einem neuen Auto? (Dativ)", "options": ["von", "auf", "\u00fcber"], "correct": 0 },
+      { "type": "fill-blank", "question": "Ich interessiere mich ___ Musik.", "answer": "f\u00fcr", "hint": "sich interessieren f\u00fcr + Akkusativ" },
+      { "type": "fill-blank", "question": "Denkst du ___ deinen Vater?", "answer": "an", "hint": "denken an + Akkusativ" }
     ]
   },
   {
     "id": 10,
+    "level": "B1",
     "title": "Infinitiv mit zu",
-    "titleAr": "المصدر مع zu",
-    "explanation": "تُستخدم صيغة المصدر مع zu عندما تعتمد الجملة الثانية على فعل أو صفة أو اسم في الجملة الأولى. يأتي تركيب zu + Infinitiv دائماً في نهاية الجملة.\n\nملاحظات هامة:\n• إذا كان الفعل منفصلاً، تدخل zu بين البادئة والجذر: aufstehen → aufzustehen.\n• أفعال لا تأخذ zu أبداً: الأفعال الناقصة (Modalverben)، الفعل bleiben، gehen، sehen، hören.",
+    "titleAr": "\u0627\u0644\u0645\u0635\u062f\u0631 \u0645\u0639 zu",
+    "tip": "\u0627\u0644\u0623\u0641\u0639\u0627\u0644 \u0627\u0644\u0646\u0627\u0642\u0635\u0629 (m\u00fcssen, k\u00f6nnen, wollen...) \u0644\u0627 \u062a\u062d\u062a\u0627\u062c \u0623\u0628\u062f\u0627\u064b \u0625\u0644\u0649 'zu'!",
+    "explanation": "zu + Infinitiv \u062a\u0623\u062a\u064a \u0641\u064a \u0646\u0647\u0627\u064a\u0629 \u0627\u0644\u062c\u0645\u0644\u0629 \u0627\u0644\u062b\u0627\u0646\u0648\u064a\u0629.\n\n\u2022 \u0627\u0644\u0623\u0641\u0639\u0627\u0644 \u0627\u0644\u0645\u0646\u0641\u0635\u0644\u0629: zu \u064a\u062f\u062e\u0644 \u0628\u064a\u0646 \u0627\u0644\u0628\u0627\u062f\u0626\u0629 \u0648\u0627\u0644\u062c\u0630\u0631: aufzustehen\n\u2022 \u0628\u062f\u0648\u0646 zu: Modalverben, bleiben, gehen, sehen, h\u00f6ren",
     "examples": [
-      {
-        "de": "Es ist wichtig, jeden Tag Deutsch zu lernen.",
-        "ar": "من المهم تعلم الألمانية كل يوم."
-      },
-      {
-        "de": "Ich habe keine Lust, heute einkaufen zu gehen.",
-        "ar": "ليس لدي رغبة في الذهاب للتسوق اليوم."
-      },
-      {
-        "de": "Er versucht, heute früher aufzustehen.",
-        "ar": "هو يحاول الاستيقاظ باكراً اليوم."
-      },
-      {
-        "de": "Ich muss heute viel arbeiten. (بدون zu لأن muss فعل ناقص)",
-        "ar": "يجب أن أعمل كثيراً اليوم."
-      }
+      { "de": "Es ist wichtig, jeden Tag Deutsch zu lernen.", "ar": "\u0645\u0646 \u0627\u0644\u0645\u0647\u0645 \u062a\u0639\u0644\u0645 \u0627\u0644\u0623\u0644\u0645\u0627\u0646\u064a\u0629 \u0643\u0644 \u064a\u0648\u0645." },
+      { "de": "Ich habe keine Lust, heute einkaufen zu gehen.", "ar": "\u0644\u064a\u0633 \u0644\u062f\u064a \u0631\u063a\u0628\u0629 \u0641\u064a \u0627\u0644\u062a\u0633\u0648\u0642 \u0627\u0644\u064a\u0648\u0645." },
+      { "de": "Er versucht, heute fr\u00fcher aufzustehen.", "ar": "\u0647\u0648 \u064a\u062d\u0627\u0648\u0644 \u0627\u0644\u0627\u0633\u062a\u064a\u0642\u0627\u0638 \u0628\u0627\u0643\u0631\u0627\u064b." },
+      { "de": "Ich muss heute viel arbeiten. (\u0628\u062f\u0648\u0646 zu)", "ar": "\u064a\u062c\u0628 \u0623\u0646 \u0623\u0639\u0645\u0644 \u0643\u062b\u064a\u0631\u0627\u064b \u0627\u0644\u064a\u0648\u0645." }
     ],
     "exercises": [
-      {
-        "question": "Ich habe vor, ein neues Auto ___ kaufen.",
-        "options": [
-          "zu",
-          "um",
-          "ohne"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Es macht Spaß, Deutsch ___ sprechen.",
-        "options": [
-          "zu",
-          "für",
-          "um"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Ich kann heute nicht ___ kommen.",
-        "options": [
-          "بدون zu",
-          "zu",
-          "zu kommen"
-        ],
-        "correct": 0
-      }
+      { "type": "multiple-choice", "question": "Ich habe vor, ein neues Auto ___ kaufen.", "options": ["zu", "um", "ohne"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Es macht Spa\u00df, Deutsch ___ sprechen.", "options": ["zu", "f\u00fcr", "um"], "correct": 0 },
+      { "type": "fill-blank", "question": "aufstehen \u2192 Infinitiv mit zu = auf___stehen", "answer": "zu", "hint": "\u0627\u0644\u0623\u0641\u0639\u0627\u0644 \u0627\u0644\u0645\u0646\u0641\u0635\u0644\u0629: \u0627\u0644\u0628\u0627\u062f\u0626\u0629 + zu + \u0627\u0644\u062c\u0630\u0631" },
+      { "type": "fill-blank", "question": "Ich versuche, p\u00fcnktlich ___ kommen.", "answer": "zu", "hint": "versuchen + zu + Infinitiv" }
     ]
   },
   {
     "id": 11,
+    "level": "B1",
     "title": "Adjektivdeklination",
-    "titleAr": "تصريف الصفات قبل الأسماء",
-    "explanation": "عندما تأتي الصفة قبل الاسم مباشرة، يجب تصريف نهايتها لتطابق جنس الاسم (مذكر، مؤنث، محايد، جمع) وحالته الإعرابية ونوع الأداة المسبوقة.\n\nالقاعدة بعد أداة التنكير (ein/kein/mein) في حالة الرفع (Nominativ):\n• المذكر: -er (ein guter Mann)\n• المؤنث: -e (eine nette Frau)\n• المحايد: -es (ein schönes Kind)\n\nتنبيه: في حالة المجرور (Dativ) وحالة النصب للمذكر (Akkusativ)، تنتهي الصفة دائماً بـ -en.",
+    "titleAr": "\u062a\u0635\u0631\u064a\u0641 \u0627\u0644\u0635\u0641\u0627\u062a \u0642\u0628\u0644 \u0627\u0644\u0623\u0633\u0645\u0627\u0621",
+    "tip": "\u0628\u0639\u062f der/die/das (\u0627\u0644\u062a\u0639\u0631\u064a\u0641) \u0627\u0644\u0635\u0641\u0629 \u062f\u0627\u0626\u0645\u0627\u064b \u062a\u0646\u062a\u0647\u064a \u0628\u0640 -e \u0623\u0648 -en. \u0628\u0639\u062f ein (\u0627\u0644\u062a\u0646\u0643\u064a\u0631) \u062a\u0623\u062e\u0630 \u0627\u0644\u0635\u0641\u0629 \u0627\u0644\u0646\u0647\u0627\u064a\u0629 \u0645\u0646 \u0623\u062f\u0627\u0629 \u0627\u0644\u062a\u0639\u0631\u064a\u0641.",
+    "table": {
+      "headers": ["\u0627\u0644\u062d\u0627\u0644\u0629", "m (nach ein)", "f (nach eine)", "n (nach ein)", "pl (nach die)"],
+      "rows": [
+        ["Nominativ", "-er (guter)", "-e (nette)", "-es (sch\u00f6nes)", "-e (nette)"],
+        ["Akkusativ", "-en (guten)", "-e (nette)", "-es (sch\u00f6nes)", "-e (nette)"],
+        ["Dativ", "-en (guten)", "-en (netten)", "-en (gutem)", "-en (netten)"]
+      ]
+    },
+    "explanation": "\u0628\u0639\u062f \u0623\u062f\u0627\u0629 \u0627\u0644\u062a\u0646\u0643\u064a\u0631 (ein/kein/mein) \u0641\u064a Nominativ:\n\u2022 \u0627\u0644\u0645\u0630\u0643\u0631: -er (ein guter Mann)\n\u2022 \u0627\u0644\u0645\u0624\u0646\u062b: -e (eine nette Frau)\n\u2022 \u0627\u0644\u0645\u062d\u0627\u064a\u062f: -es (ein sch\u00f6nes Kind)\n\n\u0641\u064a Dativ \u0648Akkusativ \u0645\u0630\u0643\u0631: \u062f\u0627\u0626\u0645\u0627\u064b -en.",
     "examples": [
-      {
-        "de": "Das ist ein schöner Tag. (Nominativ Masculine)",
-        "ar": "هذا يوم جميل."
-      },
-      {
-        "de": "Ich habe eine nette Nachbarin. (Nominativ Feminine)",
-        "ar": "لدي جارة لطيفة."
-      },
-      {
-        "de": "Wir wohnen in einem kleinen Haus. (Dativ)",
-        "ar": "نحن نسكن في بيت صغير."
-      },
-      {
-        "de": "Er tr一杯 einen heißen Kaffee. (Akkusativ Masculine)",
-        "ar": "هو يشرب قهوة ساخنة."
-      }
+      { "de": "Das ist ein sch\u00f6ner Tag.", "ar": "\u0647\u0630\u0627 \u064a\u0648\u0645 \u062c\u0645\u064a\u0644." },
+      { "de": "Ich habe eine nette Nachbarin.", "ar": "\u0644\u062f\u064a \u062c\u0627\u0631\u0629 \u0644\u0637\u064a\u0641\u0629." },
+      { "de": "Wir wohnen in einem kleinen Haus.", "ar": "\u0646\u062d\u0646 \u0646\u0633\u0643\u0646 \u0641\u064a \u0628\u064a\u062a \u0635\u063a\u064a\u0631." },
+      { "de": "Er trinkt einen hei\u00dfen Kaffee.", "ar": "\u0647\u0648 \u064a\u0634\u0631\u0628 \u0642\u0647\u0648\u0629 \u0633\u0627\u062e\u0646\u0629." }
     ],
     "exercises": [
-      {
-        "question": "Ich trinke einen ___ Tee. (der Tee - Akk)",
-        "options": [
-          "heißen",
-          "heißer",
-          "heiße"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Sie ist eine ___ Frau.",
-        "options": [
-          "schöne",
-          "schöner",
-          "schönes"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Das ist ein ___ Auto. (das Auto - Nom)",
-        "options": [
-          "schnelles",
-          "schnelle",
-          "schneller"
-        ],
-        "correct": 0
-      }
+      { "type": "multiple-choice", "question": "Ich trinke einen ___ Tee. (der Tee - Akk)", "options": ["hei\u00dfen", "hei\u00dfer", "hei\u00dfe"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Sie ist eine ___ Frau.", "options": ["sch\u00f6ne", "sch\u00f6ner", "sch\u00f6nes"], "correct": 0 },
+      { "type": "fill-blank", "question": "Das ist ein ___ Auto. (schnell - das Auto - Nom)", "answer": "schnelles", "hint": "Nominativ Neutrum nach ein: -es" },
+      { "type": "fill-blank", "question": "Er wohnt in einem ___ Haus. (gro\u00df - Dativ)", "answer": "gro\u00dfen", "hint": "Dativ: immer -en" }
     ]
   },
   {
     "id": 12,
+    "level": "B1",
     "title": "Zweiteilige Konjunktionen",
-    "titleAr": "حروف العطف المزدوجة",
-    "explanation": "تُستخدم روابط العطف المزدوجة لربط الأفكار والجمل بطريقة متطورة:\n\n• nicht nur ... sondern auch: ليس فقط ... بل وأيضاً (للجمع بين أمرين إيجابيين).\n• entweder ... oder: إما ... أو (للاختيار بين أمرين).\n• sowohl ... als auch: كلاهما معاً (الجمع التام).\n• weder ... noch: لا هذا ولا ذاك (النفي المزدوج).\n• einerseits ... andererseits: من ناحية ... ومن ناحية أخرى (المقارنة والتناقض).",
+    "titleAr": "\u062d\u0631\u0648\u0641 \u0627\u0644\u0639\u0637\u0641 \u0627\u0644\u0645\u0632\u062f\u0648\u062c\u0629",
+    "tip": "nicht nur...sondern auch = \u0644\u064a\u0633 \u0641\u0642\u0637... \u0628\u0644 \u0648\u0623\u064a\u0636\u0627\u064b \u2190 \u0644\u0644\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0625\u064a\u062c\u0627\u0628\u064a\u0629. weder...noch = \u0644\u0627... \u0648\u0644\u0627 \u2190 \u0627\u0644\u0646\u0641\u064a \u0627\u0644\u0645\u0632\u062f\u0648\u062c.",
+    "explanation": "\u2022 nicht nur ... sondern auch: \u0644\u064a\u0633 \u0641\u0642\u0637 ... \u0628\u0644 \u0648\u0623\u064a\u0636\u0627\u064b\n\u2022 entweder ... oder: \u0625\u0645\u0627 ... \u0623\u0648\n\u2022 sowohl ... als auch: \u0643\u0644\u0627\u0647\u0645\u0627 \u0645\u0639\u0627\u064b\n\u2022 weder ... noch: \u0644\u0627 \u0647\u0630\u0627 \u0648\u0644\u0627 \u0630\u0627\u0643\n\u2022 einerseits ... andererseits: \u0645\u0646 \u0646\u0627\u062d\u064a\u0629 ... \u0648\u0645\u0646 \u0646\u0627\u062d\u064a\u0629 \u0623\u062e\u0631\u0649",
     "examples": [
-      {
-        "de": "Er spricht nicht nur Deutsch, sondern auch Englisch.",
-        "ar": "هو لا يتحدث الألمانية فقط، بل والإنجليزية أيضاً."
-      },
-      {
-        "de": "Entweder wir gehen ins Kino oder wir bleiben zu Hause.",
-        "ar": "إما أن نذهب إلى السينما أو نبقى في البيت."
-      },
-      {
-        "de": "Das Kleid ist weder schön noch billig.",
-        "ar": "الفستان ليس جميلاً ولا رخيصاً."
-      },
-      {
-        "de": "Ich trinke sowohl Tee als auch Kaffee.",
-        "ar": "أنا أشرب الشاي والقهوة كلاهما."
-      }
+      { "de": "Er spricht nicht nur Deutsch, sondern auch Englisch.", "ar": "\u0647\u0648 \u0644\u0627 \u064a\u062a\u062d\u062f\u062b \u0627\u0644\u0623\u0644\u0645\u0627\u0646\u064a\u0629 \u0641\u0642\u0637\u060c \u0628\u0644 \u0648\u0627\u0644\u0625\u0646\u062c\u0644\u064a\u0632\u064a\u0629 \u0623\u064a\u0636\u0627\u064b." },
+      { "de": "Entweder wir gehen ins Kino oder wir bleiben zu Hause.", "ar": "\u0625\u0645\u0627 \u0623\u0646 \u0646\u0630\u0647\u0628 \u0625\u0644\u0649 \u0627\u0644\u0633\u064a\u0646\u0645\u0627 \u0623\u0648 \u0646\u0628\u0642\u0649 \u0641\u064a \u0627\u0644\u0628\u064a\u062a." },
+      { "de": "Das Kleid ist weder sch\u00f6n noch billig.", "ar": "\u0627\u0644\u0641\u0633\u062a\u0627\u0646 \u0644\u064a\u0633 \u062c\u0645\u064a\u0644\u0627\u064b \u0648\u0644\u0627 \u0631\u062e\u064a\u0635\u0627\u064b." },
+      { "de": "Ich trinke sowohl Tee als auch Kaffee.", "ar": "\u0623\u0646\u0627 \u0623\u0634\u0631\u0628 \u0627\u0644\u0634\u0627\u064a \u0648\u0627\u0644\u0642\u0647\u0648\u0629 \u0643\u0644\u0627\u0647\u0645\u0627." }
     ],
     "exercises": [
-      {
-        "question": "Ich möchte ___ Pizza oder Pasta essen.",
-        "options": [
-          "entweder",
-          "weder",
-          "nicht nur"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Sie lernt ___ Deutsch als auch Englisch.",
-        "options": [
-          "sowohl",
-          "nicht nur",
-          "entweder"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Er ist ___ nett noch hilfsbereit.",
-        "options": [
-          "weder",
-          "entweder",
-          "sowohl"
-        ],
-        "correct": 0
-      }
+      { "type": "multiple-choice", "question": "Ich m\u00f6chte ___ Pizza oder Pasta essen.", "options": ["entweder", "weder", "nicht nur"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Sie lernt ___ Deutsch als auch Englisch.", "options": ["sowohl", "nicht nur", "entweder"], "correct": 0 },
+      { "type": "fill-blank", "question": "Er ist ___ nett. Er ist ___ hilfsbereit. (\u0644\u0627... \u0648\u0644\u0627)", "answer": "weder...noch", "hint": "\u0627\u0644\u0646\u0641\u064a \u0627\u0644\u0645\u0632\u062f\u0648\u062c" },
+      { "type": "fill-blank", "question": "Das Essen ist ___ lecker ___ billig. (\u0644\u064a\u0633 \u0641\u0642\u0637... \u0628\u0644 \u0648\u0623\u064a\u0636\u0627\u064b)", "answer": "nicht nur...sondern auch", "hint": "\u0627\u0644\u0625\u0636\u0627\u0641\u0629 \u0627\u0644\u0645\u0632\u062f\u0648\u062c\u0629 \u0627\u0644\u0625\u064a\u062c\u0627\u0628\u064a\u0629" }
     ]
   },
   {
     "id": 13,
+    "level": "B1",
     "title": "n-Deklination",
-    "titleAr": "تصريف الأسماء المذكرة بـ n",
-    "explanation": "هناك مجموعة خاصة من الأسماء المذكرة (ومعظمها ينتهي بـ -e أو يدل على أشخاص/مهن) تأخذ نهاية -n أو -en في جميع الحالات الإعرابية (Akkusativ, Dativ, Genitiv) ما عدا حالة الرفع (Nominativ).\n\nأمثلة على هذه الأسماء:\n• der Name (الاسم) → des Namens\n• der Kollege (الزميل) → den Kollegen\n• der Kunde (الزبون) → dem Kunden\n• der Junge (الولد) → den Jungen\n• der Mensch (الإنسان) → dem Menschen",
+    "titleAr": "\u062a\u0635\u0631\u064a\u0641 \u0627\u0644\u0623\u0633\u0645\u0627\u0621 \u0627\u0644\u0645\u0630\u0643\u0631\u0629 \u0628\u0640 n",
+    "tip": "\u0623\u0633\u0647\u0644 \u0637\u0631\u064a\u0642\u0629 \u0644\u0644\u062a\u0645\u064a\u064a\u0632: \u0625\u0630\u0627 \u0627\u0646\u062a\u0647\u0649 \u0627\u0644\u0627\u0633\u0645 \u0627\u0644\u0645\u0630\u0643\u0631 \u0628\u0640 -e (\u0645\u062b\u0644 Kollege, Kunde, Junge) \u2192 \u0641\u0647\u0648 \u0639\u0644\u0649 \u0627\u0644\u0623\u063a\u0644\u0628 n-Deklination!",
+    "explanation": "\u0623\u0633\u0645\u0627\u0621 \u0645\u0630\u0643\u0631\u0629 \u062e\u0627\u0635\u0629 \u062a\u0623\u062e\u0630 -n/-en \u0641\u064a \u0643\u0644 \u0627\u0644\u062d\u0627\u0644\u0627\u062a \u0645\u0627 \u0639\u062f\u0627 Nominativ:\n\u2022 der Kollege \u2192 den Kollegen\n\u2022 der Kunde \u2192 dem Kunden\n\u2022 der Junge \u2192 den Jungen\n\u2022 der Mensch \u2192 dem Menschen\n\u2022 der Name \u2192 des Namens (\u0627\u0633\u062a\u062b\u0646\u0627\u0621: +s \u0641\u064a Genitiv)",
     "examples": [
-      {
-        "de": "Der Kollege kommt heute. (Nominativ)",
-        "ar": "الزميل يأتي اليوم."
-      },
-      {
-        "de": "Ich rufe den Kollegen an. (Akkusativ)",
-        "ar": "أنا أتصل بالزميل."
-      },
-      {
-        "de": "Ich helfe dem Jungen. (Dativ)",
-        "ar": "أنا أساعد الولد."
-      },
-      {
-        "de": "Das هو اسم الرجل: der Name des Menschen. (Genitiv)",
-        "ar": "هذا هو اسم الشخص."
-      }
+      { "de": "Der Kollege kommt heute. (Nominativ)", "ar": "\u0627\u0644\u0632\u0645\u064a\u0644 \u064a\u0623\u062a\u064a \u0627\u0644\u064a\u0648\u0645." },
+      { "de": "Ich rufe den Kollegen an. (Akkusativ)", "ar": "\u0623\u0646\u0627 \u0623\u062a\u0635\u0644 \u0628\u0627\u0644\u0632\u0645\u064a\u0644." },
+      { "de": "Ich helfe dem Jungen. (Dativ)", "ar": "\u0623\u0646\u0627 \u0623\u0633\u0627\u0639\u062f \u0627\u0644\u0648\u0644\u062f." },
+      { "de": "Das ist der Name des Menschen. (Genitiv)", "ar": "\u0647\u0630\u0627 \u0647\u0648 \u0627\u0633\u0645 \u0627\u0644\u0634\u062e\u0635." }
     ],
     "exercises": [
-      {
-        "question": "Ich kenne diesen ___ . (der Kunde)",
-        "options": [
-          "Kunden",
-          "Kunde",
-          "Kundes"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Wie ist der Name des ___ ? (der Junge)",
-        "options": [
-          "Jungen",
-          "Junge",
-          "Junges"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Er spricht mit dem ___ . (der Kollege)",
-        "options": [
-          "Kollegen",
-          "Kollege",
-          "Kollegis"
-        ],
-        "correct": 0
-      }
+      { "type": "multiple-choice", "question": "Ich kenne diesen ___ . (der Kunde)", "options": ["Kunden", "Kunde", "Kundes"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Er spricht mit dem ___ . (der Kollege)", "options": ["Kollegen", "Kollege", "Kollegis"], "correct": 0 },
+      { "type": "fill-blank", "question": "Wie ist der Name des ___? (der Junge - Genitiv)", "answer": "Jungen", "hint": "n-Deklination \u0641\u064a \u0627\u0644\u0640 Genitiv \u0623\u064a\u0636\u0627\u064b" },
+      { "type": "fill-blank", "question": "Der ___ wohnt hier. (der Mensch - Nominativ)", "answer": "Mensch", "hint": "Nominativ: \u0628\u062f\u0648\u0646 -n" }
     ]
   },
   {
     "id": 14,
+    "level": "B1",
     "title": "Futur I",
-    "titleAr": "زمن المستقبل البسيط",
-    "explanation": "يُستخدم زمن المستقبل البسيط (Futur I) للتعبير عن أحداث ستقع في المستقبل، أو للتعبير عن وعود (Versprechen)، أو توقعات (Vermutung).\n\nصياغة الزمن:\n• werden (مصرّف في الموقع الثاني) + Infinitiv (فعل المصدر في نهاية الجملة).\n\nتصريف werden:\n• ich werde / du wirst / er wird / wir werden / ihr werdet / sie werden.",
+    "titleAr": "\u0632\u0645\u0646 \u0627\u0644\u0645\u0633\u062a\u0642\u0628\u0644 \u0627\u0644\u0628\u0633\u064a\u0637",
+    "tip": "\u0641\u064a \u0627\u0644\u0645\u062d\u0627\u062f\u062b\u0629 \u0627\u0644\u064a\u0648\u0645\u064a\u0629\u060c \u0646\u0633\u062a\u062e\u062f\u0645 Pr\u00e4sens \u0645\u0639 \u0638\u0631\u0641 \u0632\u0645\u0627\u0646 \u0644\u0644\u0645\u0633\u062a\u0642\u0628\u0644 \u0628\u062f\u0644\u0627\u064b \u0645\u0646 Futur I. Futur I \u064a\u064f\u0641\u064a\u062f \u0623\u0643\u062b\u0631 \u0644\u0644\u062a\u0648\u0642\u0639\u0627\u062a \u0648\u0627\u0644\u0648\u0639\u0648\u062f.",
+    "table": {
+      "headers": ["\u0627\u0644\u0636\u0645\u064a\u0631", "werden", "\u0645\u062b\u0627\u0644"],
+      "rows": [
+        ["ich", "werde", "Ich werde reisen."],
+        ["du", "wirst", "Du wirst kommen."],
+        ["er/sie/es", "wird", "Er wird arbeiten."],
+        ["wir", "werden", "Wir werden lernen."],
+        ["ihr", "werdet", "Ihr werdet sehen."],
+        ["sie/Sie", "werden", "Sie werden ankommen."]
+      ]
+    },
+    "explanation": "Futur I = werden (\u0645\u0635\u0631\u0651\u0641) + Infinitiv \u0641\u064a \u0627\u0644\u0646\u0647\u0627\u064a\u0629.\n\n\u064a\u064f\u0633\u062a\u062e\u062f\u0645 \u0644\u0644\u062a\u0639\u0628\u064a\u0631 \u0639\u0646:\n\u2022 \u0627\u0644\u0645\u0633\u062a\u0642\u0628\u0644: N\u00e4chstes Jahr werde ich reisen.\n\u2022 \u0627\u0644\u0648\u0639\u062f: Ich werde dir helfen.\n\u2022 \u0627\u0644\u062a\u0648\u0642\u0639: Morgen wird es regnen.",
     "examples": [
-      {
-        "de": "Nächstes Jahr werde ich nach Deutschland reisen.",
-        "ar": "السنة القادمة سأسافر إلى ألمانيا."
-      },
-      {
-        "de": "Morgen wird es regnen.",
-        "ar": "غداً سوف تمطر (توقع)."
-      },
-      {
-        "de": "Ich werde dir bei den Hausaufgaben helfen.",
-        "ar": "سأساعدك في الواجبات المنزلية (وعد)."
-      }
+      { "de": "N\u00e4chstes Jahr werde ich nach Deutschland reisen.", "ar": "\u0627\u0644\u0633\u0646\u0629 \u0627\u0644\u0642\u0627\u062f\u0645\u0629 \u0633\u0623\u0633\u0627\u0641\u0631 \u0625\u0644\u0649 \u0623\u0644\u0645\u0627\u0646\u064a\u0627." },
+      { "de": "Morgen wird es regnen.", "ar": "\u063a\u062f\u0627\u064b \u0633\u0648\u0641 \u062a\u0645\u0637\u0631 (\u062a\u0648\u0642\u0639)." },
+      { "de": "Ich werde dir bei den Hausaufgaben helfen.", "ar": "\u0633\u0623\u0633\u0627\u0639\u062f\u0643 \u0641\u064a \u0627\u0644\u0648\u0627\u062c\u0628\u0627\u062a (\u0648\u0639\u062f)." }
     ],
     "exercises": [
-      {
-        "question": "Morgen ___ wir eine Prüfung schreiben.",
-        "options": [
-          "werden",
-          "wirst",
-          "wird"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Er ___ nächstes Jahr eine Ausbildung machen.",
-        "options": [
-          "wird",
-          "werde",
-          "werden"
-        ],
-        "correct": 0
-      },
-      {
-        "question": "Du wirst das ___ . (schaffen)",
-        "options": [
-          "schaffen",
-          "geschafft",
-          "zu schaffen"
-        ],
-        "correct": 0
-      }
+      { "type": "multiple-choice", "question": "Morgen ___ wir eine Pr\u00fcfung schreiben.", "options": ["werden", "wirst", "wird"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Er ___ n\u00e4chstes Jahr eine Ausbildung machen.", "options": ["wird", "werde", "werden"], "correct": 0 },
+      { "type": "fill-blank", "question": "Ich ___ dir morgen anrufen. (Futur I, Versprechen)", "answer": "werde", "hint": "ich + werde" },
+      { "type": "fill-blank", "question": "Du ___ das schaffen!", "answer": "wirst", "hint": "du + wirst" }
+    ]
+  },
+  {
+    "id": 15,
+    "level": "B1",
+    "title": "Genitiv (Besitz und Zugeh\u00f6rigkeit)",
+    "titleAr": "\u062d\u0627\u0644\u0629 \u0627\u0644\u0625\u0636\u0627\u0641\u0629 (\u0627\u0644\u062c\u064a\u0646\u064a\u062a\u064a\u0641)",
+    "tip": "\u0641\u064a \u0627\u0644\u0645\u062d\u0627\u062f\u062b\u0629: 'das Auto von meinem Vater' (von + Dativ) \u0623\u0633\u0647\u0644 \u0645\u0646 'das Auto meines Vaters' (Genitiv). \u0644\u0643\u0646 \u0641\u064a \u0627\u0644\u0643\u062a\u0627\u0628\u0629 \u0627\u0633\u062a\u062e\u062f\u0645 Genitiv!",
+    "table": {
+      "headers": ["\u0627\u0644\u062d\u0627\u0644\u0629", "m", "f", "n", "pl"],
+      "rows": [
+        ["Genitiv (\u0623\u062f\u0627\u0629 \u0627\u0644\u062a\u0639\u0631\u064a\u0641)", "des", "der", "des", "der"],
+        ["Genitiv (\u0623\u062f\u0627\u0629 \u0627\u0644\u062a\u0646\u0643\u064a\u0631)", "eines / meines", "einer / meiner", "eines / meines", "meiner"],
+        ["\u0646\u0647\u0627\u064a\u0629 \u0627\u0644\u0627\u0633\u0645", "+s \u0623\u0648 +es", "\u0628\u062f\u0648\u0646 \u062a\u063a\u064a\u064a\u0631", "+s \u0623\u0648 +es", "\u0628\u062f\u0648\u0646 \u062a\u063a\u064a\u064a\u0631"]
+      ]
+    },
+    "explanation": "\u0627\u0644\u0640Genitiv \u064a\u064f\u0639\u0628\u0651\u0631 \u0639\u0646 \u0627\u0644\u0645\u0644\u0643\u064a\u0629 \u0648\u0627\u0644\u062a\u0628\u0639\u064a\u0629:\n\u2022 des Mannes, der Frau, des Kindes\n\u2022 Kurzformen: des Hauses, des Tages\n\n\u062d\u0631\u0648\u0641 \u062c\u0631 \u062a\u0623\u062e\u0630 Genitiv: wegen, trotz, w\u00e4hrend, statt, innerhalb, au\u00dferhalb",
+    "examples": [
+      { "de": "Das ist das Auto meines Vaters.", "ar": "\u0647\u0630\u0647 \u0633\u064a\u0627\u0631\u0629 \u0623\u0628\u064a." },
+      { "de": "Die Farbe des Himmels ist blau.", "ar": "\u0644\u0648\u0646 \u0627\u0644\u0633\u0645\u0627\u0621 \u0623\u0632\u0631\u0642." },
+      { "de": "Wegen des Regens bleibe ich zu Hause.", "ar": "\u0628\u0633\u0628\u0628 \u0627\u0644\u0645\u0637\u0631 \u0623\u0628\u0642\u0649 \u0641\u064a \u0627\u0644\u0628\u064a\u062a." },
+      { "de": "Das ist die Tasche meiner Mutter.", "ar": "\u0647\u0630\u0647 \u062d\u0642\u064a\u0628\u0629 \u0623\u0645\u064a." }
+    ],
+    "exercises": [
+      { "type": "multiple-choice", "question": "Das ist das Haus ___ Lehrers. (der Lehrer)", "options": ["des", "der", "dem"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Wegen ___ Unfalls gibt es Stau.", "options": ["des", "die", "dem"], "correct": 0 },
+      { "type": "fill-blank", "question": "Die Tasche ___ Frau ist gro\u00df. (die Frau - Genitiv)", "answer": "der", "hint": "f \u2192 der im Genitiv" },
+      { "type": "fill-blank", "question": "Das Ende ___ Films war traurig. (der Film - Genitiv)", "answer": "des", "hint": "m \u2192 des im Genitiv. Film + s" }
+    ]
+  },
+  {
+    "id": 16,
+    "level": "B2",
+    "title": "Plusquamperfekt",
+    "titleAr": "\u0627\u0644\u0645\u0627\u0636\u064a \u0627\u0644\u0633\u0627\u0628\u0642 \u0644\u0644\u0645\u0627\u0636\u064a",
+    "tip": "Plusquamperfekt \u064a\u0635\u0641 \u062d\u062f\u062b\u0627\u064b \u0648\u0642\u0639 \u0642\u0628\u0644 \u062d\u062f\u062b \u0622\u062e\u0631 \u0641\u064a \u0627\u0644\u0645\u0627\u0636\u064a. \u063a\u0627\u0644\u0628\u0627\u064b \u064a\u0623\u062a\u064a \u0645\u0639: bevor, nachdem, als.",
+    "table": {
+      "headers": ["\u0627\u0644\u0632\u0645\u0646", "\u0627\u0644\u0647\u064a\u0643\u0644", "\u0645\u062b\u0627\u0644"],
+      "rows": [
+        ["Plusquamperfekt", "hatte/war + Partizip II", "Ich hatte gegessen."],
+        ["Perfekt (\u0645\u0631\u062c\u0639\u064a)", "habe/bin + Partizip II", "Ich habe gegessen."],
+        ["\u0627\u0644\u0639\u0644\u0627\u0642\u0629", "Plusquamperf. = \u0623\u0642\u062f\u0645", "Nachdem ich gegessen hatte, schlief ich."]
+      ]
+    },
+    "explanation": "\u0627\u0644\u0640Plusquamperfekt = hatte/war + Partizip II\n\n\u064a\u0635\u0641 \u0627\u0644\u062d\u062f\u062b \u0627\u0644\u0630\u064a \u062d\u062f\u062b \u0623\u0648\u0644\u0627\u064b \u0642\u0628\u0644 \u062d\u062f\u062b \u0622\u062e\u0631 \u0641\u064a \u0627\u0644\u0645\u0627\u0636\u064a:\n\u2022 Nachdem er gegessen hatte, schlief er.\n\u2022 Bevor ich ankam, hatte er schon gegangen.",
+    "examples": [
+      { "de": "Nachdem ich gegessen hatte, schlief ich sofort.", "ar": "\u0628\u0639\u062f \u0623\u0646 \u0623\u0643\u0644\u062a\u060c \u0646\u0645\u062a \u0641\u0648\u0631\u0627\u064b." },
+      { "de": "Als wir ankamen, war er schon gegangen.", "ar": "\u0639\u0646\u062f\u0645\u0627 \u0648\u0635\u0644\u0646\u0627\u060c \u0643\u0627\u0646 \u0642\u062f \u0630\u0647\u0628 \u0628\u0627\u0644\u0641\u0639\u0644." },
+      { "de": "Sie hatte das Buch gelesen, bevor der Film begann.", "ar": "\u0647\u064a \u0643\u0627\u0646\u062a \u0642\u062f \u0642\u0631\u0623\u062a \u0627\u0644\u0643\u062a\u0627\u0628 \u0642\u0628\u0644 \u0623\u0646 \u064a\u0628\u062f\u0623 \u0627\u0644\u0641\u064a\u0644\u0645." },
+      { "de": "Ich war noch nie in Berlin gewesen.", "ar": "\u0644\u0645 \u0623\u0643\u0646 \u0642\u062f \u0632\u0631\u062a \u0628\u0631\u0644\u064a\u0646 \u0645\u0646 \u0642\u0628\u0644 \u0623\u0628\u062f\u0627\u064b." }
+    ],
+    "exercises": [
+      { "type": "multiple-choice", "question": "Nachdem er ___ , ging er schlafen. (essen - Plusquamperfekt)", "options": ["gegessen hatte", "gegessen hat", "a\u00df"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Als wir ankamen, ___ er schon ___. (gehen)", "options": ["war...gegangen", "ist...gegangen", "hat...gegangen"], "correct": 0 },
+      { "type": "fill-blank", "question": "gehen \u2192 Plusquamperfekt (ich) = ich ___ gegangen.", "answer": "war", "hint": "gehen ben\u00f6tigt 'sein', Plusquamperf: war" },
+      { "type": "fill-blank", "question": "kaufen \u2192 Plusquamperfekt (er) = er ___ gekauft.", "answer": "hatte", "hint": "kaufen ben\u00f6tigt 'haben', Plusquamperf: hatte" }
+    ]
+  },
+  {
+    "id": 17,
+    "level": "A2",
+    "title": "Steigerung der Adjektive (Komparativ und Superlativ)",
+    "titleAr": "\u062f\u0631\u062c\u0627\u062a \u0627\u0644\u0645\u0642\u0627\u0631\u0646\u0629 \u0644\u0644\u0635\u0641\u0627\u062a",
+    "tip": "\u0627\u0644\u0642\u0627\u0639\u062f\u0629 \u0628\u0633\u064a\u0637\u0629: Komparativ = \u0635\u0641\u0629 + er / Superlativ = am + \u0635\u0641\u0629 + sten. \u0627\u0644\u0635\u0641\u0627\u062a \u0627\u0644\u0642\u0635\u064a\u0631\u0629 \u062a\u0623\u062e\u0630 Umlaut: alt\u2192\u00e4lter\u060c gro\u00df\u2192gr\u00f6\u00dfer.",
+    "table": {
+      "headers": ["\u0627\u0644\u062f\u0631\u062c\u0629", "\u0627\u0644\u0635\u064a\u063a\u0629", "\u0645\u062b\u0627\u0644"],
+      "rows": [
+        ["Positiv (\u062f\u0631\u062c\u0629 \u0627\u0644\u0635\u0641\u0631)", "\u0635\u0641\u0629 \u0639\u0627\u062f\u064a\u0629", "schnell"],
+        ["Komparativ (\u0627\u0644\u0645\u0642\u0627\u0631\u0646\u0629)", "Adjektiv + er", "schneller als"],
+        ["Superlativ (\u0627\u0644\u0645\u0628\u0627\u0644\u063a\u0629)", "am + Adj + sten", "am schnellsten"]
+      ]
+    },
+    "explanation": "\u2022 Komparativ: schnell \u2192 schneller als, gro\u00df \u2192 gr\u00f6\u00dfer als\n\u2022 Superlativ: am schnellsten, am gr\u00f6\u00dften\n\n\u0623\u0634\u0643\u0627\u0644 \u0634\u0627\u0630\u0651\u0629 \u0645\u0647\u0645\u0629:\n\u2022 gut \u2192 besser \u2192 am besten\n\u2022 viel \u2192 mehr \u2192 am meisten\n\u2022 gern \u2192 lieber \u2192 am liebsten",
+    "examples": [
+      { "de": "Er ist gr\u00f6\u00dfer als ich.", "ar": "\u0647\u0648 \u0623\u0637\u0648\u0644 \u0645\u0646\u064a." },
+      { "de": "Dieses Restaurant ist am besten.", "ar": "\u0647\u0630\u0627 \u0627\u0644\u0645\u0637\u0639\u0645 \u0647\u0648 \u0627\u0644\u0623\u0641\u0636\u0644." },
+      { "de": "Sie l\u00e4uft schneller als ihr Bruder.", "ar": "\u0647\u064a \u062a\u0631\u0643\u0636 \u0623\u0633\u0631\u0639 \u0645\u0646 \u0623\u062e\u064a\u0647\u0627." },
+      { "de": "Ich lerne am liebsten Deutsch.", "ar": "\u0623\u0646\u0627 \u0623\u062d\u0628 \u062a\u0639\u0644\u0645 \u0627\u0644\u0623\u0644\u0645\u0627\u0646\u064a\u0629 \u0623\u0643\u062b\u0631 \u0645\u0646 \u063a\u064a\u0631\u0647\u0627." }
+    ],
+    "exercises": [
+      { "type": "multiple-choice", "question": "Er ist ___ als sein Bruder. (alt)", "options": ["\u00e4lter", "alter", "am \u00e4ltesten"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Das ist das ___ Buch, das ich je gelesen habe. (gut)", "options": ["beste", "besser", "gut"], "correct": 0 },
+      { "type": "fill-blank", "question": "viel \u2192 Komparativ = ___", "answer": "mehr", "hint": "\u0634\u0643\u0644 \u0634\u0627\u0630\u0651" },
+      { "type": "fill-blank", "question": "gut \u2192 Superlativ = am ___", "answer": "besten", "hint": "\u0634\u0643\u0644 \u0634\u0627\u0630\u0651: gut \u2192 besser \u2192 am besten" }
+    ]
+  },
+  {
+    "id": 18,
+    "level": "B2",
+    "title": "Konjunktiv I (indirekte Rede)",
+    "titleAr": "\u0627\u0644\u062e\u0637\u0627\u0628 \u063a\u064a\u0631 \u0627\u0644\u0645\u0628\u0627\u0634\u0631",
+    "tip": "Konjunktiv I \u064a\u064f\u0633\u062a\u062e\u062f\u0645 \u0641\u064a \u0627\u0644\u0623\u062e\u0628\u0627\u0631 \u0648\u0627\u0644\u0635\u062d\u0627\u0641\u0629 \u0648\u0627\u0644\u0643\u062a\u0627\u0628\u0629 \u0627\u0644\u0631\u0633\u0645\u064a\u0629 \u0644\u0646\u0642\u0644 \u0643\u0644\u0627\u0645 \u0634\u062e\u0635 \u0622\u062e\u0631 \u062f\u0648\u0646 \u062a\u0623\u0643\u064a\u062f \u0635\u062d\u062a\u0647.",
+    "table": {
+      "headers": ["\u0627\u0644\u0636\u0645\u064a\u0631", "sein (Konj. I)", "haben (Konj. I)", "kommen (Konj. I)"],
+      "rows": [
+        ["ich", "sei", "habe", "komme"],
+        ["du", "seiest", "habest", "kommest"],
+        ["er/sie/es", "sei \u2746", "habe \u2746", "komme \u2746"],
+        ["wir", "seien", "haben*", "kommen*"],
+        ["sie/Sie", "seien", "haben*", "kommen*"]
+      ]
+    },
+    "explanation": "\u0627\u0644\u062e\u0637\u0627\u0628 \u063a\u064a\u0631 \u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u064a\u0646\u0642\u0644 \u0643\u0644\u0627\u0645 \u0634\u062e\u0635 \u0622\u062e\u0631:\n\u2022 Direkt: Er sagt: 'Ich bin krank.'\n\u2022 Indirekt: Er sagt, er sei krank.\n\n* \u0625\u0630\u0627 \u0643\u0627\u0646 Konjunktiv I \u0645\u0634\u0627\u0628\u0647\u0627\u064b \u0644\u0644\u0640 Indikativ \u0646\u0633\u062a\u062e\u062f\u0645 Konjunktiv II",
+    "examples": [
+      { "de": "Er sagt, er sei sehr m\u00fcde.", "ar": "\u064a\u0642\u0648\u0644 \u0623\u0646\u0647 \u0645\u062a\u0639\u0628 \u062c\u062f\u0627\u064b." },
+      { "de": "Sie berichtet, das Wetter sei sch\u00f6n.", "ar": "\u062a\u064f\u0628\u0644\u0651\u063a \u0623\u0646 \u0627\u0644\u0637\u0642\u0633 \u062c\u0645\u064a\u0644." },
+      { "de": "Der Politiker erkl\u00e4rte, er habe nichts gewusst.", "ar": "\u0623\u0639\u0644\u0646 \u0627\u0644\u0633\u064a\u0627\u0633\u064a \u0623\u0646\u0647 \u0644\u0645 \u064a\u0643\u0646 \u064a\u0639\u0644\u0645 \u0634\u064a\u0626\u0627\u064b." },
+      { "de": "Die Zeitung schreibt, die Preise seien gestiegen.", "ar": "\u062a\u0643\u062a\u0628 \u0627\u0644\u0635\u062d\u064a\u0641\u0629 \u0623\u0646 \u0627\u0644\u0623\u0633\u0639\u0627\u0631 \u0627\u0631\u062a\u0641\u0639\u062a." }
+    ],
+    "exercises": [
+      { "type": "multiple-choice", "question": "Er sagt, er ___ krank. (sein - Konj. I)", "options": ["sei", "ist", "w\u00e4re"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Sie berichtet, die Preise ___ gestiegen.", "options": ["seien", "sind", "w\u00e4ren"], "correct": 0 },
+      { "type": "fill-blank", "question": "Direkt: 'Ich habe keine Zeit.' \u2192 Indirekt: Er sagt, er ___ keine Zeit.", "answer": "habe", "hint": "haben \u2192 Konjunktiv I: habe" },
+      { "type": "word-order", "question": "\u0631\u062a\u0651\u0628: \u0627\u0644\u062e\u0637\u0627\u0628 \u063a\u064a\u0631 \u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0644\u0640 'Ich bin gesund.'", "words": ["er", "sei", "sagt,", "gesund", "Er"], "answer": "Er sagt, er sei gesund" }
+    ]
+  },
+  {
+    "id": 19,
+    "level": "B2",
+    "title": "Partizip I als Attribut",
+    "titleAr": "\u0627\u0633\u0645 \u0627\u0644\u0641\u0627\u0639\u0644 \u0643\u0635\u0641\u0629 (Partizip I)",
+    "tip": "Partizip I = Infinitiv + d + \u0635\u0641\u0629 \u0646\u0647\u0627\u064a\u0629. \u064a\u062f\u0644 \u0639\u0644\u0649 \u062d\u062f\u062b \u0645\u0633\u062a\u0645\u0631 \u0641\u064a \u0648\u0642\u062a \u0627\u0644\u062c\u0645\u0644\u0629 \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629.",
+    "explanation": "\u0635\u064a\u0627\u063a\u0629 Partizip I: Infinitiv + d\n\u2022 lachen \u2192 lachend (\u064a\u0636\u062d\u0643 / \u0636\u0627\u062d\u0643)\n\u2022 schlafen \u2192 schlafend (\u0646\u0627\u0626\u0645)\n\n\u0643\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0643\u0635\u0641\u0629 \u0642\u0628\u0644 \u0627\u0644\u0627\u0633\u0645 \u064a\u0623\u062e\u0630 \u0646\u0647\u0627\u064a\u0627\u062a \u0627\u0644\u0635\u0641\u0629:\n\u2022 das schlafende Kind (\u0627\u0644\u0637\u0641\u0644 \u0627\u0644\u0646\u0627\u0626\u0645)\n\u2022 ein lachender Mann (\u0631\u062c\u0644 \u064a\u0636\u062d\u0643)",
+    "examples": [
+      { "de": "Das schlafende Kind ist s\u00fc\u00df.", "ar": "\u0627\u0644\u0637\u0641\u0644 \u0627\u0644\u0646\u0627\u0626\u0645 \u0644\u0637\u064a\u0641." },
+      { "de": "Der weinende Mann sitzt auf der Bank.", "ar": "\u0627\u0644\u0631\u062c\u0644 \u0627\u0644\u0628\u0627\u0643\u064a \u064a\u062c\u0644\u0633 \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f." },
+      { "de": "Ein bellender Hund bei\u00dft nicht.", "ar": "\u0627\u0644\u0643\u0644\u0628 \u0627\u0644\u0646\u0627\u0628\u062d \u0644\u0627 \u064a\u0639\u0636. (\u0645\u062b\u0644 \u0634\u0639\u0628\u064a)" },
+      { "de": "Flie\u00dfendes Wasser ist sauber.", "ar": "\u0627\u0644\u0645\u0627\u0621 \u0627\u0644\u062c\u0627\u0631\u064a \u0646\u0638\u064a\u0641." }
+    ],
+    "exercises": [
+      { "type": "multiple-choice", "question": "Das ___ Kind braucht Ruhe. (schlafen \u2192 Partizip I)", "options": ["schlafende", "geschlafene", "schl\u00e4fende"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Ein ___ Hund macht mir Angst. (bellen \u2192 Partizip I)", "options": ["bellender", "gebellter", "bellend"], "correct": 0 },
+      { "type": "fill-blank", "question": "lachen \u2192 Partizip I = lach___", "answer": "end", "hint": "Infinitiv + d = lachend" },
+      { "type": "fill-blank", "question": "Das sing___ M\u00e4dchen ist meine Tochter. (singen - das M\u00e4dchen, Nom)", "answer": "ende", "hint": "singend + Adjektivendung: -e f\u00fcr n (das)" }
+    ]
+  },
+  {
+    "id": 20,
+    "level": "B1",
+    "title": "um...zu / damit (Finalsatz)",
+    "titleAr": "\u0627\u0644\u062a\u0639\u0628\u064a\u0631 \u0639\u0646 \u0627\u0644\u063a\u0631\u0636 \u0648\u0627\u0644\u0647\u062f\u0641",
+    "tip": "\u0627\u0644\u0642\u0627\u0639\u062f\u0629 \u0627\u0644\u0630\u0647\u0628\u064a\u0629: \u0641\u0627\u0639\u0644 \u0648\u0627\u062d\u062f \u2192 um...zu. \u0641\u0627\u0639\u0644\u0627\u0646 \u0645\u062e\u062a\u0644\u0641\u0627\u0646 \u2192 damit!",
+    "explanation": "\u0644\u0644\u062a\u0639\u0628\u064a\u0631 \u0639\u0646 \u0627\u0644\u063a\u0631\u0636 \u0623\u0648 \u0627\u0644\u0647\u062f\u0641:\n\n\u2022 um...zu + Infinitiv: \u0641\u0627\u0639\u0644 \u0648\u0627\u062d\u062f\n  Ich lerne Deutsch, um in Deutschland zu arbeiten.\n\n\u2022 damit + Nebensatz: \u0641\u0627\u0639\u0644\u0627\u0646 \u0645\u062e\u062a\u0644\u0641\u0627\u0646\n  Ich erkl\u00e4re es langsam, damit du es verstehst.",
+    "examples": [
+      { "de": "Ich lerne Deutsch, um in Deutschland zu arbeiten.", "ar": "\u0623\u062a\u0639\u0644\u0645 \u0627\u0644\u0623\u0644\u0645\u0627\u0646\u064a\u0629 \u0644\u0643\u064a \u0623\u0639\u0645\u0644 \u0641\u064a \u0623\u0644\u0645\u0627\u0646\u064a\u0627." },
+      { "de": "Er spart Geld, um ein Auto zu kaufen.", "ar": "\u064a\u0648\u0641\u0631 \u0627\u0644\u0645\u0627\u0644 \u0644\u0643\u064a \u064a\u0634\u062a\u0631\u064a \u0633\u064a\u0627\u0631\u0629." },
+      { "de": "Ich spreche laut, damit alle mich h\u00f6ren k\u00f6nnen.", "ar": "\u0623\u062a\u062d\u062f\u062b \u0628\u0635\u0648\u062a \u0639\u0627\u0644\u064d \u0644\u0643\u064a \u064a\u0633\u0645\u0639\u0646\u064a \u0627\u0644\u062c\u0645\u064a\u0639." },
+      { "de": "Sie schreibt alles auf, damit sie es nicht vergisst.", "ar": "\u0647\u064a \u062a\u0643\u062a\u0628 \u0643\u0644 \u0634\u064a\u0621 \u0644\u0643\u064a \u0644\u0627 \u062a\u0646\u0633\u0627\u0647." }
+    ],
+    "exercises": [
+      { "type": "multiple-choice", "question": "Ich gehe fr\u00fch ins Bett, ___ ich morgen ausgeschlafen bin.", "options": ["damit", "um...zu", "weil"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Er lernt viel, ___ die Pr\u00fcfung zu bestehen.", "options": ["um", "damit", "weil"], "correct": 0 },
+      { "type": "fill-blank", "question": "Sie joggt jeden Tag, ___ fit ___ bleiben. (\u0641\u0627\u0639\u0644 \u0648\u0627\u062d\u062f)", "answer": "um...zu", "hint": "\u0641\u0627\u0639\u0644 \u0648\u0627\u062d\u062f \u2192 um...zu" },
+      { "type": "word-order", "question": "\u0631\u062a\u0651\u0628 \u0627\u0644\u0643\u0644\u0645\u0627\u062a:", "words": ["arbeiten.", "Ich", "lerne", "um", "Deutsch,", "zu", "in", "Deutschland"], "answer": "Ich lerne Deutsch, um in Deutschland zu arbeiten." }
+    ]
+  },
+  {
+    "id": 21,
+    "level": "B1",
+    "title": "Temporals\u00e4tze: als, wenn, w\u00e4hrend, bevor, nachdem",
+    "titleAr": "\u0627\u0644\u062c\u0645\u0644 \u0627\u0644\u0632\u0645\u0646\u064a\u0629",
+    "tip": "als = \u0645\u0627\u0636\u064a \u0645\u0631\u0629 \u0648\u0627\u062d\u062f\u0629. wenn = \u0645\u0627\u0636\u064a \u0645\u062a\u0643\u0631\u0631 \u0623\u0648 \u0645\u0633\u062a\u0642\u0628\u0644 \u0623\u0648 \u062d\u0627\u0636\u0631. \u0648\u0627\u0644\u0641\u0639\u0644 \u062f\u0627\u0626\u0645\u0627\u064b \u0641\u064a \u0646\u0647\u0627\u064a\u0629 \u0627\u0644\u062c\u0645\u0644\u0629 \u0627\u0644\u062b\u0627\u0646\u0648\u064a\u0629!",
+    "table": {
+      "headers": ["\u0627\u0644\u0631\u0627\u0628\u0637", "\u0627\u0644\u0627\u0633\u062a\u062e\u062f\u0627\u0645", "\u0645\u062b\u0627\u0644"],
+      "rows": [
+        ["als", "\u0645\u0627\u0636\u064a \u0645\u0631\u0629 \u0648\u0627\u062d\u062f\u0629", "Als ich jung war, spielte ich Fu\u00dfball."],
+        ["wenn", "\u0645\u0627\u0636\u064a \u0645\u062a\u0643\u0631\u0631 / \u062d\u0627\u0636\u0631 / \u0645\u0633\u062a\u0642\u0628\u0644", "Wenn ich Zeit habe, lese ich."],
+        ["w\u00e4hrend", "\u0628\u064a\u0646\u0645\u0627 / \u0641\u064a \u0646\u0641\u0633 \u0627\u0644\u0648\u0642\u062a", "W\u00e4hrend er schl\u00e4ft, lerne ich."],
+        ["bevor", "\u0642\u0628\u0644 \u0623\u0646", "Bevor ich esse, wasche ich die H\u00e4nde."],
+        ["nachdem", "\u0628\u0639\u062f \u0623\u0646 (+ Plusquamperfekt)", "Nachdem ich gegessen hatte, schlief ich."]
+      ]
+    },
+    "explanation": "\u0643\u0644 \u0647\u0630\u0647 \u0627\u0644\u0631\u0648\u0627\u0628\u0637 \u062a\u064f\u0643\u0648\u0651\u0646 \u062c\u0645\u0644 \u062b\u0627\u0646\u0648\u064a\u0629\u060c \u0627\u0644\u0641\u0639\u0644 \u0641\u064a \u0627\u0644\u0646\u0647\u0627\u064a\u0629.\n\n\u0642\u0627\u0639\u062f\u0629 \u0645\u0647\u0645\u0629 \u062c\u062f\u0627\u064b \u0645\u0639 'nachdem':\n\u0627\u0633\u062a\u062e\u062f\u0645 Plusquamperfekt \u0641\u064a \u062c\u0645\u0644\u0629 nachdem \u0625\u0630\u0627 \u0643\u0627\u0646 \u0627\u0644\u062d\u062f\u062b \u0627\u0644\u0631\u0626\u064a\u0633\u064a \u0641\u064a \u0627\u0644\u0645\u0627\u0636\u064a.",
+    "examples": [
+      { "de": "Als ich Kind war, wohnte ich in Syrien.", "ar": "\u0639\u0646\u062f\u0645\u0627 \u0643\u0646\u062a \u0637\u0641\u0644\u0627\u064b\u060c \u0633\u0643\u0646\u062a \u0641\u064a \u0633\u0648\u0631\u064a\u0627." },
+      { "de": "Wenn es regnet, bleibe ich zu Hause.", "ar": "\u0639\u0646\u062f\u0645\u0627 \u062a\u0645\u0637\u0631\u060c \u0623\u0628\u0642\u0649 \u0641\u064a \u0627\u0644\u0628\u064a\u062a." },
+      { "de": "W\u00e4hrend ich lerne, h\u00f6re ich Musik.", "ar": "\u0628\u064a\u0646\u0645\u0627 \u0623\u062a\u0639\u0644\u0645\u060c \u0623\u0633\u0645\u0639 \u0645\u0648\u0633\u064a\u0642\u0649." },
+      { "de": "Nachdem er gegessen hatte, schlief er sofort.", "ar": "\u0628\u0639\u062f \u0623\u0646 \u0623\u0643\u0644\u060c \u0646\u0627\u0645 \u0641\u0648\u0631\u0627\u064b." }
+    ],
+    "exercises": [
+      { "type": "multiple-choice", "question": "___ ich klein war, spielte ich immer drau\u00dfen. (\u0645\u0627\u0636\u064a \u0645\u0631\u0629 \u0648\u0627\u062d\u062f\u0629)", "options": ["Als", "Wenn", "W\u00e4hrend"], "correct": 0 },
+      { "type": "multiple-choice", "question": "___ ich nach Hause komme, koche ich immer. (\u062d\u0627\u0636\u0631/\u0645\u062a\u0643\u0631\u0631)", "options": ["Wenn", "Als", "Nachdem"], "correct": 0 },
+      { "type": "fill-blank", "question": "___ er die Pr\u00fcfung bestanden hatte, feierte er. (\u0628\u0639\u062f \u0623\u0646)", "answer": "Nachdem", "hint": "\u0628\u0639\u062f \u0623\u0646 + Plusquamperfekt = Nachdem" },
+      { "type": "fill-blank", "question": "Ich esse Fr\u00fchst\u00fcck, ___ ich aus dem Haus gehe. (\u0642\u0628\u0644 \u0623\u0646)", "answer": "bevor", "hint": "\u0642\u0628\u0644 \u0623\u0646 = bevor" }
+    ]
+  },
+  {
+    "id": 22,
+    "level": "B2",
+    "title": "Nominalstil",
+    "titleAr": "\u0627\u0644\u0623\u0633\u0644\u0648\u0628 \u0627\u0644\u0627\u0633\u0645\u064a (\u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u0623\u0641\u0639\u0627\u0644 \u0625\u0644\u0649 \u0623\u0633\u0645\u0627\u0621)",
+    "tip": "\u0627\u0644\u0623\u0633\u0644\u0648\u0628 \u0627\u0644\u0627\u0633\u0645\u064a \u0634\u0627\u0626\u0639 \u062c\u062f\u0627\u064b \u0641\u064a \u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0631\u0633\u0645\u064a\u0629 \u0648\u0627\u0644\u0625\u062f\u0627\u0631\u064a\u0629 \u0648\u0627\u0644\u0623\u0643\u0627\u062f\u064a\u0645\u064a\u0629 \u0641\u064a \u0623\u0644\u0645\u0627\u0646\u064a\u0627. \u062a\u0639\u0644\u0651\u0645\u0647 \u064a\u062c\u0639\u0644 \u0643\u062a\u0627\u0628\u062a\u0643 \u0623\u0643\u062b\u0631 \u0627\u062d\u062a\u0631\u0627\u0641\u064a\u0629!",
+    "explanation": "\u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u0641\u0639\u0644 \u0625\u0644\u0649 \u0627\u0633\u0645 (Nominalisierung):\n\u2022 helfen \u2192 die Hilfe\n\u2022 bezahlen \u2192 die Bezahlung\n\u2022 fahren \u2192 die Fahrt\n\u2022 entscheiden \u2192 die Entscheidung\n\n\u062a\u062d\u0648\u064a\u0644 \u0627\u0644\u0627\u0633\u0645 \u0625\u0644\u0649 \u0641\u0639\u0644 (Verbalisierung):\n\u2022 die Kontrolle \u2192 kontrollieren\n\u2022 die Analyse \u2192 analysieren",
+    "examples": [
+      { "de": "Statt zu rauchen, sollte er Sport treiben.", "ar": "\u0628\u062f\u0644\u0627\u064b \u0645\u0646 \u0627\u0644\u062a\u062f\u062e\u064a\u0646\u060c \u064a\u0646\u0628\u063a\u064a \u0644\u0647 \u0645\u0645\u0627\u0631\u0633\u0629 \u0627\u0644\u0631\u064a\u0627\u0636\u0629." },
+      { "de": "Die Entscheidung des Ministers war umstritten.", "ar": "\u0642\u0631\u0627\u0631 \u0627\u0644\u0648\u0632\u064a\u0631 \u0643\u0627\u0646 \u0645\u062b\u064a\u0631\u0627\u064b \u0644\u0644\u062c\u062f\u0644." },
+      { "de": "Bei der Bezahlung bitte Karte benutzen.", "ar": "\u0639\u0646\u062f \u0627\u0644\u062f\u0641\u0639\u060c \u064a\u0631\u062c\u0649 \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0628\u0637\u0627\u0642\u0629." },
+      { "de": "Die \u00dcberpr\u00fcfung der Dokumente dauert 2 Tage.", "ar": "\u0645\u0631\u0627\u062c\u0639\u0629 \u0627\u0644\u0648\u062b\u0627\u0626\u0642 \u062a\u0633\u062a\u063a\u0631\u0642 \u064a\u0648\u0645\u064a\u0646." }
+    ],
+    "exercises": [
+      { "type": "multiple-choice", "question": "entscheiden \u2192 Nomen = die ___", "options": ["Entscheidung", "Entscheid", "Entscheiderei"], "correct": 0 },
+      { "type": "multiple-choice", "question": "bezahlen \u2192 Nomen = die ___", "options": ["Bezahlung", "Bezahl", "Zahlung"], "correct": 0 },
+      { "type": "fill-blank", "question": "fahren \u2192 Nomen = die ___", "answer": "Fahrt", "hint": "\u0628\u0639\u0636 \u0627\u0644\u0623\u0641\u0639\u0627\u0644 \u0644\u0647\u0627 \u0623\u0633\u0645\u0627\u0621 \u063a\u064a\u0631 \u0645\u0646\u062a\u0638\u0645\u0629" },
+      { "type": "fill-blank", "question": "die Analyse \u2192 Verb = ___ieren", "answer": "analys", "hint": "analyse \u2192 analysieren" }
+    ]
+  },
+  {
+    "id": 23,
+    "level": "B1",
+    "title": "Konzezivsätze: obwohl, trotzdem",
+    "titleAr": "\u062c\u0645\u0644 \u0627\u0644\u062a\u0646\u0627\u0632\u0644 \u0648\u0627\u0644\u062a\u0646\u0627\u0642\u0636",
+    "tip": "\u0627\u0644\u0641\u0631\u0642 \u0627\u0644\u0631\u0626\u064a\u0633\u064a: obwohl \u062a\u064f\u0643\u0648\u0651\u0646 \u062c\u0645\u0644\u0629 \u062b\u0627\u0646\u0648\u064a\u0629 (\u0641\u0639\u0644 \u0641\u064a \u0627\u0644\u0646\u0647\u0627\u064a\u0629). trotzdem \u062a\u0628\u062f\u0623 \u062c\u0645\u0644\u0629 \u0631\u0626\u064a\u0633\u064a\u0629 \u062c\u062f\u064a\u062f\u0629 (\u0641\u0639\u0644 \u0641\u064a \u0627\u0644\u062b\u0627\u0646\u064a).",
+    "table": {
+      "headers": ["\u0627\u0644\u0623\u062f\u0627\u0629", "\u0627\u0644\u062c\u0645\u0644\u0629 \u0628\u0639\u062f\u0647\u0627", "\u0645\u0643\u0627\u0646 \u0627\u0644\u0641\u0639\u0644"],
+      "rows": [
+        ["obwohl", "Nebensatz", "\u0641\u064a \u0627\u0644\u0646\u0647\u0627\u064a\u0629"],
+        ["trotzdem", "Hauptsatz", "\u0641\u064a \u0627\u0644\u0645\u0643\u0627\u0646 \u0627\u0644\u062b\u0627\u0646\u064a"],
+        ["obgleich / obschon", "Nebensatz (\u0631\u0633\u0645\u064a)", "\u0641\u064a \u0627\u0644\u0646\u0647\u0627\u064a\u0629"],
+        ["dennoch", "Hauptsatz (\u0631\u0633\u0645\u064a)", "\u0641\u064a \u0627\u0644\u0645\u0643\u0627\u0646 \u0627\u0644\u062b\u0627\u0646\u064a"]
+      ]
+    },
+    "explanation": "\u0644\u0644\u062a\u0639\u0628\u064a\u0631 \u0639\u0646 \u062a\u0646\u0627\u0642\u0636 \u0623\u0648 \u0627\u0633\u062a\u062b\u0646\u0627\u0621:\n\n\u2022 obwohl (\u0628\u0627\u0644\u0631\u063a\u0645 \u0645\u0646):\n  Obwohl es regnet, geht er spazieren.\n\n\u2022 trotzdem (\u0628\u0627\u0644\u0631\u063a\u0645 \u0645\u0646 \u0630\u0644\u0643 - \u062c\u0645\u0644\u0629 \u0645\u0633\u062a\u0642\u0644\u0629):\n  Es regnet. Trotzdem geht er spazieren.",
+    "examples": [
+      { "de": "Obwohl er m\u00fcde ist, arbeitet er weiter.", "ar": "\u0628\u0627\u0644\u0631\u063a\u0645 \u0645\u0646 \u062a\u0639\u0628\u0647\u060c \u064a\u062a\u0627\u0628\u0639 \u0627\u0644\u0639\u0645\u0644." },
+      { "de": "Es ist kalt. Trotzdem gehe ich schwimmen.", "ar": "\u0627\u0644\u062c\u0648 \u0628\u0627\u0631\u062f. \u0628\u0627\u0644\u0631\u063a\u0645 \u0645\u0646 \u0630\u0644\u0643 \u0623\u0630\u0647\u0628 \u0644\u0644\u0633\u0628\u0627\u062d\u0629." },
+      { "de": "Obwohl ich kein Geld habe, kaufe ich das Buch.", "ar": "\u0628\u0627\u0644\u0631\u063a\u0645 \u0645\u0646 \u0623\u0646\u0647 \u0644\u0627 \u0645\u0627\u0644 \u0644\u062f\u064a\u0651\u060c \u0623\u0634\u062a\u0631\u064a \u0627\u0644\u0643\u062a\u0627\u0628." },
+      { "de": "Er isst viel, trotzdem nimmt er nicht zu.", "ar": "\u064a\u0623\u0643\u0644 \u0643\u062b\u064a\u0631\u0627\u064b\u060c \u0628\u0627\u0644\u0631\u063a\u0645 \u0645\u0646 \u0630\u0644\u0643 \u0644\u0627 \u064a\u0632\u064a\u062f \u0648\u0632\u0646\u0647." }
+    ],
+    "exercises": [
+      { "type": "multiple-choice", "question": "___ sie krank ist, geht sie zur Arbeit.", "options": ["Obwohl", "Trotzdem", "Deshalb"], "correct": 0 },
+      { "type": "multiple-choice", "question": "Er hat nicht ge\u00fcbt. ___ hat er die Pr\u00fcfung bestanden.", "options": ["Trotzdem", "Obwohl", "Weil"], "correct": 0 },
+      { "type": "fill-blank", "question": "___ es sp\u00e4t ist, sehen wir noch einen Film. (\u0631\u063a\u0645 \u0623\u0646 - Nebensatz)", "answer": "Obwohl", "hint": "Nebensatz: Obwohl (\u0641\u0639\u0644 \u0641\u064a \u0627\u0644\u0646\u0647\u0627\u064a\u0629)" },
+      { "type": "fill-blank", "question": "Er ist erkältet. ___ kommt er heute Abend. (\u0631\u063a\u0645 \u0630\u0644\u0643)", "answer": "Trotzdem", "hint": "Hauptsatz \u062c\u062f\u064a\u062f: Trotzdem + \u0641\u0639\u0644 \u0641\u064a \u0627\u0644\u0645\u0643\u0627\u0646 \u0627\u0644\u062b\u0627\u0646\u064a" }
+    ]
+  },
+  {
+    "id": 24,
+    "level": "B1",
+    "title": "Pr\u00e4positionen mit Genitiv",
+    "titleAr": "\u062d\u0631\u0648\u0641 \u0627\u0644\u062c\u0631 \u0645\u0639 \u062d\u0627\u0644\u0629 \u0627\u0644\u0625\u0636\u0627\u0641\u0629",
+    "tip": "\u0647\u0630\u0647 \u0627\u0644\u062d\u0631\u0648\u0641 \u0623\u0643\u062b\u0631 \u0634\u064a\u0648\u0639\u0627\u064b \u0641\u064a \u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0631\u0633\u0645\u064a\u0629 \u0648\u0627\u0644\u0643\u062a\u0627\u0628\u064a\u0629. \u0641\u064a \u0627\u0644\u0645\u062d\u0627\u062f\u062b\u0629 \u064a\u064f\u0633\u062a\u0628\u062f\u0644 'wegen + Genitiv' \u0628\u0640 'wegen + Dativ'.",
+    "explanation": "\u0623\u0647\u0645 \u062d\u0631\u0648\u0641 \u0627\u0644\u062c\u0631 \u0645\u0639 Genitiv:\n\u2022 wegen = \u0628\u0633\u0628\u0628 \u2192 wegen des Regens\n\u2022 trotz = \u0628\u0627\u0644\u0631\u063a\u0645 \u0645\u0646 \u2192 trotz des Regens\n\u2022 w\u00e4hrend = \u062e\u0644\u0627\u0644 \u2192 w\u00e4hrend des Unterrichts\n\u2022 innerhalb = \u062f\u0627\u062e\u0644 / \u062e\u0644\u0627\u0644 \u2192 innerhalb eines Jahres\n\u2022 au\u00dferhalb = \u062e\u0627\u0631\u062c \u2192 au\u00dferhalb der Stadt\n\u2022 statt / anstatt = \u0628\u062f\u0644\u0627\u064b \u0645\u0646 \u2192 statt des Autos",
+    "examples": [
+      { "de": "Wegen des schlechten Wetters bleiben wir zu Hause.", "ar": "\u0628\u0633\u0628\u0628 \u0627\u0644\u0637\u0642\u0633 \u0627\u0644\u0633\u064a\u0621 \u0646\u0628\u0642\u0649 \u0641\u064a \u0627\u0644\u0628\u064a\u062a." },
+      { "de": "Trotz des Regens ging er spazieren.", "ar": "\u0628\u0627\u0644\u0631\u063a\u0645 \u0645\u0646 \u0627\u0644\u0645\u0637\u0631 \u0630\u0647\u0628 \u0641\u064a \u0646\u0632\u0647\u0629." },
+      { "de": "W\u00e4hrend der Pr\u00fcfung ist Handy verboten.", "ar": "\u062e\u0644\u0627\u0644 \u0627\u0644\u0627\u0645\u062a\u062d\u0627\u0646\u060c \u0627\u0644\u0647\u0627\u062a\u0641 \u0645\u0645\u0646\u0648\u0639." },
+      { "de": "Anstatt des Autos nahm er das Fahrrad.", "ar": "\u0628\u062f\u0644\u0627\u064b \u0645\u0646 \u0627\u0644\u0633\u064a\u0627\u0631\u0629 \u0623\u062e\u0630 \u0627\u0644\u062f\u0631\u0627\u062c\u0629." }
+    ],
+    "exercises": [
+      { "type": "multiple-choice", "question": "___ des schlechten Wetters findet das Fest statt.", "options": ["Trotz", "Wegen", "W\u00e4hrend"], "correct": 0 },
+      { "type": "multiple-choice", "question": "___ der Ferien lernt er Deutsch.", "options": ["W\u00e4hrend", "Wegen", "Statt"], "correct": 0 },
+      { "type": "fill-blank", "question": "Wegen ___ L\u00e4rms (der L\u00e4rm) kann ich nicht schlafen.", "answer": "des", "hint": "m \u2192 des im Genitiv" },
+      { "type": "fill-blank", "question": "Statt ___ Zugs (der Zug) nehme ich das Flugzeug.", "answer": "des", "hint": "m \u2192 des im Genitiv" }
     ]
   }
 ]

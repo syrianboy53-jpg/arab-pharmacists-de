@@ -3,6 +3,7 @@ import { type ReactNode, useState, useEffect } from 'react'
 import { Home, GraduationCap, Award, BookOpen, Mail, LayoutDashboard, Moon, Sun, ArrowRight, Zap } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import FeedbackModal from './FeedbackModal'
+import TickerBar from './TickerBar'
 
 export default function Layout({ children }: { children: ReactNode }) {
   const location = useLocation()
@@ -78,7 +79,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     { path: '/b1', label: 'GOETHE', icon: GraduationCap },
     { path: '/b2-hub', label: 'TELC', icon: Award },
     { path: '/dtz', label: 'DTZ', icon: BookOpen },
-    { path: '#', label: 'تواصل معنا', icon: Mail },
+    { path: '/contact', label: 'تواصل معنا', icon: Mail },
     { path: '/dashboard', label: 'لوحة التحكم', icon: LayoutDashboard },
   ]
 
@@ -184,21 +185,22 @@ export default function Layout({ children }: { children: ReactNode }) {
           </a>
         </div>
       )}
-      <div className="min-h-screen bg-[#f8f9fb] dark:bg-[#0f0f1a] text-gray-900 dark:text-gray-100 transition-colors duration-300">
+      <div className="min-h-screen bg-[#f0f2f8] dark:bg-[#060610] text-gray-900 dark:text-gray-100 transition-colors duration-300 relative z-10">
         {/* ── Header ── */}
-        <header className="sticky top-0 z-50 bg-white/90 dark:bg-[#12122a]/90 backdrop-blur-xl border-b border-gray-200/60 dark:border-white/5 shadow-sm dark:shadow-none">
-          <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+        <header className="sticky top-0 z-50">
+          <div className="bg-white/80 dark:bg-[#0a0a1e]/80 backdrop-blur-2xl border-b border-gray-200/40 dark:border-white/[0.04]">
+          <div className="max-w-5xl mx-auto px-4 h-[60px] flex items-center justify-between">
             {/* Logo + Brand */}
             <a href="/app/#/" className="flex items-center gap-2.5 group">
               <div className="relative">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#00b894] to-[#0984e3] flex items-center justify-center text-white text-sm font-black shadow-lg shadow-[#00b894]/20 group-hover:shadow-[#00b894]/40 transition-all group-hover:scale-105">
+                <div className="w-9 h-9 rounded-[10px] bg-gradient-to-br from-[#00b894] to-[#0984e3] flex items-center justify-center text-white text-xs font-black shadow-lg shadow-[#00b894]/25 group-hover:shadow-[#00b894]/50 transition-all duration-300 group-hover:scale-110">
                   B1
                 </div>
-                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-white dark:border-[#12122a] rounded-full" />
+                <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 border-[1.5px] border-white dark:border-[#0a0a1e] rounded-full animate-pulse" />
               </div>
               <div className="hidden sm:block">
-                <span className="font-black text-base text-gray-900 dark:text-white leading-none block">B1-Syrer</span>
-                <span className="text-[10px] text-gray-400 dark:text-gray-500 leading-none">.de — 100% Free</span>
+                <span className="font-black text-[15px] text-gray-900 dark:text-white leading-none block tracking-tight">B1-Syrer</span>
+                <span className="text-[10px] text-gray-400 dark:text-gray-500 leading-none font-semibold">.de — مجاني 100%</span>
               </div>
             </a>
 
@@ -284,7 +286,15 @@ export default function Layout({ children }: { children: ReactNode }) {
               })()}
             </div>
           </div>
+          </div>
+          {/* Animated gradient line under header */}
+          <div className="h-[1px] bg-gradient-to-r from-transparent via-[#00b894]/40 to-transparent" />
         </header>
+
+        {/* ── Ticker Bar ── */}
+        <AnimatePresence>
+          <TickerBar />
+        </AnimatePresence>
 
         {/* ── Back Button (non-home pages) ── */}
         {location.pathname !== '/' && (
@@ -311,32 +321,45 @@ export default function Layout({ children }: { children: ReactNode }) {
           </AnimatePresence>
         </main>
 
-        {/* ── Bottom Nav (Mobile) ── */}
-        <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white/90 dark:bg-[#1a1a2e]/90 backdrop-blur-xl border-t border-gray-200/50 dark:border-white/5 sm:hidden">
-          <div className="flex justify-around items-center h-14 px-2">
-            {navItems.map((item) => {
-              const Icon = item.icon
-              const active = isActive(item.path)
-              return (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`flex flex-col items-center justify-center gap-0.5 py-1 px-2 rounded-xl transition-all ${
-                    active
-                      ? 'text-[#00b894]'
-                      : 'text-gray-400 dark:text-gray-500'
-                  }`}
-                >
-                  <Icon size={20} strokeWidth={active ? 2.5 : 1.5} />
-                  <span className="text-[10px] font-bold">{item.label}</span>
-                </Link>
-              )
-            })}
+        {/* ── Bottom Nav (Mobile) — Premium Floating Pill ── */}
+        <nav className="fixed bottom-0 left-0 right-0 z-50 sm:hidden">
+          <div className="mx-3 mb-3 rounded-[20px] bg-white/90 dark:bg-[#0e0e22]/90 backdrop-blur-3xl border border-gray-200/50 dark:border-white/[0.06] shadow-[0_-4px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_-4px_40px_rgba(0,0,0,0.5)]">
+            <div className="flex justify-around items-center h-[62px] px-1">
+              {navItems.map((item) => {
+                const Icon = item.icon
+                const active = isActive(item.path)
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`relative flex flex-col items-center justify-center gap-0.5 py-1 px-2.5 rounded-2xl transition-all duration-200 ${
+                      active
+                        ? 'text-[#00b894]'
+                        : 'text-gray-400 dark:text-gray-500 active:scale-90'
+                    }`}
+                  >
+                    {active && (
+                      <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-6 h-[3px] rounded-full bg-gradient-to-r from-[#00b894] to-[#0984e3] shadow-[0_0_10px_rgba(0,184,148,0.8)]" />
+                    )}
+                    <div className={`p-1.5 rounded-xl transition-all duration-200 ${
+                      active ? 'bg-[#00b894]/10 scale-110' : ''
+                    }`}>
+                      <Icon size={19} strokeWidth={active ? 2.5 : 1.5} />
+                    </div>
+                    <span className={`text-[9px] font-bold transition-all ${
+                      active ? 'opacity-100 text-[#00b894]' : 'opacity-50'
+                    }`}>{item.label}</span>
+                  </Link>
+                )
+              })}
+            </div>
           </div>
         </nav>
 
         {/* ── Mega Footer ── */}
-        <footer className="bg-[#0f2940] text-white mt-12 pb-20 sm:pb-0 border-t-4 border-[#00b894]">
+        <footer className="relative text-white mt-16 pb-24 sm:pb-0 overflow-hidden" style={{ background: 'linear-gradient(180deg, #0a1628 0%, #0d1f3c 40%, #0a1628 100%)' }}>
+          {/* Decorative top gradient line */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#00b894] to-transparent" />
           <div className="max-w-7xl mx-auto px-4 py-12">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
               

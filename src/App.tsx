@@ -19,6 +19,7 @@ const B2Page = lazy(() => import('./pages/B2Page'))
 const AdminDashboardPage = lazy(() => import('./pages/AdminDashboardPage'))
 const SprachbausteinePage = lazy(() => import('./pages/SprachbausteinePage'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
+const ContactPage = lazy(() => import('./pages/ContactPage'))
 const ChatSimulatorPage = lazy(() => import('./pages/ChatSimulatorPage'))
 const SlangPage = lazy(() => import('./pages/SlangPage'))
 const EinstufungPage = lazy(() => import('./pages/EinstufungPage'))
@@ -37,6 +38,8 @@ const A1Page = lazy(() => import('./pages/levels/A1Page'))
 const A2Page = lazy(() => import('./pages/levels/A2Page'))
 const B1HubPage = lazy(() => import('./pages/levels/B1HubPage'))
 const B2HubPage = lazy(() => import('./pages/levels/B2HubPage'))
+const B2BridgePage = lazy(() => import('./pages/levels/B2BridgePage'))
+const B2InteractivePage = lazy(() => import('./pages/levels/B2InteractivePage'))
 const C1Page = lazy(() => import('./pages/levels/C1Page'))
 
 // New pages — Phase 3: Interactive
@@ -76,6 +79,44 @@ const TipsPage = lazy(() => import('./pages/TipsPage'))
 const ProfilePage = lazy(() => import('./pages/ProfilePage'))
 const LoginPage = lazy(() => import('./pages/LoginPage'))
 const RegisterPage = lazy(() => import('./pages/RegisterPage'))
+const EscapeRoomPage = lazy(() => import('./pages/EscapeRoomPage'))
+const MagicLetterPage = lazy(() => import('./pages/MagicLetterPage'))
+const DictationPage = lazy(() => import('./pages/DictationPage'))
+const HangmanPage = lazy(() => import('./pages/HangmanPage'))
+
+// New pages — Phase 7: Games + Content
+const WheelPage = lazy(() => import('./pages/WheelPage'))
+const SpeedRushPage = lazy(() => import('./pages/SpeedRushPage'))
+const StoriesPage = lazy(() => import('./pages/StoriesPage'))
+const AchievementsPage = lazy(() => import('./pages/AchievementsPage'))
+
+// New pages — Phase 8: Life in Germany
+const GermanyMapPage = lazy(() => import('./pages/GermanyMapPage'))
+const JobsPage = lazy(() => import('./pages/JobsPage'))
+const WohnungPage = lazy(() => import('./pages/WohnungPage'))
+const TransportPage = lazy(() => import('./pages/TransportPage'))
+const FoodPage = lazy(() => import('./pages/FoodPage'))
+const DocsPage = lazy(() => import('./pages/DocsPage'))
+const SongsPage = lazy(() => import('./pages/SongsPage'))
+const MemoryGamePage = lazy(() => import('./pages/MemoryGamePage'))
+
+// Phase 9: Full Level Exam Pages (A1–C1)
+const A1ExamPage = lazy(() => import('./pages/A1ExamPage'))
+const A2ExamPage = lazy(() => import('./pages/A2ExamPage'))
+const B1ExamPage = lazy(() => import('./pages/B1ExamPage'))
+const C1ExamPage = lazy(() => import('./pages/C1ExamPage'))
+
+// Phase 10: New Content Pages
+const RedemittelHubPage = lazy(() => import('./pages/RedemittelHubPage'))
+const ZahlenTrainerPage = lazy(() => import('./pages/ZahlenTrainerPage'))
+const AlltagsDialogePage = lazy(() => import('./pages/AlltagsDialogePage'))
+const KulturGuidePage = lazy(() => import('./pages/KulturGuidePage'))
+const RedewendungenPage = lazy(() => import('./pages/RedewendungenPage'))
+
+// Phase 11: More Content
+const VerbTrainerPage = lazy(() => import('./pages/VerbTrainerPage'))
+const PruefungsTippsPage = lazy(() => import('./pages/PruefungsTippsPage'))
+const WortschatzSpielPage = lazy(() => import('./pages/WortschatzSpielPage'))
 
 function Loading() {
   return (
@@ -97,6 +138,7 @@ export default function App() {
           {/* TestDaF Hub */}
           <Route path="/grammar" element={<GrammarPage />} />
           <Route path="/grammar/lesson/:lessonId" element={<GrammarLessonPage />} />
+          <Route path="/escape-room" element={<EscapeRoomPage />} />
           <Route path="/vocabulary" element={<VocabularyPage />} />
           <Route path="/vocabulary/lesson/:catId" element={<VocabLessonPage />} />
           <Route path="/lesen" element={<LesenPage />} />
@@ -108,6 +150,13 @@ export default function App() {
 
           {/* Interactive Training */}
           <Route path="/daily" element={<DailyChallengePage />} />
+          <Route path="/magic-letter" element={<MagicLetterPage />} />
+          <Route path="/dictation" element={<DictationPage />} />
+          <Route path="/hangman" element={<HangmanPage />} />
+          <Route path="/wheel" element={<WheelPage />} />
+          <Route path="/speed-rush" element={<SpeedRushPage />} />
+          <Route path="/stories" element={<StoriesPage />} />
+          <Route path="/achievements" element={<AchievementsPage />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route path="/contests" element={<ContestsPage />} />
           <Route path="/referral" element={<ReferralPage />} />
@@ -139,6 +188,9 @@ export default function App() {
           <Route path="/b1" element={<B1HubPage />} />
           <Route path="/b2-hub" element={<B2HubPage />} />
           <Route path="/c1" element={<C1Page />} />
+          
+          <Route path="/b2-bridge" element={<B2BridgePage />} />
+          <Route path="/b2-interactive" element={<B2InteractivePage />} />
 
           {/* Exam Simulation */}
           <Route path="/telc-sim" element={<TelcSimPage />} />
@@ -170,11 +222,40 @@ export default function App() {
           {/* Misc */}
           <Route path="/slang" element={<SlangPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/admin/*" element={<AdminDashboardPage />} />
           
+          {/* Phase 8: Life in Germany */}
+          <Route path="/germany-map" element={<GermanyMapPage />} />
+          <Route path="/jobs" element={<JobsPage />} />
+          <Route path="/wohnung" element={<WohnungPage />} />
+          <Route path="/transport" element={<TransportPage />} />
+          <Route path="/food" element={<FoodPage />} />
+          <Route path="/docs" element={<DocsPage />} />
+          <Route path="/songs" element={<SongsPage />} />
+          <Route path="/memory" element={<MemoryGamePage />} />
+
+          {/* Phase 9: Full Level Exams (A1–C1) */}
+          <Route path="/a1-exam" element={<A1ExamPage />} />
+          <Route path="/a2-exam" element={<A2ExamPage />} />
+          <Route path="/b1-exam" element={<B1ExamPage />} />
+          <Route path="/c1-exam" element={<C1ExamPage />} />
+
+          {/* Phase 10: New Content */}
+          <Route path="/redemittel-hub" element={<RedemittelHubPage />} />
+          <Route path="/zahlen" element={<ZahlenTrainerPage />} />
+          <Route path="/dialoge" element={<AlltagsDialogePage />} />
+          <Route path="/kultur" element={<KulturGuidePage />} />
+          <Route path="/redewendungen" element={<RedewendungenPage />} />
+
+          {/* Phase 11: More Content */}
+          <Route path="/verb-trainer" element={<VerbTrainerPage />} />
+          <Route path="/tipps" element={<PruefungsTippsPage />} />
+          <Route path="/wortschatz-spiel" element={<WortschatzSpielPage />} />
+
           {/* Default */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

@@ -20,6 +20,28 @@ import 'grammatik_screen.dart';
 import 'wortschatz_screen.dart';
 import 'flashcards_screen.dart';
 import 'voice_roleplay_screen.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+import '../providers/app_provider.dart';
+import '../utils/ad_manager.dart';
+import 'lesen_screen.dart';
+import 'hoeren_screen.dart';
+import 'schreiben_screen.dart';
+import 'sprechen_screen.dart';
+import 'sprachbausteine_screen.dart';
+import 'grammatik_screen.dart';
+import 'wortschatz_screen.dart';
+import 'flashcards_screen.dart';
+import 'voice_roleplay_screen.dart';
 import '../widgets/daily_quests_widget.dart';
 import 'grammatik_screen.dart';
 import 'leben_screen.dart';
@@ -28,6 +50,8 @@ import 'leaderboard_screen.dart';
 import 'library_screen.dart';
 import 'premium_screen.dart';
 import 'einstufung_screen.dart';
+import 'b2_screen.dart';
+import 'b1_b2_bridge_screen.dart';
 import 'satzbau_screen.dart';
 import 'synonyms_screen.dart';
 import 'fehler_screen.dart';
@@ -39,6 +63,7 @@ import 'interactive_practice_screen.dart';
 import 'brief_corrector_screen.dart';
 import 'pronunciation_lab_screen.dart';
 import 'duels_screen.dart';
+import 'daily_phrases_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -165,11 +190,11 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
-        backgroundColor: isDark ? const Color(0xFF1E293B) : Colors.white,
+        backgroundColor: isDark ? const Color(0xFF0E0E24) : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Row(
           children: [
-            Icon(Icons.system_update, color: Color(0xFF10B981)),
+            Icon(Icons.system_update, color: Color(0xFF00B894)),
             SizedBox(width: 8),
             Text(
               'تحديث جديد متوفر! 🚀',
@@ -198,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF10B981),
+              backgroundColor: const Color(0xFF00B894),
               foregroundColor: Colors.white,
             ),
             onPressed: () async {
@@ -241,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: isDark ? const Color(0xFF1E293B) : Colors.white,
+          backgroundColor: isDark ? const Color(0xFF0E0E24) : Colors.white,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           title: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -390,14 +415,14 @@ class _HomeScreenState extends State<HomeScreen> {
 //                           width: double.infinity,
 //                           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
 //                           decoration: BoxDecoration(
-//                             color: const Color(0xFF10B981).withValues(alpha: 0.1),
+//                             color: const Color(0xFF00B894).withValues(alpha: 0.1),
 //                             borderRadius: BorderRadius.circular(16),
-//                             border: Border.all(color: const Color(0xFF10B981), width: 1.5),
+//                             border: Border.all(color: const Color(0xFF00B894), width: 1.5),
 //                           ),
 //                           child: Text(
 //                             words[currentIndex]['word']!,
 //                             textAlign: TextAlign.center,
-//                             style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF10B981)),
+//                             style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF00B894)),
 //                           ),
 //                         ),
 //                         const SizedBox(height: 20),
@@ -408,7 +433,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //                           children: ['der', 'die', 'das'].map((art) {
 //                             return ElevatedButton(
 //                               style: ElevatedButton.styleFrom(
-//                                 backgroundColor: const Color(0xFF1E293B),
+//                                 backgroundColor: const Color(0xFF0E0E24),
 //                                 foregroundColor: Colors.white,
 //                               ),
 //                               onPressed: () {
@@ -734,10 +759,10 @@ class _HomeScreenState extends State<HomeScreen> {
 //                       ),
 //                       Text(
 //                         '$days يوماً',
-//                         style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF10B981)),
+//                         style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF00B894)),
 //                       ),
 //                       IconButton(
-//                         icon: const Icon(Icons.add_circle_outline, size: 28, color: Color(0xFF10B981)),
+//                         icon: const Icon(Icons.add_circle_outline, size: 28, color: Color(0xFF00B894)),
 //                         onPressed: () {
 //                           if (days < 180) setState(() => days += 5);
 //                         },
@@ -759,7 +784,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //               ),
 //               actions: [
 //                 ElevatedButton(
-//                   style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white),
+//                   style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00B894), foregroundColor: Colors.white),
 //                   onPressed: () {
 //                     Navigator.pop(context);
 //                     ScaffoldMessenger.of(context).showSnackBar(
@@ -812,13 +837,13 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       margin: const EdgeInsets.only(bottom: 6),
       decoration: BoxDecoration(
-        color: isUser ? const Color(0xFF10B981).withValues(alpha: 0.15) : Colors.transparent,
+        color: isUser ? const Color(0xFF00B894).withValues(alpha: 0.15) : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
-        border: isUser ? Border.all(color: const Color(0xFF10B981)) : null,
+        border: isUser ? Border.all(color: const Color(0xFF00B894)) : null,
       ),
       child: Row(
         children: [
-          Text(rank, style: TextStyle(fontWeight: FontWeight.bold, color: isUser ? const Color(0xFF10B981) : Colors.grey)),
+          Text(rank, style: TextStyle(fontWeight: FontWeight.bold, color: isUser ? const Color(0xFF00B894) : Colors.grey)),
           const SizedBox(width: 12),
           Expanded(child: Text(name, style: TextStyle(fontWeight: isUser ? FontWeight.bold : FontWeight.normal))),
           Text(xp, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.orange)),
@@ -902,7 +927,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //                   ? const Column(
 //                       mainAxisSize: MainAxisSize.min,
 //                       children: [
-//                         Icon(Icons.done_all, size: 64, color: Color(0xFF10B981)),
+//                         Icon(Icons.done_all, size: 64, color: Color(0xFF00B894)),
 //                         SizedBox(height: 12),
 //                         Text('أنهيت مراجعة بطاقات اليوم!', style: TextStyle(fontWeight: FontWeight.bold)),
 //                         SizedBox(height: 8),
@@ -916,7 +941,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //                         const SizedBox(height: 20),
 //                         Text(
 //                           words[index]['de']!,
-//                           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF10B981)),
+//                           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF00B894)),
 //                           textDirection: TextDirection.ltr,
 //                         ),
 //                         const SizedBox(height: 20),
@@ -998,7 +1023,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //             Center(
 //               child: SelectableText(
 //                 'B1SYR55',
-//                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFF10B981), letterSpacing: 2),
+//                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Color(0xFF00B894), letterSpacing: 2),
 //               ),
 //             ),
 //           ],
@@ -1009,7 +1034,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //             child: const Text('إغلاق'),
 //           ),
 //           ElevatedButton(
-//             style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white),
+//             style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00B894), foregroundColor: Colors.white),
 //             onPressed: () {
 //               Navigator.pop(context);
 //               ScaffoldMessenger.of(context).showSnackBar(
@@ -1057,7 +1082,7 @@ class _HomeScreenState extends State<HomeScreen> {
 //                   child: const Text('إلغاء', style: TextStyle(color: Colors.grey)),
 //                 ),
 //                 ElevatedButton(
-//                   style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF10B981), foregroundColor: Colors.white),
+//                   style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00B894), foregroundColor: Colors.white),
 //                   onPressed: () {
 //                     if (controller.text.trim().isEmpty) return;
 //                     Navigator.pop(context);
@@ -1106,7 +1131,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final provider = context.watch<AppProvider>();
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    final scaffoldBg = isDark ? const Color(0xFF080D1A) : const Color(0xFFF1F5F9);
+    final scaffoldBg = isDark ? const Color(0xFF060610) : const Color(0xFFF1F5F9);
     final textMain = isDark ? Colors.white : const Color(0xFF0F172A);
     final borderCol = isDark ? Colors.white.withValues(alpha: 0.08) : const Color(0xFFE2E8F0);
 
@@ -1127,7 +1152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF0D9488).withValues(alpha: 0.18),
+                        color: const Color(0xFF00B894).withValues(alpha: 0.18),
                         blurRadius: 130,
                         spreadRadius: 30,
                       ),
@@ -1175,8 +1200,8 @@ class _HomeScreenState extends State<HomeScreen> {
             SafeArea(
               child: RefreshIndicator(
                 onRefresh: _checkUpdates,
-                color: const Color(0xFF0D9488),
-                backgroundColor: isDark ? const Color(0xFF131C33) : Colors.white,
+                color: const Color(0xFF00B894),
+                backgroundColor: isDark ? const Color(0xFF0E0E24) : Colors.white,
                 child: CustomScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   slivers: [
@@ -1195,7 +1220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Container(
                           decoration: BoxDecoration(
                             gradient: const LinearGradient(
-                              colors: [Color(0xFF4F46E5), Color(0xFF0D9488)],
+                              colors: [Color(0xFF4F46E5), Color(0xFF00B894)],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
@@ -1288,11 +1313,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
 
                     // Unit 3
-                    _buildPathUnitHeader('الوحدة 3', 'الفهم والاستيعاب 🎧📖', const Color(0xFF0D9488), isDark),
+                    _buildPathUnitHeader('الوحدة 3', 'الفهم والاستيعاب 🎧📖', const Color(0xFF00B894), isDark),
                     SliverToBoxAdapter(
                       child: Column(
                         children: [
-                          _buildPathNode('القراءة', Icons.menu_book, const Color(0xFF0D9488), () => _navigate(const LesenScreen()), -0.3),
+                          _buildPathNode('القراءة', Icons.menu_book, const Color(0xFF00B894), () => _navigate(const LesenScreen()), -0.3),
                           _buildPathNode('الاستماع', Icons.headphones, const Color(0xFFEA580C), () => _navigate(const HoerenScreen()), 0.4, isLarge: true),
                           _buildPathNode('Sprachbausteine', Icons.extension, const Color(0xFF4F46E5), () => _navigate(const SprachbausteineScreen()), 0.7),
                         ],
@@ -1308,7 +1333,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           _buildPathNode('مختبر النطق', Icons.mic, const Color(0xFF9333EA), () => _navigate(const PronunciationLabScreen()), 0.5),
                           _buildPathNode('محاكي المحادثة (الذكاء الاصطناعي)', Icons.record_voice_over, const Color(0xFF1E3A8A), () => _navigate(const VoiceRoleplayCategoryScreen()), 0.1),
                           _buildPathNode('الكتابة', Icons.edit_note, const Color(0xFF2563EB), () => _navigate(const SchreibenScreen()), -0.4, isLarge: true),
-                          _buildPathNode('المصحح الذكي', Icons.auto_awesome, const Color(0xFF10B981), () => _navigate(const BriefCorrectorScreen()), -0.1),
+                          _buildPathNode('المصحح الذكي', Icons.auto_awesome, const Color(0xFF00B894), () => _navigate(const BriefCorrectorScreen()), -0.1),
                           _buildPathNode('تصريف الأفعال', Icons.refresh, const Color(0xFF65A30D), () => _navigate(const ConjugationTrainerScreen()), -0.7),
                         ],
                       ),
@@ -1326,12 +1351,24 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
 
+                    // Unit B1-B2
+                    _buildPathUnitHeader('B1 ➔ B2', 'الانتقال للระดับ المتقدم 🚀', const Color(0xFFEF4444), isDark),
+                    SliverToBoxAdapter(
+                      child: Column(
+                        children: [
+                          _buildPathNode('دورة العبور B1-B2', Icons.compare_arrows, const Color(0xFF4F46E5), () => _navigate(const B1B2BridgeScreen()), 0.0, isLarge: true),
+                          _buildPathNode('امتحانات B2', Icons.school, const Color(0xFFEF4444), () => _navigate(const B2Screen()), 0.3),
+                        ],
+                      ),
+                    ),
+                    const SliverToBoxAdapter(child: SizedBox(height: 16)),
+
                     // Extra Tools
                     _buildPathUnitHeader('إضافات', 'أدوات وتدريبات مفيدة ⭐', const Color(0xFF475569), isDark),
                     SliverToBoxAdapter(
                       child: Column(
                         children: [
-                          _buildPathNode('المراجعة الذكية', Icons.loop, const Color(0xFF475569), () => _navigate(const SmartReviewScreen()), 0.0),
+                          _buildPathNode('العبارات اليومية', Icons.format_quote, const Color(0xFF9B59B6), () => _navigate(const DailyPhrasesScreen()), 0.0, isLarge: true),
                           _buildPathNode('الأخطاء الشائعة', Icons.warning, const Color(0xFFB45309), () => _navigate(const FehlerScreen()), -0.4),
                           _buildPathNode('لعبة المرادفات', Icons.gamepad, const Color(0xFF059669), () => _navigate(const SynonymsScreen()), 0.4),
                           _buildPathNode('تحديات الأصدقاء', Icons.sports_esports, const Color(0xFFF59E0B), () => _navigate(const DuelsScreen()), -0.2),
@@ -1440,11 +1477,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF0D9488),
+                      color: const Color(0xFF00B894),
                       borderRadius: BorderRadius.circular(6),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF0D9488).withValues(alpha: 0.3),
+                          color: const Color(0xFF00B894).withValues(alpha: 0.3),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         )
@@ -1546,22 +1583,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 destinations: const [
                   NavigationDestination(
                     icon: Icon(Icons.home_rounded),
-                    selectedIcon: Icon(Icons.home_rounded, color: Color(0xFF0D9488)),
+                    selectedIcon: Icon(Icons.home_rounded, color: Color(0xFF00B894)),
                     label: 'الرئيسية',
                   ),
                   NavigationDestination(
                     icon: Icon(Icons.psychology_rounded),
-                    selectedIcon: Icon(Icons.psychology_rounded, color: Color(0xFF0D9488)),
+                    selectedIcon: Icon(Icons.psychology_rounded, color: Color(0xFF00B894)),
                     label: 'التدريب التفاعلي',
                   ),
                   NavigationDestination(
                     icon: Icon(Icons.emoji_events_rounded),
-                    selectedIcon: Icon(Icons.emoji_events_rounded, color: Color(0xFF0D9488)),
+                    selectedIcon: Icon(Icons.emoji_events_rounded, color: Color(0xFF00B894)),
                     label: 'المتصدّرين',
                   ),
                   NavigationDestination(
                     icon: Icon(Icons.settings_rounded),
-                    selectedIcon: Icon(Icons.settings_rounded, color: Color(0xFF0D9488)),
+                    selectedIcon: Icon(Icons.settings_rounded, color: Color(0xFF00B894)),
                     label: 'الإعدادات',
                   ),
                 ],

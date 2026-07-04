@@ -1,10 +1,17 @@
+/app/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/app/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/app
+  Cache-Control: public, max-age=0, must-revalidate
+
 /app/assets/data-schreiben-CBnQkpUN.js
   Cache-Control: public, max-age=0, must-revalidate
 
 /app/assets/data-vocab-RImsq-ao.js
   Cache-Control: public, max-age=0, must-revalidate
 
-
 /app/assets/data-grammar-CqkqFCxM.js
   Cache-Control: public, max-age=0, must-revalidate
-

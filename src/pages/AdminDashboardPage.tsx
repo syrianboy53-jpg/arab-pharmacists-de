@@ -160,6 +160,9 @@ export default function AdminDashboardPage() {
   const [suggestionsFilter, setSuggestionsFilter] = useState('all')
   const [unreadSuggestionsCount, setUnreadSuggestionsCount] = useState(0)
 
+  // Active visitors
+  const [activeVisitors, setActiveVisitors] = useState<any[]>([])
+
   // APK Download stats
   const [downloadStats, setDownloadStats] = useState<{ total: number; today: number; week: number; by_day: any[] } | null>(null)
 
@@ -279,6 +282,19 @@ export default function AdminDashboardPage() {
 
   async function fetchData() {
     fetchUsers()
+    fetchActiveVisitors()
+  }
+
+  async function fetchActiveVisitors() {
+    if (!adminToken.trim()) return
+    try {
+      const res = await fetch(`${API_BASE}/api/admin/active_visitors`, {
+        headers: { 'X-Admin-Token': adminToken.trim() }
+      })
+      if (res.ok) {
+        setActiveVisitors(await res.json())
+      }
+    } catch {}
   }
 
   async function fetchUsers(search = '') {
@@ -422,22 +438,41 @@ export default function AdminDashboardPage() {
   async function fetchSuggestions() {
     setIsSuggestionsLoading(true)
     try {
-      const stored = JSON.parse(localStorage.getItem('b1-feedbacks') || '[]')
-      let filtered = stored
-      if (suggestionsFilter === 'unread') filtered = stored.filter((s: any) => s.status === 'new')
-      if (suggestionsFilter === 'archived') filtered = stored.filter((s: any) => s.status === 'resolved')
-      
-      setSuggestions(filtered)
-      setUnreadSuggestionsCount(stored.filter((s: any) => s.status === 'new').length)
-    } catch {}
+      const res = await fetch(`${API_BASE}/api/admin/feedback`, {
+        headers: { 'X-Admin-Token': adminToken.trim() }
+      })
+      if (res.ok) {
+        const data = await res.json()
+        setSuggestions(data.entries || [])
+        setUnreadSuggestionsCount(data.unread_count || 0)
+      }
+    } catch (err) {
+      console.error(err)
+    }
     setIsSuggestionsLoading(false)
   }
 
   async function updateSuggestionStatus(id: string, status: string) {
     try {
-      const stored = JSON.parse(localStorage.getItem('b1-feedbacks') || '[]')
-      const updated = stored.map((s: any) => s.id === id ? { ...s, status } : s)
-      localStorage.setItem('b1-feedbacks', JSON.stringify(updated))
+      await fetch(`${API_BASE}/api/admin/feedback`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Token': adminToken.trim()
+        },
+        body: JSON.stringify({ id, status })
+      })
+      fetchSuggestions()
+    } catch {}
+  }
+
+  async function deleteSuggestion(id: string) {
+    if (!confirm('هل أنت متأكد من حذف هذه الرسالة نهائياً؟')) return
+    try {
+      await fetch(`${API_BASE}/api/admin/feedback?id=${id}`, {
+        method: 'DELETE',
+        headers: { 'X-Admin-Token': adminToken.trim() }
+      })
       fetchSuggestions()
     } catch {}
   }
@@ -608,49 +643,74 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#0f0f1a] -mx-4 sm:-mx-0 -mt-6 sm:mt-0">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#0f0f1a] -mx-4 sm:-mx-0 -mt-6 sm:mt-0 flex flex-col md:flex-row font-sans" dir="rtl">
       
-      {/* TOP NAVBAR */}
-      <div className="w-full bg-white dark:bg-[#1a1a2e] border-b border-gray-200 dark:border-white/5 px-6 py-4 flex flex-col md:flex-row items-center justify-between shadow-[0_0_40px_rgba(0,0,0,0.03)] z-40 sticky top-0 gap-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-[#0984e3] to-[#00b894] rounded-xl flex items-center justify-center text-white text-lg shadow-lg shadow-[#00b894]/20">👑</div>
-          <div className="hidden lg:block">
-            <h1 className="font-black text-lg text-gray-900 dark:text-white leading-tight">الإدارة V2</h1>
+      {/* SIDEBAR */}
+      <aside className="w-full md:w-72 bg-white dark:bg-[#1a1a2e] border-b md:border-b-0 md:border-l border-gray-200 dark:border-white/5 shadow-xl flex flex-col z-40 sticky top-0 md:h-screen shrink-0">
+        <div className="p-6 flex items-center justify-between border-b border-gray-100 dark:border-white/5">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-gradient-to-br from-[#0984e3] to-[#00b894] rounded-2xl flex items-center justify-center text-white text-xl shadow-lg shadow-[#00b894]/20">🚀</div>
+            <div>
+              <h1 className="font-black text-xl text-gray-900 dark:text-white leading-tight">Admin<span className="text-[#00b894]">OS</span></h1>
+              <p className="text-[10px] text-gray-500 font-bold tracking-widest uppercase mt-0.5">Workspace</p>
+            </div>
           </div>
         </div>
         
-        <div className="flex items-center gap-1 overflow-x-auto custom-scrollbar w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
-          <button onClick={() => setActiveTab('stats')} className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'stats' ? 'bg-[#0984e3]/10 text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
-            <span className="text-lg">📊</span> الإحصائيات
+        <div className="flex-1 overflow-y-auto py-6 px-4 space-y-1 custom-scrollbar flex md:flex-col overflow-x-auto md:overflow-x-visible">
+          <button onClick={() => setActiveTab('stats')} className={`w-full whitespace-nowrap px-4 py-3 rounded-2xl font-bold transition-all flex items-center gap-3 ${activeTab === 'stats' ? 'bg-gradient-to-r from-[#00b894]/10 to-transparent text-[#00b894]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'}`}>
+            <span className={`text-xl ${activeTab === 'stats' ? 'scale-110' : ''} transition-transform`}>📊</span> 
+            <span className="hidden md:inline">نظرة عامة</span>
           </button>
-          <button onClick={() => setActiveTab('users')} className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'users' ? 'bg-[#0984e3]/10 text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
-            <span className="text-lg">👥</span> المستخدمون
+          <button onClick={() => setActiveTab('users')} className={`w-full whitespace-nowrap px-4 py-3 rounded-2xl font-bold transition-all flex items-center gap-3 ${activeTab === 'users' ? 'bg-gradient-to-r from-[#0984e3]/10 to-transparent text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'}`}>
+            <span className={`text-xl ${activeTab === 'users' ? 'scale-110' : ''} transition-transform`}>👥</span> 
+            <span className="hidden md:inline">المستخدمون</span>
           </button>
-          <button onClick={() => setActiveTab('communication')} className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'communication' ? 'bg-[#0984e3]/10 text-[#0984e3]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
-            <span className="text-lg">💬</span> التواصل
-            {unreadSuggestionsCount > 0 && <span className="bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full mr-1">{unreadSuggestionsCount}</span>}
+          <button onClick={() => setActiveTab('communication')} className={`w-full whitespace-nowrap px-4 py-3 rounded-2xl font-bold transition-all flex items-center gap-3 ${activeTab === 'communication' ? 'bg-gradient-to-r from-purple-500/10 to-transparent text-purple-500' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'}`}>
+            <span className={`text-xl ${activeTab === 'communication' ? 'scale-110' : ''} transition-transform`}>💬</span> 
+            <span className="hidden md:inline">صندوق البريد</span>
+            {unreadSuggestionsCount > 0 && <span className="bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full mr-auto shadow-sm">{unreadSuggestionsCount}</span>}
           </button>
-          <button onClick={() => setActiveTab('content')} className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'content' ? 'bg-gradient-to-r from-[#e84393]/20 to-transparent text-[#e84393]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
-            <span className="text-lg">✨</span> استوديو المحتوى
+          <button onClick={() => setActiveTab('content')} className={`w-full whitespace-nowrap px-4 py-3 rounded-2xl font-bold transition-all flex items-center gap-3 ${activeTab === 'content' ? 'bg-gradient-to-r from-[#e84393]/10 to-transparent text-[#e84393]' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'}`}>
+            <span className={`text-xl ${activeTab === 'content' ? 'scale-110' : ''} transition-transform`}>🎨</span> 
+            <span className="hidden md:inline">استديو المحتوى</span>
           </button>
-          <button onClick={() => setActiveTab('settings')} className={`whitespace-nowrap px-4 py-2.5 rounded-xl font-bold transition-all flex items-center gap-2 ${activeTab === 'settings' ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 shadow-xl' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5'}`}>
-            <span className="text-lg">⚙️</span> النظام
+          
+          <div className="hidden md:block my-4 border-t border-gray-100 dark:border-white/5 mx-4"></div>
+
+          <button onClick={() => setActiveTab('settings')} className={`w-full whitespace-nowrap px-4 py-3 rounded-2xl font-bold transition-all flex items-center gap-3 ${activeTab === 'settings' ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 shadow-xl' : 'text-gray-500 hover:bg-gray-50 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'}`}>
+            <span className={`text-xl ${activeTab === 'settings' ? 'scale-110 animate-spin-slow' : ''} transition-transform`}>⚙️</span> 
+            <span className="hidden md:inline">إعدادات النظام</span>
           </button>
         </div>
 
-        <div className="flex items-center gap-2 shrink-0">
-          <button onClick={fetchData} disabled={isUsersLoading} className="px-3 py-2.5 bg-gray-50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 rounded-xl font-bold flex items-center justify-center transition-colors" title="تحديث البيانات">
-            🔄
-          </button>
-          <button onClick={handleLogout} className="px-3 py-2.5 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 text-red-600 rounded-xl font-bold flex items-center justify-center transition-colors" title="تسجيل خروج">
-            🚪
-          </button>
+        <div className="hidden md:block p-6 mt-auto border-t border-gray-100 dark:border-white/5">
+          <div className="bg-gray-50 dark:bg-white/5 rounded-2xl p-4">
+            <p className="text-xs text-gray-500 font-bold mb-3 flex items-center gap-2"><span>👤</span> مدير النظام</p>
+            <div className="flex gap-2">
+              <button onClick={fetchData} disabled={isUsersLoading} className="flex-1 py-2 bg-white dark:bg-black/20 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 rounded-xl font-bold flex items-center justify-center transition-colors shadow-sm border border-gray-200 dark:border-white/5" title="تحديث البيانات">
+                🔄
+              </button>
+              <button onClick={handleLogout} className="flex-1 py-2 bg-red-50 dark:bg-red-500/10 hover:bg-red-100 dark:hover:bg-red-500/20 text-red-600 rounded-xl font-bold flex items-center justify-center transition-colors shadow-sm" title="تسجيل خروج">
+                🚪 خروج
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      </aside>
 
       {/* MAIN CONTENT AREA */}
-      <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 space-y-8 pb-20">
-        
+      <main className="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-8 space-y-8 pb-24 md:h-screen overflow-y-auto custom-scrollbar relative">
+        {/* Mobile Header Controls */}
+        <div className="md:hidden flex items-center justify-end gap-2 mb-4">
+          <button onClick={fetchData} disabled={isUsersLoading} className="px-3 py-2 bg-white dark:bg-white/5 text-gray-700 dark:text-gray-300 rounded-xl font-bold shadow-sm border border-gray-200 dark:border-white/5">
+            🔄 تحديث
+          </button>
+          <button onClick={handleLogout} className="px-3 py-2 bg-red-50 dark:bg-red-500/10 text-red-600 rounded-xl font-bold shadow-sm">
+            🚪 خروج
+          </button>
+        </div>
+
         {/* Welcome Header */}
         <div className="glass p-8 rounded-[2rem] border border-gray-200 dark:border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6 shadow-sm relative overflow-hidden bg-white/50 dark:bg-[#1a1a2e]/50 backdrop-blur-xl">
           <div className="absolute right-0 top-0 w-96 h-96 bg-gradient-to-br from-[#0984e3]/10 via-[#00b894]/5 to-transparent blur-3xl pointer-events-none rounded-full"></div>
@@ -693,6 +753,86 @@ export default function AdminDashboardPage() {
             {usersStats && (
               <div className="grid lg:grid-cols-2 gap-6">
                 
+                {/* Active Visitors Radar */}
+                <div className="glass p-6 rounded-[2rem] border border-[#0984e3]/30 shadow-2xl relative overflow-hidden bg-[#0984e3]/5 lg:col-span-2">
+                  <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#0984e3]/10 via-transparent to-transparent pointer-events-none"></div>
+                  
+                  {/* Radar Scanner Animation */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-[#0984e3]/20 rounded-full opacity-50 pointer-events-none"></div>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-[#0984e3]/30 rounded-full opacity-50 pointer-events-none"></div>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-[#0984e3]/40 rounded-full opacity-50 pointer-events-none bg-[#0984e3]/5"></div>
+                  <motion.div 
+                    animate={{ rotate: 360 }}
+                    transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 pointer-events-none rounded-full"
+                    style={{ background: 'conic-gradient(from 0deg, transparent 70%, rgba(9, 132, 227, 0.4) 100%)' }}
+                  ></motion.div>
+
+                  <div className="flex justify-between items-center mb-6 relative z-10">
+                    <div>
+                      <h3 className="font-black text-xl text-[#0984e3] flex items-center gap-2">
+                        <span className="relative flex h-4 w-4">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0984e3] opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-4 w-4 bg-[#0984e3]"></span>
+                        </span>
+                        رادار الزوار المباشر 🌍
+                      </h3>
+                      <p className="text-sm text-gray-500 font-bold mt-1">يتم التحديث تلقائياً • {activeVisitors.length > 0 ? 'بيانات حقيقية' : 'بيانات تجريبية (لا يوجد زوار حالياً)'}</p>
+                    </div>
+                    <button onClick={fetchActiveVisitors} className="bg-[#0984e3] hover:bg-blue-600 text-white px-4 py-2 rounded-xl font-bold transition-all shadow-lg shadow-blue-500/30 flex items-center gap-2">
+                      <span>تحديث</span>
+                      <span className="text-xs">🔄</span>
+                    </button>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10 max-h-[400px] overflow-y-auto custom-scrollbar pr-2">
+                    {(() => {
+                      // Use real data if available, otherwise mock data for presentation
+                      const visitorsToShow = activeVisitors.length > 0 ? activeVisitors : [
+                        { ip_address: '192.168.1.1', country: 'DE', path: '/app/#/grammar', last_seen: new Date().toISOString(), user_agent: 'Chrome' },
+                        { ip_address: '84.23.11.9', country: 'SY', path: '/app/#/vocabulary', last_seen: new Date().toISOString(), user_agent: 'Safari' },
+                        { ip_address: '213.55.99.2', country: 'TR', path: '/', last_seen: new Date(Date.now() - 60000).toISOString(), user_agent: 'Firefox' },
+                        { ip_address: '91.22.33.4', country: 'SE', path: '/app/#/leben', last_seen: new Date(Date.now() - 120000).toISOString(), user_agent: 'Edge' },
+                        { ip_address: '176.44.55.6', country: 'AE', path: '/app/#/drill', last_seen: new Date(Date.now() - 180000).toISOString(), user_agent: 'Chrome Mobile' },
+                      ];
+
+                      return visitorsToShow.map((v: any, idx: number) => (
+                        <motion.div 
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: idx * 0.1 }}
+                          key={idx} 
+                          className="bg-white/80 dark:bg-[#1a1a2e]/80 backdrop-blur-md p-4 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-[#0984e3]/50 transition-all shadow-sm group"
+                        >
+                          <div className="flex justify-between items-start mb-3">
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 flex items-center justify-center text-xl shadow-inner border border-gray-200 dark:border-white/5">
+                                {v.country && v.country !== 'unknown' ? (
+                                  <img src={`https://flagcdn.com/32x24/${v.country.toLowerCase()}.png`} alt={v.country} className="rounded-sm" />
+                                ) : '🌐'}
+                              </div>
+                              <div>
+                                <h4 className="font-bold text-gray-900 dark:text-white text-sm" dir="ltr">{v.ip_address}</h4>
+                                <p className="text-[10px] text-gray-500 font-mono mt-0.5" dir="ltr">{v.country || 'Unknown'}</p>
+                              </div>
+                            </div>
+                            <span className="text-[10px] font-black text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded-lg border border-emerald-500/20">
+                              {new Date(v.last_seen).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </span>
+                          </div>
+                          
+                          <div className="bg-gray-50 dark:bg-black/30 rounded-xl p-2.5 flex items-center gap-2 border border-gray-100 dark:border-white/5 group-hover:bg-[#0984e3]/5 transition-colors">
+                            <span className="text-gray-400 text-xs">📍</span>
+                            <span className="text-xs font-bold text-[#0984e3] truncate flex-1" title={v.path} dir="ltr">
+                              {getPathLabel(v.path)}
+                            </span>
+                          </div>
+                        </motion.div>
+                      ))
+                    })()}
+                  </div>
+                </div>
+
                 {/* App Downloads Section */}
                 <div className="glass p-6 rounded-[2rem] border border-[#00b894]/20 shadow-lg relative overflow-hidden bg-[#00b894]/5">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-[#00b894] rounded-full blur-[100px] opacity-10"></div>
@@ -776,40 +916,63 @@ export default function AdminDashboardPage() {
             {usersError && <p className="text-red-500 font-bold">{usersError}</p>}
             {isUsersLoading && <p className="text-gray-500 text-sm">⏳ جاري التحميل...</p>}
             
-            <div className="overflow-x-auto glass rounded-2xl border border-gray-200 dark:border-white/10">
+            <div className="overflow-x-auto glass rounded-3xl border border-gray-200 dark:border-white/10 shadow-lg">
               <table className="w-full text-right text-sm">
-                <thead className="bg-gray-50 dark:bg-white/5 text-gray-500">
+                <thead className="bg-gray-50/80 dark:bg-[#1a1a2e]/80 text-gray-500 backdrop-blur-md sticky top-0 z-10">
                   <tr>
-                    <th className="p-4">ID</th>
-                    <th className="p-4">الاسم والبريد</th>
-                    <th className="p-4 text-center">النقاط / المهام</th>
-                    <th className="p-4 text-center">الشعلة</th>
-                    <th className="p-4 text-center">الاشتراك</th>
-                    <th className="p-4">تاريخ الانضمام</th>
-                    <th className="p-4 text-center">حذف</th>
+                    <th className="p-5 font-bold uppercase tracking-wider text-xs">المستخدم</th>
+                    <th className="p-5 font-bold uppercase tracking-wider text-xs text-center">التفاعل</th>
+                    <th className="p-5 font-bold uppercase tracking-wider text-xs text-center">الباقة</th>
+                    <th className="p-5 font-bold uppercase tracking-wider text-xs">تاريخ الانضمام</th>
+                    <th className="p-5 font-bold uppercase tracking-wider text-xs text-center">إجراءات</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-white/5">
                   {users.map(u => (
-                    <tr key={u.id} className="hover:bg-gray-50 dark:hover:bg-white/5">
-                      <td className="p-4 text-gray-500">#{u.id}</td>
-                      <td className="p-4">
-                        <div className="font-bold text-gray-900 dark:text-white">{u.display_name || 'بدون اسم'}</div>
-                        <div className="text-gray-500 text-xs" dir="ltr">{u.email}</div>
+                    <tr key={u.id} className="hover:bg-gray-50/50 dark:hover:bg-white/5 transition-colors group">
+                      <td className="p-5">
+                        <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0984e3] to-[#00b894] text-white flex items-center justify-center font-bold shadow-md">
+                            {(u.display_name || u.email || '?')[0].toUpperCase()}
+                          </div>
+                          <div>
+                            <div className="font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                              {u.display_name || 'بدون اسم'}
+                              <span className="text-[10px] text-gray-400 font-mono bg-gray-100 dark:bg-white/10 px-1.5 py-0.5 rounded">#{u.id}</span>
+                            </div>
+                            <div className="text-gray-500 text-xs mt-0.5" dir="ltr">{u.email}</div>
+                          </div>
+                        </div>
                       </td>
-                      <td className="p-4 text-center font-bold text-emerald-500">{u.progress_entries}</td>
-                      <td className="p-4 text-center font-bold text-orange-500">🔥 {u.streak_current}</td>
-                      <td className="p-4 text-center text-xs">{u.subscription_status === 'active' ? '💎 VIP' : 'مجاني'}</td>
-                      <td className="p-4 text-gray-500 text-xs" dir="ltr">{new Date(u.created_at).toLocaleDateString('en-GB')}</td>
-                      <td className="p-4 text-center">
-                        <div className="flex items-center justify-center gap-2">
-                          <button onClick={() => alert('قريباً: تسجيل الدخول بصلاحيات هذا المستخدم لمعاينة حسابه.')} className="bg-[#0984e3]/10 hover:bg-[#0984e3]/20 text-[#0984e3] p-2 rounded-lg" title="الدخول كالمستخدم">🕵️</button>
+                      <td className="p-5 text-center">
+                        <div className="flex flex-col items-center gap-1">
+                          <span className="font-bold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-md text-xs">{u.progress_entries} درس</span>
+                          <span className="font-bold text-orange-500 flex items-center gap-1 text-xs">🔥 {u.streak_current} أيام</span>
+                        </div>
+                      </td>
+                      <td className="p-5 text-center">
+                        {u.subscription_status === 'active' ? (
+                          <span className="inline-flex items-center gap-1 bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 px-3 py-1 rounded-full font-bold text-xs border border-yellow-500/20 shadow-sm">
+                            <span>👑</span> PRO
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-400 px-3 py-1 rounded-full font-bold text-xs">
+                            FREE
+                          </span>
+                        )}
+                      </td>
+                      <td className="p-5 text-gray-500 text-xs font-medium" dir="ltr">
+                        {new Date(u.created_at).toLocaleDateString('en-GB')}
+                      </td>
+                      <td className="p-5 text-center">
+                        <div className="flex items-center justify-center gap-2 md:opacity-0 group-hover:opacity-100 transition-opacity">
+                          <button onClick={() => alert('قريباً: تسجيل الدخول بصلاحيات هذا المستخدم لمعاينة حسابه.')} className="bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 hover:bg-[#0984e3]/10 hover:text-[#0984e3] hover:border-[#0984e3]/30 text-gray-600 dark:text-gray-400 p-2 rounded-xl transition-all shadow-sm" title="الدخول كالمستخدم">🕵️</button>
                           <button onClick={() => {
                             const xpToAdd = prompt('أدخل عدد نقاط الـ XP لإضافتها لهذا المستخدم (مثال: 500):')
                             if(xpToAdd) alert(`تم إرسال ${xpToAdd} XP للمستخدم بنجاح!`)
-                          }} className="bg-orange-500/10 hover:bg-orange-500/20 text-orange-500 p-2 rounded-lg" title="إرسال مكافأة XP">🎁</button>
-                          <a href={`mailto:${u.email}`} className="bg-[#00b894]/10 hover:bg-[#00b894]/20 text-[#00b894] p-2 rounded-lg" title="مراسلة عبر الإيميل">✉️</a>
-                          <button onClick={() => deleteUser(u.id, u.email)} className="bg-red-500/10 hover:bg-red-500/20 text-red-500 p-2 rounded-lg" title="حذف الحساب">🗑️</button>
+                          }} className="bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 hover:bg-orange-500/10 hover:text-orange-500 hover:border-orange-500/30 text-gray-600 dark:text-gray-400 p-2 rounded-xl transition-all shadow-sm" title="إرسال مكافأة XP">🎁</button>
+                          <a href={`mailto:${u.email}`} className="bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 hover:bg-[#00b894]/10 hover:text-[#00b894] hover:border-[#00b894]/30 text-gray-600 dark:text-gray-400 p-2 rounded-xl transition-all shadow-sm flex items-center justify-center" title="مراسلة عبر الإيميل">✉️</a>
+                          <button onClick={() => deleteUser(u.id, u.email)} className="bg-white dark:bg-[#1a1a2e] border border-gray-200 dark:border-white/10 hover:bg-red-500/10 hover:text-red-500 hover:border-red-500/30 text-gray-600 dark:text-gray-400 p-2 rounded-xl transition-all shadow-sm" title="حذف الحساب">🗑️</button>
                         </div>
                       </td>
                     </tr>
@@ -838,37 +1001,71 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* FEEDBACKS & ISSUES */}
-            <div className="glass p-6 rounded-2xl border border-[#e17055]/30 flex flex-col h-[500px]">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-black text-gray-900 dark:text-white flex items-center gap-2">
-                  📬 الملاحظات والمشاكل ({suggestions.length})
-                  {unreadSuggestionsCount > 0 && <span className="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">{unreadSuggestionsCount} جديد</span>}
+            <div className="glass p-6 rounded-[2rem] border border-[#e17055]/30 flex flex-col h-[600px] shadow-lg relative overflow-hidden bg-gradient-to-b from-white to-gray-50 dark:from-[#1a1a2e] dark:to-[#0f0f1a]">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#e17055] rounded-full blur-[100px] opacity-10 pointer-events-none"></div>
+              
+              <div className="flex justify-between items-center mb-6 relative z-10">
+                <h2 className="text-2xl font-black text-gray-900 dark:text-white flex items-center gap-3">
+                  <span className="bg-[#e17055]/10 text-[#e17055] p-2.5 rounded-xl shadow-inner">📬</span> 
+                  صندوق الوارد
+                  {unreadSuggestionsCount > 0 && <span className="bg-red-500 text-white text-xs px-2.5 py-1 rounded-full shadow-md animate-pulse">{unreadSuggestionsCount} جديد</span>}
                 </h2>
-                <button onClick={fetchSuggestions} disabled={isSuggestionsLoading} className="bg-[#e17055] text-white px-3 py-1 rounded text-xs font-bold">
-                  {isSuggestionsLoading ? '⏳' : 'تحديث'}
+                <button onClick={fetchSuggestions} disabled={isSuggestionsLoading} className="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/10 px-4 py-2 rounded-xl text-sm font-bold shadow-sm transition-all flex items-center gap-2">
+                  {isSuggestionsLoading ? <span className="animate-spin">⏳</span> : <span>🔄 تحديث</span>}
                 </button>
               </div>
-              <div className="flex gap-2 mb-4">
-                <button onClick={() => setSuggestionsFilter('unread')} className={`px-3 py-1 rounded text-xs font-bold ${suggestionsFilter==='unread'?'bg-[#e17055] text-white':'bg-gray-100 text-gray-600'}`}>جديد</button>
-                <button onClick={() => setSuggestionsFilter('all')} className={`px-3 py-1 rounded text-xs font-bold ${suggestionsFilter==='all'?'bg-gray-300 text-black':'bg-gray-100 text-gray-600'}`}>الكل</button>
-                <button onClick={() => setSuggestionsFilter('archived')} className={`px-3 py-1 rounded text-xs font-bold ${suggestionsFilter==='archived'?'bg-gray-300 text-black':'bg-gray-100 text-gray-600'}`}>محلول</button>
+              
+              <div className="flex gap-2 mb-6 relative z-10 bg-gray-100 dark:bg-black/20 p-1.5 rounded-xl border border-gray-200/50 dark:border-white/5 w-fit">
+                <button onClick={() => setSuggestionsFilter('unread')} className={`px-4 py-1.5 rounded-lg text-sm font-bold transition-all ${suggestionsFilter==='unread'?'bg-white dark:bg-gray-800 text-[#e17055] shadow-sm':'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}>الجديدة</button>
+                <button onClick={() => setSuggestionsFilter('all')} className={`px-4 py-1.5 rounded-lg text-sm font-bold transition-all ${suggestionsFilter==='all'?'bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm':'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}>الكل</button>
+                <button onClick={() => setSuggestionsFilter('archived')} className={`px-4 py-1.5 rounded-lg text-sm font-bold transition-all ${suggestionsFilter==='archived'?'bg-white dark:bg-gray-800 text-emerald-600 shadow-sm':'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}>المقروءة</button>
               </div>
-              <div className="flex-1 overflow-y-auto space-y-3 custom-scrollbar pr-2">
-                {suggestions.length === 0 && <p className="text-center text-gray-500 mt-10">لا توجد رسائل حالياً.</p>}
-                {suggestions.map((s: any) => (
-                  <div key={s.id} className="p-4 bg-white dark:bg-black/20 rounded-xl border border-gray-200 dark:border-white/10">
-                    <div className="flex justify-between font-bold text-sm mb-2">
-                      <span className={`flex items-center gap-2 ${s.type === 'issue' ? 'text-orange-500' : 'text-blue-500'}`}>
-                        {s.type === 'issue' ? '⚠️ مشكلة' : '💬 رأي'}
-                        {s.status === 'new' && <span className="w-2 h-2 rounded-full bg-red-500 inline-block"></span>}
-                      </span>
-                      <span className="text-[10px] text-gray-400">{new Date(s.date).toLocaleDateString()}</span>
+              
+              <div className="flex-1 overflow-y-auto space-y-4 custom-scrollbar pr-2 relative z-10 pb-4">
+                {suggestions.filter((s: any) => {
+                  if (suggestionsFilter === 'unread') return s.status === 'unread'
+                  if (suggestionsFilter === 'archived') return s.status === 'resolved'
+                  return true
+                }).length === 0 && (
+                  <div className="flex flex-col items-center justify-center h-full opacity-50 mt-10">
+                    <span className="text-6xl mb-4">📭</span>
+                    <p className="text-gray-500 font-bold">لا توجد رسائل حالياً.</p>
+                  </div>
+                )}
+                {suggestions.filter((s: any) => {
+                  if (suggestionsFilter === 'unread') return s.status === 'unread'
+                  if (suggestionsFilter === 'archived') return s.status === 'resolved'
+                  return true
+                }).map((s: any) => (
+                  <div key={s.id} className={`p-5 rounded-2xl border transition-all ${s.status === 'unread' ? 'bg-white dark:bg-[#1a1a2e] border-[#e17055]/30 shadow-md' : 'bg-gray-50 dark:bg-black/20 border-gray-200 dark:border-white/5 opacity-80 hover:opacity-100'}`}>
+                    <div className="flex justify-between items-start mb-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#e17055] to-orange-400 text-white flex items-center justify-center font-bold shadow-md shrink-0">
+                          {(s.name || s.email || 'M')[0].toUpperCase()}
+                        </div>
+                        <div>
+                          <span className="flex items-center gap-2 font-bold text-gray-900 dark:text-white">
+                            {s.subject || 'رسالة تواصل'}
+                            {s.status === 'unread' && <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>}
+                          </span>
+                          <div className="text-xs text-gray-500 flex items-center gap-2 mt-0.5">
+                            <span className="font-bold">{s.name || 'بدون اسم'}</span>
+                            {s.email && <span className="font-mono" dir="ltr">• {s.email}</span>}
+                          </div>
+                        </div>
+                      </div>
+                      <span className="text-[10px] text-gray-400 font-bold bg-gray-100 dark:bg-white/5 px-2 py-1 rounded-lg">{new Date(s.created_at || new Date()).toLocaleDateString('ar-EG', { month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit' })}</span>
                     </div>
-                    {s.email && <div className="text-xs text-gray-400 mb-2 font-mono">{s.email}</div>}
-                    <p className="text-sm text-gray-800 dark:text-gray-200 mb-4 bg-gray-50 dark:bg-white/5 p-3 rounded-lg leading-relaxed">{s.message}</p>
-                    <div className="flex gap-2">
-                      {s.status === 'new' && <button onClick={() => updateSuggestionStatus(s.id, 'read')} className="text-[#0984e3] text-xs font-bold bg-[#0984e3]/10 px-3 py-1.5 rounded-lg hover:bg-[#0984e3]/20">مقروء</button>}
-                      {s.status !== 'resolved' && <button onClick={() => updateSuggestionStatus(s.id, 'resolved')} className="text-emerald-600 text-xs font-bold bg-emerald-500/10 px-3 py-1.5 rounded-lg hover:bg-emerald-500/20">✔ حل المشكلة (أرشفة)</button>}
+                    
+                    <div className="text-sm text-gray-700 dark:text-gray-300 mb-4 bg-gray-50/50 dark:bg-black/30 p-4 rounded-xl leading-relaxed whitespace-pre-wrap border border-gray-100 dark:border-white/5">
+                      {s.message}
+                    </div>
+                    
+                    <div className="flex items-center gap-2 border-t border-gray-100 dark:border-white/5 pt-3">
+                      {s.status === 'unread' && <button onClick={() => updateSuggestionStatus(s.id, 'read')} className="text-[#0984e3] text-xs font-bold bg-[#0984e3]/10 px-4 py-2 rounded-xl hover:bg-[#0984e3]/20 transition-colors flex items-center gap-1"><span>👀</span> مقروء</button>}
+                      {s.status !== 'resolved' && <button onClick={() => updateSuggestionStatus(s.id, 'resolved')} className="text-emerald-600 text-xs font-bold bg-emerald-500/10 px-4 py-2 rounded-xl hover:bg-emerald-500/20 transition-colors flex items-center gap-1"><span>✔</span> أرشفة</button>}
+                      {s.email && <a href={`mailto:${s.email}`} className="text-gray-600 dark:text-gray-400 text-xs font-bold bg-gray-100 dark:bg-white/10 px-4 py-2 rounded-xl hover:bg-gray-200 dark:hover:bg-white/20 transition-colors flex items-center gap-1"><span>✉️</span> رد</a>}
+                      <button onClick={() => deleteSuggestion(s.id)} className="text-red-600 text-xs font-bold bg-red-500/10 px-4 py-2 rounded-xl hover:bg-red-500/20 transition-colors mr-auto flex items-center gap-1 shadow-sm"><span>🗑️</span> حذف نهائي</button>
                     </div>
                   </div>
                 ))}
@@ -904,14 +1101,139 @@ export default function AdminDashboardPage() {
               <input value={config.maintenance_message} onChange={e => setConfig({...config, maintenance_message: e.target.value})} className="w-full p-3 rounded-xl border border-gray-200 outline-none dark:bg-black/20" placeholder="رسالة الصيانة للزوار..." />
             </div>
 
+            {/* ═══ TICKER / ANNOUNCEMENT EDITOR ═══ */}
+            <div className="glass p-6 rounded-[2rem] border-2 border-[#0984e3]/30 shadow-xl relative overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-[#0984e3]/5 dark:to-transparent">
+              <div className="absolute top-0 right-0 w-48 h-48 bg-blue-400/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="relative z-10 space-y-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#0984e3] flex items-center justify-center text-white text-xl shadow-md">📢</div>
+                  <div>
+                    <h2 className="text-xl font-black text-gray-900 dark:text-white">شريط الإعلانات المتحرك</h2>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">يظهر أسفل الهيدر مباشرة لجميع الزوار</p>
+                  </div>
+                </div>
+
+                {/* Live Preview */}
+                {config.announcement?.trim() && (
+                  <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-white/10 shadow-inner">
+                    <div className="px-3 py-1 text-[10px] font-black text-gray-400 bg-gray-50 dark:bg-black/20 border-b border-gray-200 dark:border-white/10 uppercase tracking-widest">
+                      معاينة مباشرة ↓
+                    </div>
+                    <div
+                      className="flex items-center h-10 relative overflow-hidden"
+                      style={{ backgroundColor: config.announcement_color || '#0984e3' }}
+                    >
+                      <div className="flex items-center gap-1 px-3 h-full shrink-0" style={{ backgroundColor: 'rgba(0,0,0,0.15)' }}>
+                        <span className="text-xs font-black text-white">📢 إعلان</span>
+                      </div>
+                      <div className="flex-1 overflow-hidden">
+                        <motion.div
+                          animate={{ x: ['100%', '-100%'] }}
+                          transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 12, ease: 'linear' } }}
+                          className="whitespace-nowrap text-sm font-bold px-4 text-white inline-block"
+                        >
+                          {config.announcement} ◆ {config.announcement}
+                        </motion.div>
+                      </div>
+                      <div className="w-10 h-full flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.15)' }}>
+                        <span className="text-white text-xs">✕</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Text Editor */}
+                <div className="space-y-3">
+                  <label className="block text-sm font-black text-gray-700 dark:text-gray-300">نص الإعلان</label>
+                  <textarea
+                    value={config.announcement}
+                    onChange={e => setConfig({...config, announcement: e.target.value})}
+                    className="w-full p-4 rounded-2xl border-2 border-gray-200 dark:border-white/10 bg-white dark:bg-black/20 outline-none focus:border-[#0984e3] transition-colors text-base font-bold resize-none shadow-inner"
+                    rows={3}
+                    placeholder="اكتب هنا نص الإعلان الذي سيظهر لجميع الطلاب في شريط التمرير..."
+                    dir="rtl"
+                  />
+                </div>
+
+                {/* Quick Templates */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-black text-gray-500 uppercase tracking-wider">نصوص جاهزة ⚡</label>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      '🎉 تحديث جديد! تم إضافة 3 ألعاب تعليمية جديدة',
+                      '🆕 ميزة جديدة: شريط الإملاء الصوتي — جربه الآن!',
+                      '⚡ تذكير: تحديك اليومي ينتهي في منتصف الليل',
+                      '🏆 منافسة الأسبوع: من يجمع أكثر XP يفوز بجائزة',
+                    ].map(t => (
+                      <button
+                        key={t}
+                        onClick={() => setConfig({...config, announcement: t})}
+                        className="text-xs px-3 py-1.5 bg-white dark:bg-white/10 border border-gray-200 dark:border-white/20 rounded-lg hover:border-[#0984e3] hover:text-[#0984e3] transition-colors font-bold text-right"
+                      >
+                        {t.substring(0, 40)}...
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Color Picker */}
+                <div className="flex items-center gap-4 flex-wrap">
+                  <div className="flex-1 space-y-2">
+                    <label className="block text-sm font-black text-gray-700 dark:text-gray-300">لون الشريط</label>
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="color"
+                        value={config.announcement_color || '#0984e3'}
+                        onChange={e => setConfig({...config, announcement_color: e.target.value})}
+                        className="w-12 h-10 rounded-xl border-2 border-gray-200 cursor-pointer shadow-md"
+                      />
+                      <div className="flex gap-2 flex-wrap">
+                        {['#0984e3', '#00b894', '#6c5ce7', '#e17055', '#e84393', '#fdcb6e', '#d63031', '#2d3436'].map(c => (
+                          <button
+                            key={c}
+                            onClick={() => setConfig({...config, announcement_color: c})}
+                            className={`w-7 h-7 rounded-lg transition-all hover:scale-110 shadow-md ${config.announcement_color === c ? 'ring-2 ring-offset-2 ring-gray-400 scale-110' : ''}`}
+                            style={{ backgroundColor: c }}
+                            title={c}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <label className="block text-sm font-black text-gray-700 dark:text-gray-300">حذف الإعلان</label>
+                    <button
+                      onClick={() => setConfig({...config, announcement: ''})}
+                      className="px-4 py-2 bg-red-50 dark:bg-red-900/20 text-red-500 border border-red-200 dark:border-red-800/30 rounded-xl font-bold text-sm hover:bg-red-100 transition-colors"
+                    >
+                      🗑️ مسح النص
+                    </button>
+                  </div>
+                </div>
+
+                {/* Save Button */}
+                <div className="flex items-center gap-4 pt-2 border-t border-gray-200 dark:border-white/10">
+                  <button
+                    onClick={saveConfig}
+                    disabled={isSavingConfig}
+                    className="flex-1 py-3 bg-gradient-to-r from-[#0984e3] to-[#6c5ce7] text-white rounded-xl font-black text-base shadow-lg hover:opacity-90 transition-all hover:-translate-y-0.5 disabled:opacity-60"
+                  >
+                    {isSavingConfig ? '⏳ جاري الحفظ...' : '💾 حفظ وتطبيق الإعلان فوراً'}
+                  </button>
+                  {configStatus && (
+                    <span className={`text-sm font-bold ${configStatus.includes('✅') ? 'text-emerald-600' : 'text-red-500'}`}>
+                      {configStatus}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* ═══ OTHER SETTINGS ═══ */}
             <div className="glass p-6 rounded-2xl border border-gray-200 dark:border-white/10">
               <h2 className="text-xl font-black mb-4">⚙️ إعدادات التطبيق والدعم</h2>
               <div className="grid md:grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className="block text-xs font-bold mb-1">رسالة الإعلان</label>
-                  <textarea value={config.announcement} onChange={e => setConfig({...config, announcement: e.target.value})} className="w-full p-2 rounded border outline-none dark:bg-black/20" rows={2} />
-                  <input type="color" value={config.announcement_color} onChange={e => setConfig({...config, announcement_color: e.target.value})} className="mt-1" />
-                </div>
                 <div>
                   <label className="block text-xs font-bold mb-1">رسالة الدعم (Buy Me a Coffee)</label>
                   <textarea value={config.support_message} onChange={e => setConfig({...config, support_message: e.target.value})} className="w-full p-2 rounded border outline-none dark:bg-black/20" rows={2} />
@@ -920,9 +1242,13 @@ export default function AdminDashboardPage() {
                     <input placeholder="APK Version" value={config.apk_version} onChange={e => setConfig({...config, apk_version: e.target.value})} className="w-full p-2 border rounded text-xs dark:bg-black/20" />
                   </div>
                 </div>
+                <div>
+                  <label className="block text-xs font-bold mb-1">رابط APK</label>
+                  <input value={config.apk_url} onChange={e => setConfig({...config, apk_url: e.target.value})} className="w-full p-2 rounded border outline-none dark:bg-black/20 text-xs" dir="ltr" />
+                </div>
               </div>
               <button onClick={saveConfig} disabled={isSavingConfig} className="bg-[#00b894] text-white px-6 py-2.5 rounded-xl font-bold">
-                {isSavingConfig ? '⏳ جاري الحفظ...' : '💾 حفظ إعدادات السيرفر'}
+                {isSavingConfig ? '⏳ جاري الحفظ...' : '💾 حفظ الإعدادات'}
               </button>
               {configStatus && <span className="mx-3 text-sm font-bold">{configStatus}</span>}
             </div>
@@ -1032,7 +1358,7 @@ export default function AdminDashboardPage() {
 
 
     </AnimatePresence>
-  </div>
-</div>
+      </main>
+    </div>
   )
 }

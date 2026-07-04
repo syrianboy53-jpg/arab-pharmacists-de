@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../data/b2_data.dart';
+import 'b2_interactive_screen.dart';
 
 class B2Screen extends StatefulWidget {
   const B2Screen({super.key});
@@ -84,6 +85,21 @@ class _B2ScreenState extends State<B2Screen> with SingleTickerProviderStateMixin
                       const Text('🗣️ المحادثة:', style: TextStyle(fontWeight: FontWeight.bold)),
                       Text(model['sprechenLabel'] as String? ?? model['sprechen'].toString(), style: const TextStyle(fontSize: 13)),
                     ],
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFEF4444),
+                          foregroundColor: Colors.white,
+                        ),
+                        icon: const Icon(Icons.play_circle_fill),
+                        label: const Text('ابدأ الامتحان التفاعلي'),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (_) => B2InteractiveScreen(b2Model: model)));
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),

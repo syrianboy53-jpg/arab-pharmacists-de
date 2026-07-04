@@ -38,4 +38,7 @@ final List<Map<String, dynamic>> mockExams = [{'id': 'mock-1', 'number': 1, 'tit
     'highlights': ['تدريب مكثف على قسم القراءة الجزء الأول والثاني', 'شروحات ذكية تفاعلية باللغة العربية'],
     'parts': {'lesen': 45, 'hoeren': 30, 'bausteine': 15, 'schreiben': 30, 'sprechen': 15}
   }
+,
+  {"id": "mock-9", "number": 9, "titleAr": "النموذج 9 - عالم العمل والاندماج", "titleDe": "Modell 9 - Arbeitswelt & Integration", "theme": "Beruf, Arbeitsplatz, Kollegen", "themeIcon": "🏢", "difficulty": 4, "durationMin": 165, "premium": false, "lesenId": "lesen-9", "hoerenId": "hoeren-9", "bausteineId": "sb-9", "schreibenId": "schreiben-9", "sprechenLabel": "Teil 2: Präsentation", "descriptionAr": "نموذج يركز على بيئة العمل، المراسلات مع الزملاء، والبحث عن وظائف.", "highlights": ["رسائل العمل الرسمية", "قواعد العمل في ألمانيا"], "parts": {"lesen": 45, "hoeren": 30, "bausteine": 15, "schreiben": 30, "sprechen": 15}},
+  {"id": "mock-10", "number": 10, "titleAr": "النموذج 10 - الدوائر الحكومية (مجاني بالكامل)", "titleDe": "Modell 10 - Behörden & Bürokratie", "theme": "Behörden, Formulare", "themeIcon": "🏛️", "difficulty": 5, "durationMin": 165, "premium": false, "lesenId": "lesen-10", "hoerenId": "hoeren-10", "bausteineId": "sb-10", "schreibenId": "schreiben-10", "sprechenLabel": "Teil 2: Präsentation", "descriptionAr": "النموذج الأهم للتدريب على المراسلات الحكومية ومكتب العمل والتأمين.", "highlights": ["استمارات حكومية", "رسائل لـ Jobcenter"], "parts": {"lesen": 45, "hoeren": 30, "bausteine": 15, "schreiben": 30, "sprechen": 15}}
 ];

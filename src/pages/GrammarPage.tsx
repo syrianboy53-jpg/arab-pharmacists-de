@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { commonMistakes, trennbareVerben } from '../data/grammar'
 interface LessonTopic {
   id: number
@@ -14,8 +14,19 @@ import originalLessonsJson from '../data/grammarLessons.json'
 
 const originalLessons = originalLessonsJson as LessonTopic[]
 
+const LEVEL_COLORS: Record<string, string> = {
+  'A1': 'bg-emerald-100 text-emerald-700 border-emerald-300 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-700/30',
+  'A2': 'bg-blue-100 text-blue-700 border-blue-300 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-700/30',
+  'B1': 'bg-amber-100 text-amber-700 border-amber-300 dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-700/30',
+  'B2': 'bg-rose-100 text-rose-700 border-rose-300 dark:bg-rose-900/30 dark:text-rose-400 dark:border-rose-700/30',
+}
+
 export default function GrammarPage() {
+  const [searchParams] = useSearchParams()
+  const levelParam = searchParams.get('level')?.toUpperCase() || ''
+
   const [activeTab, setActiveTab] = useState<'lessons' | 'mistakes' | 'verbs'>('lessons')
+  const [selectedLevel, setSelectedLevel] = useState<string>('all')
   
   // Mistakes State
   const [searchMistakeQuery, setSearchMistakeQuery] = useState('')
@@ -44,7 +55,11 @@ export default function GrammarPage() {
   // Filter mistakes based on search and category
   const filteredMistakes = useMemo(() => {
     const q = searchMistakeQuery.toLowerCase().trim()
-    return commonMistakes.filter(m => {
+    let mistakes = commonMistakes
+    if (levelParam) {
+      mistakes = mistakes.filter(m => m.level === levelParam || m.level === 'all')
+    }
+    return mistakes.filter(m => {
       const matchCat = selectedCategory === 'all' || m.category === selectedCategory
       const matchText = !q || 
         (m.titleAr && m.titleAr.toLowerCase().includes(q)) ||
@@ -103,26 +118,61 @@ export default function GrammarPage() {
       {/* TAB 1: LESSONS */}
       {activeTab === 'lessons' && (
         <div className="space-y-6">
-          <div className="grid gap-3">
-            {originalLessons.map((l) => (
-              <div
-                key={l.id}
-                className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-[#00b894]/20 transition-all shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+          {/* Level Filter */}
+          <div className="flex flex-wrap gap-2">
+            {['all', 'A1', 'A2', 'B1', 'B2'].map(level => (
+              <button
+                key={level}
+                onClick={() => setSelectedLevel(level)}
+                className={`px-4 py-1.5 rounded-xl text-sm font-black border transition-all ${
+                  selectedLevel === level
+                    ? level === 'all'
+                      ? 'bg-[#00b894] text-white border-[#00b894] shadow-lg shadow-green-500/20'
+                      : LEVEL_COLORS[level] + ' border-current shadow-md'
+                    : 'bg-white dark:bg-white/5 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-white/10 hover:border-gray-300'
+                }`}
               >
-                <div>
-                  <h3 className="font-bold text-gray-900 dark:text-white text-base" dir="ltr">{l.title}</h3>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{l.titleAr}</p>
-                </div>
-                <div className="w-full sm:w-auto">
-                  <Link 
-                    to={`/grammar/lesson/${l.id}`}
-                    className="block w-full text-center px-6 py-2.5 bg-[#0984e3] hover:bg-blue-600 text-white font-black rounded-xl transition-all shadow-lg shadow-blue-500/20"
-                  >
-                    🚀 ابدأ الدرس التفاعلي
-                  </Link>
-                </div>
-              </div>
+                {level === 'all' ? '📚 الكل' : level}
+              </button>
             ))}
+            <span className="text-xs text-gray-400 self-center mr-2">
+              ({originalLessons.filter(l => selectedLevel === 'all' || (l as any).level === selectedLevel).length} درس)
+            </span>
+          </div>
+
+          <div className="grid gap-3">
+            {originalLessons.filter(l => selectedLevel === 'all' || (l as any).level === selectedLevel).map((l) => {
+              const level = (l as any).level || 'B1'
+              return (
+                <div
+                  key={l.id}
+                  className="glass p-5 rounded-2xl border border-gray-200 dark:border-white/5 text-right hover:border-[#00b894]/30 hover:shadow-lg transition-all shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group"
+                >
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1 flex-row-reverse sm:flex-row justify-end sm:justify-start">
+                      <h3 className="font-bold text-gray-900 dark:text-white text-base group-hover:text-[#00b894] transition-colors" dir="ltr">{l.title}</h3>
+                      <span className={`text-[10px] font-black px-2 py-0.5 rounded-md border ${LEVEL_COLORS[level] || LEVEL_COLORS['B1']}`}>
+                        {level}
+                      </span>
+                    </div>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{l.titleAr}</p>
+                    {(l as any).tip && (
+                      <p className="text-[11px] text-amber-600 dark:text-amber-400 mt-2 bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-700/20 px-3 py-1.5 rounded-lg leading-relaxed">
+                        💡 {(l as any).tip.slice(0, 80)}{(l as any).tip.length > 80 ? '...' : ''}
+                      </p>
+                    )}
+                  </div>
+                  <div className="w-full sm:w-auto shrink-0">
+                    <Link 
+                      to={`/grammar/lesson/${l.id}`}
+                      className="block w-full text-center px-6 py-2.5 bg-[#0984e3] hover:bg-blue-600 text-white font-black rounded-xl transition-all shadow-lg shadow-blue-500/20 group-hover:shadow-blue-500/40"
+                    >
+                      🚀 ابدأ الدرس
+                    </Link>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       )}
